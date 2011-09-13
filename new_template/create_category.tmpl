@@ -1,0 +1,47 @@
+<!--create_category.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_CREATE_CATEGORY###</h1>
+###CURRENT_TRANSLATION###
+###TRANSLATION_OPTIONS###
+<!-- ###FORM_START### end-->
+
+<form name="tx_cal_controller" method="post" id="tx_cal_controller_create_element" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###"  />
+		<input type="hidden" name="tx_cal_controller[uid]"value="###UID###"  />
+		
+		<script type="text/javascript">
+			var calendarUrl = "###CHANGE_CALENDAR_ACTION_URL###";
+			function calendarChanged(selector){
+				var thisForm = document.getElementById("tx_cal_controller_create_element");
+				thisForm.action = calendarUrl;
+				thisForm.submit();
+			}
+		</script>
+		
+		###CALENDAR_ID###
+		###HIDDEN###
+		###TITLE###
+		###HEADERSTYLE###
+		###BODYSTYLE###
+		###PARENT_CATEGORY###
+		###SHARED_USER_ALLOWED###
+<!-- ###FORM_END### begin-->
+		
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_SAVE###" />
+	</fieldset>
+</form>
+
+<script type="text/javascript">
+	function getNewStyle(element){
+		var index = element.selectedIndex;
+		element.className = element.options[index].className;
+	}
+	try{
+		getNewStyle(document.getElementById('tx_cal_controller_headerstyle'));
+		getNewStyle(document.getElementById('tx_cal_controller_bodystyle'));
+	}catch(e){}
+</script>
+<!-- ###FORM_END### end-->
+<!--/create_category.tmpl-->

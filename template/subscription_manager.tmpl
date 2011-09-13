@@ -1,0 +1,56 @@
+<!--subscription_manager.tmpl-->
+<h1>###HEADING###</h1>
+
+###STATUS###
+
+<!-- ###USER_LOGIN### start -->
+<form style="margin-bottom:0;" action="###LOGIN_ACTION###" method="post">
+	<input type="hidden" name="logintype" value="###LOGIN_TYPE###" />
+	<input type="hidden" name="pid" value="###USER_FOLDER###" />
+	<input type="hidden" name="redirect_url" value="###REDIRECT_URL###" />
+	<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+		<tr>
+			<td colspan="2" align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_LOGIN###</div></td>
+		</tr>
+		
+		<!-- ###LOGIN### start -->
+		<tr>
+			<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-top: 5px;">###L_USERNAME###:</div></td>
+			<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-top: 5px;"><input type="text" name="user" size="10" /></div></td>
+		</tr>
+		<tr>
+			<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">###L_PASSWORD###:</div></td>
+			<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;"><input type="password" name="pass" size="10" /></div></td>
+		</tr>
+		<!-- ###LOGIN### end -->
+		
+		<!-- ###LOGOUT### start -->
+		<tr>
+			<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">###L_USERNAME###:</div></td>
+			<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;">###USERNAME###</div></td>
+		</tr>
+		<!-- ###LOGOUT### end -->
+		<tr>
+			<td bgcolor="#FFFFFF" align="center" valign="middle" colspan="2"><div style="padding-left: 5px; padding-bottom: 5px;"><input type="submit" value="###L_LOGIN_BUTTON###" /></div></td>
+		</tr>
+	</table>
+</form>
+<!-- ###USER_LOGIN### end -->
+
+<!-- ###SUBSCRIPTION_CONTAINER### start -->
+###TITLE###:
+
+<!-- ###SUBSCRIPTION### start -->
+<div id="monitor_event">
+	<!--###LOGGEDIN_MONITORING### start-->
+	<form>
+		Stop monitoring this event? 
+		<input type="hidden" name="userid" value="1"/>
+		<input type="submit" value="Stop monitoring" />
+	</form>
+	<!--###LOGGEDIN_MONITORING### end-->
+</div>
+<!-- ###SUBSCRIPTION### end -->
+
+<!-- ###SUBSCRIPTION_CONTAINER### end -->
+<!--/subscription_manager.tmpl-->

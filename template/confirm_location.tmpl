@@ -1,0 +1,35 @@
+<!--confirm_location.tmpl-->
+<!-- ###FORM_START### start-->
+<h1>###L_CONFIRM_LOCATION###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###" />
+		<input type="hidden" name="tx_cal_controller[uid]" value="###UID###" />
+		<input type="hidden" name="tx_cal_controller[lastview]" value="###LASTVIEW###" />
+		<!-- ###FORM_START### end-->
+		###HIDDEN###
+		###NAME###
+		###DESCRIPTION###
+		###STREET###
+		###ZIP###
+		###CITY###
+		###COUNTRY###
+		###COUNTRYZONE###
+		###PHONE###
+		###FAX###
+		###EMAIL###
+		###IMAGE###
+		###IMAGE_CAPTION###
+		###IMAGE_TITLE###
+		###IMAGE_ALT###
+		###LINK###
+		###SHARED###
+		<!-- ###FORM_END### start-->
+
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_SAVE###" />
+	</fieldset>
+</form>
+
+<!-- ###FORM_END### end-->
+<!--/confirm_location.tmpl-->

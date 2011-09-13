@@ -1,0 +1,44 @@
+<!-- ###FE-EDITING### start -->
+	<script type="text/javascript">
+		var url = '###AJAX_URL###';
+		var imgPath = '###IMG_PATH###';
+		var pid = '###PID###';
+		var availableCalendar = '###AVAILABLE_CALENDAR###';
+		var save_label = '###SAVE_LABEL###';
+		var cancel_label = '###CANCEL_LABEL###';
+		var delete_label = '###DELETE_LABEL###';
+		var delete_confirm_label = '###DELETE_CONFIRM_LABEL###';
+		var view = '###VIEW###';
+	</script>
+	<script type="text/javascript" src="###JS_PATH###/dateFormater.js"></script>
+	<script type="text/javascript" src="###JS_PATH###/fe-editing.js"></script>
+	<script type="text/javascript" src="###JS_PATH###/dd.js"></script>
+	
+	<!-- The dialog is created from existing markup.
+         The inline styles just hide it until it created and should be in a stylesheet -->
+	<form enctype="multipart/form-data" name="tx_cal_controller" id="tx_cal_controller_create_element" method="post" action="">
+		<input type="hidden" value="" name="tx_cal_controller[type]" id="event_type" />
+		<input type="hidden" value="" name="tx_cal_controller[uid]" id="event_uid" />
+		<input type="hidden" value="" name="tx_cal_controller[view]" id="event_view" />
+		<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" id="event_lastview" />
+		<input type="hidden" value="" name="tx_cal_controller[option]" id="event_option" />
+
+	    <div id="event_dlg" style="visibility:hidden;position:absolute;top:0px;">
+	    	<div class="x-dlg-hd" id="event_dlg_header">&nbsp;</div>
+	    	<div class="x-dlg-bd" id="cal_window_panel">
+	        </div>
+	    </div>
+    </form>
+    <button id="mb1" style="display:none">Show Meee</button>
+    <div class="dd-ct" id="dd1-ct">
+    <div class="dd-item" id="dd1-item1">Item 1.1</div>
+    <div class="dd-item" id="dd1-item2">Item 1.2</div>
+    <div class="dd-item" id="dd1-item3">Item 1.3</div>
+</div>
+<div class="dd-ct" id="dd2-ct">
+    <div class="dd-item" id="dd2-item1">Item 2.1</div>
+    <div class="dd-item" id="dd2-item2">Item 2.2</div>
+    <div class="dd-item" id="dd2-item3">Item 2.3</div>
+</div>
+    
+<!-- ###FE-EDITING### end -->

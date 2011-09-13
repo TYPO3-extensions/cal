@@ -1,0 +1,43 @@
+<!-- ###FE-EDITING### start -->
+	<script type="text/javascript">
+		/*<![CDATA[*/
+	<!--
+		var url = '###AJAX_URL###';
+		var imgPath = '###IMG_PATH###';
+		var pid = '###PID###';
+		var view = '###VIEW###';
+		var availableCalendar = '###AVAILABLE_CALENDAR###';
+		var save_label = '###SAVE_LABEL###';
+		var cancel_label = '###CANCEL_LABEL###';
+		var delete_label = '###DELETE_LABEL###';
+		var delete_confirm_label = '###DELETE_CONFIRM_LABEL###';
+		var allowedToCreateEvents = '###ALLOWED_TO_CREATE_EVENTS###';
+	// -->
+		/*]]>*/
+	</script>
+	<script type="text/javascript" src="###JS_PATH###/dateFormater.js"></script>
+	<script type="text/javascript" src="###JS_PATH###/fe-editing.js"></script>
+	<script type="text/javascript" src="###JS_PATH###/move.js"></script>
+	<form enctype="multipart/form-data" name="tx_cal_controller" id="tx_cal_controller_create_element" method="post" action="">
+	</form>
+	<!-- The dialog is created from existing markup.
+         The inline styles just hide it until it created and should be in a stylesheet -->
+	<div id="event_dlg" class="x-hidden">
+		
+		<div class="x-window-header" id="event_dlg_header">&nbsp;</div>
+    	<div id="cal_window_panel">
+    		<div id="my-tabs">
+		    </div>
+			    		
+        </div>
+	</div>
+	<div id="event_window" class="x-hidden">
+		
+		<div class="x-window-header" id="event_window_header">&nbsp;</div>
+    	<div id="event_window_panel">
+			    		
+        </div>
+	</div>
+    
+    <button id="mb1" style="display:none">Show Me</button>
+<!-- ###FE-EDITING### end -->

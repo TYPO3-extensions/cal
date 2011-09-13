@@ -1,0 +1,110 @@
+<!--confirm_event.tmpl-->
+<!-- ###FORM_START### start-->
+<h1>###L_CONFIRM_EVENT###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+<input type="hidden" value="###VIEW###" name="tx_cal_controller[view]" />
+<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+<input type="hidden" value="###CALENDAR###" name="tx_cal_controller[calendar]" />
+<table>
+<!-- ###FORM_START### end-->
+<!-- ###FORM_HIDDEN### start-->
+	<tr>
+		<td>###L_HIDDEN###:</td><td>###HIDDEN###<input type="hidden" name="tx_cal_controller[hidden]" value="###HIDDEN###"></td>
+	</tr>
+<!-- ###FORM_HIDDEN### end-->
+<!-- ###FORM_CALENDAR### start-->
+	<tr>
+		<td>###L_CALENDAR###:</td><td>###CALENDAR_TITLE###<input type="hidden" name="tx_cal_controller[calendar_id]" value="###CALENDAR_ID###"></td>
+	</tr>
+<!-- ###FORM_CALENDAR### end-->
+<!-- ###FORM_CATEGORY### start-->
+	<tr>
+		<td>###L_CATEGORY###:</td><td>###CATEGORY_DISPLAY_IDS###<input type="hidden" name="tx_cal_controller[category_ids]" value="###CATEGORY_IDS###"></td>
+	</tr>
+<!-- ###FORM_CATEGORY### end-->
+<!-- ###FORM_DATETIME### start-->
+	<tr>
+		<td>###L_EVENT_START_DAY###:</td><td>###EVENT_START_DAY###<input type="hidden" name="tx_cal_controller[event_start_day]" value="###EVENT_START_DAY###"></td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_START_TIME###:</td><td>###EVENT_START_TIME###<input type="hidden" name="tx_cal_controller[event_start_time]" value="###EVENT_START_TIME_VALUE###"></td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_END_DAY###:</td><td>###EVENT_END_DAY###<input type="hidden" name="tx_cal_controller[event_end_day]" value="###EVENT_END_DAY###"></td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_END_TIME###:</td><td>###EVENT_END_TIME###<input type="hidden" name="tx_cal_controller[event_end_time]" value="###EVENT_END_TIME_VALUE###"></td>
+	</tr>
+<!-- ###FORM_DATETIME### end-->
+<!-- ###FORM_TITLE### start-->
+	<tr>
+		<td>###L_TITLE###:</td><td>###TITLE###<input type="hidden" name="tx_cal_controller[title]" value="###TITLE###"></td>
+	</tr>
+<!-- ###FORM_TITLE### end-->
+<!-- ###FORM_CREATOR### start-->
+	<tr>
+		<td>###L_USER###:</td><td>###USERGROUP_IDS###<input type="hidden" name="tx_cal_controller[user_ids]" value="###USER_IDS###"><input type="hidden" name="group_ids" value="###GROUP_IDS###"></td>
+	</tr>
+<!-- ###FORM_CREATOR### end-->
+<!-- ###FORM_ORGANIZER### start-->
+	<tr>
+		<td>###L_ORGANIZER###:</td><td>###ORGANIZER###<input type="hidden" name="tx_cal_controller[organizer]" value="###ORGANIZER###"></td>
+	</tr>
+	<tr>
+		<td>###L_CAL_ORGANIZER###:</td><td>###ORGANIZER_TITLE###<input type="hidden" name="tx_cal_controller[organizer_id]" value="###ORGANIZER_ID###"></td>
+	</tr>
+<!-- ###FORM_ORGANIZER### end-->
+<!-- ###FORM_LOCATION### start-->
+  <tr>
+		<td>###L_LOCATION###:</td><td>###LOCATION###<input type="hidden" name="tx_cal_controller[location]" value="###LOCATION###"></td>
+	</tr>
+	<tr>
+		<td>###L_CAL_LOCATION###:</td><td>###LOCATION_TITLE###<input type="hidden" name="tx_cal_controller[location_id]" value="###LOCATION_ID###"></td>
+	</tr>
+<!-- ###FORM_LOCATION### end-->
+<!-- ###FORM_DESCRIPTION### start-->
+	<tr>
+		<td>###L_DESCRIPTION###:</td><td>###DESCRIPTION###<input type="hidden" name="tx_cal_controller[description]" value="###DESCRIPTION###"></td>
+	</tr>
+<!-- ###FORM_DESCRIPTION### end-->
+<!-- ###FORM_FREQ### start-->
+	<tr>
+		<td>###L_FREQUENCY###:</td><td>###FREQUENCY_ID###<input type="hidden" name="tx_cal_controller[frequency_id]" value="###FREQUENCY_ID###"></td>
+	</tr>
+	<tr>
+		<td>###L_BY_DAY###:</td><td>###BY_DAY###<input type="hidden" name="tx_cal_controller[by_day]" value="###BY_DAY###"></td>
+	</tr>
+	<tr>
+		<td>###L_BY_MONTHDAY###:</td><td>###BY_MONTHDAY###<input type="hidden" name="tx_cal_controller[by_monthday]" value="###BY_MONTHDAY###"></td>
+	</tr>
+	<tr>
+		<td>###L_BY_MONTH###:</td><td>###BY_MONTH###<input type="hidden" name="tx_cal_controller[by_month]" value="###BY_MONTH###"></td>
+	</tr>
+	<tr>
+		<td>###L_UNTIL###:</td><td>###UNTIL###<input type="hidden" name="tx_cal_controller[until]" value="###UNTIL###"></td>
+	</tr>
+	<tr>
+		<td>###L_COUNT###:</td><td>###COUNT###<input type="hidden" name="tx_cal_controller[count]" value="###COUNT###"></td>
+	</tr>
+	<tr>
+		<td>###L_INTERVAL###:</td><td>###INTERVAL###<input type="hidden" name="tx_cal_controller[interval]" value="###INTERVAL###"></td>
+	</tr>
+<!-- ###FORM_FREQ### end-->
+<!-- ###FORM_NOTIFY### start-->
+	<tr>
+		<td>###L_NOTIFY_ON_CHANGE###:</td><td>###NOTIFY_DISPLAY_IDS###<input type="hidden" name="tx_cal_controller[notify_ids]" value="###NOTIFY_IDS###"></td>
+	</tr>
+<!-- ###FORM_NOTIFY### end-->
+<!-- ###FORM_EXCEPTION### start-->
+	<tr>
+		<td>###L_EXCEPTION###:</td><td>###EXCEPTION_IDS###<input type="hidden" name="tx_cal_controller[single_exception_ids]" value="###SINGLE_EXCEPTION_IDS###"><input type="hidden" name="group_exception_ids" value="###GROUP_EXCEPTION_IDS###"></td>
+	</tr>
+<!-- ###FORM_EXCEPTION### end-->
+<!-- ###FORM_END### start-->
+</table>
+<input type="reset" value="###L_CANCEL###" onclick="window.back()"/><input type="submit" value="###L_SAVE###" />
+</form>
+<!-- ###FORM_END### end-->

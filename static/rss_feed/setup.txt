@@ -1,0 +1,94 @@
+###
+# This is the default TS-setup RSS feed from cal
+# this template has to be included after the cal main TS-setup because it depends on some settings from there
+#
+# (see Section Reference in the manual for more options & parameters)
+#
+###
+
+
+
+
+# - - - - - - - - - - - - - -  render XML news   - - - - - - - - - - - - -  #
+ 
+# point your RSS reader to: http://your-server.org/index.php?type=151
+
+## This enables the xml news feed
+calRSS = PAGE
+calRSS {
+ 	typeNum = 151
+	10 =< plugin.tx_cal_controller
+	10 {
+		pidList = {$plugin.tx_cal_controller.pidList}
+		recursive = 1
+		view {
+			allowedViews = rss,event
+			event.eventViewPid = {$plugin.tx_cal_controller.rss.eventViewPID}
+			ics.eventUidPrefix = {$plugin.tx_cal_controller.view.ics.eventUidPrefix}
+			rss {
+				rss091_tmplFile = {$plugin.tx_cal_controller.rss.rss091_tmplFile}
+				rss2_tmplFile = {$plugin.tx_cal_controller.rss.rss2_tmplFile}
+				rdf_tmplFile = {$plugin.tx_cal_controller.rss.rdf_tmplFile}
+				atom03_tmplFile = {$plugin.tx_cal_controller.rss.atom03_tmplFile}
+				atom1_tmplFile = {$plugin.tx_cal_controller.rss.atom1_tmplFile}
+				
+				# possibile values: rss091 / rss2 / rdf / atom03
+				xmlFormat = {$plugin.tx_cal_controller.rss.xmlFormat}
+				
+				xmlTitle = {$plugin.tx_cal_controller.rss.xmlTitle}
+				xmlDesc = {$plugin.tx_cal_controller.rss.xmlDesc}
+				xmlLang = {$plugin.tx_cal_controller.rss.xmlLang}
+				xmlIcon = {$plugin.tx_cal_controller.rss.xmlIcon}
+				xmlLimit = {$plugin.tx_cal_controller.rss.xmlLimit}
+				xmlCaching = {$plugin.tx_cal_controller.rss.xmlCaching}
+				xmlLastBuildDate = 1
+				range = {$plugin.tx_cal_controller.rss.range}
+				
+				timeFormat = %I:%M %p
+				dateFormat = %Y-%m-%d
+					
+				event < plugin.tx_cal_controller.view.event.event
+				event {
+					title {
+						dataWrap >
+						htmlSpecialChars = 1
+						htmlSpecialChars.preserveEntities = 1
+					}
+					alldayTitle {
+						dataWrap >
+						htmlSpecialChars = 1
+						htmlSpecialChars.preserveEntities = 1
+					}
+					
+					startdate.dataWrap = |<br/>
+					starttime.dataWrap = |-
+					endtime.dataWrap =  |<br/>
+					description {
+						crop = 100|..
+						dataWrap = |<br/>
+					}
+					location.dataWrap = <div>%%%LOCATION%%%: |</div><br/>
+					category.dataWrap = <div>%%%CATEGORY%%%: |</div><br/>
+					crdate = TEXT
+					crdate {
+						strftime = %a, %d %b %Y %H:%M:%S GMT
+						current = 1
+					}
+					eventUrl < plugin.tx_cal_controller.view.event.event.eventLink
+					eventUrl.typolink.returnLast = url
+				}
+			}
+		}
+	}
+	
+
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:application/xml
+		xhtml_cleaning = 0
+		admPanel = 0
+		locale_all = en
+	}
+}
+
+

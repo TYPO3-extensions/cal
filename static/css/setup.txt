@@ -1,0 +1,1225 @@
+plugin.tx_cal_controller {
+	_CSS_DEFAULT_STYLE (
+		/* Styled by TYPO3 Content Rendering Group - ben@netcreators.com 2007 */
+		/* START new classes and  id's */
+		#month-header {
+			width: 100%;
+			margin-bottom: 7px;
+			}
+
+		#month-header-prevnext {
+			float: left;
+			}
+
+		#month-header-icons {
+			float: right;
+			text-align: right;
+			}
+			
+		#month-header-icons IMG, #month-header-prevnext IMG , #month-footer IMG{
+			border: 0px solid;
+			}
+
+		#month-footer {
+			width: 735px;
+			margin-bottom: 7px;
+			}
+			
+		#month-footer-header {
+			text-align: center;
+			}
+
+		table.month-small {
+			border: 1px solid #A1A5A9;
+			border-collapse: collapse;
+			}
+			
+		.month-weeknums {
+			border-right:1px solid #AAAAAA;
+			background-color:#EFEFEF;
+		}
+		
+		.month-weekdays {
+			border-bottom:1px solid #AAAAAA;
+			background-color:#EFEFEF;
+		}
+		.month-small a:link,.monthoff a:visited {
+			color: #000000;
+		}
+		
+		.month-small th,
+		.month-small td {
+			padding: 2px;
+			width: 22px;
+			font-size: 10px;
+			text-align: right;
+		}
+		
+		.month-small th{
+			text-align: center;
+		}
+			
+		.month-large {
+			border: 1px solid #A1A5A9;	
+			border-collapse: collapse;
+			}
+
+		.month-large th,
+		.month-large td {
+			border: 1px solid #A1A5A9;
+			}
+
+		.month-large .weekday {
+			background-color: #EEE;
+			height: 12px;
+			}
+
+		.month-large .weeknum {
+			background-color: #A1A5A9;
+			width: 22px;
+		}
+
+		.month-large .day {
+			height: 100px;
+			width: 100px;
+			vertical-align: top;
+			text-align: left;
+		}
+		
+		.month-large .daylink {
+			font-weight: bold;
+		}
+
+		.month-large .day div {
+			text-align: right;
+			padding-right: 3px;
+		}
+		
+		.month-large .dayNum {
+			border-bottom: none;
+			background-color: #E8EEF7;
+			text-align: right;
+		}
+		
+		.month-large .days td {
+			border-top: none;
+		}
+		
+		.month-large .alldays td {
+			border-top: none;
+			border-bottom: none;
+		}
+		
+		.month-large .alldays .event div{
+			-moz-border-radius:2px 2px 2px 2px;
+		}
+
+		/*For the time being calendar-nav remains a table - no proper alternatives came to my mind yet - suggestions?*/
+		#calendar-nav {
+
+			}
+
+		#calendar-nav td {
+			vertical-align: top;
+			}
+
+		#calendar-nav td#previous {
+			width: 175px;
+			}
+
+		#calendar-nav td#list {
+			width: 188px;
+			}
+
+		#calendar-nav td#legend {
+			width: 188px;
+			}
+
+		#calendar-nav td#next {
+			width: 175px;
+			}
+
+		#link-ics,
+		#link-admin {
+			width: 100%;
+			text-align: center;
+			}
+
+		/* END new classes and  id's */
+		
+		.calborder {
+			background-color: #fff;
+			border: 1px solid #A1A5A9;
+			}
+		
+		.tbll {
+			background: url(../typo3conf/ext/cal/template/img/shadow_l.gif) no-repeat;
+			width: 8px
+			}
+		
+		.tblbot {
+			background: url(../typo3conf/ext/cal/template/img/shadow_m.gif) repeat-x;
+			width: 100%
+			}
+		
+		.tblr {
+			background: url(../typo3conf/ext/cal/template/img/shadow_r.gif) no-repeat;
+			width: 8px
+			}
+		
+		.rowOn {
+			background-color: #cfc;
+			border-top: 1px solid #fff;
+			border-left: 1px solid #fff;
+			}
+		
+		.rowOn2 {
+			background-color: #cfc;
+			border-top: 1px solid #fff;
+			}
+		
+		.rowOff {
+			background-color: #E1E8F1;
+			border-top: 1px solid #fff;
+			border-left: 1px solid #fff;
+			}
+		
+		.rowOff2 {
+			background-color: #E1E8F1;
+			border-top: 1px solid #fff;
+			}
+		
+		.rowToday {
+			background-color: #cff;
+			border-top: 1px solid #fff;
+			border-left: 1px solid #fff;
+			}
+		
+		.tx-cal-controller .padd {
+			/*XXXpadding: 2px;*/
+			}
+		
+		.eventbg_1 {
+			background-color: #557CA3;
+			padding: 2px;
+			}
+		
+		.eventbg_2 {
+			background-color: #53A062;
+			padding: 2px;
+			}
+		
+		.eventbg_3 {
+			background-color: #E84F25;
+			padding: 2px;
+			}
+		
+		.eventbg_4 {
+			background-color: #B257A2;
+			padding: 2px;
+			}
+		
+		.eventbg_5 {
+			background-color: #D42020;
+			padding: 2px;
+			}
+		
+		.eventbg_6 {
+			background-color: #B88F0B;
+			padding: 2px;
+			}
+		
+		.eventbg_7 {
+			background-color: #73738C;
+			padding: 2px;
+			}
+		
+		#allday a {
+			font-size: 9px;
+			color: #fff;
+			font-weight: 900;
+			text-decoration: none;
+			}
+		
+		#allday a:hover {
+			text-decoration: underline;
+			}
+		
+		.eventbg2_1 {
+			background-color: #6699CC;
+			border: 1px solid #557CA3;
+			}
+		
+		.eventbg2_2 {
+			background-color: #4FC464;
+			border: 1px solid #53A062;
+			}
+		
+		.eventbg2_3 {
+			background-color: #FF6D3B;
+			border: 1px solid #E84F25;
+			}
+		
+		.eventbg2_4 {
+			background-color: #EA62D4;
+			border: 1px solid #B257A2;
+			}
+		
+		.eventbg2_5 {
+			background-color: #FF5E56;
+			border: 1px solid #D42020;
+			}
+		
+		.eventbg2_6 {
+			background-color: #CCB21F;
+			border: 1px solid #B88F0B;
+			}
+		
+		.eventbg2_7 {
+			background-color: #9292A1;
+			border: 1px solid #73738C;
+			}
+		
+		.dayborder {
+			background-color: #fff;
+			border-top: 1px solid #A1A5A9;
+			}
+		
+		.dayborder2 {
+			background-color: #fff;
+			border-top: 1px dashed #ccc;
+			}
+		
+		.tx-cal-controller .title {
+			background-image: url(../typo3conf/ext/cal/template/img/time_bg.gif);
+			padding: 5px;
+			}
+		
+		.tx-cal-controller .title h1 {
+			font-family: Helvetica,sans-serif;
+			font-size: 18px;
+			color: #000;
+			margin: 0;
+			}
+		
+		.monthBack {
+			background-color: #A1A5A9;
+			}
+		
+		.monthSmallBasic {
+			text-align: left;
+			vertical-align: top;
+			}
+		
+		.monthMediumBasic {
+			height: 20px;
+			width: 20px;
+			text-align: left;
+			vertical-align: top;
+			}
+		
+		.monthOff, .monthOff a:link,.monthOff a:visited {
+			color: #BBBBBB ! important;
+		}
+		
+		.monthWeekend {
+			background-color: #FFFFEF;
+		}
+		
+		.monthCurrentWeek {
+			background-color: #F2F9FF;
+		}
+		
+		.month-small th, .month-medium th, .month-large th {
+			font-weight: normal;
+		}
+		
+		.month-small th a:link, .month-small th a:visited, .month-medium th a:link, .month-medium th a:visited, .month-large th a:link, .month-large th a:visited{
+			font-weight: bold;
+			color: #000000;
+		}
+		
+		.monthToday {
+			background:#99AABB none repeat scroll 0% !important;
+			border-color:#556677 rgb(170, 187, 204) rgb(170, 187, 204) rgb(85, 102, 119) !important;
+			border-style:solid !important;
+			border-width:1px !important;
+		}
+		
+		.monthToday a:link, .monthToday a:visited {
+			color:#FFFFFF;
+		}
+			
+		.monthCorner {
+			border-bottom: 1px solid #AAAAAA;
+		}
+			
+		.monthSelected, .monthSelectedWeek {
+			background-color: #AACCEE;
+		}
+		
+		.current td, .days .current td, tr.current th {
+			background-color: #F2F9FF;
+		}
+		
+		.selected {
+			background-color: #AACCEE;
+		}
+		
+		.monthEventTop {
+			background-image: url(../typo3conf/ext/cal/template/img/side_bg.gif);
+			border-top: 1px solid #A1A5A9;
+			}
+		
+		.monthEventLine {
+			border-right: 1px dotted #A1A5A9;
+			}
+		
+		.medtitle {
+			background-image: url(../typo3conf/ext/cal/template/img/side_bg.gif);
+			height: 20px;
+			margin-top: 3px;
+			font-weight: 900;
+			}
+		
+		.yearreg {
+			background-color: #fff;
+			height: 30px;
+			width: 30px;
+			text-align: right;
+			vertical-align: top;
+			font-size: 9px;
+			}
+		
+		.yearoff {
+			background-color: #F2F2F2;
+			height: 30px;
+			width: 30px;
+			text-align: right;
+			vertical-align: top;
+			font-size: 9px;
+			}
+		
+		.yearon {
+			background-color: #F2F9FF;
+			height: 30px;
+			width: 30px;
+			text-align: right;
+			vertical-align: top;
+			font-size: 9px;
+			}
+		
+		.yearmonth {
+			background-color: #ccc;
+			}
+		
+		.yearweek {
+			background-color: #eee;
+			width: 30px;
+			font-size: 9px;
+			font-weight: 900;
+			text-align: center;
+			height: 15px;
+			}
+		
+		.eventborder {
+			background-image: url(../typo3conf/ext/cal/template/img/day_title.gif);
+			border: 1px #006699 solid;
+			}
+		
+		.dateback {
+			background-color: #eee;
+			}
+		
+		.weekborder {
+			border-top: 1px dashed #A1A5A9;
+			border-right: 1px solid #A1A5A9;
+			}
+		
+		.weekborder2 {
+			border-right: 1px solid #A1A5A9;
+			}
+		
+		.timeborder {
+			border-right: 2px solid #A1A5A9;
+			border-top: 1px dashed #A1A5A9;
+			background-image: url(../typo3conf/ext/cal/template/img/time_bg.gif);
+			}
+		
+		.timeborder2 {
+			border-right: 2px solid #A1A5A9;
+			border-top: 1px solid #A1A5A9;
+			background-image: url(../typo3conf/ext/cal/template/img/time_bg.gif);
+			}
+		
+		.tx-cal-controller .navback {
+			background-image: url(../typo3conf/ext/cal/template/img/time_bg.gif);
+			}
+			
+		.tx-cal-controller .navback img{
+			border:none;
+			}
+		
+		.tx-cal-controller .sideback {
+			background-image: url(../typo3conf/ext/cal/template/img/side_bg.gif);
+			}
+		
+		a.psf {
+			text-decoration: none;
+			}
+		
+		a.psf:link {
+			color: #0066FF;
+			}
+		
+		a.psf:visited {
+			color: #0066FF;
+			}
+		
+		a.psf:active {
+			color: #3366CC;
+			}
+		
+		a.psf:hover {
+			color: #000099;
+			text-decoration: underline;
+			}
+		
+		a.ps2 {
+			text-decoration: underline;
+			}
+		
+		a.ps2:link {
+			color: #0066FF;
+			}
+		
+		a.ps2:visited {
+			color: #0066FF;
+			}
+		
+		a.ps2:active {
+			color: #3366CC;
+			}
+		
+		a.ps2:hover {
+			color: #000099;
+			}
+		
+		a.ps3 {
+			text-decoration: none;
+			}
+		
+		a.ps3:link {
+			color: #000;
+			}
+		
+		a.ps3:visited {
+			color: #000;
+			}
+		
+		a.ps3:active {
+			color: #000;
+			}
+		
+		a.ps3:hover {
+			color: #000;
+			text-decoration: underline;
+			}
+		
+		a.ps {
+			text-decoration: none;
+			}
+		
+		a.ps:link {
+			color: #fff;
+			}
+		
+		a.ps:visited {
+			color: #fff;
+			}
+		
+		a.ps:active {
+			color: #fff;
+			}
+		
+		a.ps:hover {
+			color: #fff;
+			text-decoration: underline;
+			}
+		.legend_calendar {
+			font-size: 9px;
+			color: #000000;
+			margin-top: 1em;
+			margin-left: 1em;
+		}
+		
+		.V9 {
+			text-align:left ! important;
+			font-size: 9px;
+			color: #000000;
+			}
+		
+		.V9 ul {
+			margin-bottom: 0px;
+			padding-bottom: 0px;
+			margin-left: 20px;
+			padding-left: 0px;
+			}
+		.V9 li {
+			margin-bottom: 0px;
+			padding-bottom: 0px;
+			}
+		
+		.V10W {
+			font-size: 10px;
+			color: #FFFFFF;
+			text-decoration: none;
+			}
+		
+		.V9W {
+			font-size: 9px;
+			color: #FFFFFF;
+			text-decoration: none;
+			}
+		
+		.V10WB {
+			font-size: 10px;
+			color: #FFFFFF;
+			font-weight: 900;
+			}
+		
+		.V9G {
+			font-size: 9px;
+			color: #666666;
+			}
+		
+		.V10 {
+			font-size: 10px;
+			color: #000000;
+			}
+		
+		.V9BOLD {
+			font-size: 9px;
+			font-weight: 900;
+			}
+		
+		.G10 {
+			font-size: 11px;
+			color: #0066FF;
+			}
+		
+		.G10B {
+			font-size: 11px;
+			color: #000000;
+			}
+		
+		.G10BOLD {
+			font-size: 11px;
+			font-weight: 900;
+			}
+		
+		.G10G {
+			font-size: 11px;
+			color: #A1A5A9;
+			}
+		
+		.V12 {
+			font-size: 12px;
+			color: #000000;
+			}
+		
+		.tx-cal-controller .eventfont {
+			font-size: 11px;
+			color: #FFFFFF;
+			}
+		
+		.tx-cal-controller .query_style {
+			font-size: 11px;
+			width: 156px;
+			margin-bottom: 0;
+			}
+		
+		.tx-cal-controller .search_style {
+			font-size: 12px;
+			width: 134px;
+			margin-bottom: 0;
+			}
+		
+		.tx-cal-controller .login_style {
+			font-size: 11px;
+			width: 80px;
+			margin-bottom: 0;
+				}
+			
+		.tx-cal-controller .bold a:link {
+			font-weight: bold;
+			}
+		
+		.tx-cal-controller .bold a:active {
+			font-weight: bold;
+			}
+		
+		.tx-cal-controller .bold a:visited {
+			font-weight: bold;
+			}
+
+		/* Pagebrowser */
+		.tx-cal-controller .pagebrowser span {
+			padding: 0 2px;
+			}
+
+		/*------------ Category style package: default (blue) - start ------------*/
+		
+		.default_categoryheader,
+		.default_catheader {
+			background-color: #557CA3;
+			}
+		
+		.V9G .default_categoryheader,
+		.V9G .deafult_catheader {
+			background-color: transparent !important;
+			color: #557CA3 !important;
+		}
+		
+		.default_categoryheader_bullet,
+		.default_catheader_bullet {
+			color: #557CA3;
+			font-size: 13px;
+			}
+		
+		.default_categoryheader_text,
+		.default_catheader_text {
+			color: #000000;
+			font-size: 11px;
+			margin-left: 3px;
+			}
+		
+		.default_categoryheader_legend_bullet,
+		.default_catheader_legend_bullet {
+			margin-left: 3px;
+			}
+		
+		.default_categoryheader_legend_text,
+		.default_catheader_legend_text {
+			}
+		
+		.default_categoryheader_allday,
+		.default_catheader_allday {
+			text-align: center;
+			background-color: #6699CC;
+			}
+		
+		.default_categorybody,
+		.default_catbody {
+			background-color: #6699CC;
+			border: 1px solid #557CA3;
+			color: #fff;
+			}
+		
+		.default_categorybody a:link,
+		.default_catbody a:link {
+			color: #fff;
+			}
+		
+		/*------------ Category style package: default (blue) - end ------------*/	
+		/*------------ Category style package: green - start ------------*/
+		
+		.green_catheader, .green_catheader_allday {
+			background-color: #53A062;
+			}
+		
+		.V9G .green_catheader {
+			background-color: transparent !important;
+			color: #53A062 !important;
+		}
+		
+		.green_catheader_bullet {
+			color: #4FC464;
+			font-size: 13px;
+			}
+		
+		.green_catheader_text {
+			color: #000000;
+			font-size: 11px;
+			margin-left: 3px;
+			}
+		
+		.green_catheader_legend_bullet {
+			margin-left: 3px;
+			}
+		
+		.green_catheader_bullet_text {
+			}
+		
+		.green_catheader_allday {
+			text-align: center;
+			background-color: #4FC464;
+			}
+		
+		.green_catbody {
+			background-color: #4FC464;
+			border: 1px solid #53A062;
+			color: #fff;
+			}
+		
+		.green_catbody a:link {
+			color: #fff;
+			}
+		
+		/*------------ Category style package: green - end ------------*/
+		/*------------ Category style package: orange - start ------------*/
+
+		.orange_catheader, .orange_catheader_allday {
+			background-color: #E84F25;
+			}
+		.V9G .orange_catheader {
+			background-color: transparent !important;
+			color: #E84F25 !important;
+		}
+		
+		.orange_catheader_bullet {
+			color: #FF6D3B;
+			font-size: 13px;
+			}
+		
+		.orange_catheader_text {
+			color: #000000;
+			font-size: 11px;
+			margin-left: 3px;
+			}
+		
+		.orange_catheader_legend_bullet {
+			margin-left: 3px;
+			}
+		
+		.orange_catheader_bullet_text {
+			}
+		
+		.orange_catheader_allday {
+			text-align: center;
+			background-color: #FF6D3B;
+			}
+		
+		.orange_catbody {
+			background-color: #FF6D3B;
+			border: 1px solid #E84F25;
+			color: #fff;
+			}
+		
+		.orange_catbody a:link {
+			color: #fff;
+			}
+		
+		/*------------ Category style package: orange - end ------------*/
+		/*------------ Category style package: pink - start ------------*/
+		
+		.pink_catheader, .pink_catheader_allday {
+			background-color: #B257A2;
+			}
+			
+		.V9G .pink_catheader {
+			background-color: transparent !important;
+			color: #B257A2 !important;
+		}
+		
+		.pink_catheader_bullet {
+			color: #EA62D4;
+			font-size: 13px;
+			}
+		
+		.pink_catheader_text {
+			color: #000000;
+			font-size: 11px;
+			margin-left: 3px;
+			}
+		
+		.pink_catheader_legend_bullet {
+			margin-left: 3px;
+			}
+		
+		.pink_catheader_bullet_text {
+			}
+		
+		.pink_catheader_allday {
+			text-align: center;
+			background-color: #EA62D4;
+			}
+		
+		.pink_catbody {
+			background-color: #EA62D4;
+			border: 1px solid #B257A2;
+			color: #fff;
+			}
+		
+		.pink_catbody a:link {
+			color: #fff;
+			}
+		
+		/*------------ Category style package: pink - end ------------*/
+		/*------------ Category style package: red - start ------------*/
+
+		.red_catheader, .red_catheader_allday {
+			background-color: #D42020;
+			}
+			
+		.V9G .red_catheader {
+			background-color: transparent !important;
+			color: #D42020 !important;
+		}
+		
+		.red_catheader_bullet {
+			color: #FF5E56;
+			font-size: 13px;
+			}
+		
+		.red_catheader_text {
+			color: #000000;
+			font-size: 11px;
+			margin-left: 3px;
+			}
+		
+		.red_catheader_legend_bullet {
+			margin-left: 3px;
+			}
+		
+		.red_catheader_bullet_text {
+			}
+		
+		.red_catheader_allday {
+			text-align: center;
+			background-color: #FF5E56;
+			}
+		
+		.red_catbody {
+			background-color: #FF5E56;
+			border: 1px solid #D42020;
+			color: #fff;
+			}
+		
+		.red_catbody a:link {
+			color: #fff;
+			}
+		
+		/*------------ Category style package: red - end ------------*/
+		/*------------ Category style package: yellow - start ------------*/
+
+		.yellow_catheader, .yellow_catheader_allday {
+			background-color: #B88F0B;
+			}
+			
+		.V9G .yellow_catheader {
+			background-color: transparent !important;
+			color: #B88F0B !important;
+		}
+		
+		.yellow_catheader_bullet {
+			color: #CCB21F;
+			font-size: 13px;
+			}
+		
+		.yellow_catheader_text{
+			color: #000000;
+			font-size: 11px;
+			margin-left: 3px;
+			}
+		
+		.yellow_catheader_legend_bullet {
+			margin-left: 3px;
+			}
+		
+		.yellow_catheader_bullet_text {
+
+			}
+		
+		.yellow_catheader_allday {
+			text-align: center;
+			background-color: #CCB21F;
+			}
+		
+		.yellow_catbody {
+			background-color: #CCB21F;
+			border: 1px solid #B88F0B;
+			color: #fff;
+			}
+		
+		.yellow_catbody a:link {
+			color: #fff;
+			}
+		
+		/*------------ Category style package: yellow - end ------------*/
+		/*------------ Category style package: grey - start ------------*/
+
+		.grey_catheader, .grey_catheader_allday {
+			background-color: #73738C;
+			}
+			
+		.V9G .grey_catheader {
+			background-color: transparent !important;
+			color: #73738C !important;
+		}
+		
+		.grey_catheader_bullet {
+			color: #9292A1;
+			font-size: 13px;
+			}
+		
+		.grey_catheader_text {
+			color: #000000;
+			font-size: 11px;
+			margin-left: 3px;
+			}
+		
+		.grey_catheader_legend_bullet {
+			margin-left: 3px;
+			}
+		
+		.grey_catheader_bullet_text {
+			}
+		
+		.grey_catheader_allday {
+			text-align: center;
+			background-color: #9292A1;
+			}
+		
+		.grey_catbody {
+			background-color: #9292A1;
+			border: 1px solid #73738C;
+			color: #fff;
+			}
+		
+		.grey_catbody a:link {
+			color: #fff;
+			}
+		
+		/*------------ Category style package: grey - end ------------*/
+		
+		.tx-cal-controller .bold {
+			/*font-weight: bold;*/
+			}
+		
+		.refresh_calendar {
+			margin-right: 5px;
+			}
+		
+		/*  Start of moving stuff from the templat into this file */
+		
+		.tx-cal-controller .weekview {
+			margin: 0 auto;
+			}
+		
+		.tx-cal-controller .weekview .nextweek_arrow, .tx-cal-controller .weekview .previousweek_arrow {
+			width: 16px;
+			height: 20px;
+			border: 0px;
+			text-align: left;
+			}
+		
+		.previsousweek_arrow {
+			text-align: right;
+			}
+		
+		/*------------- free & busy styles ----------*/
+		.fnb_header {
+			background-color: #444444;
+			}
+		
+		.fnb_body {
+			background-color: #888888;
+			border: 1px solid #999999;
+			color: #fff;
+			}
+
+		/*------------- list styles ------------*/
+		.tx-cal-controller .even {
+			background-color: #eeeeee;
+		}
+		
+		
+		.tx-cal-controller .treelevel0 {
+		}
+		
+		.tx-cal-controller .treelevel1 {
+			margin-left:20px;
+		}
+		
+		.tx-cal-controller .treelevel2 {
+			margin-left:30px;
+		}
+	
+		.tx-cal-controller label {
+			display:block;
+			float:left;
+			margin-bottom: 0px;
+			padding-right:1em;
+			text-align:right;
+			width:120px;
+		}
+		.tx-cal-controller fieldset div {
+			clear:left;
+		}
+		.tx-cal-controller .noborder {
+			border: none;
+		}
+		
+		.tx-cal-controller .search-result {
+			list-style: none;
+			margin-left: 0px;
+			padding-left: 0px;
+		}
+		
+		.tx-cal-controller .search-result li {
+			padding-bottom: 1em;
+		}
+		
+		.tx-cal-controller .search_result li .even {
+			background-color: #EEEEEE;
+		}
+		
+		.tx_cal_controller img .mouse_pointer {
+			cursor:pointer;
+		}
+/*		
+		#cal_general,#cal_location,#cal_organizer,#cal_freq,#cal_exception,#cal_files,#cal_notify {
+			height:210px;
+			overflow:auto;
+			padding:8px;
+		}
+*/		
+		.x-form-label-top .x-form-item label {
+			width:70px ! important;
+		}
+		
+		.x-form-invalid, textarea.x-form-invalid {
+			background: none ! important;
+		}
+		
+		#cal_event_description {
+			margin-top:10px;
+		}
+		
+		.admin_link {
+			width:100%;
+			text-align:center;
+		}
+		
+		.ics_link {
+			width:100%;
+			text-align:center;
+		}
+		
+		.tx-cal-controller .cal_required {
+			color: red;
+		}
+		
+		.tx-cal-controller .constrain {
+			color: red;
+			font-weight:bold;
+		}
+		
+		
+		#editorWrap1 textarea {display: block}
+		
+		
+		/*Credits: By Santosh Setty (http://webdesigninfo.wordpress.com) */
+		/*Posted to: Dynamic Drive CSS Library (http://www.dynamicdrive.com/style/) */
+		
+		#tx_cal_controller_create_element {
+			width:540px;
+		}
+		
+		.basictab ul{
+			margin: 4px;
+			padding: 3px 0;
+			margin-left: 0;
+			font: bold 12px Verdana;
+			border-bottom: 1px solid gray;
+			list-style-type: none;
+			text-align: left; /*set to left, center, or right to align the menu as desired*/
+		}
+		
+		.basictab li{
+			display: inline;
+			margin: 0;
+		}
+		
+		.basictab li a{
+			text-decoration: none;
+			padding: 3px 7px;
+			margin-right: 3px;
+			border: 1px solid gray;
+			border-bottom: none;
+			background-color: #6699CC;
+			color: #FFFFFF;
+		}
+		
+		.basictab li a:visited{
+			color: #2d2b2b;
+		}
+		
+		.basictab li a:hover, .basictab li a.current{
+			background-color: #557CA3;
+			color: #FFFFFF;
+		}
+		
+		.basictab li a:active{
+			color: #000000;
+		}
+		
+		.tabcontainer{
+			clear: left;
+			width:95%; /*width of 2nd level sub menus*/
+			height:1.5em; /*height of 2nd level sub menus. Set to largest's sub menu's height to avoid jittering.*/
+		}
+		
+		.tabcontent{
+			display:none;
+		}
+		
+		#tx_cal_controller_create_element input[type="text"]:not([size]) { 
+			width: 6em;    /* Desired width of input field */
+		}
+		
+		#tx_cal_controller_create_element .treelevel0{
+			display:block;
+			margin-left: 70px;
+		}
+		#tx_cal_controller_create_element p {
+			margin: 7px;
+		}
+		
+		#tx_cal_controller_create_element .notify, #tx_cal_controller_create_element .shared, #tx_cal_controller_create_element .exception {
+			display:block;
+			margin-left: 140px;
+		}
+		#sc1 label {
+			width:50px;
+		}
+		
+		#allday {
+			width:10px;
+		}
+		
+		#category_tree {
+			float:right;
+			width:200px;
+		}
+		
+		#until label, #by_day label, #by_monthday label, #by_month label{
+			margin-left: 50px;
+		}
+		
+		#by_month label, #by_monthday label{
+			width: 230px;
+		}
+		
+		#categoryEntries {
+			height:80px;
+			overflow:auto;
+		}
+	    
+	    .reminderOffset {
+	    	width: 2em !important;
+	    }
+		
+	)
+}

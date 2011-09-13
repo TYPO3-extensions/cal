@@ -1,0 +1,53 @@
+<!-- search_location.tmpl -->
+<h1>###HEADING###</h1>
+<!-- ###SEARCHLOCATIONFORM### start -->
+<div class = 'G10BOLD'>###L_SEARCH###:</div>
+<form action="###SEARCH_ACTION_URL###" method="post">
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###">
+	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###">
+	<input type="image" src="###IMG_PATH###/search.gif" border=0 height="19" width="18" name="tx_cal_controller[submit]" title="###DOSEARCH_LABEL###" value="Search">
+</form>
+<!-- ###SEARCHLOCATIONFORM### end -->
+<ul class="search-result">
+	<!-- ###LOCATION### start -->
+	<!-- ###LOCATION_ODD### start -->
+	<li class="odd">
+		<div class="fn">
+			###NAME_LABEL###: <!-- ###LOCATION_LINK### start -->###NAME###<!-- ###LOCATION_LINK### end -->
+		</div>
+		
+		<div class="adr">
+			<div class="street-address">###STREET###</div>
+			<span class="postal-code">###ZIP###</span>
+			<span class="locality">###CITY###</span>
+			<span class="region">###COUNTRYZONE###</span>
+			<div class="country-name">###COUNTRY###</div>
+			###EVENT_LINK###
+		</div>
+	</li>
+	<!-- ###LOCATION_ODD### end -->
+	
+	<!-- ###LOCATION_EVEN### start -->
+	<li class="even">
+		<div class="fn">
+			###NAME_LABEL###: <!-- ###LOCATION_LINK### start -->###NAME###<!-- ###LOCATION_LINK### end -->
+		</div>
+		
+		<div class="adr">
+			<div class="street-address">###STREET###</div>
+			<span class="postal-code">###ZIP###</span>
+			<span class="locality">###CITY###</span>
+			<span class="region">###COUNTRYZONE###</span>
+			<div class="country-name">###COUNTRY###</div>
+			###EVENT_LINK###
+		</div>
+	</li>
+	
+	<!-- ###LOCATION_EVEN### end -->
+	<!-- ###LOCATION### end -->
+</ul>
+<!-- ###LINKS### start -->
+<div>###BACK_LINK###</div>
+<div>###OTHERSEARCH###</div>
+<!-- ###LINKS### end -->
+<!-- /search_location.tmpl -->

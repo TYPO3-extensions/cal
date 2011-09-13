@@ -1,0 +1,250 @@
+<!--sidebar.tmpl-->
+<!-- ###USER_LOGIN### start -->
+<form style="margin-bottom:0;" action="###LOGIN_ACTION###" method="post">
+<input type="hidden" name="logintype" value="###LOGIN_TYPE###" />
+<input type="hidden" name="pid" value="###USER_FOLDER###" />
+<input type="hidden" name="redirect_url" value="###REDIRECT_URL###" />
+<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+	<tr>
+		<td colspan="2" align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_LOGIN###</div></td>
+	</tr>
+	<!-- ###LOGIN### start -->
+	<tr>
+		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-top: 5px;">###L_USERNAME###:</div></td>
+		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-top: 5px;"><input type="text" name="user" size="10" /></div></td>
+	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">###L_PASSWORD###:</div></td>
+		<td bgcolor="#FFFFFF" align="right" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;"><input type="password" name="pass" size="10" /></div></td>
+	</tr>
+	<!-- ###LOGIN### end -->
+	<!-- ###LOGOUT### start -->
+	<tr>
+		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-left: 5px; padding-bottom: 5px;">###L_USERNAME###:</div></td>
+		<td bgcolor="#FFFFFF" align="left" valign="middle"><div style="padding-right: 5px; padding-bottom: 5px;">###USERNAME###</div></td>
+	</tr>
+	<!-- ###LOGOUT### end -->
+	<tr>
+		<td bgcolor="#FFFFFF" align="center" valign="middle" colspan="2"><div style="padding-left: 5px; padding-bottom: 5px;"><input type="submit" value="###L_LOGIN_BUTTON###" /></div></td>
+	</tr>
+</table>
+</form>
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+<!-- ###USER_LOGIN### end -->
+<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+	<tr>
+		<td align="left" valign="top" width="24" class="sideback">###LEGEND_PREV_DAY###</td>
+		<td align="center" width="112" class="sideback"><font class="G10BOLD">###SIDEBAR_DATE###</font></td>
+		<td align="right" valign="top" width="24" class="sideback">###LEGEND_NEXT_DAY###</td>
+	</tr>
+	<tr>
+		<td colspan="3" bgcolor="#FFFFFF" align="left">
+			<div style="padding: 5px;">
+				<b>###L_LEGEND###:</b> ###CREATE_CALENDAR_LINK###<br />
+				
+				<script type="text/javascript">
+					function showHide(image, id){
+						var element = document.getElementById(id);
+						if(element.style.display == ""){
+							element.style.display = "none";
+							image.src = image.src.replace(/minusonly.gif/, "plusonly.gif");
+						} else {
+							element.style.display = "";
+							image.src = image.src.replace(/plusonly.gif/, "minusonly.gif");
+						}
+					}
+					</script>
+					
+					<form action="###CATEGORYURL###" method="post">###LEGEND###</form>
+			</div>
+		</td>
+	</tr>
+</table>
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+
+
+<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+	<tr>
+		<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_JUMP###</div></td>
+	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" align="left">
+			<div style="padding: 5px;">
+				<!-- ###JUMPS### start -->
+				<form style="margin-bottom:0;" action="" method="post">
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_JUMPS###</select><br />
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_YEARS###</select><br />
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_MONTHS###</select><br />
+					<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_WEEKS###</select><br />
+				</form>
+				<!-- ###JUMPS### end -->
+				<!-- ###CALENDAR_SELECTOR### begin-->
+				<form name="tx_cal_controller" method="post" action="###CHANGE_CALENDAR_ACTION_URL###">
+					<input type="hidden" value="###GETDATE###" name="tx_cal_controller[getdate]" />
+					<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+					<input type="hidden" value="###THIS_VIEW###" name="tx_cal_controller[view]" />
+					<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+					<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+					<div class = 'G10BOLD'>###L_CALENDAR###:</div>
+						<select name="tx_cal_controller[calendar]" size="1" onchange="submit();">###CALENDAR_IDS###</select>
+				</form>
+				<!-- ###CALENDAR_SELECTOR### end-->
+				<!-- ###SHOW_GOTO### start -->
+				<form style="margin-bottom:0;margin-top:10px;" action="" method="post">
+					<input type="hidden" value="###GETDATE###" name="tx_cal_controller[getdate]" />
+					<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+					<input type="hidden" value="###THIS_VIEW###" name="tx_cal_controller[view]" />
+					<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+					<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+					<input type="text" style="width:110px; font-size:10px" name="tx_cal_controller[jumpto]" />
+					<input type="submit" value="Go" />
+				</form>
+				<!-- ###SHOW_GOTO### end -->
+			</div>
+		</td>
+	</tr>
+</table>
+
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+	<!-- ###SEARCH### start -->
+<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+				###SEARCH_BOX###
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+	<!-- ###SEARCH### end -->
+
+
+<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+
+<!-- ###TOMORROWS_EVENTS### start -->
+
+<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+	<tr>
+		<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_TOMORROWS###</div></td>
+	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" align="left">
+			<div style="padding: 5px;">
+				<!-- ###T_ALLDAY_SWITCH### start -->
+				###T_ALLDAY###
+				<!-- ###T_ALLDAY_SWITCH### end -->
+				<!-- ###T_EVENT_SWITCH### start -->
+				###T_EVENT###
+				<!-- ###T_EVENT_SWITCH### end -->
+			</div>
+		</td>
+	</tr>
+</table>
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+
+<!-- ###TOMORROWS_EVENTS### end -->
+
+<!-- ###TODO### start -->
+
+<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+	<tr>
+		<td align="center" width="98%" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_TODO###</div></td>
+	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" align="left">
+			<div style="padding: 5px;">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<!-- ###show_completed### start -->
+					<tr>
+						<td><img src="###IMG_PATH###/completed.gif" alt=" " width="13" height="11" border="0" align="middle" /></td>
+						<td><img src="###IMG_PATH###/spacer.gif" width="2" height="1" border="0" alt="" /></td>
+						<td><s><a class="psf" href="javascript:openTodoInfo('###VTODO_ARRAY###')"><font class="G10B"> ###VTODO_TEXT###</font></a></s></td>
+					</tr>
+					<!-- ###show_completed### end -->
+					<!-- ###show_important### start -->
+					<tr>
+						<td><img src="###IMG_PATH###/important.gif" alt=" " width="13" height="11" border="0" align="middle" /></td>
+						<td><img src="###IMG_PATH###/spacer.gif" width="2" height="1" border="0" alt="" /></td>
+						<td><a class="psf" href="javascript:openTodoInfo('###VTODO_ARRAY###')"><font class="G10B"> ###VTODO_TEXT###</font></a></td>
+					</tr>
+					<!-- ###show_important### end -->
+					<!-- ###show_normal### start -->
+					<tr>
+						<td><img src="###IMG_PATH###/not_completed.gif" alt=" " width="13" height="11" border="0" align="middle" /></td>
+						<td><img src="###IMG_PATH###/spacer.gif" width="2" height="1" border="0" alt="" /></td>
+						<td><a class="psf" href="javascript:openTodoInfo('###VTODO_ARRAY###')"><font class="G10B"> ###VTODO_TEXT###</font></a></td>
+					</tr>
+					<!-- ###show_normal### end -->
+				</table>
+			</div>
+		</td>
+	</tr>			
+</table>
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+
+
+<!-- ###TODO### end -->
+
+###MONTH_SMALL|-1###
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+
+###MONTH_SMALL|+0###
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+
+###MONTH_SMALL|+1###
+<table width="171" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+		<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+	</tr>
+</table>
+<!--/sidebar.tmpl-->

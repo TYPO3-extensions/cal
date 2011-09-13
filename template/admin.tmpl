@@ -1,0 +1,100 @@
+<!--admin.tmpl-->
+<!--t3boardtest-->
+<h2><img src="###IMG_PATH###/config.png"/> ###L_ADMINISTRATION_VIEW###</h2>
+<script type="text/javascript">
+	function calAdminAction(type, prefix){
+		if(type=='create'){
+			document.getElementById(prefix+"_view").value = type+"_"+prefix;
+			document.getElementById(prefix+"_form").submit();
+		}else{
+			var selector = document.getElementById(prefix+"_selector");
+			var value = selector[selector.selectedIndex].value;
+			if(isNumber(value) && value!=''){
+				document.getElementById(prefix+"_view").value = type+"_"+prefix;
+				document.getElementById(prefix+"_form").submit();
+			}else{
+				document.getElementById(prefix+'_message').style.display = "";
+			}
+		}
+	}
+	
+	function isNumber(str) {
+		for(var position=0; position<str.length; position++){
+			var chr = str.charAt(position)
+			if  ( (chr < "0") || (chr > "9") ) 
+				return false;
+		};      
+		return true;
+	};
+	
+</script>
+<!-- ###CALENDAR_FORM### start -->
+<div id="calendar_message" style="text-align:center;vertical-align:middle;min-width:300px;padding:5px;border:2px solid red;background-color:yellow;margin-bottom:10px;display:none;">Please select a calendar first!</div>
+<form action="###EDIT_CALENDAR_URL###" method="post" id="calendar_form">
+	<fieldset>
+		<legend><img src="###IMG_PATH###/../../res/icons/icon_tx_cal_calendar.gif" style="border:0px;" alt="###L_CREATE_CALENDAR###"/> ###L_CALENDAR_LABEL###</legend>
+		###EDIT_CALENDAR_PARAMETER###
+		<!-- ###CHOOSE_CALENDAR### start -->
+		<select name="tx_cal_controller[uid]" id="calendar_selector" size="1">
+			###EDIT_CALENDAR_OPTIONS###
+		</select>
+		<!-- ###CHOOSE_CALENDAR### end -->
+		<!-- ###CREATE_CALENDAR### start --><a onclick="javascript:calAdminAction('create','calendar')" title="###L_CREATE### ###L_CALENDAR###"><img src="###IMG_PATH###/add.png" style="border:0px;cursor:pointer;" alt="###L_CREATE### ###L_CALENDAR###"/></a><!-- ###CREATE_CALENDAR### end -->
+		<!-- ###EDIT_CALENDAR### start --><a onclick="javascript:calAdminAction('edit','calendar')" title="###L_EDIT### ###L_CALENDAR###"><img src="###IMG_PATH###/edit.gif" style="border:0px;cursor:pointer;" alt="###L_EDIT### ###L_CALENDAR###"/></a><!-- ###EDIT_CALENDAR### end -->
+		<!-- ###DELETE_CALENDAR### start --><a onclick="javascript:calAdminAction('delete','calendar')" title="###L_DELETE### ###L_CALENDAR###"><img src="###IMG_PATH###/delete.gif" style="border:0px;cursor:pointer;" alt="###L_DELETE### ###L_CALENDAR###"/></a><!-- ###DELETE_CALENDAR### end -->
+	</fieldset>
+</form>
+<!-- ###CALENDAR_FORM### end -->
+<!-- ###CATEGORY_FORM### start -->
+<div id="category_message" style="text-align:center;vertical-align:middle;min-width:300px;padding:5px;border:2px solid red;background-color:yellow;margin-bottom:10px;display:none;">Please select a category first!</div>
+<form action="###EDIT_CATEGORY_URL###" method="post" id="category_form">
+	<fieldset>
+		<legend><img src="###IMG_PATH###/../../res/icons/icon_tx_cal_category.gif" style="border:0px;cursor:pointer;" alt="###L_CATEGORY_LABEL###"/> ###L_CATEGORY_LABEL###</legend>
+		###EDIT_CATEGORY_PARAMETER###
+		<!-- ###CHOOSE_CATEGORY### start -->
+		<select name="tx_cal_controller[uid]" id="category_selector" size="1">
+			###EDIT_CATEGORY_OPTIONS###
+		</select>
+		<!-- ###CHOOSE_CATEGORY### end -->
+		<!-- ###CREATE_CATEGORY### start --><a onclick="javascript:calAdminAction('create','category')" title="###L_CREATE### ###L_CATEGORY_LABEL###"><img src="###IMG_PATH###/add.png" style="border:0px;cursor:pointer;" alt="###L_CREATE### ###L_CATEGORY_LABEL###"/></a><!-- ###CREATE_CATEGORY### end -->
+		<!-- ###EDIT_CATEGORY### start --><a onclick="javascript:calAdminAction('edit','category')" title="###L_EDIT### ###L_CATEGORY_LABEL###"><img src="###IMG_PATH###/edit.gif" style="border:0px;cursor:pointer;" alt="###L_EDIT### ###L_CATEGORY_LABEL###"/></a><!-- ###EDIT_CATEGORY### end -->
+		<!-- ###DELETE_CATEGORY### start --><a onclick="javascript:calAdminAction('delete','category')" title="###L_DELETE### ###L_CATEGORY_LABEL###"><img src="###IMG_PATH###/delete.gif" style="border:0px;cursor:pointer;" alt="###L_DELETE### ###L_CATEGORY_LABEL###"/></a><!-- ###DELETE_CATEGORY### end -->
+	</fieldset>
+</form>
+<!-- ###CATEGORY_FORM### end -->
+<!-- ###LOCATION_FORM### start -->
+<div id="location_message" style="text-align:center;vertical-align:middle;min-width:300px;padding:5px;border:2px solid red;background-color:yellow;margin-bottom:10px;display:none;">Please select a location first!</div>
+<form action="###EDIT_LOCATION_URL###" method="post" id="location_form">
+	<fieldset>
+		<legend><img src="###IMG_PATH###/../../res/icons/icon_tx_cal_location.gif" style="border:0px;cursor:pointer;" alt="###L_LOCATION_LABEL###"/> ###L_LOCATION_LABEL###</legend>
+		###EDIT_LOCATION_PARAMETER###
+		<!-- ###CHOOSE_LOCATION### start -->
+		<select name="tx_cal_controller[uid]" id="location_selector" size="1">
+			###EDIT_LOCATION_OPTIONS###
+		</select>
+		<!-- ###CHOOSE_LOCATION### end -->
+		<!-- ###CREATE_LOCATION### start --><a onclick="javascript:calAdminAction('create','location')" title="###L_CREATE### ###L_LOCATION_LABEL###"><img src="###IMG_PATH###/add.png" style="border:0px;cursor:pointer;" alt="###L_CREATE### ###L_LOCATION_LABEL###"/></a><!-- ###CREATE_LOCATION### end -->
+		<!-- ###EDIT_LOCATION### start --><a onclick="javascript:calAdminAction('edit','location')" title="###L_EDIT### ###L_LOCATION_LABEL###"><img src="###IMG_PATH###/edit.gif" style="border:0px;cursor:pointer;" alt="###L_EDIT### ###L_LOCATION_LABEL###"/></a><!-- ###EDIT_LOCATION### end -->
+		<!-- ###DELETE_LOCATION### start --><a onclick="javascript:calAdminAction('delete','location')" title="###L_DELETE### ###L_LOCATION_LABEL###"><img src="###IMG_PATH###/delete.gif" style="border:0px;cursor:pointer;" alt="###L_DELETE### ###L_LOCATION_LABEL###"/></a><!-- ###DELETE_LOCATION### end -->
+	</fieldset>
+</form>
+<!-- ###LOCATION_FORM### end -->
+<!-- ###ORGANIZER_FORM### start -->
+<div id="organizer_message" style="text-align:center;vertical-align:middle;min-width:300px;padding:5px;border:2px solid red;background-color:yellow;margin-bottom:10px;display:none;">Please select an organizer first!</div>
+<form action="###EDIT_ORGANIZER_URL###" method="post" id="organizer_form">
+	<fieldset>
+		<legend><img src="###IMG_PATH###/../../res/icons/icon_tx_cal_organizer.gif" style="border:0px;cursor:pointer;" alt="###L_ORGANIZER_LABEL###"/> ###L_ORGANIZER_LABEL###</legend>
+		###EDIT_ORGANIZER_PARAMETER###
+		<!-- ###CHOOSE_ORGANIZER### start -->
+		<select name="tx_cal_controller[uid]" id="organizer_selector" size="1">
+			###EDIT_ORGANIZER_OPTIONS###
+		</select>
+		<!-- ###CHOOSE_ORGANIZER### end -->
+		<!-- ###CREATE_ORGANIZER### start --><a onclick="javascript:calAdminAction('create','organizer')" title="###L_CREATE### ###L_ORGANIZER_LABEL###"><img src="###IMG_PATH###/add.png" style="border:0px;cursor:pointer;" alt="###L_CREATE### ###L_ORGANIZER_LABEL###"/></a><!-- ###CREATE_ORGANIZER### end -->
+		<!-- ###EDIT_ORGANIZER### start --><a onclick="javascript:calAdminAction('edit','organizer')" title="###L_EDIT### ###L_ORGANIZER_LABEL###"><img src="###IMG_PATH###/edit.gif" style="border:0px;cursor:pointer;" alt="###L_EDIT### ###L_ORGANIZER_LABEL###"/></a><!-- ###EDIT_ORGANIZER### end -->
+		<!-- ###DELETE_ORGANIZER### start --><a onclick="javascript:calAdminAction('delete','organizer')" title="###L_DELETE### ###L_ORGANIZER_LABEL###"><img src="###IMG_PATH###/delete.gif" style="border:0px;cursor:pointer;" alt="###L_DELETE### ###L_ORGANIZER_LABEL###"/></a><!-- ###DELETE_ORGANIZER### end -->
+	</fieldset>
+</form>
+<!-- ###ORGANIZER_FORM### end -->
+###BACK_LINK###
+<!--/admin.tmpl-->

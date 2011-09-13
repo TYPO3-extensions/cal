@@ -1,0 +1,28 @@
+<!--month_large.tmpl-->
+<table class="month-large" summary="calendar for the month january 2006[should be localized and date from script]">
+	<tr>
+		<!-- ###LOOPWEEKDAY### start -->
+		<th class="weekday">###WEEKDAY###</th>
+		<!-- ###LOOPWEEKDAY### end -->
+	
+	<!-- ###LOOPMONTHWEEKS### start -->
+	<!-- ###LOOPMONTHWEEKS_DAYS### start -->
+	<tr>
+	<!-- ###LOOPMONTHWEEKS_DAYS### end -->
+		<!-- ###LOOPWEEK_NUMS### start -->
+		<th class="weeknum"><span>###WEEKNUM###</span></th>
+		<!-- ###LOOPWEEK_NUMS### end -->
+
+		<!-- ###SWITCHMONTHDAY### start -->
+		<td class="###STYLE### day">
+			<div>###LINK###</div>
+			###ALLDAY###
+			###EVENT###
+		</td>
+		<!-- ###SWITCHMONTHDAY### end -->
+		<!-- ###LOOPMONTHDAYS_WEEKS### start -->
+	</tr>
+	<!-- ###LOOPMONTHDAYS_WEEKS### end -->
+	<!-- ###LOOPMONTHWEEKS### end -->
+</table>
+<!--/month_large.tmpl-->

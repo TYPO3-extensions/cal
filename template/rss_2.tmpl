@@ -1,0 +1,41 @@
+<!-- ###TEMPLATE_RSS2### begin -->###XML_DECLARATION###
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+	<channel>
+		<!-- ###HEADER### begin -->
+		<title>###SITE_TITLE###</title>
+		<link>###SITE_LINK###</link>
+		<description>###SITE_DESCRIPTION###</description>
+		###SITE_LANG###
+		<image>
+			<title>###SITE_TITLE###</title>
+			<url>###IMG###</url>
+			<link>###SITE_LINK###</link>
+			<width>###IMG_W###</width>
+			<height>###IMG_H###</height>
+			<description>###SITE_DESCRIPTION###</description>
+		</image>
+		<generator>TYPO3 - get.content.right</generator>
+		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+		<ttl>10</ttl>
+		###NEWS_COPYRIGHT###
+		###NEWS_WEBMASTER###
+		###NEWS_MANAGINGEDITOR###
+		###NEWS_LASTBUILD###
+		<!-- ###HEADER### end -->
+		<!-- ###CONTENT### begin -->
+
+		<!-- ###EVENT### begin -->
+		<item>
+			<title>###STARTDATE### ###STARTTIME### : ###TITLE### - *###CATEGORY###*</title>
+			<link>###LINK###</link>
+			<guid>###LINK###</guid>
+			<pubDate>###CREATE_DATE###</pubDate>
+			<content:encoded>
+			<![CDATA[###ABS_EVENT_IMAGE### ###DESCRIPTION###]]>
+			</content:encoded>
+			<description><![CDATA[###DESCRIPTION_STRIPTAGS###]]></description>
+		</item>
+		<!-- ###EVENT### end -->
+		<!-- ###CONTENT### end -->
+	</channel>
+</rss><!-- ###TEMPLATE_RSS2### end -->

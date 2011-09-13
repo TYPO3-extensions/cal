@@ -1,0 +1,41 @@
+<!--confirm_event.tmpl-->
+<!-- ###FORM_START### start-->
+<fieldset><legend>###L_CONFIRM_EVENT###</legend>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+<input type="hidden" value="###VIEW###" name="tx_cal_controller[view]" />
+<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+<input type="hidden" value="###CALENDAR_ID###" name="tx_cal_controller[calendar]" />
+<!-- ###FORM_START### end-->
+	###HIDDEN###
+	###CALENDAR###
+	###CATEGORY###
+	###ALLDAY###
+	###STARTDATE###
+	###STARTTIME###
+	###ENDDATE###
+	###ENDTIME###
+	###TITLE###
+	###CAL_ORGANIZER###
+	###ORGANIZER###
+	###CAL_LOCATION###
+	###LOCATION###
+	###TEASER###
+	###DESCRIPTION###
+	###FREQUENCY###
+	###BY_DAY###
+	###BY_MONTHDAY###
+	###BY_MONTH###
+	###UNTIL###
+	###COUNT###
+	###INTERVAL###
+	###NOTIFY###
+	###EXCEPTION###
+<!-- ###FORM_END### start-->
+<a href="###BACK_LINK###" title="###L_CANCEL###" >###L_CANCEL###</a><input type="submit" value="###L_SAVE###" />
+</form>
+</fieldset>
+<!-- ###FORM_END### end-->
+<!--/confirm_event.tmpl-->

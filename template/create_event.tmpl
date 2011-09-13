@@ -1,0 +1,211 @@
+<!--create_event.tmpl-->
+<!-- ###FORM_START### begin-->
+
+<script type="text/javascript">
+
+function addOption(tag, selectbox, newbox )
+{
+	var optn = document.createElement("OPTION");
+	optn.text = tag.text;
+	optn.value = tag.value;
+	optn.className = tag.className;
+	optn.setAttribute("onclick","addOption(this,'"+newbox+"','"+selectbox+"');removeOption('"+selectbox+"',this.index);");
+	var elem = document.getElementById(selectbox);
+	elem.options.add(optn);
+}
+
+//This function is needed, because the IE doesn't support onclick at the option tag
+function addOption2(selectbox, newbox )
+{
+	if(navigator.appName=="Microsoft Internet Explorer"){
+		var elem = document.getElementById(selectbox);
+		var newElem = document.getElementById(newbox);
+		for(var i=0;i<elem.options.length;i++){
+			if(elem.options[i].selected==true){
+				var optn = document.createElement("OPTION");
+				optn.text = elem.options[i].text;
+				optn.value = elem.options[i].value;
+				optn.className = elem.options[i].className;
+				newElem.options.add(optn);
+				elem.remove(i);
+			}
+		}
+		checkAll();
+	}else{
+		var elem = document.getElementById(selectbox);
+		var newElem = document.getElementById(newbox);
+		for(var i=0;i<elem.options.length;i++){
+			if(elem.options[i].selected==true){
+				var optn = document.createElement("OPTION");
+				optn.text = elem.options[i].text;
+				optn.value = elem.options[i].value;
+				optn.className = elem.options[i].className;
+				optn.setAttribute("onclick","addOption(this,'"+selectbox+"','"+newbox+"');removeOption('"+newbox+"',this.index);checkAll()");
+				newElem.options.add(optn);
+				elem.remove(i);
+			}
+		}
+	}
+}
+
+
+function removeOption(listbox, i){
+	var elem = document.getElementById(listbox);
+	elem.remove(i);
+}
+
+function checkForm(id){
+	var error = false;
+	var form = document.getElementById(id);
+	for(var i=0; i < form.elements.length; i++){
+	    ###VALIDATION###
+	}
+	msg='';
+	falsch=0;
+	dF=document.getElementById("event_start_day");
+	d=dF.value.split('###DATE_SPLIT_SYMBOL###');
+	if(d.length==3){
+		t=d[###DATE_DAY_POSITION###];
+		mo=d[###DATE_MONTH_POSITION###];
+		j=d[###DATE_YEAR_POSITION###];
+		tL=t.length;
+		moL=mo.length;
+		jL=j.length;
+		t-=0;
+		mo-=1;
+		j-=0;
+	}else{
+		msg+='###L_WRONG_SPLIT_SYMBOL_MSG###';
+		falsch=dF;
+	}
+	uS=document.getElementById("event_start_hour").value;
+	uM=document.getElementById("event_start_minutes").value;
+	uF=uS+':'+uM;
+	u=uF.split(':');
+	if(u.length==2){
+		s=u[0];
+		m=u[1];
+		sL=s.length;
+		mL=m.length;
+		s-=0;
+		m-=0;
+	}else{
+		msg+='Trennzeichen für die Zeiteingabe ist der Doppelpunkt!\n';
+		if(!falsch)
+			falsch=uF;
+	}
+	if(!falsch){
+		h=new Date();
+		dD=new Date(j,mo,t);
+		if(dD.getFullYear()!=j||dD.getMonth()!=mo||dD.getDate()!=t||isNaN(dD)||tL!=2||moL!=2||jL!=4){
+			msg+='###L_WRONG_DATE_MSG###';
+			falsch=dF;
+		}else if(s<0||s>23||m<0||m>59||isNaN(s)||isNaN(m)||sL!=2||mL!=2){
+			msg+='###L_WRONG_TIME_MSG###';
+			if(!falsch)
+				falsch=uF;
+		}else{
+			dD.setHours(s);
+			dD.setMinutes(m);
+			if(dD<h){
+				mo+=1;
+				mo=(mo<10?'0':'')+mo;
+				t=(t<10?'0':'')+t;
+				s=(s<10?'0':'')+s;
+				m=(m<10?'0':'')+m;
+				msg+=t+'.'+mo+'.'+j+' '+s+':'+m+' ###L_IS_IN_PAST_MSG###';
+				falsch=dF;
+			}
+		}
+	}
+	if(msg){
+		alert(msg);
+		falsch.focus();
+		falsch.select();
+		return false;
+	}
+	
+	if(error){
+		return false;
+	}
+	form.submit();
+	return true;
+}
+
+function atLeastOne(element){
+	if(element.options.length == 0){
+		return false;
+	}
+	return true;	
+}
+
+function selectAll(element){
+	for(var i = 0; i < element.options.length; i++){
+		element.options[i].selected = true;
+	}
+}
+
+</script>
+<fieldset><legend>###L_EDIT_EVENT###</legend>
+<!-- ###FORM_START### end-->
+
+<form name="tx_cal_controller" method="post" action="###CHANGE_CALENDAR_ACTION_URL###">
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+<input type="hidden" value="###THIS_VIEW###" name="tx_cal_controller[view]" />
+<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+<input type="hidden" value="###GETTIME###" name="tx_cal_controller[gettime]" />
+<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+<input type="hidden" value="###CALENDAR_ID###" name="tx_cal_controller[calendar]" />
+###CALENDAR###
+</form>
+###ADDITIONALJS_PRE###
+<form name="tx_cal_controller" id="tx_cal_controller_create_element" method="post" action="###ACTION_URL###" onsubmit="###ADDITIONALJS_SUBMIT###">
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+<input type="hidden" value="###NEXT_VIEW###" name="tx_cal_controller[view]" />
+<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+<input type="hidden" value="###CALENDAR_ID###" name="tx_cal_controller[calendar_id]" />
+
+
+	###HIDDEN###
+	###CATEGORY###
+	
+	###ALLDAY###
+	###STARTDATE###
+	###STARTTIME###
+	###ENDDATE###
+	###ENDTIME###
+
+	###TITLE###
+
+	###ORGANIZER###
+	###CAL_ORGANIZER###
+	###LOCATION###
+	###CAL_LOCATION###
+	
+	###TEASER###
+	###DESCRIPTION###
+
+	###FREQUENCY###
+	###BY_DAY###
+	###BY_MONTHDAY###
+	###BY_MONTH###
+	###UNTIL###
+	###COUNT###
+	###INTERVAL###
+	
+	###NOTIFY###
+	###EXCEPTION###
+<!-- ###FORM_END### start-->
+
+
+<a href="###BACK_LINK###" title="###L_CANCEL###" >###L_CANCEL###</a><input type="submit" value="###L_SUBMIT###" onclick="return checkForm('tx_cal_controller_create_element');" />
+</form>
+###ADDITIONALJS_POST###
+</fieldset>
+
+<!-- ###FORM_END### end-->
+
+<!--/create_event.tmpl-->

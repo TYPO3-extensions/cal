@@ -1,0 +1,58 @@
+<!-- search_organizer.tmpl -->
+<h1>###HEADING###</h1>
+<!-- ###SEARCHORGANIZERFORM### start -->
+<div class = 'G10BOLD'>###L_SEARCH###:</div>
+<form action="###SEARCH_ACTION_URL###" method="POST">
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
+	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###" />
+	<input type="image" src="###IMG_PATH###/search.gif" height="19" width="18" name="tx_cal_controller[submit]" value="Search" />
+</form>
+<!-- ###SEARCHORGANIZERFORM### end -->
+<ul class="search-result">
+	<!-- ###ORGANIZER### start -->
+	<!-- ###ORGANIZER_ODD### start -->
+	<li class="odd">
+		<div class="vcard">
+			<div class="fn">
+				###NAME_LABEL###: <!-- ###ORGANIZER_LINK### start -->###NAME###<!-- ###ORGANIZER_LINK### end -->
+			</div>
+		
+			<div class="adr">
+				<div class="street-address">###STREET###</div>
+				<span class="postal-code">###ZIP###</span>
+				<span class="locality">###CITY###</span>
+				<span class="region">###COUNTRYZONE###</span>
+				<div class="country-name">###COUNTRY###</div>
+				###EVENT_LINK###
+			</div>
+		</div>
+	</li>
+	<!-- ###ORGANIZER_ODD### end -->
+	
+	<!-- ###ORGANIZER_EVEN### start -->
+	<li class="even">
+		<div class="vcard">
+			<div class="fn">
+				###NAME_LABEL###: <!-- ###ORGANIZER_LINK### start -->###NAME###<!-- ###ORGANIZER_LINK### end -->
+			</div>
+			
+			<div class="adr">
+				<div class="street-address">###STREET###</div>
+				<span class="postal-code">###ZIP###</span>
+				<span class="locality">###CITY###</span>
+				<span class="region">###COUNTRYZONE###</span>
+				<div class="country-name">###COUNTRY###</div>
+				###EVENT_LINK###
+			</div>
+		</div>
+	</li>
+	<!-- ###ORGANIZER_EVEN### end -->
+	<!-- ###ORGANIZER### end -->
+</ul>
+
+<!-- ###LINKS### start -->
+<div>###BACK_LINK###</div>
+<div>###OTHERSEARCH###</div>
+<!-- ###LINKS### end -->
+
+<!-- /search_organizer.tmpl -->

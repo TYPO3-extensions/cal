@@ -1,0 +1,110 @@
+<!--create_event.tmpl-->
+###ADDITIONALJS_PRE###
+
+<script type="text/javascript" id="create_js">
+		/*<![CDATA[*/
+	<!--
+	document.getElementById('event_type').value = "###TYPE###";
+	document.getElementById('event_uid').value ="###UID###";
+	document.getElementById('event_view').value = "save_event";
+	document.getElementById('event_option').value = "###OPTION###";
+
+	document.getElementById('event_dlg_header').innerHTML = "###L_EDIT_EVENT###";
+	calendarArray = ###CALENDAR_ARRAY###;
+	categoryArray = ###CATEGORY_ARRAY###;
+	eventCalendarUid = '###EVENT_CALENDAR###';
+	eventCategoryUids = ###EVENT_CATEGORY###;
+	var tabs = new Ext.TabPanel('cal_window_panel','syncHeight:true');
+	var tab1 = tabs.addTab('cal_general', "###GENERAL_LABEL###");
+	tab1.setContent('<div class="x-form-ct x-form-column x-form-label-top" style="width:50%">###TITLE######STARTDATE######STARTTIME######ENDDATE######ENDTIME######ALLDAY###</div><div class="x-form-ct x-form-column x-form-label-top" style="width:50%">###HIDDEN######CALENDAR_ID######CATEGORY###</div><div style="clear:left"></div>');
+	var cal_event_title = new Ext.form.TextField({
+            name: 'cal_event_title',
+            width: '150',
+            allowBlank:false,
+        });
+    cal_event_title.applyTo(document.getElementById('cal_event_title'));
+	var event_start_day = new Ext.form.DateField({
+            name: 'event_startdate',
+            allowBlank:false,
+            format:'###DATE_FORMAT###'
+        });
+	event_start_day.applyTo(document.getElementById('event_startdate'));
+	var event_end_day = new Ext.form.DateField({
+            name: 'event_enddate',
+            allowBlank:false,
+            format:'###DATE_FORMAT###'
+        });
+	event_end_day.applyTo(document.getElementById('event_enddate'));
+	var a = '###DESCRIPTION###';
+	if(a!=''){
+		var tabx = tabs.addTab('description', "###DESCRIPTION_LABEL###");
+		tabx.setContent(a);
+	}
+	var event_description = new Ext.form.TextArea({
+            name: 'event_description',
+            width:350,
+            height:200,
+            allowBlank:false,
+        });
+	event_description.applyTo(document.getElementById('cal_event_description'));
+	a = '<div class="x-form-ct x-form-column x-form-label-top" style="width:50%">###FREQUENCY######UNTIL######COUNT######INTERVAL###</div><div class="x-form-ct x-form-column x-form-label-top" style="width:50%">###BY_DAY######BY_MONTHDAY######BY_MONTH###</div><div style="clear:left"></div>';
+	if(a!=''){
+		var tab2 = tabs.addTab('cal_freq', "###FREQUENCY_LABEL###");
+		tab2.setContent(a);
+		var event_until = new Ext.form.DateField({
+            name: 'event_until',
+            allowBlank:false,
+            format:'###DATE_FORMAT###'
+        });
+		event_until.applyTo(document.getElementById('event_until'));
+		
+	}
+	a = '###EXCEPTION###';
+	if(a!=''){
+		var tab3 = tabs.addTab('cal_exception', "###EXCEPTION_LABEL###");
+		tab3.setContent(a);
+	}
+	a = '###ORGANIZER######CAL_ORGANIZER###';
+	if(a!=''){
+		var tab4 = tabs.addTab('cal_organizer', "###ORGANIZER_LABEL###");
+		tab4.setContent(a);
+	}
+	a = '###LOCATION######CAL_LOCATION###';
+	if(a!=''){
+		var tab5 = tabs.addTab('cal_location', "###LOCATION_LABEL###");
+		tab5.setContent(a);
+	}
+	a = '###IMAGE######IMAGE_CAPTION######IMAGE_TITLE######IMAGE_ALT###';
+	if(a!=''){
+		var tab6 = tabs.addTab('cal_files', "###FILES_LABEL###");
+		tab6.setContent(a);
+	}
+	a = '###ATTACHMENT### ###ATTACHMENT_CAPTION###';
+	if(a!=''){
+		tab6.setContent(a);
+	}
+	a = '###NOTIFY###';
+	if(a!=''){
+		var tab8 = tabs.addTab('cal_notify', "###NOTIFY_LABEL###");
+		tab8.setContent(a);
+	}
+	tabs.activate('cal_general');
+	
+	try{
+		renderCalendarSelector();
+	}catch (e){}
+	try {
+		renderCategorySelector();
+	}catch(e){}
+	try {
+		checkFrequency(document.getElementById('frequency_id'));
+	}catch (e){}
+	document.getElementById('cal_event_title').focus();
+	// -->
+		/*]]>*/
+</script>
+<!-- ###FORM_END### start-->
+###ADDITIONALJS_POST###
+<!-- ###FORM_END### end-->
+
+<!--/create_event.tmpl-->

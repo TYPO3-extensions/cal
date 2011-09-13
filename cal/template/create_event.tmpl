@@ -1,0 +1,513 @@
+<!--create_event.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_EDIT_EVENT###</h1>
+###CURRENT_TRANSLATION###
+###TRANSLATION_OPTIONS###
+<!-- ###FORM_START### end-->
+
+###ADDITIONALJS_PRE###
+
+
+<form enctype="multipart/form-data" name="tx_cal_controller" id="tx_cal_controller_create_element" method="post" action="###ACTION_URL###" onsubmit="###ADDITIONALJS_SUBMIT###">
+	<fieldset class="noborder">
+		<input type="hidden" value="###VIEW###" name="tx_cal_controller[view]" />
+		<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+		<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+		<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+
+		<script type="text/javascript">
+		/*<![CDATA[*/
+	<!--
+			var calendarUrl = "###CHANGE_CALENDAR_ACTION_URL###";
+			function calendarChanged(selector){
+				var thisForm = document.getElementById("tx_cal_controller_create_element");
+				thisForm.action = calendarUrl;
+				thisForm.submit();
+			}
+
+			function freqChanged(element){
+				var index = "";
+				try{
+					index = element.options[element.selectedIndex].value;
+				}catch(e0){
+					return;
+				}	
+				switch(index){
+					case "none":
+						try{
+							document.getElementById('by_day').style.display = 'none';
+						}catch(e1){}
+						try{
+							document.getElementById('by_monthday').style.display = 'none';
+						}catch(e2){}
+						try{
+							document.getElementById('by_month').style.display = 'none';
+						}catch(e3){}
+						try{
+							document.getElementById('until').style.display = 'none';
+						}catch(e4){}
+						try{
+							document.getElementById('count').style.display = 'none';
+						}catch(e5){}
+						try{
+							document.getElementById('interval').style.display = 'none';
+						}catch(e6){}
+						break;
+					case "day":
+						try{
+							document.getElementById('by_day').style.display = 'none';
+						}catch(e1){}
+						try{
+							document.getElementById('by_monthday').style.display = 'none';
+						}catch(e2){}
+						try{
+							document.getElementById('by_month').style.display = 'none';
+						}catch(e3){}
+						try{
+							document.getElementById('until').style.display = '';
+						}catch(e4){}
+						try{
+							document.getElementById('count').style.display = '';
+						}catch(e5){}
+						try{
+							document.getElementById('interval').style.display = '';
+						}catch(e6){}
+						break;
+					case "week":
+						try{
+							document.getElementById('by_day').style.display = '';
+						}catch(e1){}
+						try{
+							document.getElementById('by_monthday').style.display = 'none';
+						}catch(e2){}
+						try{
+							document.getElementById('by_month').style.display = 'none';
+						}catch(e3){}
+						try{
+							document.getElementById('until').style.display = '';
+						}catch(e4){}
+						try{
+							document.getElementById('count').style.display = '';
+						}catch(e5){}
+						try{
+							document.getElementById('interval').style.display = '';
+						}catch(e6){}
+						break;
+					case "month":
+						try{
+							document.getElementById('by_day').style.display = '';
+						}catch(e1){}
+						try{
+							document.getElementById('by_monthday').style.display = '';
+						}catch(e2){}
+						try{
+							document.getElementById('by_month').style.display = 'none';
+						}catch(e3){}
+						try{
+							document.getElementById('until').style.display = '';
+						}catch(e4){}
+						try{
+							document.getElementById('count').style.display = '';
+						}catch(e5){}
+						try{
+							document.getElementById('interval').style.display = '';
+						}catch(e6){}
+						break;
+					case "year":
+						try{
+							document.getElementById('by_day').style.display = '';
+						}catch(e1){}
+						try{
+							document.getElementById('by_monthday').style.display = '';
+						}catch(e2){}
+						try{
+							document.getElementById('by_month').style.display = '';
+						}catch(e3){}
+						try{
+							document.getElementById('until').style.display = '';
+						}catch(e4){}
+						try{
+							document.getElementById('count').style.display = '';
+						}catch(e5){}
+						try{
+							document.getElementById('interval').style.display = '';
+						}catch(e6){}
+						break;
+				}
+			}
+			
+			function rdateTypeChanged(element){
+				var index = "";
+				try{
+					index = element.options[element.selectedIndex].value;
+				}catch(e0){
+					return;
+				}
+				switch(index){
+					case "none":
+						try{
+							document.getElementById('rdate').style.display = 'none';
+						}catch(e1){}
+						break;
+					default:
+						try{
+							document.getElementById('rdate').style.display = '';
+						}catch(e1){}
+						break;
+				}
+				buildRdateTableFromValues(document.getElementById('rdateValues').value);
+			}
+			
+			function buildRdateTableFromValues(rdateValues){
+				var table = document.getElementById('rdateTable');
+				if(table){
+					table.parentNode.removeChild(table);
+				}
+				var splittedValues = rdateValues.split(",");
+				for(var i=0; i < splittedValues.length; i++){
+					var splittedPeriod = splittedValues[i].split("P");
+					var splittedDateTime = splittedPeriod[0].split("T");
+					var valueArray = new Array(splittedDateTime[0],'','','','','','','','');
+					if(splittedDateTime[1]){
+						valueArray[1] = splittedDateTime[1].substr(0,2);
+						valueArray[2] = splittedDateTime[1].substr(2,2);
+					}
+					if(splittedPeriod[1]){
+						var splittedPeriodDateTime = splittedPeriod[1].split("T");
+						var splittedYearValue = splittedPeriodDateTime[0].split("Y");
+						if(splittedYearValue.length > 1){
+							valueArray[3] = splittedYearValue[0];
+							splittedYearValue[0] = splittedYearValue[1];
+						}
+						var splittedMonthValue = splittedYearValue[0].split("M");
+						if(splittedMonthValue.length > 1){
+							valueArray[4] = splittedMonthValue[0];
+							splittedMonthValue[0] = splittedMonthValue[1];
+						}
+						var splittedWeekValue = splittedMonthValue[0].split("W");
+						if(splittedWeekValue.length > 1){
+							valueArray[5] = splittedWeekValue[0];
+							splittedWeekValue[0] = splittedWeekValue[1];
+						}
+						var splittedDayValue = splittedWeekValue[0].split("D");
+						if(splittedDayValue.length > 1){
+							valueArray[6] = splittedDayValue[0];
+						}
+						if(splittedPeriodDateTime.length > 1){
+							var splittedHourValue = splittedPeriodDateTime[1].split("H");
+							if(splittedHourValue.length > 1){
+								valueArray[7] = splittedHourValue[0];
+								splittedHourValue[0] = splittedHourValue[1];
+							}
+							var splittedMinuteValue = splittedHourValue[0].split("M");
+							if(splittedMinuteValue.length > 1){
+								valueArray[8] = splittedMinuteValue[0];
+							}
+						}
+					}
+					addRdateRow(valueArray);
+				}
+			}
+			
+			function addRdateRow(rdateValues){
+				var rdateTable = document.getElementById('rdateTable');
+				var rdateType = document.getElementById('rdate_type').value;
+				var row = document.createElement('tr');
+				
+				//date
+				var dateCell  = document.createElement('td');
+				row.appendChild(dateCell);
+				var dateInput = document.createElement('input');
+				dateCell.appendChild(dateInput);
+				dateInput.setAttribute('type','text');
+				dateInput.setAttribute('value',rdateValues[0]);
+				
+				//time
+				if(rdateType!='date'){
+					var timeCell  = document.createElement('td');
+					row.appendChild(timeCell);
+					var hourInput = document.createElement('input');
+					timeCell.appendChild(hourInput);
+					hourInput.setAttribute('type','text');
+					hourInput.setAttribute('size','1');
+					hourInput.setAttribute('value',rdateValues[1]);
+					timeCell.appendChild(document.createTextNode(':'));
+					var minuteInput = document.createElement('input');
+					timeCell.appendChild(minuteInput);
+					minuteInput.setAttribute('type','text');
+					minuteInput.setAttribute('size','1');
+					minuteInput.setAttribute('value',rdateValues[2]);
+				}
+				
+				//period
+				if(rdateType=='period'){
+					var periodCell  = document.createElement('td');
+					row.appendChild(periodCell);
+					periodCell.appendChild(document.createTextNode('Y:'));
+					var yearInput = document.createElement('input');
+					periodCell.appendChild(yearInput);
+					yearInput.setAttribute('type','text');
+					yearInput.setAttribute('size','1');
+					yearInput.setAttribute('value',rdateValues[3]);
+					periodCell.appendChild(document.createTextNode('M:'));
+					var monthInput = document.createElement('input');
+					periodCell.appendChild(monthInput);
+					monthInput.setAttribute('type','text');
+					monthInput.setAttribute('size','1');
+					monthInput.setAttribute('value',rdateValues[4]);
+					periodCell.appendChild(document.createTextNode('W:'));
+					var weekInput = document.createElement('input');
+					periodCell.appendChild(weekInput);
+					weekInput.setAttribute('type','text');
+					weekInput.setAttribute('size','1');
+					weekInput.setAttribute('value',rdateValues[5]);
+					periodCell.appendChild(document.createTextNode('D:'));
+					var dayInput = document.createElement('input');
+					periodCell.appendChild(dayInput);
+					dayInput.setAttribute('type','text');
+					dayInput.setAttribute('size','1');
+					dayInput.setAttribute('value',rdateValues[6]);
+					periodCell.appendChild(document.createTextNode('H:'));
+					var hourInput = document.createElement('input');
+					periodCell.appendChild(hourInput);
+					hourInput.setAttribute('type','text');
+					hourInput.setAttribute('size','1');
+					hourInput.setAttribute('value',rdateValues[7]);
+					periodCell.appendChild(document.createTextNode('M:'));
+					var minuteInput = document.createElement('input');
+					periodCell.appendChild(minuteInput);
+					minuteInput.setAttribute('type','text');
+					minuteInput.setAttribute('size','1');
+					minuteInput.setAttribute('value',rdateValues[8]);
+				}
+				
+				//delete
+				var deleteCell  = document.createElement('td');
+				row.appendChild(deleteCell);
+				var deleteImg = document.createElement('img');
+				deleteCell.appendChild(deleteImg);
+				deleteImg.setAttribute('src','typo3/sysext/t3skin/icons/gfx/deletedok.gif');
+				deleteImg.setAttribute('onclick','deleteRdateRow(this);');
+				
+				if(!rdateTable){
+					var rdate = document.getElementById('rdate');
+					var table = document.createElement('table');
+					table.setAttribute('id','rdateTable');
+					table.setAttribute('style','clear:left;');
+					rdate.appendChild(table);
+					var header = document.createElement('tr');
+					var dateHeader  = document.createElement('th');
+					dateHeader.appendChild(document.createTextNode('Date (YYYYMMDD)'));
+					header.appendChild(dateHeader);
+					if(rdateType!='date'){
+						var timeHeader  = document.createElement('th');
+						timeHeader.appendChild(document.createTextNode('Time (HH:MM)'));
+						header.appendChild(timeHeader);
+					}
+					if(rdateType=='period'){
+						var periodHeader  = document.createElement('th');
+						periodHeader.appendChild(document.createTextNode('Duration: Year,Month,Week,Day,Hour,Minute'));
+						header.appendChild(periodHeader);
+					}
+					var deleteHeader  = document.createElement('th');
+					deleteHeader.appendChild(document.createTextNode(''));
+					header.appendChild(deleteHeader);
+					table.appendChild(header);
+					table.appendChild(row);
+				} else {
+					rdateTable.appendChild(row);
+				}
+				
+			}
+			
+			function deleteRdateRow(rowImg){
+				var table = rowImg.parentNode.parentNode.parentNode;
+				table.removeChild(rowImg.parentNode.parentNode);
+			}
+			
+			function takeOverRdateRowValues(){
+				var rdateValues = document.getElementById('rdateValues');
+				if(rdateValues){
+					try {
+						var rdateTable = document.getElementById('rdateTable');
+						var rdateType = document.getElementById('rdate_type').value;
+						var newValues = '';
+						for(var i=0; i < rdateTable.childNodes.length; i++){
+							var row = rdateTable.childNodes[i];
+							if(row.firstChild.tagName != 'TH'){
+								switch(rdateType){
+									case 'date':
+										newValues += row.childNodes[0].firstChild.value + ',';
+									break;
+									case 'period':
+										var periodValue = '';
+										var periodCell = row.childNodes[2];
+										if(periodCell.childNodes[1].value!=""){
+											periodValue += parseInt(periodCell.childNodes[1].value) + 'Y';
+										}
+										if(periodCell.childNodes[3].value!=""){
+											periodValue += parseInt(periodCell.childNodes[3].value) + 'M';
+										}
+										if(periodCell.childNodes[5].value!=""){
+											periodValue += parseInt(periodCell.childNodes[5].value) + 'W';
+										}
+										if(periodCell.childNodes[7].value!=""){
+											periodValue += parseInt(periodCell.childNodes[7].value) + 'D';
+										}
+										if(periodCell.childNodes[9].value!="" | periodCell.childNodes[11].value!=""){
+											periodValue += 'T';
+										}
+										if(periodCell.childNodes[9].value!=""){
+											periodValue += parseInt(periodCell.childNodes[9].value) + 'H';
+										}
+										if(periodCell.childNodes[11].value!=""){
+											periodValue += parseInt(periodCell.childNodes[11].value) + 'M';
+										}
+										newValues += row.childNodes[0].childNodes[0].value + 'T' + row.childNodes[1].childNodes[0].value + row.childNodes[1].childNodes[2].value + '00Z/P' + periodValue + ',';
+									break;
+									case 'date_time':
+										newValues += row.childNodes[0].childNodes[0].value + 'T' + row.childNodes[1].childNodes[0].value + row.childNodes[1].childNodes[2].value + '00Z' + ',';
+									break;
+								}
+							}
+						}
+						if(rdateTable.childNodes.length > 1){
+							newValues = newValues.substr(0,newValues.length-1);
+						}
+						rdateValues.value = newValues;
+					} catch(e){
+						rdateValues.value = '';
+					}
+				}
+			}
+			
+			//DD Tab Menu- Last updated April 27th, 07: http://www.dynamicdrive.com
+			//Only 1 configuration variable below
+			
+			// modified [1] to change tabs only onclick
+			
+			var ddtabmenu={
+				disabletablinks: true, ////Disable hyperlinks in 1st level tabs with sub contents (true or false)?
+				currentpageurl: window.location.href.replace("http://"+window.location.hostname, "").replace(/^\//, ""), //get current page url (minus hostname, ie: http://www.dynamicdrive.com/)
+			
+				definemenu:function(tabid, dselected){
+					this[tabid+"-menuitems"]=null
+					this.addEvent(window, function(){ddtabmenu.init(tabid, dselected)}, "load")
+				},
+				
+				showsubmenu:function(tabid, targetitem){
+					var menuitems=this[tabid+"-menuitems"]
+				 for (i=0; i < menuitems.length; i++){
+						menuitems[i].className=""
+						if (typeof menuitems[i].hasSubContent!="undefined")
+							document.getElementById(menuitems[i].getAttribute("rel")).style.display="none"
+					}
+					targetitem.className="current"
+					if (typeof targetitem.hasSubContent!="undefined")
+						document.getElementById(targetitem.getAttribute("rel")).style.display="block"
+				},
+				
+				isSelected:function(menuurl){
+					var menuurl=menuurl.replace("http://"+menuurl.hostname, "").replace(/^\//, "")
+					return (ddtabmenu.currentpageurl==menuurl)
+				},
+				
+				addEvent:function(target, functionref, tasktype){ //assign a function to execute to an event handler (ie: onunload)
+					var tasktype=(window.addEventListener)? tasktype : "on"+tasktype
+					if (target.addEventListener)
+						target.addEventListener(tasktype, functionref, false)
+					else if (target.attachEvent)
+						target.attachEvent(tasktype, functionref)
+				},
+				
+				init:function(tabid, dselected){
+					var menuitems=document.getElementById(tabid).getElementsByTagName("a")
+					this[tabid+"-menuitems"]=menuitems
+					for (var x=0; x < menuitems.length; x++){
+						if (menuitems[x].getAttribute("rel")){
+							this[tabid+"-menuitems"][x].hasSubContent=true
+							if (ddtabmenu.disabletablinks)
+								menuitems[x].onclick=function(){ddtabmenu.showsubmenu(tabid, this);return false}  // [1] replace with: menuitems[x].onclick=function(){return false}
+						}
+						else //for items without a submenu, add onMouseout effect
+							menuitems[x].onmouseout=function(){this.className=""}
+						//menuitems[x].onmouseover=function(){ddtabmenu.showsubmenu(tabid, this)}  // [1] remove // 
+						if (dselected=="auto" && typeof setalready=="undefined" && this.isSelected(menuitems[x].href)){
+							ddtabmenu.showsubmenu(tabid, menuitems[x])
+							var setalready=true
+						}
+						else if (parseInt(dselected)==x)
+							ddtabmenu.showsubmenu(tabid, menuitems[x])
+					}
+				}
+			}
+	// -->
+		/*]]>*/
+		</script>
+		
+	<div class="basictab" id="ddtabs1"><ul class="glossymenu">###TABBED_MENU###</ul></div>
+  <div id="sc1" class="tabcontent">
+		###EVENT_TYPE###
+		###TITLE###
+		###STARTDATE### ###STARTTIME### ###ENDTIME### ###ENDDATE### ###ALLDAY###
+		###FREQUENCY###
+		###UNTIL### ###COUNT### ###INTERVAL###
+		###BY_DAY###
+		###BY_MONTHDAY###
+		###BY_MONTH###
+		###RDATE_TYPE### ###RDATE###
+		###CATEGORY### ###CALENDAR_ID###
+		###LOCATION### ###CAL_LOCATION###
+		###DESCRIPTION###
+	</div>
+	<div id="sc2" class="tabcontent">
+		###TEASER###
+	</div>
+	<div id="sc3" class="tabcontent">	
+		###ORGANIZER###
+		###CAL_ORGANIZER###
+	</div>
+	<div id="sc4" class="tabcontent">
+		###IMAGE###
+		###IMAGE_CAPTION###
+		###IMAGE_TITLE###
+		###IMAGE_ALT###
+		
+		###ATTACHMENT###
+		###ATTACHMENT_CAPTION###
+	</div>
+	<div id="sc5" class="tabcontent">
+		###NOTIFY###
+		###SHARED###
+		###EXCEPTION###
+	</div>
+	<div id="sc6" class="tabcontent">
+		###ATTENDEE###
+		###ATTENDEE_EXTERNAL###
+		###SENDOUT_INVITATION###
+	</div>
+	<!-- ###FORM_END### start-->
+
+
+		<input type="button" value="###L_CANCEL###" onclick="self.location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_SAVE###" onclick="takeOverRdateRowValues();" />
+	</fieldset>
+</form>
+###REQUIRED_LABEL###
+###ADDITIONALJS_POST###
+<script type="text/javascript">
+		/*<![CDATA[*/
+	<!--
+	try {
+		freqChanged(document.getElementById('freq'));
+	} catch (e){}
+	try {
+		rdateTypeChanged(document.getElementById('rdate_type'));
+	} catch (e){}
+	ddtabmenu.definemenu("ddtabs1", 0)
+	// -->
+		/*]]>*/
+</script>
+<!-- ###FORM_END### end-->
+
+<!--/create_event.tmpl-->

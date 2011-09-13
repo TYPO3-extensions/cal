@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>CSH for table tx_cal_calendar</description>
+		<type>CSH</type>
+		<csh_table>tx_cal_calendar</csh_table>
+		<fileId>EXT:cal/locallang_csh_txcalcal.xml</fileId>
+		<labelContext type="array">
+		</labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index=".description">Individual calendars for the Calendar Base extension.</label>
+			<label index=".details">Many calendars can be created, each with unique categories and events.</label>
+			<label index="title.description">Name of the calendar.</label>
+			<label index="hidden.description">Disables the calendar so that it is not visible in the frontend.</label>
+			<label index="starttime.description">Sets a date at which the calendar will be visible in the frontend.</label>
+			<label index="_starttime.seeAlso">tx_cal_calendar:hidden</label>
+			<label index="endtime.description">Sets a date at which the calendar will no longer be visible in the frontend.</label>
+			<label index="_endtime.seeAlso">tx_cal_calendar:hidden</label>
+			<label index="fe_user_id.description">Owner of the calendar.</label>
+			<label index="fe_user_id.details">By default, a calendar is public.  By setting a specific frontend user in this field, the calendar will only be accessible to that user.</label>
+			<label index="type.description">The type of the calendar.</label>
+			<label index="type.details">
+				
+				There are three types of calendars:
+				&lt;b&gt;Standard&lt;/b&gt;: This is a normal calendar with events created in TYPO3 and located in the database.
+				&lt;b&gt;Include ICS File&lt;/b&gt;: This calendar reads events from a static ICS file and imports them into the backend.
+				&lt;b&gt;External Calendar&lt;/b&gt;: This calendar reads events from a URL containing an ICS feed and imports them into the backend.
+				
+			</label>
+			<label index="ext_url.description">URL for an ICS feed.</label>
+			<label index="ics_file.description">Static ICS file to upload.</label>
+			<label index="owner.description">Frontend user or group who owns this calendar and can view it in the frontend.  If no selection is made, the calendar is considered public.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index=".description">Kalender für den TYPO3-Kalender</label>
+			<label index=".details">Erstellt Kalender für den TYPO3-Kalender, in welche dann Ereignisse einsortiert werden.</label>
+			<label index="title.description">Titel dieses Kalenders</label>
+			<label index="hidden.description">Versteckt diesen Kalender</label>
+			<label index="starttime.description">Die &quot;Start&quot;-Zeit definiert, ab wann dieser Datensatz aktiv sein sein soll. Vor diesem Zeitpunkt wird der Kalender nicht verwendet. Siehe auch &quot;verstecken&quot;</label>
+			<label index="endtime.description">Die &quot;End&quot;-Zeit definiert, ab wann dieser Datensatz nicht mehr aktiv sein sein soll. Nach diesem Zeitpunkt wird der Kalender nicht verwendet. Siehe auch &quot;verstecken&quot;</label>
+			<label index="fe_user_id.description">Definiert die FE-Benutzer-Gruppe, die dieser Kategorie zugeordnet ist.</label>
+			<label index="fe_user_id.details">Werden hier FrontEnd-Benutzer ausgewählt, so ist der Kalender nur für die eingeloggten Benutzer sichtbar. Ist nichts ausgewählt (Standard), so ist der Kalender für jedermann sichtbar (öffentlich).</label>
+			<label index="type.description">Der Typ des Kalenders</label>
+			<label index="type.details">Es gibt drei Typen:
+&lt;b&gt;- Standard Kalender&lt;/b&gt;: Ein normaler Kalender, dessen Einträge in der lokalen Datenbank gespeichert werden.
+&lt;b&gt;- Einbinden einer ICS-Datei&lt;/b&gt;: Bindet eine ICS-Datei ein, in der die Ereignisse gespeichert sind.
+&lt;b&gt;- Externer Kalender&lt;/b&gt;: Bindet einen externen Kalender per URL ein, aus welchem die Ereignisse übernommen werden sollen.</label>
+			<label index="ext_url.description">Die URL des externen Kalenders.</label>
+			<label index="ics_file.description">Die ICS-Datei, in der die Ereignisse gespeichert sind.</label>
+			<label index="owner.description">Werden hier FrontEnd-Benutzer ausgewählt, so ist der Kalender nur für die eingeloggten Benutzer sichtbar. Ist nichts ausgewählt (Standard), so ist der Kalender für jedermann sichtbar (öffentlich).</label>
+			<label index="title.details">Der Kalender wird diesen Namen tragen, welcher auch an diversen Stellen im Front-End auftaucht.</label>
+			<label index="ics_file.details">Es muss eine ICS-Datei sein: icalendar-Standard.</label>
+			<label index="relation_cnt.description">Diese Frontend-Benutzer sind dieser Kategorie zugeordnet.</label>
+		</languageKey>
+		<languageKey index="dk" type="array">
+		</languageKey>
+		<languageKey index="no" type="array">
+		</languageKey>
+		<languageKey index="it" type="array">
+		</languageKey>
+		<languageKey index="fr" type="array">
+		</languageKey>
+		<languageKey index="es" type="array">
+		</languageKey>
+		<languageKey index="nl" type="array">
+		</languageKey>
+		<languageKey index="cz" type="array">
+		</languageKey>
+		<languageKey index="pl" type="array">
+		</languageKey>
+		<languageKey index="si" type="array">
+		</languageKey>
+		<languageKey index="fi" type="array">
+		</languageKey>
+		<languageKey index="tr" type="array">
+		</languageKey>
+		<languageKey index="se" type="array">
+		</languageKey>
+		<languageKey index="pt" type="array">
+		</languageKey>
+		<languageKey index="ru" type="array">
+		</languageKey>
+		<languageKey index="ro" type="array">
+		</languageKey>
+		<languageKey index="ch" type="array">
+		</languageKey>
+		<languageKey index="sk" type="array">
+		</languageKey>
+		<languageKey index="lt" type="array">
+		</languageKey>
+		<languageKey index="is" type="array">
+		</languageKey>
+		<languageKey index="hr" type="array">
+		</languageKey>
+		<languageKey index="hu" type="array">
+		</languageKey>
+		<languageKey index="gl" type="array">
+		</languageKey>
+		<languageKey index="th" type="array">
+		</languageKey>
+		<languageKey index="gr" type="array">
+		</languageKey>
+		<languageKey index="hk" type="array">
+		</languageKey>
+		<languageKey index="eu" type="array">
+		</languageKey>
+		<languageKey index="bg" type="array">
+		</languageKey>
+		<languageKey index="br" type="array">
+		</languageKey>
+		<languageKey index="et" type="array">
+		</languageKey>
+		<languageKey index="ar" type="array">
+		</languageKey>
+		<languageKey index="he" type="array">
+		</languageKey>
+		<languageKey index="ua" type="array">
+		</languageKey>
+		<languageKey index="lv" type="array">
+		</languageKey>
+		<languageKey index="jp" type="array">
+		</languageKey>
+		<languageKey index="vn" type="array">
+		</languageKey>
+		<languageKey index="ca" type="array">
+		</languageKey>
+		<languageKey index="ba" type="array">
+		</languageKey>
+		<languageKey index="kr" type="array">
+		</languageKey>
+		<languageKey index="eo" type="array">
+		</languageKey>
+		<languageKey index="my" type="array">
+		</languageKey>
+		<languageKey index="hi" type="array">
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".description" type="integer">22014637</label>
+			<label index="title.description" type="integer">68581563</label>
+			<label index="type.description" type="integer">116909981</label>
+			<label index="hidden.description" type="integer">142300332</label>
+			<label index="category_id.description" type="integer">168863205</label>
+			<label index="ext_url.description" type="integer">229840730</label>
+			<label index=".details" type="integer">32897275</label>
+			<label index="relation_cnt.description" type="integer">60225542</label>
+			<label index="type.details" type="integer">15179808</label>
+			<label index="ics_file.description" type="integer">201811037</label>
+			<label index="ics_file.details" type="integer">226137078</label>
+			<label index="headerstyle.description" type="integer">49830561</label>
+			<label index="bodystyle.description" type="integer">8915518</label>
+			<label index="title.details" type="integer">80283001</label>
+			<label index="starttime.description" type="integer">213043644</label>
+			<label index="endtime.description" type="integer">62151955</label>
+			<label index="fe_user_id.description" type="integer">90629007</label>
+			<label index="fe_user_id.details" type="integer">175735654</label>
+			<label index="owner.description" type="integer">27196356</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Individual calendars for the Calendar Base extension.</label>
+			<label index="title.description">Name of the calendar.</label>
+			<label index="type.description">The type of the calendar.</label>
+			<label index="hidden.description">Disables the calendar so that it is not visible in the frontend.</label>
+			<label index="category_id.description">Here you can assign categories to the current event.</label>
+			<label index="ext_url.description">URL for an ICS feed.</label>
+			<label index=".details">Many calendars can be created, each with unique categories and events.</label>
+			<label index="relation_cnt.description">defines the FE-User which are assigned to the events of this category</label>
+			<label index="type.details">
+				
+				There are three types of calendars:
+				&lt;b&gt;Standard&lt;/b&gt;: This is a normal calendar with events created in TYPO3 and located in the database.
+				&lt;b&gt;Include ICS File&lt;/b&gt;: This calendar reads events from a static ICS file and imports them into the backend.
+				&lt;b&gt;External Calendar&lt;/b&gt;: This calendar reads events from a URL containing an ICS feed and imports them into the backend.
+				
+			</label>
+			<label index="ics_file.description">Static ICS file to upload.</label>
+			<label index="ics_file.details">... where the events are stored in.</label>
+			<label index="headerstyle.description">Define a headerstyle, which is used for all event-headers in this category</label>
+			<label index="bodystyle.description">Define a  bodystyle, which is used for all event-bodys in this category</label>
+			<label index="title.details">This becomes the title of the calendar</label>
+			<label index="starttime.description">Sets a date at which the calendar will be visible in the frontend.</label>
+			<label index="endtime.description">Sets a date at which the calendar will no longer be visible in the frontend.</label>
+			<label index="fe_user_id.description">Owner of the calendar.</label>
+			<label index="fe_user_id.details">By default, a calendar is public.  By setting a specific frontend user in this field, the calendar will only be accessible to that user.</label>
+			<label index="owner.description">Frontend user or group who owns this calendar and can view it in the frontend.  If no selection is made, the calendar is considered public.</label>
+		</languageKey>
+	</orig_text>
+</T3locallang>

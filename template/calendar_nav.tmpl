@@ -1,0 +1,105 @@
+<!--calendar_nav.tmpl-->
+<table border="0" width="737" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="1%" valign="top" align="right">
+			###MONTH_SMALL|-1###
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+				</tr>
+			</table>
+		</td>
+		<td width="98%" valign="top" align="center">
+			<table border="0" width="330" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="160" valign="top">
+						<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
+							<!-- ###DONT_SHOW_JUMPS### start -->
+							<tr>
+								<td bgcolor="#FFFFFF" align="left">
+									<div style="padding: 5px;">
+							<!-- ###DONT_SHOW_JUMPS### end -->
+							<!-- ###SHOW_JUMPS### start -->
+							<tr>
+								<td align="center" class="sideback"><div style="height:16px;"><b>###L_JUMP###</b></div></td>
+							</tr>
+							<tr>
+								<td>
+									<div style="padding: 5px;">
+										<form style="margin-bottom:0;" action="###CURRENT_VIEW###.php" method="get">
+											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_JUMPS###</select><br />
+											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_YEARS###</select><br />
+											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_MONTHS###</select><br />
+											<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_WEEKS###</select><br />
+										</form>
+										<!-- ###SHOW_JUMPS### end -->
+										<!-- ###SHOW_SEARCH### start -->
+										###SEARCH_BOX###
+										<!-- ###SHOW_SEARCH### end -->
+										<!-- ###SHOW_GOTO### start -->
+										<form style="margin-bottom:0;" action="###ACTION_URL###" method="get">
+											<input type="hidden" name="cal" value="###URL_CAL###">
+											<input type="text" style="width:160px; font-size:10px" name="jumpto_day">
+											<input type="submit" value="Go">
+										</form>
+										<!-- ###SHOW_GOTO### end -->
+										<!-- ###SHOW_CATEGORY_SELECTOR### start -->
+										<hr>
+										<div class = 'G10BOLD'>###L_CATEGORY_SELECTOR###:</div>
+										<form style="margin-bottom:0;" action="###CATEGORYURL###" method="post">
+											###HIDDENVALUES###
+											<select name="tx_cal_controller[category][]" class="query_style" size="5" multiple="multiple">###LIST_CATEGORIES_PICK###</select><br />
+											###CATEGORYSUBMIT###
+										</form>
+										<!-- ###SHOW_CATEGORY_SELECTOR### end -->
+									</div>
+								</td>
+							</tr>
+						</table>
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+								<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+								<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+							</tr>
+						</table>
+					</td>
+					<td>
+						<img src="###IMG_PATH###/spacer.gif" width="20" height="1" alt=" " />
+					</td>
+					<td width="160" valign="top">
+						<table width="170" border="0" cellpadding="3" cellspacing="0" class="calborder">
+							<tr>
+								<td>
+									<div style="padding-left: 5px;">
+										<b>###L_LEGEND###:</b><br />
+										###LEGEND###
+									</div>
+								</td>
+							</tr>
+						</table>
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+								<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+								<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td width="1%" valign="top" align="left">
+			###MONTH_SMALL|+1###
+			<table width="170" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>

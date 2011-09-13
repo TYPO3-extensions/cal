@@ -1,0 +1,33 @@
+<div class = 'G10BOLD'>###L_SEARCH###:</div>
+<form action="###SEARCH_ACTION_URL###" method="POST">
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###">
+	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###">
+	<INPUT type="image" src="###IMG_PATH###/search.gif" border=0 height="19" width="18" name="submit" value="Search">
+</form>
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+	<!-- ###SHOWBOTTOMEVENTS### start -->
+	<!-- ###SHOWBOTTOMEVENTS_ODD### start -->
+	<tr align="left" valign="top">
+		<td width="170" nowrap="nowrap">
+			###DAYLINK###<br />
+			<span class="V9G">###START_TIME###</span>
+		</td>
+		<td>
+			###EVENT_TEXT###<br /><span class="V9G">###CALNAME###</span>
+		</td>
+	</tr>
+	<!-- ###SHOWBOTTOMEVENTS_ODD### end -->
+	<!-- ###SHOWBOTTOMEVENTS_EVEN### start -->
+	<tr align="left" valign="top">
+		<td width="170" nowrap="nowrap" bgcolor="#EEEEEE">
+			###DAYLINK###<br />
+			<span class="V9G">###START_TIME###</span>
+		</td>
+		<td bgcolor="#EEEEEE">
+			###EVENT_TEXT###<br /><span class="V9G">###CALNAME###</span>
+		</td>
+	</tr>
+	<!-- ###SHOWBOTTOMEVENTS_EVEN### end -->
+	<!-- ###SHOWBOTTOMEVENTS### end -->
+</table>
+<br /><span>###BACKLINK###</span>

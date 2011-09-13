@@ -1,0 +1,1766 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description></description>
+        <type>database</type>
+        <csh_table></csh_table>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="tx_cal_event">Calendar Event</label>
+            <label index="tx_cal_event.category">Category</label>
+            <label index="tx_cal_event.calendar">Calendar</label>
+            <label index="tx_cal_event.title">Title</label>
+            <label index="tx_cal_event.starttime">Starttime</label>
+            <label index="tx_cal_event.endtime">Endtime</label>
+            <label index="tx_cal_event.start_date">Event Start Day</label>
+            <label index="tx_cal_event.start_time">Event Start Time</label>
+            <label index="tx_cal_event.end_date">Event End Day</label>
+            <label index="tx_cal_event.end_time">Event End Time</label>
+            <label index="tx_cal_event.organizer">Organizer</label>
+            <label index="tx_cal_event.organizer_id">Cal Organizer</label>
+            <label index="tx_cal_event.location">Location</label>
+            <label index="tx_cal_event.location_id">Cal Location</label>
+            <label index="tx_cal_event.freq">Frequency</label>
+            <label index="tx_cal_event.byday">By Day (e.g.: mo,fr or all)</label>
+            <label index="tx_cal_event.bymonthday">By Monthday (e.g.: 1,2,30 or all)</label>
+            <label index="tx_cal_event.bymonth">By Month (e.g.: 1,2,3,4,12 or all)</label>
+            <label index="tx_cal_event.until">Until Date</label>
+            <label index="tx_cal_event.count">Count</label>
+            <label index="tx_cal_event.interval">Interval</label>
+            <label index="tx_cal_event.description">Description</label>
+            <label index="tx_cal_event.exception">Exception</label>
+            <label index="tx_cal_event.fe_cruser_id">Creator</label>
+            <label index="tx_cal_event.shared_user">Share this event with another user !Attention!: including rights</label>
+            <label index="tx_cal_event.fe_crgroup_id">Creator Group</label>
+            <label index="tx_cal_event.none">None</label>
+            <label index="tx_cal_event.type">Event type</label>
+            <label index="tx_cal_event.type.I.0">Event with description</label>
+            <label index="tx_cal_event.type.I.1">Shortcut to page</label>
+            <label index="tx_cal_event.type.I.2">Link to external url</label>
+            <label index="tx_cal_event.external">External URL</label>
+            <label index="tx_cal_event.shortcut_page">Shortcut to page</label>
+            <label index="tx_cal_event.imagealttext">alt-text</label>
+            <label index="tx_cal_event.imagetitletext">title-text</label>
+            <label index="tx_cal_exception_event">Calendar Exception Event</label>
+            <label index="tx_cal_exception_event.title">Title</label>
+            <label index="tx_cal_exception_event.starttime">Starttime</label>
+            <label index="tx_cal_exception_event.endtime">Endtime</label>
+            <label index="tx_cal_exception_event.start_date">Event Start Day</label>
+            <label index="tx_cal_exception_event.start_time">Event Start Time</label>
+            <label index="tx_cal_exception_event.end_date">Event End Day</label>
+            <label index="tx_cal_exception_event.end_time">Event End Time</label>
+            <label index="tx_cal_exception_event.freq">Frequency</label>
+            <label index="tx_cal_exception_event.byday">By Day (e.g.: mo,fr or all)</label>
+            <label index="tx_cal_exception_event.bymonthday">By Monthday (e.g.: 1,2,30 or all)</label>
+            <label index="tx_cal_exception_event.bymonth">By Month (e.g.: 1,2,3,4,12 or all)</label>
+            <label index="tx_cal_exception_event.until">Until Date</label>
+            <label index="tx_cal_exception_event.count">Count</label>
+            <label index="tx_cal_exception_event.interval">Interval</label>
+            <label index="tx_cal_exception_event.description">Description</label>
+            <label index="tx_cal_exception_event_group">Calendar Exception Event Group</label>
+            <label index="tx_cal_exception_event_group.title">Title</label>
+            <label index="tx_cal_fe_user_event">Frontend User - Event Relation</label>
+            <label index="tx_cal_fe_user_event.fe_user">User</label>
+            <label index="tx_cal_fe_user_event.event">Event</label>
+            <label index="tx_cal_fe_group_event">Frontend Group - Event Relation</label>
+            <label index="tx_cal_fe_group_event.fe_group">Group</label>
+            <label index="tx_cal_fe_group_event.event">Event</label>
+            <label index="tx_cal_fe_user_event.monitor">Notify on change</label>
+            <label index="tx_cal_calendar">Calendar</label>
+            <label index="tx_cal_calendar.title">Calendar Title</label>
+            <label index="tx_cal_calendar.type">Event Type</label>
+            <label index="tx_cal_calendar.type.I.0">Standard Calendar (database)</label>
+            <label index="tx_cal_calendar.type.I.1">External Calendar</label>
+            <label index="tx_cal_calendar.type.I.2">Include ICS File</label>
+            <label index="tx_cal_calendar.ext_url">External Calendar URL</label>
+            <label index="tx_cal_calendar.ics_file">ICS File</label>
+            <label index="tx_cal_calendar.owner">Owner</label>
+            <label index="tx_cal_calendar.activate_fnb">Enable free and busy view</label>
+            <label index="tx_cal_calendar.fb_users_groups">Limit the free and busy view to these users and/or Groups (else public)</label>
+            <label index="tx_cal_category">Calendar Category</label>
+            <label index="tx_cal_category.title">Category title</label>
+            <label index="tx_cal_category.headerstyle">Header style</label>
+            <label index="tx_cal_category.bodystyle">Body style</label>
+            <label index="tx_cal_category.headercolor">Header Color (e.g. green or #15E337)</label>
+            <label index="tx_cal_category.bodycolor">Body Color (e.g. green or #15E337)</label>
+            <label index="tx_cal_category.calendar">Calendar</label>
+            <label index="tx_cal_category.shared_user_allowed">Allow shared user to select this category</label>
+            <label index="tx_cal_organizer">Calendar Organizer</label>
+            <label index="tx_cal_organizer.name">Name</label>
+            <label index="tx_cal_organizer.description">Description</label>
+            <label index="tx_cal_organizer.street">Street</label>
+            <label index="tx_cal_organizer.zip">Zip</label>
+            <label index="tx_cal_organizer.city">City</label>
+            <label index="tx_cal_organizer.phone">Phone</label>
+            <label index="tx_cal_organizer.email">E-mail</label>
+            <label index="tx_cal_organizer.image">Logo/Image</label>
+            <label index="tx_cal_organizer.link">Homepage</label>
+            <label index="tx_cal_organizer.isorganizer">Is Cal Organizer</label>
+            <label index="tx_cal_location">Calendar Location</label>
+            <label index="tx_cal_location.location">Location</label>
+            <label index="tx_cal_location.description">Description</label>
+            <label index="tx_cal_location.name">Name</label>
+            <label index="tx_cal_location.street">Street</label>
+            <label index="tx_cal_location.zip">Zip</label>
+            <label index="tx_cal_location.city">City</label>
+            <label index="tx_cal_location.phone">Phone</label>
+            <label index="tx_cal_location.email">E-mail</label>
+            <label index="tx_cal_location.image">Logo/Image</label>
+            <label index="tx_cal_location.link">Homepage</label>
+            <label index="tx_cal_location.islocation">Is Cal Location</label>
+            <label index="tx_cal_controller_flexform.sheet_general">[ General Settings ]</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode">Plugin Mode:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.1">search data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.11">select data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.2">list data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.3">view/edit data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.4">import data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.30">search+list data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.31">list+view/edit data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.32">search+list+view/edit data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.33">select+list data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.99">show info for plugin</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode">Plugins Debug-Mode:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.0">Debug Off</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.1">Debug On</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.2">Debug Verbose</label>
+            <label index="tx_cal_controller_flexform.sheet_general-template">Template:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-listpage">PageID of Result ListPage:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpage">PageID of EditPage:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpopup">Edit in Popup-Window:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-backpage">PageID for BackButton:</label>
+            <label index="tx_cal_controller_flexform.sheet_more">[ More Settings ]</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics">[ Template Settings ]</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics-template">Template:</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf">[ Local Config ]</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf-data">LocalConf (TS-Style)</label>
+            <label index="tt_content.list_type">TYPO3 Calendar</label>
+            <label index="frequency.none">None</label>
+            <label index="frequency.day">Daily</label>
+            <label index="frequency.week">Weekly</label>
+            <label index="frequency.month">Monthly</label>
+            <label index="frequency.year">Yearly</label>
+        </languageKey>
+        <languageKey index="dk" type="array">
+            <label index="tx_cal_event">Kalenderbegivenhed</label>
+            <label index="tx_cal_event.category">Kategori</label>
+            <label index="tx_cal_event.title">Titel</label>
+            <label index="tx_cal_event.starttime">Starttid</label>
+            <label index="tx_cal_event.endtime">Sluttid</label>
+            <label index="tx_cal_event.start_date">Begivenheds startdato</label>
+            <label index="tx_cal_event.start_time">Begivenheds starttid</label>
+            <label index="tx_cal_event.end_date">Begivenheds slutdato</label>
+            <label index="tx_cal_event.end_time">Begivenheds sluttid</label>
+            <label index="tx_cal_event.organizer">Organisator</label>
+            <label index="tx_cal_event.organizer_id">Cal Organisator</label>
+            <label index="tx_cal_event.location">Sted</label>
+            <label index="tx_cal_event.location_id">Cal sted</label>
+            <label index="tx_cal_event.freq">Hyppighed</label>
+            <label index="tx_cal_event.byday">Pr dag (eks.: ma, fr eller alle)</label>
+            <label index="tx_cal_event.bymonthday">Pr m?nedsdag (eks.: 1, 2, 30 eller alle)</label>
+            <label index="tx_cal_event.bymonth">Pr m?ned (eks.: 1, 2 ,3 ,4 , 12 eller alle)</label>
+            <label index="tx_cal_event.until">Indtil dato</label>
+            <label index="tx_cal_event.count">Antal</label>
+            <label index="tx_cal_event.interval">Interval</label>
+            <label index="tx_cal_event.description">Beskrivelse</label>
+            <label index="tx_cal_event.exception">Undtagelse</label>
+            <label index="tx_cal_event.fe_cruser_id">Bruger</label>
+            <label index="tx_cal_event.fe_crgroup_id">Brugergruppe</label>
+            <label index="tx_cal_event.type">Begivenhedstype</label>
+            <label index="tx_cal_event.type.I.0">Begivenhed med beskrivelse</label>
+            <label index="tx_cal_event.type.I.1">Genvej til side</label>
+            <label index="tx_cal_event.type.I.2">Link til ekstern URL</label>
+            <label index="tx_cal_event.external">Ekstern URL</label>
+            <label index="tx_cal_event.shortcut_page">Genvej til side</label>
+            <label index="tx_cal_exception_event">Kalender undtagelsesbegivenhed</label>
+            <label index="tx_cal_exception_event.title">Titel</label>
+            <label index="tx_cal_exception_event.starttime">Starttid</label>
+            <label index="tx_cal_exception_event.endtime">Sluttid</label>
+            <label index="tx_cal_exception_event.start_date">Begivenheds startdato</label>
+            <label index="tx_cal_exception_event.start_time">Begivenheds starttid</label>
+            <label index="tx_cal_exception_event.end_date">Begivenheds slutdato</label>
+            <label index="tx_cal_exception_event.end_time">Begivenheds sluttid</label>
+            <label index="tx_cal_exception_event.freq">Hyppighed</label>
+            <label index="tx_cal_exception_event.byday">Pr dag (eks.: ma, fr eller alle)</label>
+            <label index="tx_cal_exception_event.bymonthday">Pr m?nedsdag (eks.: 1, 2, 30 eller alle)</label>
+            <label index="tx_cal_exception_event.bymonth">Pr m?ned (eks.: 1, 2 ,3 ,4 , 12 eller alle)</label>
+            <label index="tx_cal_exception_event.until">Indtil dato</label>
+            <label index="tx_cal_exception_event.count">Antal</label>
+            <label index="tx_cal_exception_event.interval">Interval</label>
+            <label index="tx_cal_exception_event.description">Beskrivelse</label>
+            <label index="tx_cal_exception_event_group">Kalender undtagelsesbegivenhed gruppe</label>
+            <label index="tx_cal_exception_event_group.title">Titel</label>
+            <label index="tx_cal_fe_user_event">Frontend bruger - Begivenhedsrelationer</label>
+            <label index="tx_cal_fe_user_event.fe_user">Bruger</label>
+            <label index="tx_cal_fe_user_event.event">Begivenhed</label>
+            <label index="tx_cal_fe_group_event">Frontend gruppe - Begivenhedsrelationer</label>
+            <label index="tx_cal_fe_group_event.fe_group">Gruppe</label>
+            <label index="tx_cal_fe_group_event.event">Begivenhed</label>
+            <label index="tx_cal_fe_user_event.monitor">Rapporter ¾ndringer</label>
+            <label index="tx_cal_category">Kalender kategori</label>
+            <label index="tx_cal_category.title">Kategori titel</label>
+            <label index="tx_cal_category.headercolor">Sidehoved farve (eks. green eller #15E337)</label>
+            <label index="tx_cal_category.bodycolor">Br¿dtekst farve (eks. green eller #15E337)</label>
+            <label index="tt_content.list_type">TYPO3 Kalender</label>
+            <label index="tx_cal_controller_flexform.sheet_general">[ Generelle Indstillinger ]</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode">Plugin Mode:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.1">search data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.11">select data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.2">list data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.3">view/edit data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.4">import data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.30">search+list data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.31">list+view/edit data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.32">search+list+view/edit data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.33">select+list data</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.99">show info for plugin</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode">Plugins Debug-Mode:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.0">Debug Off</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.1">Debug On</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.2">Debug Verbose</label>
+            <label index="tx_cal_controller_flexform.sheet_general-template">Template:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-listpage">PageID of Result ListPage:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpage">PageID of EditPage:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpopup">Edit in Popup-Window:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-backpage">PageID for BackButton:</label>
+            <label index="tx_cal_controller_flexform.sheet_more">[ More Settings ]</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics">[ Template Settings ]</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics-template">Template:</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf">[ Local Config ]</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf-data">LocalConf (TS-Style)</label>
+            <label index="frequency.none">Ingen</label>
+            <label index="frequency.day">Daglig</label>
+            <label index="frequency.week">Ugentlig</label>
+            <label index="frequency.month">M?nedlig</label>
+            <label index="frequency.year">?rlig</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+            <label index="tx_cal_event">Kalender Event</label>
+            <label index="tx_cal_event.category">Kategorie</label>
+            <label index="tx_cal_event.title">Titel</label>
+            <label index="tx_cal_event.starttime">Startzeit</label>
+            <label index="tx_cal_event.endtime">Endzeit</label>
+            <label index="tx_cal_event.start_date">Event Start Tag</label>
+            <label index="tx_cal_event.start_time">Event Start Zeit</label>
+            <label index="tx_cal_event.end_date">Event Ende Tag</label>
+            <label index="tx_cal_event.end_time">Event Ende Zeit</label>
+            <label index="tx_cal_event.organizer">Organisator</label>
+            <label index="tx_cal_event.organizer_id">Cal Organisator</label>
+            <label index="tx_cal_event.location">Ort</label>
+            <label index="tx_cal_event.location_id">Cal Ort</label>
+            <label index="tx_cal_event.freq">Frequenz</label>
+            <label index="tx_cal_event.byday">Nach Tag (z.B.: mo,fr oder all)</label>
+            <label index="tx_cal_event.bymonthday">Nach Monagstag (z.B.: 1,2,30 oder all)</label>
+            <label index="tx_cal_event.bymonth">Nach Monat (e.g.: 1,2,3,4,12 oder all)</label>
+            <label index="tx_cal_event.until">Bis Datum</label>
+            <label index="tx_cal_event.count">Anzahl</label>
+            <label index="tx_cal_event.interval">Intervall</label>
+            <label index="tx_cal_event.description">Beschreibung</label>
+            <label index="tx_cal_event.exception">Ausnahme</label>
+            <label index="tx_cal_event.fe_cruser_id">Ersteller</label>
+            <label index="tx_cal_event.fe_crgroup_id">Erstellergruppe</label>
+            <label index="tx_cal_event.type">Ereignis Typ</label>
+            <label index="tx_cal_event.type.I.0">Ereignis mit Beschreibung</label>
+            <label index="tx_cal_event.type.I.1">Shortcut zu (interner) Seite</label>
+            <label index="tx_cal_event.type.I.2">Link zu externer URL</label>
+            <label index="tx_cal_event.external">Externe URL</label>
+            <label index="tx_cal_event.shortcut_page">Shortcut zu Seite</label>
+            <label index="tx_cal_exception_event">Kalender Ausnahme Event</label>
+            <label index="tx_cal_exception_event.title">Titel</label>
+            <label index="tx_cal_exception_event.starttime">Startzeit</label>
+            <label index="tx_cal_exception_event.endtime">Endzeit</label>
+            <label index="tx_cal_exception_event.start_date">Event Start Tag</label>
+            <label index="tx_cal_exception_event.start_time">Event Start Zeit</label>
+            <label index="tx_cal_exception_event.end_date">Event End Tag</label>
+            <label index="tx_cal_exception_event.end_time">Event End Zeit</label>
+            <label index="tx_cal_exception_event.freq">Frequenz</label>
+            <label index="tx_cal_exception_event.byday">Nach Tag (z.B.: mo,fr oder all)</label>
+            <label index="tx_cal_exception_event.bymonthday">Nach Monagstag (z.B.: 1,2,30 oder all)</label>
+            <label index="tx_cal_exception_event.bymonth">Nach Monat (e.g.: 1,2,3,4,12 oder all)</label>
+            <label index="tx_cal_exception_event.until">Bis Datum</label>
+            <label index="tx_cal_exception_event.count">Anzahl</label>
+            <label index="tx_cal_exception_event.interval">Intervall</label>
+            <label index="tx_cal_exception_event.description">Beschreibung</label>
+            <label index="tx_cal_exception_event_group">Kalenderausnahme Eventgruppe</label>
+            <label index="tx_cal_exception_event_group.title">Titel</label>
+            <label index="tx_cal_fe_user_event">Frontend Benutzer - Event Relation</label>
+            <label index="tx_cal_fe_user_event.fe_user">User</label>
+            <label index="tx_cal_fe_user_event.event">Event</label>
+            <label index="tx_cal_fe_group_event">Frontend Gruppe - Event Relation</label>
+            <label index="tx_cal_fe_group_event.fe_group">Gruppe</label>
+            <label index="tx_cal_fe_group_event.event">Event</label>
+            <label index="tx_cal_fe_user_event.monitor">Benachrichtigung bei &amp;Auml;nderungen</label>
+            <label index="tx_cal_category">Kalender Kategorie</label>
+            <label index="tx_cal_category.title">Kalendertitel</label>
+            <label index="tx_cal_category.type">Ereignis Typ</label>
+            <label index="tx_cal_category.type.I.0">Standard Kategorie (Datenbank)</label>
+            <label index="tx_cal_category.type.I.1">Externer Kalender</label>
+            <label index="tx_cal_category.type.I.2">ICS-Datei einbinden</label>
+            <label index="tx_cal_category.ext_url">externe Kalender-URL</label>
+            <label index="tx_cal_category.ics_file">ICS-Datei</label>
+            <label index="tx_cal_category.headerstyle">Header style</label>
+            <label index="tx_cal_category.bodystyle">Body style</label>
+            <label index="tx_cal_organizer">Kalender Organisation</label>
+            <label index="tx_cal_organizer.name">Name</label>
+            <label index="tx_cal_organizer.description">Beschreibung</label>
+            <label index="tx_cal_organizer.street">StraÃ?e</label>
+            <label index="tx_cal_organizer.zip">PLZ</label>
+            <label index="tx_cal_organizer.city">Stadt</label>
+            <label index="tx_cal_organizer.phone">Tel.</label>
+            <label index="tx_cal_organizer.email">EMail</label>
+            <label index="tx_cal_organizer.image">Logo/Bild</label>
+            <label index="tx_cal_organizer.link">Homepage</label>
+            <label index="tx_cal_location">Kalender Ort</label>
+            <label index="tx_cal_location.location">Ort</label>
+            <label index="tx_cal_location.description">Beschreibung</label>
+            <label index="tx_cal_location.name">Name</label>
+            <label index="tx_cal_location.street">StraÃ?e</label>
+            <label index="tx_cal_location.zip">PLZ</label>
+            <label index="tx_cal_location.city">Stadt</label>
+            <label index="tx_cal_location.phone">Tel</label>
+            <label index="tx_cal_location.email">EMail</label>
+            <label index="tx_cal_location.image">Logo/Bild</label>
+            <label index="tx_cal_location.link">Homepage</label>
+            <label index="tx_cal_controller_flexform.sheet_general">[ Allgemeine Einstellungen ]</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode">Plugin Modus:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.1">Daten suchen</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.11">Daten ausw&amp;aumlhlen</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.2">Daten auflisten</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.3">Daten betrachten/editieren</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.4">Daten importieren</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.30">Daten suchen/auflisten</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.31">Daten auflisten+betrachten/editieren</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.32">Daten suchen+auflisten+betrachten/editieren</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.33">Daten ausw&amp;auml;hlen+auflisten</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.99">Infos des Plugins anzeigen</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode">Plugins Debug-Modus:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.0">Debug Aus</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.1">Debug An</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.2">Debug Verbose</label>
+            <label index="tx_cal_controller_flexform.sheet_general-template">Template:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-listpage">PageID der Result ListPage:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpage">PageID der EditPage:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpopup">Edit in Popup-Window:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-backpage">PageID des BackButton:</label>
+            <label index="tx_cal_controller_flexform.sheet_more">[ Mehr Einstellungen ]</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics">[ Template Einstellungen ]</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics-template">Template:</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf">[ Local Config ]</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf-data">LocalConf (TS-Style)</label>
+            <label index="tt_content.list_type">TYPO3 Kalender</label>
+        </languageKey>
+        <languageKey index="no" type="array">
+            <label index="tx_cal_event">Kalender hendelse</label>
+            <label index="tx_cal_event.category">Kategori</label>
+            <label index="tx_cal_event.title">Tittel</label>
+            <label index="tx_cal_event.starttime">Starttidspunkt</label>
+            <label index="tx_cal_event.endtime">Sluttidspunkt</label>
+            <label index="tx_cal_event.start_date">Startdag for hendelse</label>
+            <label index="tx_cal_event.start_time">Starttid for hendelse</label>
+            <label index="tx_cal_event.end_date">Sluttdag for hendelse</label>
+            <label index="tx_cal_event.end_time">Sluttid for hendelse</label>
+            <label index="tx_cal_event.organizer">Organisator</label>
+            <label index="tx_cal_event.organizer_id">Cal organisator</label>
+            <label index="tx_cal_event.location">Sted</label>
+            <label index="tx_cal_event.freq">Frekvens</label>
+            <label index="tx_cal_event.byday">Ved dag (f.eks.: ma,fr eller alle)</label>
+            <label index="tx_cal_event.bymonthday">Ved dag i m&amp;aring;ned (f.eks.: 1,2,30 eller alle)</label>
+            <label index="tx_cal_event.bymonth">Ved m&amp;aring;ned (f.eks.: 1,2,3,4,12 or all)</label>
+            <label index="tx_cal_event.until">Inntil dato</label>
+            <label index="tx_cal_event.count">Antall</label>
+            <label index="tx_cal_event.interval">Interval</label>
+            <label index="tx_cal_event.description">Beskrivelse</label>
+            <label index="tx_cal_event.exception">Unntak</label>
+            <label index="tx_cal_event.fe_cruser_id">Opphavsmann</label>
+            <label index="tx_cal_event.fe_crgroup_id">Opphavsgruppe</label>
+            <label index="tx_cal_exception_event">Kalender unntakshendelse</label>
+            <label index="tx_cal_exception_event.title">Tittel</label>
+            <label index="tx_cal_exception_event.starttime">Starttidspunkt</label>
+            <label index="tx_cal_exception_event.endtime">Sluttidspunkt</label>
+            <label index="tx_cal_exception_event.start_date">Startdag for hendelse</label>
+            <label index="tx_cal_exception_event.start_time">Starttid for hendelse</label>
+            <label index="tx_cal_exception_event.end_date">Sluttdag for hendelse</label>
+            <label index="tx_cal_exception_event.end_time">Sluttid for hendelse</label>
+            <label index="tx_cal_exception_event.freq">Frekvens</label>
+            <label index="tx_cal_exception_event.byday">Ved dag (f.eks.: ma,fr eller alle)</label>
+            <label index="tx_cal_exception_event.bymonthday">Ved dag i m&amp;aring;ned (f.eks.: 1,2,30 eller alle)</label>
+            <label index="tx_cal_exception_event.bymonth">Ved m&amp;aring;ned (f.eks.: 1,2,3,4,12 or all)</label>
+            <label index="tx_cal_exception_event.until">Inntil dato</label>
+            <label index="tx_cal_exception_event.count">Antall</label>
+            <label index="tx_cal_exception_event.interval">Interval</label>
+            <label index="tx_cal_exception_event.description">Beskrivelse</label>
+            <label index="tx_cal_exception_event_group">Kalender unntak hendelsesgruppe</label>
+            <label index="tx_cal_exception_event_group.title">Tittel</label>
+            <label index="tx_cal_fe_user_event">Frontend bruker - hendelsesrelasjon</label>
+            <label index="tx_cal_fe_user_event.fe_user">Bruker</label>
+            <label index="tx_cal_fe_user_event.event">Hendelse</label>
+            <label index="tx_cal_fe_group_event">Frontend gruppe - hendelsesrelasjon</label>
+            <label index="tx_cal_fe_group_event.fe_group">Gruppe</label>
+            <label index="tx_cal_fe_group_event.event">Hendelse</label>
+            <label index="tx_cal_fe_user_event.monitor">Varsle ved endring</label>
+            <label index="tx_cal_category">Kalender kategori</label>
+            <label index="tx_cal_category.title">Kategori tittel</label>
+            <label index="tx_cal_category.headercolor">Overskift farge (f.eks. green eller #15E337)</label>
+            <label index="tx_cal_category.bodycolor">Tekstomr&amp;aring;de farge (f.eks. green eller #15E337)</label>
+            <label index="tx_cal_organizer">Kalender organisator</label>
+            <label index="tx_cal_organizer.name">Navn</label>
+            <label index="tx_cal_organizer.description">Beskrivelse</label>
+            <label index="tx_cal_organizer.street">Adresse</label>
+            <label index="tx_cal_organizer.zip">Postnummer</label>
+            <label index="tx_cal_organizer.city">Sted</label>
+            <label index="tx_cal_organizer.phone">Telefon</label>
+            <label index="tx_cal_organizer.email">E-post</label>
+            <label index="tx_cal_organizer.image">Logo/Bilde</label>
+            <label index="tx_cal_organizer.link">Hjemmeside</label>
+            <label index="tx_cal_location">Kalender sted</label>
+            <label index="tx_cal_location.location">Sted</label>
+            <label index="tx_cal_location.description">Beskrivelse</label>
+            <label index="tx_cal_location.name">Navn</label>
+            <label index="tx_cal_location.street">Adresse</label>
+            <label index="tx_cal_location.zip">Postnummer</label>
+            <label index="tx_cal_location.city">Sted</label>
+            <label index="tx_cal_location.phone">Telefon</label>
+            <label index="tx_cal_location.email">E-post</label>
+            <label index="tx_cal_location.image">Logo/Bilde</label>
+            <label index="tx_cal_location.link">Hjemmeside</label>
+            <label index="tt_content.list_type">TYPO3 Kalender</label>
+        </languageKey>
+        <languageKey index="it" type="array">
+            <label index="tx_cal_event">Evento</label>
+            <label index="tx_cal_event.category">Categoria</label>
+            <label index="tx_cal_event.title">Titolo</label>
+            <label index="tx_cal_event.organizer">Organizzatore</label>
+            <label index="tx_cal_event.location">Luogo</label>
+            <label index="tx_cal_event.freq">Frequenza</label>
+            <label index="tx_cal_event.until">Fino al</label>
+            <label index="tx_cal_event.count">Contatore</label>
+            <label index="tx_cal_event.interval">Intervallo</label>
+            <label index="tx_cal_event.description">Descrizione</label>
+            <label index="tx_cal_event.exception">Eccezione</label>
+            <label index="tx_cal_event.fe_cruser_id">Creatore</label>
+            <label index="tx_cal_exception_event.title">Titolo</label>
+            <label index="tx_cal_exception_event.freq">Frequenza</label>
+            <label index="tx_cal_exception_event.count">Contatore</label>
+            <label index="tx_cal_exception_event.interval">Intervallo</label>
+            <label index="tx_cal_exception_event.description">Descrizione</label>
+            <label index="tx_cal_exception_event_group.title">Titolo</label>
+            <label index="tx_cal_fe_user_event.fe_user">Utente</label>
+            <label index="tx_cal_fe_user_event.event">Evento</label>
+            <label index="tx_cal_fe_group_event.fe_group">Gruppo</label>
+            <label index="tx_cal_fe_group_event.event">Evento</label>
+            <label index="tx_cal_fe_user_event.monitor">Notifica in caso di modifica</label>
+            <label index="tx_cal_category">Categoria Calendario</label>
+            <label index="tx_cal_category.title">Titolo Categoria</label>
+            <label index="tx_cal_category.color">Colore (es. green o #15E337)</label>
+            <label index="tx_cal_organizer">Organizzatore Calendario</label>
+            <label index="tx_cal_organizer.name">Nome</label>
+            <label index="tx_cal_organizer.description">Descrizione</label>
+            <label index="tx_cal_organizer.street">Via</label>
+            <label index="tx_cal_organizer.zip">CAP</label>
+            <label index="tx_cal_organizer.city">Cittï¿½</label>
+            <label index="tx_cal_organizer.phone">Telefono</label>
+            <label index="tx_cal_organizer.email">E-mail</label>
+            <label index="tx_cal_organizer.image">Logo/Immagine</label>
+            <label index="tx_cal_organizer.link">Homepage</label>
+            <label index="tx_cal_location.location">Luogo</label>
+            <label index="tx_cal_location.description">Descrizione</label>
+            <label index="tx_cal_location.name">Nome</label>
+            <label index="tx_cal_location.street">Via</label>
+            <label index="tx_cal_location.zip">CAP</label>
+            <label index="tx_cal_location.city">Cittï¿½</label>
+            <label index="tx_cal_location.phone">Telefono</label>
+            <label index="tx_cal_location.email">E-mail</label>
+            <label index="tx_cal_location.image">Logo/Immagine</label>
+            <label index="tx_cal_location.link">Homepage</label>
+            <label index="tt_content.list_type">TYPO3 Calendario</label>
+        </languageKey>
+        <languageKey index="fr" type="array">
+            <label index="tx_cal_event">ï¿½vï¿½nement calendrier</label>
+            <label index="tx_cal_event.category">Catï¿½gorie</label>
+            <label index="tx_cal_event.title">Titre</label>
+            <label index="tx_cal_event.starttime">Heure de dï¿½but</label>
+            <label index="tx_cal_event.endtime">Heure de fin</label>
+            <label index="tx_cal_event.start_date">Date de dï¿½but</label>
+            <label index="tx_cal_event.start_time">Heure de dï¿½but</label>
+            <label index="tx_cal_event.end_date">Date de fin</label>
+            <label index="tx_cal_event.end_time">Heure de fin </label>
+            <label index="tx_cal_event.organizer">Organisateur</label>
+            <label index="tx_cal_event.organizer_id">Organisateurs rï¿½pertoriï¿½s</label>
+            <label index="tx_cal_event.location">Endroit</label>
+            <label index="tx_cal_event.location_id">Endroits rï¿½pï¿½rtoriï¿½s</label>
+            <label index="tx_cal_event.freq">Frï¿½quence</label>
+            <label index="tx_cal_event.byday">Par jour (ex.: mo,tu, wed, th, fr ou all)</label>
+            <label index="tx_cal_event.bymonthday">Par jour du mois (ex.: 1,2,30 ou all)</label>
+            <label index="tx_cal_event.bymonth">Par mois (ex.: 1,2,3,4,12 ou all)</label>
+            <label index="tx_cal_event.until">Jusque</label>
+            <label index="tx_cal_event.count">Nombre de rï¿½pï¿½titions (ï¿½vï¿½nement de base inclus)</label>
+            <label index="tx_cal_event.interval">Intervalle</label>
+            <label index="tx_cal_event.description">Description</label>
+            <label index="tx_cal_event.exception">Exception</label>
+            <label index="tx_cal_event.fe_cruser_id">Crï¿½ateur</label>
+            <label index="tx_cal_event.fe_crgroup_id">Groupe Crï¿½ateur</label>
+            <label index="tx_cal_exception_event">Exception</label>
+            <label index="tx_cal_exception_event.title">Titre</label>
+            <label index="tx_cal_exception_event.starttime">Heure de dï¿½but</label>
+            <label index="tx_cal_exception_event.endtime">Heure de fin</label>
+            <label index="tx_cal_exception_event.start_date">Date de dï¿½but</label>
+            <label index="tx_cal_exception_event.start_time">Heure de dï¿½but</label>
+            <label index="tx_cal_exception_event.end_date">Date de fin</label>
+            <label index="tx_cal_exception_event.end_time">Heure de fin</label>
+            <label index="tx_cal_exception_event.freq">Frï¿½quence</label>
+            <label index="tx_cal_exception_event.byday">Par jour (ex.: mo,tu, wed, th, fr ou all)</label>
+            <label index="tx_cal_exception_event.bymonthday">Par jour du mois (ex.: 1,2,30 ou all)</label>
+            <label index="tx_cal_exception_event.bymonth">Par mois (ex.: 1,2,3,4,12 ou all)</label>
+            <label index="tx_cal_exception_event.until">Jusque</label>
+            <label index="tx_cal_exception_event.count">Nombre de rï¿½pï¿½titions (ï¿½vï¿½nement de base inclus)</label>
+            <label index="tx_cal_exception_event.interval">Intervalle</label>
+            <label index="tx_cal_exception_event.description">Description</label>
+            <label index="tx_cal_exception_event_group">Groupe Exception Calendrier</label>
+            <label index="tx_cal_exception_event_group.title">Titre</label>
+            <label index="tx_cal_fe_user_event">Utilisateur frontal - (Event Relation)</label>
+            <label index="tx_cal_fe_user_event.fe_user">Afficher uniquement pour</label>
+            <label index="tx_cal_fe_user_event.event">Evï¿½nement</label>
+            <label index="tx_cal_fe_group_event">Groupe frontal - Lien ï¿½vï¿½nement</label>
+            <label index="tx_cal_fe_group_event.fe_group">Groupe frontal</label>
+            <label index="tx_cal_fe_group_event.event">Evï¿½nement</label>
+            <label index="tx_cal_fe_user_event.monitor">Notification en cas de changement</label>
+            <label index="tx_cal_category">Catï¿½gorie de calendrier</label>
+            <label index="tx_cal_category.title">Titre de catï¿½gorie</label>
+            <label index="tx_cal_category.color">Couleur (ex. vert ou #15E337)</label>
+            <label index="tx_cal_organizer">Organisateurs calendrier</label>
+            <label index="tx_cal_organizer.name">Nom</label>
+            <label index="tx_cal_organizer.description">Description</label>
+            <label index="tx_cal_organizer.street">Rue</label>
+            <label index="tx_cal_organizer.zip">Code Postal</label>
+            <label index="tx_cal_organizer.city">Ville</label>
+            <label index="tx_cal_organizer.phone">Tï¿½lï¿½phone</label>
+            <label index="tx_cal_organizer.email">Email</label>
+            <label index="tx_cal_organizer.image">Logo/Image</label>
+            <label index="tx_cal_organizer.link">Page d'accueil</label>
+            <label index="tx_cal_location">Endroits calendrier</label>
+            <label index="tx_cal_location.location">Endroit</label>
+            <label index="tx_cal_location.description">Description</label>
+            <label index="tx_cal_location.name">Nom</label>
+            <label index="tx_cal_location.street">Rue</label>
+            <label index="tx_cal_location.zip">Code postal</label>
+            <label index="tx_cal_location.city">Ville</label>
+            <label index="tx_cal_location.phone">Tï¿½lï¿½phone</label>
+            <label index="tx_cal_location.email">Email</label>
+            <label index="tx_cal_location.image">Logo/Image</label>
+            <label index="tx_cal_location.link">Page d'accueil</label>
+            <label index="tt_content.list_type">TYPO3 Calendrier</label>
+        </languageKey>
+        <languageKey index="es" type="array">
+            <label index="tx_cal_event">Evento de Calendario</label>
+            <label index="tx_cal_event.category">Categoría</label>
+            <label index="tx_cal_event.title">Título</label>
+            <label index="tx_cal_event.starttime">Hora de Inicio</label>
+            <label index="tx_cal_event.endtime">Hora de Finalización</label>
+            <label index="tx_cal_event.start_date">Día de Inicio del Evento</label>
+            <label index="tx_cal_event.start_time">Hora de Inicio del Evento</label>
+            <label index="tx_cal_event.end_date">Día de Finalización del Evento</label>
+            <label index="tx_cal_event.end_time">Hora de Finalización del Evento</label>
+            <label index="tx_cal_event.organizer">Organizador</label>
+            <label index="tx_cal_event.organizer_id">Organizador del Cal</label>
+            <label index="tx_cal_event.location">Ubicación</label>
+            <label index="tx_cal_event.location_id">Ubicación del Cal</label>
+            <label index="tx_cal_event.freq">Frecuencia</label>
+            <label index="tx_cal_event.byday">Por Día (e.g.: lu, vi o todos)</label>
+            <label index="tx_cal_event.bymonthday">Por Día del Mes (e.g.: 1, 2, 30 o todos)</label>
+            <label index="tx_cal_event.bymonth">Por Mes (e.g.: 1, 2, 3, 4, 12 o todos)</label>
+            <label index="tx_cal_event.until">Hasta</label>
+            <label index="tx_cal_event.count">Cuenta</label>
+            <label index="tx_cal_event.interval">Intervalo</label>
+            <label index="tx_cal_event.description">Descripción</label>
+            <label index="tx_cal_event.exception">Excepción</label>
+            <label index="tx_cal_event.fe_cruser_id">Creador</label>
+            <label index="tx_cal_event.fe_crgroup_id">Grupo Creador</label>
+            <label index="tx_cal_event.none">Ninguno</label>
+            <label index="tx_cal_event.type">Tipo de Evento</label>
+            <label index="tx_cal_event.type.I.0">Evento con descripción</label>
+            <label index="tx_cal_event.type.I.1">Atajo a página</label>
+            <label index="tx_cal_event.type.I.2">Enlace a url externo</label>
+            <label index="tx_cal_event.external">URL Externo</label>
+            <label index="tx_cal_event.shortcut_page">Atajo a Página</label>
+            <label index="tx_cal_exception_event">Excepción de Evento del Calendario</label>
+            <label index="tx_cal_exception_event.title">Título</label>
+            <label index="tx_cal_exception_event.starttime">Hora de Inicio</label>
+            <label index="tx_cal_exception_event.endtime">Hora de Finalización</label>
+            <label index="tx_cal_exception_event.start_date">Día de Inicio del Evento</label>
+            <label index="tx_cal_exception_event.start_time">Hora de Inicio del Evento</label>
+            <label index="tx_cal_exception_event.end_date">Día de Finalización del Evento</label>
+            <label index="tx_cal_exception_event.end_time">Hora de Finalización del Evento</label>
+            <label index="tx_cal_exception_event.freq">Frecuencia</label>
+            <label index="tx_cal_exception_event.byday">Por Día (e.g.: lu, vi o todos)</label>
+            <label index="tx_cal_exception_event.bymonthday">Por Día del Mes (e.g.: 1, 2, 30 o todos)</label>
+            <label index="tx_cal_exception_event.bymonth">Por Mes (e.g.: 1, 2, 3, 4, 12 o todos)</label>
+            <label index="tx_cal_exception_event.until">Hasta</label>
+            <label index="tx_cal_exception_event.count">Cuenta</label>
+            <label index="tx_cal_exception_event.interval">Intervalo</label>
+            <label index="tx_cal_exception_event.description">Descripción</label>
+            <label index="tx_cal_exception_event_group">Grupo de Excepción de Evento del Calendario</label>
+            <label index="tx_cal_exception_event_group.title">Título</label>
+            <label index="tx_cal_fe_user_event">Usuario del Frontend - Relación de Evento</label>
+            <label index="tx_cal_fe_user_event.fe_user">Usuario</label>
+            <label index="tx_cal_fe_user_event.event">Evento</label>
+            <label index="tx_cal_fe_group_event">Grupo del Frontend - Relación de Evento</label>
+            <label index="tx_cal_fe_group_event.fe_group">Grupo</label>
+            <label index="tx_cal_fe_group_event.event">Evento</label>
+            <label index="tx_cal_fe_user_event.monitor">Notificar al Cambio</label>
+            <label index="tx_cal_category">Categoría de Calendario</label>
+            <label index="tx_cal_category.title">Título de Categoría</label>
+            <label index="tx_cal_category.headercolor">Color del Encabezado (e.g. green o #15E337)</label>
+            <label index="tx_cal_category.bodycolor">Color del Cuerpo</label>
+            <label index="tx_cal_category.headertextcolor">Color del Texto del Encabezado</label>
+            <label index="tx_cal_category.bodytextcolor">Color del Texto del Cuerpo</label>
+            <label index="tx_cal_category.type">Tipo de Evento</label>
+            <label index="tx_cal_category.type.I.0">Categoría normal (base de datos)</label>
+            <label index="tx_cal_category.type.I.1">Calendario externo</label>
+            <label index="tx_cal_category.type.I.2">Incluir archivo ICS</label>
+            <label index="tx_cal_category.ext_url">URL del Calendario Externo</label>
+            <label index="tx_cal_category.ics_file">Archivo ICS</label>
+            <label index="tt_content.list_type">Calendario TYPO3</label>
+            <label index="tx_cal_controller_flexform.sheet_general">[ Ajustes Generales ]</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode">Modo de Plugin:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.1">buscar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.11">seleccionar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.2">listar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.3">ver/editar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.4">importar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.30">buscar+listar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.31">listar+ver/editar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.32">buscar+listar+ver/editar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.33">seleccionar+listar datos</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.99">mostrar información para el plugin</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode">Modo de Depuración del Plugin:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.0">Depuración Apagada</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.1">Depuración Encendida</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.2">Depuración Prólija</label>
+            <label index="tx_cal_controller_flexform.sheet_general-template">Plantilla:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-listpage">ID de la Página Lista de Resultados:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpage">ID de la Página de Edición:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpopup">Editar en Ventana Emergente:</label>
+            <label index="tx_cal_controller_flexform.sheet_general-backpage">ID de la Página para el Botón de Volver:</label>
+            <label index="tx_cal_controller_flexform.sheet_more">[ Más Ajustes ]</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics">[ Ajustes de la Plantilla ]</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics-template">Plantilla:</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf">[ Configuración Local ]</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf-data">LocalConf (Estilo-TS)</label>
+        </languageKey>
+        <languageKey index="nl" type="array">
+            <label index="tx_cal_event">Kalender gebeurtenis</label>
+            <label index="tx_cal_event.category">Categorie</label>
+            <label index="tx_cal_event.title">Titel</label>
+            <label index="tx_cal_event.starttime">Aanvangstijd</label>
+            <label index="tx_cal_event.endtime">Eindtijd</label>
+            <label index="tx_cal_event.start_date">Gebeurtenis begindatum</label>
+            <label index="tx_cal_event.start_time">Gebeurtenis aanvangstijd</label>
+            <label index="tx_cal_event.end_date">Gebeurtenis einddatum</label>
+            <label index="tx_cal_event.end_time">Gebeurtenis eindtijd</label>
+            <label index="tx_cal_event.organizer">Organisator</label>
+            <label index="tx_cal_event.organizer_id">Kalender organisator</label>
+            <label index="tx_cal_event.location">Locatie</label>
+            <label index="tx_cal_event.freq">Frequentie</label>
+            <label index="tx_cal_event.byday">Op dag (b.v.: ma,vr of alle)</label>
+            <label index="tx_cal_event.bymonthday">Op dag van de maand (b.v.: 1,2,30 of alle)</label>
+            <label index="tx_cal_event.bymonth">Op maand (b.v.: 1,2,3,4,12 of alle)</label>
+            <label index="tx_cal_event.until">Tot datum</label>
+            <label index="tx_cal_event.count">Telling</label>
+            <label index="tx_cal_event.interval">Interval</label>
+            <label index="tx_cal_event.description">Omschrijving</label>
+            <label index="tx_cal_event.exception">Uitzondering</label>
+            <label index="tx_cal_event.fe_cruser_id">Aangemaakt door</label>
+            <label index="tx_cal_event.fe_crgroup_id">Aanmakersgroep</label>
+            <label index="tx_cal_exception_event">Kalender uitzonderings gebeurtenis</label>
+            <label index="tx_cal_exception_event.title">Titel</label>
+            <label index="tx_cal_exception_event.starttime">Aanvangstijd</label>
+            <label index="tx_cal_exception_event.endtime">Eindtijd</label>
+            <label index="tx_cal_exception_event.start_date">Gebeurtenis begindag</label>
+            <label index="tx_cal_exception_event.start_time">Gebeurtenis aanvangstijd</label>
+            <label index="tx_cal_exception_event.end_date">gebeurtenis einddag</label>
+            <label index="tx_cal_exception_event.end_time">Gebeurtenis eindtijd</label>
+            <label index="tx_cal_exception_event.freq">Frequentie</label>
+            <label index="tx_cal_exception_event.byday">Op dag (b.v.: ma,vr of all)</label>
+            <label index="tx_cal_exception_event.bymonthday">Op maanddag (b.v.: 1,2,30 of all)</label>
+            <label index="tx_cal_exception_event.bymonth">Op maand (b.v.: 1,2,3,4,12 of all)</label>
+            <label index="tx_cal_exception_event.until">Tot datum</label>
+            <label index="tx_cal_exception_event.count">Telling</label>
+            <label index="tx_cal_exception_event.interval">Interval</label>
+            <label index="tx_cal_exception_event.description">Omschrijving</label>
+            <label index="tx_cal_exception_event_group">Kalender gebeurtenis uitzonderingen groep</label>
+            <label index="tx_cal_exception_event_group.title">Titel</label>
+            <label index="tx_cal_fe_user_event">Frontendgebruiker - Relatie met gebeurtenis</label>
+            <label index="tx_cal_fe_user_event.fe_user">Gebruiker</label>
+            <label index="tx_cal_fe_user_event.event">Gebeurtenis</label>
+            <label index="tx_cal_fe_group_event">Frontendgroep - Relatie met gebeurtenis</label>
+            <label index="tx_cal_fe_group_event.fe_group">Groep</label>
+            <label index="tx_cal_fe_group_event.event">Gebeurtenis</label>
+            <label index="tx_cal_fe_user_event.monitor">Op de hoogte stellen bij wijziging</label>
+            <label index="tx_cal_category">Kalender categorien</label>
+            <label index="tx_cal_category.title">Titel van categorie</label>
+            <label index="tx_cal_category.headercolor">Kleur (b.v. green [CSS kleuren] of #15E337 [HEX])</label>
+            <label index="tx_cal_category.bodycolor">Kleur (b.v. green [CSS kleuren] of #15E337 [HEX])</label>
+            <label index="tx_cal_organizer">Kalender organisator</label>
+            <label index="tx_cal_organizer.name">Naam</label>
+            <label index="tx_cal_organizer.description">Omschrijving</label>
+            <label index="tx_cal_organizer.street">Straat</label>
+            <label index="tx_cal_organizer.zip">Postcode</label>
+            <label index="tx_cal_organizer.city">Woonplaats</label>
+            <label index="tx_cal_organizer.phone">Telefoonnummer</label>
+            <label index="tx_cal_organizer.email">Emailadres</label>
+            <label index="tx_cal_organizer.image">Logo/Afbeelding</label>
+            <label index="tx_cal_organizer.link">Homepage</label>
+            <label index="tx_cal_location">Kalender lokatie</label>
+            <label index="tx_cal_location.location">Lokatie</label>
+            <label index="tx_cal_location.description">Omschrijving</label>
+            <label index="tx_cal_location.name">Naam</label>
+            <label index="tx_cal_location.street">Straat</label>
+            <label index="tx_cal_location.zip">Postcode</label>
+            <label index="tx_cal_location.city">Woonplaats</label>
+            <label index="tx_cal_location.phone">Telefoonnummer</label>
+            <label index="tx_cal_location.email">Emailadres</label>
+            <label index="tx_cal_location.image">Logo/Afbeelding</label>
+            <label index="tx_cal_location.link">Homepage</label>
+            <label index="tt_content.list_type">TYPO3 Kalender</label>
+        </languageKey>
+        <languageKey index="cz" type="array">
+        </languageKey>
+        <languageKey index="pl" type="array">
+        </languageKey>
+        <languageKey index="si" type="array">
+        </languageKey>
+        <languageKey index="fi" type="array">
+            <label index="tx_cal_events">Kalenteritapahtuma</label>
+            <label index="tx_cal_events.title">Otsikko</label>
+            <label index="tx_cal_events.starttime">Aloitusaika</label>
+            <label index="tx_cal_events.endtime">Pï¿½ï¿½ttymisaika</label>
+            <label index="tx_cal_events.organizer">Jï¿½rjestï¿½jï¿½</label>
+            <label index="tx_cal_events.location">Sijainti</label>
+            <label index="tx_cal_events.freq">Toistuvuus</label>
+            <label index="tx_cal_events.byday">Pï¿½ivittï¿½in (esim.: ma, pe tai kaikki)</label>
+            <label index="tx_cal_events.bymonthday">Kuukaudenpï¿½ivï¿½nï¿½ (esim.: 1,2,30 tai kaikki)</label>
+            <label index="tx_cal_events.bymonth">Kuukausittain (esim.: 1,2,3,4,12 tai kaikki)</label>
+            <label index="tx_cal_events.until">saakka (muoto VVVVKKPP)</label>
+            <label index="tx_cal_events.count">Lukumï¿½ï¿½rï¿½</label>
+            <label index="tx_cal_events.interval">Jakso</label>
+            <label index="tx_cal_events.description">Kuvaus</label>
+            <label index="tx_cal_fe_user_event">Edustakï¿½yttï¿½jï¿½ - tapahtuma riippuvuus</label>
+            <label index="tx_cal_fe_user_event.fe_user">Kï¿½yttï¿½jï¿½</label>
+            <label index="tx_cal_fe_user_event.event">Tapahtuma</label>
+            <label index="tx_cal_fe_group_event">Edustakï¿½yttï¿½jï¿½ryhmï¿½- tapahtuma riippuvuus</label>
+            <label index="tx_cal_fe_group_event.fe_group">Ryhmï¿½</label>
+            <label index="tx_cal_fe_group_event.event">Tapahtuma</label>
+            <label index="tx_cal_fe_user_event.monitor">Huomauta muutoksesta</label>
+            <label index="tx_cal_categories">Kalenteriluokat</label>
+            <label index="tx_cal_categories.title">Luokan nimike</label>
+            <label index="tx_cal_categories.color">Vï¿½ri (esim. vihreï¿½ (green) tai #15E337)</label>
+            <label index="tx_cal_organizer">Kalenterin pitï¿½jï¿½</label>
+            <label index="tx_cal_organizer.name">Nimi</label>
+            <label index="tx_cal_organizer.description">Kuvaus</label>
+            <label index="tx_cal_organizer.street">Katuosoite</label>
+            <label index="tx_cal_organizer.zip">Postinumero</label>
+            <label index="tx_cal_organizer.city">Kaupunki</label>
+            <label index="tx_cal_organizer.phone">Puhelin</label>
+            <label index="tx_cal_organizer.email">Sï¿½hkï¿½postiosoite</label>
+            <label index="tx_cal_organizer.image">Logo/Kuva</label>
+            <label index="tx_cal_organizer.link">Kotisivu</label>
+            <label index="tx_cal_location">Kalenterin sijainti</label>
+            <label index="tx_cal_location.location">Sijainti</label>
+            <label index="tx_cal_location.description">Kuvaus</label>
+            <label index="tx_cal_location.name">Nimi</label>
+            <label index="tx_cal_location.street">Katuosoite</label>
+            <label index="tx_cal_location.zip">Postinumero</label>
+            <label index="tx_cal_location.city">Kaupunki</label>
+            <label index="tx_cal_location.phone">Puhelin</label>
+            <label index="tx_cal_location.email">Sï¿½hkï¿½postiosoite</label>
+            <label index="tx_cal_location.image">Logo/Kuva</label>
+            <label index="tx_cal_location.link">Kotisivu</label>
+            <label index="tt_content.list_type">TYPO3 Kalenteri</label>
+        </languageKey>
+        <languageKey index="tr" type="array">
+        </languageKey>
+        <languageKey index="se" type="array">
+        </languageKey>
+        <languageKey index="pt" type="array">
+        </languageKey>
+        <languageKey index="ru" type="array">
+        </languageKey>
+        <languageKey index="ro" type="array">
+        </languageKey>
+        <languageKey index="ch" type="array">
+        </languageKey>
+        <languageKey index="sk" type="array">
+        </languageKey>
+        <languageKey index="lt" type="array">
+        </languageKey>
+        <languageKey index="is" type="array">
+        </languageKey>
+        <languageKey index="hr" type="array">
+        </languageKey>
+        <languageKey index="hu" type="array">
+        </languageKey>
+        <languageKey index="gl" type="array">
+        </languageKey>
+        <languageKey index="th" type="array">
+        </languageKey>
+        <languageKey index="gr" type="array">
+        </languageKey>
+        <languageKey index="hk" type="array">
+        </languageKey>
+        <languageKey index="eu" type="array">
+        </languageKey>
+        <languageKey index="bg" type="array">
+        </languageKey>
+        <languageKey index="br" type="array">
+        </languageKey>
+        <languageKey index="et" type="array">
+        </languageKey>
+        <languageKey index="ar" type="array">
+        </languageKey>
+        <languageKey index="he" type="array">
+        </languageKey>
+        <languageKey index="ua" type="array">
+        </languageKey>
+        <languageKey index="lv" type="array">
+        </languageKey>
+        <languageKey index="jp" type="array">
+        </languageKey>
+        <languageKey index="vn" type="array">
+        </languageKey>
+        <languageKey index="ca" type="array">
+        </languageKey>
+        <languageKey index="ba" type="array">
+        </languageKey>
+        <languageKey index="kr" type="array">
+        </languageKey>
+        <languageKey index="eo" type="array">
+        </languageKey>
+        <languageKey index="my" type="array">
+        </languageKey>
+        <languageKey index="hi" type="array">
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="default" type="array">
+            <label index="tx_cal_event" type="integer">110826355</label>
+            <label index="tx_cal_event.category" type="integer">61717939</label>
+            <label index="tx_cal_event.calendar" type="integer">150966827</label>
+            <label index="tx_cal_event.title" type="integer">192455458</label>
+            <label index="tx_cal_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_event.organizer" type="integer">231556830</label>
+            <label index="tx_cal_event.organizer_id" type="integer">197757211</label>
+            <label index="tx_cal_event.location" type="integer">216383317</label>
+            <label index="tx_cal_event.location_id" type="integer">88124733</label>
+            <label index="tx_cal_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_event.until" type="integer">39933470</label>
+            <label index="tx_cal_event.count" type="integer">244578708</label>
+            <label index="tx_cal_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_event.description" type="integer">190479069</label>
+            <label index="tx_cal_event.exception" type="integer">185420184</label>
+            <label index="tx_cal_event.fe_cruser_id" type="integer">250728461</label>
+            <label index="tx_cal_event.fe_crgroup_id" type="integer">229465782</label>
+            <label index="tx_cal_event.none" type="integer">112064895</label>
+            <label index="tx_cal_event.type" type="integer">99114704</label>
+            <label index="tx_cal_event.type.I.0" type="integer">68500460</label>
+            <label index="tx_cal_event.type.I.1" type="integer">237124901</label>
+            <label index="tx_cal_event.type.I.2" type="integer">135983235</label>
+            <label index="tx_cal_event.external" type="integer">76246465</label>
+            <label index="tx_cal_event.shortcut_page" type="integer">237124901</label>
+            <label index="tx_cal_event.imagealttext" type="integer">154823294</label>
+            <label index="tx_cal_event.imagetitletext" type="integer">66961694</label>
+            <label index="tx_cal_exception_event" type="integer">55052286</label>
+            <label index="tx_cal_exception_event.title" type="integer">192455458</label>
+            <label index="tx_cal_exception_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_exception_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_exception_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_exception_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_exception_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_exception_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_exception_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_exception_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_exception_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_exception_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_exception_event.until" type="integer">39933470</label>
+            <label index="tx_cal_exception_event.count" type="integer">244578708</label>
+            <label index="tx_cal_exception_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_exception_event.description" type="integer">190479069</label>
+            <label index="tx_cal_exception_event_group" type="integer">68377223</label>
+            <label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
+            <label index="tx_cal_fe_user_event" type="integer">97590023</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event" type="integer">265295873</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_calendar" type="integer">150966827</label>
+            <label index="tx_cal_calendar.title" type="integer">71117580</label>
+            <label index="tx_cal_calendar.type" type="integer">265997578</label>
+            <label index="tx_cal_calendar.type.I.0" type="integer">67693952</label>
+            <label index="tx_cal_calendar.type.I.1" type="integer">70632763</label>
+            <label index="tx_cal_calendar.type.I.2" type="integer">128090527</label>
+            <label index="tx_cal_calendar.ext_url" type="integer">165396769</label>
+            <label index="tx_cal_calendar.ics_file" type="integer">25167984</label>
+            <label index="tx_cal_calendar.owner" type="integer">191842862</label>
+            <label index="tx_cal_category" type="integer">131600806</label>
+            <label index="tx_cal_category.title" type="integer">96882397</label>
+            <label index="tx_cal_category.headerstyle" type="integer">86915426</label>
+            <label index="tx_cal_category.bodystyle" type="integer">110767857</label>
+            <label index="tx_cal_category.headercolor" type="integer">71224712</label>
+            <label index="tx_cal_category.bodycolor" type="integer">180471136</label>
+            <label index="tx_cal_category.calendar" type="integer">150966827</label>
+            <label index="tx_cal_organizer" type="integer">12819964</label>
+            <label index="tx_cal_organizer.name" type="integer">77521672</label>
+            <label index="tx_cal_organizer.description" type="integer">190479069</label>
+            <label index="tx_cal_organizer.street" type="integer">224521181</label>
+            <label index="tx_cal_organizer.zip" type="integer">157526795</label>
+            <label index="tx_cal_organizer.city" type="integer">92079470</label>
+            <label index="tx_cal_organizer.phone" type="integer">197928267</label>
+            <label index="tx_cal_organizer.email" type="integer">32015587</label>
+            <label index="tx_cal_organizer.image" type="integer">140709043</label>
+            <label index="tx_cal_organizer.link" type="integer">54130594</label>
+            <label index="tx_cal_organizer.isorganizer" type="integer">188053948</label>
+            <label index="tx_cal_location" type="integer">92408295</label>
+            <label index="tx_cal_location.location" type="integer">216383317</label>
+            <label index="tx_cal_location.description" type="integer">190479069</label>
+            <label index="tx_cal_location.name" type="integer">77521672</label>
+            <label index="tx_cal_location.street" type="integer">224521181</label>
+            <label index="tx_cal_location.zip" type="integer">157526795</label>
+            <label index="tx_cal_location.city" type="integer">92079470</label>
+            <label index="tx_cal_location.phone" type="integer">197928267</label>
+            <label index="tx_cal_location.email" type="integer">32015587</label>
+            <label index="tx_cal_location.image" type="integer">140709043</label>
+            <label index="tx_cal_location.link" type="integer">54130594</label>
+            <label index="tx_cal_location.islocation" type="integer">90417607</label>
+            <label index="tx_cal_controller_flexform.sheet_general" type="integer">177986581</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode" type="integer">41664888</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.1" type="integer">29454801</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.11" type="integer">199725104</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.2" type="integer">122121700</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.3" type="integer">166676841</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.4" type="integer">30210797</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.30" type="integer">89362857</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.31" type="integer">177983638</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.32" type="integer">4758303</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.33" type="integer">132397966</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.99" type="integer">236824211</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode" type="integer">194214981</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.0" type="integer">30563240</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.1" type="integer">11605804</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.2" type="integer">81908307</label>
+            <label index="tx_cal_controller_flexform.sheet_general-template" type="integer">26203726</label>
+            <label index="tx_cal_controller_flexform.sheet_general-listpage" type="integer">236555930</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpage" type="integer">20847167</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpopup" type="integer">208986071</label>
+            <label index="tx_cal_controller_flexform.sheet_general-backpage" type="integer">259532064</label>
+            <label index="tx_cal_controller_flexform.sheet_more" type="integer">225688337</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics" type="integer">1052501</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics-template" type="integer">26203726</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf" type="integer">174757693</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf-data" type="integer">113191694</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+            <label index="frequency.none" type="integer">112064895</label>
+            <label index="frequency.day" type="integer">206646120</label>
+            <label index="frequency.week" type="integer">113401450</label>
+            <label index="frequency.month" type="integer">151195193</label>
+            <label index="frequency.year" type="integer">217442937</label>
+        </languageKey>
+        <languageKey index="dk" type="array">
+            <label index="tx_cal_event" type="integer">110826355</label>
+            <label index="tx_cal_event.category" type="integer">61717939</label>
+            <label index="tx_cal_event.title" type="integer">192455458</label>
+            <label index="tx_cal_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_event.organizer" type="integer">231556830</label>
+            <label index="tx_cal_event.organizer_id" type="integer">197757211</label>
+            <label index="tx_cal_event.location" type="integer">216383317</label>
+            <label index="tx_cal_event.location_id" type="integer">88124733</label>
+            <label index="tx_cal_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_event.until" type="integer">39933470</label>
+            <label index="tx_cal_event.count" type="integer">244578708</label>
+            <label index="tx_cal_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_event.description" type="integer">190479069</label>
+            <label index="tx_cal_event.exception" type="integer">185420184</label>
+            <label index="tx_cal_event.fe_cruser_id" type="integer">250728461</label>
+            <label index="tx_cal_event.fe_crgroup_id" type="integer">229465782</label>
+            <label index="tx_cal_event.type" type="integer">99114704</label>
+            <label index="tx_cal_event.type.I.0" type="integer">68500460</label>
+            <label index="tx_cal_event.type.I.1" type="integer">237124901</label>
+            <label index="tx_cal_event.type.I.2" type="integer">135983235</label>
+            <label index="tx_cal_event.external" type="integer">76246465</label>
+            <label index="tx_cal_event.shortcut_page" type="integer">237124901</label>
+            <label index="tx_cal_exception_event" type="integer">55052286</label>
+            <label index="tx_cal_exception_event.title" type="integer">192455458</label>
+            <label index="tx_cal_exception_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_exception_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_exception_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_exception_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_exception_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_exception_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_exception_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_exception_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_exception_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_exception_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_exception_event.until" type="integer">39933470</label>
+            <label index="tx_cal_exception_event.count" type="integer">244578708</label>
+            <label index="tx_cal_exception_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_exception_event.description" type="integer">190479069</label>
+            <label index="tx_cal_exception_event_group" type="integer">68377223</label>
+            <label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
+            <label index="tx_cal_fe_user_event" type="integer">97590023</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event" type="integer">265295873</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_category" type="integer">131600806</label>
+            <label index="tx_cal_category.title" type="integer">96882397</label>
+            <label index="tx_cal_category.headercolor" type="integer">71224712</label>
+            <label index="tx_cal_category.bodycolor" type="integer">180471136</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+            <label index="tx_cal_controller_flexform.sheet_general" type="integer">177986581</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode" type="integer">41664888</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.1" type="integer">29454801</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.11" type="integer">199725104</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.2" type="integer">122121700</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.3" type="integer">166676841</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.4" type="integer">30210797</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.30" type="integer">89362857</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.31" type="integer">177983638</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.32" type="integer">4758303</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.33" type="integer">132397966</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.99" type="integer">236824211</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode" type="integer">194214981</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.0" type="integer">30563240</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.1" type="integer">11605804</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.2" type="integer">81908307</label>
+            <label index="tx_cal_controller_flexform.sheet_general-template" type="integer">26203726</label>
+            <label index="tx_cal_controller_flexform.sheet_general-listpage" type="integer">236555930</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpage" type="integer">20847167</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpopup" type="integer">208986071</label>
+            <label index="tx_cal_controller_flexform.sheet_general-backpage" type="integer">259532064</label>
+            <label index="tx_cal_controller_flexform.sheet_more" type="integer">225688337</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics" type="integer">1052501</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics-template" type="integer">26203726</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf" type="integer">174757693</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf-data" type="integer">113191694</label>
+            <label index="frequency.none" type="integer">112064895</label>
+            <label index="frequency.day" type="integer">206646120</label>
+            <label index="frequency.week" type="integer">113401450</label>
+            <label index="frequency.month" type="integer">151195193</label>
+            <label index="frequency.year" type="integer">217442937</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+            <label index="tx_cal_event" type="integer">110826355</label>
+            <label index="tx_cal_event.category" type="integer">61717939</label>
+            <label index="tx_cal_event.title" type="integer">192455458</label>
+            <label index="tx_cal_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_event.organizer" type="integer">231556830</label>
+            <label index="tx_cal_event.organizer_id" type="integer">197757211</label>
+            <label index="tx_cal_event.location" type="integer">216383317</label>
+            <label index="tx_cal_event.location_id" type="integer">88124733</label>
+            <label index="tx_cal_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_event.until" type="integer">39933470</label>
+            <label index="tx_cal_event.count" type="integer">244578708</label>
+            <label index="tx_cal_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_event.description" type="integer">190479069</label>
+            <label index="tx_cal_event.exception" type="integer">185420184</label>
+            <label index="tx_cal_event.fe_cruser_id" type="integer">250728461</label>
+            <label index="tx_cal_event.fe_crgroup_id" type="integer">229465782</label>
+            <label index="tx_cal_event.type" type="integer">99114704</label>
+            <label index="tx_cal_event.type.I.0" type="integer">68500460</label>
+            <label index="tx_cal_event.type.I.1" type="integer">237124901</label>
+            <label index="tx_cal_event.type.I.2" type="integer">135983235</label>
+            <label index="tx_cal_event.external" type="integer">76246465</label>
+            <label index="tx_cal_event.shortcut_page" type="integer">237124901</label>
+            <label index="tx_cal_exception_event" type="integer">55052286</label>
+            <label index="tx_cal_exception_event.title" type="integer">192455458</label>
+            <label index="tx_cal_exception_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_exception_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_exception_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_exception_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_exception_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_exception_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_exception_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_exception_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_exception_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_exception_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_exception_event.until" type="integer">39933470</label>
+            <label index="tx_cal_exception_event.count" type="integer">244578708</label>
+            <label index="tx_cal_exception_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_exception_event.description" type="integer">190479069</label>
+            <label index="tx_cal_exception_event_group" type="integer">68377223</label>
+            <label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
+            <label index="tx_cal_fe_user_event" type="integer">97590023</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event" type="integer">265295873</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_category" type="integer">131600806</label>
+            <label index="tx_cal_category.title" type="integer">96882397</label>
+            <label index="tx_cal_category.type" type="integer">222419149</label>
+            <label index="tx_cal_category.type.I.0" type="integer">222419149</label>
+            <label index="tx_cal_category.type.I.1" type="integer">222419149</label>
+            <label index="tx_cal_category.type.I.2" type="integer">222419149</label>
+            <label index="tx_cal_category.ext_url" type="integer">222419149</label>
+            <label index="tx_cal_category.ics_file" type="integer">222419149</label>
+            <label index="tx_cal_category.headerstyle" type="integer">86915426</label>
+            <label index="tx_cal_category.bodystyle" type="integer">110767857</label>
+            <label index="tx_cal_organizer" type="integer">12819964</label>
+            <label index="tx_cal_organizer.name" type="integer">77521672</label>
+            <label index="tx_cal_organizer.description" type="integer">190479069</label>
+            <label index="tx_cal_organizer.street" type="integer">224521181</label>
+            <label index="tx_cal_organizer.zip" type="integer">157526795</label>
+            <label index="tx_cal_organizer.city" type="integer">92079470</label>
+            <label index="tx_cal_organizer.phone" type="integer">197928267</label>
+            <label index="tx_cal_organizer.email" type="integer">32015587</label>
+            <label index="tx_cal_organizer.image" type="integer">140709043</label>
+            <label index="tx_cal_organizer.link" type="integer">54130594</label>
+            <label index="tx_cal_location" type="integer">92408295</label>
+            <label index="tx_cal_location.location" type="integer">216383317</label>
+            <label index="tx_cal_location.description" type="integer">190479069</label>
+            <label index="tx_cal_location.name" type="integer">77521672</label>
+            <label index="tx_cal_location.street" type="integer">224521181</label>
+            <label index="tx_cal_location.zip" type="integer">157526795</label>
+            <label index="tx_cal_location.city" type="integer">92079470</label>
+            <label index="tx_cal_location.phone" type="integer">197928267</label>
+            <label index="tx_cal_location.email" type="integer">32015587</label>
+            <label index="tx_cal_location.image" type="integer">140709043</label>
+            <label index="tx_cal_location.link" type="integer">54130594</label>
+            <label index="tx_cal_controller_flexform.sheet_general" type="integer">177986581</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode" type="integer">41664888</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.1" type="integer">29454801</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.11" type="integer">199725104</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.2" type="integer">122121700</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.3" type="integer">166676841</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.4" type="integer">30210797</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.30" type="integer">89362857</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.31" type="integer">177983638</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.32" type="integer">4758303</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.33" type="integer">132397966</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.99" type="integer">236824211</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode" type="integer">194214981</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.0" type="integer">30563240</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.1" type="integer">11605804</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.2" type="integer">81908307</label>
+            <label index="tx_cal_controller_flexform.sheet_general-template" type="integer">26203726</label>
+            <label index="tx_cal_controller_flexform.sheet_general-listpage" type="integer">236555930</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpage" type="integer">20847167</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpopup" type="integer">208986071</label>
+            <label index="tx_cal_controller_flexform.sheet_general-backpage" type="integer">259532064</label>
+            <label index="tx_cal_controller_flexform.sheet_more" type="integer">225688337</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics" type="integer">1052501</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics-template" type="integer">26203726</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf" type="integer">174757693</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf-data" type="integer">113191694</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+        </languageKey>
+        <languageKey index="no" type="array">
+            <label index="tx_cal_event" type="integer">110826355</label>
+            <label index="tx_cal_event.category" type="integer">61717939</label>
+            <label index="tx_cal_event.title" type="integer">192455458</label>
+            <label index="tx_cal_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_event.organizer" type="integer">231556830</label>
+            <label index="tx_cal_event.organizer_id" type="integer">197757211</label>
+            <label index="tx_cal_event.location" type="integer">216383317</label>
+            <label index="tx_cal_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_event.until" type="integer">39933470</label>
+            <label index="tx_cal_event.count" type="integer">244578708</label>
+            <label index="tx_cal_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_event.description" type="integer">190479069</label>
+            <label index="tx_cal_event.exception" type="integer">185420184</label>
+            <label index="tx_cal_event.fe_cruser_id" type="integer">250728461</label>
+            <label index="tx_cal_event.fe_crgroup_id" type="integer">229465782</label>
+            <label index="tx_cal_exception_event" type="integer">55052286</label>
+            <label index="tx_cal_exception_event.title" type="integer">192455458</label>
+            <label index="tx_cal_exception_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_exception_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_exception_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_exception_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_exception_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_exception_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_exception_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_exception_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_exception_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_exception_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_exception_event.until" type="integer">39933470</label>
+            <label index="tx_cal_exception_event.count" type="integer">244578708</label>
+            <label index="tx_cal_exception_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_exception_event.description" type="integer">190479069</label>
+            <label index="tx_cal_exception_event_group" type="integer">68377223</label>
+            <label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
+            <label index="tx_cal_fe_user_event" type="integer">97590023</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event" type="integer">265295873</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_category" type="integer">131600806</label>
+            <label index="tx_cal_category.title" type="integer">96882397</label>
+            <label index="tx_cal_category.headercolor" type="integer">71224712</label>
+            <label index="tx_cal_category.bodycolor" type="integer">180471136</label>
+            <label index="tx_cal_organizer" type="integer">12819964</label>
+            <label index="tx_cal_organizer.name" type="integer">77521672</label>
+            <label index="tx_cal_organizer.description" type="integer">190479069</label>
+            <label index="tx_cal_organizer.street" type="integer">224521181</label>
+            <label index="tx_cal_organizer.zip" type="integer">157526795</label>
+            <label index="tx_cal_organizer.city" type="integer">92079470</label>
+            <label index="tx_cal_organizer.phone" type="integer">197928267</label>
+            <label index="tx_cal_organizer.email" type="integer">32015587</label>
+            <label index="tx_cal_organizer.image" type="integer">140709043</label>
+            <label index="tx_cal_organizer.link" type="integer">54130594</label>
+            <label index="tx_cal_location" type="integer">92408295</label>
+            <label index="tx_cal_location.location" type="integer">216383317</label>
+            <label index="tx_cal_location.description" type="integer">190479069</label>
+            <label index="tx_cal_location.name" type="integer">77521672</label>
+            <label index="tx_cal_location.street" type="integer">224521181</label>
+            <label index="tx_cal_location.zip" type="integer">157526795</label>
+            <label index="tx_cal_location.city" type="integer">92079470</label>
+            <label index="tx_cal_location.phone" type="integer">197928267</label>
+            <label index="tx_cal_location.email" type="integer">32015587</label>
+            <label index="tx_cal_location.image" type="integer">140709043</label>
+            <label index="tx_cal_location.link" type="integer">54130594</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+        </languageKey>
+        <languageKey index="it" type="array">
+            <label index="tx_cal_event" type="integer">110826355</label>
+            <label index="tx_cal_event.category" type="integer">61717939</label>
+            <label index="tx_cal_event.title" type="integer">192455458</label>
+            <label index="tx_cal_event.organizer" type="integer">231556830</label>
+            <label index="tx_cal_event.location" type="integer">216383317</label>
+            <label index="tx_cal_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_event.until" type="integer">39933470</label>
+            <label index="tx_cal_event.count" type="integer">244578708</label>
+            <label index="tx_cal_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_event.description" type="integer">190479069</label>
+            <label index="tx_cal_event.exception" type="integer">185420184</label>
+            <label index="tx_cal_event.fe_cruser_id" type="integer">250728461</label>
+            <label index="tx_cal_exception_event.title" type="integer">192455458</label>
+            <label index="tx_cal_exception_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_exception_event.count" type="integer">244578708</label>
+            <label index="tx_cal_exception_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_exception_event.description" type="integer">190479069</label>
+            <label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_category" type="integer">131600806</label>
+            <label index="tx_cal_category.title" type="integer">96882397</label>
+            <label index="tx_cal_category.color" type="integer">222419149</label>
+            <label index="tx_cal_organizer" type="integer">12819964</label>
+            <label index="tx_cal_organizer.name" type="integer">77521672</label>
+            <label index="tx_cal_organizer.description" type="integer">190479069</label>
+            <label index="tx_cal_organizer.street" type="integer">224521181</label>
+            <label index="tx_cal_organizer.zip" type="integer">157526795</label>
+            <label index="tx_cal_organizer.city" type="integer">92079470</label>
+            <label index="tx_cal_organizer.phone" type="integer">197928267</label>
+            <label index="tx_cal_organizer.email" type="integer">32015587</label>
+            <label index="tx_cal_organizer.image" type="integer">140709043</label>
+            <label index="tx_cal_organizer.link" type="integer">54130594</label>
+            <label index="tx_cal_location.location" type="integer">216383317</label>
+            <label index="tx_cal_location.description" type="integer">190479069</label>
+            <label index="tx_cal_location.name" type="integer">77521672</label>
+            <label index="tx_cal_location.street" type="integer">224521181</label>
+            <label index="tx_cal_location.zip" type="integer">157526795</label>
+            <label index="tx_cal_location.city" type="integer">92079470</label>
+            <label index="tx_cal_location.phone" type="integer">197928267</label>
+            <label index="tx_cal_location.email" type="integer">32015587</label>
+            <label index="tx_cal_location.image" type="integer">140709043</label>
+            <label index="tx_cal_location.link" type="integer">54130594</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+        </languageKey>
+        <languageKey index="fr" type="array">
+            <label index="tx_cal_event" type="integer">110826355</label>
+            <label index="tx_cal_event.category" type="integer">61717939</label>
+            <label index="tx_cal_event.title" type="integer">192455458</label>
+            <label index="tx_cal_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_event.organizer" type="integer">231556830</label>
+            <label index="tx_cal_event.organizer_id" type="integer">197757211</label>
+            <label index="tx_cal_event.location" type="integer">216383317</label>
+            <label index="tx_cal_event.location_id" type="integer">88124733</label>
+            <label index="tx_cal_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_event.until" type="integer">39933470</label>
+            <label index="tx_cal_event.count" type="integer">244578708</label>
+            <label index="tx_cal_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_event.description" type="integer">190479069</label>
+            <label index="tx_cal_event.exception" type="integer">185420184</label>
+            <label index="tx_cal_event.fe_cruser_id" type="integer">250728461</label>
+            <label index="tx_cal_event.fe_crgroup_id" type="integer">229465782</label>
+            <label index="tx_cal_exception_event" type="integer">55052286</label>
+            <label index="tx_cal_exception_event.title" type="integer">192455458</label>
+            <label index="tx_cal_exception_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_exception_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_exception_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_exception_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_exception_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_exception_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_exception_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_exception_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_exception_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_exception_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_exception_event.until" type="integer">39933470</label>
+            <label index="tx_cal_exception_event.count" type="integer">244578708</label>
+            <label index="tx_cal_exception_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_exception_event.description" type="integer">190479069</label>
+            <label index="tx_cal_exception_event_group" type="integer">68377223</label>
+            <label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
+            <label index="tx_cal_fe_user_event" type="integer">97590023</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event" type="integer">265295873</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_category" type="integer">131600806</label>
+            <label index="tx_cal_category.title" type="integer">96882397</label>
+            <label index="tx_cal_category.color" type="integer">222419149</label>
+            <label index="tx_cal_organizer" type="integer">12819964</label>
+            <label index="tx_cal_organizer.name" type="integer">77521672</label>
+            <label index="tx_cal_organizer.description" type="integer">190479069</label>
+            <label index="tx_cal_organizer.street" type="integer">224521181</label>
+            <label index="tx_cal_organizer.zip" type="integer">157526795</label>
+            <label index="tx_cal_organizer.city" type="integer">92079470</label>
+            <label index="tx_cal_organizer.phone" type="integer">197928267</label>
+            <label index="tx_cal_organizer.email" type="integer">32015587</label>
+            <label index="tx_cal_organizer.image" type="integer">140709043</label>
+            <label index="tx_cal_organizer.link" type="integer">54130594</label>
+            <label index="tx_cal_location" type="integer">92408295</label>
+            <label index="tx_cal_location.location" type="integer">216383317</label>
+            <label index="tx_cal_location.description" type="integer">190479069</label>
+            <label index="tx_cal_location.name" type="integer">77521672</label>
+            <label index="tx_cal_location.street" type="integer">224521181</label>
+            <label index="tx_cal_location.zip" type="integer">157526795</label>
+            <label index="tx_cal_location.city" type="integer">92079470</label>
+            <label index="tx_cal_location.phone" type="integer">197928267</label>
+            <label index="tx_cal_location.email" type="integer">32015587</label>
+            <label index="tx_cal_location.image" type="integer">140709043</label>
+            <label index="tx_cal_location.link" type="integer">54130594</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+        </languageKey>
+        <languageKey index="es" type="array">
+            <label index="tx_cal_event" type="integer">110826355</label>
+            <label index="tx_cal_event.category" type="integer">61717939</label>
+            <label index="tx_cal_event.title" type="integer">192455458</label>
+            <label index="tx_cal_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_event.organizer" type="integer">231556830</label>
+            <label index="tx_cal_event.organizer_id" type="integer">197757211</label>
+            <label index="tx_cal_event.location" type="integer">216383317</label>
+            <label index="tx_cal_event.location_id" type="integer">88124733</label>
+            <label index="tx_cal_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_event.until" type="integer">39933470</label>
+            <label index="tx_cal_event.count" type="integer">244578708</label>
+            <label index="tx_cal_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_event.description" type="integer">190479069</label>
+            <label index="tx_cal_event.exception" type="integer">185420184</label>
+            <label index="tx_cal_event.fe_cruser_id" type="integer">250728461</label>
+            <label index="tx_cal_event.fe_crgroup_id" type="integer">229465782</label>
+            <label index="tx_cal_event.none" type="integer">112064895</label>
+            <label index="tx_cal_event.type" type="integer">99114704</label>
+            <label index="tx_cal_event.type.I.0" type="integer">68500460</label>
+            <label index="tx_cal_event.type.I.1" type="integer">237124901</label>
+            <label index="tx_cal_event.type.I.2" type="integer">135983235</label>
+            <label index="tx_cal_event.external" type="integer">76246465</label>
+            <label index="tx_cal_event.shortcut_page" type="integer">237124901</label>
+            <label index="tx_cal_exception_event" type="integer">55052286</label>
+            <label index="tx_cal_exception_event.title" type="integer">192455458</label>
+            <label index="tx_cal_exception_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_exception_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_exception_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_exception_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_exception_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_exception_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_exception_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_exception_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_exception_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_exception_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_exception_event.until" type="integer">39933470</label>
+            <label index="tx_cal_exception_event.count" type="integer">244578708</label>
+            <label index="tx_cal_exception_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_exception_event.description" type="integer">190479069</label>
+            <label index="tx_cal_exception_event_group" type="integer">68377223</label>
+            <label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
+            <label index="tx_cal_fe_user_event" type="integer">97590023</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event" type="integer">265295873</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_category" type="integer">131600806</label>
+            <label index="tx_cal_category.title" type="integer">96882397</label>
+            <label index="tx_cal_category.headercolor" type="integer">71224712</label>
+            <label index="tx_cal_category.bodycolor" type="integer">180471136</label>
+            <label index="tx_cal_category.headertextcolor" type="integer">222419149</label>
+            <label index="tx_cal_category.bodytextcolor" type="integer">222419149</label>
+            <label index="tx_cal_category.type" type="integer">222419149</label>
+            <label index="tx_cal_category.type.I.0" type="integer">222419149</label>
+            <label index="tx_cal_category.type.I.1" type="integer">222419149</label>
+            <label index="tx_cal_category.type.I.2" type="integer">222419149</label>
+            <label index="tx_cal_category.ext_url" type="integer">222419149</label>
+            <label index="tx_cal_category.ics_file" type="integer">222419149</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+            <label index="tx_cal_controller_flexform.sheet_general" type="integer">177986581</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode" type="integer">41664888</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.1" type="integer">29454801</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.11" type="integer">199725104</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.2" type="integer">122121700</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.3" type="integer">166676841</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.4" type="integer">30210797</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.30" type="integer">89362857</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.31" type="integer">177983638</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.32" type="integer">4758303</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.33" type="integer">132397966</label>
+            <label index="tx_cal_controller_flexform.sheet_general-mode2.99" type="integer">236824211</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode" type="integer">194214981</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.0" type="integer">30563240</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.1" type="integer">11605804</label>
+            <label index="tx_cal_controller_flexform.sheet_general-debugmode.2" type="integer">81908307</label>
+            <label index="tx_cal_controller_flexform.sheet_general-template" type="integer">26203726</label>
+            <label index="tx_cal_controller_flexform.sheet_general-listpage" type="integer">236555930</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpage" type="integer">20847167</label>
+            <label index="tx_cal_controller_flexform.sheet_general-editpopup" type="integer">208986071</label>
+            <label index="tx_cal_controller_flexform.sheet_general-backpage" type="integer">259532064</label>
+            <label index="tx_cal_controller_flexform.sheet_more" type="integer">225688337</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics" type="integer">1052501</label>
+            <label index="tx_cal_controller_flexform.sheet_statistics-template" type="integer">26203726</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf" type="integer">174757693</label>
+            <label index="tx_cal_controller_flexform.sheet_localconf-data" type="integer">113191694</label>
+        </languageKey>
+        <languageKey index="nl" type="array">
+            <label index="tx_cal_event" type="integer">110826355</label>
+            <label index="tx_cal_event.category" type="integer">61717939</label>
+            <label index="tx_cal_event.title" type="integer">192455458</label>
+            <label index="tx_cal_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_event.organizer" type="integer">231556830</label>
+            <label index="tx_cal_event.organizer_id" type="integer">197757211</label>
+            <label index="tx_cal_event.location" type="integer">216383317</label>
+            <label index="tx_cal_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_event.until" type="integer">39933470</label>
+            <label index="tx_cal_event.count" type="integer">244578708</label>
+            <label index="tx_cal_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_event.description" type="integer">190479069</label>
+            <label index="tx_cal_event.exception" type="integer">185420184</label>
+            <label index="tx_cal_event.fe_cruser_id" type="integer">250728461</label>
+            <label index="tx_cal_event.fe_crgroup_id" type="integer">229465782</label>
+            <label index="tx_cal_exception_event" type="integer">55052286</label>
+            <label index="tx_cal_exception_event.title" type="integer">192455458</label>
+            <label index="tx_cal_exception_event.starttime" type="integer">184216206</label>
+            <label index="tx_cal_exception_event.endtime" type="integer">50914099</label>
+            <label index="tx_cal_exception_event.start_date" type="integer">161879097</label>
+            <label index="tx_cal_exception_event.start_time" type="integer">102705003</label>
+            <label index="tx_cal_exception_event.end_date" type="integer">239466726</label>
+            <label index="tx_cal_exception_event.end_time" type="integer">263596360</label>
+            <label index="tx_cal_exception_event.freq" type="integer">131021139</label>
+            <label index="tx_cal_exception_event.byday" type="integer">209064503</label>
+            <label index="tx_cal_exception_event.bymonthday" type="integer">181316515</label>
+            <label index="tx_cal_exception_event.bymonth" type="integer">162585583</label>
+            <label index="tx_cal_exception_event.until" type="integer">39933470</label>
+            <label index="tx_cal_exception_event.count" type="integer">244578708</label>
+            <label index="tx_cal_exception_event.interval" type="integer">219602177</label>
+            <label index="tx_cal_exception_event.description" type="integer">190479069</label>
+            <label index="tx_cal_exception_event_group" type="integer">68377223</label>
+            <label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
+            <label index="tx_cal_fe_user_event" type="integer">97590023</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event" type="integer">265295873</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_category" type="integer">131600806</label>
+            <label index="tx_cal_category.title" type="integer">96882397</label>
+            <label index="tx_cal_category.headercolor" type="integer">71224712</label>
+            <label index="tx_cal_category.bodycolor" type="integer">180471136</label>
+            <label index="tx_cal_organizer" type="integer">12819964</label>
+            <label index="tx_cal_organizer.name" type="integer">77521672</label>
+            <label index="tx_cal_organizer.description" type="integer">190479069</label>
+            <label index="tx_cal_organizer.street" type="integer">224521181</label>
+            <label index="tx_cal_organizer.zip" type="integer">157526795</label>
+            <label index="tx_cal_organizer.city" type="integer">92079470</label>
+            <label index="tx_cal_organizer.phone" type="integer">197928267</label>
+            <label index="tx_cal_organizer.email" type="integer">32015587</label>
+            <label index="tx_cal_organizer.image" type="integer">140709043</label>
+            <label index="tx_cal_organizer.link" type="integer">54130594</label>
+            <label index="tx_cal_location" type="integer">92408295</label>
+            <label index="tx_cal_location.location" type="integer">216383317</label>
+            <label index="tx_cal_location.description" type="integer">190479069</label>
+            <label index="tx_cal_location.name" type="integer">77521672</label>
+            <label index="tx_cal_location.street" type="integer">224521181</label>
+            <label index="tx_cal_location.zip" type="integer">157526795</label>
+            <label index="tx_cal_location.city" type="integer">92079470</label>
+            <label index="tx_cal_location.phone" type="integer">197928267</label>
+            <label index="tx_cal_location.email" type="integer">32015587</label>
+            <label index="tx_cal_location.image" type="integer">140709043</label>
+            <label index="tx_cal_location.link" type="integer">54130594</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+        </languageKey>
+        <languageKey index="cz" type="array">
+        </languageKey>
+        <languageKey index="pl" type="array">
+        </languageKey>
+        <languageKey index="si" type="array">
+        </languageKey>
+        <languageKey index="fi" type="array">
+            <label index="tx_cal_events" type="integer">222419149</label>
+            <label index="tx_cal_events.title" type="integer">222419149</label>
+            <label index="tx_cal_events.starttime" type="integer">222419149</label>
+            <label index="tx_cal_events.endtime" type="integer">222419149</label>
+            <label index="tx_cal_events.organizer" type="integer">222419149</label>
+            <label index="tx_cal_events.location" type="integer">222419149</label>
+            <label index="tx_cal_events.freq" type="integer">222419149</label>
+            <label index="tx_cal_events.byday" type="integer">222419149</label>
+            <label index="tx_cal_events.bymonthday" type="integer">222419149</label>
+            <label index="tx_cal_events.bymonth" type="integer">222419149</label>
+            <label index="tx_cal_events.until" type="integer">222419149</label>
+            <label index="tx_cal_events.count" type="integer">222419149</label>
+            <label index="tx_cal_events.interval" type="integer">222419149</label>
+            <label index="tx_cal_events.description" type="integer">222419149</label>
+            <label index="tx_cal_fe_user_event" type="integer">97590023</label>
+            <label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
+            <label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_group_event" type="integer">265295873</label>
+            <label index="tx_cal_fe_group_event.fe_group" type="integer">3749651</label>
+            <label index="tx_cal_fe_group_event.event" type="integer">172937159</label>
+            <label index="tx_cal_fe_user_event.monitor" type="integer">43991152</label>
+            <label index="tx_cal_categories" type="integer">222419149</label>
+            <label index="tx_cal_categories.title" type="integer">222419149</label>
+            <label index="tx_cal_categories.color" type="integer">222419149</label>
+            <label index="tx_cal_organizer" type="integer">12819964</label>
+            <label index="tx_cal_organizer.name" type="integer">77521672</label>
+            <label index="tx_cal_organizer.description" type="integer">190479069</label>
+            <label index="tx_cal_organizer.street" type="integer">224521181</label>
+            <label index="tx_cal_organizer.zip" type="integer">157526795</label>
+            <label index="tx_cal_organizer.city" type="integer">92079470</label>
+            <label index="tx_cal_organizer.phone" type="integer">197928267</label>
+            <label index="tx_cal_organizer.email" type="integer">32015587</label>
+            <label index="tx_cal_organizer.image" type="integer">140709043</label>
+            <label index="tx_cal_organizer.link" type="integer">54130594</label>
+            <label index="tx_cal_location" type="integer">92408295</label>
+            <label index="tx_cal_location.location" type="integer">216383317</label>
+            <label index="tx_cal_location.description" type="integer">190479069</label>
+            <label index="tx_cal_location.name" type="integer">77521672</label>
+            <label index="tx_cal_location.street" type="integer">224521181</label>
+            <label index="tx_cal_location.zip" type="integer">157526795</label>
+            <label index="tx_cal_location.city" type="integer">92079470</label>
+            <label index="tx_cal_location.phone" type="integer">197928267</label>
+            <label index="tx_cal_location.email" type="integer">32015587</label>
+            <label index="tx_cal_location.image" type="integer">140709043</label>
+            <label index="tx_cal_location.link" type="integer">54130594</label>
+            <label index="tt_content.list_type" type="integer">232545207</label>
+        </languageKey>
+        <languageKey index="tr" type="array">
+        </languageKey>
+        <languageKey index="se" type="array">
+        </languageKey>
+        <languageKey index="pt" type="array">
+        </languageKey>
+        <languageKey index="ru" type="array">
+        </languageKey>
+        <languageKey index="ro" type="array">
+        </languageKey>
+        <languageKey index="ch" type="array">
+        </languageKey>
+        <languageKey index="sk" type="array">
+        </languageKey>
+        <languageKey index="lt" type="array">
+        </languageKey>
+        <languageKey index="is" type="array">
+        </languageKey>
+        <languageKey index="hr" type="array">
+        </languageKey>
+        <languageKey index="hu" type="array">
+        </languageKey>
+        <languageKey index="gl" type="array">
+        </languageKey>
+        <languageKey index="th" type="array">
+        </languageKey>
+        <languageKey index="gr" type="array">
+        </languageKey>
+        <languageKey index="hk" type="array">
+        </languageKey>
+        <languageKey index="eu" type="array">
+        </languageKey>
+        <languageKey index="bg" type="array">
+        </languageKey>
+        <languageKey index="br" type="array">
+        </languageKey>
+        <languageKey index="et" type="array">
+        </languageKey>
+        <languageKey index="ar" type="array">
+        </languageKey>
+        <languageKey index="he" type="array">
+        </languageKey>
+        <languageKey index="ua" type="array">
+        </languageKey>
+        <languageKey index="lv" type="array">
+        </languageKey>
+        <languageKey index="jp" type="array">
+        </languageKey>
+        <languageKey index="vn" type="array">
+        </languageKey>
+        <languageKey index="ca" type="array">
+        </languageKey>
+        <languageKey index="ba" type="array">
+        </languageKey>
+        <languageKey index="kr" type="array">
+        </languageKey>
+        <languageKey index="eo" type="array">
+        </languageKey>
+        <languageKey index="my" type="array">
+        </languageKey>
+        <languageKey index="hi" type="array">
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="default" type="array">
+        </languageKey>
+        <languageKey index="dk" type="array">
+        </languageKey>
+        <languageKey index="de" type="array">
+        </languageKey>
+        <languageKey index="no" type="array">
+        </languageKey>
+        <languageKey index="it" type="array">
+        </languageKey>
+        <languageKey index="fr" type="array">
+        </languageKey>
+        <languageKey index="es" type="array">
+        </languageKey>
+        <languageKey index="nl" type="array">
+        </languageKey>
+        <languageKey index="cz" type="array">
+        </languageKey>
+        <languageKey index="pl" type="array">
+        </languageKey>
+        <languageKey index="si" type="array">
+        </languageKey>
+        <languageKey index="fi" type="array">
+        </languageKey>
+        <languageKey index="tr" type="array">
+        </languageKey>
+        <languageKey index="se" type="array">
+        </languageKey>
+        <languageKey index="pt" type="array">
+        </languageKey>
+        <languageKey index="ru" type="array">
+        </languageKey>
+        <languageKey index="ro" type="array">
+        </languageKey>
+        <languageKey index="ch" type="array">
+        </languageKey>
+        <languageKey index="sk" type="array">
+        </languageKey>
+        <languageKey index="lt" type="array">
+        </languageKey>
+        <languageKey index="is" type="array">
+        </languageKey>
+        <languageKey index="hr" type="array">
+        </languageKey>
+        <languageKey index="hu" type="array">
+        </languageKey>
+        <languageKey index="gl" type="array">
+        </languageKey>
+        <languageKey index="th" type="array">
+        </languageKey>
+        <languageKey index="gr" type="array">
+        </languageKey>
+        <languageKey index="hk" type="array">
+        </languageKey>
+        <languageKey index="eu" type="array">
+        </languageKey>
+        <languageKey index="bg" type="array">
+        </languageKey>
+        <languageKey index="br" type="array">
+        </languageKey>
+        <languageKey index="et" type="array">
+        </languageKey>
+        <languageKey index="ar" type="array">
+        </languageKey>
+        <languageKey index="he" type="array">
+        </languageKey>
+        <languageKey index="ua" type="array">
+        </languageKey>
+        <languageKey index="lv" type="array">
+        </languageKey>
+        <languageKey index="jp" type="array">
+        </languageKey>
+        <languageKey index="vn" type="array">
+        </languageKey>
+        <languageKey index="ca" type="array">
+        </languageKey>
+        <languageKey index="ba" type="array">
+        </languageKey>
+        <languageKey index="kr" type="array">
+        </languageKey>
+        <languageKey index="eo" type="array">
+        </languageKey>
+        <languageKey index="my" type="array">
+        </languageKey>
+        <languageKey index="hi" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallang>

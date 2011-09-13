@@ -1,0 +1,10 @@
+  # cat=basic/enable/120; type=boolean; label= Do not use Tab-Dividers: Here you can disable the "dividers2tabs" feature (TYPO3 > 3.7.0). "Dividers to Tabs" means: the BE form is divided into sections. If you don't want this, set this value to 1.
+noTabDividers = 0
+  # cat=basic/enable/150; type=boolean; label= Hide location textfield: Here you choose if users should be able to have a separate textfield for location. By default this textfield is visible. If this is not wanted set "hideLocationTextfield" to 1.
+hideLocationTextfield = 0
+  # cat=basic/enable/160; type=boolean; label= Hide organizer textfield: Here you choose if users should be able to have a separate textfield for organizer. By default this textfield is visible. If this is not wanted set "hideOrganizerTextfield" to 1.
+hideOrganizerTextfield = 0
+  # cat=basic/enable/200; type=options[Calendar Base Location (Built-in)=tx_cal_location,tt_address=tx_tt_address,Partner Framework=tx_partner_main]; label= Select the cal location data model: Here you choose which data structure you want to use (tx_cal_location/tx_tt_address/tx_partner_main).
+useLocationStructure = tx_cal_location
+  # cat=basic/enable/200; type=options[Calendar Base Organizer (Built-in)=tx_cal_organizer,tt_address=tx_tt_address,Partner Framework=tx_partner_main]; label= Select the cal organizer data model: Here you choose which data structure you want to use (tx_cal_organizer/tx_tt_address/tx_partner_main).
+useOrganizerStructure = tx_cal_organizer

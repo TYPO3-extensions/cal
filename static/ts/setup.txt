@@ -1,0 +1,745 @@
+plugin.tx_cal_controller {
+	parseFunc < styles.content.parseFunc
+	userFunc = tx_cal_controller->main
+	
+	# @description	Name of the calendar.
+	# @also			FlexForm
+	calendarName = My Calendar
+	
+	# @description	Allows visitors to subscribe to an event and be notified when it changes.
+	# @also			FlexForm
+	allowSubscribe = 1
+	
+	# @description	Allows registered frontend users to subscribe based on the email address in their account.
+	# @also			FlexForm
+	subscribeFeUser = 0
+	
+	# @description	Enables CAPTCHA-based validation before a vistor can subscribe to an event.  Requires CAPTCHA Library extension.
+	# @also			FlexForm
+	# @see			http://typo3.org/extensions/repository/search/captcha/
+	subscribeWithCaptcha = 0
+	
+	# @description	Email address that notification emails are sent from.
+	emailaddress =
+	
+	# @description		Reply-to address for notification emails.
+	emailreplyaddress =
+	
+	
+	view {
+		# @description	Calendar view to show by default.  Options are day,week,month,year.
+		# @also			FlexForm
+		defaultView = day
+		
+		# @description	Forces a particular calendar instance to draw what it was explicitly configured for and
+		#				ignore any variable from the URL.  This is most useful when configured from the FlexForm
+		#				since setting it globally (plugin.tx_cal_controller.view.isStatic) would make all views
+		# 				on the page static.
+		# @also			FlexForm
+		isStatic = 0
+		
+		# @description	Relative path (from TYPO3 site root) that images should be loaded from.
+		# @also					Constants
+		imagePath = {$plugin.tx_cal_controller.view.imagePath}
+		
+		# @description	First day of the week.
+		# @also			FlexForm
+		weekStartDay = Monday
+		
+		calendar {
+			# @description	Template for creating a new calendar in the frontend.
+			# @also			Constants
+			createCalendarTemplate = {$plugin.tx_cal_controller.view.calendar.createCalendarTemplate}
+			
+			# @description	Template for confirming creation of a new calendar in the frontend.
+			# @also			Constants
+			confirmCalendarTemplate = {$plugin.tx_cal_controller.view.calendar.confirmCalendarTemplate}
+		}
+		category {
+			# @description	Template for creating a new category in the frontend.
+			# @also			Constants
+			createCategoryTemplate = {$plugin.tx_cal_controller.view.calendar.createCategoryTemplate}
+			
+			# @description	Template for confirming creation of a new category in the frontend.
+			# @also			Constants
+			confirmCategoryTemplate = {$plugin.tx_cal_controller.view.calendar.confirmCategoryTemplate}
+		}
+		day {
+			# @description	Page to display the day view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			dayViewPid =
+			
+			# @description	Start time for the day view.
+			# @also			FlexForm
+			dayStart = 0700
+			
+			# @description	End time for the day view.
+			# @also			FlexForm
+			dayEnd = 2300
+			
+			# @description	Length of time in minutes for each grid on the day view. Should be evenly
+			#				divisible into 60 minutes (ex. 15,30,60)
+			# @also			FlexForm
+			gridLength = 15
+			
+			# @description	Template for the day view.
+			# @also			Constants
+			dayTemplate = {$plugin.tx_cal_controller.view.day.dayTemplate}
+			
+			# @description	Symbol to use for browsing to next day.
+			nextDaySymbol = &rsaquo;
+			
+			@ @description	Symbol to use for browsing to previous day.
+			previousDaySymbol = &lsaquo;
+		}
+		
+		week {
+			# @description	Page to display the week view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			weekViewPid =
+			
+			# @description	Template for the week view.
+			# @also			Constants
+			weekTemplate = {$plugin.tx_cal_controller.view.week.weekTemplate}
+			
+			# @description	Symbol to use for browsing to next week.
+			nextWeekSymbol = &raquo;
+			
+			# @description	Symbol to use for browsing to previous week.
+			previousWeekSymbol = &laquo;
+			
+			# @description	Symbol to use for browsing to next day.
+			# @see					plugin.tx_cal_controller.view.day.nextDaySymbol
+			nextDaySymbol < plugin.tx_cal_controller.view.day.nextDaySymbol
+			
+			# @description	Symbol to use for browsing to previous day.
+			# @see					plugin.tx_cal_controller.view.day.previousDaySymbol			
+			previousDaySymbol < plugin.tx_cal_controller.view.day.previousDaySymbol
+			
+			weekDisplayFullHour = <tr><td colspan="4" rowspan="###60TH_GRIDLENGTH###" align="center" valign="top" width="60" class="timeborder">###TIME###</td><td bgcolor="#a1a5a9" width="1" height="###GRIDLENGTH###"></td>
+			weekDisplayInbetween = <tr><td bgcolor="#a1a5a9" width="1" height="###GRIDLENGTH###"></td>
+		}
+		
+		month {
+			# @description	Page to display the month view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			monthViewPid =
+			
+			# @description	Template for the month view
+			# @also			Constants
+			monthTemplate = {$plugin.tx_cal_controller.view.month.monthTemplate}
+			
+			# @description	Template for a small month
+			# @also			Constants
+			monthSmallTemplate = {$plugin.tx_cal_controller.view.month.monthSmallTemplate}
+			
+			# @description	Template for a medium month, like in the year view
+			# @also			Constants
+			# @see			tx_cal_controller.view.year.yearTemplate
+			monthMediumTemplate = {$plugin.tx_cal_controller.view.month.monthMediumTemplate}
+			
+			# @description	Template for a large month as it is in the default month view
+			# @also			Constants
+			monthLargeTemplate = {$plugin.tx_cal_controller.view.month.monthLargeTemplate}
+			
+			# @description	Template for a navigation bar in the month view
+			# @also			Constants
+			calendarNavTemplate = {$plugin.tx_cal_controller.view.month.calendarNavTemplate}
+			
+			# @description	Show this month's events in a list view
+			# @also			FlexForm
+			thisMonthsEvents = 1
+			
+			# @description	Defines cropping for event titles in month view.
+			titleCrop = 15|..|1
+		}
+		
+		year {
+			# @description	Page to display the year view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			yearViewPid =
+			
+			# @description	Template for the year view.
+			# @also			Constants
+			yearTemplate = {$plugin.tx_cal_controller.view.year.yearTemplate}
+		}
+		
+		event {
+			# @description	Page to display the event view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			eventViewPid =
+			
+			# @description	Template for the standard event view. Any events following the standard event
+			#				structure can be used with this template.
+			# @also			Constants
+			eventTemplate = {$plugin.tx_cal_controller.view.event.eventTemplate}
+			
+			# @description	Template for the phpicalendar event view.  This is an example of how different
+			#				event types can provide their own views.
+			# @also			Constants
+			phpicalendarEventTemplate = {$plugin.tx_cal_controller.view.event.phpicalendarEventTemplate}
+			
+			# @description	Template for creation of an event in the frontend.
+			# @also			Constants
+			createEventTemplate = {$plugin.tx_cal_controller.view.event.createEventTemplate}
+			
+			# @description	Template for confirmation of an event created in the frontend.
+			# @also			Constants
+			confirmEventTemplate = {$plugin.tx_cal_controller.view.event.confirmEventTemplate}
+			
+			# @description	Template for deleting an even in the frontend.
+			# @description	Constants
+			deleteEventTemplate = {$plugin.tx_cal_controller.view.event.deleteEventTemplate}
+			
+			imageCount=4
+			imgAltTextField = imagecaption
+			imageWrapIfAny = <div class="news-single-img"> | </div>
+		
+			category_stdWrap.wrap = <div class="news-single-category"> | </div>
+			email_stdWrap.setContentToCurrent = 1
+			email_stdWrap.typolink.parameter.current = 1
+			caption_stdWrap.wrap = <p class="news-single-imgcaption"> | </p>
+			caption_stdWrap.trim=1
+
+			isPreview = 0;
+			preview{
+				# @description	Defines cropping for event description in event view.
+				descriptionCrop = 100|..|1
+			}
+		}
+		event.image {
+		    file.maxW = {$plugin.tx_cal_controller.singleMaxW}
+		    file.maxH = {$plugin.tx_cal_controller.singleMaxH}
+		    wrap = 
+		    imageLinkWrap = 1
+		    imageLinkWrap {
+				enable = 1
+				bodyTag = <body bgColor="#ffffff">
+				wrap = <a href="javascript:close();"> | </a>
+				width = 500m
+				height = 500
+				JSwindow = 1
+				JSwindow.newWindow = 1
+		      	JSwindow.expand = 17,20
+		  	}
+		}
+		
+		location {
+			# @description	Template for generic location view.
+			# @also			Constants
+			locationTemplate = {$plugin.tx_cal_controller.view.location.locationTemplate}
+			
+			# @description	Template for location view when using the partner framework.
+			# @also			Constants
+			locationTemplate4Partner = {$plugin.tx_cal_controller.view.location.locationTemplate4Partner}
+			
+			# @description	Template for location view when using tt_address.
+			# @also			Constants
+			locationTemplate4Address = {$plugin.tx_cal_controller.view.location.locationTemplate4Address}
+			
+			# @description	Template for creating a location in the frontend.
+			# @also			Constants
+			createLocationTemplate = {$plugin.tx_cal_controller.view.location.createLocationTemplate}
+			
+			# @description	Template for confirming a location created in the frontend.
+			# @also			Constants
+			confirmLocationTemplate = {$plugin.tx_cal_controller.view.location.confirmLocationTemplate}
+		}
+		
+		organizer {
+			# @description	Template for generic organizer view.
+			# @also			Constants
+			organizerTemplate = {$plugin.tx_cal_controller.view.organizer.organizerTemplate}
+			
+			# @description	Template for organizer view when using the partner framework.
+			# @also			Constants
+			organizerTemplate4Partner = {$plugin.tx_cal_controller.view.organizer.organizerTemplate4Partner}
+			
+			# @description	Template for organizer view when using tt_address.
+			# @also			Constants
+			organizerTemplate4Address = {$plugin.tx_cal_controller.view.organizer.organizerTemplate4Address}
+			
+			# @todo What does this do?  Looks to only be relevant to partner framework.
+			contactInfoType = 1
+		}
+		
+		list {
+			# @description	Show events starting with this date.
+			# @also			FlexForm
+			starttime = now
+			
+			# @description	Show events until this date.
+			# @also			FlexForm
+			endtime = +1 month
+			
+			# @description	Maximum number of events to display.
+			# @also			FlexForm
+			maxEvents = 10
+			
+			# @description	Template for list view.
+			# @also			Constants
+			listTemplate = {$plugin.tx_cal_controller.view.list.listTemplate}
+			
+			dateFormat = %a, %b %e
+			
+		    	age_stdWrap.age = 1
+		    	textNewsAge_stdWrap.wrap =
+		    	date_stdWrap.strftime= %A %d. of %B %Y
+		    	time_stdWrap.strftime= %d/%m/%y %H:%M
+			
+		    	# Don't display caption in List view
+		    	caption_stdWrap.if.directReturn = 0 
+		
+		    	title_stdWrap.wrap =
+		    	subheader_stdWrap.stripHtml = 1
+		    	subheader_stdWrap.crop = 230 | ... | 1
+		    	subheader_stdWrap.ifEmpty.field = bodytext
+		    	author_stdWrap.wrap =
+		    	imageCount=1
+		    	imageWrapIfAny = 
+		
+		    	category_stdWrap.wrap = <div class="news-list-category"> | </div>
+		    	imgAltTextField = imagecaption
+		
+		    	linkTitleField = title
+		    	linkTitleField.wrap = 
+		    	linkAltField = short
+		    	linkAltField.wrap = 
+		    	image < view.event.image
+	  	    	image {
+	    			file.maxW = {$plugin.tx_cal_controller.listMaxW}
+	    			file.maxH = {$plugin.tx_cal_controller.listMaxH}
+	    			imageLinkWrap = 1
+	  	    	}
+		}
+		
+		ics {
+			# @description	Turns on ICS/iCal links in the frontend.
+			# @also			FlexForm
+			showIcsLinks = 0
+			
+			# @description	Template for ICS view.
+			# @also			Constants
+			icsTemplate = {$plugin.tx_cal_controller.view.ics.icsTemplate}
+			
+			# @description	Template for ICS list view.
+			# @also			Constants
+			icsListTemplate = {$plugin.tx_cal_controller.view.ics.icsListTemplate}
+		}
+		admin {
+			# @description	Template for frontend administrative view.
+			# @also			Constants
+			adminTemplate = {$plugin.tx_cal_controller.view.admin.adminTemplate}
+		}
+		
+		other {
+			# @description	Displays a login box with the calendar.  Requires the newloginbox extension.
+			# @also			FlexForm
+			# @see			http://typo3.org/extensions/repository/search/newloginbox/
+			# @todo			Does it really require newlogin or will others work?
+			showLogin = 0
+			
+			# @description	Page to perform login on.
+			loginPageId = 
+			
+			# @description	Page where frontend users are stored.
+			userFolderId =
+			
+			# @description	Show the search box.
+			# @also			FlexForm
+			showSearch = 0
+			
+			# @todo			Not needed?
+			showGoto = 0
+			
+			# @description	Enables category filtering.
+			# @also			FlexForm
+			showCategorySelection = 0
+			
+			# @description	Adds a sidebar box with tomorrow's events.
+			# @also			FlexForm
+			showTomorrowEvents = 0
+			
+			# @todo			Is this implemented?
+			showTodos = 0
+			
+			# @description	Enables calendar navigation from the sidebar.
+			# @also			FlexForm
+			showJumps = 0
+			
+			# @description	Template for the sidebar.
+			# @also			Constants
+			sidebarTemplate = {$plugin.tx_cal_controller.view.other.sidebarTemplate}
+			
+			# @description	Template for the search box.
+			# @also			Constants
+			searchBoxTemplate = {$plugin.tx_cal_controller.view.other.searchBoxTemplate}
+		}
+		
+		search {
+			# @description	Template for search results.
+			# @also			Constants
+			searchResultAllTemplate = {$plugin.tx_cal_controller.view.search.searchResultAllTemplate}
+			
+			# @description	Template for search results within an event.
+			# @also			Constants
+			searchResultEventTemplate = {$plugin.tx_cal_controller.view.search.searchResultEventTemplate}
+			
+			# @description	Template for search results within a location.
+			# @also			Constants
+			searchResultLocationTemplate = {$plugin.tx_cal_controller.view.search.searchResultLocationTemplate}
+			
+			# @description	Template for search results within an organizer.
+			# @also			Constants
+			searchResultOrganizerTemplate = {$plugin.tx_cal_controller.view.search.searchResultOrganizerTemplate}
+			
+			# @description	Fields to search within an event.
+			searchEventFieldList = title,organizer,location,description
+			
+			# @description	Fields to search within a location.
+			searchLocationFieldList = name
+			
+			# @description	Fields to search within an organizer.
+			searchOrganizerFieldList = name
+		}
+	}
+	
+	# @description	The Typoscript object for rights is used to configure frontend editing of calendar events,
+	#				locations, and groups.  
+	rights {
+		
+		# @description	Turns frontend editing on.  If this is not enabled, none of the other rights options
+		#				will have any effect.
+		edit = 0
+		
+		# @description	Comma separated list of all administrator users and groups.  These users will have full 
+		#				privileges for frontend editing.
+		admin.user =
+		admin.group =
+		
+		# @description	Comma separated list of all users and groups allowed to be selected for notification
+		allowedUsers =
+		allowedGroups =
+		create {
+			calendar {
+				# @description	Page to save frontend-created calendars to.
+				saveCalendarToPid =
+				
+				# @description	Comma separated list of all users and groups that are allowed to create calendars.
+				allowedToCreateCalendar.user =
+				allowedToCreateCalendar.group =
+				
+				# @description	Comma separated list of all users and groups that should have all calendar 
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that should have a specific calendar 
+				#				field enabled.
+				fields {					
+					allowedToCreateHidden.user =
+					allowedToCreateHidden.group =
+					allowedToCreateTitle.user =
+					allowedToCreateTitle.group =
+					allowedToCreateHeaderstyle.user =
+					allowedToCreateHeaderstyle.group =
+					allowedToCreateBodystyle.user =
+					allowedToCreateBodystyle.group =
+					allowedToCreateFeUser.user =
+					allowedToCreateFeUser.group =
+				}
+			}
+			category {
+				# @description	Page to save frontend-created categories to.
+				saveCategoryToPid =
+				
+				# @description	Comma separated list of all users and groups that should have all category
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that are allowed to create categories.
+				allowedToCreateCategory.user =
+				allowedToCreateCategory.group =
+				
+				# @description	Comma separated list of all users and groups that should have a specific category
+				#				field enabled.
+				fields {					
+					allowedToCreateHidden.user =
+					allowedToCreateHidden.group =
+					allowedToCreateTitle.user =
+					allowedToCreateTitle.group =
+					allowedToCreateHeaderstyle.user =
+					allowedToCreateHeaderstyle.group =
+					allowedToCreateBodystyle.user =
+					allowedToCreateBodystyle.group =
+					allowedToCreateFeUser.user =
+					allowedToCreateFeUser.group =
+				}
+			}
+			
+			
+			event {
+				# @description	Page to save frontend-created events to.
+				saveEventToPid =
+				
+				# @description	Comma separated list of all users and groups that are allowed to create events.
+				allowedToCreateEvents.user =
+				allowedToCreateEvents.group =
+				
+				# @description	Comma separated list of all users and groups that are allowed to create public events.
+				allowedToCreatePublicEvents.user =
+				allowedToCreatePublicEvents.group =
+				
+				# @description	Comma separated list of all users and groups that should have all event
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that should have a specific event
+				#				field enabled.
+				fields {
+					allowedToCreateHidden.user =
+					allowedToCreateHidden.group =
+					allowedToCreateCalendar.user =
+					allowedToCreateCalendar.group =
+					allowedToCreateCategory.user =
+					allowedToCreateCategory.group =
+					allowedToCreateCategory.uidList =
+					allowedToCreateCategory.uidDefault =
+					allowedToCreateDateTime.user =
+					allowedToCreateDateTime.group =
+					allowedToCreateTitle.default =
+					allowedToCreateTitle.user =
+					allowedToCreateTitle.group =
+					allowedToCreateOrganizer.user =
+					allowedToCreateOrganizer.group =
+					allowedToCreateOrganizer.uidList =
+					allowedToCreateOrganizer.uidDefault =
+					allowedToCreateLocation.user =
+					allowedToCreateLocation.group =
+					allowedToCreateLocation.uidList =
+					allowedToCreateLocation.uidDefault =
+					allowedToCreateDescription.user =
+					allowedToCreateDescription.group =
+					allowedToCreateRecurring.user =
+					allowedToCreateRecurring.group =
+					allowedToCreateCreator.user =   
+					allowedToCreateCreator.group =
+					allowedToCreateNotify.user =
+					allowedToCreateNotify.group =
+					allowedToCreateException.user =
+					allowedToCreateException.group =
+				}
+			}
+			exceptionEvent{
+				# @description	Page to save frontend-created exception events to.
+				saveExceptionEventToPid =
+				
+				# @description	Comma separated list of all users and groups that are allowed to create exception events.
+				allowedToCreateExceptionEvents.user =
+				allowedToCreateExceptionEvents.group =
+			}
+			location {
+				# @description	Page to save frontend-created locations to.
+				saveLocationToPid =
+				
+				# @description	Comma separated list of all users and groups that should have all location
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that should have a specific location
+				#				field enabled.
+				fields {
+				}
+			}
+			organizer {
+				# @description	Page to save frontend-created organizers to.
+				saveOrganizerToPid =
+				
+				# @description	Comma separated list of all users and groups that should have all organizer
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that should have a specific organizer
+				#				field enabled.
+				fields {
+				}
+			}
+			
+		}
+		edit {
+			calendar {
+				# @description	Comma separated list of all users and groups that should have all calendar
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that are allowed to edit calendars.
+				allowedToEditCalendar.user =
+				allowedToEditCalendar.group =
+				
+				# @description	Comma separated list of all users and groups that should have a specific calendar
+				#				field enabled.
+				fields {					
+					allowedToEditHidden.user =
+					allowedToEditHidden.group =
+					allowedToEditTitle.user =
+					allowedToEditTitle.group =
+					allowedToEditFeUser.user =
+					allowedToEditFeUser.group =
+				}
+			}
+			category {
+				# @description	Comma separated list of all users and groups that should have all category
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that are allowed to edit categories.
+				allowedToEditCategory.user =
+				allowedToEditCategory.group =
+				
+				# @description	Comma separated list of all users and groups that should have a specific category
+				#				field enabled.
+				fields {					
+					allowedToEditHidden.user =
+					allowedToEditHidden.group =
+					allowedToEditTitle.user =
+					allowedToEditTitle.group =
+					allowedToEditHeaderstyle.user =
+					allowedToEditHeaderstyle.group =
+					allowedToEditBodystyle.user =
+					allowedToEditBodystyle.group =
+					allowedToEditFeUser.user =
+					allowedToEditFeUser.group =
+				}
+			}
+			event {
+				# @description	Comma separated list of all users and groups that should have all event
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that are allowed to edit events.
+				allowedToEditEvents.user =
+				allowedToEditEvents.group =
+				
+				# @description	Comma separated list of all users and groups that should have a specific event
+				#				field enabled.
+				fields {					
+					allowedToEditHidden.user =
+					allowedToEditHidden.group =
+					allowedToEditCalendar.user =
+					allowedToEditCalendar.group =
+					allowedToEditCategory.user =
+					allowedToEditCategory.group =
+					allowedToEditDateTime.user =
+					allowedToEditDateTime.group =
+					allowedToEditTitle.user =
+					allowedToEditTitle.group =
+					allowedToEditOrganizer.user =
+					allowedToEditOrganizer.group =
+					allowedToEditLocation.user =
+					allowedToEditLocation.group =
+					allowedToEditDescription.user =
+					allowedToEditDescription.group =
+					allowedToEditRecurring.user =
+					allowedToEditRecurring.group =
+					allowedToEditCreator.user =
+					allowedToEditCreator.group =
+					allowedToEditNotify.user =
+					allowedToEditNotify.group =
+					allowedToEditException.user =
+					allowedToEditException.group =
+				}
+			}
+			exceptionEvent{
+				# @description	Comma separated list of all users and groups that are allowed to edit exception events.
+				allowedToEditExceptionEvents.user =
+				allowedToEditExceptionEvents.group =
+			}
+			location {
+				# @description	Comma separated list of all users and groups that should have all location
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that should have a specific location
+				#				field enabled.
+				fields {
+				}
+			}
+			
+			organizer {
+				# @description	Comma separated list of all users and groups that should have all organizer
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group = 
+				
+				# @description	Comma separated list of all users and groups that should have a specific organizer
+				#				field enabled.
+				fields {
+				}
+			}
+		}
+		delete {
+			calendar {
+				# @description	Comma separated list of all users and groups that are allowed to delete calendars.
+				allowedToDeleteCalendar.user =
+				allowedToDeleteCalendar.group =
+			}
+			category {
+				# @description	Comma separated list of all users and groups that are allowed to delete categories.
+				allowedToDeleteCategory.user =
+				allowedToDeleteCategory.group =
+			}
+			event {
+				# @description	Comma separated list of all users and groups that are allowed to delete events.
+				allowedToDeleteEvents.user =
+				allowedToDeleteEvents.group =
+			}
+			exceptionEvent{
+				# @description	Comma separated list of all users and groups that are allowed to delete exception events.
+				allowedToDeleteExceptionEvents.user =
+				allowedToDeleteExceptionEvents.group =
+			}
+			location {
+			
+			}
+			organizer {
+			
+			}
+		}
+		
+	}
+}
+
+
+## This enables the cal ics export
+ics = PAGE
+ics {
+  typeNum = 150
+
+  10 < plugin.tx_cal_controller
+  10.pages >
+  10.pages = {$plugin.tx_cal_controller.pidList}
+  10.anonymousUserUid = {$plugin.tx_cal_controller.anonymousUserUid}
+  10.view.ics.calUid = {$plugin.tx_cal_controller.view.ics.calUid}
+  10.defaultCode = TEXT
+
+
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:application/text
+    xhtml_cleaning = 0
+    admPanel = 0
+  }
+}

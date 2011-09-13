@@ -1,0 +1,88 @@
+<!-- delete_event.tmpl -->
+<h1>###L_DELETE_EVENT###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+<input type="hidden" value="###VIEW###" name="tx_cal_controller[view]" />
+<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+<table>
+	<tr>
+		<td>###L_CATEGORY###:</td><td>###CATEGORY_IDS###</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_START_DAY###:</td><td>###EVENT_START_DAY###</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_START_TIME###:</td><td>###EVENT_START_TIME###</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_END_DAY###:</td><td>###EVENT_END_DAY###</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_END_TIME###:</td><td>###EVENT_END_TIME###</td>
+	</tr>
+	<tr>
+		<td>###L_TITLE###:</td><td>###TITLE###</td>
+	</tr>
+	<tr>
+		<td>###L_USER###:</td><td>###USER_IDS###</td>
+	</tr>
+	<tr>
+		<td>###L_ORGANIZER###:</td><td>###ORGANIZER###</td>
+	</tr>
+	<tr>
+		<td>###L_CAL_ORGANIZER###:</td><td>###ORGANIZER_IDS###</td>
+	</tr>
+	<tr>
+		<td>###L_LOCATION###:</td><td>###LOCATION###</td>
+	</tr>
+	<tr>
+		<td>###L_CAL_LOCATION###:</td><td>###LOCATION_IDS###</td>
+	</tr>
+	<tr>
+		<td>###L_DESCRIPTION###:</td><td>###DESCRIPTION###</td>
+	</tr>
+	<tr>
+		<td>###L_FREQUENCY###:</td><td>###FREQUENCY_IDS###</td>
+	</tr>
+	<tr>
+		<td>###L_BY_DAY###:</td><td>###BY_DAY###</td>
+	</tr>
+	<tr>
+		<td>###L_BY_MONTHDAY###:</td><td>###BY_MONTHDAY###</td>
+	</tr>
+	<tr>
+		<td>###L_BY_MONTH###:</td><td>###BY_MONTH###</td>
+	</tr>
+	<tr>
+		<td>###L_UNTIL###:</td><td>###UNTIL###</td>
+	</tr>
+	<tr>
+		<td>###L_COUNT###:</td><td>###COUNT###</td>
+	</tr>
+	<tr>
+		<td>###L_INTERVAL###:</td><td>###INTERVAL###</td>
+	</tr>
+	<tr>
+		<td>###L_NOTIFY_ON_CHANGE###:</td><td>###NOTIFY_IDS###</td>
+	</tr>
+	<tr>
+		<td>###L_EXCEPTION###:</td><td>###EXCEPTION_IDS###</td>
+	</tr>
+</table>
+<input type="reset" value="###L_CANCEL###" onclick="window.back()"/><input type="submit" value="###L_DELETE###" />
+</form>
+<!-- ###CREATE_EXCEPTION### start -->
+<form name="tx_cal_controller" method="post" action="###ACTION_EXCEPTION_URL###">
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+<input type="hidden" value="###VIEW###" name="tx_cal_controller[view]" />
+<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+<input type="hidden" value="###UID###" name="tx_cal_controller[event_uid]" />
+###L_TITLE###:<input type="text" value="" name="tx_cal_controller[exception_title]" />
+<input type="hidden" value="###EVENT_START_DAY###" name="tx_cal_controller[exception_start_day]" />
+<input type="hidden" value="###EVENT_START_TIME###" name="tx_cal_controller[exception_start_time]" />
+<input type="hidden" value="###EVENT_END_DAY###" name="tx_cal_controller[exception_end_day]" />
+<input type="hidden" value="###EVENT_END_TIME###" name="tx_cal_controller[exception_end_time]" />
+<input type="submit" value="###L_CREATE_EXCEPTION###" />
+</form>
+<!-- ###CREATE_EXCEPTION### end -->

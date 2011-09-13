@@ -1,0 +1,46 @@
+<!--create_category.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_CREATE_CATEGORY###</h1>
+<!-- ###FORM_START### end-->
+
+<form name="tx_cal_controller" method="post" action="###CHANGE_CALENDAR_ACTION_URL###">
+	<fieldset class="noborder">
+	
+		<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+		<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+		<input type="hidden" value="###THIS_VIEW###" name="tx_cal_controller[view]" />
+		<input type="hidden" value="###CALENDAR_ID###" name="tx_cal_controller[calendar]" />
+		###CALENDAR###
+	</fieldset>
+</form>
+
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" name="tx_cal_controller[view]" value="confirm_category" />
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###"  />
+		<input type="hidden" name="tx_cal_controller[uid]"value="###UID###"  />
+		<input type="hidden" value="###CALENDAR_ID###" name="tx_cal_controller[calendar_id]" />
+
+		###HIDDEN###
+		###TITLE###
+		###HEADERSTYLE###
+		###BODYSTYLE###
+		###PARENT_CATEGORY###
+		###SHARED_USER_ALLOWED###
+<!-- ###FORM_END### begin-->
+		
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_SUBMIT###" />
+	</fieldset>
+</form>
+
+<script type="text/javascript">
+	function getNewStyle(element){
+		var index = element.selectedIndex;
+		element.className = element.options[index].className;
+	}
+	getNewStyle(document.getElementById('tx_cal_controller_headerstyle'));
+	getNewStyle(document.getElementById('tx_cal_controller_bodystyle'));
+</script>
+<!-- ###FORM_END### end-->
+<!--/create_category.tmpl-->

@@ -1,0 +1,33 @@
+<!--month_medium.tmpl-->
+<table border="0" width="210" cellspacing="0" cellpadding="0" class="calborder">
+	<tr>
+		<td align="center" class="medtitle">###MONTH_LINK###</td>
+	</tr>
+	<tr>
+		<td>
+			<table border="0" width="210" cellspacing="1" cellpadding="0" class="yearmonth">
+				<tr>
+					<!-- ###LOOPWEEKDAY### start -->
+					<td class="yearweek">###WEEKDAY###</td>
+					<!-- ###LOOPWEEKDAY### end -->
+					<!-- ###LOOPMONTHWEEKS_DAYS### start -->
+				<tr>
+					<!-- ###LOOPMONTHWEEKS_DAYS### end -->
+				<!-- ###LOOPMONTHWEEKS### start -->
+				<tr>
+					<!-- ###SWITCHMONTHDAY### start -->
+					<td class="###STYLE###">
+						###ALLDAY###
+						###LINK###
+						###EVENT###
+					</td>
+					<!-- ###SWITCHMONTHDAY### end -->
+					<!-- ###LOOPMONTHDAYS_WEEKS### start -->
+				</tr>
+				<!-- ###LOOPMONTHDAYS_WEEKS### end -->
+				<!-- ###LOOPMONTHWEEKS### end -->	
+			</table>
+		</td>
+	</tr>
+</table>
+<!--/month_medium.tmpl-->

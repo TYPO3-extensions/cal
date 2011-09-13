@@ -1,0 +1,63 @@
+<!--list.tmpl-->
+<!-- ###LIST_DAY_WRAPPER### begin -->
+	<dt><hr></dt>
+    <dd> --- Event ---</dd>
+<!-- ###LIST_DAY_WRAPPER### end -->
+
+<!-- ###LIST_WEEK_WRAPPER### begin -->
+	<dt><hr></dt>
+    <dd> --- Week ---</dd>
+<!-- ###LIST_WEEK_WRAPPER### end -->
+
+<!-- ###LIST_MONTH_WRAPPER### begin -->
+	<dt><hr></dt>
+    <dd> --- Month ---</dd>
+<!-- ###LIST_MONTH_WRAPPER### end -->
+
+
+<!-- ###LIST_TEMPLATE### begin -->
+
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
+
+<!-- ###POST_LIST_TEMPLATE### begin -->
+<h1>###HEADING###</h1>
+###FOUND###
+<!-- ###POST_LIST_TEMPLATE### end -->
+<dl>
+	<!-- ###SHOWBOTTOMEVENTS### start -->
+	<!-- ###SHOWBOTTOMEVENTS_ODD### start -->
+	<dt>
+		###IMAGE###
+		<!-- ###EVENT_LINK### start-->###TITLE###<!-- ###EVENT_LINK### end--><br />
+		###STARTDATE### ###ENDDATE### <span class="V9G">###STARTTIME### ###ENDTIME###</span><br />
+		###TEASER###
+		<br /><span class="V9G">###CATEGORY_LINK###</span>
+	</dt>
+	<dd>###DESCRIPTION###</dd>
+	<!-- ###SHOWBOTTOMEVENTS_ODD### end -->
+	<!-- ###SHOWBOTTOMEVENTS_EVEN### start -->
+	<dt class="even">
+		###IMAGE###
+		<!-- ###EVENT_LINK### start-->###TITLE###<!-- ###EVENT_LINK### end--><br />
+		###STARTDATE### ###ENDDATE### <span class="V9G">###STARTTIME### ###ENDTIME###</span><br />
+		###TEASER###
+		<br /><span class="V9G">###CATEGORY_LINK###</span>
+	</dt>
+	<dd class="even">###DESCRIPTION###</dd>
+	<!-- ###SHOWBOTTOMEVENTS_EVEN### end -->
+	<!-- ###SHOWBOTTOMEVENTS### end -->
+</dl>
+
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
+
+###CREATE_EVENT_LINK###
+<!-- ###LIST_TEMPLATE### end -->
+<!--/list.tmpl-->

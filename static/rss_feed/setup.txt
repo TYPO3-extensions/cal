@@ -1,0 +1,79 @@
+###
+# This is the default TS-setup RSS feed from cal
+# this template has to be included after the cal main TS-setup because it depends on some settings from there
+#
+# (see Section Reference in the manual for more options & parameters)
+#
+# cal v 0.14.x
+###
+
+
+
+
+# - - - - - - - - - - - - - -  render XML news   - - - - - - - - - - - - -  #
+ 
+# point your RSS reader to: http://your-server.org/index.php?type=100
+
+plugin.tx_cal_controller {
+  displayXML {
+    rss091_tmplFile = {$plugin.tx_cal_controller.displayXML.rss091_tmplFile}
+    rss2_tmplFile = {$plugin.tx_cal_controller.displayXML.rss2_tmplFile}
+    rdf_tmplFile = {$plugin.tx_cal_controller.displayXML.rdf_tmplFile}
+    atom03_tmplFile = {$plugin.tx_cal_controller.displayXML.atom03_tmplFile}
+    atom1_tmplFile = {$plugin.tx_cal_controller.displayXML.atom1_tmplFile}
+
+    # possibile values: rss091 / rss2 / rdf / atom03
+    xmlFormat = {$plugin.tx_cal_controller.displayXML.xmlFormat}
+
+    xmlTitle = {$plugin.tx_cal_controller.displayXML.xmlTitle}
+    xmlLink = {$plugin.tx_cal_controller.displayXML.xmlLink}
+    xmlDesc = {$plugin.tx_cal_controller.displayXML.xmlDesc}
+    xmlLang = {$plugin.tx_cal_controller.displayXML.xmlLang}
+    xmlIcon = {$plugin.tx_cal_controller.displayXML.xmlIcon}
+    xmlLimit = {$plugin.tx_cal_controller.displayXML.xmlLimit}
+    xmlCaching = {$plugin.tx_cal_controller.displayXML.xmlCaching}
+
+    title_stdWrap.htmlSpecialChars = 1
+    title_stdWrap.htmlSpecialChars.preserveEntities = 1
+    subheader_stdWrap.stripHtml = 1
+    subheader_stdWrap.htmlSpecialChars = 1
+    subheader_stdWrap.htmlSpecialChars.preserveEntities = 1
+    subheader_stdWrap.crop = 100 | ... | 1 
+    subheader_stdWrap.ifEmpty.field = bodytext
+    xmlLastBuildDate = 1
+  }
+}
+
+plugin.tx_cal_controller.view.rss {
+	dateFormat = %Y-%m-%dT%H:%M:%S+00:00
+}
+
+
+## This enables the xml news feed
+calRSS = PAGE
+calRSS {
+  typeNum = 151
+
+  10 < plugin.tx_cal_controller
+  10.pidList >
+  10.pidList = {$plugin.tx_cal_controller.pidList}
+  10.view.event.eventViewPid = {$plugin.tx_cal_controller.view.event.eventViewPid}
+  10.view.allowedViews = rss
+  10.view.rss.eventTimeFormat = %I:%M %p
+  10.view.rss.eventDateFormat = %Y-%m-%d
+  // in days
+  10.view.rss.range = 10
+  10.defaultCode = XML
+  10.catTextMode = 1
+  10.catImageMode = 0
+
+
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:application/xml
+    xhtml_cleaning = 0
+    admPanel = 0
+  }
+}
+
+

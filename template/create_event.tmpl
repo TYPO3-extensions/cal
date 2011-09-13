@@ -1,0 +1,186 @@
+<!-- ###FORM_START### begin-->
+<form name="tx_cal_controller" id="tx_cal_controller_create_element" method="post" action="###ACTION_URL###">
+<input type="hidden" value="###TYPE###" name="type" >
+<input type="hidden" value="###UID###" name="uid" >
+<script language="javascript">
+
+function addOption(selectbox,text,value,newbox )
+{
+	var optn = document.createElement("OPTION");
+	optn.text = text;
+	optn.value = value;
+	optn.setAttribute("onclick","addOption('"+newbox+"','"+text+"','"+value+"','"+selectbox+"');removeOption('"+selectbox+"',this.index);");
+	var elem = document.getElementById(selectbox);
+	elem.options.add(optn);
+}
+
+//This function is needed, because the IE doesn't support onclick at the option tag
+function addOption2(selectbox,newbox )
+{
+	var elem = document.getElementById(selectbox);
+	var newElem = document.getElementById(newbox);
+	for(var i=0;i<elem.options.length;i++){
+		if(elem.options[i].selected==true){
+			var optn = document.createElement("OPTION");
+			optn.text = elem.options[i].text;
+			optn.value = elem.options[i].value;
+			newElem.options.add(optn);
+			elem.remove(i);
+		}
+	}
+	elem.options.add(optn);
+}
+
+function removeOption(listbox, i){
+	var elem = document.getElementById(listbox);
+	elem.remove(i);
+}
+
+function checkForm(id){
+	var error = false;
+	var form = document.getElementById(id);
+	for(var i=0; i < form.elements.length; i++){
+		switch(form.elements[i].name){
+		    ###VALIDATION###
+		}
+	}
+	if(!error){
+		form.submit();
+	}
+}
+
+function atLeastOne(element){
+	if(element.options.length == 0){
+		alert("###L_EDIT_EVENT_ATLEASTONE###");
+		return false;
+	}
+	return true;	
+}
+
+function selectAll(element){
+	for(var i = 0; i < element.options.length; i++){
+		element.options[i].selected = true;
+	}
+}
+
+</script>
+<h1>###L_EDIT_EVENT###</h1>
+<table border="0">
+<!-- ###FORM_START### end-->
+<!-- ###FORM_HIDDEN### begin-->
+	<tr>
+		<td>###L_HIDDEN###:</td><td><input type="checkbox" ###HIDDEN### name="hidden" ></td>
+	</tr>
+<!-- ###FORM_HIDDEN### end-->
+<!-- ###FORM_CATEGORY### begin-->
+	<tr>
+		<td>###L_CATEGORY###:</td><td><select name="category_id" size="1">###CATEGORY_IDS###</select></td>
+	</tr>
+<!-- ###FORM_CATEGORY### end-->
+<!-- ###FORM_DATETIME### begin-->
+	<tr>
+		<td>###L_EVENT_START_DAY###:</td><td><input type="text" value="###EVENT_START_DAY###" name="event_start_day" id="event_start_day" />###START_DAY_SELECTOR###</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_START_TIME###:</td>
+		<td>
+			<select name="event_start_hour" size="1">###START_HOURS###</select>:<select name="event_start_minutes" size="1">###START_MINUTES###</select>
+		</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_END_DAY###:</td><td><input type="text" value="###EVENT_END_DAY###" name="event_end_day" id="event_end_day" />###END_DAY_SELECTOR###</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_END_TIME###:</td>
+		<td>
+			<select name="event_end_hour" size="1">###END_HOURS###</select>:<select name="event_end_minutes" size="1">###END_MINUTES###</select>
+		</td>
+	</tr>
+<!-- ###FORM_DATETIME### end-->
+<!-- ###FORM_TITLE### begin-->
+	<tr>
+		<td>###L_TITLE###:</td><td><input type="text" value="###TITLE###" name="title" ></td>
+	</tr>
+<!-- ###FORM_TITLE### end-->
+<!-- ###FORM_CREATOR### begin-->
+	<tr>
+		<td>###L_USER_SELECTED###:</td><td><select name="user_ids_selected[]" id="tx_cal_controller_user_ids_selected"  size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_user_ids_selected','tx_cal_controller_user_ids');">###USER_IDS_SELECTED###</select></td>
+	</tr>
+	<tr>
+		<td>###L_USER###:</td><td><select name="user_ids[]" id="tx_cal_controller_user_ids" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_user_ids','tx_cal_controller_user_ids_selected');">###USER_IDS###</select></td>
+	</tr>
+<!-- ###FORM_CREATOR### end-->
+<!-- ###FORM_ORGANIZER### start-->
+	<tr>
+		<td>###L_ORGANIZER###:</td><td><input type="text" value="###ORGANIZER###" name="organizer" ></td>
+	</tr>
+	<tr>
+		<td>###L_CAL_ORGANIZER###:</td><td><select name="organizer_id" size="1">###ORGANIZER_IDS###</select></td>
+	</tr>
+<!-- ###FORM_ORGANIZER### end-->
+<!-- ###FORM_LOCATION### start-->
+  <tr>
+		<td>###L_LOCATION###:</td><td><input type="text" value="###LOCATION###" name="location" ></td>
+	</tr>
+	<tr>
+		<td>###L_CAL_LOCATION###:</td><td><select name="location_id" size="1">###LOCATION_IDS###</select></td>
+	</tr>
+<!-- ###FORM_LOCATION### end-->
+<!-- ###FORM_DESCRIPTION### start-->
+	<tr>
+		<td>###L_DESCRIPTION###:</td><td><textarea name="description" style="width:384px;" cols="40" rows="6" wrap="virtual">###DESCRIPTION###</textarea></td>
+	</tr>
+<!-- ###FORM_DESCRIPTION### end-->
+<!-- ###FORM_RECURRING### start-->
+	<tr>
+		<td>###L_FREQUENCY###:</td><td><select name="frequency_id" size="1">###FREQUENCY_IDS###</select></td>
+	</tr>
+	<tr>
+		<td>###L_BY_DAY###:</td>
+		<td>
+			<input type="checkbox" value="mo" name="by_day" ###BY_DAY_CHECKED_MON###/>###L_DAYSOFWEEKSHORT_LANG_MON### 
+			<input type="checkbox" value="tu" name="by_day" ###BY_DAY_CHECKED_TUE###/>###L_DAYSOFWEEKSHORT_LANG_TUE### 
+			<input type="checkbox" value="we" name="by_day" ###BY_DAY_CHECKED_WED###/>###L_DAYSOFWEEKSHORT_LANG_WED### 
+			<input type="checkbox" value="th" name="by_day" ###BY_DAY_CHECKED_THU###/>###L_DAYSOFWEEKSHORT_LANG_THU### 
+			<input type="checkbox" value="fr" name="by_day" ###BY_DAY_CHECKED_FRI###/>###L_DAYSOFWEEKSHORT_LANG_FRI### 
+			<input type="checkbox" value="sa" name="by_day" ###BY_DAY_CHECKED_SAT###/>###L_DAYSOFWEEKSHORT_LANG_SAT### 
+			<input type="checkbox" value="su" name="by_day" ###BY_DAY_CHECKED_SUN###/>###L_DAYSOFWEEKSHORT_LANG_SUN###
+		</td>
+	</tr>
+	<tr>
+		<td>###L_BY_MONTHDAY###:</td><td><input type="text" value="###BY_MONTHDAY###" name="by_monthday" ></td>
+	</tr>
+	<tr>
+		<td>###L_BY_MONTH###:</td><td><input type="text" value="###BY_MONTH###" name="by_month" ></td>
+	</tr>
+	<tr>
+		<td>###L_UNTIL###:</td><td><input type="text" value="###UNTIL###" name="until" id="until" />###UNTIL_SELECTOR###</td>
+	</tr>
+	<tr>
+		<td>###L_COUNT###:</td><td><input type="text" value="###COUNT###" name="count" ></td>
+	</tr>
+	<tr>
+		<td>###L_INTERVAL###:</td><td><input type="text" value="###INTERVAL###" name="interval" ></td>
+	</tr>
+<!-- ###FORM_RECURRING### end-->
+<!-- ###FORM_NOTIFY### start-->
+	<tr>
+		<td>###L_NOTIFY_ON_CHANGE_SELECTED###:</td><td><select name="notify_ids_selected[]" id="tx_cal_controller_notify_ids_selected"  size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_notify_ids_selected','tx_cal_controller_notify_ids');">###NOTIFY_IDS_SELECTED###</select></td>
+	</tr>
+	<tr>	
+		<td>###L_NOTIFY_ON_CHANGE###:</td><td><select name="notify_ids[]" id="tx_cal_controller_notify_ids" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_notify_ids','tx_cal_controller_notify_ids_selected');">###NOTIFY_IDS###</select></td>
+	</tr>
+<!-- ###FORM_NOTIFY### end-->
+<!-- ###FORM_EXCEPTION### start-->
+	<tr>
+		<td>###L_EXCEPTION_SELECTED###:</td><td><select name="exception_ids_selected[]" id="tx_cal_controller_exception_ids_selected" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_exception_ids_selected','tx_cal_controller_exception_ids');">###EXCEPTION_IDS_SELECTED###</select></td>
+	</tr>
+	<tr>
+		<td>###L_EXCEPTION###:</td><td><select name="exception_ids[]" id="tx_cal_controller_exception_ids" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_exception_ids','tx_cal_controller_exception_ids_selected');">###EXCEPTION_IDS###</select></td>
+	</tr>
+<!-- ###FORM_EXCEPTION### end-->
+<!-- ###FORM_END### start-->
+</table>
+<input type="reset" value="###L_CANCEL###" onclick="window.back()"/><input type="button" value="###L_SUBMIT###" onclick="checkForm('tx_cal_controller_create_element');"/>
+</form>
+<!-- ###FORM_END### end-->

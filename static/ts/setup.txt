@@ -1,0 +1,220 @@
+plugin.tx_cal_controller {
+	parseFunc < styles.content.parseFunc
+	userFunc = tx_cal_controller->main
+	calendarName = My Calendar
+	anonymousUserUid =
+	allowSubscribe = 1
+	subscribeFeUser = 0
+	subscribeWithCaptcha = 0
+	emailaddress =
+	emailreplyaddress =
+	view {
+		defaultView = day
+		minicalView = current
+		day {
+			dayViewPid =
+			dayStart = 0700
+			dayEnd = 2300
+			gridLength = 15
+			dayTemplate = typo3conf/ext/cal/template/day.tmpl
+		}
+		
+		week {
+			weekViewPid =
+			weekStartDay = Monday
+			weekTemplate = typo3conf/ext/cal/template/week.tmpl
+		}
+		
+		month {
+			monthViewPid =
+			monthTemplate = typo3conf/ext/cal/template/month.tmpl
+			monthSmallTemplate = typo3conf/ext/cal/template/month_small.tmpl
+			monthMediumTemplate = typo3conf/ext/cal/template/month_medium.tmpl
+			monthLargeTemplate = typo3conf/ext/cal/template/month_large.tmpl
+			thisMonthsEvents = 1
+		}
+		
+		year {
+			yearViewPid =
+			yearTemplate = typo3conf/ext/cal/template/year.tmpl
+		}
+		
+		event {
+			eventViewPid =
+			eventTemplate = typo3conf/ext/cal/template/event.tmpl
+			phpicalendarEventTemplate = typo3conf/ext/cal/template/phpicalendar_event.tmpl
+			createEventTemplate = typo3conf/ext/cal/template/create_event.tmpl
+			confirmEventTemplate = typo3conf/ext/cal/template/confirm_event.tmpl
+			deleteEventTemplate = typo3conf/ext/cal/template/delete_event.tmpl
+			defaultCategoryText =
+		}
+		
+		location {
+			locationTemplate = typo3conf/ext/cal/template/location.tmpl
+			createLocationTemplate = typo3conf/ext/cal/template/create_location.tmpl
+			confirmLocationTemplate = typo3conf/ext/cal/template/confirm_location.tmpl
+		}
+		
+		organizer {
+			organizerTemplate = typo3conf/ext/cal/template/organizer.tmpl
+		}
+		
+		list {
+			starttime = now
+			endtime = +1 month
+			maxEvents = 10
+			listTemplate = typo3conf/ext/cal/template/list.tmpl
+		}
+		
+		ics {
+			calUid =
+			showIcsLinks = 0
+			icsTemplate = typo3conf/ext/cal/template/ics.tmpl
+		}
+		
+		other {
+			showLogin = 0
+			showSearch = 0
+			showGoto = 0
+			showMultiple = 0
+			showTomorrowEvents = 0
+			sidebarTemplate = typo3conf/ext/cal/template/sidebar.tmpl
+			searchBoxTemplate = typo3conf/ext/cal/template/search_box.tmpl
+		}
+	}
+	rights {
+		edit = 0
+		admin.user =
+		admin.group =
+		allowedUsers =
+		allowedGroups =
+		create {
+			event {
+				saveEventToPid =
+				allowedToCreateEvents.user =
+				allowedToCreateEvents.group =
+				enableAllFields.user = 
+				enableAllFields.group = 
+				fields {
+					allowedToCreateHidden.user =
+					allowedToCreateHidden.group =
+					allowedToCreateCategory.user =
+					allowedToCreateCategory.group =
+					allowedToCreateDateTime.user =
+					allowedToCreateDateTime.group =
+					allowedToCreateTitle.default =
+					allowedToCreateTitle.user =
+					allowedToCreateTitle.group =
+					allowedToCreateOrganizer.user =
+					allowedToCreateOrganizer.group =
+					allowedToCreateLocation.user =
+					allowedToCreateLocation.group =
+					allowedToCreateDescription.user =
+					allowedToCreateDescription.group =
+					allowedToCreateRecurring.user =
+					allowedToCreateRecurring.group =
+					allowedToCreateCreator.user =   
+					allowedToCreateCreator.group =
+					allowedToCreateNotify.user =
+					allowedToCreateNotify.group =
+					allowedToCreateException.user =
+					allowedToCreateException.group =
+				}
+			}
+			location {
+				saveLocationToPid =
+				enableAllFields.user = 
+				enableAllFields.group = 
+				fields {
+				}
+			}
+			organizer {
+				saveOrganizerToPid =
+				enableAllFields.user = 
+				enableAllFields.group = 
+				fields {
+				}
+			}
+			
+		}
+		edit {
+			event {
+				enableAllFields.user = 
+				enableAllFields.group = 
+				allowedToEditEvents.user =
+				allowedToEditEvents.group =
+				fields {					
+					allowedToEditHidden.user =
+					allowedToEditHidden.group =
+					allowedToEditCategory.user =
+					allowedToEditCategory.group =
+					allowedToEditDateTime.user =
+					allowedToEditDateTime.group =
+					allowedToEditTitle.user =
+					allowedToEditTitle.group =
+					allowedToEditOrganizer.user =
+					allowedToEditOrganizer.group =
+					allowedToEditLocation.user =
+					allowedToEditLocation.group =
+					allowedToEditDescription.user =
+					allowedToEditDescription.group =
+					allowedToEditRecurring.user =
+					allowedToEditRecurring.group =
+					allowedToEditCreator.user =
+					allowedToEditCreator.group =
+					allowedToEditNotify.user =
+					allowedToEditNotify.group =
+					allowedToEditException.user =
+					allowedToEditException.group =
+				}
+			}
+			location {
+				enableAllFields.user = 
+				enableAllFields.group = 
+				fields {
+				}
+			}
+			
+			organizer {
+				enableAllFields.user = 
+				enableAllFields.group = 
+				fields {
+				}
+			}
+		}
+		delete {
+			event {
+				allowedToDeleteEvents.user =
+				allowedToDeleteEvents.group =
+			}
+			location {
+			
+			}
+			organizer {
+			
+			}
+		}
+		
+	}
+}
+
+
+## This enables the cal ics export
+ics = PAGE
+ics {
+  typeNum = 150
+
+  10 < plugin.tx_cal_controller
+  10.pid_list >
+  10.pid_list = {$plugin.tx_cal_controller.pidList}
+  10.anonymousUserUid = {$plugin.tx_cal_controller.anonymousUserUid}
+  10.defaultCode = TEXT
+
+
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:application/text
+    xhtml_cleaning = 0
+    admPanel = 0
+  }
+}

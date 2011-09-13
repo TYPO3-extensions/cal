@@ -1,0 +1,2 @@
+  # cat=basic/enable/120; type=boolean; label= Do not use Tab-Dividers: Here you can disable the "dividers2tabs" feature (TYPO3 > 3.7.0). "Dividers to Tabs" means: the BE form is divided into sections. If you don't want this, set this value to 1.
+noTabDividers = 0

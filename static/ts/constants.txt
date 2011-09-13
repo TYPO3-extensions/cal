@@ -1,0 +1,171 @@
+###
+# This are the default TS-constants for cal
+##
+
+plugin.tx_cal_controller {
+	# cat=Calendar Base (General)/general/pidlist/1; type=string; label=Page ID where events are stored.  Required for ICS and XML output.
+	pidList =
+
+	# cat=Calendar Base (General)/general/pidlist/2; type=integer; label=Page ID that frontend-created records should be saved on.
+	rights.defaultSavePid =
+	
+	# cat=Calendar Base (General)/dims/110; type=int+; label= Event Image Max Width: Max width for an image displayed in Event view.
+	singleMaxW = 240
+		  
+	# cat=Calendar Base (General)/dims/150; type=int+; label= List Image Max Width: Max width for an image displayed in List view.
+	listMaxW = 120
+	
+	# cat=Calendar Base (General)/general/10; type=boolean; label=Enable Frontend Editing:  This setting turns frontend editing on. Without it, the other Typoscript options for frontend editing are ignored.
+	rights.edit = 0
+	# cat=Calendar Base (General)/general/11; type=string; label=Frontend Calendar Admin Users: Comma seperated list of frontend user IDs.
+	rights.admin.user = 
+	# cat=Calendar Base (General)/general/12; type=string; label=Frontend Calendar Admin Groups: Comma separated list of frontend group IDs.
+	rights.admin.group = 
+	
+	# cat=Calendar Base (General)/general/13; type=string; label=Email Address:  Address used for notifications and reminder emails.
+	emailAddress =
+	# cat=Calendar Base (General)/general/14; type=string; label=Email Name: Name used for notification and reminder emails.
+	emailName =
+	# cat=Calendar Base (General)/general/15; type=string; label=Email Organization: Organization used for notification and reminder emails.
+	emailOrganisation =
+	# cat=Calendar Base (General)/general/16; type=string; label=Reminder Time: Remind users about subscribed events this many minutes in advance. Requires the gabriel extension.
+	view.event.remind.time = 30
+	# cat=Calendar Base (General)/general/17; type=string; label=Subscription Page: Page ID where the subscription view is allowed.
+	view.event.notify.subscriptionViewPid =
+	# cat=Calendar Base (General)/general/18; type=string; label=Meeting status Page: Page ID where the meeting-status view is allowed.
+	view.event.meeting.statusViewPid =
+	
+	# cat=Calendar Base (General)/general/19; type=boolean; label=Enable the google map (wec_map needed)
+	view.location.showMap = 0
+
+	# cat=Calendar Base (General)/file/datetimeformats/1; type=options[October 22=%B %d, Oct 22=%b %d, 22 October=%d %B, 22 Oct=%d %b, 10/22=%m/%d, 22.10=%d.%m]; label=General date format
+	view.dateFormat = %B %d
+	
+	# cat=Calendar Base (General)/file/datetimeformats/2; type=options[08:37 pm=%I:%M %p, 20:37=%H:%M]; label=General time format
+	view.timeFormat = %I:%M %p
+	
+	# cat=Calendar Base (Templates)/file/image/1; type=string; label=Images (Path): Path of the calendar images.
+	view.imagePath = EXT:cal/template/img
+	# cat=Calendar Base (Templates)/file/javascript/1; type=string; label=Javascripts (Path): Path of the calendar javascripts.
+	view.javascriptPath = EXT:cal/template/js
+	# cat=Calendar Base (Templates)/file/calendar/1; type=string; label=Calendar Create Template: Marker-based template for calendar creation.
+	view.calendar.createCalendarTemplate = EXT:cal/template/create_calendar.tmpl
+	# cat=Calendar Base (Templates)/file/calendar/2; type=string; label=Calendar Confirm Template: Marker-based template for calendar confirmation.
+	view.calendar.confirmCalendarTemplate = EXT:cal/template/confirm_calendar.tmpl
+	# cat=Calendar Base (Templates)/file/calendar/3; type=string; label=Calendar Delete Template: Marker-based template for calendar deletion.
+	view.calendar.deleteCalendarTemplate = EXT:cal/template/delete_calendar.tmpl
+
+	# cat=Calendar Base (Templates)/file/category/1; type=string; label=Category Create Template: Marker-based template for category creation.
+	view.category.createCategoryTemplate = EXT:cal/template/create_category.tmpl
+	# cat=Calendar Base (Templates)/file/category/2; type=string; label=Category Confirm Template: Marker-based template for category confirmation.
+	view.category.confirmCategoryTemplate = EXT:cal/template/confirm_category.tmpl
+	# cat=Calendar Base (Templates)/file/category/3; type=string; label=Category Delete Template: Marker-based template for category deletion.
+	view.category.deleteCategoryTemplate = EXT:cal/template/delete_category.tmpl
+
+	# cat=Calendar Base (Templates)/file/day/1; type=string; label=Day View Template: Marker-based template for day view.
+	view.day.dayTemplate = EXT:cal/template/day.tmpl
+
+
+	# cat=Calendar Base (Templates)/file/week/1; type=string; label=Week View Template: Marker-based template for week view.
+	view.week.weekTemplate = EXT:cal/template/week.tmpl
+
+
+	# cat=Calendar Base (Templates)/file/month/1; type=string; label=Month View Template: Marker-based template for month view.
+	view.month.monthTemplate = EXT:cal/template/month.tmpl
+	# cat=Calendar Base (Templates)/file/month/2; type=string; label=Month View Template (Small): Marker-based template for small month view.
+	view.month.monthSmallTemplate = EXT:cal/template/month_small.tmpl
+	# cat=Calendar Base (Templates)/file/month/3; type=string; label=Month View Template (Medium): Marker-based template for medium month view.
+	view.month.monthMediumTemplate = EXT:cal/template/month_medium.tmpl
+	# cat=Calendar Base (Templates)/file/month/4; type=string; label=Month View Template (Large): Marker-based template for large month view.
+	view.month.monthLargeTemplate = EXT:cal/template/month_large.tmpl
+	
+	# cat=Calendar Base (Templates)/file/misc/1; type=string; label=Calendar Nav Template: Marker-based template for calendar navigation view.
+	view.month.horizontalSidebarTemplate = EXT:cal/template/calendar_nav.tmpl
+
+
+	# cat=Calendar Base (Templates)/file/year/1; type=string; label=Year View Template: Marker-based template for year view.
+	view.year.yearTemplate = EXT:cal/template/year.tmpl
+	
+	
+	# cat=Calendar Base (Templates)/file/event/1; type=string; label=Event-wrapper-Template: Marker-based template for event view.
+	view.event.eventTemplate = EXT:cal/template/event.tmpl
+	# cat=Calendar Base (Templates)/file/event/2; type=string; label=Event (phpiCalendar) Template: Marker-based template for phpiCalendar event view.
+	view.event.phpicalendarEventTemplate = EXT:cal/template/phpicalendar_event.tmpl
+	# cat=Calendar Base (Templates)/file/event/3; type=string; label=Event (Create) Template: Marker-based template for event creation view.
+	view.event.createEventTemplate = EXT:cal/template/create_event.tmpl
+	# cat=Calendar Base (Templates)/file/event/4; type=string; label=Event (Confirm) Template: Marker-based template for event confirmation view.
+	view.event.confirmEventTemplate = EXT:cal/template/confirm_event.tmpl
+	# cat=Calendar Base (Templates)/file/event/5; type=string; label=Event (Delete) Template: Marker-based template for event deletion view.
+	view.event.deleteEventTemplate = EXT:cal/template/delete_event.tmpl
+	
+	# cat=Calendar Base (Templates)/file/event/6; type=string; label=Event email notification Template: Marker-based template for email notification on creation.
+	view.event.notify.all.onCreateTemplate = EXT:cal/template/notifyOnCreate.tmpl
+	# cat=Calendar Base (Templates)/file/event/7; type=string; label=Event email notification Template: Marker-based template for email notification on change.
+	view.event.notify.all.onChangeTemplate = EXT:cal/template/notifyOnChange.tmpl
+	# cat=Calendar Base (Templates)/file/event/8; type=string; label=Event email notification Template: Marker-based template for email notification on delete.
+	view.event.notify.all.onDeleteTemplate = EXT:cal/template/notifyOnDelete.tmpl
+	
+	# cat=Calendar Base (Templates)/file/event/9; type=string; label=Event email reminder Template: Marker-based template for email reminder.
+	view.event.remind.all.template = EXT:cal/template/remind.tmpl
+
+	# cat=Calendar Base (Templates)/file/event/10; type=string; label=Subscription Manager Template: Marker-based template for subscription manager view.
+	view.event.subscriptionManagerTemplate = EXT:cal/template/subscription_manager.tmpl
+	# cat=Calendar Base (Templates)/file/event/11; type=string; label=Confirm Subscription Template: Marker-based template to confirm a subscription.
+	view.event.notify.confirmTemplate = EXT:cal/template/notifyConfirm.tmpl
+	# cat=Calendar Base (Templates)/file/event/12; type=string; label=Confirm Unsubscription Template: Marker-based template to confirm a unsubscription.
+	view.event.notify.unsubscribeConfirmTemplate = EXT:cal/template/notifyUnsubscribeConfirm.tmpl
+	# cat=Calendar Base (Templates)/file/event/13; type=string; label=Confirm Unsubscription Template: Marker-based template for meeting invitation (email).
+	view.event.meeting.template = EXT:cal/template/invite.tmpl
+	# cat=Calendar Base (Templates)/file/event/14; type=string; label=Confirm Unsubscription Template: Marker-based template for meeting invitation updates (email).
+	view.event.meeting.onChangeTemplate = EXT:cal/template/inviteOnChange.tmpl
+	# cat=Calendar Base (Templates)/file/event/15; type=string; label=Meeting Manager Template: Marker-based template for meeting manager view.
+	view.event.meeting.managerTemplate = EXT:cal/template/meetingManager.tmpl
+	
+	# cat=Calendar Base (Templates)/file/location/1; type=string; label=Location-wrapper-Template: Marker-based template for location view.
+	view.location.locationTemplate = EXT:cal/template/location.tmpl
+	# cat=Calendar Base (Templates)/file/location/2; type=string; label=Location (Partner) Template: Marker-based template for location view using the partner framework.
+	view.location.locationTemplate4Partner = EXT:cal/template/location_partner.tmpl
+	# cat=Calendar Base (Templates)/file/location/3; type=string; label=Location (Address) Template: Marker-based template for location view using tt_address.
+	view.location.locationTemplate4Address = EXT:cal/template/location_address.tmpl
+	# cat=Calendar Base (Templates)/file/location/4; type=string; label=Location (Create) Template: Marker-based template for location creation view.
+	view.location.createLocationTemplate = EXT:cal/template/create_location.tmpl
+	# cat=Calendar Base (Templates)/file/location/5; type=string; label=Location (Confirm) Template: Marker-based template for location confirmation view.
+	view.location.confirmLocationTemplate = EXT:cal/template/confirm_location.tmpl
+	# cat=Calendar Base (Templates)/file/location/6; type=string; label=Location (Delete) Template: Marker-based template for location deletion view.
+	view.location.deleteLocationTemplate = EXT:cal/template/delete_location.tmpl
+	
+	# cat=Calendar Base (Templates)/file/organizer/1; type=string; label=Organizer (Standard) Template: Marker-based template for organizer.
+	view.organizer.organizerTemplate = EXT:cal/template/organizer.tmpl
+	# cat=Calendar Base (Templates)/file/organizer/2; type=string; label=Organizer (Partner) Template: Marker-based template for organizer using the partner framework.
+	view.organizer.organizerTemplate4Partner = EXT:cal/template/organizer_partner.tmpl
+	# cat=Calendar Base (Templates)/file/organizer/3; type=string; label=Organizer (Address) Template: Marker-based template for organizer using tt_address.
+	view.organizer.organizerTemplate4Address = EXT:cal/template/organizer_address.tmpl
+	# cat=Calendar Base (Templates)/file/organizer/4; type=string; label=Organizer (Frontend User) Template: Marker-based template for organizer using frontend users.
+	view.organizer.organizerTemplate4FEUser = EXT:cal/template/organizer_feuser.tmpl
+
+
+	# cat=Calendar Base (Templates)/file/list/1; type=string; label=List View Template: Marker-based template for list view.
+	view.list.listTemplate = EXT:cal/template/list.tmpl
+	# cat=Calendar Base (Templates)/file/list/2; type=string; label=List View Template: Marker-based template for list view with teaser enabled.
+	view.list.listWithTeaserTemplate = EXT:cal/template/list_w_teaser.tmpl
+	
+	# cat=Calendar Base (Templates)/file/module/1; type=string; label=Locationloader Template: Marker-based template to add location information into the event view.
+	module.locationloader.template = EXT:cal/template/module_locationloader.tmpl
+	
+	# cat=Calendar Base (Templates)/file/admin/1; type=string; label=Admin View Template: Marker-based template for admin view.
+	view.admin.adminTemplate = EXT:cal/template/admin.tmpl
+	
+	# cat=Calendar Base (Templates)/file/other/1; type=string; label=Sidebar Template: Marker-based template for the sidebar.	
+	view.other.sidebarTemplate = EXT:cal/template/sidebar.tmpl
+	# cat=Calendar Base (Templates)/file/other/2; type=string; label=Search Box Template: Marker-based template for the search box.
+	view.other.searchBoxTemplate = EXT:cal/template/search_box.tmpl
+
+	# cat=Calendar Base (Templates)/file/search/1; type=string; label=Search (All) Template: Marker-based template for full search.	
+	view.search.searchResultAllTemplate = EXT:cal/template/search_all.tmpl
+	# cat=Calendar Base (Templates)/file/search/2; type=string; label=Search (Event) Template: Marker-based template for event search.	
+	view.search.searchResultEventTemplate = EXT:cal/template/search_event.tmpl
+	# cat=Calendar Base (Templates)/file/search/3; type=string; label=Search (Location) Template: Marker-based template for location search.	
+	view.search.searchResultLocationTemplate = EXT:cal/template/search_location.tmpl
+	# cat=Calendar Base (Templates)/file/search/4; type=string; label=Search (Organizer) Template: Marker-based template for organizer search.	
+	view.search.searchResultOrganizerTemplate = EXT:cal/template/search_organizer.tmpl
+}

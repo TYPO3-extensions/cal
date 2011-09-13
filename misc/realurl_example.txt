@@ -1,0 +1,48 @@
+/*
+ * Add the following to the postVarSets section of your RealURL config in typo3conf/localconf.php
+ */
+
+'cal'=> array(
+	array(
+		'GETvar' => 'tx_cal_controller[view]'
+	),
+	array(
+		'GETvar' => 'tx_cal_controller[getdate]'
+	),
+	array(
+		'GETvar' => 'tx_cal_controller[lastview]'
+	),
+	array(
+		'GETvar' => 'tx_cal_controller[type]'
+	),
+	
+	array(
+		'GETvar' => 'tx_cal_controller[category]',
+		'lookUpTable' => array(
+			'table' => 'tx_cal_category',
+			'id_field' => 'uid',
+			'alias_field' => 'title',
+			'addWhereClause'  => ' AND NOT deleted',
+			'useUniqueCache' => 1,
+			'useUniqueCache_conf' => array(
+				'strtolower' => 1,
+				'spaceCharacter' => '_',
+			 ),
+		 
+		),
+	),
+	array(
+		'GETvar' => 'tx_cal_controller[uid]',
+		'lookUpTable' => array(
+			'table' => 'tx_cal_event',
+			'id_field' => 'uid',
+			'alias_field' => 'title',
+			'addWhereClause'  => ' AND NOT deleted',
+			'useUniqueCache' => 1,
+			'useUniqueCache_conf' => array(
+				'strtolower' => 1,
+				'spaceCharacter' => '_',
+			),
+		),
+	),
+),

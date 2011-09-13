@@ -1,0 +1,80 @@
+## This enables the cal ics export
+ics = PAGE
+ics {
+  typeNum = 150
+
+  10 < plugin.tx_cal_controller
+  10.view {
+		day >
+		week >
+		month >
+		year >
+		calendar >
+		category >
+		list >
+		freeAndBusy >
+		other >
+		search >
+		search_event >
+		search_location >
+		search_organizer >
+		admin >
+		location >
+		organizer >
+		rss >
+		create_event >
+		edit_event >
+		confirm_event >
+		delete_event >
+		create_calendar >
+		edit_calendar >
+		confirm_calendar >
+		delete_calendar >
+		create_category >
+		edit_category >
+		confirm_category >
+		delete_category >
+		create_location >
+		edit_location >
+		confirm_location >
+		delete_location >
+		create_organizer >
+		edit_organizer >
+		confirm_organizer >
+		delete_organizer >
+		translation >
+	}
+	10.rights {
+		create >
+		edit >
+		delete >
+	}
+  10.pages >
+  10.pages = {$plugin.tx_cal_controller.pidList}
+  10.view.allowedViews = ics,single_ics
+  10.view.ics.eventUidPrefix = {$plugin.tx_cal_controller.view.ics.eventUidPrefix}
+  # @description	The maximum date for recurring events
+  10.view.ics.maxDate = 20090101
+  10.view.ics.minDate = 00000001
+  
+  #stdWraps, e.g. to convert Text to utf8
+  10.view.ics.summary_stdWrap {
+    #csConf = utf-8
+  }
+  10.view.ics.description_stdWrap {
+    #csConf = utf-8
+  }
+  10.view.ics.location_stdWrap {
+    #csConf = utf-8
+  }
+  10.view.ics.category_stdWrap {
+    #csConf = utf-8
+  }
+  
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:application/text
+    xhtml_cleaning = 0
+    admPanel = 0
+  }
+}

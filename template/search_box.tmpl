@@ -1,0 +1,10 @@
+<!--search_box.tmpl-->
+<div class = 'G10BOLD'>###L_SEARCH###:</div>
+<form action="###SEARCH_ACTION_URL###" method="POST">
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
+	<input type="hidden" size="15" name="tx_cal_controller[view]" value="search_event" />
+	<input type="hidden" size="15" name="tx_cal_controller[lastview]" value="###LASTVIEW###" />	   
+	<input type="text" size="15" name="tx_cal_controller[query]" value="" />
+	<input type="image" src="###IMG_PATH###/search.gif" border=0 height="19" width="18" name="tx_cal_controller[submit]" value="###L_DOSEARCH###" />
+</form>
+<!--/search_box.tmpl-->

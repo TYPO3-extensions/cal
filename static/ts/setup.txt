@@ -1,0 +1,2487 @@
+config.cache_clearAtMidnight = 1
+
+plugin.tx_cal_controller {
+	parseFunc < styles.content.parseFunc
+	userFunc = tx_cal_controller->main
+
+	# @description	Name of the calendar.
+	# @also			FlexForm
+	calendarName = My Calendar
+
+	# @description	Allows visitors to subscribe to an event and be notified when it changes.
+	# @also			FlexForm
+	allowSubscribe = 1
+
+	# @description	Allows registered frontend users to subscribe based on the email address in their account.
+	# @also			FlexForm
+	subscribeFeUser = 0
+
+	# @description	Enables CAPTCHA-based validation before a vistor can subscribe to an event.  Requires CAPTCHA Library extension.
+	# @also			FlexForm
+	# @see			http://typo3.org/extensions/repository/search/captcha/
+	subscribeWithCaptcha = 0
+
+	view {
+		# @description	Allowed calendar views. First one in the list is the default view.  
+		#				Options are day,week,month,year,list,event,search_all,search_event,search_location,search_organizer,organizer,location,admin,create_event,confirm_event,save_event,edit_event,delete_event,remove_event,create_location,confirm_location,save_location,edit_loaction,delete_location,remove_location,create_organizer,confirm_organizer,save_organizer,edit_organizer,delete_organizer,remove_organizer,create_calendar,confirm_calendar,save_calendar,edit_calendar,delete_calendar,remove_calendar,create_category,confirm_category,save_category,edit_category,delete_category,remove_category.
+		#				This is most useful when configured from the FlexForm since setting it globally (plugin.tx_cal_controller.view.defaultView) would make all views
+		# 				on the page static.
+		# @also			FlexForm
+		allowedViews =
+		
+		customViews =
+		
+		noViewFoundHelpText = Controller function not found: 
+
+        # @description	Categories can be preselected. Enter a single ID or a comma seperated list
+		category = 
+        
+		# @description	Relative path (from TYPO3 site root) that images should be loaded from.
+		# @also					Constants
+		imagePath = {$plugin.tx_cal_controller.view.imagePath}
+
+		# @description	First day of the week.
+		# @also			FlexForm
+		weekStartDay = Monday
+		
+		# @description	The view to be rendered when clicking on a day link
+		dayLinkTarget = day
+		
+		# @description	The view to be rendered when clicking on a week link
+		weekLinkTarget = week
+		
+		# @description	The view to be rendered when clicking on a month link
+		monthLinkTarget = month
+		
+		# @description	The view to be rendered when clicking on a year link
+		yearkLinkTarget = year
+		
+		# @description	The view to be rendered when clicking on a year link
+		locationLinkTarget = location
+		
+		# @description	The view to be rendered when clicking on a year link
+		organizerLinkTarget = organizer
+		
+		# @description	Views before that date will get a no_follow meta tag
+		startLinkRange = -5 month
+		
+		# @description	Views after that date will get a no_follow meta tag
+		endLinkRange = +5 month
+		
+		# @description	Icon for adding events.
+		addIcon = <img src="###IMG_PATH###/add.gif" border="0"/>
+
+		freeAndBusy {
+			# @description  Enables a free & busy view of the calendar.
+			enable = 0
+
+			# @description  Class applied to free/busy header.
+			headerStyle = fnb_header
+
+			# @description  Class applied to free/busy body.
+			bodyStyle = fnb_body
+
+			# @description  Generic even title when viewed in free/busy view.
+			eventTitle = Busy
+
+			# @description	Default calendar to display in Free/Busy view.
+			defaultCalendarUid =
+		}
+
+		calendar {
+			# @description	Template for creating a new calendar in the frontend.
+			# @also			Constants
+			createCalendarTemplate = {$plugin.tx_cal_controller.view.calendar.createCalendarTemplate}
+
+			# @description	Template for confirming creation of a new calendar in the frontend.
+			# @also			Constants
+			confirmCalendarTemplate = {$plugin.tx_cal_controller.view.calendar.confirmCalendarTemplate}
+			
+			# @description	Template for confirming deletion of a calendar in the frontend.
+			# @also			Constants
+			deleteCalendarTemplate = {$plugin.tx_cal_controller.view.calendar.deleteCalendarTemplate}
+			
+			# @description	Image tag for icon used in link to frontend creation of a calendar.
+			# @see			plugin.tx_cal_controller.view.addIcon
+			addIcon = {$plugin.tx_cal_controller.view.addIcon}
+			
+			# @description	Image tag for icon used in link to frontend editing of a calendar.
+			editIcon = <img src="typo3/gfx/edit2.gif" border="0"/>
+			
+			# @description	Image tag for icon used in link to frontend deletion of a calendar.
+			deleteIcon = <img src="###IMG_PATH###/delete.png" border="0"/>
+		}
+		category {
+			# @description	Template for creating a new category in the frontend.
+			# @also			Constants
+			createCategoryTemplate = {$plugin.tx_cal_controller.view.category.createCategoryTemplate}
+
+			# @description	Template for confirming creation of a new category in the frontend.
+			# @also			Constants
+			confirmCategoryTemplate = {$plugin.tx_cal_controller.view.category.confirmCategoryTemplate}
+			
+			# @description	Template for confirming deletion of a category in the frontend.
+			# @also			Constants
+			deleteCategoryTemplate = {$plugin.tx_cal_controller.view.category.deleteCategoryTemplate}
+			
+			
+			defaultHeaderStyle = default_categoryheader
+			defaultBodyStyle = default_categorybody
+
+			tree {
+				calendar =
+				category =
+				calendarTitle_stdWrap {
+				} 
+				rootElement = TEXT
+				rootElement {
+					wrap = <table class="treelevel0"><tr><td>|</td></tr></table>
+				}
+				selector = TEXT
+				selector {
+					wrap = <input type="checkbox" name="tx_cal_controller[category][]" value="###UID###" | />
+				}
+				element = <span class="###HEADERSTYLE###_bullet ###HEADERSTYLE###_legend_bullet" >&bull;</span><span class="###HEADERSTYLE###_text">###TITLE###</span>
+				emptyElement = <br/><br/>
+				
+				subElement = <br /><table class="treelevel###LEVEL###" id="treelevel###UID###">
+				
+				subElement_wrap {
+					wrap = <tr><td>|</td></tr>
+				}
+				
+				subElement_pre = </table>
+
+				categorySelectorSubmit = <input type="image" class="refresh_calendar" src="###IMG_PATH###/refresh.gif" alt="###REFRESH###" title="###REFRESH###">
+			}
+		}
+		day {
+			# @description	Page to display the day view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			dayViewPid =
+
+			# @description	Start time for the day view.
+			# @also			FlexForm
+			dayStart = 0700
+
+			# @description	End time for the day view.
+			# @also			FlexForm
+			dayEnd = 2300
+
+			# @description	Length of time in minutes for each grid on the day view. Should be evenly
+			#				divisible into 60 minutes (ex. 15,30,60)
+			# @also			FlexForm
+			gridLength = 15
+			
+			# @description	Corrects the starting point to search for events. If you only have the dayview to display you can leave it to 0, but if you have e.g. a month also in your dayview, you should enter a value in seconds, so the month will be filled with events too - not only the one day
+			startPointCorrection = 600000
+			
+			# @description	Same as startingPointCorrection but for the end point
+			endPointCorrection = 600000
+
+			# @description	Template for the day view.
+			# @also			Constants
+			dayTemplate = {$plugin.tx_cal_controller.view.day.dayTemplate}
+
+			# @description	Symbol to use for browsing to next day.
+			nextDaySymbol = &rsaquo;
+
+			# @description	Symbol to use for browsing to previous day.
+			previousDaySymbol = &lsaquo;
+			
+			# @description	Arrow image within the legend for going back to the previous day.
+			legendPrevDayLink = <img src="###IMG_PATH###/left_arrows.gif" width="16" height="20" border="0" align="left" />
+			
+			# @description	Arrow image within the legend for going forward to the next day.
+			legendNextDayLink = <img src="###IMG_PATH###/right_arrows.gif" width="16" height="20" border="0" align="right" />
+
+			# @description	stdWrap for the event title.
+			title_stdWrap {
+			}
+			
+			# @description	stdWrap for the event title of an all day event.
+			alldayTitle_stdWrap {
+				crop = 15|..
+			}
+			
+			# @description	stdWrap for the cell containing the time
+			dayTimeCell_stdWrap {
+				wrap = <tr><td rowspan="###ROWSPAN###" align="center" valign="top" width="60" class="timeborder">|</td><td bgcolor="#a1a5a9" width="1" height="###GRIDLENGTH###"></td>
+			}
+			
+			# @description	stdWrap for the time cell 
+			dayTimeCell2_stdWrap {
+				wrap = <tr><td bgcolor="#a1a5a9" width="1" height="|"></td>
+			}
+			
+			# @description	Pre event wrap
+			dayEventPre = <td rowspan="###ROWSPAN###" align="left" valign="top" 
+			
+			# @description	Post event wrap
+			dayEventPost = </td>
+			
+			# @description	Major time divider in day view.  By default, this is the solid line every 30 minutes.
+			classDayborder = class="dayborder"
+			# @description Minor time divider in day view.  By default, this is the dotted line every 15 minutes.
+			classDayborder2 = class="dayborder2"
+
+			# @description	Wrap for the event status icon.
+			statusIcon_stdWrap {
+				wrap = <img src="###IMG_PATH###/|.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;
+			}
+			
+			# @description	Image tag for icon used to indicate recurring events.
+			recurringIcon = <img src="###IMG_PATH###/recurring.gif" width="9" height="9" alt="" border="0" hspace="0" vspace="0" />&nbsp;
+			
+			# @description	Image tag for icon used in link to frontend editing of an event.
+			editIcon = <img src="typo3/gfx/edit2.gif" border="0"/>
+			
+			# @description	Image tag for icon used in link to frontend creation of an event.
+			addIcon = <img src="###IMG_PATH###/add.gif" border="0"/>
+			
+			# @description	Image tag for icon used in link to frontend deletion of an event.
+			deleteIcon = <img src="###IMG_PATH###/delete.png" border="0"/>
+			
+			# @description	Wrap for a single cell in day view.
+			normalCell_stdWrap {
+				wrap = <td colspan="###COLSPAN###" ###CLASS###>|&nbsp;</td>
+			}
+
+			# @description	Final element for a row in day view.
+			dayFinishRow = </tr>
+			
+			# @description	Date format for weeks within day view.
+			dateFormatWeekList = %A, %b %d
+			
+			# @description	Date format of the day displayed at the top of the view.
+			dateFormatDay = %a, %b %d
+			
+			# @description	Time format for hours shown within the day view.
+			timeFormatDay = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Time format for events shown within the day view.
+			eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Date format of the events shown within the day view.
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+			
+			# @description	Formats the week title
+			titleWrap = COA
+			titleWrap.1 = TEXT
+			titleWrap.1 {
+				data = register:cal_day_starttime
+				strftime = {$plugin.tx_cal_controller.view.dateFormat}
+			}
+	#		titleWrap.3 = TEXT
+	#		titleWrap.3 {
+	#			data = register:cal_day_starttime
+	#			date = W
+	#			wrap = &nbsp;(WK |)
+	#		}
+			
+			calendarStyle_stdWrap {
+				wrap = calendar|
+			}
+		}
+
+		week {
+			# @description	Page to display the week view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			weekViewPid =
+			
+			# @description	Corrects the starting point to search for events. If you only have the weekview to display you can leave it to 0, but if you have e.g. a month also in your weekview, you should enter a value in seconds, so the month will be filled with events too - not only the onw week
+			#				
+			startPointCorrection = 600000
+			
+			# @description	Same as startingPointCorrection but for the end point
+			endPointCorrection = 600000
+
+			# @description	Template for the week view.
+			# @also			Constants
+			weekTemplate = {$plugin.tx_cal_controller.view.week.weekTemplate}
+
+			# @description	Symbol to use for browsing to next week.
+			nextWeekSymbol = &raquo;
+
+			# @description	Symbol to use for browsing to previous week.
+			previousWeekSymbol = &laquo;
+
+			# @description	Symbol to use for browsing to next day.
+			# @see			plugin.tx_cal_controller.view.day.nextDaySymbol
+			nextDaySymbol < plugin.tx_cal_controller.view.day.nextDaySymbol
+
+			# @description	Symbol to use for browsing to previous day.
+			# @see			plugin.tx_cal_controller.view.day.previousDaySymbol
+			previousDaySymbol < plugin.tx_cal_controller.view.day.previousDaySymbol
+
+			# @description	Row for a full hour.
+			weekDisplayFullHour = <tr><td colspan="4" rowspan="###60TH_GRIDLENGTH###" align="center" valign="top" width="60" class="timeborder">###TIME###</td><td bgcolor="#a1a5a9" width="1" height="###GRIDLENGTH###"></td>
+			
+			# @description	Cells within the weekDisplayFullHour
+			# @see	plugin.tx_cal_controller.view.week.weekDisplayFullHour
+			weekDisplayInbetween = <tr><td bgcolor="#a1a5a9" width="1" height="###GRIDLENGTH###"></td>
+
+			# @description	Wrap for the event title.
+			title_stdWrap {
+				wrap = <div>|</div>
+			}
+			
+			# @description	Wrap around each weekday title.
+			weekday_stdWrap {
+				wrap = <span class="V9BOLD">|</span>
+			}
+			
+			# @description	Major time divider in day view.  By default, this is the dotted line every 15 minutes.
+			classWeekborder = class="weekborder"
+
+			# @description	Wrap for the event status icon.
+			# @see			plugin.tx_cal_controller.view.day.statusIcon_stdWrap
+			statusIcon_stdWrap < plugin.tx_cal_controller.view.day.statusIcon_stdWrap
+			
+			# @description	Image tag for icon used to indicate recurring events.
+			# @see			plugin.tx_cal_controller.view.day.recurringIcon
+			recurringIcon < plugin.tx_cal_controller.view.day.recurringIcon
+			
+			# @description	Image tag for icon used in link to frontend editing of an event.
+			# @see			plugin.tx_cal_controller.view.day.editIcon
+			editIcon < plugin.tx_cal_controller.view.day.editIcon
+			
+			# @description	Image tag for icon used in link to frontend creation of an event.
+			# @see			plugin.tx_cal_controller.view.day.addIcon
+			addIcon < plugin.tx_cal_controller.view.day.addIcon
+			
+			# @description	Image tag for icon used in link to frontend deletion of an event.
+			# @see			plugin.tx_cal_controller.view.day.deleteIcon
+			deleteIcon < plugin.tx_cal_controller.view.day.deleteIcon
+
+			# @description	Pre event wrap.
+			# @see			plugin.tx_cal_controller.view.day.dayEventPre	
+			weekEventPre < plugin.tx_cal_controller.view.day.dayEventPre
+			
+			# @description	Post event wrap.
+			# @see			plugin.tx_cal_controller.view.day.weekEventPost
+			weekEventPost < plugin.tx_cal_controller.view.day.weekEventPost
+			
+			# @description	Wrap for a single cell in week view.
+			# @see			plugin.tx_cal_controller.view.day.normalCell_stdWrap
+			normalCell_stdWrap < plugin.tx_cal_controller.view.day.normalCell_stdWrap
+
+			# @description	Final element for a row in week view.
+			# @see			plugin.tx_cal_controller.view.day.dayFinishRow
+			weekFinishRow < plugin.tx_cal_controller.view.day.dayFinishRow
+			
+			# @description	Date format for weeks within week view.
+			dateFormatWeekList = %a, %b %d
+            
+			# @description	Date format for week show at the top of view.
+			dateFormatWeek = {$plugin.tx_cal_controller.view.dateFormat}
+            
+			# @description	Time format for hours shown within the week view.
+			timeFormatWeek = {$plugin.tx_cal_controller.view.timeFormat}
+            
+			# @description	Time format for event start time.
+			eventStartTimeFormatWeek = {$plugin.tx_cal_controller.view.timeFormat}
+            
+			# @description	Time format for event end time.
+			eventEndTimeFormatWeek = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Time format for events shown within the week view.
+			eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Date format of the events shown within the week view.
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+
+			# @description	Arrow image within the legend for going back to the previous day.
+            legendPrevDayLink = <img src="###IMG_PATH###/left_arrows.gif" alt="###L_PREV###" class="nextweek_arrow" />
+            
+			# @description	Arrow image within the legend for going forward to the next day.
+			legendNextDayLink = <img src="###IMG_PATH###/right_arrows.gif" alt="###L_NEXT###" class="previousweek_arrow" />
+			
+			# @description	Formats the week title
+			titleWrap = COA
+			titleWrap.1 = TEXT
+			titleWrap.1 {
+				data = register:cal_week_starttime
+				strftime = {$plugin.tx_cal_controller.view.dateFormat}
+			}
+			titleWrap.2 = TEXT
+			titleWrap.2 {
+				data = register:cal_week_endtime
+				strftime = {$plugin.tx_cal_controller.view.dateFormat}
+				wrap = &nbsp;-&nbsp;|
+			}
+	#		titleWrap.3 = TEXT
+	#		titleWrap.3 {
+	#			data = register:cal_week_starttime
+	#			date = W
+	#			wrap = &nbsp;(WK |)
+	#		}
+	
+			calendarStyle_stdWrap {
+				wrap = calendar|
+			}
+
+		}
+
+		month {
+			# @description	Page to display the month view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			monthViewPid =
+			
+			# @description	Corrects the starting point to search for events. If you only have only one month in your view to display you can leave it to 0, but if you have e.g. a small months also in your view, you should enter a value in seconds, so the other months will be filled with events too
+			#				60*60*24*35
+			startPointCorrection = 3024000
+			
+			# @description	Same as startingPointCorrection but for the end point
+			endPointCorrection = 3024000
+
+			# @description	Template for the month view
+			# @also			Constants
+			monthTemplate = {$plugin.tx_cal_controller.view.month.monthTemplate}
+
+			# @description	Template for a small month
+			# @also			Constants
+			monthSmallTemplate = {$plugin.tx_cal_controller.view.month.monthSmallTemplate}
+
+			# @description	Template for a medium month, like in the year view
+			# @also			Constants
+			# @see			tx_cal_controller.view.year.yearTemplate
+			monthMediumTemplate = {$plugin.tx_cal_controller.view.month.monthMediumTemplate}
+
+			# @description	Template for a large month as it is in the default month view
+			# @also			Constants
+			monthLargeTemplate = {$plugin.tx_cal_controller.view.month.monthLargeTemplate}
+
+			# @description	Template for a navigation bar in the month view
+			# @also			Constants
+			calendarNavTemplate = {$plugin.tx_cal_controller.view.month.calendarNavTemplate}
+
+			# @description	Show this month's events in a list view
+			# @also			FlexForm
+			thisMonthsEvents = 0
+
+			# @description	Defines cropping for event titles in month view.
+			title_stdWrap {
+				crop = 11|..
+			}
+
+			# @description	Date format for month shown at top of view.
+            dateFormatMonth = %B
+			
+			
+			# @description	Image tag for icon used in link to frontend creation of an event.
+			# @see			plugin.tx_cal_controller.view.day.addIcon
+            addIcon < plugin.tx_cal_controller.view.day.addIcon
+            
+			# @description	Image tag for icon used in link to frontend editing of an event.
+			# @see			plugin.tx_cal_controller.view.day.editIcon
+			editIcon < plugin.tx_cal_controller.view.day.editIcon
+
+			# @description	Wrap for all day events in large month view.
+			allDayLarge_stdWrap {
+				wrap = <div class="V10"><ul class="###HEADERSTYLE###_legend"><li><span style="color:#000000">|</span></li></ul></div>
+			}
+			
+			# @description	Wrap for all day events and standard events in small month view.
+			smallLink_stdWrap {
+				wrap = <span class="bold">|</span>
+			}
+
+			# @description	Wrap for all day events in medium month view.
+			mediumLink_stdWrap {
+				wrap = <ul class="|_legend"><li></li></ul>
+			}
+			
+			# @description	Wrap for standard events in large month view.
+			eventLarge_stdWrap {
+			}
+
+			# @description	Wrap for standard events in medium month view.
+			eventMedium_stdWrap {
+				wrap = <span class="###HEADERSTYLE###_bullet" title="###TITLE###">&bull;</span>|<br />
+			}
+
+			# Container for free/busy events.
+			#@see plugin.tx_cal_controller.view.freeAndBusy.headerStyle, plugin.tx_cal_controller.view.freeAndBusy.eventTitle
+			freeAndBusyEvent_stdWrap {
+				insertData = 1
+				wrap = <div class="V9"><span class="{$plugin.tx_cal_controller.view.freeAndBusy.headerStyle}_bullet"><span class="{$plugin.tx_cal_controller.view.freeAndBusy.headerStyle}_text">{$plugin.tx_cal_controller.view.freeAndBusy.eventTitle}</span></div>
+			}
+			
+			# @description	Additional styling for small month view.
+			monthSmallStyle = monthsmallbasic
+			
+			# @description	Additional styling for medium month view.
+			monthMediumStyle = monthmediumbasic
+			
+			# @description	Additional styling for large month view.
+			monthLargeStyle = monthlargebasic
+			
+			# @description	CSS class for days not in the current month.
+			monthOffStyle = monthoff
+			
+			# @description	CSS class for the selected day in the current month (ie. today).
+			monthSelectedStyle = monthselected
+			
+			# @description	CSS class for the weekend in the month (ie. today).
+			monthWeekendStyle = monthWeekend
+			
+			# @description	CSS class for today in the current month.
+			monthTodayStyle = monthtoday
+			
+			# @description	CSS class for a day containing an event.
+			eventDayStyle = eventday
+			
+			# @description	Time format for events shown within the month view.
+			eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Date format of the events shown within the month view.
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+			
+			calendarStyle_stdWrap {
+				wrap = calendar|
+			}
+			
+			# @description	Formats the list title
+			heading = COA
+			heading.1 = TEXT
+			heading.1 {
+				data = register:cal_list_starttime
+				strftime = {$plugin.tx_cal_controller.view.dateFormat}
+			}
+			heading.2 = TEXT
+			heading.2 {
+				data = register:cal_list_endtime
+				strftime = {$plugin.tx_cal_controller.view.dateFormat}
+				wrap = &nbsp;-&nbsp;|
+			}
+			image_stdWrap < event.image_stdWrap
+		}
+
+		year {
+			# @description	Page to display the year view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			yearViewPid =
+			
+			# @description	Corrects the starting point to search for events. If the year ends on a monday and you want to have the rest of the weekdays filled
+			#				60*60*24*6
+			startPointCorrection = 518400
+			
+			# @description	Same as startingPointCorrection but for the end point
+			endPointCorrection = 518400
+
+			# @description	Template for the year view.
+			# @also			Constants
+			yearTemplate = {$plugin.tx_cal_controller.view.year.yearTemplate}
+			
+			# @description	Time format for events shown within the year view.
+			eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Date format of the events shown within the year view.
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+			
+			calendarStyle_stdWrap {
+				wrap = calendar|
+			}
+			image_stdWrap < event.image_stdWrap
+		}
+
+		event {
+			# @description	Page to display the event view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			eventViewPid =
+			
+			# @description	Page view configured for creating an event. If this is not configured,
+			#				then the current page will be used instead.
+			createEventViewPid = 
+			
+			# @description	Page view configured for editing an event. If this is not configured,
+			#				then the current page will be used instead.
+			editEventViewPid = 
+			
+			# @description	Page view configured for deleting an event. If this is not configured,
+			#				then the current page will be used instead.
+			deleteEventViewPid = 
+
+			# @description	Template for the standard event view. Any events following the standard event
+			#				structure can be used with this template.
+			# @also			Constants
+			eventTemplate = {$plugin.tx_cal_controller.view.event.eventTemplate}
+
+			# @description	Template for the phpicalendar event view.  This is an example of how different
+			#				event types can provide their own views.
+			# @also			Constants
+			phpicalendarEventTemplate = {$plugin.tx_cal_controller.view.event.phpicalendarEventTemplate}
+
+			# @description	Template for creation of an event in the frontend.
+			# @also			Constants
+			createEventTemplate = {$plugin.tx_cal_controller.view.event.createEventTemplate}
+
+			# @description	Template for confirmation of an event created in the frontend.
+			# @also			Constants
+			confirmEventTemplate = {$plugin.tx_cal_controller.view.event.confirmEventTemplate}
+
+			# @description	Template for deleting an event in the frontend.
+			# @also	Constants
+			deleteEventTemplate = {$plugin.tx_cal_controller.view.event.deleteEventTemplate}
+			
+			subscriptionManagerTemplate = {$plugin.tx_cal_controller.view.event.subscriptionManagerTemplate}
+			
+			useTitleForLinkTitle = 1
+			ownLinkTitleText = 
+			
+			dateDayPosition = 2
+			dateMonthPosition = 1
+			dateYearPosition = 0
+			dateSplitSymbol = -
+			
+			# @description	If start date and end date are the same, only show start.
+			dontShowEndDateIfEqualsStartDate = 1
+
+			notify {
+				# @description	The pade id where the subscription manager view is allowed
+				subscriptionViewPid = {$plugin.tx_cal_controller.view.event.notify.subscriptionViewPid}
+				
+				# @description	Template for subscription confirmation
+				confirmTemplate = {$plugin.tx_cal_controller.view.event.notify.confirmTemplate}
+				
+				# @description	Title for subscription confirmation email
+				confirmTitle = Please confirm the event monitoring on www.abc.com
+				
+				# @description	Template for subscription stop confirmation
+				unsubscribeConfirmTemplate = {$plugin.tx_cal_controller.view.event.notify.unsubscribeConfirmTemplate}
+				
+				# @description	Title for subscription stop confirmation email
+				unsubscribeConfirmTitle = Please confirm the event monitoring stop on www.abc.com
+				
+				# @description	Template for email notification if an event is created.
+				# @also	Constants
+				all.onCreateTemplate = {$plugin.tx_cal_controller.view.event.notify.all.onCreateTemplate}
+
+				# @description	Template for email notification if an event has been changed.
+				# @also	Constants
+				all.onChangeTemplate = {$plugin.tx_cal_controller.view.event.notify.all.onChangeTemplate}
+				
+				# @description	Template for email notification if an event has been deleted.
+				# @also	Constants
+				all.onDeleteTemplate = {$plugin.tx_cal_controller.view.event.notify.all.onDeleteTemplate}
+
+				# @description	Email address that notification emails are sent from.
+				emailAddress = {$plugin.tx_cal_controller.emailAddress}
+
+				# @description		Reply-to address for notification emails.
+				emailReplyAddress = {$plugin.tx_cal_controller.emailAddress}
+
+				# @description		From name for notification emails.
+				fromName = {$plugin.tx_cal_controller.emailName}
+
+				# @description		Reply-to name for notification emails.
+				replyToName = {$plugin.tx_cal_controller.emailName}
+
+				# @description		Organization for notification emails.
+				organisation = {$plugin.tx_cal_controller.emailOrganisation}
+				
+				# @description		Date format for notification emails.
+				dateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+				
+				# @description		Time format for notification emails.
+				timeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+				
+				# @description	Time format for events shown within the notify view.
+				eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+				
+				# @description	Date format of the events shown within the notify view.
+				eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+				
+				# @description		Title for notification emails on create.
+				all.onCreateEmailTitle = The event ###TITLE### has been created
+				
+				# @description		Title for notification emails on change.
+				all.onChangeEmailTitle = The event ###TITLE### has been changed
+				
+				# @description		Title for notification emails on delete.
+				all.onDeleteEmailTitle = The event ###TITLE### has been deleted
+			}
+			
+			remind {
+				# @description	Time in minutes, to send out the reminder before the event starts.
+				time = {$plugin.tx_cal_controller.view.event.remind.time}
+				
+				# @description	Template for email reminder for an event.
+				# @also	Constants
+				all.template = {$plugin.tx_cal_controller.view.event.remind.all.template}
+			
+				# @description	Email address that reminder emails are sent from.
+				emailAddress = {$plugin.tx_cal_controller.emailAddress}
+
+				# @description		Reply-to address for reminder emails.
+				emailReplyAddress = {$plugin.tx_cal_controller.emailAddress}
+
+				# @description		From name for reminder emails.
+				fromName = {$plugin.tx_cal_controller.emailName}
+
+				# @description		Reply-to name for reminder emails.
+				replyToName = {$plugin.tx_cal_controller.emailName}
+
+				# @description		Organization for reminder emails.
+				organisation = {$plugin.tx_cal_controller.emailOrganisation}
+				
+				# @description		Date format for reminder emails.
+				dateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+				
+				# @description		Time format for reminder emails.
+				timeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+				
+				# @description	Time format for events shown within the reminder view.
+				eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+				
+				# @description	Date format of the events shown within the reminder view.
+				eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+				
+				# @description		Title for reminder emails.
+				all.emailTitle = Reminder for event: ###TITLE###
+			}
+			
+			differentStyleIfOwnEvent = 0
+			headerStyleOfOwnEvent = green_catheader
+			bodyStyleOfOwnEvent = green_catbody
+
+			# @description	Use the frontend date selector from rlmp_dateselectlib in frontend editing.
+			# @see	http://typo3.org/extensions/repository/search/rlmp_dateselectlib/
+			useDateSelector = 1
+			
+			# @description	Edit icon
+			editIcon < plugin.tx_cal_controller.view.day.editIcon
+			
+			# @description	Delete icon
+			deleteIcon < plugin.tx_cal_controller.view.day.deleteIcon
+			
+			# @description	Date format
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+			
+			# @description	Time format
+			dateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+			
+			# @description	Time format
+			timeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Time format for event.
+			eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Date format of the event.
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+			
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_event_title}:</label>|</div>
+			}
+			
+			startdate_stdWrap {
+				dataWrap = <div><label for="startdate">{LLL:EXT:cal/controller/locallang.xml:l_event_startdate}:</label>|</div>
+			}
+			
+			enddate_stdWrap {
+				noTrimWrap = | - ||
+				required = 1
+				dataWrap = <div><label for="enddate">{LLL:EXT:cal/controller/locallang.xml:l_event_enddate}:</label>|</div>
+			}
+			
+			starttime_stdWrap {
+				dataWrap = <div><label for="starttime">{LLL:EXT:cal/controller/locallang.xml:l_event_starttime}:</label>|</div>
+			}
+			
+			endtime_stdWrap {
+				dataWrap = <div><label for="endtime">{LLL:EXT:cal/controller/locallang.xml:l_event_endtime}:</label>|</div>
+			}
+			
+			organizer_stdWrap {
+				required = 1
+				dataWrap = <div><label for="organizer">{LLL:EXT:cal/controller/locallang.xml:l_organizer}:</label>|</div>
+			}
+			
+			location_stdWrap {
+				required = 1
+				dataWrap = <div><label for="location">{LLL:EXT:cal/controller/locallang.xml:l_location}:</label>|</div>
+			}
+			
+			# @description	stdWrap for event teaser in event view
+			teaser_stdWrap {
+				required = 1
+				dataWrap = <div><label for="teaser">{LLL:EXT:cal/controller/locallang.xml:l_event_teaser}:</label>|</div>
+				parseFunc =< plugin.tx_cal_controller.parseFunc
+			}
+			
+			# @description	stdWrap for event description in event view
+			description_stdWrap {
+				required = 1
+				dataWrap = <div><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_event_description}:</label>|</div>
+				parseFunc =< plugin.tx_cal_controller.parseFunc
+			}
+			
+			image_stdWrap {
+				required = 1
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_event_image}:</label>|</div>
+				# @description	Maximum number of images to be displayed
+				imageCount=4
+				
+				# @description	The database field to look for the image caption
+				imgAltTextField = imagecaption
+				
+				# @description	Wraps the image
+				imageWrapIfAny = <div class="cal-single-img"> | </div>
+	
+				# @description
+				caption_stdWrap {
+					wrap = <p class="cal-single-imgcaption"> | </p>
+					trim=1
+				}
+				
+				image {
+					
+					# @description	Maximum with of a single image
+					file.maxW = {$plugin.tx_cal_controller.singleMaxW}
+					# @description	Maximum height of a single image
+					file.maxH = {$plugin.tx_cal_controller.singleMaxH}
+					
+					# @description	Image wrap
+					wrap =
+				    
+					# @description	Creates a popup window with the image
+					imageLinkWrap {
+						enable = 1
+						bodyTag = <body bgColor="#ffffff">
+						wrap = <a href="javascript:close();"> | </a>
+						width = 500m
+						height = 500
+						JSwindow = 1
+						JSwindow.newWindow = 1
+						JSwindow.expand = 17,20
+					}
+				}
+			}
+
+			# @description	Enables a preview of the event
+			isPreview = 0
+			
+			# @description	Defines cropping for event description in event view.
+			preview_stdWrap < plugin.tx_cal_controller.view.event.description_stdWrap
+			preview_stdWrap {
+				crop = 100|..
+			}
+			
+			attachment_label = TEXT
+			attachment_label.wrap = </tr><td class="event-single-files">|</td>
+			attachment_label.data = LLL:EXT:cal/controller/locallang.xml:l_event_attachment
+
+			attachment_stdWrap {
+				required = 1
+				dataWrap = <div><label for="attachment">{LLL:EXT:cal/controller/locallang.xml:l_event_attachment}:</label>|</div>
+			}
+			attachmentHeader_stdWrap.wrap = <dt>|</dt>
+			attachment {
+				path = uploads/tx_cal/media/
+				icon = 1
+				stdWrap.wrap = <dd>|</dd>
+			}
+			
+			calendarStyle_stdWrap {
+				wrap = calendar|
+			}
+			
+			ics_stdWrap {
+				required = 1
+				wrap = <div>|</div>
+			}
+			
+			noEventFound_stdWrap =
+		}
+
+		location {
+			# @description	Page to display the location view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			locationViewPid =
+			
+			# @description	Template for generic location view.
+			# @also			Constants
+			locationTemplate = {$plugin.tx_cal_controller.view.location.locationTemplate}
+
+			# @description	Template for location view when using the partner framework.
+			# @also			Constants
+			locationTemplate4Partner = {$plugin.tx_cal_controller.view.location.locationTemplate4Partner}
+
+			# @description	Template for location view when using tt_address.
+			# @also			Constants
+			locationTemplate4Address = {$plugin.tx_cal_controller.view.location.locationTemplate4Address}
+
+			# @description	Template for creating a location in the frontend.
+			# @also			Constants
+			createLocationTemplate = {$plugin.tx_cal_controller.view.location.createLocationTemplate}
+
+			# @description	Template for confirming a location created in the frontend.
+			# @also			Constants
+			confirmLocationTemplate = {$plugin.tx_cal_controller.view.location.confirmLocationTemplate}
+			
+			# @description	Template for deleting a location in the frontend.
+			# @also			Constants
+			deleteLocationTemplate = {$plugin.tx_cal_controller.view.location.deleteLocationTemplate}
+			
+			# @description	Enables the rendering of the wec_map.
+			# @also			Constants
+			showMap = {$plugin.tx_cal_controller.view.location.showMap}
+			
+			map {
+				# @description	API Key for Google Maps.
+				# @see	http://www.google.com/apis/maps/signup.html
+				apiKey =
+				
+				# @description	Width of the map.
+				mapWidth = 300
+				
+				# @description	Height of the map.
+				mapHeight = 300
+			}
+			
+			description_stdWrap {
+			    parseFunc =< plugin.tx_cal_controller.parseFunc
+			} 
+			emailStdWrap {
+		        setContentToCurrent = 1
+		        typolink.parameter.current = 1
+		    }
+		    linkStdWrap < .emailStdWrap
+		    
+			image_stdWrap < plugin.tx_cal_controller.view.event.image_stdWrap
+			
+			noLocationFound_stdWrap =
+		}
+
+		organizer {
+			# @description	Page to display the week view on. If this is not configured, then the
+			#				current page will be used instead.
+			# @also			FlexForm
+			organizerViewPid =
+			
+			# @description	Template for generic organizer view.
+			# @also			Constants
+			organizerTemplate = {$plugin.tx_cal_controller.view.organizer.organizerTemplate}
+
+			# @description	Template for organizer view when using the partner framework.
+			# @also			Constants
+			organizerTemplate4Partner = {$plugin.tx_cal_controller.view.organizer.organizerTemplate4Partner}
+
+			# @description	Template for organizer view when using tt_address.
+			# @also			Constants
+			organizerTemplate4Address = {$plugin.tx_cal_controller.view.organizer.organizerTemplate4Address}
+
+			# @todo What does this do?  Looks to only be relevant to partner framework.
+			contactInfoType = 1
+			
+			description_stdWrap {
+			    parseFunc =< plugin.tx_cal_controller.parseFunc
+			}
+			emailStdWrap {
+		        setContentToCurrent = 1
+		        typolink.parameter.current = 1
+		    }
+		    linkStdWrap < .emailStdWrap
+		    
+		    image_stdWrap < plugin.tx_cal_controller.view.event.image_stdWrap
+		    
+		    noOrganizerFound_stdWrap =
+		}
+
+		list {
+			# @description	Show events starting with this date.
+			# @also			FlexForm
+			starttime = now
+
+			# @description	Show events until this date.
+			# @also			FlexForm
+			endtime = +1 month
+			
+			# @description	Ignores the starttime and endtime value and displays all events of the getdate day.
+			useGetdate = 0
+			
+			# @description	Defines the view.list.endtime as endtime for the list starting with the parameter getdate
+			useCustomEndtime = 0
+
+			# @description	Maximum number of events to display.
+			# @also			FlexForm
+			maxEvents = 
+			
+			# @description	Template for list view.
+			# @also			Constants
+			listTemplate = {$plugin.tx_cal_controller.view.list.listTemplate}
+			
+			# @description	Image tag for icon used in link to frontend creation of an event.
+			# @see			plugin.tx_cal_controller.view.day.addIcon
+			addIcon < plugin.tx_cal_controller.view.day.addIcon
+			
+			# @description	Time format for events shown within the list view.
+			eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Date format of the events shown within the listy view.
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+			
+			enddate_stdWrap {
+				noTrimWrap = | - ||
+				required = 1
+			}
+			
+			# @description	Title wrap
+			title_stdWrap.wrap =
+			
+			# @description	Wrap for the no event found text
+			noEventFound_stdWrap {
+				wrap = <dt>|</dt> 
+			}
+			
+			image_stdWrap {
+			
+				# @description	Maximum number of images to be displayed
+				imageCount=1
+			
+				# @description	Image wrap
+				imageWrapIfAny =
+			
+				# Configuration for images displayed in list view.
+				# @see	plugin.tx_cal_controller.listMaxW, plugin.tx_cal_controller.listMaxH
+				image < plugin.tx_cal_controller.view.event.image_stdWrap.image
+				image {
+					file.maxW = {$plugin.tx_cal_controller.listMaxW}
+					file.maxH = {$plugin.tx_cal_controller.listMaxH}
+				}
+			}
+			
+			# @description	stdWrap for event description in list view
+			description_stdWrap.crop = 100|...
+			
+            found_stdWrap {
+			    noTrimWrap = |<p class="found">| {LLL:EXT:cal/controller/locallang.xml:l_search_found}</p>|
+                insertData = 1
+		    }
+        
+			# @description	Formats the list title
+			heading = COA
+			heading.1 = TEXT
+			heading.1 {
+				data = register:cal_list_starttime
+				strftime = {$plugin.tx_cal_controller.view.dateFormat}
+			}
+			heading.2 = TEXT
+			heading.2 {
+				data = register:cal_list_endtime
+				strftime = {$plugin.tx_cal_controller.view.dateFormat}
+				wrap = &nbsp;-&nbsp;|
+			}
+			
+			# @description	Enables seperation of different days/weeks/months in the list view
+            enableDayWrapper = 0
+			dayWrapper = COA
+			dayWrapper.10 = TEXT
+			dayWrapper.10 {
+				strftime = %d. %B
+				wrap = <dt style="background-color:#CCCCCC;">|</dt>
+			}
+			enableWeekWrapper = 0
+			weekWrapper = COA
+			weekWrapper.10 = TEXT
+			weekWrapper.10 {
+				date = W
+				wrap = <dt style="background-color:#CCCCCC;">|. (Week)</dt>
+			}
+			enableMonthWrapper = 0
+			monthWrapper = COA
+			monthWrapper.10 = TEXT
+			monthWrapper.10 {
+				strftime = %B %Y
+				wrap = <dt style="background-color:#CCCCCC;">|</dt>
+			}
+            
+            # @description Enables and configure pagebrowser for the list
+            pageBrowser = 1
+            pageBrowser.pagesCount = 0
+            pageBrowser.recordsPerPage = 10
+            pageBrowser.actPage_stdWrap.wrap = <span><b>|</b></span>
+            pageBrowser.space_stdWrap.wrap = <span>|</span>
+            pageBrowser.pages_stdWrap.wrap = <span>|</span>
+            pageBrowser.next_stdWrap.wrap = <span>|</span>
+            pageBrowser.previous_stdWrap.wrap = <span>|</span>
+            
+            enableCategoryWrapper = 0
+			categoryWrapper = COA
+			categoryWrapper.10 = TEXT
+			categoryWrapper.10 {
+				wrap = <dt style="background-color:#CC0000;">|</dt>
+			}
+			
+			enableCalendarWrapper = 0
+			calendarWrapper = COA
+			calendarWrapper.10 = TEXT
+			calendarWrapper.10 {
+				wrap = <dt style="background-color:#000099;">|</dt>
+			}
+			
+			calendarStyle_stdWrap {
+				wrap = calendar|
+			}
+			
+			# @description	If start date and end date are the same, only show start.
+			dontShowEndDateIfEqualsStartDate = 1
+		}
+		
+		rss {
+			dontShowEndDateIfEqualsStartDate = 1
+			endtime_stdWrap {
+				noTrimWrap = | - ||
+				required = 1
+			}
+		}
+		ics {
+			# @description	Turns on ICS/iCal links in the frontend.
+			# @also			FlexForm
+			showIcsLinks = {$plugin.tx_cal_controller.view.ics.showIcsLinks}
+
+			# @description	Template for ICS view.
+			# @also			Constants
+			icsTemplate = {$plugin.tx_cal_controller.view.ics.icsTemplate}
+
+			# @description	Template for ICS list view.
+			# @also			Constants
+			icsListTemplate = {$plugin.tx_cal_controller.view.ics.icsListTemplate}
+			
+			# @description	Prefix for used with event UID to create a GUID.  Site URL
+			#				is a good choice here to ensure uniqueness.
+			eventUidPrefix = {$plugin.tx_cal_controller.view.ics.eventUidPrefix}
+			
+			attachment {
+				path = {$plugin.tx_cal_controller.view.ics.attachment.path}
+			}
+		}
+		admin {
+			# @description	Template for frontend administrative view.
+			# @also			Constants
+			adminTemplate = {$plugin.tx_cal_controller.view.admin.adminTemplate}
+			
+			# @description	View target name for frontend administrative view.
+			# @also			Constants
+			viewName = {$plugin.tx_cal_controller.view.admin.viewName}
+		}
+
+		other {
+			# @description	Displays a login box with the calendar.  Requires the newloginbox extension.
+			# @also			FlexForm
+			# @see			http://typo3.org/extensions/repository/search/newloginbox/
+			# @todo			Does it really require newlogin or will others work?
+			showLogin = 0
+
+			# @description	Page to perform login on.  If login fails, redirect to this page.
+			loginPageId =
+
+			# @description	Page where frontend users are stored.
+			userFolderId =
+
+			# @description	Show the search box.
+			# @also			FlexForm
+			showSearch = 0
+
+			# @todo			Not needed?
+			showGoto = 0
+
+			# @description	Enables category filtering.
+			# @also			FlexForm
+			showCategorySelection = 0
+			
+			# @description	Hidden input element used to track changes in the category selector.
+			categorySwitch = <input type="hidden" name="###NAME###" value="###VALUE###" />
+			
+			# @description	Submit button for the category selector.
+			categorySelectorSubmit = <input type="image" class="refresh_calendar" src="###IMG_PATH###/refresh.gif" alt="###REFRESH###" title="###REFRESH###">
+
+			# @description	Submit button to clear the category selection.
+			categorySelectorClear = <form action="###CATEGORYURL###"><input type="hidden" name="tx_cal_controller[category]" value=""/> <input type="image" class="refresh_calendar" src="###IMG_PATH###/refresh.gif" alt="###REFRESH###" title="###REFRESH###"></form>
+
+			# @description	Boolean value indicating whether the calendar switcher should be shown.
+			showCalendarSwitch = 0
+
+			# @description	Template for option tag used in category and calendar selector.
+			optionString = <option value="###VALUE###">###NAME###</option>
+
+			# @description	Adds a sidebar box with tomorrow's events.
+			# @also			FlexForm
+			showTomorrowEvents = 0
+
+			# @description	Wrap for tomorrow's events shown in the sidebar.
+			tomorrowsEvents_stdWrap {
+				wrap = |<br />
+			}
+			
+			# @description	Wrap for the legend shown in the sidebar.
+			legend_stdWrap {
+				wrap = |<div style="text-align:right;margin-left:10px;"></div>
+			}
+			
+			# @description	Wrap for the calendar legend shown in the sidebar.
+			legendCalendar_stdWrap {
+				wrap = <div class="legend_calendar">|</div>
+			}
+			
+			# @description	Wrap for the category legend shown in the sidebar.
+			legendCategory_stdWrap {
+				wrap = <div class="V9"><span class="###HEADERSTYLE###_bullet ###HEADERSTYLE###_legend_bullet">&bull;</span><span class="###HEADERSTYLE###_text ###HEADERSTYLE###_legend_text">|</span></div>
+			}
+
+			# @description	Not currently implemented.
+			showTodos = 0
+
+			# @description	Enables calendar navigation from the sidebar.
+			# @also			FlexForm
+			showJumps = 0
+
+			# @description	Date format for the dropdown list of weeks in the sidebar.
+			dateFormatWeekJump = %b %d
+			
+			# @description	Option tag for weeks used to build the dropdown list in the sidebar.
+			listWeeks_stdWrap {
+				wrap = <option value="|" >###WEEK1### - ###WEEK2###</option>
+			}
+
+			# @description	Option tag for selected weeks used to build the dropdown list in the sidebar.
+			listWeeksSelected_stdWrap {
+				wrap = <option value="|" selected="selected">###WEEK1### - ###WEEK2###</option>
+			}
+
+			# @description	Date format for the dropdown list of months in the sidebar.
+			dateFormatMonthJump = %B %Y
+			
+			# @description	Option tag for months used to build the dropdown list in the sidebar.
+			listMonth_stdWrap {
+				wrap = <option value="|" >###MONTH###</option>
+			}
+
+			# @description	Option tag for selected months used to build the dropdown list in the sidebar.
+			listMonthSelected_stdWrap {
+				wrap = <option value="|" selected="selected">###MONTH###</option>
+			}
+
+			# @description	Date format for the dropdown list of years in the sidebar.
+			dateFormatYearJump = %Y
+			
+			# @description	Option tag for years used in the dropdown list of years in the sidebar.
+			listYear_stdWrap {
+				wrap = <option value="|" >###YEAR###</option>
+			}
+			
+			# @description	Option tag for selected years used in the dropdown list of years in the sidebar.
+			listYearSelected_stdWrap {
+				wrap = <option value="|" selected="selected">###YEAR###</option>
+			}
+
+			# @description	Template for the sidebar.
+			# @also			Constants
+			sidebarTemplate = {$plugin.tx_cal_controller.view.other.sidebarTemplate}
+
+			# @description	Template for the search box.
+			# @also			Constants
+			searchBoxTemplate = {$plugin.tx_cal_controller.view.other.searchBoxTemplate}
+			
+			# @description	These options correspond to the ###MONTH_MENU### marker
+			monthMenu {
+				
+				# @description	A static month to start the menu with
+				monthStart = 1
+				
+				# @description	A static year to start the menu with
+				yearStart = 2007
+				
+				# @description	Defines to take the current month and year shall be taken instead of what is defined at monthStart and yearStart
+				monthStart.thisMonth = 1
+				
+				# @description	Number of items in the menu
+				count = 5
+				
+				# @description	The format to display the links in
+				format = %b %Y
+				
+				# @description	StandardWrap for each month link
+				month_stdWrap {
+					wrap = <span>|</span>
+				}
+			}
+		}
+
+		search {
+			# @description	Template for search results.
+			# @also			Constants
+			searchResultAllTemplate = {$plugin.tx_cal_controller.view.search.searchResultAllTemplate}
+
+			# @description	Template for search results within an event.
+			# @also			Constants
+			searchResultEventTemplate = {$plugin.tx_cal_controller.view.search.searchResultEventTemplate}
+
+			# @description	Template for search results within a location.
+			# @also			Constants
+			searchResultLocationTemplate = {$plugin.tx_cal_controller.view.search.searchResultLocationTemplate}
+
+			# @description	Template for search results within an organizer.
+			# @also			Constants
+			searchResultOrganizerTemplate = {$plugin.tx_cal_controller.view.search.searchResultOrganizerTemplate}
+
+			# @description	Fields to search within an event.
+			searchEventFieldList = title,organizer,location,description
+
+			# @description	Fields to search within a location.
+			searchLocationFieldList = name
+
+			# @description	Fields to search within an organizer.
+			searchOrganizerFieldList = name
+			 
+            # @description	Start Range for search.
+			startRange = 19700102
+            
+            # @description	End Range for Search.
+			endRange = 20300101
+			
+			defaultValues {
+				query =
+				# @description	Date to start searching, in strtotime format.
+				start_day = now
+				# @description	Date to stop searching, in strtotime format.
+				end_day = +1 month
+			}
+			
+			rlmp_dateselectorlib_config {
+				// Important: dateTimeFormat is really important and should never be changed
+				dateTimeFormat = %Y%m%d
+				inputFieldDateTimeFormat = %Y%m%d
+				toolTipDateTimeFormat = %Y%m%d
+				// tweaking the selectorlib also allows images:<img src="###IMG_PATH###/calendar.gif">
+				inputFieldLabel =  Select
+			}
+            
+		}
+		search_event{	
+			# @description	Time format for events shown within the search_event view.
+			eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Date format of the events shown within the search_event view.
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+			
+			# @description      Formats the list title 
+			heading = COA 
+			heading.1 = TEXT 
+			heading.1 { 
+				data = register:cal_list_starttime 
+				strftime = {$plugin.tx_cal_controller.view.dateFormat} 
+			} 
+			heading.2 = TEXT 
+			heading.2 { 
+				data = register:cal_list_endtime 
+				strftime = {$plugin.tx_cal_controller.view.dateFormat} 
+				wrap = &nbsp;-&nbsp;| 
+			} 
+			title { 
+				# case = upper 
+			} 
+		}
+		
+		create_event {
+			tree {
+				calendar =
+				category = 
+				calendarTitle_stdWrap {
+					if.equals = ###
+				}
+				rootElement = TEXT
+				rootElement {
+					wrap = <table class="treelevel0"><tr><td>|</td></tr></table>
+				}
+				selector = TEXT
+				selector {
+					wrap = <input type="checkbox" name="tx_cal_controller[category][]" value="###UID###" | />
+				}
+				element = <span class="###HEADERSTYLE###_bullet ###HEADERSTYLE###_legend_bullet" >&bull;</span><span class="###HEADERSTYLE###_text">###TITLE###</span>
+				emptyElement = <br/><br/>
+				
+				subElement = <br /><table class="treelevel###LEVEL###" id="treelevel###UID###">
+				
+				subElement_wrap {
+					wrap = <tr><td>|</td></tr>
+				}
+				
+				subElement_pre = </table>
+
+				categorySelectorSubmit = 
+			}
+            
+            #custom size for RTE
+            rte.width = 
+            rte.height = 
+            
+			calendar_stdWrap {
+				dataWrap = <div><label for="calendar">{LLL:EXT:cal/controller/locallang.xml:l_calendar}:</label><select name="tx_cal_controller[switch_calendar]" size="1" onchange="submit();">|</select></div>
+			}
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label><input type="checkbox" | name="tx_cal_controller[hidden]" /></div>
+			}
+			category_stdWrap {
+				dataWrap = <div><label for="category">{LLL:EXT:cal/controller/locallang.xml:l_category}:</label>|</div>
+			}
+			allday_stdWrap {
+				dataWrap = 	<div><label for="allday">{LLL:EXT:cal/controller/locallang.xml:l_event_allday}:</label><input type="checkbox" | name="tx_cal_controller[allday]" /></div>
+			}
+			startdate_stdWrap {
+				dataWrap = 	<div><label for="startdate">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_startdate}:</label><input type="text" value="|" name="tx_cal_controller[event_start_day]" id="event_start_day" />###START_DAY_SELECTOR###</div>
+			}
+			enddate_stdWrap {
+				dataWrap = 	<div><label for="enddate">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_enddate}:</label><input type="text" value="|" name="tx_cal_controller[event_end_day]" id="event_end_day" />###END_DAY_SELECTOR###</div>
+			}
+			starthour_stdWrap {
+				dataWrap = 	<div><label for="starttime">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_starttime}:</label><select name="tx_cal_controller[event_start_hour]" id="event_start_hour" size="1">|</select>
+			}
+			startminute_stdWrap {
+				dataWrap = 	:<select name="tx_cal_controller[event_start_minutes]" id="event_start_minutes" size="1">|</select></div>
+			}
+			endhour_stdWrap {
+				dataWrap = 	<div><label for="endtime">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_endtime}:</label><select name="tx_cal_controller[event_end_hour]" id="event_end_hour" size="1">|</select>
+			}
+			endminute_stdWrap {
+				dataWrap = 	:<select name="tx_cal_controller[event_end_minutes]" id="event_end_minutes" size="1">|</select></div>
+			}
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_event_title}:</label><input type="text" value="|" name="tx_cal_controller[title]" /></div>
+			}
+			cal_organizer_stdWrap {
+				dataWrap = <div><label for="cal_organizer">{LLL:EXT:cal/controller/locallang.xml:l_event_cal_organizer}:</label><select name="tx_cal_controller[cal_organizer]" size="1">|</select></div>
+			}
+			organizer_stdWrap {
+				dataWrap = <div><label for="organizer">{LLL:EXT:cal/controller/locallang.xml:l_organizer}:</label><input type="text" value="|" name="tx_cal_controller[organizer]" /></div>
+			}
+			cal_location_stdWrap {
+				dataWrap = <div><label for="cal_location">{LLL:EXT:cal/controller/locallang.xml:l_location}:</label><select name="tx_cal_controller[cal_location]" size="1">|</select></div>
+			}
+			location_stdWrap {
+				dataWrap = <div><label for="location">{LLL:EXT:cal/controller/locallang.xml:l_location}:</label><input type="text" value="|" name="tx_cal_controller[location]" /></div>
+			}
+			teaser_stdWrap {
+				dataWrap = <div><label for="teaser">{LLL:EXT:cal/controller/locallang.xml:l_event_teaser}:</label>|</div>
+			}
+			description_stdWrap {
+				dataWrap = <div><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_event_description}:</label>|</div>
+			}
+			image_stdWrap {
+				imageCount=2
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_event_image}:</label><input type="file" value="|" name="tx_cal_controller[image][]" />###IMAGE_PREVIEW###</div>
+			}
+			imageUpload_stdWrap {
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_image_upload}:</label><input type="file" value="|" name="tx_cal_controller[image][]" /></div>
+			}
+			frequency_stdWrap {
+				dataWrap = <div><label for="frequency">{LLL:EXT:cal/controller/locallang.xml:l_event_frequency}:</label><select name="tx_cal_controller[frequency_id]" size="1">|</select></div>
+			}
+			byDay_stdWrap {
+				split {
+		        		# replace ###SPLITTER### with the split option
+				    token = ###SPLITTER###
+				        # the order is beeing defined in the normal optionSplit style
+				    cObjNum = 1 || 2 || 3 || 4 || 5 || 6 || 7
+				        # define the wraps on every position
+				    1.current = 1
+				    1.wrap = <input type="checkbox" value="mo" name="tx_cal_controller[by_day]" |
+				    2.current = 1
+				    2.wrap = <input type="checkbox" value="tu" name="tx_cal_controller[by_day]" |
+				    3.current = 1
+				    3.wrap = <input type="checkbox" value="we" name="tx_cal_controller[by_day]" |
+				    4.current = 1
+				    4.wrap = <input type="checkbox" value="th" name="tx_cal_controller[by_day]" |
+				    5.current = 1
+				    5.wrap = <input type="checkbox" value="fr" name="tx_cal_controller[by_day]" |
+				    6.current = 1
+				    6.wrap = <input type="checkbox" value="sa" name="tx_cal_controller[by_day]" |
+				    7.current = 1
+				    7.wrap = <input type="checkbox" value="su" name="tx_cal_controller[by_day]" |
+				}
+				dataWrap = <div><label for="bymonthday">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_byday}:</label>|</div>
+					
+			}
+			byMonthday_stdWrap {
+				dataWrap = <div><label for="bymonthday">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_bymonthday}:</label><input type="text" value="|" name="tx_cal_controller[by_monthday]" /></div>
+			}
+			byMonth_stdWrap {
+				dataWrap = <div><label for="bymonth">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_bymonth}:</label><input type="text" value="|" name="tx_cal_controller[by_month]" /></div>
+			}
+			until_stdWrap {
+				dataWrap = <div><label for="until">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_until}:</label><input type="text" value="|" name="tx_cal_controller[until]" id="event_until" />###UNTIL_SELECTOR###</div>
+			}
+			count_stdWrap {
+				dataWrap = <div><label for="count">{LLL:EXT:cal/controller/locallang.xml:l_event_count}:</label><input type="text" value="|" name="tx_cal_controller[count]"/></div>
+			}
+			interval_stdWrap {
+				dataWrap = <div><label for="interval">{LLL:EXT:cal/controller/locallang.xml:l_event_interval}:</label><input type="text" value="|" name="tx_cal_controller[interval]"/></div>
+			}
+			notify_stdWrap {
+				dataWrap = <div><label for="notify">{LLL:EXT:cal/controller/locallang.xml:l_event_notify}:</label>|</div>
+			}
+			exception_stdWrap {
+				dataWrap = <div><label for="exception">{LLL:EXT:cal/controller/locallang.xml:l_event_exception}:</label>|</div>
+			}
+		}
+		edit_event < plugin.tx_cal_controller.view.create_event
+		
+		edit_event {
+			image_stdWrap {
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_location_image}:</label><input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]" />###IMAGE_PREVIEW###<br/>{LLL:EXT:cal/controller/locallang.xml:l_delete_image}:<input type="checkbox" name="tx_cal_controller[removeImage][]" value="###IMAGE_VALUE###"</div>
+			}
+		}
+
+		confirm_event {
+			calendar_stdWrap {
+				dataWrap = <div><label for="calendar">{LLL:EXT:cal/controller/locallang.xml:l_calendar}:</label>|<input type="hidden" name="tx_cal_controller[calendar_id]" value="###CALENDAR_VALUE###"></div>
+			}
+			hidden_stdWrap {
+				dataWrap = <div><label for="hide">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" /></div>
+			}
+			category_stdWrap {
+				dataWrap = <div><label for="category">{LLL:EXT:cal/controller/locallang.xml:l_category}:</label>|<input type="hidden" value="###CATEGORY_VALUE###" name="tx_cal_controller[category_ids]" /></div>
+			}
+			allday_stdWrap {
+				dataWrap = <div><label for"allday">{LLL:EXT:cal/controller/locallang.xml:l_event_allday}:</label>|<input type="hidden" value="###ALLDAY_VALUE###" name="tx_cal_controller[allday]" /></div>
+			}
+			startdate_stdWrap {
+				dataWrap = 	<div><label for="startdate">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_startdate}:</label>|<input type="hidden" value="###STARTDATE_VALUE###" name="tx_cal_controller[event_start_day]" /></div>
+			}
+			enddate_stdWrap {
+				dataWrap = 	<div><label for="enddate">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_enddate}:</label>|<input type="hidden" value="###ENDDATE_VALUE###" name="tx_cal_controller[event_end_day]" /></div>
+			}
+			starttime_stdWrap {
+				dataWrap = 	<div><label for="startdate">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_starttime}:</label>|<input type="hidden" value="###STARTTIME_VALUE###" name="tx_cal_controller[event_start_time]" /></div>
+			}
+			endtime_stdWrap {
+				dataWrap = 	<div><label for="enddate">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_endtime}:</label>|<input type="hidden" value="###ENDTIME_VALUE###" name="tx_cal_controller[event_end_time]" /></div>
+			}
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_event_title}:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" /></div>
+			}
+			cal_organizer_stdWrap {
+				dataWrap = <div><label for="cal_organizer">{LLL:EXT:cal/controller/locallang.xml:l_event_cal_organizer}:</label>|<input type="hidden" value="###CAL_ORGANIZER_VALUE###" name="tx_cal_controller[cal_organizer]" /></div>
+			}
+			organizer_stdWrap {
+				dataWrap = <div><label for="organizer">{LLL:EXT:cal/controller/locallang.xml:l_organizer}:</label>|<input type="hidden" value="###ORGANIZER_VALUE###" name="tx_cal_controller[organizer]" /></div>
+			}
+			cal_location_stdWrap {
+				dataWrap = <div><label for="cal_location">{LLL:EXT:cal/controller/locallang.xml:l_event_cal_location}:</label>|<input type="hidden" value="###CAL_LOCATION_VALUE###" name="tx_cal_controller[cal_location]" /></div>
+			}
+			location_stdWrap {
+				dataWrap = <div><label for="location">{LLL:EXT:cal/controller/locallang.xml:l_location}:</label>|<input type="hidden" value="###LOCATION_VALUE###" name="tx_cal_controller[location]" /></div>
+			}
+			teaser_stdWrap {
+				dataWrap = <div><label for="teaser">{LLL:EXT:cal/controller/locallang.xml:l_event_teaser}:</label>|<input type="hidden" value="###TEASER_VALUE###" name="tx_cal_controller[teaser]"/></div>
+			}
+			description_stdWrap {
+				dataWrap = <div><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_event_description}:</label>|<input type="hidden" value="###DESCRIPTION_VALUE###" name="tx_cal_controller[description]"/></div>
+			}
+			image_stdWrap {
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_event_image}:</label>|<input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]" /></div>
+			}
+			frequency_stdWrap {
+				dataWrap = <div><label for="frequency">{LLL:EXT:cal/controller/locallang.xml:l_event_frequency}:</label>|<input type="hidden" value="###FREQUENCY_VALUE###" name="tx_cal_controller[frequency_id]" /></div>
+			}
+			byDay_stdWrap {
+				dataWrap = <div><label for="bymonthday">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_byday}:</label>|<input type="hidden" value="###BY_DAY_VALUE###" name="tx_cal_controller[by_monthday]" /></div>
+			}
+			byMonthday_stdWrap {
+				dataWrap = <div><label for="bymonthday">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_bymonthday}:</label>|<input type="hidden" value="###BY_MONTHDAY_VALUE###" name="tx_cal_controller[by_monthday]" /></div>
+			}
+			byMonth_stdWrap {
+				dataWrap = <div><label for="bymonth">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_bymonth}:</label>|<input type="hidden" value="###BY_MONTH_VALUE###" name="tx_cal_controller[by_month]" /></div>
+			}
+			until_stdWrap {
+				dataWrap = <div><label for="until">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_until}:</label>|<input type="hidden" value="###UNTIL_VALUE###" name="tx_cal_controller[until]" id="until" /></div>
+			}
+			count_stdWrap {
+				dataWrap = <div><label for="count">{LLL:EXT:cal/controller/locallang.xml:l_event_count}:</label>|<input type="hidden" value="###COUNT_VALUE###" name="tx_cal_controller[count]"/></div>
+			}
+			interval_stdWrap {
+				dataWrap = <div><label for="interval">{LLL:EXT:cal/controller/locallang.xml:l_event_interval}:</label>|<input type="hidden" value="###INTERVAL_VALUE###" name="tx_cal_controller[interval]"/></div>
+			}
+			notify_stdWrap {
+				dataWrap = <div><label for="notify">{LLL:EXT:cal/controller/locallang.xml:l_event_notify}:</label>|<input type="hidden" value="###NOTIFY_VALUE###" name="tx_cal_controller[notify_ids]"/></div>
+			}
+			exception_stdWrap {
+				dataWrap = <div><label for="exception">{LLL:EXT:cal/controller/locallang.xml:l_event_exception}:</label>|<input type="hidden" value="###EXCEPTION_SINGLE_VALUE###" name="tx_cal_controller[exception_single_ids]"/><input type="hidden" value="###EXCEPTION_GROUP_VALUE###" name="tx_cal_controller[exception_group_ids]"/></div>
+			}
+		}
+		delete_event < plugin.tx_cal_controller.view.confirm_event
+		
+		delete_event {
+			# @description	Time format for events shown within the delete view.
+			eventTimeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+			
+			# @description	Date format of the events shown within the delete view.
+			eventDateFormat = {$plugin.tx_cal_controller.view.dateFormat}
+		}
+		
+		create_calendar {
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label><input type="checkbox" | name="tx_cal_controller[hidden]" /></div>
+			}
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_calendar_title}:</label><input type="text" value="|" name="tx_cal_controller[title]" /></div>
+			}
+			owner_stdWrap {
+				dataWrap = <div><label for="owner">{LLL:EXT:cal/controller/locallang.xml:l_calendar_owner}:</label>|</div>
+			}
+			activateFreeAndBusy_stdWrap {
+				dataWrap = <div><label for="activateFreeAndBusy">{LLL:EXT:cal/controller/locallang.xml:l_calendar_activateFreeAndBusy}:</label><input type="checkbox" | name="tx_cal_controller[activateFreeAndBusy]" /></div>
+			}
+			freeAndBusyUser_stdWrap {
+				dataWrap = <div><label for="freeAndBusyUser">{LLL:EXT:cal/controller/locallang.xml:l_calendar_freeAndBusyUser}:</label>|</div>
+			}
+			calendarType_stdWrap {
+				dataWrap = <div><label for="calendarType">{LLL:EXT:cal/controller/locallang.xml:l_calendar_type}:</label><select name="tx_cal_controller[calendarType]" size="1" onchange="javascript: typeChanged(this);" id="calendarType">|</select></div>
+			}
+			exturl_stdWrap {
+				dataWrap = <div id="exturl"><label for="exturl">{LLL:EXT:cal/controller/locallang.xml:l_calendar_exturl}:</label><input type="text" value="|" name="tx_cal_controller[exturl]" /></div>
+			}
+			icsfile_stdWrap {
+				dataWrap = <div id="icsfile"><label for="icsfile">{LLL:EXT:cal/controller/locallang.xml:l_calendar_icsfile}:</label><input type="file" value="|" name="tx_cal_controller[icsfile]" /></div>
+			}
+			refresh_stdWrap {
+				dataWrap = <div id="refresh"><label for="refresh">{LLL:EXT:cal/controller/locallang.xml:l_calendar_refresh}:</label><input type="text" value="|" name="tx_cal_controller[refresh]" /></div>
+			}
+		}
+		
+		edit_calendar < plugin.tx_cal_controller.view.create_calendar
+		
+		confirm_calendar {
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" /></div>
+			}
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_calendar_title}:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" /></div>
+			}
+			owner_stdWrap {
+				dataWrap = <div><label for="owner">{LLL:EXT:cal/controller/locallang.xml:l_calendar_owner}:</label>|<input type="hidden" value="###OWNER_SINGLE_VALUE###" name="tx_cal_controller[owner_single]" /><input type="hidden" value="###OWNER_GROUP_VALUE###" name="tx_cal_controller[owner_group]" /></div>
+			}
+			activateFreeAndBusy_stdWrap {
+				dataWrap = <div><label for="activateFreeAndBusy">{LLL:EXT:cal/controller/locallang.xml:l_calendar_activateFreeAndBusy}:</label>|<input type="hidden" value="###ACTIVATE_FREEANDBUSY_VALUE###" name="tx_cal_controller[activateFreeAndBusy]" /></div>
+			}
+			freeAndBusyUser_stdWrap {
+				dataWrap = <div><label for="freeAndBusyUser">{LLL:EXT:cal/controller/locallang.xml:l_calendar_freeAndBusyUser}:</label>|<input type="hidden" value="###FREEANDBUSYUSER_SINGLE_VALUE###" name="tx_cal_controller[freeAndBusyUser_single]" /><input type="hidden" value="###FREEANDBUSYUSER_GROUP_VALUE###" name="tx_cal_controller[freeAndBusyUser_group]" /></div>
+			}
+			calendarType_stdWrap {
+				dataWrap = <div><label for="calendarType">{LLL:EXT:cal/controller/locallang.xml:l_calendar_type}:</label>|<input type="hidden" value="###CALENDARTYPE_VALUE###" name="tx_cal_controller[calendarType]" /></div>
+			}
+			exturl_stdWrap {
+				dataWrap = <div id="exturl"><label for="exturl">{LLL:EXT:cal/controller/locallang.xml:l_calendar_exturl}:</label>>|<input type="hidden" value="###EXTURL_VALUE###" name="tx_cal_controller[exturl]" /></div>
+			}
+			icsfile_stdWrap {
+				dataWrap = <div id="icsfile"><label for="icsfile">{LLL:EXT:cal/controller/locallang.xml:l_calendar_icsfile}:</label>|<input type="hidden" value="###ICSFILE_VALUE###" name="tx_cal_controller[icsfile]" /></div>
+			}
+			refresh_stdWrap {
+				dataWrap = <div id="refresh"><label for="refresh">{LLL:EXT:cal/controller/locallang.xml:l_calendar_refresh}:</label>|<input type="hidden" value="###REFRESH_VALUE###" name="tx_cal_controller[refresh]" /></div>
+			}
+		}
+		
+		delete_calendar < plugin.tx_cal_controller.view.confirm_calendar
+
+		create_category {
+			tree {
+				calendar =
+				category = 
+				calendarTitle_stdWrap {
+					if.equals = ###
+				}
+				rootElement = TEXT
+				rootElement {
+					wrap = <table class="treelevel0"><tr><td>|</td></tr></table>
+				}
+				selector = TEXT
+				selector {
+					wrap = <input type="radio" name="tx_cal_controller[parent_category][]" value="###UID###" | />
+				}
+				element = <span class="###HEADERSTYLE###_bullet ###HEADERSTYLE###_legend_bullet" >&bull;</span><span class="###HEADERSTYLE###_text">###TITLE###</span>
+				emptyElement = <br/><br/>
+				
+				subElement = <br /><table class="treelevel###LEVEL###" id="treelevel###UID###">
+				
+				subElement_wrap {
+					wrap = <tr><td>|</td></tr>
+				}
+				
+				subElement_pre = </table>
+
+				categorySelectorSubmit = 
+			}
+			
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label><input type="checkbox" | name="tx_cal_controller[hidden]" /></div>
+			}
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_category_title}:</label><input type="text" value="|" name="tx_cal_controller[title]" /></div>
+			}
+			calendar_stdWrap {
+				dataWrap = <div><label for="calendar">{LLL:EXT:cal/controller/locallang.xml:l_category_calendar}:</label><select name="tx_cal_controller[switch_calendar]" size="1" onchange="submit();">|</select></div>
+			}
+			headerStyle_stdWrap {
+				dataWrap = <div><label for="headerStyle">{LLL:EXT:cal/controller/locallang.xml:l_category_headerstyle}:</label><select name="tx_cal_controller[headerstyle]" size="1" onchange="getNewStyle(this);" id="tx_cal_controller_headerstyle">|</select></div>
+			}
+			bodyStyle_stdWrap {
+				dataWrap = <div><label for="bodyStyle">{LLL:EXT:cal/controller/locallang.xml:l_category_bodystyle}:</label><select name="tx_cal_controller[bodystyle]" size="1" onchange="getNewStyle(this);" id="tx_cal_controller_bodystyle">|</select></div>
+			}
+			parentCategory_stdWrap {
+				dataWrap = <div><label for="parentCategory">{LLL:EXT:cal/controller/locallang.xml:l_category_parent_category}:</label>|</div>
+			}
+			sharedUserAllowed_stdWrap {
+				dataWrap = <div><label for="sharedUserAllowed">{LLL:EXT:cal/controller/locallang.xml:l_category_shared_user_allowed}:</label><input type="checkbox" | name="tx_cal_controller[shared_user_allowed]" /></div>
+			}
+		}
+		
+		edit_category < plugin.tx_cal_controller.view.create_category
+
+		
+		confirm_category {
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" /></div>
+			}
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_category_title}:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" /></div>
+			}
+			calendar_stdWrap {
+				dataWrap = <div><label for="calendar">{LLL:EXT:cal/controller/locallang.xml:l_category_calendar}:</label>|<input type="hidden" value="###CALENDAR_VALUE###" name="tx_cal_controller[switch_calendar]" /></div>
+			}
+			headerStyle_stdWrap {
+				dataWrap = <div><label for="headerStyle">{LLL:EXT:cal/controller/locallang.xml:l_category_headerstyle}:</label>|<input type="hidden" value="###HEADERSTYLE_VALUE###" name="tx_cal_controller[headerstyle]" /></div>
+			}
+			bodyStyle_stdWrap {
+				dataWrap = <div><label for="bodyStyle">{LLL:EXT:cal/controller/locallang.xml:l_category_bodystyle}:</label>|<input type="hidden" value="###BODYSTYLE_VALUE###" name="tx_cal_controller[bodystyle]" /></div>
+			}
+			parentCategory_stdWrap {
+				dataWrap = <div><label for="parentCategory">{LLL:EXT:cal/controller/locallang.xml:l_category_parent_category}:</label>|<input type="hidden" value="###PARENT_CATEGORY_VALUE###" name="tx_cal_controller[parent_category]" /></div>
+			}	
+			sharedUserAllowed_stdWrap {
+				dataWrap = <div><label for="sharedUserAllowed">{LLL:EXT:cal/controller/locallang.xml:l_category_shared_user_allowed}:</label>|<input type="hidden" value="###SHARED_USER_ALLOWED_VALUE###" name="tx_cal_controller[shared_user_allowed]" /></div>
+			}
+		}
+		
+		delete_category < plugin.tx_cal_controller.view.confirm_category
+		
+		create_location {
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label><input type="checkbox" | name="tx_cal_controller[hidden]" /></div>
+			}
+			name_stdWrap {
+				dataWrap = <div><label for="name">{LLL:EXT:cal/controller/locallang.xml:l_location_name}:</label><input type="text" value="|" name="tx_cal_controller[name]" /></div>
+			}
+			description_stdWrap {
+				dataWrap = <div><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_location_description}:</label><input type="text" value="|" name="tx_cal_controller[description]" /></div>
+			}
+			street_stdWrap {
+				dataWrap = <div><label for="street">{LLL:EXT:cal/controller/locallang.xml:l_location_street}:</label><input type="text" value="|" name="tx_cal_controller[street]" /></div>
+			}
+			zip_stdWrap {
+				dataWrap = <div><label for="zip">{LLL:EXT:cal/controller/locallang.xml:l_location_zip}:</label><input type="text" value="|" name="tx_cal_controller[zip]" /></div>
+			}
+			city_stdWrap {
+				dataWrap = <div><label for="city">{LLL:EXT:cal/controller/locallang.xml:l_location_city}:</label><input type="text" value="|" name="tx_cal_controller[city]" /></div>
+			}
+			phone_stdWrap {
+				dataWrap = <div><label for="phone">{LLL:EXT:cal/controller/locallang.xml:l_location_phone}:</label><input type="text" value="|" name="tx_cal_controller[phone]" /></div>
+			}
+			email_stdWrap {
+				dataWrap = <div><label for="email">{LLL:EXT:cal/controller/locallang.xml:l_location_email}:</label><input type="text" value="|" name="tx_cal_controller[email]" /></div>
+			}
+			image_stdWrap {
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_location_image}:</label><input type="file" value="|" name="tx_cal_controller[image][]" />###IMAGE_PREVIEW###</div>
+			}
+			imageUpload_stdWrap {
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_image_upload}:</label><input type="file" value="|" name="tx_cal_controller[image][]" /></div>
+			}
+			country_stdWrap {
+				dataWrap = <div><label for="country">{LLL:EXT:cal/controller/locallang.xml:l_location_country}:</label><input type="text" value="|" name="tx_cal_controller[country]" /></div>
+			}
+			country_static_info_stdWrap {
+				dataWrap = <div><label for="country">{LLL:EXT:cal/controller/locallang.xml:l_location_country}:</label>|</div>
+			}
+			countryzone_stdWrap {
+				dataWrap = <div><label for="countryzone">{LLL:EXT:cal/controller/locallang.xml:l_location_countryzone}:</label><input type="text" value="|" name="tx_cal_controller[countryzone]" /></div>
+			}
+			countryzone_static_info_stdWrap {
+				dataWrap = <div><label for="countryzone">{LLL:EXT:cal/controller/locallang.xml:l_location_countryzone}:</label>|</div>
+			}
+			
+		}
+		
+		edit_location < plugin.tx_cal_controller.view.create_location
+		
+		edit_location {
+			image_stdWrap {
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_location_image}:</label><input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]" />###IMAGE_PREVIEW###<br/>{LLL:EXT:cal/controller/locallang.xml:l_delete_image}:<input type="checkbox" name="tx_cal_controller[removeImage][]" value="###IMAGE_VALUE###"</div>
+			}
+		}
+		
+		confirm_location {
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label>|<input type="hidden" ###HIDDEN_VALUE### name="tx_cal_controller[hidden]" /></div>
+			}
+			name_stdWrap {
+				dataWrap = <div><label for="name">{LLL:EXT:cal/controller/locallang.xml:l_location_name}:</label>|<input type="hidden" value="###NAME_VALUE###" name="tx_cal_controller[name]" /></div>
+			}
+			description_stdWrap {
+				dataWrap = <div><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_location_description}:</label>|<input type="hidden" value="###DESCRIPTION_VALUE###" name="tx_cal_controller[description]" /></div>
+			}
+			street_stdWrap {
+				dataWrap = <div><label for="street">{LLL:EXT:cal/controller/locallang.xml:l_location_street}:</label>|<input type="hidden" value="###STREET_VALUE###" name="tx_cal_controller[street]" /></div>
+			}
+			zip_stdWrap {
+				dataWrap = <div><label for="zip">{LLL:EXT:cal/controller/locallang.xml:l_location_zip}:</label>|<input type="hidden" value="###ZIP_VALUE###" name="tx_cal_controller[zip]" /></div>
+			}
+			city_stdWrap {
+				dataWrap = <div><label for="city">{LLL:EXT:cal/controller/locallang.xml:l_location_city}:</label>|<input type="hidden" value="###CITY_VALUE###" name="tx_cal_controller[city]" /></div>
+			}
+			phone_stdWrap {
+				dataWrap = <div><label for="phone">{LLL:EXT:cal/controller/locallang.xml:l_location_phone}:</label>|<input type="hidden" value="###PHONE_VALUE###" name="tx_cal_controller[phone]" /></div>
+			}
+			email_stdWrap {
+				dataWrap = <div><label for="email">{LLL:EXT:cal/controller/locallang.xml:l_location_email}:</label>|<input type="hidden" value="###EMAIL_VALUE###" name="tx_cal_controller[email]" /></div>
+			}
+			image_stdWrap {
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_location_image}:</label>|<input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]" /></div>
+			}
+			country_stdWrap {
+				dataWrap = <div><label for="country">{LLL:EXT:cal/controller/locallang.xml:l_location_country}:</label>|<input type="hidden" value="###COUNTRY_VALUE###" name="tx_cal_controller[country]" /></div>
+			}
+			country_static_info_stdWrap {
+				dataWrap = <div><label for="country">{LLL:EXT:cal/controller/locallang.xml:l_location_country}:</label>|</div>
+			}
+			countryzone_stdWrap {
+				dataWrap = <div><label for="countryzone">{LLL:EXT:cal/controller/locallang.xml:l_location_countryzone}:</label>|<input type="hidden" value="###COUNTRYZONE_VALUE###" name="tx_cal_controller[countryzone]" /></div>
+			}
+			countryzone_static_info_stdWrap {
+				dataWrap = <div><label for="countryzone">{LLL:EXT:cal/controller/locallang.xml:l_location_countryzone}:</label>|</div>
+			}
+		}
+		
+		delete_location < plugin.tx_cal_controller.view.location
+		
+		create_organizer < plugin.tx_cal_controller.view.create_location
+		edit_organizer < plugin.tx_cal_controller.view.edit_location
+		confirm_organizer < plugin.tx_cal_controller.view.confirm_location
+	}
+
+	# @description	The Typoscript object for rights is used to configure frontend editing of calendar events,
+	#				locations, and groups.
+	rights {
+
+		# @description	Turns frontend editing on.  If this is not enabled, none of the other rights options
+		#				will have any effect.
+		edit = {$plugin.tx_cal_controller.rights.edit}
+
+		# @description	Comma separated list of all administrator users and groups.  These users will have full
+		#				privileges for frontend editing.
+		admin.user = {$plugin.tx_cal_controller.rights.admin.user}
+		admin.group = {$plugin.tx_cal_controller.rights.admin.group}
+
+		# @description	Comma separated list of all users and groups allowed to be selected for notification
+		allowedUsers =
+		allowedGroups =
+		create {
+			calendar {
+				# @description	Page to save frontend-created calendars to.
+				saveCalendarToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users and groups that are allowed to create calendars.
+				allowedToCreateCalendar.user = 
+				allowedToCreateCalendar.group =
+
+				# @description	Comma separated list of all users and groups that should have all calendar
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that should have a specific calendar
+				#				field enabled.
+				fields {
+					allowedToCreateHidden.user =
+					allowedToCreateHidden.group =
+					allowedToCreateHidden.default =
+					allowedToCreateTitle.user =
+					allowedToCreateTitle.group =
+					allowedToCreateOwner.allowedUsers = 
+					allowedToCreateOwner.allowedGroups = 
+					allowedToCreateOwner.user =
+					allowedToCreateOwner.group =
+					allowedToCreateActivateFreeAndBusy.user =
+					allowedToCreateActivateFreeAndBusy.group =
+					allowedToCreateActivateFreeAndBusy.default =
+					allowedToCreateFreeAndBusyUser.allowedUsers = 
+					allowedToCreateFreeAndBusyUser.allowedGroups = 
+					allowedToCreateFreeAndBusyUser.user =
+					allowedToCreateFreeAndBusyUser.group =
+					allowedToCreateType.user =
+					allowedToCreateType.group =
+					allowedToCreateType.default = 0
+				}
+				additionalFields = 
+			}
+			category {
+				# @description	Page to save frontend-created categories to.
+				saveCategoryToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users and groups that should have all category
+				#				fields enabled.
+				enableAllFields.user =
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that are allowed to create categories.
+				allowedToCreateCategory.user =
+				allowedToCreateCategory.group =
+				
+				allowedHeaderStyles = default_categoryheader,yellow_catheader,orange_catheader,red_catheader,pink_catheader,green_catheader,grey_catheader
+				allowedBodyStyles = default_categorybody,yellow_catbody,orange_catbody,red_catbody,pink_catbody,green_catbody,grey_catbody
+				
+
+				# @description	Comma separated list of all users and groups that should have a specific category
+				#				field enabled.
+				fields {
+					allowedToCreateHidden.user =
+					allowedToCreateHidden.group =
+					allowedToCreateTitle.user =
+					allowedToCreateTitle.group =
+					allowedToCreateHeaderstyle.user =
+					allowedToCreateHeaderstyle.group =
+					allowedToCreateBodystyle.user =
+					allowedToCreateBodystyle.group =
+					allowedToCreateCalendar.user =
+					allowedToCreateCalendar.group =
+					allowedToCreateParent.user =
+					allowedToCreateParent.group =
+					allowedToCreateSharedUser.user =
+					allowedToCreateSharedUser.group =
+				}
+				additionalFields = 
+			}
+
+
+			event {
+				# @description	Page to save frontend-created events to.
+				saveEventToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users and groups that are allowed to create events.
+				allowedToCreateEvents.user =
+				allowedToCreateEvents.group =
+				
+				# @description	Enable this to allow everyone to create public events.
+				allowedToCreateEvents.public = 0
+				
+				# @description	Comma separated list of user ids of fe-users to be notified if a public event has been created
+				notifyUsersOnPublicCreate =
+
+				# @description	Comma separated list of all users and groups that are allowed to create public events.
+				allowedToCreatePublicEvents.user =
+				allowedToCreatePublicEvents.group =
+				
+				#allowedToCreateOnlyEventsForOwnCalendar.user =
+				#allowedToCreateOnlyEventsForOwnCalendar.group =
+
+				# @description	Comma separated list of all users and groups that should have all event
+				#				fields enabled.
+				enableAllFields.user =
+				enableAllFields.group =
+				
+				# @description	Offset in minutes. The user is allowed to create a new event in now + timeOffset
+				timeOffset = 0
+
+				# @description	Comma separated list of all users and groups that should have a specific event
+				#				field enabled. ATTENTION: for public just use 1/0 => enable/disable
+				fields {
+					allowedToCreateHidden.user =
+					allowedToCreateHidden.group =
+					allowedToCreateHidden.public = 0
+					allowedToCreateHidden.default = 1
+					allowedToCreateCalendar.user =
+					allowedToCreateCalendar.group =
+					allowedToCreateCalendar.public = 1
+					allowedToCreateCategory.allowedUids =
+					allowedToCreateCalendar.uidDefault =
+					allowedToCreateCategory.user =
+					allowedToCreateCategory.group =
+					allowedToCreateCategory.public = 1
+					allowedToCreateCategory.uidList =
+					allowedToCreateCategory.uidDefault =
+					allowedToCreateDateTime.user =
+					allowedToCreateDateTime.group =
+					allowedToCreateDateTime.public = 1
+					allowedToCreateTitle.default =
+					allowedToCreateTitle.user =
+					allowedToCreateTitle.group =
+					allowedToCreateTitle.public = 1
+					allowedToCreateOrganizer.user =
+					allowedToCreateOrganizer.group =
+					allowedToCreateOrganizer.public = 1
+					allowedToCreateOrganizer.uidList =
+					allowedToCreateOrganizer.uidDefault =
+					allowedToCreateLocation.user =
+					allowedToCreateLocation.group =
+					allowedToCreateLocation.public = 1
+					allowedToCreateLocation.uidList =
+					allowedToCreateLocation.uidDefault =
+					allowedToCreateTeaser.user =
+					allowedToCreateTeaser.group =
+					allowedToCreateTeaser.public = 1
+					allowedToCreateDescription.user =
+					allowedToCreateDescription.group =
+					allowedToCreateDescription.public = 1
+					allowedToCreateRecurring.user =
+					allowedToCreateRecurring.group =
+					allowedToCreateRecurring.public = 0
+					allowedToCreateNotify.user =
+					allowedToCreateNotify.group =
+					allowedToCreateNotify.public = 0
+					allowedToCreateNotify.uidDefault =
+					allowedToCreateShared.user =
+					allowedToCreateShared.group =
+					allowedToCreateShared.public = 0
+					allowedToCreateShared.uidDefault =
+					allowedToCreateException.user =
+					allowedToCreateException.group =
+					allowedToCreateException.public	= 0
+				}
+				additionalFields = 
+				
+				# @description	Adds the frontend user who created an event to the notification field.
+				addFeUserToNotify = 1
+				
+				# @description	Adds the frontend user who created an event to the shared field.
+				addFeUserToShared = 0
+				
+				# @description	Replaces the standard textarea with the installed rte.
+				enableRTE = 1
+			}
+			exceptionEvent{
+				# @description	Page to save frontend-created exception events to.
+				saveExceptionEventToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users and groups that are allowed to create exception events.
+				allowedToCreateExceptionEvents.user =
+				allowedToCreateExceptionEvents.group =
+				
+				additionalFields = 
+			}
+			location {
+				# @description	Page to save frontend-created locations to.
+				saveLocationToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users and groups that should have all location
+				#				fields enabled.
+				enableAllFields.user =
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that should have a specific location
+				#				field enabled.
+				fields {
+					allowedToCreateLocationHidden.user =
+					allowedToCreateLocationHidden.group =
+					allowedToCreateLocationHidden.default =
+					allowedToCreateLocationTitle.user =
+					allowedToCreateLocationTitle.group =
+					allowedToCreateLocationTitle.default =
+					allowedToCreateLocationDescription.user =
+					allowedToCreateLocationDescription.group =
+					allowedToCreateLocationStreet.user =
+					allowedToCreateLocationStreet.group =
+					allowedToCreateLocationZip.user =
+					allowedToCreateLocationZip.group =
+					allowedToCreateLocationCity.user =
+					allowedToCreateLocationCity.group =
+					allowedToCreateLocationCountryzone.user =
+					allowedToCreateLocationCountryzone.group =
+					allowedToCreateLocationCountry.user =
+					allowedToCreateLocationCountry.group =
+					allowedToCreateLocationPhone.user =
+					allowedToCreateLocationPhone.group =
+					allowedToCreateLocationEmail.user =
+					allowedToCreateLocationEmail.group =
+					allowedToCreateLocationImage.user =
+					allowedToCreateLocationImage.group =
+					allowedToCreateLocationLink.user =
+					allowedToCreateLocationLink.group =
+				}
+				additionalFields = 
+			}
+			organizer {
+				# @description	Page to save frontend-created organizers to.
+				saveOrganizerToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users and groups that should have all organizer
+				#				fields enabled.
+				enableAllFields.user =
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that should have a specific organizer
+				#				field enabled.
+				fields {
+					allowedToCreateOrganizerHidden.user =
+					allowedToCreateOrganizerHidden.group =
+					allowedToCreateOrganizerHidden.default =
+					allowedToCreateOrganizerTitle.user =
+					allowedToCreateOrganizerTitle.group =
+					allowedToCreateOrganizerTitle.default =
+					allowedToCreateOrganizerDescription.user =
+					allowedToCreateOrganizerDescription.group =
+					allowedToCreateOrganizerStreet.user =
+					allowedToCreateOrganizerStreet.group =
+					allowedToCreateOrganizerZip.user =
+					allowedToCreateOrganizerZip.group =
+					allowedToCreateOrganizerCity.user =
+					allowedToCreateOrganizerCity.group =
+					allowedToCreateOrganizerCountryzone.user =
+					allowedToCreateOrganizerCountryzone.group =
+					allowedToCreateOrganizerCountry.user =
+					allowedToCreateOrganizerCountry.group =
+					allowedToCreateOrganizerPhone.user =
+					allowedToCreateOrganizerPhone.group =
+					allowedToCreateOrganizerEmail.user =
+					allowedToCreateOrganizerEmail.group =
+					allowedToCreateOrganizerImage.user =
+					allowedToCreateOrganizerImage.group =
+					allowedToCreateOrganizerLink.user =
+					allowedToCreateOrganizerLink.group =
+				}
+				additionalFields = 
+			}
+		}
+		
+		edit {
+			calendar {
+				# @description	Comma separated list of all users and groups that should have all calendar
+				#				fields enabled.
+				enableAllFields.user = 
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that are allowed to edit calendars.
+				allowedToEditCalendar.user = 
+				allowedToEditCalendar.group =
+				
+				allowedToEditOnlyOwnCalendar.user =
+				allowedToEditOnlyOwnCalendar.group =
+				
+				allowedToEditPublicCalendar.user =
+				allowedToEditPublicCalendar.group =
+
+				# @description	Comma separated list of all users and groups that should have a specific calendar
+				#				field enabled.
+				fields {
+					allowedToEditHidden.user =
+					allowedToEditHidden.group =
+					allowedToEditHidden.default =
+					allowedToEditTitle.user =
+					allowedToEditTitle.group =
+					allowedToEditOwner.allowedUsers = 
+					allowedToEditOwner.allowedGroups = 
+					allowedToEditOwner.user =
+					allowedToEditOwner.group =
+					allowedToEditActivateFreeAndBusy.user =
+					allowedToEditActivateFreeAndBusy.group =
+					allowedToEditActivateFreeAndBusy.default =
+					allowedToEditFreeAndBusyUser.allowedUsers = 
+					allowedToEditFreeAndBusyUser.allowedGroups = 
+					allowedToEditFreeAndBusyUser.user =
+					allowedToEditFreeAndBusyUser.group =
+					allowedToEditType.user =
+					allowedToEditType.group =
+					allowedToEditType.default = 0
+				}
+				additionalFields = 
+			}
+			category {
+				# @description	Comma separated list of all users and groups that should have all category
+				#				fields enabled.
+				enableAllFields.user =
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that are allowed to edit categories.
+				allowedToEditCategory.user =
+				allowedToEditCategory.group =
+				
+				allowedToEditOnlyOwnCategory.user =
+				allowedToEditOnlyOwnCategory.group =
+				
+				allowedToEditGeneralCategory.user =
+				allowedToEditGeneralCategory.group =
+				
+				allowedHeaderStyles = default_categoryheader,yellow_catheader,orange_catheader,red_catheader,pink_catheader,green_catheader,grey_catheader
+				allowedBodyStyles = default_categorybody,yellow_catbody,orange_catbody,red_catbody,pink_catbody,green_catbody,grey_catbody
+
+				# @description	Comma separated list of all users and groups that should have a specific category
+				#				field enabled.
+				fields {
+					allowedToEditHidden.user =
+					allowedToEditHidden.group =
+					allowedToEditTitle.user =
+					allowedToEditTitle.group =
+					allowedToEditHeaderstyle.user =
+					allowedToEditHeaderstyle.group =
+					allowedToEditBodystyle.user =
+					allowedToEditBodystyle.group =
+					allowedToEditCalendar.user = 
+					allowedToEditCalendar.group =
+					allowedToEditParent.user =
+					allowedToEditParent.group =
+					allowedToEditSharedUser.user =
+					allowedToEditShareduser.group =
+				}
+				additionalFields = 
+			}
+			event {
+				# @description	Comma separated list of all users and groups that should have all event
+				#				fields enabled.
+				enableAllFields.user =
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that are allowed to edit events.
+				allowedToEditEvents.user =
+				allowedToEditEvents.group =
+
+				# @description	Comma separated list of all users and groups that are allowed to edit only their own events.
+				allowedToEditOnlyOwnEvents.user =
+				allowedToEditOnlyOwnEvents.group =
+				
+				# @description	Comma separated list of all users and groups that are allowed to edit events after they have started.
+				allowedToEditStartedEvents.user =
+				allowedToEditStartedEvents.group =
+				
+				# @description	Offset in minutes. The user is allowed to edit the event until timeOffset minutes before it takes place
+				timeOffset = 0
+
+				# @description	Comma separated list of all users and groups that should have a specific event
+				#				field enabled.
+				fields {
+					allowedToEditHidden.user =
+					allowedToEditHidden.group =
+					allowedToEditHidden.default =
+					allowedToEditCalendar.user =
+					allowedToEditCalendar.group =
+					allowedToEditCategory.user =
+					allowedToEditCategory.group =
+					allowedToEditCategory.allowedUids =
+					allowedToEditCategory.uidDefault =
+					allowedToEditDateTime.user =
+					allowedToEditDateTime.group =
+					allowedToEditTitle.user =
+					allowedToEditTitle.group =
+					allowedToEditOrganizer.user =
+					allowedToEditOrganizer.group =
+					allowedToEditLocation.user =
+					allowedToEditLocation.group =
+					allowedToEditTeaser.user =
+					allowedToEditTeaser.group =
+					allowedToEditDescription.user =
+					allowedToEditDescription.group =
+					allowedToEditRecurring.user =
+					allowedToEditRecurring.group =
+					allowedToEditCreator.user =
+					allowedToEditCreator.group =
+					allowedToEditNotify.user =
+					allowedToEditNotify.group =
+					allowedToEditException.user =
+					allowedToEditException.group =
+				}
+				additionalFields = 
+				
+				# @description	Replaces the standard textarea with the installed rte.
+				enableRTE = 1
+			}
+			exceptionEvent{
+				# @description	Comma separated list of all users and groups that are allowed to edit exception events.
+				allowedToEditExceptionEvents.user =
+				allowedToEditExceptionEvents.group =
+				
+				additionalFields = 
+			}
+			location {
+				# @description	Comma separated list of all users and groups that should have all location
+				#				fields enabled.
+				enableAllFields.user =
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that should have a specific location
+				#				field enabled.
+				fields {
+					allowedToEditLocationHidden.user =
+					allowedToEditLocationHidden.group =
+					allowedToEditLocationHidden.default =
+					allowedToEditLocationTitle.user =
+					allowedToEditLocationTitle.group =
+					allowedToEditLocationTitle.default =
+					allowedToEditLocationDescription.user =
+					allowedToEditLocationDescription.group =
+					allowedToEditLocationStreet.user =
+					allowedToEditLocationStreet.group =
+					allowedToEditLocationZip.user =
+					allowedToEditLocationZip.group =
+					allowedToEditLocationCity.user =
+					allowedToEditLocationCity.group =
+					allowedToEditLocationCountryzone.user =
+					allowedToEditLocationCountryzone.group =
+					allowedToEditLocationCountry.user =
+					allowedToEditLocationCountry.group =
+					allowedToEditLocationPhone.user =
+					allowedToEditLocationPhone.group =
+					allowedToEditLocationEmail.user =
+					allowedToEditLocationEmail.group =
+					allowedToEditLocationImage.user =
+					allowedToEditLocationImage.group =
+					allowedToEditLocationLink.user =
+					allowedToEditLocationLink.group =
+				}
+				additionalFields = 
+			}
+			organizer {
+				# @description	Comma separated list of all users and groups that should have all organizer
+				#				fields enabled.
+				enableAllFields.user =
+				enableAllFields.group =
+
+				# @description	Comma separated list of all users and groups that should have a specific organizer
+				#				field enabled.
+				fields {
+					allowedToEditOrganizerHidden.user =
+					allowedToEditOrganizerHidden.group =
+					allowedToEditOrganizerHidden.default =
+					allowedToEditOrganizerTitle.user =
+					allowedToEditOrganizerTitle.group =
+					allowedToEditOrganizerTitle.default =
+					allowedToEditOrganizerDescription.user =
+					allowedToEditOrganizerDescription.group =
+					allowedToEditOrganizerStreet.user =
+					allowedToEditOrganizerStreet.group =
+					allowedToEditOrganizerZip.user =
+					allowedToEditOrganizerZip.group =
+					allowedToEditOrganizerCity.user =
+					allowedToEditOrganizerCity.group =
+					allowedToEditOrganizerCountryzone.user =
+					allowedToEditOrganizerCountryzone.group =
+					allowedToEditOrganizerCountry.user =
+					allowedToEditOrganizerCountry.group =
+					allowedToEditOrganizerPhone.user =
+					allowedToEditOrganizerPhone.group =
+					allowedToEditOrganizerEmail.user =
+					allowedToEditOrganizerEmail.group =
+					allowedToEditOrganizerImage.user =
+					allowedToEditOrganizerImage.group =
+					allowedToEditOrganizerLink.user =
+					allowedToEditOrganizerLink.group =
+				}
+				additionalFields = 
+			}
+		}
+		
+		delete {
+			calendar {
+				# @description	Comma separated list of all users and groups that are allowed to delete calendars.
+				allowedToDeleteCalendar.user = 
+				allowedToDeleteCalendar.group =
+				
+				allowedToDeleteOnlyOwnCalendar.user =
+				allowedToDeleteOnlyOwnCalendar.group =
+				
+				allowedToDeletePublicCalendar.user = 
+				allowedToDeletePublicCalendar.group =
+			}
+			category {
+				# @description	Comma separated list of all users and groups that are allowed to delete categories.
+				allowedToDeleteCategory.user =
+				allowedToDeleteCategory.group =
+				
+				allowedToDeleteOnlyOwnCategory.user =
+				allowedToDeleteOnlyOwnCategory.group =
+				
+				allowedToDeleteGeneralCategory.user =
+				allowedToDeleteGeneralCategory.group =
+			}
+			event {
+				# @description	Comma separated list of all users and groups that are allowed to delete events.
+				allowedToDeleteEvents.user =
+				allowedToDeleteEvents.group =
+				
+				# @description	Comma separated list of all users and groups that are allowed to delete only their own events.
+				allowedToDeleteOnlyOwnEvents.user =
+				allowedToDeleteOnlyOwnEvents.group =
+				
+				# @description	Comma separated list of all users and groups that are allowed to delete events that have already started.
+				allowedToDeleteStartedEvents.user =
+				allowedToDeleteStartedEvents.group =
+				
+				# @description	Offset in minutes. The user is allowed to delete the event until timeOffset minutes before it takes place
+				timeOffset = 0
+			}
+			exceptionEvent{
+				# @description	Comma separated list of all users and groups that are allowed to delete exception events.
+				allowedToDeleteExceptionEvents.user =
+				allowedToDeleteExceptionEvents.group =
+			}
+			location {
+
+			}
+			organizer {
+
+			}
+		}
+
+	}
+	
+	module {
+		locationloader {
+			template = {$plugin.tx_cal_controller.module.locationloader.template}
+		}
+	}
+}
+
+
+## This enables the cal ics export
+ics = PAGE
+ics {
+  typeNum = 150
+
+  10 < plugin.tx_cal_controller
+  10.pages >
+  10.pages = {$plugin.tx_cal_controller.pidList}
+  10.view.allowedViews = ics,single_ics
+  10.view.ics.calUid = {$plugin.tx_cal_controller.view.ics.calUid}
+  10.defaultCode = TEXT
+  
+  #stdWraps, e.g. to convert Text to utf8
+  10.summary_stdWrap {
+    #csConf = utf-8
+  }
+  10.description_stdWrap {
+    #csConf = utf-8
+  }
+  10.location_stdWrap {
+    #csConf = utf-8
+  }
+  10.category_stdWrap {
+    #csConf = utf-8
+  }
+  
+  config {
+    disableAllHeaderCode = 1
+    additionalHeaders = Content-type:application/text
+    xhtml_cleaning = 0
+    admPanel = 0
+  }
+}

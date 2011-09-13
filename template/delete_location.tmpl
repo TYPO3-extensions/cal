@@ -1,0 +1,80 @@
+<!--delete_location.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_DELETE_LOCATION###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###"  />
+		
+		<!-- ###FORM_START### end-->
+			<!-- ###NAME_DATA_LOOP### start -->
+		<tr><td>###NAME_LABEL###</td><td>###NAME###</td></tr>
+	<!-- ###NAME_DATA_LOOP### end -->
+	<!-- ###DESCRIPTION_DATA_LOOP### start -->
+		<tr><td>###DESCRIPTION_LABEL###</td><td>###DESCRIPTION###</td></tr>
+	<!-- ###DESCRIPTION_DATA_LOOP### end -->
+	<!-- ###STREET_DATA_LOOP### start -->
+		<tr><td>###STREET_LABEL###</td><td>###STREET###</td></tr>
+	<!-- ###STREET_DATA_LOOP### end -->
+	<!-- ###ZIP_DATA_LOOP### start -->
+		<tr><td>###ZIP_LABEL###</td><td>###ZIP###</td></tr>
+	<!-- ###ZIP_DATA_LOOP### end -->
+	<!-- ###CITY_DATA_LOOP### start -->
+		<tr><td>###CITY_LABEL###</td><td>###CITY###</td></tr>
+	<!-- ###CITY_DATA_LOOP### end -->
+	<!-- ###COUNTRYZONE_DATA_LOOP### start -->
+		<tr><td>###COUNTRYZONE_LABEL###</td><td>###COUNTRYZONE###</td></tr>
+	<!-- ###COUNTRYZONE_DATA_LOOP### end -->
+	<!-- ###COUNTRY_DATA_LOOP### start -->
+		<tr><td>###COUNTRY_LABEL###</td><td>###COUNTRY###</td></tr>
+	<!-- ###COUNTRY_DATA_LOOP### end -->
+	<!-- ###PHONE_DATA_LOOP### start -->
+		<tr><td>###PHONE_LABEL###</td><td>
+		<!-- ###PHONE_LOOP### start -->
+			<!-- ###POST_PHONE_LOOP### start -->
+			<!-- ###POST_PHONE_LOOP### end -->
+			<!-- ###PHONE_DATA### start -->
+				<div>###PHONE###</div>
+			<!-- ###PHONE_DATA### end -->
+			<!-- ###PRE_PHONE_LOOP### start -->
+			<!-- ###PRE_PHONE_LOOP### end -->
+		<!-- ###PHONE_LOOP### end -->
+		</td></tr>
+	<!-- ###PHONE_DATA_LOOP### end -->
+	<!-- ###LINK_DATA_LOOP### start -->
+		<tr><td>###LINK_LABEL###</td><td>
+		<!-- ###LINK_LOOP### start -->
+		<!-- ###POST_LINK_LOOP### start -->
+		<!-- ###POST_LINK_LOOP### end -->
+			<!-- ###LINK_DATA### start -->
+				<div>###LINK###</div>
+			<!-- ###LINK_DATA### end -->
+		<!-- ###PRE_LINK_LOOP### start -->
+		<!-- ###PRE_LINK_LOOP### end -->
+		<!-- ###LINK_LOOP### end -->
+		</td></tr>
+	<!-- ###LINK_DATA_LOOP### end -->
+	<!-- ###EMAIL_DATA_LOOP### start -->
+		<tr><td>###EMAIL_LABEL###</td><td>
+		<!-- ###EMAIL_LOOP### start -->
+		<!-- ###POST_EMAIL_LOOP### start -->
+		<!-- ###POST_EMAIL_LOOP### end -->
+			<!-- ###EMAIL_DATA### start -->
+				<div>###EMAIL###</div>
+			<!-- ###EMAIL_DATA### end -->
+		<!-- ###PRE_EMAIL_LOOP### start -->
+		<!-- ###PRE_EMAIL_LOOP### end -->
+		<!-- ###EMAIL_LOOP### end -->
+		</td></tr>
+	<!-- ###EMAIL_DATA_LOOP### end -->
+	<!-- ###IMAGE_DATA_LOOP### start -->
+		<tr><td>###IMAGE_LABEL###</td><td>###IMAGE###</td></tr>
+	<!-- ###IMAGE_DATA_LOOP### end -->
+
+		<!-- ###FORM_END### start-->
+		
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_DELETE###" onclick="return checkForm('tx_cal_controller_create_element');" />
+	</fieldset>
+</form>
+<!-- ###FORM_END### end-->
+<!--/delete_location.tmpl-->

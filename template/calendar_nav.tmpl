@@ -1,0 +1,43 @@
+<!--calendar_nav.tmpl-->
+<table id="calendar-nav">
+	<tr>
+		<td id="previous">###MONTH_SMALL|-1###</td>
+		<td id="list">
+			<!-- ###DONT_SHOW_JUMPS### start -->
+			<!-- ###DONT_SHOW_JUMPS### end -->
+			<!-- ###SHOW_JUMPS### start -->
+			<b>###L_JUMP###</b>
+			<form style="margin-bottom:0;" action="###CURRENT_VIEW###.php" method="get">
+				<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_JUMPS###</select>
+				<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_YEARS###</select>
+				<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_MONTHS###</select>
+				<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_WEEKS###</select>
+			</form>
+			<!-- ###SHOW_JUMPS### end -->
+			<!-- ###SHOW_CALENDAR_SWITCH### begin-->
+			<form name="tx_cal_controller" method="post" action="###CHANGE_CALENDAR_ACTION_URL###">
+				<input type="hidden" value="###GETDATE###" name="tx_cal_controller[getdate]" />
+				<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+				<input type="hidden" value="###THIS_VIEW###" name="tx_cal_controller[view]" />
+				<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+				<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+				<b>###L_CALENDAR###:</b>
+				<select name="tx_cal_controller[calendar]" size="1" onchange="submit();">###CALENDAR_IDS###</select>
+			</form>
+			<!-- ###SHOW_CALENDAR_SWITCH### end-->
+			<!-- ###SHOW_SEARCH### start -->
+			###SEARCH_BOX###
+			<!-- ###SHOW_SEARCH### end -->
+		</td>
+		<td id="legend">
+			<div>
+				<h5>###L_LEGEND###:</h5>
+				<form method="post" action="###CATEGORYURL###">
+					###LEGEND###
+				</form>
+			</div>
+		</td>
+		<td id="next">###MONTH_SMALL|+1###</td>
+	</tr>
+</table>
+<!--/calendar_nav.tmpl-->

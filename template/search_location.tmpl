@@ -1,0 +1,96 @@
+<!--search_location.tmpl-->
+<h1>###HEADING###</h1>
+<!-- ###SEARCHLOCATIONFORM### start -->
+<div class = 'G10BOLD'>###L_SEARCH###:</div>
+<form action="###SEARCH_ACTION_URL###" method="POST">
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###">
+	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###">
+	<INPUT type="image" src="###IMG_PATH###/search.gif" border=0 height="19" width="18" name="tx_cal_controller[submit]" value="Search">
+</form>
+<!-- ###SEARCHLOCATIONFORM### end -->
+<ul class="search-result">
+	<!-- ###LOCATION### start -->
+	<!-- ###LOCATION_ODD### start -->
+	<li class="odd">
+		<!-- ###NAME_DATA_LOOP### start -->
+		<div class="fn">
+			<!-- ###LOCATION_LINK### start -->###NAME###<!-- ###LOCATION_LINK### end -->
+		</div>
+		<!-- ###NAME_DATA_LOOP### end -->
+		
+		<div class="adr">
+			<!-- ###STREET_DATA_LOOP### start -->	
+			<div class="street-address">
+				###STREET###
+			</div>
+			<!-- ###STREET_DATA_LOOP### end -->
+			<!-- ###CITY_DATA_LOOP### start -->
+			<span class="locality">
+				###CITY###
+			</span>
+			<!-- ###CITY_DATA_LOOP### end -->
+			<!-- ###COUNTRYZONE_DATA_LOOP### start -->
+			<span class="region">
+				###COUNTRYZONE###
+			</span>
+			<!-- ###COUNTRYZONE_DATA_LOOP### end -->
+			<!-- ###ZIP_DATA_LOOP### start -->
+			<span class="postal-code">
+				###ZIP###
+			</span>
+			<!-- ###ZIP_DATA_LOOP### end -->
+			<!-- ###COUNTRY_DATA_LOOP### start -->
+			<div class="country-name">
+				###COUNTRY###
+			</div>
+			<!-- ###COUNTRY_DATA_LOOP### end -->
+			
+		</div>
+	</li>
+	<!-- ###LOCATION_ODD### end -->
+	
+	<!-- ###LOCATION_EVEN### start -->
+	<li class="even">
+		<!-- ###NAME_DATA_LOOP### start -->
+		<div class="fn">
+			<!-- ###LOCATION_LINK### start -->###NAME###<!-- ###LOCATION_LINK### end -->
+		</div>
+		<!-- ###NAME_DATA_LOOP### end -->
+		
+		<div class="adr">
+			<!-- ###STREET_DATA_LOOP### start -->	
+			<div class="street-address">
+				###STREET###
+			</div>
+			<!-- ###STREET_DATA_LOOP### end -->
+			<!-- ###CITY_DATA_LOOP### start -->
+			<span class="locality">
+				###CITY###
+			</span>,
+			<!-- ###CITY_DATA_LOOP### end -->
+			<!-- ###COUNTRYZONE_DATA_LOOP### start -->
+			<span class="region">
+				###COUNTRYZONE###
+			</span>
+			<!-- ###COUNTRYZONE_DATA_LOOP### end -->
+			<!-- ###ZIP_DATA_LOOP### start -->
+			<span class="postal-code">
+				###ZIP###
+			</span>
+			<!-- ###ZIP_DATA_LOOP### end -->
+			<!-- ###COUNTRY_DATA_LOOP### start -->
+			<div class="country-name">
+				###COUNTRY###
+			</div>
+			<!-- ###COUNTRY_DATA_LOOP### end -->
+		</div>
+	</li>
+	
+	<!-- ###LOCATION_EVEN### end -->
+	<!-- ###LOCATION### end -->
+</ul>
+<!-- ###LINKS### start -->
+<br /><span>###BACKLINK###</span>
+<br /><span>###OTHERSEARCH###</span>
+<!-- ###LINKS### end -->
+<!--/search_location.tmpl-->

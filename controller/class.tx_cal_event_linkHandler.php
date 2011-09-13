@@ -1,0 +1,53 @@
+<?php
+
+
+/***************************************************************
+*  Copyright notice
+*
+*  (c) 2004
+*  All rights reserved
+*
+*  This script is part of the TYPO3 project. The TYPO3 project is
+*  free software; you can redistribute it and/or modify
+*  it under the terms of the GNU General Public License as published by
+*  the Free Software Foundation; either version 2 of the License, or
+*  (at your option) any later version.
+*
+*  The GNU General Public License can be found at
+*  http://www.gnu.org/copyleft/gpl.html.
+*
+*  This script is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU General Public License for more details.
+*
+*  This copyright notice MUST APPEAR in all copies of the script!
+***************************************************************/
+
+/**
+ * TODO
+ *
+ * @author Mario Matzulla <mario(at)matzullas.de>
+ */
+class tx_cal_event_linkHandler {
+	function main($linktxt, $conf, $linkHandlerKeyword, $linkHandlerValue, $link_param, & $pObj) {
+		if($linkHandlerKeyword != 'calendar'){
+			return;
+		}
+
+		$pid = $pObj->data['pid'];
+		$values = explode('|',$linkHandlerValue);
+		$lconf = Array();
+		if($values[1]){
+			$lconf['parameter'] = $values[1];
+		}
+		$lconf['additionalParams'] = '&tx_cal_controller[view]=event&tx_cal_controller[type]=tx_cal_phpicalendar&tx_cal_controller[uid]='.$values[0];
+		return $pObj->typoLink($linktxt, $lconf);
+	}
+}
+
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/controller/class.tx_cal_event_linkHandler.php']) {
+	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/controller/class.tx_cal_event_linkHandler.php']);
+}
+
+?>

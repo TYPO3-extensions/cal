@@ -1,0 +1,61 @@
+<!--create_calendar.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_CREATE_CALENDAR###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" name="tx_cal_controller[view]" value="confirm_calendar" />
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###" />
+		<input type="hidden" name="tx_cal_controller[uid]" value="###UID###" />
+	
+		<!-- ###FORM_START### end-->
+			<script type="text/javascript">
+			function typeChanged(element){
+				var index = element.options[element.selectedIndex].value;
+				switch(index){
+					case "0":
+						try{
+							document.getElementById('exturl').style.display = 'none';
+							document.getElementById('icsfile').style.display = 'none';
+							document.getElementById('refresh').style.display = 'none';
+						}catch(e){
+						}
+						break;
+					case "1":
+						try{
+							document.getElementById('exturl').style.display = '';
+							document.getElementById('icsfile').style.display = 'none';
+							document.getElementById('refresh').style.display = '';
+						}catch(e){
+						}
+						break;
+					case "2":
+						try{
+							document.getElementById('exturl').style.display = 'none';
+							document.getElementById('icsfile').style.display = '';
+							document.getElementById('refresh').style.display = '';
+						}catch(e){
+						}
+						break;
+				}
+			}
+			</script>
+			###HIDDEN###
+			###CALENDARTYPE###
+			###EXTURL###
+			###ICSFILE###
+			###REFRESH###
+			###TITLE###
+			###OWNER###
+			###ACTIVATE_FREEANDBUSY###
+			###FREEANDBUSYUSER###
+		<!-- ###FORM_END### begin-->
+		
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_SUBMIT###" />
+	</fieldset>
+</form>
+<script type="text/javascript">
+	typeChanged(document.getElementById('calendarType'));
+</script>
+<!-- ###FORM_END### end-->
+<!--/create_calendar.tmpl-->

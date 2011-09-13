@@ -1,0 +1,25 @@
+<!--confirm_category.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_CONFIRM_CATEGORY###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" name="tx_cal_controller[view]" value="###VIEW###" />
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###" />
+		<input type="hidden" name="tx_cal_controller[uid]" value="###UID###" />
+
+		<!-- ###FORM_START### end-->
+			###HIDDEN###
+			###TITLE###
+			###CALENDAR###
+			###HEADERSTYLE###
+			###BODYSTYLE###
+			###PARENT_CATEGORY###
+			###SHARED_USER_ALLOWED###
+		<!-- ###FORM_END### begin-->
+
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_SUBMIT###" />
+	</fieldset>
+</form>
+<!-- ###FORM_END### end-->
+<!--/confirm_category.tmpl-->

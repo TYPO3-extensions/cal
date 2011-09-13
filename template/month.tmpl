@@ -1,0 +1,78 @@
+<!--month.tmpl-->
+<!--In the month view this template represents the 'header' of the large month view. Not the month itself eventhough the template is called month.tmpl-->
+<div id="month-header" class="calborder navback">
+	<div id="month-header-prevnext">
+	<!-- ###PREV_MONTHLINK### start-->
+		<!-- ###PREV_MONTHLINKTEXT### start-->
+		<img src="###IMG_PATH###/left_day.gif" alt="[Previous Month]" />
+		<!-- ###PREV_MONTHLINKTEXT### end-->
+	<!-- ###PREV_MONTHLINK### end-->
+	
+	<!-- ###NEXT_MONTHLINK### start-->
+		<!-- ###NEXT_MONTHLINKTEXT### start-->
+		<img src="###IMG_PATH###/right_day.gif" alt="[Next Month]" />
+		<!-- ###NEXT_MONTHLINKTEXT### end-->
+	<!-- ###NEXT_MONTHLINK### end-->
+	###DISPLAY_DATE###(###CALENDAR_NAME###)
+	</div>	
+
+	<div id="month-header-icons">
+	<!-- ###DAYVIEWLINK### start-->
+		<!-- ###DAYVIEWLINKTEXT### start-->
+		<img src="###IMG_PATH###/day_on.gif" alt="###L_DAY###" />
+		<!-- ###DAYVIEWLINKTEXT### end-->
+	<!-- ###DAYVIEWLINK### end-->
+
+	<!-- ###WEEKVIEWLINK### start-->
+		<!-- ###WEEKVIEWLINKTEXT### start-->
+		<img src="###IMG_PATH###/week_on.gif" alt="###L_WEEK###" />
+		<!-- ###WEEKVIEWLINKTEXT### end-->
+	<!-- ###WEEKVIEWLINK### end-->
+
+	<!-- ###MONTHVIEWLINK### start-->
+		<!-- ###MONTHVIEWLINKTEXT### start-->
+		<img src="###IMG_PATH###/month_on.gif" alt="###L_MONTH###" />
+		<!-- ###MONTHVIEWLINKTEXT### end-->
+	<!-- ###MONTHVIEWLINK### end-->
+
+	<!-- ###YEARVIEWLINK### start-->
+		<!-- ###YEARVIEWLINKTEXT### start-->
+		<img src="###IMG_PATH###/year_on.gif" alt="###L_YEAR###" />
+		<!-- ###YEARVIEWLINKTEXT### end-->
+	<!-- ###YEARVIEWLINK### end-->
+	</div>
+
+	<!-- ###SHOW_ADMINLINK### start -->
+	<div id="link-admin">###ADMINLINK###</div>
+	<!-- ###SHOW_ADMINLINK### end -->
+	<br style="clear: both;" />
+</div>
+
+	###MONTH_LARGE|+0###
+
+	###CALENDAR_NAV###
+	
+<!-- ###SHOWBOTTOMEVENTS### start -->
+<div id="month-footer" class="calborder">
+	<div id="month-footer-header">
+	<!-- ###PREV_MONTHLINK### start-->
+		<!-- ###PREV_MONTHLINKTEXT### start-->
+			<img src="###IMG_PATH###/left_day.gif" alt="[Previous Month]">
+		<!-- ###PREV_MONTHLINKTEXT### end-->
+	<!-- ###PREV_MONTHLINK### end-->
+	###L_THIS_MONTHS###
+	<!-- ###NEXT_MONTHLINK### start-->
+		<!-- ###NEXT_MONTHLINKTEXT### start-->
+			<img src="###IMG_PATH###/right_day.gif" alt="[Next Month]" />
+		<!-- ###NEXT_MONTHLINKTEXT### end-->
+	<!-- ###NEXT_MONTHLINK### end-->
+	</div>
+	###LIST###	
+</div>
+<!-- ###SHOWBOTTOMEVENTS### end -->
+
+<!-- ###SHOW_ICSLINK### start -->
+<div id="link-ics"">###ICSLINK###</div>
+<!-- ###SHOW_ICSLINK### end -->
+
+<!--/month.tmpl-->

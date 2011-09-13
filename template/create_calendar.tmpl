@@ -1,0 +1,30 @@
+<!--create_calendar.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_CREATE_CALENDAR###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+<input type="hidden" value="confirm_calendar" name="tx_cal_controller[view]" >
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" >
+<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" >
+<table>
+<!-- ###FORM_START### end-->
+<!-- ###FORM_HIDDEN### begin-->
+	<tr>
+		<td>###L_HIDDEN###:</td><td><input type="checkbox" ###HIDDEN### name="tx_cal_controller[hidden]" ></td>
+	</tr>
+<!-- ###FORM_HIDDEN### end-->
+<!-- ###FORM_TITLE### begin-->
+	<tr>
+		<td>###L_TITLE###:</td><td><input type="text" value="###TITLE###" name="tx_cal_controller[title]" ></td>
+	</tr>
+<!-- ###FORM_TITLE### end-->
+<!-- ###FORM_FEUSER### begin-->
+	<tr>
+		<td>###L_FE_USER###:</td><td><select name="tx_cal_controller[fe_user_id]" size="1">###FE_USER_IDS###"</select ></td>
+	</tr>
+<!-- ###FORM_FEUSER### end-->
+<!-- ###FORM_END### begin-->
+</table>
+<input type="button" value="###L_CANCEL###" /><input type="submit" value="###L_SUBMIT###" />
+</form>
+<!-- ###FORM_END### end-->
+<!--/create_calendar.tmpl-->

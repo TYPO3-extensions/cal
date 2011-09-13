@@ -1,0 +1,41 @@
+<!--search_location.tmpl-->
+<h1>###HEADING###</h1>
+<!-- ###SEARCHLOCATIONFORM### start -->
+<div class = 'G10BOLD'>###L_SEARCH###:</div>
+<form action="###SEARCH_ACTION_URL###" method="POST">
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###">
+	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###">
+	<INPUT type="image" src="###IMG_PATH###/search.gif" border=0 height="19" width="18" name="submit" value="Search">
+</form>
+<!-- ###SEARCHLOCATIONFORM### end -->
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+	<!-- ###LOCATION### start -->
+	<!-- ###LOCATION_ODD### start -->
+	<tr align="left" valign="top">
+		<td width="170" nowrap="nowrap">
+			###NAME###<br />
+			<span class="V9G">###CITY###</span>
+		</td>
+		<td>
+			###COMPANY###<br /><span class="V9G">###STREET###</span>
+		</td>
+	</tr>
+	<!-- ###LOCATION_ODD### end -->
+	<!-- ###LOCATION_EVEN### start -->
+	<tr align="left" valign="top">
+		<td width="170" nowrap="nowrap" bgcolor="#EEEEEE">
+			###NAME###<br />
+			<span class="V9G">###CITY###</span>
+		</td>
+		<td bgcolor="#EEEEEE">
+			###COMPANY###<br /><span class="V9G">###STREET###</span>
+		</td>
+	</tr>
+	<!-- ###LOCATION_EVEN### end -->
+	<!-- ###LOCATION### end -->
+</table>
+<!-- ###LINKS### start -->
+<br /><span>###BACKLINK###</span>
+<br /><span>###OTHERSEARCH###</span>
+<!-- ###LINKS### end -->
+<!--/search_location.tmpl-->

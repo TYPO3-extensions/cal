@@ -1,0 +1,60 @@
+<!--phpicalendar_event.tmpl-->
+<h1>###HEADING###</h1>
+###EDITLINK###
+<table>
+<tr><td>###TITLE_LABEL###</td><td>###TITLE###</td></tr>
+<tr><td>###STARTDATE_LABEL###</td><td>###STARTDATE###</td></tr>
+<tr><td>###ENDDATE_LABEL###</td><td>###ENDDATE###</td></tr>
+<tr><td>###STARTTIME_LABEL###</td><td>###STARTTIME###</td></tr>
+<tr><td>###ENDTIME_LABEL###</td><td>###ENDTIME###</td></tr>
+<tr><td>###ORGANIZER_LABEL###</td><td>###ORGANIZER###</td></tr>
+<tr><td>###LOCATION_LABEL###</td><td>###LOCATION###</td></tr>
+<tr><td>###DESCRIPTION_LABEL###</td><td>###DESCRIPTION###</td></tr>
+<tr><td>###ATTACHMENT_LABEL###</td><td>###ATTACHMENT###</td></tr>
+</table>
+###MORE_LINK###
+<br />
+
+<!-- ###MONITOR_LOOP### start -->
+<div id="monitor_event">
+<!--###NOTLOGGEDIN### start-->
+If you are logged in, you can set up monitoring for this event.
+<!--###NOTLOGGEDIN### end-->
+<!--###NOTLOGGEDIN_NOMONITORING### start-->
+<h1>###NOTLOGGEDIN_NOMONITORING_HEADING###</h1>
+<form name="tx_cal_controller" id="tx_cal_controller_subscribe" method="post" action="###ACTIONURL###">
+###L_ENTER_EMAIL###
+<input type="text" size=30 name="email" value=""><br /><br />
+###L_CAPTCHA_TEXT###<br />
+<input type="text" size=10 name="captcha" value="">&nbsp;&nbsp;&nbsp;
+<img src="###CAPTCHA_SRC###" alt="" /><br />
+<input type="submit" value="###NOTLOGGEDIN_NOMONITORING_SUBMIT###" />
+</form>
+<!--###NOTLOGGEDIN_NOMONITORING### end-->
+<!--###NOTLOGGEDIN_MONITORING### start-->
+<h1>###NOTLOGGEDIN_MONITORING_HEADING###</h1>
+<form name="tx_cal_controller" id="tx_cal_controller_unsubscribe" method="post" action="###ACTIONURL###">
+###L_ENTER_EMAIL###
+<input type="text" size=30 name="email" value=""><br /><br />
+###L_CAPTCHA_TEXT###<br />
+<input type="text" size=10 name="captcha" value="">&nbsp;&nbsp;&nbsp;
+<img src="###CAPTCHA_SRC###" alt="" /><br />
+<input type="submit" value="###NOTLOGGEDIN_MONITORING_SUBMIT###" />
+</form>
+<!--###NOTLOGGEDIN_MONITORING### end-->
+<!--###LOGGEDIN_NOMONITORING###-->
+<form >
+Do you want to be notified, on event changes? <input type="hidden" id="userid" value="1"/> <input type="submit" value="monitor" />
+</form>
+<!--###LOGGEDIN_NOMONITORING###-->
+<!--###LOGGEDIN_MONITORING###-->
+<form >
+Stop monitorng this event? <input type="hidden" id="userid" value="1"/> <input type="submit" value="Stop monitoring" />
+</form>
+<!--###LOGGEDIN_MONITORING###-->
+
+</div>
+<!-- ###MONITOR_LOOP### end -->
+###EVENT_IMAGE###
+<br /><span>###ICSLINK###</span>
+<!--/phpicalendar_event.tmpl-->

@@ -1,0 +1,151 @@
+###
+# This are the default TS-constants for tt_news
+##
+
+plugin.tx_cal_controller {
+	# cat=plugin.tx_cal_controller/file/datetimeformats/1; type=string; label=General date format.
+	view.dateFormat = %B %d
+	# cat=plugin.tx_cal_controller/file/datetimeformats/2; type=string; label=General time format.
+	view.timeFormat = %I:%M %p
+
+	
+	# cat=plugin.tx_cal_controller/file/image/1; type=string; label=Images (Path): Path of the calendar images.
+	view.imagePath = EXT:cal/template/img
+	# cat=plugin.tx_cal_controller/file/calendar/1; type=string; label=Calendar Create Template: Marker-based template for calendar creation.
+	view.calendar.createCalendarTemplate = EXT:cal/template/create_calendar.tmpl
+	# cat=plugin.tx_cal_controller/file/calendar/2; type=string; label=Calendar Confirm Template: Marker-based template for calendar confirmation.
+	view.calendar.confirmCalendarTemplate = EXT:cal/template/confirm_calendar.tmpl
+
+	# cat=plugin.tx_cal_controller/file/category/1; type=string; label=Category Create Template: Marker-based template for category creation.
+	view.category.createCategoryTemplate = EXT:cal/template/create_category.tmpl
+	# cat=plugin.tx_cal_controller/file/category/2; type=string; label=Category Confirm Template: Marker-based template for category confirmation.
+	view.category.confirmCategoryTemplate = EXT:cal/template/confirm_category.tmpl
+
+	# cat=plugin.tx_cal_controller/file/day/1; type=string; label=Day View Template: Marker-based template for day view.
+	view.day.dayTemplate = EXT:cal/template/day.tmpl
+
+
+	# cat=plugin.tx_cal_controller/file/week/1; type=string; label=Week View Template: Marker-based template for week view.
+	view.week.weekTemplate = EXT:cal/template/week.tmpl
+
+
+	# cat=plugin.tx_cal_controller/file/month/1; type=string; label=Month View Template: Marker-based template for month view.
+	view.month.monthTemplate = EXT:cal/template/month.tmpl
+	# cat=plugin.tx_cal_controller/file/month/2; type=string; label=Month View Template (Small): Marker-based template for small month view.
+	view.month.monthSmallTemplate = EXT:cal/template/month_small.tmpl
+	# cat=plugin.tx_cal_controller/file/month/3; type=string; label=Month View Template (Medium): Marker-based template for medium month view.
+	view.month.monthMediumTemplate = EXT:cal/template/month_medium.tmpl
+	# cat=plugin.tx_cal_controller/file/month/4; type=string; label=Month View Template (Large): Marker-based template for large month view.
+	view.month.monthLargeTemplate = EXT:cal/template/month_large.tmpl
+	
+	# cat=plugin.tx_cal_controller/file/misc/1; type=string; label=Calendar Nav Template: Marker-based template for calendar navigation view.
+	view.month.calendarNavTemplate = EXT:cal/template/calendar_nav.tmpl
+
+
+	# cat=plugin.tx_cal_controller/file/year/1; type=string; label=Year View Template: Marker-based template for year view.
+	view.year.yearTemplate = EXT:cal/template/year.tmpl
+	
+	
+	# cat=plugin.tx_cal_controller/file/event/1; type=string; label=Event (Standard) Template: Marker-based template for event view.
+	view.event.eventTemplate = EXT:cal/template/event.tmpl
+	# cat=plugin.tx_cal_controller/file/event/2; type=string; label=Event (phpiCalendar) Template: Marker-based template for phpiCalendar event view.
+	view.event.phpicalendarEventTemplate = EXT:cal/template/phpicalendar_event.tmpl
+	# cat=plugin.tx_cal_controller/file/event/3; type=string; label=Event (Create) Template: Marker-based template for event creation view.
+	view.event.createEventTemplate = EXT:cal/template/create_event.tmpl
+	# cat=plugin.tx_cal_controller/file/event/4; type=string; label=Event (Confirm) Template: Marker-based template for event confirmation view.
+	view.event.confirmEventTemplate = EXT:cal/template/confirm_event.tmpl
+	# cat=plugin.tx_cal_controller/file/event/5; type=string; label=Event (Delete) Template: Marker-based template for event deletion view.
+	view.event.deleteEventTemplate = EXT:cal/template/delete_event.tmpl
+	
+	# cat=plugin.tx_cal_controller/file/event/6; type=string; label=Event email notification Template: Marker-based template for email notification on creation.
+	view.event.notify.all.onCreateTemplate = EXT:cal/template/notifyOnCreate.tmpl
+	# cat=plugin.tx_cal_controller/file/event/7; type=string; label=Event email notification Template: Marker-based template for email notification on change.
+	view.event.notify.all.onChangeTemplate = EXT:cal/template/notifyOnChange.tmpl
+	# cat=plugin.tx_cal_controller/file/event/8; type=string; label=Event email notification Template: Marker-based template for email notification on delete.
+	view.event.notify.all.onDeleteTemplate = EXT:cal/template/notifyOnDelete.tmpl
+	
+	# cat=plugin.tx_cal_controller/file/event/9; type=string; label=Event email reminder Template: Marker-based template for email reminder.
+	view.event.remind.all.template = EXT:cal/template/remind.tmpl
+	
+	
+	# cat=plugin.tx_cal_controller/file/location/1; type=string; label=Location (Standard) Template: Marker-based template for location view.
+	view.location.locationTemplate = EXT:cal/template/location.tmpl
+	# cat=plugin.tx_cal_controller/file/location/2; type=string; label=Location (Partner) Template: Marker-based template for location view using the partner framework.
+	view.location.locationTemplate4Partner = EXT:cal/template/location_partner.tmpl
+	# cat=plugin.tx_cal_controller/file/location/3; type=string; label=Location (Address) Template: Marker-based template for location view using tt_address.
+	view.location.locationTemplate4Address = EXT:cal/template/location_address.tmpl
+	# cat=plugin.tx_cal_controller/file/location/4; type=string; label=Location (Create) Template: Marker-based template for location creation view.
+	view.location.createLocationTemplate = EXT:cal/template/create_location.tmpl
+	# cat=plugin.tx_cal_controller/file/location/5; type=string; label=Location (Confirm) Template: Marker-based template for location confirmation view.
+	view.location.confirmLocationTemplate = EXT:cal/template/confirm_location.tmpl
+	
+	
+	# cat=plugin.tx_cal_controller/file/organizer/1; type=string; label=Organizer (Standard) Template: Marker-based template for organizer.
+	view.organizer.organizerTemplate = EXT:cal/template/organizer.tmpl
+	# cat=plugin.tx_cal_controller/file/organizer/2; type=string; label=Organizer (Partner) Template: Marker-based template for organizer using the partner framework.
+	view.organizer.organizerTemplate4Partner = EXT:cal/template/organizer_partner.tmpl
+	# cat=plugin.tx_cal_controller/file/organizer/3; type=string; label=Organizer (Address) Template: Marker-based template for organizer using tt_address.
+	view.organizer.organizerTemplate4Address = EXT:cal/template/organizer_address.tmpl
+
+
+	# cat=plugin.tx_cal_controller/file/list/1; type=string; label=List View Template: Marker-based template for list view.
+	view.list.listTemplate = EXT:cal/template/list.tmpl
+	
+	
+	view.ics {
+			# @description	Turns on ICS/iCal links in the frontend.
+			# @also			FlexForm
+			showIcsLinks = 1
+
+			# @description	Template for ICS view.
+			# @also			Constants
+			icsTemplate = EXT:cal/template/ics.tmpl
+
+			# @description	Template for ICS list view.
+			# @also			Constants
+			icsListTemplate = EXT:cal/template/icslist.tmpl
+			
+			# @description	Prefix for used with event UID to create a GUID.  Site URL
+			#				is a good choice here to ensure uniqueness.
+			eventUidPrefix = www.mysite.com
+			
+			attachment {
+				path = uploads/media/
+			}
+		}
+	
+	
+	# cat=plugin.tx_cal_controller/file/admin/1; type=string; label=Admin View Template: Marker-based template for admin view.
+	view.admin.adminTemplate = EXT:cal/template/admin.tmpl
+	# cat=plugin.tx_cal_controller/file/admin/2; type=string; label=View name: link value of view target.
+	view.admin.viewName = admin
+	
+	# cat=plugin.tx_cal_controller/file/other/1; type=string; label=Sidebar Template: Marker-based template for the sidebar.	
+	view.other.sidebarTemplate = EXT:cal/template/sidebar.tmpl
+	# cat=plugin.tx_cal_controller/file/other/2; type=string; label=Search Box Template: Marker-based template for the search box.
+	view.other.searchBoxTemplate = EXT:cal/template/search_box.tmpl
+
+	# cat=plugin.tx_cal_controller/file/search/1; type=string; label=Search (All) Template: Marker-based template for full search.	
+	view.search.searchResultAllTemplate = EXT:cal/template/search_all.tmpl
+	# cat=plugin.tx_cal_controller/file/search/1; type=string; label=Search (Event) Template: Marker-based template for event search.	
+	view.search.searchResultEventTemplate = EXT:cal/template/search_event.tmpl
+	# cat=plugin.tx_cal_controller/file/search/1; type=string; label=Search (Location) Template: Marker-based template for location search.	
+	view.search.searchResultLocationTemplate = EXT:cal/template/search_location.tmpl
+	# cat=plugin.tx_cal_controller/file/search/1; type=string; label=Search (Organizer) Template: Marker-based template for organizer search.	
+	view.search.searchResultOrganizerTemplate = EXT:cal/template/search_organizer.tmpl
+	
+	# cat=plugin.tx_cal_controller/dims/110; type=int+; label= Single Image Max Width: Max width for an image displayed in SINGLE template
+	singleMaxW = 240
+	# cat=plugin.tx_cal_controller/dims/120; type=int+; label= Single Image Max Height: Max height for an image displayed in SINGLE template
+	singleMaxH = 180
+	
+	# cat=plugin.tx_cal_controller/dims/130; type=int+; label= Latest Image Max Width: Max width for an image displayed in LATEST template
+	latestMaxW = 60
+	# cat=plugin.tx_cal_controller/dims/140; type=int+; label= Latest Image Max Height: Max height for an image displayed in LATEST template
+	latestMaxH = 40
+	  
+	# cat=plugin.tx_cal_controller/dims/150; type=int+; label= List Image Max Width: Max width for an image displayed in LIST template
+	listMaxW = 120
+	# cat=plugin.tx_cal_controller/dims/160; type=int+; label= List Image Max Height: Max height for an image displayed in LIST template
+	listMaxH = 90
+}

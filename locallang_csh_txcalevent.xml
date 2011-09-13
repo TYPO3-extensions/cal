@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>CSH for table tx_cal_event</description>
+		<type>CSH</type>
+		<csh_table>tx_cal_event</csh_table>
+		<fileId>EXT:cal/locallang_csh_txcalevent.xml</fileId>
+		<labelContext type="array">
+		</labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index=".description">Event for the Calendar Base extension.</label>
+			<label index=".details">Create events to be displayed on the calendar.  Events have a description, location, organizer, and many other fields.  Events can occur over a specific time period, last an entire, or recur at a specified interval.</label>
+			<label index="hidden.description">Disables the event so that it is not visible in the frontend.</label>
+			<label index="_hidden.seeAlso">tx_cal_event:endtime, tx_cal_event:starttime</label>
+			<label index="starttime.description">Sets a date at which the event will be visible in the frontend.</label>
+			<label index="starttime.details">This field has nothing to do with the actual start time of the event and is only used to determine at what time the event should be made visible.</label>
+			<label index="_starttime.seeAlso">tx_cal_event:endtime, tx_cal_event:hidden</label>
+			<label index="endtime.description">Sets a date at which the category will no longer be visible in the frontend.</label>
+			<label index="endtime.details">This field has nothing to do with the actual end time of the event and is only used to determine at what time the event should be hidden.</label>
+			<label index="_endtime.seeAlso">tx_cal_event:starttime, tx_cal_event:hidden</label>
+			<label index="start_date.description">Date the event starts.</label>
+			<label index="start_date.details">For recurring events, this field should be the start date for the first instance of the recurring event.</label>
+			<label index="end_date.description">Date the event ends.</label>
+			<label index="end_date.details">For recurring events, this field should be the end date for the first instance of the recurring event, not the last day that the event recurs on.</label>
+			<label index="start_time.description">Time the event starts.</label>
+			<label index="start_time.details">For recurring events, this field should be the start time for the first instance of the recurring event.</label>
+			<label index="end_time.description">Time the event ends.</label>
+			<label index="end_time.details">For recurring events, this field should be the end time for the first instance of the recurring event.</label>
+			<label index="title.description">Title of the event.</label>
+			<label index="calendar_id.description">Calendar that the event belongs to.</label>
+			<label index="category_id.description">Category that the event belongs to.</label>
+			<label index="organizer.description">Organizer of the event.</label>
+			<label index="organizer_id.description">Record for the organizer of the event.</label>
+			<label index="location.description">Location of the event.</label>
+			<label index="location_id.description">Record for the location of the event.</label>
+			<label index="description.description">Description of the event.</label>
+			<label index="freq.description">Frequency at which the event occurs.</label>
+			<label index="until.description">Date the recurrence should end.</label>
+			<label index="_until.seeAlso">tx_cal_event:cnt</label>
+			<label index="cnt.description">Number of times the event should recur before stopping.</label>
+			<label index="_cnt.seeAlso">tx_cal_event:until</label>
+			<label index="byday.description">Defines the interval by day of the week.</label>
+			<label index="bymonthday.description">Defines the interval by day of the month (e.g. 20th)</label>
+			<label index="bymonth.description">Defines the interval by month.</label>
+			<label index="intrval.description">Defines the interval at which the event recurs.</label>
+			<label index="intrval.details">An interval of 2 with a frequency of weekly would create an event that recurs every other week.</label>
+			<label index="monitor_cnt.description">Frontend users who are monitoring the event.</label>
+			<label index="monitor_cnt.details">Users listed here will receive email notifications about the event.</label>
+			<label index="exception_cnt.description">Exceptions to describe when this event should not occur.</label>
+			<label index="fe_cruser_id.description">Frontend user who created the event.</label>
+			<label index="fe_crgroup_id.description">Frontend group who created the event.</label>
+			<label index="type.description">Type of the event.</label>
+			<label index="type.details">Possible types are normal event with description, link to internal page, and link to external page.</label>
+			<label index="page.description">Internal page on your site to link to.</label>
+			<label index="ext_url.description">External url to link to.</label>
+			<label index="isTemp.description">IsTemp</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index=".description">Kalendereintrag für den Kalender für TYPO3</label>
+			<label index=".details">Erstellt einen Kalendereintrag (Ereignis) im Kalender. Die Einträge werden im &quot;icalendar&quot;-Standard abgelegt; weitere Features runden den Kalender ab.</label>
+			<label index="hidden.description">Verwenden Sie diese Funktion, um ein Ereignis nicht anzeigen zu lassen.</label>
+			<label index="starttime.description">Ab diesem Zeitpunkt wird der Kalender-Eintrag sichtbar sein.</label>
+			<label index="starttime.details">Dieses Feld hat nichts mit der Start-Zeit des eigentlichen Ereignisses zu tun. Es definiert, wann dieses Ereignis auf der Webseite gezeigt wird.</label>
+			<label index="endtime.description">Ab diesem Zeitpunkt wird der Kalender-Eintrag nicht mehr sichtbar sein.</label>
+			<label index="endtime.details">Dieses Feld hat nichts mit der End-Zeit des eigentlichen Ereignisses zu tun. Es definiert, wann dieses Ereignis auf der Webseite gezeigt wird.</label>
+			<label index="start_date.description">Gibt das Start-Datum für dieses Ereignis an.</label>
+			<label index="start_date.details">Für wiederkehrende Ereignisse ist dieses Feld das Start-Datum des ersten Termins.</label>
+			<label index="end_date.description">Gibt das End-Datum für dieses Ereignis an.</label>
+			<label index="end_date.details">Für wiederkehrende Ereignisse ist dieses Feld das End-Datum des &lt;b&gt;ersten&lt;/b&gt; Termins.</label>
+			<label index="start_time.description">Gibt die Start-Uhrzeit für dieses Ereignis an.</label>
+			<label index="start_time.details">Für wiederkehrende Ereignisse ist dieses Feld die Start-Uhrzeit des ersten Termins.</label>
+			<label index="end_time.description">Gibt die End-Uhrzeit für dieses Ereignis an.</label>
+			<label index="end_time.details">Für wiederkehrende Ereignisse ist dieses Feld die End-Uhrzeit des ersten Termins.</label>
+			<label index="title.description">Titel für dieses Ereignis</label>
+			<label index="calendar_id.description">Ordnen Sie hier Ihr Ereignis einem Kalender zu.</label>
+			<label index="category_id.description">Hier können Sie eine Kategorie für Ihr Ereignis auswählen.</label>
+			<label index="organizer.description">Der Organisator dieses Ereignisses</label>
+			<label index="organizer_id.description">Wählen Sie aus den existierenden Datensätzen einen Organisator für dieses Ereignis aus.</label>
+			<label index="location.description">Der Ort, an dem das Ereignis stattfindet.</label>
+			<label index="location_id.description">Wählen Sie aus den existierenden Datensätzen einen Ort für dieses Ereignis aus.</label>
+			<label index="description.description">Geben Sie hier eine m&amp;ouml;glichst aussagekr&amp;auml;ftige Beschreibung des Ereignisses ein.</label>
+			<label index="freq.description">Gibt die Frequenz des Ereignisses an.</label>
+			<label index="until.description">Gibt das endgültige End-Datum für ein wiederkehrendes Ereignis an.</label>
+			<label index="cnt.description">Gibt an, wie oft das Ereignis wiederholt werden soll.</label>
+			<label index="byday.description">Definiert das Intervall nach Tagen (z.B.Montag, Freitag oder all)</label>
+			<label index="bymonthday.description">Definiert das Intervall nach Monatstagen (z.B. 1, 2, ... , 30 oder all)</label>
+			<label index="bymonth.description">Definiert das Intervall nach Monaten (z.B. 1, 2, ..., 12)</label>
+			<label index="intrval.description">Gibt das Intervall an.</label>
+			<label index="intrval.details">Ein Intervall von 2 mit einer wöchentlichen Frequenz würde ein Ereignis erstellen, welches jede zweite Woche stattfindet.</label>
+			<label index="monitor_cnt.description">Definiert, welche FE-Benutzer dieses Ereignis beobachten.</label>
+			<label index="monitor_cnt.details">Beispielsweise bekommen diese Benutzer eine Benachrichtigung per email, sobald sich das Ereignis ändert.</label>
+			<label index="exception_cnt.description">Definiert die Ausnahmen für dieses Ereignis.</label>
+			<label index="fe_cruser_id.description">Der FrontEnd-Benutzer, der dieses Ereignis erstellt hat.</label>
+			<label index="fe_crgroup_id.description">Die FrontEnd-Benutzergruppe, die dieses Ereignis erstellt hat.</label>
+			<label index="type.description">Hier können Sie den TYP des Ereignis einstellen</label>
+			<label index="type.details">Es gibt drei Typen:
+&lt;b&gt;- normal mit Beschreibung&lt;/b&gt;: Erstellt ein normales Ereignis, welches Sie mit Hilfe einer Beschreibung näher erläutern können.
+&lt;b&gt;- interner Link&lt;/b&gt;: Erstellt, ein Ereignis, welches nur auf eine interne Seite für nähere Informationen verlinkt. Sie müssen eine interne Seite auswählen.
+&lt;b&gt;- externer Link&lt;/b&gt;: Erstellt, ein Ereignis, welches nur auf eine externe Seite (URL) für nähere Informationen verlinkt. Sie müssen eine externe URL angeben.</label>
+			<label index="page.description">Wählen Sie eine Seite aus, zu welcher das Ereignis verlinken soll.</label>
+			<label index="ext_url.description">Geben Sie hier eine externe URL ein. Z.B. http://www.typo3.org</label>
+			<label index="title.details">Dieser Titel wird als Überschrift und Titel für dieses Ereignis angezeigt und sollte kurz und aussagekräftig gewählt werden.</label>
+		</languageKey>
+		<languageKey index="dk" type="array">
+		</languageKey>
+		<languageKey index="no" type="array">
+		</languageKey>
+		<languageKey index="it" type="array">
+		</languageKey>
+		<languageKey index="fr" type="array">
+		</languageKey>
+		<languageKey index="es" type="array">
+		</languageKey>
+		<languageKey index="nl" type="array">
+		</languageKey>
+		<languageKey index="cz" type="array">
+		</languageKey>
+		<languageKey index="pl" type="array">
+		</languageKey>
+		<languageKey index="si" type="array">
+		</languageKey>
+		<languageKey index="fi" type="array">
+		</languageKey>
+		<languageKey index="tr" type="array">
+		</languageKey>
+		<languageKey index="se" type="array">
+		</languageKey>
+		<languageKey index="pt" type="array">
+		</languageKey>
+		<languageKey index="ru" type="array">
+		</languageKey>
+		<languageKey index="ro" type="array">
+		</languageKey>
+		<languageKey index="ch" type="array">
+		</languageKey>
+		<languageKey index="sk" type="array">
+		</languageKey>
+		<languageKey index="lt" type="array">
+		</languageKey>
+		<languageKey index="is" type="array">
+		</languageKey>
+		<languageKey index="hr" type="array">
+		</languageKey>
+		<languageKey index="hu" type="array">
+		</languageKey>
+		<languageKey index="gl" type="array">
+		</languageKey>
+		<languageKey index="th" type="array">
+		</languageKey>
+		<languageKey index="gr" type="array">
+		</languageKey>
+		<languageKey index="hk" type="array">
+		</languageKey>
+		<languageKey index="eu" type="array">
+		</languageKey>
+		<languageKey index="bg" type="array">
+		</languageKey>
+		<languageKey index="br" type="array">
+		</languageKey>
+		<languageKey index="et" type="array">
+		</languageKey>
+		<languageKey index="ar" type="array">
+		</languageKey>
+		<languageKey index="he" type="array">
+		</languageKey>
+		<languageKey index="ua" type="array">
+		</languageKey>
+		<languageKey index="lv" type="array">
+		</languageKey>
+		<languageKey index="jp" type="array">
+		</languageKey>
+		<languageKey index="vn" type="array">
+		</languageKey>
+		<languageKey index="ca" type="array">
+		</languageKey>
+		<languageKey index="ba" type="array">
+		</languageKey>
+		<languageKey index="kr" type="array">
+		</languageKey>
+		<languageKey index="eo" type="array">
+		</languageKey>
+		<languageKey index="my" type="array">
+		</languageKey>
+		<languageKey index="hi" type="array">
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="de" type="array">
+			<label index=".description" type="integer">153037545</label>
+			<label index="title.description" type="integer">226202598</label>
+			<label index="type.description" type="integer">37899510</label>
+			<label index="hidden.description" type="integer">263158905</label>
+			<label index="category_id.description" type="integer">53513233</label>
+			<label index="ext_url.description" type="integer">60443193</label>
+			<label index="starttime.description" type="integer">138141142</label>
+			<label index="endtime.description" type="integer">249111843</label>
+			<label index="start_date.description" type="integer">34728395</label>
+			<label index="end_date.description" type="integer">134327140</label>
+			<label index="start_time.description" type="integer">185244219</label>
+			<label index="end_time.description" type="integer">117485108</label>
+			<label index="organizer.description" type="integer">120058828</label>
+			<label index="organizer_id.description" type="integer">118794383</label>
+			<label index="location.description" type="integer">8823903</label>
+			<label index="location_id.description" type="integer">18817717</label>
+			<label index="freq.description" type="integer">117735563</label>
+			<label index="until.description" type="integer">116428641</label>
+			<label index="byday.description" type="integer">113250456</label>
+			<label index="bymonthday.description" type="integer">216980990</label>
+			<label index="bymonth.description" type="integer">121344561</label>
+			<label index="intrval.description" type="integer">231625876</label>
+			<label index="description.description" type="integer">34644145</label>
+			<label index="starttime.details" type="integer">181858940</label>
+			<label index=".details" type="integer">192664146</label>
+			<label index="title.details" type="integer">72321086</label>
+			<label index="type.details" type="integer">124482803</label>
+			<label index="endtime.details" type="integer">186117219</label>
+			<label index="cnt.description" type="integer">149138094</label>
+			<label index="monitor_cnt.description" type="integer">56597284</label>
+			<label index="monitor_cnt.details" type="integer">15460618</label>
+			<label index="exception_cnt.description" type="integer">149703221</label>
+			<label index="page.description" type="integer">61757847</label>
+			<label index="calendar_id.description" type="integer">130864956</label>
+			<label index="start_date.details" type="integer">177247227</label>
+			<label index="end_date.details" type="integer">151139419</label>
+			<label index="start_time.details" type="integer">26212864</label>
+			<label index="end_time.details" type="integer">94842149</label>
+			<label index="intrval.details" type="integer">264737818</label>
+			<label index="fe_cruser_id.description" type="integer">20469594</label>
+			<label index="fe_crgroup_id.description" type="integer">160974844</label>
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="de" type="array">
+			<label index=".description">Event for the Calendar Base extension.</label>
+			<label index="title.description">Title of the event.</label>
+			<label index="type.description">Type of the event.</label>
+			<label index="hidden.description">Disables the event so that it is not visible in the frontend.</label>
+			<label index="category_id.description">Category that the event belongs to.</label>
+			<label index="ext_url.description">External url to link to.</label>
+			<label index="starttime.description">Sets a date at which the event will be visible in the frontend.</label>
+			<label index="endtime.description">Sets a date at which the category will no longer be visible in the frontend.</label>
+			<label index="start_date.description">Date the event starts.</label>
+			<label index="end_date.description">Date the event ends.</label>
+			<label index="start_time.description">Time the event starts.</label>
+			<label index="end_time.description">Time the event ends.</label>
+			<label index="organizer.description">Organizer of the event.</label>
+			<label index="organizer_id.description">Record for the organizer of the event.</label>
+			<label index="location.description">Location of the event.</label>
+			<label index="location_id.description">Record for the location of the event.</label>
+			<label index="freq.description">Frequency at which the event occurs.</label>
+			<label index="until.description">Date the recurrence should end.</label>
+			<label index="byday.description">Defines the interval by day of the week.</label>
+			<label index="bymonthday.description">Defines the interval by day of the month (e.g. 20th)</label>
+			<label index="bymonth.description">Defines the interval by month.</label>
+			<label index="intrval.description">Defines the interval at which the event recurs.</label>
+			<label index="description.description">Description of the event.</label>
+			<label index="starttime.details">This field has nothing to do with the actual start time of the event and is only used to determine at what time the event should be made visible.</label>
+			<label index=".details">Create events to be displayed on the calendar.  Events have a description, location, organizer, and many other fields.  Events can occur over a specific time period, last an entire, or recur at a specified interval.</label>
+			<label index="title.details">This becomes the title of the event.</label>
+			<label index="type.details">Possible types are normal event with description, link to internal page, and link to external page.</label>
+			<label index="endtime.details">This field has nothing to do with the actual end time of the event and is only used to determine at what time the event should be hidden.</label>
+			<label index="cnt.description">Number of times the event should recur before stopping.</label>
+			<label index="monitor_cnt.description">Frontend users who are monitoring the event.</label>
+			<label index="monitor_cnt.details">Users listed here will receive email notifications about the event.</label>
+			<label index="exception_cnt.description">Exceptions to describe when this event should not occur.</label>
+			<label index="page.description">Internal page on your site to link to.</label>
+			<label index="calendar_id.description">Calendar that the event belongs to.</label>
+			<label index="start_date.details">For recurring events, this field should be the start date for the first instance of the recurring event.</label>
+			<label index="end_date.details">For recurring events, this field should be the end date for the first instance of the recurring event, not the last day that the event recurs on.</label>
+			<label index="start_time.details">For recurring events, this field should be the start time for the first instance of the recurring event.</label>
+			<label index="end_time.details">For recurring events, this field should be the end time for the first instance of the recurring event.</label>
+			<label index="intrval.details">An interval of 2 with a frequency of weekly would create an event that recurs every other week.</label>
+			<label index="fe_cruser_id.description">Frontend user who created the event.</label>
+			<label index="fe_crgroup_id.description">Frontend group who created the event.</label>
+		</languageKey>
+	</orig_text>
+</T3locallang>

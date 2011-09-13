@@ -1,0 +1,95 @@
+<!--organizer.tmpl-->
+<!-- ###POST_ORGANIZER### start -->
+<h1>###HEADING###</h1>
+<table>
+<!-- ###POST_ORGANIZER### end -->
+<!-- ###ORGANIZER### start -->
+	<!-- ###NAME_DATA_LOOP### start -->
+		<tr><td>###NAME_LABEL###</td><td>###NAME###</td></tr>
+	<!-- ###NAME_DATA_LOOP### end -->
+	<!-- ###DESCRIPTION_DATA_LOOP### start -->
+		<tr><td>###DESCRIPTION_LABEL###</td><td>###DESCRIPTION###</td></tr>
+	<!-- ###DESCRIPTION_DATA_LOOP### end -->
+	<!-- ###STREET_DATA_LOOP### start -->
+		<tr><td>###STREET_LABEL###</td><td>###STREET###</td></tr>
+	<!-- ###STREET_DATA_LOOP### end -->
+	<!-- ###ZIP_DATA_LOOP### start -->
+		<tr><td>###ZIP_LABEL###</td><td>###ZIP###</td></tr>
+	<!-- ###ZIP_DATA_LOOP### end -->
+	<!-- ###CITY_DATA_LOOP### start -->
+		<tr><td>###CITY_LABEL###</td><td>###CITY###</td></tr>
+	<!-- ###CITY_DATA_LOOP### end -->
+	<!-- ###PHONE_DATA_LOOP### start -->
+		<tr><td>###PHONE_LABEL###</td><td>
+		<!-- ###PHONE_LOOP### start -->
+			<!-- ###POST_PHONE_LOOP### start -->
+			<!-- ###POST_PHONE_LOOP### end -->
+			<!-- ###PHONE_DATA### start -->
+				<div>###NATURE###: +###PREFIX### (###AREACODE###) ###NUMBER### ###EXTENSION###</div>
+			<!-- ###PHONE_DATA### end -->
+			<!-- ###PRE_PHONE_LOOP### start -->
+			<!-- ###PRE_PHONE_LOOP### end -->
+		<!-- ###PHONE_LOOP### end -->
+		</td></tr>
+	<!-- ###PHONE_DATA_LOOP### end -->
+	<!-- ###MOBILEPHONE_DATA_LOOP### start -->
+		<tr><td>###MOBILEPHONE_LABEL###</td><td>
+		<!-- ###MOBILEPHONE_LOOP### start -->
+			<!-- ###POST_MOBILEPHONE_LOOP### start -->
+			<!-- ###POST_MOBILEPHONE_LOOP### end -->
+			<!-- ###MOBILEPHONE_DATA### start -->
+				<div>###NATURE###: +###PREFIX### (###AREACODE###) ###NUMBER### ###EXTENSION###</div>
+			<!-- ###MOBILEPHONE_DATA### end -->
+			<!-- ###PRE_MOBILEPHONE_LOOP### start -->
+			<!-- ###PRE_MOBILEPHONE_LOOP### end -->
+		<!-- ###MOBILEPHONE_LOOP### end -->
+		</td></tr>
+	<!-- ###MOBILEPHONE_DATA_LOOP### end -->
+	<!-- ###FAX_DATA_LOOP### start -->
+		<tr><td>###FAX_LABEL###</td><td>
+		<!-- ###FAX_LOOP### start -->
+		<!-- ###POST_FAX_LOOP### start -->
+		<!-- ###POST_FAX_LOOP### end -->
+			<!-- ###FAX_DATA### start -->
+				<div>###NATURE###: +###PREFIX### (###AREACODE###) ###NUMBER### ###EXTENSION###</div>
+			<!-- ###FAX_DATA### end -->
+		<!-- ###PRE_FAX_LOOP### start -->
+		<!-- ###PRE_FAX_LOOP### end -->
+		<!-- ###FAX_LOOP### end -->
+		</td></tr>
+	<!-- ###FAX_DATA_LOOP### end -->
+	<!-- ###LINK_DATA_LOOP### start -->
+		<tr><td>###LINK_LABEL###</td><td>
+		<!-- ###LINK_LOOP### start -->
+		<!-- ###POST_LINK_LOOP### start -->
+		<!-- ###POST_LINK_LOOP### end -->
+			<!-- ###LINK_DATA### start -->
+				<div>###NATURE###: ###LINK###</div>
+			<!-- ###LINK_DATA### end -->
+		<!-- ###PRE_LINK_LOOP### start -->
+		<!-- ###PRE_LINK_LOOP### end -->
+		<!-- ###LINK_LOOP### end -->
+		</td></tr>
+	<!-- ###LINK_DATA_LOOP### end -->
+	<!-- ###EMAIL_DATA_LOOP### start -->
+		<tr><td>###EMAIL_LABEL###</td><td>
+		<!-- ###EMAIL_LOOP### start -->
+		<!-- ###POST_EMAIL_LOOP### start -->
+		<!-- ###POST_EMAIL_LOOP### end -->
+			<!-- ###EMAIL_DATA### start -->
+				<div>###NATURE###: ###EMAIL###</div>
+			<!-- ###EMAIL_DATA### end -->
+		<!-- ###PRE_EMAIL_LOOP### start -->
+		<!-- ###PRE_EMAIL_LOOP### end -->
+		<!-- ###EMAIL_LOOP### end -->
+		</td></tr>
+	<!-- ###EMAIL_DATA_LOOP### end -->
+	<!-- ###IMAGE_DATA_LOOP### start -->
+		<tr><td>###IMAGE_LABEL###</td><td><img src="###IMAGE_SRC###" alt="###FIRST_NAME### ###LAST_NAME###" title="###FIRST_NAME### ###LAST_NAME###"/></td></tr>
+	<!-- ###IMAGE_DATA_LOOP### end -->
+<!-- ###ORGANIZER### end -->
+<!-- ###PRE_ORGANIZER### start -->
+</table>
+###EDITLINK###
+<!-- ###PRE_ORGANIZER### end -->
+<!--/organizer.tmpl-->

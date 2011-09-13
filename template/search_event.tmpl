@@ -1,0 +1,50 @@
+<!--search_event.tmpl-->
+<script language="javascript">
+
+</script>
+<h1>###HEADING###</h1>
+<!-- ###SEARCHEVENTFORM### start -->
+<div class = 'G10BOLD'>###L_SEARCH###:</div>
+<form action="###SEARCH_ACTION_URL###" method="POST">
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
+	<input type="hidden" size="15" name="tx_cal_controller[query]" value="###QUERY###" />
+	<input type="hidden" size="15" name="tx_cal_controller[view]" value="###VIEW###" />
+	###L_CATEGORY###:<select name="tx_cal_controller[category][]" id="tx_cal_controller_category_ids" size="1" onchange="submit()">###CATEGORY_IDS###</select><br />
+	###L_LOCATION###:<select name="tx_cal_controller[location_ids][]" id="tx_cal_controller_location_ids" size="1" onchange="submit()">###LOCATION_IDS###</select><br />
+	###L_EVENT_START_DAY###:<input type="text" value="###EVENT_START_DAY###" name="tx_cal_controller[start_day]" id="event_start_day" />###START_DAY_SELECTOR###<br />
+	###L_EVENT_END_DAY###:<input type="text" value="###EVENT_END_DAY###" name="tx_cal_controller[end_day]" id="event_end_day" />###END_DAY_SELECTOR###<br />
+	###L_SEARCH_STRING###:<input type="text" value="###QUERY###" name="tx_cal_controller[query]" id="query" /><br />
+	<INPUT type="image" src="###IMG_PATH###/search.gif" border=0 height="19" width="18" name="submit" value="Search" />
+</form>
+<!-- ###SEARCHEVENTFORM### end -->
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+	<!-- ###SHOWBOTTOMEVENTS### start -->
+	<!-- ###SHOWBOTTOMEVENTS_ODD### start -->
+	<tr align="left" valign="top">
+		<td width="170" nowrap="nowrap">
+			###START_DATE### ###END_DATE###<br />
+			<span class="V9G">###START_TIME### ###END_TIME###</span>
+		</td>
+		<td>
+			###EVENT_TEXT###<br /><span class="V9G">###CALNAME###</span>
+		</td>
+	</tr>
+	<!-- ###SHOWBOTTOMEVENTS_ODD### end -->
+	<!-- ###SHOWBOTTOMEVENTS_EVEN### start -->
+	<tr align="left" valign="top">
+		<td width="170" nowrap="nowrap" bgcolor="#EEEEEE">
+			###START_DATE### ###END_DATE###<br />
+			<span class="V9G">###START_TIME### ###END_TIME###</span>
+		</td>
+		<td bgcolor="#EEEEEE">
+			###EVENT_TEXT###<br /><span class="V9G">###CALNAME###</span>
+		</td>
+	</tr>
+	<!-- ###SHOWBOTTOMEVENTS_EVEN### end -->
+	<!-- ###SHOWBOTTOMEVENTS### end -->
+</table>
+<!-- ###LINKS### start -->
+<br /><span>###BACKLINK###</span>
+<br /><span>###OTHERSEARCH###</span>
+<!-- ###LINKS### end -->
+<!--/search_box.tmpl-->

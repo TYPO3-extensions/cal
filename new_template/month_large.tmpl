@@ -1,0 +1,30 @@
+<!--month_large.tmpl-->
+<!-- ###MONTH_TEMPLATE### start -->
+<table class="month-large">
+	<tr>
+		<!-- ###LOOPWEEKDAY### start -->
+		<th class="weekday###ADDITIONAL_CLASSES###">###WEEKDAY###</th>
+		<!-- ###LOOPWEEKDAY### end -->
+	
+	<!-- ###LOOPMONTHWEEKS### start -->
+	<!-- ###LOOPMONTHWEEKS_DAYS### start -->
+	<tr>
+	<!-- ###LOOPMONTHWEEKS_DAYS### end -->
+		<!-- ###LOOPWEEK_NUMS### start -->
+		<th class="month-weeknums %s">%s</th>
+		<!-- ###LOOPWEEK_NUMS### end -->
+
+		<!-- ###SWITCHMONTHDAY### start -->
+		<td class="###STYLE### day">
+			<div>###LINK###</div>
+			###ALLDAY###
+			###EVENT###
+		</td>
+		<!-- ###SWITCHMONTHDAY### end -->
+		<!-- ###LOOPMONTHDAYS_WEEKS### start -->
+	</tr>
+	<!-- ###LOOPMONTHDAYS_WEEKS### end -->
+	<!-- ###LOOPMONTHWEEKS### end -->
+</table>
+<!-- ###MONTH_TEMPLATE### end -->
+<!--/month_large.tmpl-->

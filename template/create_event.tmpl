@@ -1,0 +1,241 @@
+<!--create_event.tmpl-->
+<!-- ###FORM_START### begin-->
+
+<script type="text/javascript">
+
+function addOption(tag, selectbox, newbox )
+{
+	var optn = document.createElement("OPTION");
+	optn.text = tag.text;
+	optn.value = tag.value;
+	optn.className = tag.className;
+	optn.setAttribute("onclick","addOption(this,'"+newbox+"','"+selectbox+"');removeOption('"+selectbox+"',this.index);");
+	var elem = document.getElementById(selectbox);
+	elem.options.add(optn);
+}
+
+//This function is needed, because the IE doesn't support onclick at the option tag
+function addOption2(selectbox,newbox )
+{
+	if(navigator.appName=="Microsoft Internet Explorer"){
+		var elem = document.getElementById(selectbox);
+		var newElem = document.getElementById(newbox);
+		for(var i=0;i<elem.options.length;i++){
+			if(elem.options[i].selected==true){
+				var optn = document.createElement("OPTION");
+				optn.text = elem.options[i].text;
+				optn.value = elem.options[i].value;
+				optn.class = elem.options[i].class;
+				newElem.options.add(optn);
+				elem.remove(i);
+			}
+		}
+		elem.options.add(optn);
+	}
+}
+
+function removeOption(listbox, i){
+	var elem = document.getElementById(listbox);
+	elem.remove(i);
+}
+
+function checkForm(id){
+	var error = false;
+	var form = document.getElementById(id);
+	for(var i=0; i < form.elements.length; i++){
+	    ###VALIDATION###
+	}
+	if(error){
+		return false;
+	}
+	form.submit();
+	return true;
+}
+
+function atLeastOne(element){
+	if(element.options.length == 0){
+		return false;
+	}
+	return true;	
+}
+
+function selectAll(element){
+	for(var i = 0; i < element.options.length; i++){
+		element.options[i].selected = true;
+	}
+}
+
+</script>
+<h1>###L_EDIT_EVENT###</h1>
+<!-- ###FORM_START### end-->
+<!-- ###FORM_CALENDAR### begin-->
+<form name="tx_cal_controller" method="post" action="###CHANGE_CALENDAR_ACTION_URL###">
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+<input type="hidden" value="###THIS_VIEW###" name="tx_cal_controller[view]" />
+<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+<input type="hidden" value="###GETTIME###" name="tx_cal_controller[gettime]" />
+<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+<input type="hidden" value="###CALENDAR###" name="tx_cal_controller[calendar]" />
+<table>
+	<tr>
+		<td>###L_CALENDAR###:</td><td><select name="tx_cal_controller[switch_calendar]" size="1" onchange="submit();">###CALENDAR_IDS###</select></td>
+	</tr>
+</table>
+</form>
+<!-- ###FORM_CALENDAR### end-->
+<!-- ###PRE_FORM### start -->
+###ADDITIONALJS_PRE###
+<form name="tx_cal_controller" id="tx_cal_controller_create_element" method="post" action="###ACTION_URL###" onsubmit="###ADDITIONALJS_SUBMIT###">
+<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+<input type="hidden" value="###NEXT_VIEW###" name="tx_cal_controller[view]" />
+<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+<input type="hidden" value="###CALENDAR###" name="tx_cal_controller[calendar_id]" />
+<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+<input type="hidden" value="###CALENDAR_ID###" name="tx_cal_controller[calendar]" />
+<table border="0">
+<!-- ###PRE_FORM### end -->
+<!-- ###FORM_HIDDEN### begin-->
+	<tr>
+		<td>###L_HIDDEN###:</td><td><input type="checkbox" ###HIDDEN### name="tx_cal_controller[hidden]" /></td>
+	</tr>
+<!-- ###FORM_HIDDEN### end-->
+<!-- ###FORM_CATEGORY### begin-->
+	<tr>
+		<td>###L_CATEGORY###:</td><td>
+			<table>
+				<tr>
+					<td>
+						<select name="tx_cal_controller[category_ids_selected][]" id="tx_cal_controller_category_ids_selected"  size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_category_ids_selected','tx_cal_controller_category_ids');" style="width:180px;">###CATEGORY_IDS_SELECTED###</select>
+					</td>
+					<td>
+						<select name="tx_cal_controller[category_ids][]" id="tx_cal_controller_category_ids" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_category_ids','tx_cal_controller_category_ids_selected');" style="width:180px;">###CATEGORY_IDS###</select>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	
+<!-- ###FORM_CATEGORY### end-->
+<!-- ###FORM_DATETIME### begin-->
+	<tr>
+		<td>###L_EVENT_START_DAY###:</td><td><input type="text" value="###EVENT_START_DAY###" name="tx_cal_controller[event_start_day]" id="event_start_day" />###START_DAY_SELECTOR###</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_START_TIME###:</td>
+		<td>
+			<select name="tx_cal_controller[event_start_hour]" size="1">###START_HOURS###</select>:<select name="tx_cal_controller[event_start_minutes]" size="1">###START_MINUTES###</select>
+		</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_END_DAY###:</td><td><input type="text" value="###EVENT_END_DAY###" name="tx_cal_controller[event_end_day]" id="event_end_day" />###END_DAY_SELECTOR###</td>
+	</tr>
+	<tr>
+		<td>###L_EVENT_END_TIME###:</td>
+		<td>
+			<select name="tx_cal_controller[event_end_hour]" size="1">###END_HOURS###</select>:<select name="tx_cal_controller[event_end_minutes]" size="1">###END_MINUTES###</select>
+		</td>
+	</tr>
+<!-- ###FORM_DATETIME### end-->
+<!-- ###FORM_TITLE### begin-->
+	<tr>
+		<td>###L_TITLE###:</td><td><input type="text" value="###TITLE###" name="tx_cal_controller[title]" ></td>
+	</tr>
+<!-- ###FORM_TITLE### end-->
+<!-- ###FORM_CREATOR### begin-->
+	<tr>
+		<td>###L_USER_SELECTED###:</td><td><select name="tx_cal_controller[user_ids_selected][]" id="tx_cal_controller_user_ids_selected"  size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_user_ids_selected','tx_cal_controller_user_ids');">###USER_IDS_SELECTED###</select></td>
+	</tr>
+	<tr>
+		<td>###L_USER###:</td><td><select name="user_ids[]" id="tx_cal_controller[tx_cal_controller_user_ids][]" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_user_ids','tx_cal_controller_user_ids_selected');">###USER_IDS###</select></td>
+	</tr>
+<!-- ###FORM_CREATOR### end-->
+<!-- ###FORM_ORGANIZER### start-->
+	<tr>
+		<td>###L_ORGANIZER###:</td><td><input type="text" value="###ORGANIZER###" name="tx_cal_controller[organizer]" ></td>
+	</tr>
+	<tr>
+		<td>###L_CAL_ORGANIZER###:</td><td><select name="tx_cal_controller[organizer_id]" size="1">###ORGANIZER_IDS###</select></td>
+	</tr>
+<!-- ###FORM_ORGANIZER### end-->
+<!-- ###FORM_LOCATION### start-->
+  <tr>
+		<td>###L_LOCATION###:</td><td><input type="text" value="###LOCATION###" name="tx_cal_controller[location]" ></td>
+	</tr>
+	<tr>
+		<td>###L_CAL_LOCATION###:</td><td><select name="tx_cal_controller[location_id]" size="1">###LOCATION_IDS###</select></td>
+	</tr>
+<!-- ###FORM_LOCATION### end-->
+<!-- ###FORM_DESCRIPTION### start-->
+	<tr>
+		<td>###L_DESCRIPTION###:</td><td>###DESCRIPTION###</td>
+	</tr>
+<!-- ###FORM_DESCRIPTION### end-->
+<!-- ###FORM_RECURRING### start-->
+	<tr>
+		<td>###L_FREQUENCY###:</td><td><select name="tx_cal_controller[frequency_id]" size="1">###FREQUENCY_IDS###</select></td>
+	</tr>
+	<tr>
+		<td>###L_BY_DAY###:</td>
+		<td>
+			<input type="checkbox" value="mo" name="tx_cal_controller[by_day]" ###BY_DAY_CHECKED_MON###/>###L_DAYSOFWEEKSHORT_LANG_MON### 
+			<input type="checkbox" value="tu" name="tx_cal_controller[by_day]" ###BY_DAY_CHECKED_TUE###/>###L_DAYSOFWEEKSHORT_LANG_TUE### 
+			<input type="checkbox" value="we" name="tx_cal_controller[by_day]" ###BY_DAY_CHECKED_WED###/>###L_DAYSOFWEEKSHORT_LANG_WED### 
+			<input type="checkbox" value="th" name="tx_cal_controller[by_day]" ###BY_DAY_CHECKED_THU###/>###L_DAYSOFWEEKSHORT_LANG_THU### 
+			<input type="checkbox" value="fr" name="tx_cal_controller[by_day]" ###BY_DAY_CHECKED_FRI###/>###L_DAYSOFWEEKSHORT_LANG_FRI### 
+			<input type="checkbox" value="sa" name="tx_cal_controller[by_day]" ###BY_DAY_CHECKED_SAT###/>###L_DAYSOFWEEKSHORT_LANG_SAT### 
+			<input type="checkbox" value="su" name="tx_cal_controller[by_day]" ###BY_DAY_CHECKED_SUN###/>###L_DAYSOFWEEKSHORT_LANG_SUN###
+		</td>
+	</tr>
+	<tr>
+		<td>###L_BY_MONTHDAY###:</td><td><input type="text" value="###BY_MONTHDAY###" name="tx_cal_controller[by_monthday]" ></td>
+	</tr>
+	<tr>
+		<td>###L_BY_MONTH###:</td><td><input type="text" value="###BY_MONTH###" name="tx_cal_controller[by_month]" ></td>
+	</tr>
+	<tr>
+		<td>###L_UNTIL###:</td><td><input type="text" value="###UNTIL###" name="tx_cal_controller[until]" id="until" />###UNTIL_SELECTOR###</td>
+	</tr>
+	<tr>
+		<td>###L_COUNT###:</td><td><input type="text" value="###COUNT###" name="tx_cal_controller[count]" ></td>
+	</tr>
+	<tr>
+		<td>###L_INTERVAL###:</td><td><input type="text" value="###INTERVAL###" name="tx_cal_controller[interval]" ></td>
+	</tr>
+<!-- ###FORM_RECURRING### end-->
+<!-- ###FORM_NOTIFY### start-->
+	<tr>
+		<td>###L_NOTIFY_ON_CHANGE###:</td>
+		<td>
+			<table>
+				<tr>
+					<td><select name="tx_cal_controller[notify_ids_selected][]" id="tx_cal_controller_notify_ids_selected"  size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_notify_ids_selected','tx_cal_controller_notify_ids');" style="width:180px;">###NOTIFY_IDS_SELECTED###</select></td>
+					<td><select name="tx_cal_controller[notify_ids][]" id="tx_cal_controller_notify_ids" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_notify_ids','tx_cal_controller_notify_ids_selected');" style="width:180px;">###NOTIFY_IDS###</select></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	
+<!-- ###FORM_NOTIFY### end-->
+<!-- ###FORM_EXCEPTION### start-->
+	<tr>
+		<td>###L_EXCEPTION###:</td>
+		<td>
+			<table>
+				<tr>
+					<td><select name="tx_cal_controller[exception_ids_selected][]" id="tx_cal_controller_exception_ids_selected" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_exception_ids_selected','tx_cal_controller_exception_ids');" style="width:180px;">###EXCEPTION_IDS_SELECTED###</select></td>
+					<td><select name="tx_cal_controller[exception_ids][]" id="tx_cal_controller_exception_ids" size="6" multiple="multiple" onclick="addOption2('tx_cal_controller_exception_ids','tx_cal_controller_exception_ids_selected');" style="width:180px;">###EXCEPTION_IDS###</select></td>
+				</tr>
+			</table>
+		
+		</td>
+	</tr>
+	
+<!-- ###FORM_EXCEPTION### end-->
+<!-- ###FORM_END### start-->
+</table>
+<input type="reset" value="###L_CANCEL###" onclick="window.back()"/><input type="submit" value="###L_SUBMIT###" onclick="return checkForm('tx_cal_controller_create_element');" />
+</form>
+###ADDITIONALJS_POST###
+<!-- ###FORM_END### end-->

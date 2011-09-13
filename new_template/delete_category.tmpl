@@ -1,0 +1,25 @@
+<!--delete_category.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_DELETE_CATEGORY###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" value="remove_category" name="tx_cal_controller[view]" />
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###" />
+		<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+
+		<!-- ###FORM_START### end-->
+			###HIDDEN###
+			###TITLE###
+			###HEADERSTYLE###
+			###BODYSTYLE###
+			###CALENDAR###
+			###PARENT_CATEGORY###
+			###SHARED_USER_ALLOWED###
+		<!-- ###FORM_END### begin-->
+
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_DELETE###" />
+	</fieldset>
+</form>
+<!-- ###FORM_END### end-->
+<!--/delete_category.tmpl-->

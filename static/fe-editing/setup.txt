@@ -1,0 +1,2323 @@
+plugin.tx_cal_controller {
+	view {
+		dontShowConfirmView = 0
+		
+		# @description	Switch to enable the dateSelector for create- and edit-event view
+		event.useDateSelector = 0
+		
+		create_event {
+		
+			# @description	Template for creation of an event in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.event.createEventTemplate}
+			
+			# @decription	Redirects to another page after the event has been saved. The parameter 'getdate' will get passed along.
+			# @also			redirectAfterCreateToView
+			redirectAfterCreateToPid =
+			
+			# @decription	Redirects to this view after the event has been saved. The parameter 'getdate' will get passed along.
+			# @also			redirectAfterCreateToPid
+			redirectAfterCreateToView =
+			
+			freeAndBusyViewPid = {$plugin.tx_cal_controller.view.create_event.freeAndBusyViewPid}
+			freeAndBusyViewLink = TEXT
+			freeAndBusyViewLink {
+				value = %%%AVAILABILITY%%%
+				typolink {
+					target = _blank 
+					parameter.field = link
+				}
+			}
+			
+			tabbedMenu = COA
+			tabbedMenu {
+				1	= TEXT
+				1	{
+					requiredFields = title,hidden,calendar_id,category,startdate,starttime,enddate,endtime,recurring
+					dataWrap = <li><a href="" rel="sc1"><b>%%%EVENT_GENERAL%%%</b></a></li>
+				}
+				2	= TEXT
+				2 {
+					requiredFields = teaser
+					dataWrap = <li><a href="" rel="sc2"><b>%%%TEASER%%%</b></a></li>
+				}
+				3 = TEXT
+				3 {
+					requiredFields = cal_organizer,organizer
+					dataWrap = <li><a href="" rel="sc3"><b>%%%ORGANIZER%%%</b></a></li>
+				}
+				4 = TEXT
+				4 {
+					requiredFields = image,attachment,image_caption,image_title,image_alt,attachment_caption
+					dataWrap = <li><a href="" rel="sc4"><b>%%%EVENT_FILES%%%</b></a></li>
+				}
+				5 = TEXT
+				5 {
+					requiredFields = notify,shared,exception
+					dataWrap = <li><a href="" rel="sc5"><b>%%%OPTIONS%%%</b></a></li>
+				}
+				6 = TEXT
+				6 {
+					requiredFields = attendee,sendout_invitation
+					dataWrap = <li><a href="" rel="sc6"><b>%%%ATTENDEE%%%</b></a></li>
+				}
+			}
+
+			# @description	Standard wrap for the event type field
+			event_type_stdWrap {
+				dataWrap = <p><label for="event_type_selector">%%%EVENT_TYPE%%%:</label><select name="tx_cal_controller[event_type]" size="1" onchange="calendarChanged(this);" id="event_type_selector">|</select>###EVENT_TYPE_REQUIRED###</p>
+			}
+						
+			# @description	Standard wrap for the calendar field
+			calendar_id_stdWrap {
+				dataWrap = <p><label for="calendar_selector">%%%CALENDAR%%%:</label><select name="tx_cal_controller[calendar_id]" size="1" onchange="calendarChanged(this);" id="calendar_selector">|</select>###CALENDAR_ID_REQUIRED###</p>
+			}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <p><label for="hidden">%%%HIDDEN%%%:</label><input type="checkbox" | name="tx_cal_controller[hidden]" value="1" id="hidden" /></p>
+			}
+			
+			# @description	Standard wrap for the category field
+			category_stdWrap {
+				dataWrap = <div id="category_tree"><label for="category">%%%CATEGORY%%%###CATEGORY_REQUIRED###:</label><div id="categoryEntries">|</div></div>
+			}
+			
+			# @description	Standard wrap for the allday field
+			allday_stdWrap {
+				dataWrap = 	<p><label for="allday">%%%EVENT_ALLDAY%%%:</label><input type="checkbox" | name="tx_cal_controller[allday]" id="allday" value="1" onchange="calendarChanged(this);"/></p>
+			}
+			
+			# @description	Standard wrap for the startdate field
+			startdate_stdWrap {
+				dataWrap = 	<p><label for="startdate">%%%WHEN%%%:</label><input type="text" value="|" name="tx_cal_controller[startdate]" id="startdate" />###STARTDATE_SELECTOR### ###STARTDATE_REQUIRED###
+			}
+			
+			# @description	Standard wrap for the enddate field
+			enddate_stdWrap {
+				dataWrap = 	<input type="text" value="|" name="tx_cal_controller[enddate]" id="enddate" />###ENDDATE_REQUIRED### ###ENDDATE_SELECTOR### ###STARTDATE_CONSTRAIN### ###START_CONSTRAIN###</p>
+			}
+			
+			# @description	Standard wrap for the starttime field
+			starttime_stdWrap {
+				dataWrap = 	<select name="tx_cal_controller[starttime]" id="starttime" size="1">|</select>
+			}
+			
+			startminutes.stepping = 5
+			
+			# @description	Standard wrap for the startMinutes field
+			startminutes_stdWrap {
+				dataWrap = 	:<select name="tx_cal_controller[startminutes]" id="startminutes" size="1">|</select>
+			}
+			
+			# @description	Standard wrap for the endTime field
+			endtime_stdWrap {
+				dataWrap = 	%%%TO%%% <select name="tx_cal_controller[endtime]" id="endtime" size="1">|</select>
+			}
+			
+			endminutes.stepping = 5
+			
+			# @description	Standard wrap for the endMinutes field
+			endminutes_stdWrap {
+				dataWrap = 	:<select name="tx_cal_controller[endminutes]" id="endminutes" size="1">|</select>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <p><label for="title">%%%WHAT%%%:</label><input type="text" value="|" size="40" name="tx_cal_controller[title]" id="title" />###TITLE_REQUIRED###</p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the cal_organizer field
+			cal_organizer_stdWrap {
+				dataWrap = <p><label for="cal_organizer">%%%EVENT_CAL_ORGANIZER%%%###CAL_ORGANIZER_REQUIRED###:</label><select name="tx_cal_controller[cal_organizer]" id="cal_organizer" size="1">|</select></p>
+			}
+			
+			# @description	Content object for the value of the cal_organizer_stdWrap
+			organizerDisplayField = TEXT
+			organizerDisplayField {
+				current = 1
+			}
+			
+			# @description	Standard wrap for the organizer field
+			organizer_stdWrap {
+				dataWrap = <p><label for="organizer">%%%ORGANIZER%%%###ORGANIZER_REQUIRED###:</label><input type="text" value="|" size="20" name="tx_cal_controller[organizer]" id="organizer" /></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the cal_location field
+			cal_location_stdWrap {
+				dataWrap = <p><label for="cal_location">%%%WHERE%%%###CAL_LOCATION_REQUIRED###:</label><select name="tx_cal_controller[cal_location]" size="1" id="cal_location">|</select></p>
+			}
+			
+			# @description	Content object for the value of the cal_location_stdWrap
+			locationDisplayField = TEXT
+			locationDisplayField {
+				current = 1
+			}
+			
+			# @description	Standard wrap for the location field
+			location_stdWrap {
+				dataWrap = <p><label for="location">%%%WHERE%%%###LOCATION_REQUIRED###:</label><input type="text" value="|" size="20" name="tx_cal_controller[location]" id="location" /></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the teaser field
+			teaser_stdWrap {
+				dataWrap = <p><label for="teaser">%%%EVENT_TEASER%%%###TEASER_REQUIRED###:</label><textarea name="tx_cal_controller[teaser]" id="teaser">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the description field
+			description_stdWrap {
+				dataWrap = <p><label for="description">%%%EVENT_DESCRIPTION%%%###DESCRIPTION_REQUIRED###:</label>|</p>
+				// Disable htmlSpecialChars, if you are using the RTE
+				#htmlSpecialChars = 1
+			}
+			
+			# @description	custom width for RTE
+            rte.width = 515
+            
+            # @description	custom height for RTE
+            rte.height = 150
+			
+			# @description	Standard wrap for the image field
+			image_stdWrap {
+				imageCount=2
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <p><label for="image">%%%EVENT_IMAGE%%%:</label><input type="file" value="|" name="tx_cal_controller[image][]" id="image" />###IMAGE_PREVIEW###</p>
+			}
+			
+			# @description	Content object for event image
+			event.image < tt_content.image.20
+			event.image {
+				textPos >
+				1.altText.field >
+				1.titleText.field >
+				//17 = in text right
+				textPos = 18
+				maxW = 150
+				stdWrap.dataWrap = |<input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/>
+			}
+			
+			image_caption_stdWrap {
+				dataWrap = <p><label for="image_caption">%%%EVENT_IMAGE_CAPTION%%%###IMAGE_CAPTION_REQUIRED###:</label><textarea name="tx_cal_controller[image_caption]" id="image_caption">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <p><label for="image_title">%%%EVENT_IMAGE_TITLE%%%###IMAGE_TITLE_REQUIRED###:</label><textarea name="tx_cal_controller[image_title]" id="image_title">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			image_alt_stdWrap {
+				dataWrap = <p><label for="image_alt">%%%EVENT_IMAGE_ALT%%%###IMAGE_ALT_REQUIRED###:</label><textarea name="tx_cal_controller[image_alt]" id="image_alt">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the imageUpload field
+			imageUpload_stdWrap {
+				dataWrap = <p><label for="image">%%%IMAGE_UPLOAD%%%:</label><input type="file" value="|" name="tx_cal_controller[image][]" id="image" /></p>
+			}
+			
+			# @description	Content object for event attachment
+			event.attachment < tt_content.uploads
+			event.attachment {
+				layout = 1
+				20.stdWrap.dataWrap = |<input type="hidden" value="###ATTACHMENT_VALUE###" name="tx_cal_controller[attachment][]" id="attachment" />
+			}
+			
+			# @description	Standard wrap for the attachment field
+			attachment_stdWrap {
+				imageCount=2
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <p><label for="attachment">%%%EVENT_ATTACHMENT%%%:</label><input type="file" value="|" name="tx_cal_controller[attachment][]" id="attachment" />###ATTACHMENT_PREVIEW###</p>
+			}
+			
+			# @description	Standard wrap for the attachmentUpload field
+			attachmentUpload_stdWrap {
+				dataWrap = <p><label for="attachment">%%%ATTACHMENT_UPLOAD%%%:</label><input type="file" value="|" name="tx_cal_controller[attachment][]" id="attachment" /></p>
+			}
+			
+			attachment_caption_stdWrap {
+				dataWrap = <p><label for="attachment_caption">%%%EVENT_IMAGE_CAPTION%%%###ATTACHMENT_CAPTION_REQUIRED###:</label><textarea name="tx_cal_controller[attachment_caption]" id="attachment_caption">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the frequency field
+			frequency_stdWrap {
+				dataWrap = <p><label for="freq">%%%REPEATS%%%:</label><select name="tx_cal_controller[frequency_id]" size="1" onchange="freqChanged(this)" id="freq">|</select></p>
+			}
+			
+			# @description	Standard wrap for the byDay field
+			byDay_stdWrap {
+				split {
+		        		# replace ###SPLITTER### with the split option
+				    token = ###SPLITTER###
+				        # the order is beeing defined in the normal optionSplit style
+				    cObjNum = 1 || 2 || 3 || 4 || 5 || 6 || 7
+				        # define the wraps on every position
+				    1.current = 1
+				    1.wrap = <input type="checkbox" value="mo" name="tx_cal_controller[by_day][]" |
+				    2.current = 1
+				    2.wrap = <input type="checkbox" value="tu" name="tx_cal_controller[by_day][]" |
+				    3.current = 1
+				    3.wrap = <input type="checkbox" value="we" name="tx_cal_controller[by_day][]" |
+				    4.current = 1
+				    4.wrap = <input type="checkbox" value="th" name="tx_cal_controller[by_day][]" |
+				    5.current = 1
+				    5.wrap = <input type="checkbox" value="fr" name="tx_cal_controller[by_day][]" |
+				    6.current = 1
+				    6.wrap = <input type="checkbox" value="sa" name="tx_cal_controller[by_day][]" |
+				    7.current = 1
+				    7.wrap = <input type="checkbox" value="su" name="tx_cal_controller[by_day][]"|
+				}
+				dataWrap = <p id="by_day"><label for="by_day">%%%EVENT_EDIT_BYDAY%%%:</label>|</p>
+					
+			}
+			
+			# @description	Standard wrap for the byMonthday field
+			byMonthday_stdWrap {
+				dataWrap = <p id="by_monthday" ><label for="bymonthday">%%%EVENT_EDIT_BYMONTHDAY%%%:</label><input type="text" value="|" name="tx_cal_controller[by_monthday]" id="bymonthday" /></p>
+			}
+			
+			# @description	Standard wrap for the byMonth field
+			byMonth_stdWrap {
+				dataWrap = <p id="by_month"><label for="bymonth">%%%EVENT_EDIT_BYMONTH%%%:</label><input type="text" value="|" name="tx_cal_controller[by_month]" id="bymonth" /></p>
+			}
+			
+			# @description	Standard wrap for the until field
+			until_stdWrap {
+				dataWrap = <span id="until"><label for="until">%%%UNTIL%%%:</label><input type="text" value="|" id="until_value" name="tx_cal_controller[until]" id="until" />###UNTIL_SELECTOR###</span>
+			}
+			
+			# @description	Standard wrap for the count field
+			count_stdWrap {
+				dataWrap = <span id="count"><label for="eventcount">%%%EVENT_COUNT%%%:</label> <input type="text" value="|" size="5" name="tx_cal_controller[count]" id="eventcount" /></span>
+			}
+			
+			# @description	Standard wrap for the interval field
+			interval_stdWrap {
+				dataWrap = <span id="interval"><label for="eventinterval">%%%INTERVAL%%%:</label> <input type="text" value="|" size="3" name="tx_cal_controller[interval]" id="eventinterval" /></span>
+			}
+			
+			# @description	Standard wrap for the rdate_type field
+			rdateType_stdWrap {
+				dataWrap = <p><label for="rdate_type">%%%RDATE_TYPE%%%:</label><select name="tx_cal_controller[rdate_type]" size="1" onchange="rdateTypeChanged(this);takeOverRdateRowValues();" id="rdate_type">|</select></p>
+			}
+			
+			# @description	Standard wrap for the rdate field
+			rdate_stdWrap {
+				dataWrap = <p id="rdate" style="clear:left;"><label for="rdateValues">%%%EVENT_RDATE%%%:</label><input type="hidden" name="tx_cal_controller[rdate]" value="|" id="rdateValues"/><img src="typo3/sysext/t3skin/icons/gfx/new_el.gif" onclick="addRdateRow(new Array('','','','','','','','',''));"/></p>
+			}
+			
+			# @description	Standard wrap for the notify field
+			notify_stdWrap {
+				dataWrap = <p><label for="notify">%%%EVENT_NOTIFY%%%:</label><span class="notify">|</span></p>
+			}
+			
+			# @description	Standard wrap for the shared field
+			shared_stdWrap {
+				dataWrap = <p><label for="shared">%%%EVENT_SHARED%%%:</label><span class="shared">|</span></p>
+			}
+			
+			# @description	Standard wrap for the exception field
+			exception_stdWrap {
+				dataWrap = <p><label for="exception">%%%EVENT_EXCEPTION%%%:</label><span class="exception">|</span></p>
+			}
+
+			# @description	Standard wrap for the attendee field
+			attendee_stdWrap {
+				dataWrap = <p><label for="attendee">%%%ATTENDEE%%%:</label><span class="attendee">|</span></p>
+			}
+			
+			# @description	Standard wrap for the attendee external field
+			attendee_external_stdWrap {
+				dataWrap = <p><label for="attendee_external">%%%ATTENDEE_EXTERNAL%%%:</label><textarea name="tx_cal_controller[attendee_external]" id="teaser" title="%%%GUEST_INFO%%%">|</textarea></p>
+			}
+			
+			# @description	Standard wrap for the sendout_invitation field
+			sendout_invitation_stdWrap {
+				dataWrap = <p><label for="hidden">%%%SENDOUT_INVITATION%%%:</label><input type="checkbox" | name="tx_cal_controller[sendout_invitation]" value="1" id="sendout_invitation" /></p>
+			}
+						
+			# @description	Settings for the category tree
+			tree {
+				calendar =
+				category = 
+				calendarTitle = TEXT
+				calendarTitle {
+					if.equals = ###
+				}
+				rootElement = TEXT
+				rootElement {
+					wrap = <table class="treelevel0"><tr><td>|</td></tr></table>
+				}
+				selector = TEXT
+				selector {
+					wrap = <input type="checkbox" name="tx_cal_controller[category][]" value="###UID###" | />
+				}
+				element = <span class="###HEADERSTYLE###_bullet ###HEADERSTYLE###_legend_bullet" >&bull;</span><span class="###HEADERSTYLE###_text">###TITLE###</span>
+				emptyElement = <br/><br/>
+				
+				subElement = <br /><table class="treelevel###LEVEL###" id="treelevel###UID###">
+				
+				subElement_wrap {
+					wrap = <tr><td>|</td></tr>
+				}
+				
+				subElement_pre = </table>
+
+				categorySelectorSubmit = 
+			}
+		}
+		edit_event < plugin.tx_cal_controller.view.create_event
+		
+		edit_event {
+			# @decription	Redirects to another page after the event has been updated. The parameter 'getdate' will get passed along.
+			# @also			redirectAfterEditToView
+			redirectAfterEditToPid =
+			
+			# @decription	Redirects to this view after the event has been updated. The parameter 'getdate' will get passed along.
+			# @also			redirectAfterEditToPid
+			redirectAfterEditToView =
+			
+			image_stdWrap {
+				dataWrap = <div><label for="image">%%%LOCATION_IMAGE%%%:</label>###IMAGE_PREVIEW###<br/>%%%DELETE_IMAGE%%%:<input type="checkbox" name="tx_cal_controller[remove_image][]" value="###IMAGE_VALUE###"></div>
+			}
+			
+			attachment_stdWrap {
+				dataWrap = <div><label for="attachment">%%%EVENT_ATTACHMENT%%%:</label>###ATTACHMENT_PREVIEW###<br/>%%%DELETE_ATTACHMENT%%%:<input type="checkbox" name="tx_cal_controller[remove_attachment][]" value="###ATTACHMENT_VALUE###"></div>
+			}
+		}
+
+		confirm_event {
+			# @description	Template for confirmation of an event created in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.event.confirmEventTemplate}
+			
+			# @description	Standard wrap for the event type field
+			event_type_stdWrap {
+				dataWrap = <div><label for="event_type">%%%EVENT_TYPE%%%:</label>|<input type="hidden" name="tx_cal_controller[event_type]" value="###EVENT_TYPE_VALUE###"></div>
+			}
+			
+			# @description	Standard wrap for the calendar field
+			calendar_id_stdWrap {
+				dataWrap = <div><label for="calendar">%%%CALENDAR%%%:</label>|<input type="hidden" name="tx_cal_controller[calendar_id]" value="###CALENDAR_ID_VALUE###"></div>
+			}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hide">%%%HIDDEN%%%:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the category field
+			category_stdWrap {
+				dataWrap = <div><label for="category">%%%CATEGORY%%%:</label>|<input type="hidden" value="###CATEGORY_VALUE###" name="tx_cal_controller[category_ids]" /></div>
+			}
+			
+			# @description	Standard wrap for the allday field
+			allday_stdWrap {
+				dataWrap = <div><label for"allday">%%%EVENT_ALLDAY%%%:</label>|<input type="hidden" value="###ALLDAY_VALUE###" name="tx_cal_controller[allday]" /></div>
+			}
+			
+			# @description	Standard wrap for the startdate field
+			startdate_stdWrap {
+				dataWrap = 	<div><label for="startdate">%%%EVENT_EDIT_STARTDATE%%%:</label>|<input type="hidden" value="###STARTDATE_VALUE###" name="tx_cal_controller[startdate]" /></div>
+			}
+			
+			# @description	Standard wrap for the enddate field
+			enddate_stdWrap {
+				dataWrap = 	<div><label for="enddate">%%%EVENT_EDIT_ENDDATE%%%:</label>|<input type="hidden" value="###ENDDATE_VALUE###" name="tx_cal_controller[enddate]" /></div>
+			}
+			
+			# @description	Standard wrap for the starttime field
+			starttime_stdWrap {
+				dataWrap = 	<div><label for="starttime">%%%EVENT_EDIT_STARTTIME%%%:</label>|<input type="hidden" value="###STARTTIME_VALUE###" name="tx_cal_controller[starttime]" /></div>
+			}
+			
+			# @description	Standard wrap for the endtime field
+			endtime_stdWrap {
+				dataWrap = 	<div><label for="endtime">%%%EVENT_EDIT_ENDTIME%%%:</label>|<input type="hidden" value="###ENDTIME_VALUE###" name="tx_cal_controller[endtime]" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">%%%EVENT_TITLE%%%:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" /></div>
+			}
+			
+			# @description	Standard wrap for the cal_organizer field
+			cal_organizer_stdWrap {
+				dataWrap = <div><label for="cal_organizer">%%%EVENT_CAL_ORGANIZER%%%:</label>|<input type="hidden" value="###CAL_ORGANIZER_VALUE###" name="tx_cal_controller[cal_organizer]" /></div>
+			}
+			
+			# @description	Content object for the value of the cal_organizer_stdWrap
+			organizerDisplayField = TEXT
+			organizerDisplayField {
+				current = 1
+			}
+			
+			# @description	Standard wrap for the organizer field
+			organizer_stdWrap {
+				dataWrap = <div><label for="organizer">%%%ORGANIZER%%%:</label>|<input type="hidden" value="###ORGANIZER_VALUE###" name="tx_cal_controller[organizer]" /></div>
+			}
+			
+			# @description	Standard wrap for the cal_location field
+			cal_location_stdWrap {
+				dataWrap = <div><label for="cal_location">%%%EVENT_CAL_LOCATION%%%:</label>|<input type="hidden" value="###CAL_LOCATION_VALUE###" name="tx_cal_controller[cal_location]" /></div>
+			}
+			
+			# @description	Content object for the value of the cal_location_stdWrap
+			locationDisplayField = TEXT
+			locationDisplayField {
+				current = 1
+			}
+			
+			# @description	Standard wrap for the location field
+			location_stdWrap {
+				dataWrap = <div><label for="location">%%%LOCATION%%%:</label>|<input type="hidden" value="###LOCATION_VALUE###" name="tx_cal_controller[location]" /></div>
+			}
+			
+			# @description	Standard wrap for the teaser field
+			teaser_stdWrap {
+				dataWrap = <div><label for="teaser">%%%EVENT_TEASER%%%:</label>|<input type="hidden" value="###TEASER_VALUE###" name="tx_cal_controller[teaser]"/></div>
+			}
+			
+			# @description	Standard wrap for the description field
+			description_stdWrap {
+				dataWrap = <div><label for="description">%%%EVENT_DESCRIPTION%%%:</label>|<input type="hidden" value="###DESCRIPTION_VALUE###" name="tx_cal_controller[description]"/></div>
+			}
+			
+			# @description	Content object for event image
+			event.image < tt_content.image.20
+			event.image {
+				textPos >
+				1.altText.field >
+				1.titleText.field >
+				//17 = in text right
+				textPos = 17
+				maxW = 150
+				stdWrap.dataWrap = <div><label for="image">%%%EVENT_IMAGE%%%: |</label><input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/></div>
+			}
+			
+			image_caption_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_caption]"/>
+				htmlSpecialChars = 1
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_title]"/>
+				htmlSpecialChars = 1
+			}
+			
+			image_alt_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_alt]"/>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Content object for the attachment field
+			event.attachment < tt_content.uploads
+			event.attachment {
+				layout = 1
+				20.stdWrap.dataWrap = <div><label for="attachment">%%%EVENT_ATTACHMENT%%%:|</label><input type="hidden" value="###ATTACHMENT_VALUE###" name="tx_cal_controller[attachment][]"/></div>
+			}
+			
+			attachment_caption_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[attachment_caption]"/>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the frequency field
+			frequency_stdWrap {
+				dataWrap = <div><label for="frequency">%%%EVENT_FREQUENCY%%%:</label>|<input type="hidden" value="###FREQUENCY_VALUE###" name="tx_cal_controller[frequency_id]" /></div>
+			}
+			
+			# @description	Standard wrap for the byDay field
+			byDay_stdWrap {
+				dataWrap = <div><label for="byday">%%%EVENT_EDIT_BYDAY%%%:</label>|<input type="hidden" value="###BY_DAY_VALUE###" name="tx_cal_controller[by_day]" /></div>
+			}
+			
+			# @description	Standard wrap for the byMonthday field
+			byMonthday_stdWrap {
+				dataWrap = <div><label for="bymonthday">%%%EVENT_EDIT_BYMONTHDAY%%%:</label>|<input type="hidden" value="###BY_MONTHDAY_VALUE###" name="tx_cal_controller[by_monthday]" /></div>
+			}
+			
+			# @description	Standard wrap for the byMonth field
+			byMonth_stdWrap {
+				dataWrap = <div><label for="bymonth">%%%EVENT_EDIT_BYMONTH%%%:</label>|<input type="hidden" value="###BY_MONTH_VALUE###" name="tx_cal_controller[by_month]" /></div>
+			}
+			
+			# @description	Standard wrap for the until field
+			until_stdWrap {
+				dataWrap = <div><label for="until">%%%EVENT_EDIT_UNTIL%%%:</label>|<input type="hidden" value="###UNTIL_VALUE###" name="tx_cal_controller[until]" id="until" /></div>
+			}
+			
+			# @description	Standard wrap for the count field
+			count_stdWrap {
+				dataWrap = <div><label for="count">%%%EVENT_COUNT%%%:</label>|<input type="hidden" value="###COUNT_VALUE###" name="tx_cal_controller[count]"/></div>
+			}
+			
+			# @description	Standard wrap for the interval field
+			interval_stdWrap {
+				dataWrap = <div><label for="interval">%%%EVENT_INTERVAL%%%:</label>|<input type="hidden" value="###INTERVAL_VALUE###" name="tx_cal_controller[interval]"/></div>
+			}
+			
+			# @description	Standard wrap for the rdate_type field
+			rdateType_stdWrap {
+				dataWrap = <div><label for="rdate_type">%%%RDATE_TYPE%%%:</label>|<input type="hidden" value="###RDATE_TYPE_VALUE###" name="tx_cal_controller[rdate_type]" /></div>
+			}
+			
+			# @description	Standard wrap for the rdate field
+			rdate_stdWrap {
+				dataWrap = <div><label for="rdate">%%%EVENT_RDATE%%%:</label>|<input type="hidden" value="###RDATE_VALUE###" name="tx_cal_controller[rdate]" /></div>
+			}
+			
+			# @description	Standard wrap for the notify field
+			notify_stdWrap {
+				dataWrap = <div><label for="notify">%%%EVENT_NOTIFY%%%:</label>|<input type="hidden" value="###NOTIFY_VALUE###" name="tx_cal_controller[notify_ids]"/></div>
+			}
+			
+			# @description	Standard wrap for the shared field
+			shared_stdWrap {
+				dataWrap = <div><label for="notify">%%%EVENT_SHARED%%%:</label>|<input type="hidden" value="###SHARED_VALUE###" name="tx_cal_controller[shared_ids]"/></div>
+			}
+			
+			# @description	Standard wrap for the exception field
+			exception_stdWrap {
+				dataWrap = <div><label for="exception">%%%EVENT_EXCEPTION%%%:</label>|<input type="hidden" value="###EXCEPTION_VALUE###" name="tx_cal_controller[exception_ids]"/></div>
+			}
+			
+			# @description	Standard wrap for the attendee field
+			attendee_stdWrap {
+				dataWrap = <div><label for="notify">%%%ATTENDEE%%%:</label>|<input type="hidden" value="###ATTENDEE_VALUE###" name="tx_cal_controller[attendee]"/><input type="hidden" value="###ATTENDEE_ATTENDANCE_VALUE###" name="tx_cal_controller[attendance]"/></div>
+			}
+			
+			# @description	Standard wrap for the sendout_invitation field
+			sendout_invitation_stdWrap {
+				dataWrap = <div><label for="sendout_invitation">%%%SENDOUT_INVITATION%%%:</label>|<input type="hidden" value="###SENDOUT_INVITATION_VALUE###" name="tx_cal_controller[sendout_invitation]" /></div>
+			}
+		}
+		delete_event < plugin.tx_cal_controller.view.confirm_event
+		
+		delete_event {
+			# @description	Template for deleting an event in the frontend.
+			# @also	Constants
+			template = {$plugin.tx_cal_controller.view.event.deleteEventTemplate}
+			
+			# @decription	Redirects to another page after the event has been deleted. The parameter 'getdate' will get passed along.
+			# @also			redirectAfterDeleteToView
+			redirectAfterDeleteToPid =
+			
+			# @decription	Redirects to this view after the event has been deleted. The parameter 'getdate' will get passed along.
+			# @also			redirectAfterDeleteToPid
+			redirectAfterDeleteToView =
+		}
+		
+		create_calendar {
+			# @description	Template for creating a new calendar in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.calendar.createCalendarTemplate}
+			
+			# @decription	Redirects to another page after the calendar has been saved.
+			# @also			redirectAfterCreateToView
+			redirectAfterCreateToPid =
+			
+			# @decription	Redirects to this view after the calendar has been saved.
+			# @also			redirectAfterCreateToPid
+			redirectAfterCreateToView =
+
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">%%%HIDDEN%%%:</label><input type="checkbox" | name="tx_cal_controller[hidden]" id="hidden" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">%%%CALENDAR_TITLE%%%###TITLE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[title]" id="title" /></div>
+			}
+			
+			# @description	Standard wrap for the owner field
+			owner_stdWrap {
+				dataWrap = <div><label for="owner">%%%CALENDAR_OWNER%%%###OWNER_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the activateFreeAndBusy field
+			activateFreeAndBusy_stdWrap {
+				dataWrap = <div><label for="activateFreeAndBusy">%%%CALENDAR_ACTIVATE_FREEANDBUSY%%%###ACTIVATEFREEANDBUSY_REQUIRED###:</label><input type="checkbox" | name="tx_cal_controller[activateFreeAndBusy]" value="1" id="activateFreeAndBusy" /></div>
+			}
+			
+			# @description	Standard wrap for the freeAndBusyUser field
+			freeAndBusyUser_stdWrap {
+				dataWrap = <div><label for="freeAndBusyUser">%%%CALENDAR_FREEANDBUSYUSER%%%###FREEANDBUSYUSER_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the calendarType field
+			calendarType_stdWrap {
+				dataWrap = <div><label for="calendarType">%%%CALENDAR_TYPE%%%###CALENDARTYPE_REQUIRED###:</label><select name="tx_cal_controller[calendarType]" size="1" onchange="javascript: typeChanged(this);" id="calendarType">|</select></div>
+			}
+			
+			# @description	Standard wrap for the exturl field
+			exturl_stdWrap {
+				dataWrap = <div id="exturl"><label for="exturl">%%%CALENDAR_EXTURL%%%###EXTURL_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[exturl]" /></div>
+			}
+			
+			# @description	Standard wrap for the ics_file field
+			ics_file_stdWrap {
+				imageCount=1
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <div id="ics_file"><label for="ics_file">%%%CALENDAR_ICSFILE%%%:</label><input type="file" value="|" name="tx_cal_controller[ics_file][]" />###ICS_FILE_PREVIEW###</div>
+			}
+			
+			# @description	Content object for calendar ics file
+			calendar.ics_file < tt_content.uploads
+			calendar.ics_file {
+				layout = 1
+				20.stdWrap.dataWrap = |<input type="hidden" value="###ICS_FILE_VALUE###" name="tx_cal_controller[ics_file][]" />
+			}
+			
+			# @description	Standard wrap for the ics_fileUpload field
+			ics_fileUpload_stdWrap {
+				dataWrap = <div id="ics_fileUpload"><label for="ics_fileUpload">%%%ICS_FILE_UPLOAD%%%:</label><input type="file" value="|" name="tx_cal_controller[ics_file][]" /></div>
+			}
+			
+			# @description	Standard wrap for the refresh field
+			refresh_stdWrap {
+				dataWrap = <div id="refresh"><label for="refresh">%%%CALENDAR_REFRESH%%%###REFRESH_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[refresh]"/></div>
+			}
+		}
+		
+		edit_calendar < plugin.tx_cal_controller.view.create_calendar
+		edit_calendar {
+			# @decription	Redirects to another page after the calendar has been updated.
+			# @also			redirectAfterEditToView
+			redirectAfterEditToPid =
+			
+			# @decription	Redirects to this view after the calendar has been updated.
+			# @also			redirectAfterEditToPid
+			redirectAfterEditToView =
+			
+			ics_file_stdWrap {
+				dataWrap = <div id="ics_file"><label for="ics_file">%%%CALENDAR_ICSFILE%%%:</label><input type="hidden" value="###ICS_FILE_VALUE###" name="tx_cal_controller[ics_file][]" />###ICS_FILE_PREVIEW###<br/>%%%DELETE_ICSFILE%%%:<input type="checkbox" name="tx_cal_controller[remove_ics_file][]" value="###ICS_FILE_VALUE###"></div>
+			}
+		}
+		
+		confirm_calendar {
+			# @description	Template for confirming creation/editing of a (new) calendar in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.calendar.confirmCalendarTemplate}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">%%%HIDDEN%%%:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" id="hidden" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">%%%CALENDAR_TITLE%%%:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" id="title" /></div>
+			}
+			
+			# @description	Standard wrap for the owner field
+			owner_stdWrap {
+				dataWrap = <div><label for="owner">%%%CALENDAR_OWNER%%%:</label>|<input type="hidden" value="###OWNER_VALUE###" name="tx_cal_controller[owner_ids]" id="owner" /></div>
+			}
+			
+			# @description	Standard wrap for the activateFreeAndBusy field
+			activateFreeAndBusy_stdWrap {
+				dataWrap = <div><label for="activateFreeAndBusy">%%%CALENDAR_ACTIVATE_FREEANDBUSY%%%:</label>|<input type="hidden" value="###ACTIVATE_FREEANDBUSY_VALUE###" name="tx_cal_controller[activateFreeAndBusy]" id="activateFreeAndBusy" /></div>
+			}
+			
+			# @description	Standard wrap for the freeAndBusyUser field
+			freeAndBusyUser_stdWrap {
+				dataWrap = <div><label for="freeAndBusyUser">%%%CALENDAR_FREEANDBUSYUSER%%%:</label>|<input type="hidden" value="###FREEANDBUSYUSER_VALUE###" name="tx_cal_controller[freeAndBusyUser_ids]" id="freeAndBusyUser" /></div>
+			}
+			
+			# @description	Standard wrap for the calendarType field
+			calendarType_stdWrap {
+				dataWrap = <div><label for="calendarType">%%%CALENDAR_TYPE%%%:</label>|<input type="hidden" value="###CALENDARTYPE_VALUE###" name="tx_cal_controller[calendarType]" id="calendarType" /></div>
+			}
+			
+			# @description	Standard wrap for the exturl field
+			exturl_stdWrap {
+				dataWrap = <div id="exturl"><label for="exturl">%%%CALENDAR_EXTURL%%%:</label>|<input type="hidden" value="###EXTURL_VALUE###" name="tx_cal_controller[exturl]" /></div>
+			}
+			
+			# @description	Content object for the ics file field
+			calendar.ics_file < tt_content.uploads
+			calendar.ics_file {
+				layout = 1
+				20.stdWrap.dataWrap = <div id="icsfile"><label for="ics_file">%%%CALENDAR_ICSFILE%%%:|</label><input type="hidden" value="###ICS_FILE_VALUE###" name="tx_cal_controller[ics_file][]" /></div>
+			}
+			
+			# @description	Standard wrap for the refresh field
+			refresh_stdWrap {
+				dataWrap = <div id="refresh"><label for="refresh">%%%CALENDAR_REFRESH%%%:</label>|<input type="hidden" value="###REFRESH_VALUE###" name="tx_cal_controller[refresh]" /></div>
+			}
+		}
+		
+		delete_calendar < plugin.tx_cal_controller.view.confirm_calendar
+		
+		delete_calendar {
+			# @description	Template for confirming deletion of a calendar in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.calendar.deleteCalendarTemplate}
+			
+			# @decription	Redirects to another page after the calendar has been deleted.
+			# @also			redirectAfterDeleteToView
+			redirectAfterDeleteToPid =
+			
+			# @decription	Redirects to this view after the calendar has been deleted.
+			# @also			redirectAfterDeleteToPid
+			redirectAfterDeleteToView =
+		}
+
+		create_category {
+			# @description	Template for creating a new category in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.category.createCategoryTemplate}
+			
+			# @decription	Redirects to another page after the category has been saved.
+			# @also			redirectAfterCreateToView
+			redirectAfterCreateToPid =
+			
+			# @decription	Redirects to this view after the category has been saved.
+			# @also			redirectAfterCreateToPid
+			redirectAfterCreateToView =
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">%%%HIDDEN%%%###HIDDEN_REQUIRED###:</label><input type="checkbox" | value="1" name="tx_cal_controller[hidden]" id="hidden" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">%%%CATEGORY_TITLE%%%###TITLE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[title]" id="title" /></div>
+			}
+			
+			# @description	Standard wrap for the calendar field
+			calendar_id_stdWrap {
+				dataWrap = <div><label for="calendar_id">%%%CATEGORY_CALENDAR%%%###CALENDAR_ID_REQUIRED###:</label><select name="tx_cal_controller[calendar_id]" size="1" onchange="calendarChanged(this);" id="calendar_selector">|</select></div>
+			}
+			
+			# @description	Standard wrap for the headerStyle field
+			headerstyle_stdWrap {
+				dataWrap = <div><label for="headerstyle">%%%CATEGORY_HEADERSTYLE%%%###HEADERSTYLE_REQUIRED###:</label><select name="tx_cal_controller[headerstyle]" size="1" onchange="getNewStyle(this);" id="tx_cal_controller_headerstyle">|</select></div>
+			}
+			
+			# @description	Standard wrap for the bodyStyle field
+			bodystyle_stdWrap {
+				dataWrap = <div><label for="bodystyle">%%%CATEGORY_BODYSTYLE%%%###BODYSTYLE_REQUIRED###:</label><select name="tx_cal_controller[bodystyle]" size="1" onchange="getNewStyle(this);" id="tx_cal_controller_bodystyle">|</select></div>
+			}
+			
+			# @description	Standard wrap for the parentCategory field
+			parent_category_stdWrap {
+				dataWrap = <div><label for="parent_category">%%%CATEGORY_PARENT_CATEGORY%%%###PARENT_CATEGORY_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the sharedUserAllowed field
+			shared_user_allowed_stdWrap {
+				dataWrap = <div><label for="shared_user_allowed">%%%CATEGORY_SHARD_USER_ALLOWED%%%###SHARED_USER_ALLOWED_REQUIRED###:</label><input type="checkbox" | name="tx_cal_controller[shared_user_allowed]" value="1" /></div>
+			}
+			
+			# @description	Configuration for the parent category tree
+			tree < plugin.tx_cal_controller.view.create_event.tree
+			tree {
+				selector {
+					wrap = <input type="radio" name="tx_cal_controller[parent_category][]" value="###UID###" | />
+				}
+			}
+		}
+		
+		edit_category < plugin.tx_cal_controller.view.create_category
+		
+		edit_category {
+			# @decription	Redirects to another page after the category has been edited.
+			# @also			redirectAfterEditToView
+			redirectAfterEditToPid =
+			
+			# @decription	Redirects to this view after the category has been edited.
+			# @also			redirectAfterEditToPid
+			redirectAfterEditToView =
+		}
+
+		
+		confirm_category {
+			
+			# @description	Template for confirming creation of a new category in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.category.confirmCategoryTemplate}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">%%%HIDDEN%%%:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">%%%CATEGORY_TITLE%%%:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" /></div>
+			}
+			
+			# @description	Standard wrap for the calendar_id field
+			calendar_id_stdWrap {
+				dataWrap = <div><label for="calendar_id">%%%CATEGORY_CALENDAR%%%:</label>|<input type="hidden" value="###CALENDAR_ID_VALUE###" name="tx_cal_controller[calendar_id]" /></div>
+			}
+			
+			# @description	Standard wrap for the headerstyle field
+			headerstyle_stdWrap {
+				dataWrap = <div><label for="headerstyle">%%%CATEGORY_HEADERSTYLE%%%:</label>|<input type="hidden" value="###HEADERSTYLE_VALUE###" name="tx_cal_controller[headerstyle]" /></div>
+			}
+			
+			# @description	Standard wrap for the bodystyle field
+			bodystyle_stdWrap {
+				dataWrap = <div><label for="bodystyle">%%%CATEGORY_BODYSTYLE%%%:</label>|<input type="hidden" value="###BODYSTYLE_VALUE###" name="tx_cal_controller[bodystyle]" /></div>
+			}
+			
+			# @description	Standard wrap for the parent_category field
+			parent_category_stdWrap {
+				dataWrap = <div><label for="parent_category">%%%CATEGORY_PARENT_CATEGORY%%%:</label>|<input type="hidden" value="###PARENT_CATEGORY_VALUE###" name="tx_cal_controller[parent_category]" /></div>
+			}
+			
+			# @description	Standard wrap for the shared_user_allowed field
+			shared_user_allowed_stdWrap {
+				dataWrap = <div><label for="shared_user_allowed">%%%CATEGORY_SHARD_USER_ALLOWED%%%:</label>|<input type="hidden" value="###SHARED_USER_ALLOWED_VALUE###" name="tx_cal_controller[shared_user_allowed]" /></div>
+			}
+		}
+		
+		delete_category < plugin.tx_cal_controller.view.confirm_category
+		
+		delete_category {
+			# @description	Template for confirming deletion of a category in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.category.deleteCategoryTemplate}
+			
+			# @decription	Redirects to another page after the category has been deleted.
+			# @also			redirectAfterDeleteToView
+			redirectAfterDeleteToPid =
+			
+			# @decription	Redirects to this view after the category has been deleted.
+			# @also			redirectAfterDeleteToPid
+			redirectAfterDeleteToView =
+		}
+		
+		create_location {
+			# @description	Template for creating a location in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.location.createLocationTemplate}
+			
+			# @decription	Redirects to another page after the location has been saved.
+			# @also			redirectAfterCreateToView
+			redirectAfterCreateToPid =
+			
+			# @decription	Redirects to this view after the location has been saved.
+			# @also			redirectAfterCreateToPid
+			redirectAfterCreateToView =
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">%%%HIDDEN%%%###HIDDEN_REQUIRED###:</label><input type="checkbox" | value="1" name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the name field
+			name_stdWrap {
+				dataWrap = <div><label for="name">%%%LOCATION_NAME%%%###NAME_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[name]" /></div>
+			}
+			
+			# @description	Standard wrap for the description field
+			description_stdWrap {
+				dataWrap = <div><label for="description">%%%LOCATION_DESCRIPTION%%%###DESCRIPTION_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[description]" /></div>
+			}
+			
+			# @description	Standard wrap for the street field
+			street_stdWrap {
+				dataWrap = <div><label for="street">%%%LOCATION_STREET%%%###STREET_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[street]" /></div>
+			}
+			
+			# @description	Standard wrap for the zip field
+			zip_stdWrap {
+				dataWrap = <div><label for="zip">%%%LOCATION_ZIP%%%###ZIP_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[zip]" /></div>
+			}
+			
+			# @description	Standard wrap for the city field
+			city_stdWrap {
+				dataWrap = <div><label for="city">%%%LOCATION_CITY%%%###CITY_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[city]" /></div>
+			}
+			
+			# @description	Standard wrap for the phone field
+			phone_stdWrap {
+				dataWrap = <div><label for="phone">%%%LOCATION_PHONE%%%###PHONE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[phone]" /></div>
+			}
+			
+			# @description	Standard wrap for the facsimile field
+			fax_stdWrap {
+				dataWrap = <div><label for="fax">%%%LOCATION_FAX%%%###FAX_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[fax]" /></div>
+			}
+			
+			# @description	Standard wrap for the email field
+			email_stdWrap {
+				dataWrap = <div><label for="email">%%%LOCATION_EMAIL%%%###EMAIL_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[email]" /></div>
+			}
+			
+			# @description	Standard wrap for the image field
+			image_stdWrap {
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <div><label for="image">%%%LOCATION_IMAGE%%%:</label><input type="file" value="|" name="tx_cal_controller[image][]" />###IMAGE_PREVIEW###</div>
+			}
+			
+			# @description	Standard wrap for the imageUpload field
+			imageUpload_stdWrap {
+				dataWrap = <div><label for="image">%%%IMAGE_UPLOAD%%%###IMAGE_REQUIRED###:</label><input type="file" value="|" name="tx_cal_controller[image][]" /></div>
+			}
+			
+			# @description	Content object for event image
+			location.image < tt_content.image.20
+			location.image {
+				textPos >
+				1.altText.field >
+				1.titleText.field >
+				//17 = in text right
+				textPos = 18
+				maxW = 150
+				stdWrap.dataWrap = |<input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/>
+			}
+			organizer.image < plugin.tx_cal_controller.view.create_location.location.image
+			
+			image_caption_stdWrap {
+				dataWrap = <div><label for="image_caption">%%%EVENT_IMAGE_CAPTION%%%###IMAGE_CAPTION_REQUIRED###:</label><textarea name="tx_cal_controller[image_caption]">|</textarea></div>
+				htmlSpecialChars = 1
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <div><label for="image_title">%%%EVENT_IMAGE_TITLE%%%###IMAGE_TITLE_REQUIRED###:</label><textarea name="tx_cal_controller[image_title]">|</textarea></div>
+				htmlSpecialChars = 1
+			}
+			
+			image_alt_stdWrap {
+				dataWrap = <div><label for="image_alt">%%%EVENT_IMAGE_ALT%%%###IMAGE_ALT_REQUIRED###:</label><textarea name="tx_cal_controller[image_alt]">|</textarea></div>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the country field
+			country_stdWrap {
+				dataWrap = <div><label for="country">%%%LOCATION_COUNTRY%%%###COUNTRY_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[country]" /></div>
+			}
+			
+			# @description	Standard wrap for the country_static_info field
+			country_static_info_stdWrap {
+				dataWrap = <div><label for="country">%%%LOCATION_COUNTRY%%%###COUNTRY_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the countryzone field
+			countryzone_stdWrap {
+				dataWrap = <div><label for="countryzone">%%%LOCATION_COUNTRYZONE%%%###COUNTRYZONE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[countryzone]" /></div>
+			}
+			
+			# @description	Standard wrap for the countryzone_static_info field
+			countryzone_static_info_stdWrap {
+				dataWrap = <div><label for="countryzone">%%%LOCATION_COUNTRYZONE%%%###COUNTRYZONE_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the link field
+			link_stdWrap {
+				dataWrap = <div><label for="email">%%%LOCATION_LINK%%%###LINK_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[link]" /></div>
+			}
+			
+			# @description	Standard wrap for the notify field
+			shared_stdWrap {
+				dataWrap = <div><label for="notify">%%%EVENT_SHARED%%%:</label>|<input type="hidden" value="###SHARED_VALUE###" name="tx_cal_controller[shared_ids]"/></div>
+			}
+		}
+		
+		edit_location < plugin.tx_cal_controller.view.create_location
+		
+		edit_location {
+			# @decription	Redirects to another page after the location has been updated.
+			# @also			redirectAfterEditToView
+			redirectAfterEditToPid =
+			
+			# @decription	Redirects to this view after the location has been updated.
+			# @also			redirectAfterEditToPid
+			redirectAfterEditToView =
+			
+			# @description	Standard wrap for the image field
+			image_stdWrap {
+				dataWrap = <div><label for="image">%%%LOCATION_IMAGE%%%:</label>###IMAGE_PREVIEW###<br/>%%%DELETE_IMAGE%%%:<input type="checkbox" name="tx_cal_controller[remove_image][]" value="###IMAGE_VALUE###"</div>
+			}
+		}
+		
+		confirm_location {
+			# @description	Template for confirming a location created or edited in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.location.confirmLocationTemplate}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">%%%HIDDEN%%%:</label>|<input type="hidden" ###HIDDEN_VALUE### name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the name field
+			name_stdWrap {
+				dataWrap = <div><label for="name">%%%LOCATION_NAME%%%:</label>|<input type="hidden" value="###NAME_VALUE###" name="tx_cal_controller[name]" /></div>
+			}
+			
+			# @description	Standard wrap for the description field
+			description_stdWrap {
+				dataWrap = <div><label for="description">%%%LOCATION_DESCRIPTION%%%:</label>|<input type="hidden" value="###DESCRIPTION_VALUE###" name="tx_cal_controller[description]" /></div>
+			}
+			
+			# @description	Standard wrap for the street field
+			street_stdWrap {
+				dataWrap = <div><label for="street">%%%LOCATION_STREET%%%:</label>|<input type="hidden" value="###STREET_VALUE###" name="tx_cal_controller[street]" /></div>
+			}
+			
+			# @description	Standard wrap for the zip field
+			zip_stdWrap {
+				dataWrap = <div><label for="zip">%%%LOCATION_ZIP%%%:</label>|<input type="hidden" value="###ZIP_VALUE###" name="tx_cal_controller[zip]" /></div>
+			}
+			
+			# @description	Standard wrap for the city field
+			city_stdWrap {
+				dataWrap = <div><label for="city">%%%LOCATION_CITY%%%:</label>|<input type="hidden" value="###CITY_VALUE###" name="tx_cal_controller[city]" /></div>
+			}
+			
+			# @description	Standard wrap for the phone field
+			phone_stdWrap {
+				dataWrap = <div><label for="phone">%%%LOCATION_PHONE%%%:</label>|<input type="hidden" value="###PHONE_VALUE###" name="tx_cal_controller[phone]" /></div>
+			}
+			
+			# @description	Standard wrap for the facsimile field
+			fax_stdWrap {
+				dataWrap = <div><label for="fax">%%%LOCATION_FAX%%%:</label>|<input type="hidden" value="###FAX_VALUE###" name="tx_cal_controller[fax]" /></div>
+			}
+			
+			# @description	Standard wrap for the email field
+			email_stdWrap {
+				dataWrap = <div><label for="email">%%%LOCATION_EMAIL%%%:</label>|<input type="hidden" value="###EMAIL_VALUE###" name="tx_cal_controller[email]" /></div>
+			}
+			
+			# @description	Content object for event image
+			location.image < tt_content.image.20
+			location.image {
+				textPos >
+				1.altText.field >
+				1.titleText.field >
+				//17 = in text right
+				textPos = 17
+				maxW = 150
+				stdWrap.dataWrap = <div><label for="image">%%%LOCATION_IMAGE%%%: |</label><input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/></div>
+			}
+			organizer.image < plugin.tx_cal_controller.view.confirm_location.location.image
+			
+			image_caption_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_caption]"/>
+				htmlSpecialChars = 1
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_title]"/>
+				htmlSpecialChars = 1
+			}
+			
+			image_alt_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_alt]"/>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the country field
+			country_stdWrap {
+				dataWrap = <div><label for="country">%%%LOCATION_COUNTRY%%%:</label>|<input type="hidden" value="###COUNTRY_VALUE###" name="tx_cal_controller[country]" /></div>
+			}
+			
+			# @description	Standard wrap for the country_static_info field
+			country_static_info_stdWrap {
+				dataWrap = <div><label for="country">%%%LOCATION_COUNTRY%%%:</label>|<input type="hidden" value="###COUNTRY_VALUE###" name="tx_cal_controller[country]" /></div>
+			}
+			
+			# @description	Standard wrap for the countryzone field
+			countryzone_stdWrap {
+				dataWrap = <div><label for="countryzone">%%%LOCATION_COUNTRYZONE%%%:</label>|<input type="hidden" value="###COUNTRYZONE_VALUE###" name="tx_cal_controller[countryzone]" /></div>
+			}
+			
+			# @description	Standard wrap for the countryzone_static_info field
+			countryzone_static_info_stdWrap {
+				dataWrap = <div><label for="countryzone">%%%LOCATION_COUNTRYZONE%%%:</label>|<input type="hidden" value="###COUNTRYZONE_VALUE###" name="tx_cal_controller[countryzone]" /></div>
+			}
+			
+			# @description	Standard wrap for the link field
+			link_stdWrap {
+				dataWrap = <div><label for="email">%%%LOCATION_LINK%%%:</label>|<input type="hidden" value="###LINK_VALUE###" name="tx_cal_controller[link]" /></div>
+			}
+			
+			# @description	Standard wrap for the notify field
+			shared_stdWrap {
+				dataWrap = <div><label for="notify">%%%EVENT_SHARED%%%:</label>|<input type="hidden" value="###SHARED_VALUE###" name="tx_cal_controller[shared_ids]"/></div>
+			}
+		}
+		
+		delete_location < plugin.tx_cal_controller.view.location
+		delete_location {
+			# @description	Template for deleting a location in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.location.deleteLocationTemplate}
+			
+			# @decription	Redirects to another page after the location has been deleted.
+			# @also			redirectAfterDeleteToView
+			redirectAfterDeleteToPid =
+			
+			# @decription	Redirects to this view after the location has been deleted.
+			# @also			redirectAfterDeleteToPid
+			redirectAfterDeleteToView =
+		}
+		
+		create_organizer < plugin.tx_cal_controller.view.create_location
+		edit_organizer < plugin.tx_cal_controller.view.edit_location
+		confirm_organizer < plugin.tx_cal_controller.view.confirm_location
+		delete_organizer < plugin.tx_cal_controller.view.delete_location
+		
+		translation {
+			# @description	Create links to the different available languages. Insert them in ascending order of the language uid
+			languageMenu {
+				1 = IMAGE
+				1 {
+					file = media/flags/flag_de.gif
+					offset = 2,2
+				}
+				2 = IMAGE
+				2 {
+					file = media/flags/flag_uk.gif
+					offset = 2,2
+				}
+			}
+		}
+	}
+
+	# @description	The Typoscript object for rights is used to configure frontend editing of calendar events,
+	#				locations, and groups.
+	rights {
+
+		# @description	Turns frontend editing on.  If this is not enabled, none of the other rights options
+		#				will have any effect.
+		edit = {$plugin.tx_cal_controller.rights.edit}
+
+		# @description	Comma separated list of all administrator users.  These users will have full
+		#				privileges for frontend editing.
+		admin.user = {$plugin.tx_cal_controller.rights.admin.user}
+		
+		# @description	Comma separated list of all administrator groups.  These groups will have full
+		#				privileges for frontend editing.
+		admin.group = {$plugin.tx_cal_controller.rights.admin.group}
+
+		# @description	Comma separated list of all users allowed to be selected for notification or shared
+		allowedUsers =
+		
+		# @description	Comma separated list of all groups allowed to be selected for notification or shared
+		allowedGroups =
+		
+		create {
+			calendar {
+				# @description	Page to save frontend-created calendars to.
+				saveCalendarToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users that are allowed to create calendars.
+				user = 
+	
+				# @description	Comma separated list of all groups that are allowed to create calendars.
+				group =
+	
+				# @description	1 if public user should be allowed to create calendar. default 0
+				public = 0
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_calendar record
+				additionalFields = 
+
+				# @description	Comma separated list of all users and groups that should have all calendar
+				#				fields enabled.
+				enableAllFields {
+					user = 
+					group =
+					public = 0
+				}
+	
+				# @description	Comma separated list of all users and groups that should have a specific calendar
+				#				field enabled.
+				fields {
+					hidden {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					title {
+						user =
+						group =
+						public = 0
+						default =
+						required = 1
+					}
+					calendarType {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					owner {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					activateFreeAndBusy {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					freeAndBusyUser {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					ics_file {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					exturl {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					refresh {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+				}
+			}
+			category {
+				# @description	Page to save frontend-created categories to.
+				saveCategoryToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users that are allowed to create categories.
+				user =
+	
+				# @description	Comma separated list of all groups that are allowed to create categories.
+				group =
+	
+				# @description	1 if public user should be allowed to create category. default 0
+				public = 0
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_category record
+				additionalFields = 
+	
+				# @description	Comma separated list of all users and groups that should have all category
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+	
+				# @description	Comma separated list of all users and groups to be able to create general categories
+				generalCategory {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of all users and groups to be able to create public categories
+				publicCategory {
+					user =
+					group =
+				}
+
+				# @description	Comma separated list of all users and groups that should have a specific category
+				#				field enabled.
+				fields {
+					hidden {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					title {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 1
+					}
+					headerstyle {
+						user =
+						group =
+						public = 0
+						default = default_catheader
+						required = 0
+						# @description	Comma separated list of available category headerStyles
+						available = default_catheader,yellow_catheader,orange_catheader,red_catheader,pink_catheader,green_catheader,grey_catheader
+					}
+					bodystyle {
+						user =
+						group =
+						public = 0
+						default = default_catbody
+						required = 0
+						# @description	Comma separated list of available category bodyStyles
+						available = default_catbody,yellow_catbody,orange_catbody,red_catbody,pink_catbody,green_catbody,grey_catbody
+					}
+					calendar_id {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					parent_category {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					shared_user_allowed {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+				}
+			}
+
+
+			event {
+				# @description	Page to save frontend-created events to.
+				saveEventToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users that are allowed to create events.
+				user =
+	
+				# @description	Comma separated list of all groups that are allowed to create events.
+				group =
+	
+				# @description	Enable this to allow everyone to create public events.
+				public = 0
+				
+				# @description	Comma separated list of all users and groups that are allowed to create events also in the past
+				inPast {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of user ids of fe-users to be notified if a public event has been created
+				notifyUsersOnPublicCreate =
+
+				# @description	Comma separated list of all users and groups that are allowed to create events in a public calendar.
+				publicEvents {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_event record
+				additionalFields = 
+	
+				# @description	Adds the frontend user who created an event to the notification field.
+				addFeUserToNotify = 0
+	
+				# @description	Adds the frontend user who created an event to the shared field.
+				addFeUserToShared = 0
+
+				# @description	Adds the frontend user group to the shared field.
+				addFeGroupToShared = 0
+	
+				# @description	Comma separated list of frontend user groups, which are to be ignored and NOT to be added as shared
+				addFeGroupToShared.ignore = 
+	
+				# @description	Replaces the standard textarea with the installed rte.
+				enableRTE = 1
+	
+				# @description	Comma separated list of all users and groups that should have all event
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+	
+				# @description	Offset in minutes. The user is allowed to create a new event in now + timeOffset
+				timeOffset = 0
+
+				# @description	Comma separated list of all users and groups that should have a specific event
+				#				field enabled. ATTENTION: for public just use 1/0 => enable/disable
+				fields {
+					hidden {
+						user =
+						group =
+						public = 0
+						default = 0
+						required = 0
+					}
+					event_type {
+						user =
+						group =
+						public = 1
+						# Possible values: 0=event,3=meeting
+						allowedUids = 0,3
+						default = 0
+						required = 1
+					}
+					calendar_id {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 1
+					}
+					category {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+						allowedUids = 
+					}
+					startdate {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 1
+						constrain {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = regexp
+								regexp = /(\d{4})-(\d{2})-(\d{2})/
+								message = TEXT
+								message {
+									dataWrap =  <span class="constrain">%%%WRONG_DATE%%% (yyyy-mm-dd)</span>
+								}
+							}
+						}
+					}
+					enddate {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 1
+						constrain < plugin.tx_cal_controller.rights.create.event.fields.startdate.constrain
+					}
+					starttime {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 1
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = allday
+								value = 0
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+					endtime {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 1
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = allday
+								value = 0
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+					start {
+						constrain {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = before|equals
+								field = end
+								message = TEXT
+								message {
+									dataWrap =  <span class="constrain">%%%CONSTRAIN_START_BEFORE_END%%%</span>
+								}
+							}
+							2 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = after
+								field = now
+								message = TEXT
+								message {
+									dataWrap =  <span class="constrain">%%%IS_IN_PAST%%%</span>
+								}
+							}
+						}
+					}
+					end {
+						constrain {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = after|equals
+								field = start
+								message = TEXT
+								message {
+									dataWrap =  <span class="constrain">%%%CONSTRAIN_END_AFTER_START%%%</span>
+								}
+							}
+							2 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = after
+								field = now
+								message = TEXT
+								message {
+									dataWrap =  <span class="constrain">%%%IS_IN_PAST%%%</span>
+								}
+							}
+						}
+					}
+					allday {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+					}
+					title {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 1
+					}
+					cal_organizer {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+						allowedUids =
+					}
+					organizer {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+						allowedUids =
+					}
+					cal_location {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+						allowedUids =
+					}
+					location {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+						allowedUids =
+					}
+					teaser {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					description {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+					}
+					recurring {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = eventType
+								value = 0
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+					notify {
+						user =
+						group =
+						public = 0
+						defaultUser = 
+						required = 0
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = eventType
+								value = 0
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+					shared {
+						user =
+						group =
+						public = 0
+						defaultUser = 
+						defaultGroup =
+						required = 0
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = eventType
+								value = 0
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+					exception {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = eventType
+								value = 0
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+					image {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					image_caption {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					image_title {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					image_alt {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					attachment {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					attachment_caption {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					attendee {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+						allowedUids =
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = eventType
+								value = 3
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+					attendee_external {
+						user =
+						group =
+						public = 1
+						default = 
+						required = 0
+						allowedUids =
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = eventType
+								value = 3
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+					sendout_invitation {
+						user =
+						group =
+						public = 1
+						default = 0
+						required = 0
+						displayCondition {
+							1 {
+								#less/before/greater/after/equals/regexp/userfunc
+								rule = equals
+								conditionField = eventType
+								value = 3
+								message = TEXT
+								message {
+									dataWrap = false
+								}
+							}
+						}
+					}
+				}
+			}
+
+			exceptionEvent{
+				# @description	Page to save frontend-created exception events to.
+				saveExceptionEventToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users and groups that are allowed to create exception events.
+				user =
+				group =
+				# @description	1 if public user should be allowed to create exception events. default 0
+				public = 0
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_exceptionevent record
+				additionalFields =
+	
+				# @description	Comma separated list of all users and groups that should have all exception event
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+	
+				fields {
+					# this view is to be implemented
+				}
+			}
+			location {
+				# @description	Page to save frontend-created locations to.
+				saveLocationToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+
+				# @description	Comma separated list of all users and groups that are allowed to create location.
+				user =
+				group =
+				# @description	1 if public user should be allowed to create location. default 0
+				public = 0
+				
+				# @description	Adds the frontend user who created an location to the shared field.
+				addFeUserToShared = 0
+
+				# @description	Adds the frontend user group to the shared field.
+				addFeGroupToShared = 0
+	
+				# @description	Comma separated list of frontend user groups, which are to be ignored and NOT to be added as shared
+				addFeGroupToShared.ignore = 
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_location record
+				additionalFields = 
+	
+				# @description	Comma separated list of all users and groups that should have all location
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+
+				# @description	Comma separated list of all users and groups that should have a specific location
+				#				field enabled.
+				fields {
+					hidden {
+						user =
+						group =
+						public = 0
+						default = 0
+						required = 0
+					}
+					name {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 1
+					}
+					description {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					street {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					zip {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					city {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					country {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					countryZone {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					phone {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					fax {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					email {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					image {
+						user =
+						group =
+						public = 0
+						default =
+						required = 0
+					}
+					image_caption {
+						user =
+						group =
+						public = 0
+						default =
+						required = 0
+					}
+					image_title {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					image_alt {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					link {
+						user =
+						group =
+						public = 0
+						default = 
+						required = 0
+					}
+					shared {
+						user =
+						group =
+						public = 0
+						defaultUser = 
+						defaultGroup =
+						required = 0
+					}
+				}
+			}
+			organizer < plugin.tx_cal_controller.rights.create.location
+
+			organizer {
+				# @description	Page to save frontend-created organizers to.
+				saveOrganizerToPid = {$plugin.tx_cal_controller.rights.defaultSavePid}
+			}
+
+			translation {
+				user =
+				group =
+			}
+		}
+		
+		edit {
+			calendar {
+				# @description	Comma separated list of all users and groups that are allowed to edit calendars.
+				user = 
+				group =
+				# @description	1 if public user should be allowed to edit a calendar. default 0
+				public = 0
+	
+				# @description	Comma separated list of all users and groups that should have all calendar
+				#				fields enabled.
+				enableAllFields {
+					user = 
+					group =
+					public = 0
+				}
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_category record
+				additionalFields = 
+	
+				# @description	Comma separated list of all users and groups that should have a specific calendar
+				#				field enabled.
+				fields < plugin.tx_cal_controller.rights.create.calendar.fields
+
+				# @description	Comma separated list of users and groups to be allowed to edit only their own calendar
+				onlyOwnCalendar {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of users and groups to be allowed to edit a public calendar
+				publicCalendar {
+					user =
+					group =
+				}
+			}
+			category {
+	
+
+				# @description	Comma separated list of all users and groups that are allowed to edit categories.
+				user =
+				group =
+				# @description	1 if public user should be allowed to edit a category. default 0
+				public = 0
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_category record
+				additionalFields = 
+	
+	
+				# @description	Comma separated list of all users and groups that should have all category
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+	
+				# @description	Comma separated list of all users and groups that should have a specific category
+				#				field enabled.
+				fields < plugin.tx_cal_controller.rights.create.category.fields
+	
+				# @description	Comma separated list of all users and groups to be able to edit only their own categories
+				onlyOwnCategory {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of all users and groups to be able to edit general categories
+				generalCategory {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of all users and groups to be able to edit public categories
+				publicCategory {
+					user =
+					group =
+				}
+	
+			}
+			event {
+				# @description	Comma separated list of all users and groups that are allowed to edit events.
+				user =
+				group =
+				# @description	1 if public user should be allowed to edit events. default 0
+				public = 0
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_event record
+				additionalFields = 
+
+				# @description	Offset in minutes. The user is allowed to edit the event until timeOffset minutes before it takes place
+				timeOffset = 0
+	
+				# @description	Comma separated list of all users and groups that should have all event
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+	
+				# @description	Comma separated list of all users and groups that should have a specific event
+				#				field enabled.
+				fields < plugin.tx_cal_controller.rights.create.event.fields
+	
+				# @description	Replaces the standard textarea with the installed rte.
+				enableRTE = 1
+	
+				# @description	Comma separated list of all users and groups that are allowed to edit only their own events.
+				onlyOwnEvents {
+					user =
+					group =
+				}
+	
+				addFeUserToShared = 0
+	
+				addFeGroupToShared = 0
+	
+				addFeGroupToShared.ignore =
+	
+				# @description	Comma separated list of all users and groups that are allowed to edit events after they have started.
+				startedEvents {
+					user =
+					group =
+				}
+	
+			}
+			exceptionEvent{
+				# @description	Comma separated list of all users and groups that are allowed to edit exception events.
+				user =
+				group =
+				# @description	1 if public user should be allowed to edit exception events. default 0
+				public = 0
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_exceptionevent record
+				additionalFields = 
+	
+				# @description	Comma separated list of all users and groups that should have all exception event
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+			}
+
+			location {
+				# @description	Comma separated list of all users and groups that are allowed to edit a location.
+				user =
+				group =
+				# @description	1 if public user should be allowed to edit a location. default 0
+				public = 0
+				
+				addFeUserToShared = 0
+	
+				addFeGroupToShared = 0
+	
+				addFeGroupToShared.ignore =
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_location record
+				additionalFields = 
+	
+				# @description	Comma separated list of all users and groups that should have all location
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+
+				# @description	Comma separated list of all users and groups that should have a specific location
+				#				field enabled.
+				fields < plugin.tx_cal_controller.rights.create.location.fields
+			}
+			organizer {
+				# @description	Comma separated list of all users and groups that are allowed to edit an organizer.
+				user =
+				group =
+				# @description	1 if public user should be allowed to edit an organizer. default 0
+				public = 0
+				
+				addFeUserToShared = 0
+	
+				addFeGroupToShared = 0
+	
+				addFeGroupToShared.ignore =
+	
+				# @description	Comma separated list of fields, that are not shipped with the standard cal extension, but are to be saved inside the tx_cal_organizer record
+				additionalFields = 
+	
+				# @description	Comma separated list of all users and groups that should have all organizer
+				#				fields enabled.
+				enableAllFields {
+					user =
+					group =
+					public = 0
+				}
+
+				# @description	Comma separated list of all users and groups that should have a specific organizer
+				#				field enabled.
+				fields < plugin.tx_cal_controller.rights.create.organizer.fields
+			}
+		}
+		
+		delete {
+			calendar {
+				# @description	Comma separated list of all users and groups that are allowed to delete calendars.
+				user =
+				group =
+				# @description	1 if public user should be allowed to delete a calendar. default 0
+				public = 0
+	
+				# @description	Comma separated list of all users and groups to be allowed to delete only their own calendar
+				onlyOwnCalendar {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of all users and groups to be allowed to delete a public calendar
+				publicCalendar {
+					user = 
+					group =
+				}
+			}
+			category {
+				# @description	Comma separated list of all users and groups that are allowed to delete categories.
+				user =
+				group =
+	
+				# @description	1 if public user should be allowed to delete a category. default 0
+				public = 0
+	
+				# @description	Comma separated list of all users and groups to be able to delete only their own categories
+				onlyOwnCategory {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of all users and groups to be able to delete general categories
+				generalCategory {
+					user =
+					group =
+				}
+			}
+			event {
+				# @description	Comma separated list of all users and groups that are allowed to delete events.
+				user =
+				group =
+				# @description	1 if public user should be allowed to delete an event. default 0
+				public = 0
+	
+				# @description	Comma separated list of all users and groups that are allowed to delete only their own events.
+				onlyOwnEvents {
+					user =
+					group =
+				}
+	
+				# @description	Comma separated list of all users and groups that are allowed to delete events that have already started.
+				startedEvents {
+					user =
+					group =
+				}
+	
+				# @description	Offset in minutes. The user is allowed to delete the event until timeOffset minutes before it takes place
+				timeOffset = 0
+			}
+			exceptionEvent{
+				# @description	Comma separated list of all users and groups that are allowed to delete exception events.
+				user =
+				group =
+				# @description	1 if public user should be allowed to delete an exception event. default 0
+				public = 0
+			}
+
+			location {
+				# @description	Comma separated list of all users and groups that are allowed to delete a location.
+				user =
+				group =
+				# @description	1 if public user should be allowed to delete a location. default 0
+				public = 0
+			}
+			organizer < plugin.tx_cal_controller.rights.delete.location
+		}
+	}
+}

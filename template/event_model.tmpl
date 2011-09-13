@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Calendar event example template</title>
+</head>
+
+<body>
+
+<h1>CALENDAR EVENT TEMPLATE</h1>
+<h2>EXAMPLE</h2>
+
+<br />
+<pre>
+
+<strong>Common markers:</strong>
+These are substituted in the event- and list-view templates:
+
+<em>Markers:</em>
+
+EDIT_LINK - According to the rights the edit and/or delete icon will be displayed
+TITLE - The event title
+STARTDATE - The startdate of the event parsed through "view.{view}.startdate_stdWrap" or if not available through "view.{view}.dateFormat"
+ENDDATE - The enddate of the event parsed through "view.{view}.enddate_stdWrap" or if not available through "view.{view}.dateFormat"
+STARTTIME - The starttime of the event parsed through "view.{view}.starttime_stdWrap" or if not available through "view.{view}.timeFormat"
+ENDTIME - The endtime of the event parsed through "view.{view}.endtime_stdWrap" or if not available through "view.{view}.timeFormat"
+ORGANIZER - The event organizer parsed through "view.{view}.organizer_stdWrap" if available or a link to the organizer-view if in allowedViews or view.organizer.organizerViewPid has been set
+LOCATION - The event location parsed through "view.{view}.location_stdWrap" if available or a link to the location-view if in allowedViews or view.location.locationViewPid has been set
+DESCRIPTION - The event description parsed through "view.{view}.description_stdWrap"
+DESCRIPTION_STRIPTAGS - The event description parsed through "view.{view}.description_stdWrap" and being stipped of all tags afterwards
+IMAGE - The event image(s) wrapped by "view.event.image_stdWrap",
+ATTACHMENT - The event attachment: File wrapped by "view.event.attachment_stdWrap.wrap", "view.event.attachmentHeader_stdWrap" and "view.event.attachment"
+MORE_LINK - Link to the 'full' event-view if the current view is a preview
+<br />
+Further markers are possible, condition: the markername has to be the same as a field in tx_cal_event. E.g. UID or PID. An according stdWrap can also be used: view.{view}.uid_stdWrap or view.{view}.pid_stdWrap
+
+
+<em>Event Language Markers (see controller/locallang.xml):</em>
+HEADING - The heading of the page -> l_event
+TITLE_LABEL - The title label -> l_event_title
+STARTDATE_LABEL - The startdate label -> l_event_startdate
+ENDDATE_LABEL - The enddate label -> l_event_enddate
+STARTTIME_LABEL - The startdate label -> l_event_starttime
+ENDTIME_LABEL - The endtime label -> l_event_endtime
+ORGANIZER_LABEL - The organizer label -> l_event_organizer
+LOCATION_LABEL - The location label -> l_event_location
+DESCRIPTION_LABEL - The description label -> l_event_description
+ATTACHMENT_LABEL - The attachment label -> l_event_attachment
+<br />
+Further markers are possible, condition: the markername has to end with "_LABEL". E.g. PID_LABEL will be replaced by l_event_pid form the controller/locallang.xml
+
+
+<em>Subparts:</em>
+
+</pre>
+
+
+<br /><br /><br /><br /><hr />
+<br />
+<h3>TEMPLATE_PHPICALENDAR_EVENT</h3>
+<em>This is the template for the standard calendar event.</em>
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT### begin -->
+<!--phpicalendar_event.tmpl-->
+<h1>###HEADING###</h1>
+###EDIT_LINK###
+
+###TITLE###
+###STARTDATE###
+###ENDDATE###
+###STARTTIME###
+###ENDTIME###
+###STATUS### ###PRIORITY### ###COMPLETED###
+###ORGANIZER###
+###LOCATION###
+###DESCRIPTION###
+###IMAGE###
+###ATTACHMENT###
+###ATTENDEE###
+<!-- ###ICS_LINK### start --><img src="###IMG_PATH###/ics.gif" border="0"/><!-- ###ICS_LINK### end -->
+###MORE_LINK###
+
+
+<!--/phpicalendar_event.tmpl-->
+<!--###TEMPLATE_PHPICALENDAR_EVENT### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ALLDAY### begin -->
+<div class="###HEADERSTYLE###_allday"><!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end --></div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ALLDAY### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_DAY### begin -->
+class="eventbg2 ###BODYSTYLE###">
+<div class="eventfont">
+	<div class="###HEADERSTYLE###">###ICON###<b>###STARTTIME### - ###ENDTIME###</b></div>
+	<div class="padd">###EDIT_LINK###<!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end -->###COMPLETED###</div>
+</div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_DAY### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_WEEK### begin -->
+class="eventbg2 ###BODYSTYLE###">
+<div class="eventfont">
+	<div class="###HEADERSTYLE###">###ICON###<b>###STARTTIME### - ###ENDTIME###</b></div>
+	<div class="padd">###EDIT_LINK###<!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end -->###COMPLETED###</div>
+</div>
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_WEEK### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH### begin -->
+<div class="V9" id="cal_event_###UID###"><span class="###HEADERSTYLE###_bullet">&bull;</span><span class="###HEADERSTYLE###_text"><!-- ###EVENT_LINK### start -->###STARTTIME###: ###TITLE###<!-- ###EVENT_LINK### end --></span>###EDIT_LINK###</div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_ALLDAY### begin -->
+<div class="V9"><span class="###HEADERSTYLE###_bullet">&bull;</span><span class="###HEADERSTYLE###_text"><!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end --></span>###EDIT_LINK###</div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_ALLDAY### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_MINI### begin -->
+<span class="###HEADERSTYLE###_bullet" title="###STARTTIME######TITLE###">&bull;</span>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_MINI### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_MINI_ALLDAY### begin -->
+<span class="###HEADERSTYLE###_bullet" title="###STARTTIME######TITLE###">&bull;</span>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_MINI_ALLDAY### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_YEAR### begin -->
+<div class="V9"><!-- ###EVENT_LINK### start --><span class="###HEADERSTYLE###_bullet">&bull;</span><!-- ###EVENT_LINK### end --></div><br />
+<!--###TEMPLATE_PHPICALENDAR_EVENT_YEAR### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_PREVIEW### begin -->
+<h1>###HEADING###</h1>
+###EDIT_LINK###
+
+###TITLE###
+###STARTDATE###
+###ENDDATE###
+###STARTTIME###
+###ENDTIME###
+###DESCRIPTION###
+###MORE_LINK###
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_PREVIEW### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_TOMORROW### begin -->
+<div class="V9"><span class="###HEADERSTYLE###_bullet ###HEADERSTYLE###_legend_bullet">&bull;</span><span class="###HEADERSTYLE###_text ###HEADERSTYLE###_legend_text">###TITLE###</span></div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_TOMORROW### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ORGANIZER### begin -->
+<br />###STARTDATE### <!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end -->
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ORGANIZER### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_LOCATION### begin -->
+<br />###STARTDATE### <!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end -->
+<!--###TEMPLATE_PHPICALENDAR_EVENT_LOCATION### end -->
+
+<!-- ###TEMPLATE_PHPICALENDAR_EVENT_LIST_ODD### start -->
+	<dt>
+		<!-- ###EVENT_LINK### start-->###IMAGE### ###TITLE###<!-- ###EVENT_LINK### end--><br />
+		###STARTDATE### ###ENDDATE### <span class="V9G">###STARTTIME### ###ENDTIME###</span><br />
+		<br /><span class="V9G">###CATEGORY_LINK###</span>
+	</dt>
+	<dd>###DESCRIPTION###</dd>
+<!-- ###TEMPLATE_PHPICALENDAR_EVENT_LIST_ODD### end -->
+<!-- ###TEMPLATE_PHPICALENDAR_EVENT_LIST_EVEN### start -->
+	<dt class="even">
+		<!-- ###EVENT_LINK### start-->###IMAGE### ###TITLE###<!-- ###EVENT_LINK### end--><br />
+		###STARTDATE### ###ENDDATE### <span class="V9G">###STARTTIME### ###ENDTIME###</span><br />
+		<br /><span class="V9G">###CATEGORY_LINK###</span>
+	</dt>
+	<dd class="even">###DESCRIPTION###</dd>
+<!-- ###TEMPLATE_PHPICALENDAR_EVENT_LIST_EVEN### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_LOCATION_LIST_ODD### begin -->
+<dt>
+	###STARTDATE### <!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end -->
+</dt>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_LOCATION_LIST_ODD### end -->
+<!--###TEMPLATE_PHPICALENDAR_EVENT_LOCATION_LIST_EVEN### begin -->
+<dt class="even">
+	###STARTDATE### <!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end -->
+</dt>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_LOCATION_LIST_EVEN### end -->
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ORGANIZER_LIST_ODD### begin -->
+<dt>
+	###STARTDATE### <!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end -->
+</dt>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ORGANIZER_LIST_ODD### end -->
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ORGANIZER_LIST_EVEN### begin -->
+<dt class="even">
+	###STARTDATE### <!-- ###EVENT_LINK### start -->###TITLE###<!-- ###EVENT_LINK### end -->
+</dt>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ORGANIZER_LIST_EVEN### end -->
+
+<!-- ###TEMPLATE_PHPICALENDAR_EVENT_RSS### start -->
+		<item>
+			<title>###TITLE###</title>
+			<link>###EVENT_URL###</link>
+			<guid>###EVENT_URL###</guid>
+			<pubDate>###CREATE_DATE###</pubDate>
+			<content:encoded>
+			<![CDATA[
+				###CATEGORY###
+				###STARTDATE### ###STARTTIME###
+				###ENDDATE### ###ENDTIME###
+				###LOCATION###
+				###ORGANIZER###
+				###DESCRIPTION### <!-- ###EVENT_LINK### start -->###MORE_LABEL###<!-- ###EVENT_LINK### end -->
+			]]>
+			</content:encoded>
+			<description><![CDATA[
+				###CATEGORY###
+				###STARTDATE### ###STARTTIME###
+				###ENDDATE### ###ENDTIME###
+				###LOCATION###
+				###ORGANIZER###
+				###DESCRIPTION_STRIPTAGS### <!-- ###EVENT_LINK### start -->###MORE_LABEL###<!-- ###EVENT_LINK### end -->
+				<hr/>
+				]]>
+			</description>
+		</item>
+<!-- ###TEMPLATE_PHPICALENDAR_EVENT_RSS### end -->
+
+<!-- ###TEMPLATE_PHPICALENDAR_EVENT_ICS### start -->
+BEGIN:VEVENT
+UID:###GUID###
+###DTSTAMP###
+###DTSTART_YEAR_MONTH_DAY_HOUR_MINUTE###
+###DTEND_YEAR_MONTH_DAY_HOUR_MINUTE###
+###CATEGORY###
+###TITLE###
+###DESCRIPTION###
+###LOCATION###
+###ATTACHMENT_URL###
+###RRULE###
+###RDATE###
+###EXDATE###
+###EXRULE###
+###ORGANIZER###
+###ATTENDEE###
+END:VEVENT
+<!-- ###TEMPLATE_PHPICALENDAR_EVENT_ICS### end -->
+
+Free And Busy views:
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_FNB### begin -->
+<!--phpicalendar_event.tmpl-->
+###TITLE_FNB###
+<!--/phpicalendar_event.tmpl-->
+<!--###TEMPLATE_PHPICALENDAR_EVENT_FNB### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ALLDAY_FNB### begin -->
+<div class="###HEADERSTYLE###_allday">###TITLE_FNB###</div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_ALLDAY_FNB### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_DAY_FNB### begin -->
+class="eventbg2 ###BODYSTYLE###">
+<div class="eventfont">
+	<div class="###HEADERSTYLE###">&nbsp;</div>
+	<div class="padd">###TITLE_FNB###</div>
+</div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_DAY_FNB### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_WEEK_FNB### begin -->
+class="eventbg2 ###BODYSTYLE###">
+<div class="eventfont">
+	<div class="###HEADERSTYLE###">&nbsp;</div>
+	<div class="padd">###TITLE_FNB###</div>
+</div>
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_WEEK_FNB### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_FNB### begin -->
+<div class="V9"><span class="###HEADERSTYLE###_bullet">&bull;</span><span class="###HEADERSTYLE###_text">###TITLE_FNB###</span></div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_FNB### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_ALLDAY_FNB### begin -->
+<div class="V9"><span class="###HEADERSTYLE###_bullet">&bull;</span><span class="###HEADERSTYLE###_text">###TITLE_FNB###</span></div>
+<!--###TEMPLATE_PHPICALENDAR_EVENT_MONTH_ALLDAY_FNB### end -->
+
+<!--###TEMPLATE_PHPICALENDAR_EVENT_YEAR_FNB### begin -->
+<div class="V9"><span class="###HEADERSTYLE###_bullet">&bull;</span></div><br />
+<!--###TEMPLATE_PHPICALENDAR_EVENT_YEAR_FNB### end -->
+
+</body>
+</html>

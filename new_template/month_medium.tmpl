@@ -1,0 +1,41 @@
+<!--month_medium.tmpl-->
+<!-- ###MONTH_TEMPLATE### start -->
+<table class="month month-medium">
+<caption>###MONTH_TITLE###</caption>
+<colgroup>
+	<col class="month-weeknums" />
+</colgroup>
+<colgroup span="5" class="monthMediumBasic">
+	<col class="cal_day2" />
+	<col class="cal_day3" />
+	<col class="cal_day4" />
+	<col class="cal_day5" />
+	<col class="cal_day6" />
+</colgroup>
+<colgroup span="2" class="monthMediumBasic monthWeekend">
+	<col class="cal_day0" />
+	<col class="cal_day1" />
+</colgroup>
+<thead>
+	<tr class="month-weekdays">
+		<!-- ###LOOPWEEKDAY### start -->
+		<th###CLASSES### scope="col" abbr="###WEEKDAY_LONG###">###WEEKDAY###</th><!-- ###LOOPWEEKDAY### end -->
+</thead>
+<tbody>
+		<!-- ###LOOPMONTHWEEKS_DAYS### start -->
+	<tr###CLASSES### title="%%%calendar_week%%% ###WEEKNUM_PLAIN###"><!-- ###LOOPMONTHWEEKS_DAYS### end -->
+		<!-- ###CORNER### start -->
+		<th class="###ADDITIONAL_CLASSES###" scope="col" abbr="%%%week%%%">&nbsp;</th><!-- ###CORNER### end -->
+		<!-- ###LOOPWEEK_NUMS### start -->
+		<th scope="row">###WEEKNUM###</th><!-- ###LOOPWEEK_NUMS### end -->
+		<!-- ###LOOPMONTHWEEKS### start -->
+		<!-- ###SWITCHMONTHDAY### start -->
+		<td###CLASSES###>###LINK### ###ALLDAY### ###EVENT###</td><!-- ###SWITCHMONTHDAY### end -->
+		<!-- ###LOOPMONTHDAYS_WEEKS### start -->
+	</tr>
+	<!-- ###LOOPMONTHDAYS_WEEKS### end -->
+	<!-- ###LOOPMONTHWEEKS### end -->
+</tbody>
+</table>
+<!-- ###MONTH_TEMPLATE### end -->
+<!--/month_medium.tmpl-->

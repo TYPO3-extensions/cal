@@ -1,0 +1,105 @@
+<!--day.tmpl-->
+<!-- ###DAY_TEMPLATE### start -->
+<div class="dayview">
+	<table width="700" style="border-spacing:0px;border-collapse:collapse;">
+		<tr>
+			<td width="520" valign="top">
+				<table width="520" class="calborder" style="border-spacing:0px;border-collapse:collapse;">
+					<tr>
+						<td align="center" valign="middle">
+							<table width="100%" style="border-spacing:0px;border-collapse:collapse;">
+								<tr valign="top">
+									<td align="left" class="title"><h1>###DISPLAY_DATE###</h1><span class="V9G">###CALENDAR_NAME###</span></td>
+									<td align="right" class="navback">	
+										<div style="padding-top: 3px;">
+										<table style="border-spacing:0px;border-collapse:collapse;">
+											<tr valign="top">
+												<td><!-- ###DAYVIEWLINK### start--><a class="psf" href="?view=day&amp;cal=###CAL###&amp;getdate=###GETDATE###"><!-- ###DAYVIEWLINKTEXT### start--><img src="###IMG_PATH###/day_on.gif" alt="###L_DAY###" border="0" /><!-- ###DAYVIEWLINKTEXT### end--></a><!-- ###DAYVIEWLINK### end--></td>
+												<td><!-- ###WEEKVIEWLINK### start--><a class="psf" href="?view=week&amp;cal=###CAL###&amp;getdate=###GETDATE###"><!-- ###WEEKVIEWLINKTEXT### start--><img src="###IMG_PATH###/week_on.gif" alt="###L_WEEK###" border="0" /><!-- ###WEEKVIEWLINKTEXT### end--></a><!-- ###WEEKVIEWLINK### end--></td>
+												<td><!-- ###MONTHVIEWLINK### start--><a class="psf" href="?view=month&amp;cal=###CAL###&amp;getdate=###GETDATE###"><!-- ###MONTHVIEWLINKTEXT### start--><img src="###IMG_PATH###/month_on.gif" alt="###L_MONTH###" border="0" /><!-- ###MONTHVIEWLINKTEXT### end--></a><!-- ###MONTHVIEWLINK### end--></td>
+												<td><!-- ###YEARVIEWLINK### start--><a class="psf" href="?view=year&amp;cal=###CAL###&amp;getdate=###GETDATE###"><!-- ###YEARVIEWLINKTEXT### start--><img src="###IMG_PATH###/year_on.gif" alt="###L_YEAR###" border="0" /><!-- ###YEARVIEWLINKTEXT### end--></a><!-- ###YEARVIEWLINK### end--></td>
+											</tr>
+										</table>
+										</div>
+										<!-- ###ADMIN_LINK### start -->
+										<div style="width:100%,text-align:center">###ADMIN_LINK###</div>
+										<!-- ###ADMIN_LINK### end -->
+									</td>
+								</tr>
+								<tr>	
+									<td colspan="2">
+										<table width="100%" cellspacing="0" cellpadding="2">
+											<tr>
+												<td align="left" valign="top" width="20" class="rowOff2" onmouseover="this.className='rowOn2'" onmouseout="this.className='rowOff2'">
+													<span class="V12">###PREV_DAY_LINK###</span>
+												</td>
+												<!-- ###DAYSOFWEEK### start -->
+												<td width="14%" align="center" class="###ROW1###" onmouseover="this.className='###ROW2###'" onmouseout="this.className='###ROW3###'">
+													<span class="V9BOLD">###LINK###</span>
+												</td>
+												<!-- ###DAYSOFWEEK### end -->
+												<td align="right" valign="top" width="20" class="rowOff" onmouseover="this.className='rowOn'" onmouseout="this.className='rowOff'">
+													<span class="V12">###NEXT_DAY_LINK###</span>
+												</td>
+											</tr>	
+										</table>
+									</td>
+								</tr>      			
+							</table>
+						</td>
+					</tr>
+					<tr id="allday">
+						<td>
+							<!-- ###LOOPALLDAY### start -->
+							<div class="###STYLE###">
+								###ALLDAY###
+							</div>
+							<!-- ###LOOPALLDAY### end -->
+						</td>
+					</tr>
+	      			<tr>
+						<td align="center" valign="top" colspan="3">
+							<table width="100%" style="border-spacing:0px;border-collapse:collapse;">
+								<!-- ###DAYEVENTS### start -->
+								<!-- ###LOOPROW### start -->
+								<tr>
+									<td rowspan="4" align="center" valign="top" width="60" class="timeborder">9:00 AM</td>
+									<td width="1" height="15"></td>
+									<td class="dayborder">&nbsp;</td>
+								</tr>
+								<tr>
+									<td width="1" height="15"></td>
+									<td class="dayborder2">&nbsp;</td>
+								</tr>
+								<tr>
+									<td width="1" height="15"></td>
+									<td class="dayborder">&nbsp;</td>
+								</tr>
+								<tr>
+									<td width="1" height="15"></td>
+									<td class="dayborder2">&nbsp;</td>
+								</tr>
+								<!-- ###LOOPROW### end -->
+								<!-- ###LOOPEVENT### start -->
+								<div class="eventfont">
+									<div class="###STYLE###">###CONFIRMED### ###EDIT_LINK### ###EVENT_START###  - ###EVENT_END###</div>
+									<div class="padd">###EVENT###</div>
+								</div>
+								<!-- ###LOOPEVENT### end -->
+								<!-- ###DAYEVENTS### end -->
+							</table>
+						</td>
+					</tr>
+	        	</table>
+	
+	    	</td>
+			<td width="10"><img src="###IMG_PATH###/spacer.gif" width="10" height="1" alt=" " /></td>
+			<td width="170" valign="top">
+				###SIDEBAR###
+			</td>
+		</tr>
+	</table>
+	###ICS_LINK###
+</div>
+<!-- ###DAY_TEMPLATE### end -->
+<!--/day.tmpl-->

@@ -1,0 +1,42 @@
+<!--month.tmpl-->
+<!--In the month view this template represents the 'header' of the large month view. Not the month itself eventhough the template is called month.tmpl-->
+<div id="month-header" class="calborder navback">
+	###CALENDAR_NAME###
+</div>
+<script type="text/javascript">
+var params = new Array(1, 20090909);
+var cal = new Calendar(1, "20090909");
+cal.weekNumbers = false;
+cal.create($('month-header'));
+cal.showsOtherMonths = true;
+var now = new Date();
+cal._init(1,now);
+var calMonth = cal.date.getMonth()+1;
+viewStart = cal.date.getFullYear()+''+(calMonth<10?'0'+calMonth:calMonth)+'01';
+viewEnd = cal.date.getFullYear()+''+(calMonth<10?'0'+calMonth:calMonth)+cal.date.getMonthDays(calMonth-1);
+cal.show();
+loadEvents();
+</script>
+
+
+<!-- ###LIST### start -->
+<div id="month-footer" class="calborder">
+	<div id="month-footer-header">
+	<!-- ###PREV_MONTHLINK### start-->
+		<!-- ###PREV_MONTHLINKTEXT### start-->
+			<img src="###IMG_PATH###/left_day.gif" alt="[Previous Month]">
+		<!-- ###PREV_MONTHLINKTEXT### end-->
+	<!-- ###PREV_MONTHLINK### end-->
+	###L_THIS_MONTHS###
+	<!-- ###NEXT_MONTHLINK### start-->
+		<!-- ###NEXT_MONTHLINKTEXT### start-->
+			<img src="###IMG_PATH###/right_day.gif" alt="[Next Month]" />
+		<!-- ###NEXT_MONTHLINKTEXT### end-->
+	<!-- ###NEXT_MONTHLINK### end-->
+	</div>
+</div>
+<!-- ###LIST### end -->
+
+###ICS_LINK###
+
+<!--/month.tmpl-->

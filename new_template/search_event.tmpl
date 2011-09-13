@@ -1,0 +1,36 @@
+<!--search_event.tmpl-->
+
+<h1>###TITLE###</h1>
+<!-- ###SEARCHEVENTFORM### start -->
+
+<form action="###SEARCH_ACTION_URL###" method="post">
+<fieldset>
+<legend>###L_SEARCH###:</legend>   
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
+	<input type="hidden" size="15" name="tx_cal_controller[query]" value="###QUERY###" />
+	<input type="hidden" size="15" name="tx_cal_controller[view]" value="###VIEW###" />
+	<label for="tx_cal_controller_category_ids">###L_CATEGORY###:</label>
+    <select name="tx_cal_controller[category][]" id="tx_cal_controller_category_ids" size="1">###CATEGORY_IDS###</select><br />
+	<label for="tx_cal_controller_location_ids">###L_LOCATION###:</label>
+    <select name="tx_cal_controller[location_ids][]" id="tx_cal_controller_location_ids" size="1">###LOCATION_IDS###</select><br />
+    <label for="tx_cal_controller_organizer_ids">###L_ORGANIZER###:</label>
+    <select name="tx_cal_controller[organizer_ids][]" id="tx_cal_controller_organizer_ids" size="1">###ORGANIZER_IDS###</select><br />
+	<label for="event_start_day">###L_EVENT_START_DAY###:</label>
+    <input type="text" value="###EVENT_START_DAY###" name="tx_cal_controller[start_day]" id="event_start_day" />###START_DAY_SELECTOR###<br />
+	<label for="event_end_day">###L_EVENT_END_DAY###:</label>
+    <input type="text" value="###EVENT_END_DAY###" name="tx_cal_controller[end_day]" id="event_end_day" />###END_DAY_SELECTOR###<br />
+	<label for="query">###L_SEARCH_STRING###:</label>
+    <input type="text" value="###QUERY###" name="tx_cal_controller[query]" id="query" /><br />
+    
+	<input type="image" src="###IMG_PATH###/search.gif" name="tx_cal_controller[submit]" title="###DOSEARCH_LABEL###" value="Search" />
+    </fieldset> 
+</form>
+<!-- ###SEARCHEVENTFORM### end -->
+<!-- ###LIST### start -->
+<!-- ###LIST### end -->
+
+<!-- ###LINKS### start -->
+<div>###BACK_LINK###</div>
+<div>###OTHERSEARCH###</div>
+<!-- ###LINKS### end -->
+<!--/search_event.tmpl-->

@@ -1,0 +1,20 @@
+<!--search_box.tmpl-->
+<table width="171" border="0" cellpadding="0" cellspacing="0" class="calborder">
+	<tr>
+		<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###SEARCH_LABEL###</div></td>
+	</tr>
+	<tr>
+		<td bgcolor="#FFFFFF" align="left">
+			<div style="padding: 5px;">
+				<form action="###SEARCH_ACTION_URL###" method="post">
+					<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
+					<input type="hidden" size="15" name="tx_cal_controller[view]" value="search_event" />
+					<input type="hidden" size="15" name="tx_cal_controller[lastview]" value="###LASTVIEW###" />	   
+					<input type="text" size="15" name="tx_cal_controller[query]" value="" />
+					<input type="image" src="###IMG_PATH###/search.gif" style="border-width:0px; height:19px; width:18px;" name="tx_cal_controller[submit]" title="###DOSEARCH_LABEL###" value="###L_DOSEARCH###" />
+				</form>
+			</div>
+		</td>
+	</tr>
+</table>
+<!--/search_box.tmpl-->

@@ -1,0 +1,140 @@
+<!--calendar_nav.tmpl-->
+<table id="calendar-nav">
+	<tr>
+		<td>
+			###MONTH_SMALL|-1###
+			<table width="171" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+				</tr>
+			</table>
+			<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+			
+			###MONTH_SMALL|+1###
+			<table width="171" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+				</tr>
+			</table>
+			<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+		</td>
+		<td>
+			<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<tr>
+					<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_LEGEND###</div></td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" align="left">
+						<div style="padding: 5px;">
+							<form method="post" action="###CATEGORYURL###">
+								###LEGEND###
+							</form>
+						</div>
+					</td>
+				</tr>			
+			</table>
+			<table width="170" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+				</tr>
+			</table>
+			<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+		</td>
+		<td id="list">
+			<!-- ###JUMPS### start -->
+			<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<tr>
+					<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_JUMP###</div></td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" align="left">
+						<div style="padding: 5px;">
+							<form style="margin-bottom:0;" action="###THIS_VIEW###.php" method="get">
+								<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_JUMPS###</select>
+								<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_YEARS###</select>
+								<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_MONTHS###</select>
+								<select name="action" class="query_style" onchange="window.location=(this.options[this.selectedIndex].value);">###LIST_WEEKS###</select>
+							</form>
+						</div>
+					</td>
+				</tr>			
+			</table>
+			<table width="170" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+				</tr>
+			</table>
+			<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+			<!-- ###JUMPS### end -->
+			<!-- ###CALENDAR_SELECTOR### begin-->
+			<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<tr>
+					<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_CALENDAR###</div></td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" align="left">
+						<div style="padding: 5px;">
+							<form style="margin-bottom:0px" name="tx_cal_controller" method="post" action="###CHANGE_CALENDAR_ACTION_URL###">
+								<input type="hidden" value="###GETDATE###" name="tx_cal_controller[getdate]" />
+								<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+								<input type="hidden" value="###THIS_VIEW###" name="tx_cal_controller[view]" />
+								<input type="hidden" value="###LASTVIEW###" name="tx_cal_controller[lastview]" />
+								<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+								
+								<select name="tx_cal_controller[calendar]" size="1" onchange="submit();">###CALENDAR_IDS###</select>
+							</form>
+						</div>
+					</td>
+				</tr>			
+			</table>
+			<table width="170" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+				</tr>
+			</table>
+			<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+			<!-- ###CALENDAR_SELECTOR### end-->
+			<!-- ###SEARCH### start -->
+			###SEARCH_BOX###
+			<!-- ###SEARCH### end -->
+		</td>
+		<!-- ###TODO### start -->
+		<td>
+			<table width="170" border="0" cellpadding="0" cellspacing="0" class="calborder">
+				<tr>
+					<td align="center" class="sideback"><div style="height: 17px; margin-top: 3px;" class="G10BOLD">###L_TODO###</div></td>
+				</tr>
+				<tr>
+					<td bgcolor="#FFFFFF" align="left">
+						<div style="padding: 5px;">
+							<table cellpadding="0" cellspacing="0" border="0">
+								<!-- ###TODO_ENTRIES### start -->
+								<!-- ###TODO_ENTRIES### end -->
+							</table>
+						</div>
+					</td>
+				</tr>			
+			</table>
+			<table width="170" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="tbll"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblbot"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+					<td class="tblr"><img src="###IMG_PATH###/spacer.gif" alt="" width="8" height="4" /></td>
+				</tr>
+			</table>
+			<img src="###IMG_PATH###/spacer.gif" width="1" height="10" alt=" " /><br />
+		</td>
+		<!-- ###TODO### end -->
+	</tr>
+</table>
+<!--/calendar_nav.tmpl-->

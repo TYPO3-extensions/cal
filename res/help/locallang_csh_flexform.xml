@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>CSH labels for the Calendar Base Frontend Plugin</description>
+		<type>CSH</type>
+		<csh_table></csh_table>
+		<fileId>EXT:cal/res/help/locallang_csh_flexform.xml</fileId>
+		<labelContext type="array"></labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="allowedViews.description">Defines which views will be available in the Frontend. The first view listed will be the default view on the page.</label>
+			<label index="calendarName.description">The name of the calendar. This will be the Header displayed throughout the views.</label>
+			<label index="allowSubscribe.description">Allows anonymous frontend visitors to subscribe to an event so that they are notified of any changes to the event.</label>
+			<label index="subscribeWithCaptcha.description">Require anonymous frontend users to fill out a CAPTCHA before subscribing.</label>
+			<label index="subscribeFeUser.description">Allows registered Frontend users to subscribe to an event so that they are notified of any changes to the event.</label>
+			<label index="weekStartDay.description">Sets the week to start on Sunday or Monday.</label>
+			<label index="calendarMode.description">Determines how calendar selections are interpreted.</label>
+			<label index="calendarMode.details">
+				<![CDATA[
+				<b>Show All (don't care about selection below):</b> All calendars will be shown.
+				<b>Show only selected calendars:</b> Limits the display to only the selected calendars.
+				<b>Don't show selected calendars:</b> Shows all calendars except those that have been selected.
+				]]>
+			</label>
+			<label index="calendarSelection.description">The selected calendars.</label>
+			<label index="categoryMode.description">Determines how category selections are interpreted.</label>
+			<label index="categoryMode.details">
+				<![CDATA[
+				<b>Show All (don't care about selection below):</b> All categories will be shown.
+				<b>Show only selected categories:</b> Limits the display to only the selected categories.
+				<b>Don't show selected categories:</b> Shows all categories except those that have been selected.
+				]]>
+			</label>
+			<label index="categorySelection.description">The selected categories.</label>
+			<label index="yearViewPid.description">Page where year view is configured. If no value is set here or in Typoscript, the current page is used.</label>
+			<label index="monthViewPid.description">Page where month view is configured. If no value is set here or in Typoscript, the current page is used.</label>
+			<label index="monthShowListView.description">Shows a list of events in the current month underneath the normal month view.</label>
+			<label index="monthMakeMiniCal.description">Displays the month view as a mini calendar with links to day and week view but no event display in the month view.</label>
+			<label index="weekViewPid.description">Page where week view is configured. If no value is set here or in Typoscript, the current page is used.</label>
+			<label index="dayViewPid.description">Page where day view is configured. If no value is set here or in Typoscript, the current page is used.</label>
+			<label index="dayStart.description">Earliest time that day view displays events.</label>
+			<label index="dayStart.details">This does not affect the times that events can be created, only their display within day view.</label>
+			<label index="dayEnd.description">Latest time that day view displays events.</label>
+			<label index="dayEnd.details">This does not affect the times that events can be created, only their display within day view.</label>
+			<label index="gridLength.description">Determins how day view divides the displayed hours.</label>
+			<label index="listViewPid.description">Page where list view is configured. If no value is set here or in Typoscript, the current page is used.</label>
+			<label index="starttime.description">The day and time to start displaying events in list view.</label>
+			<label index="endtime.description">The day and time to stop displaying events in list view.</label>
+			<label index="maxEvents.description">The maximum number of events to show in list view, regardless of time settings.</label>
+			<label index="maxRecurringEvents.description">The maximum number of times to show the same recurring event in list view.</label>
+			<label index="maxRecurringEvents.details">This setting can be very useful when you have a frequent recurring event that overpowers everything else in the list view.</label>
+			<label index="usePageBrowser.description">Set whether the page browser is used or events are shown in one, single page list.</label>
+			<label index="recordsPerPage.description">The number of records to display per page when the page browser is enabled.</label>
+			<label index="pagesCount.description">The maximum number of pages to display using the page browser.</label>
+			<label index="eventViewPid.description">Page where event view is configured. If no value is set here or in Typoscript, the current page is used.</label>
+			<label index="isPreview.description">Enables an abbreviated event preview page before the full event details are shown.</label>
+			<label index="showIcsLinks.description">Displays links to ICS files for calendars, categories, and events.</label>
+			<label index="showIcsLInks.details">This option only enables the links.  You must still include the ICS static template and configure it according to the manual.</label>
+			<label index="showLogin.description">Shows a login box in the calendar sidebar or below the calendar.</label>
+			<label index="showSearch.description">Shows a search box in the calendar sidebar or below the calendar.</label>
+			<label index="showJumps.description">Shows "jump" dropdowns to quickly navigate to other month, weeks, and years.</label>
+			<label index="showCategorySelection.description">Adds checkboxes to the legend so that the user can filter which categories appear on the calendar.</label>
+			<label index="showTomorrowEvents.description">Displays events for the next day in the sidebar.</label>
+			<label index="myTS.description">Custom Typoscript that only applies to this instance of the plugin.</label>
+		</languageKey>
+	</data>
+</T3locallang>

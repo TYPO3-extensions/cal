@@ -1,0 +1,34 @@
+<!--create_location.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_CREATE_LOCATION###</h1>
+###CURRENT_TRANSLATION###
+###TRANSLATION_OPTIONS###
+<form enctype="multipart/form-data" name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+		<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+		<!-- ###FORM_START### end-->
+		###HIDDEN###
+		###NAME###
+		###DESCRIPTION###
+		###STREET###
+		###ZIP###
+		###CITY###
+		###COUNTRY###
+		###COUNTRYZONE###
+		###PHONE###
+		###EMAIL###
+		###IMAGE###
+		###IMAGE_CAPTION###
+		###IMAGE_TITLE###
+		###IMAGE_ALT###
+		###LINK###
+		<!-- ###FORM_END### start-->
+
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_SAVE###" />
+	</fieldset>
+</form>
+
+<!-- ###FORM_END### end-->
+<!--/create_location.tmpl-->

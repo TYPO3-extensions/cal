@@ -1,0 +1,34 @@
+<!--month_small.tmpl-->
+<!-- ###MONTH_TEMPLATE### start -->
+<table class="month-small" summary="small calendar for the month january 2006[should be localized and date from script]">
+<thead>
+	<tr>
+		<th colspan="8" class="sideback">###MONTH_TITLE###</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<!-- ###LOOPWEEKDAY### start -->
+		<th class="month-weekdays###ADDITIONAL_CLASSES###">###WEEKDAY###</th>
+		<!-- ###LOOPWEEKDAY### end -->
+		<!-- ###LOOPMONTHWEEKS_DAYS### start -->
+	<tr>
+		<!-- ###LOOPMONTHWEEKS_DAYS### end -->
+		<!-- ###LOOPWEEK_NUMS### start -->
+		<th class="month-weeknums %s">%s</th>
+		<!-- ###LOOPWEEK_NUMS### end -->
+		<!-- ###LOOPMONTHWEEKS### start -->
+	<tr>
+		<!-- ###SWITCHMONTHDAY### start -->
+		<td class="###STYLE###">
+			###LINK###
+		</td>
+		<!-- ###SWITCHMONTHDAY### end -->
+		<!-- ###LOOPMONTHDAYS_WEEKS### start -->
+	</tr>
+	<!-- ###LOOPMONTHDAYS_WEEKS### end -->
+	<!-- ###LOOPMONTHWEEKS### end -->
+</tbody>
+</table>
+<!-- ###MONTH_TEMPLATE### end -->
+<!--/month_small.tmpl-->

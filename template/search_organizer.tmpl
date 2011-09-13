@@ -1,0 +1,29 @@
+<!-- search_organizer.tmpl -->
+<!-- ###LIST_TEMPLATE### begin -->
+<!-- ###SEARCHFORM### start -->
+<h1>###HEADING###</h1>
+<div class = 'G10BOLD'>###L_SEARCH###:</div>
+<form action="###SEARCH_ACTION_URL###" method="post">
+	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
+	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###" />
+	<input type="image" src="###IMG_PATH###/search.gif" style="border-width:0px; height:19px; width:18px;" name="tx_cal_controller[submit]" title="###DOSEARCH_LABEL###" value="Search" />
+</form>
+<!-- ###SEARCHFORM### start -->
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
+<ul class="search-result">
+	<!-- ###LIST### start -->
+	<!-- ###LIST### end -->
+</ul>
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
+
+###SEARCH_ALL_LINK###
+<!-- ###LIST_TEMPLATE### end -->
+<!-- /search_organizer.tmpl -->

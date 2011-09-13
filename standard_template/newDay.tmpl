@@ -1,0 +1,59 @@
+<html>
+<head>
+</head>
+<body>
+<h1>newDay.tmpl</h1>
+<!-- ###DAY_SUBPART### start-->
+<div class="dayview">
+  <div class="gridcontainer">
+    <table class="gridcontainertop allday">
+		<tbody>
+			<tr>
+				###ALLDAY###
+			</tr>
+		</tbody>
+	</table>
+	<div class="scrolltime">
+		<table class="timetable" style="height:###TIMETABLE_HEIGHT###">
+		  <tbody>
+			<tr height="1">
+			  <td class="width"></td>
+			  <td>
+				<div class="wrapper">
+				  <div class="hours">
+					<!-- ###HOUR_CELLS### -->
+					<div class="cell">
+					  <div class="line"></div>
+					</div>
+					<!-- ###HOUR_CELLS### -->
+				  </div>
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td class="times">
+				<!-- ###TIME_CELLS### -->
+				<div>
+					<div class="timeborder" id="time_###VALUE###">###TIME######CREATE_EVENT_LINK###</div>
+				</div>
+				<!-- ###TIME_CELLS### -->
+			  </td>
+			  <td class="event-column">
+				<div class="wrapper">
+					###EVENTS_COLUMN###
+				</div>
+			  </td>
+			</tr>
+		  </tbody>
+		</table>
+	  </div>
+	</div>
+</div>
+<script type="text/javascript">
+	var now = new Date();
+	document.getElementById('time_'+now.getHours()).scrollIntoView(true);
+</script>
+<!-- ###DAY_SUBPART### end -->
+
+</body>
+</html>

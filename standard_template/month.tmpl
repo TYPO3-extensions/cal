@@ -1,0 +1,98 @@
+<!--month.tmpl-->
+<!--In the month view this template represents the 'header' of the large month view. Not the month itself eventhough the template is called month.tmpl-->
+<div class="header-buttons">
+	<div class="year-button">
+	<!-- ###YEARVIEWLINK### start-->
+		<!-- ###YEARVIEWLINKTEXT### start-->
+		###L_YEAR###
+		<!-- ###YEARVIEWLINKTEXT### end-->
+	<!-- ###YEARVIEWLINK### end-->
+	</div>
+	<div class="month-button">
+	<!-- ###MONTHVIEWLINK### start-->
+		<!-- ###MONTHVIEWLINKTEXT### start-->
+		###L_MONTH###
+		<!-- ###MONTHVIEWLINKTEXT### end-->
+	<!-- ###MONTHVIEWLINK### end-->
+	</div>
+	<div class="week-button">
+	<!-- ###WEEKVIEWLINK### start-->
+		<!-- ###WEEKVIEWLINKTEXT### start-->
+		###L_WEEK###
+		<!-- ###WEEKVIEWLINKTEXT### end-->
+	<!-- ###WEEKVIEWLINK### end-->
+	</div>
+	<div class="day-button">
+	<!-- ###DAYVIEWLINK### start-->
+		<!-- ###DAYVIEWLINKTEXT### start-->
+		###L_DAY###
+		<!-- ###DAYVIEWLINKTEXT### end-->
+	<!-- ###DAYVIEWLINK### end-->
+	</div>
+	<div class="today-button">###TODAY###</div>
+</div>
+<br style="clear: both;"/><br />
+<div class="view-header">
+	<div class="previous-button">
+	<!-- ###PREV_MONTHLINK### start-->
+		<!-- ###PREV_MONTHLINKTEXT### start-->
+		<img src="###IMG_PATH###/control-180.png" alt="[Previous Month]" />
+		<!-- ###PREV_MONTHLINKTEXT### end-->
+	<!-- ###PREV_MONTHLINK### end-->
+	</div>
+	<div class="next-button">
+	<!-- ###NEXT_MONTHLINK### start-->
+		<!-- ###NEXT_MONTHLINKTEXT### start-->
+		<img src="###IMG_PATH###/control.png" alt="[Next Month]" />
+		<!-- ###NEXT_MONTHLINKTEXT### end-->
+	<!-- ###NEXT_MONTHLINK### end-->
+	</div>
+	<h1>###DISPLAY_DATE### ###ADMIN_LINK###</h1>
+
+	###MONTH_LARGE|+0###
+</div>
+
+<!-- ###LIST_TEMPLATE### begin -->
+<!-- ###LIST### start -->
+<div id="month-footer" class="calborder">
+	<div id="month-footer-header">
+	<!-- ###PREV_MONTHLINK### start-->
+		<!-- ###PREV_MONTHLINKTEXT### start-->
+			<img src="###IMG_PATH###/left_day.gif" alt="[Previous Month]">
+		<!-- ###PREV_MONTHLINKTEXT### end-->
+	<!-- ###PREV_MONTHLINK### end-->
+	###L_THIS_MONTHS###
+	<!-- ###NEXT_MONTHLINK### start-->
+		<!-- ###NEXT_MONTHLINKTEXT### start-->
+			<img src="###IMG_PATH###/right_day.gif" alt="[Next Month]" />
+		<!-- ###NEXT_MONTHLINKTEXT### end-->
+	<!-- ###NEXT_MONTHLINK### end-->
+	</div>
+</div>
+
+###CREATE_EVENT_LINK###
+
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
+<!-- ###LIST_DAY_WRAPPER### begin -->
+	<dt><hr></dt>
+    <dd> --- Event ---</dd>
+<!-- ###LIST_DAY_WRAPPER### end -->
+
+<!-- ###LIST_WEEK_WRAPPER### begin -->
+	<dt><hr></dt>
+    <dd> --- Week ---</dd>
+<!-- ###LIST_WEEK_WRAPPER### end -->
+
+<!-- ###LIST_MONTH_WRAPPER### begin -->
+	<dt><hr></dt>
+    <dd> --- Month ---</dd>
+<!-- ###LIST_MONTH_WRAPPER### end -->
+<!-- ###LIST### end -->
+<!-- ###LIST_TEMPLATE### end -->
+###ICS_LINK###
+
+<!--/month.tmpl-->

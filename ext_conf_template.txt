@@ -1,0 +1,57 @@
+  # cat=basic/enable/120; type=boolean; label= Do not use Tab-Dividers: Here you can disable the "dividers2tabs" feature (TYPO3 > 3.7.0). "Dividers to Tabs" means: the BE form is divided into sections. If you don't want this, set this value to 1.
+noTabDividers = 0
+  # cat=basic/enable/150; type=boolean; label= Hide location textfield: Here you choose if users should be able to have a separate textfield for location. By default this textfield is visible. If this is not wanted set "hideLocationTextfield" to 1.
+hideLocationTextfield = 0
+  # cat=basic/enable/160; type=boolean; label= Hide organizer textfield: Here you choose if users should be able to have a separate textfield for organizer. By default this textfield is visible. If this is not wanted set "hideOrganizerTextfield" to 1.
+hideOrganizerTextfield = 0
+  # cat=basic/enable/200; type=options[Calendar Base Location (Built-in)=tx_cal_location,tt_address=tx_tt_address,Partner Framework=tx_partner_main]; label= Select the cal location data model: Here you choose which data structure you want to use (tx_cal_location/tx_tt_address/tx_partner_main).
+useLocationStructure = tx_cal_location
+  # cat=basic/enable/200; type=options[Calendar Base Organizer (Built-in)=tx_cal_organizer,tt_address=tx_tt_address,Partner Framework=tx_partner_main,Frontend Users=tx_feuser]; label= Select the cal organizer data model: Here you choose which data structure you want to use (tx_cal_organizer/tx_tt_address/tx_partner_main/tx_feuser).
+useOrganizerStructure = tx_cal_organizer
+  # cat=basic/enable/220; type=options[Inline=event,Separate=todo]; label= Define the way Todos shall be displayed: like events (inline) or in a separate box (separate).
+todoSubtype = event
+
+# cat=basic/enable/220; type=text; label= Select the default height of category treeview:treeview is used in TCEForms and Flexform.
+categoryTVHeight = 280
+
+# cat=basic/enable/225; type=options[title,uid]; label=LLL:EXT:cal/locallang.xml:extmng.treeOrderBy
+treeOrderBy = uid
+
+# cat=basic/enable/227; type=boolean; label= Show time values in BE lists
+showTimes = 1
+
+# cat=basic/enable/230; type=boolean; label= New Recurring Event Interface:  Enable the new recurring event user interface.  Requires TYPO3 4.1 for Prototype Javascript library.
+newRecurUI = 1
+
+# cat=basic/enable/250; type=boolean; label= Use Teaser Field:  Show the teaser field in addition to title and description.
+useTeaser = 0
+
+# cat=basic/enable/270; type=boolean; label= Use Record Selector:  Displays the record selector instead of dropdown boxes for fe_users and fe_groups selection in backend
+useRecordSelector = 0
+
+# cat=basic/enable/290; type=boolean; label= Use New Recurring Event Model:  This will use an index table for recurring events, reducing memory consumption and improving performance. If you have already created events, you must visit the Cal Indexer backend module to make sure they are indexed properly. If you use the Scheduler in TYPO3 4.3 with Calendar Base, you must enable this setting.
+useNewRecurringModel = 1
+
+# cat=basic/enable/310; type=text; label= Recurring Event Start Date:  If using the new recurring event model, this is the earliest date recurring events will occur. The date format is YYYYMMDD.
+recurrenceStart = 20000101
+
+# cat=basic/enable/320; type=text; label= Value for useNewRecurringModel:  If using the new recurring event model, this is the latest date recurring events will occur. The date format is YYYYMMDD.
+recurrenceEnd = 20201231
+
+# cat=basic/dev/1000; type=user[EXT:cal/lib/class.tx_cal_tsparserext.php:tx_cal_tsparserext->displayMessage]; label=LLL:EXT:cal/locallang.xml:extmng.updatermsgOption
+updateMessage=0
+
+# cat=basic/enable/150; type=boolean; label=LLL:EXT:cal/locallang.xml:extmng.useInternalCaching
+useInternalCaching = 1
+
+# cat=basic/enable/155; type=options[normal,lifetime,static]; label=LLL:EXT:cal/locallang.xml:extmng.cachingMode
+cachingMode = normal
+
+# cat=basic/enable/157; type=int; label=LLL:EXT:cal/locallang.xml:extmng.cacheLifetime
+cacheLifetime = 0
+
+# cat=basic/enable/170; type=options[internal,cachingFramework]; label=LLL:EXT:cal/locallang.xml:extmng.cachingEngine
+cachingEngine = internal
+
+# cat=basic/enable/180; type=boolean; label=Enable RealURL autoconfiguration
+enableRealURLAutoConfiguration = 1

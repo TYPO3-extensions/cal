@@ -1,0 +1,32 @@
+<!--sidebar.tmpl-->
+<div class="month-sidebar">
+	<script type="text/javascript">
+		function showHide(image, id){
+			var element = document.getElementById(id);
+			if(element.style.display == ""){
+				element.style.display = "none";
+				image.src = image.src.replace(/minusonly.gif/, "plusonly.gif");
+			} else {
+				element.style.display = "";
+				image.src = image.src.replace(/plusonly.gif/, "minusonly.gif");
+			}
+		}
+	</script>
+	
+	<form action="###CATEGORYURL###" method="post">
+		###LEGEND###
+	</form>
+	<br style="clear:right"/>
+	<!-- ###SEARCH### start -->
+	
+	<form style="margin-bottom:0px" action="###SEARCH_ACTION_URL###" method="post">
+		<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
+		<input type="hidden" size="15" name="tx_cal_controller[view]" value="search_event" />
+		<input type="hidden" size="15" name="tx_cal_controller[lastview]" value="###LASTVIEW###" />	   
+		<input type="hidden" name="tx_cal_controller[submit]" value="###L_DOSEARCH###" />
+		<h4><input type="text" size="15" name="tx_cal_controller[query]" value="" class="search-box"/><input type="submit" value="%%%SEARCH_LABEL%%%" class="button"/></h4>
+		
+	</form>
+	<!-- ###SEARCH### end -->
+</div>
+<!--/sidebar.tmpl-->

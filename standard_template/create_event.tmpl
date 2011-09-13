@@ -1,0 +1,252 @@
+<!--create_event.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_EDIT_EVENT###</h1>
+###CURRENT_TRANSLATION###
+###TRANSLATION_OPTIONS###
+<!-- ###FORM_START### end-->
+
+###ADDITIONALJS_PRE###
+
+<div class="create-edit-event">
+	<form enctype="multipart/form-data" name="tx_cal_controller" id="tx_cal_controller_create_element" method="post" action="###ACTION_URL###" onsubmit="###ADDITIONALJS_SUBMIT###">
+		<fieldset class="noborder">
+			<input type="hidden" value="###VIEW###" name="tx_cal_controller[view]" />
+			<input type="hidden" value="###TYPE###" name="tx_cal_controller[type]" />
+			<input type="hidden" value="###UID###" name="tx_cal_controller[uid]" />
+			<input type="hidden" value="###OPTION###" name="tx_cal_controller[option]" />
+	
+			<script type="text/javascript">
+				var calendarUrl = "###CHANGE_CALENDAR_ACTION_URL###";
+				function calendarChanged(selector){
+					var thisForm = document.getElementById("tx_cal_controller_create_element");
+					thisForm.action = calendarUrl;
+					thisForm.submit();
+				}
+	
+				function freqChanged(element){
+					var index = "";
+					try{
+						index = element.options[element.selectedIndex].value;
+					}catch(e0){
+						return;
+					}	
+					switch(index){
+						case "none":
+							try{
+								document.getElementById('by_day').style.display = 'none';
+							}catch(e1){}
+							try{
+								document.getElementById('by_monthday').style.display = 'none';
+							}catch(e2){}
+							try{
+								document.getElementById('by_month').style.display = 'none';
+							}catch(e3){}
+							try{
+								document.getElementById('until').style.display = 'none';
+							}catch(e4){}
+							try{
+								document.getElementById('count').style.display = 'none';
+							}catch(e5){}
+							try{
+								document.getElementById('interval').style.display = 'none';
+							}catch(e6){}
+							break;
+						case "day":
+							try{
+								document.getElementById('by_day').style.display = 'none';
+							}catch(e1){}
+							try{
+								document.getElementById('by_monthday').style.display = 'none';
+							}catch(e2){}
+							try{
+								document.getElementById('by_month').style.display = 'none';
+							}catch(e3){}
+							try{
+								document.getElementById('until').style.display = '';
+							}catch(e4){}
+							try{
+								document.getElementById('count').style.display = '';
+							}catch(e5){}
+							try{
+								document.getElementById('interval').style.display = '';
+							}catch(e6){}
+							break;
+						case "week":
+							try{
+								document.getElementById('by_day').style.display = '';
+							}catch(e1){}
+							try{
+								document.getElementById('by_monthday').style.display = 'none';
+							}catch(e2){}
+							try{
+								document.getElementById('by_month').style.display = 'none';
+							}catch(e3){}
+							try{
+								document.getElementById('until').style.display = '';
+							}catch(e4){}
+							try{
+								document.getElementById('count').style.display = '';
+							}catch(e5){}
+							try{
+								document.getElementById('interval').style.display = '';
+							}catch(e6){}
+							break;
+						case "month":
+							try{
+								document.getElementById('by_day').style.display = '';
+							}catch(e1){}
+							try{
+								document.getElementById('by_monthday').style.display = '';
+							}catch(e2){}
+							try{
+								document.getElementById('by_month').style.display = 'none';
+							}catch(e3){}
+							try{
+								document.getElementById('until').style.display = '';
+							}catch(e4){}
+							try{
+								document.getElementById('count').style.display = '';
+							}catch(e5){}
+							try{
+								document.getElementById('interval').style.display = '';
+							}catch(e6){}
+							break;
+						case "year":
+							try{
+								document.getElementById('by_day').style.display = '';
+							}catch(e1){}
+							try{
+								document.getElementById('by_monthday').style.display = '';
+							}catch(e2){}
+							try{
+								document.getElementById('by_month').style.display = '';
+							}catch(e3){}
+							try{
+								document.getElementById('until').style.display = '';
+							}catch(e4){}
+							try{
+								document.getElementById('count').style.display = '';
+							}catch(e5){}
+							try{
+								document.getElementById('interval').style.display = '';
+							}catch(e6){}
+							break;
+					}
+				}
+				//DD Tab Menu- Last updated April 27th, 07: http://www.dynamicdrive.com
+				//Only 1 configuration variable below
+				
+				// modified [1] to change tabs only onclick
+				
+				var ddtabmenu={
+					disabletablinks: true, ////Disable hyperlinks in 1st level tabs with sub contents (true or false)?
+					currentpageurl: window.location.href.replace("http://"+window.location.hostname, "").replace(/^\//, ""), //get current page url (minus hostname, ie: http://www.dynamicdrive.com/)
+				
+					definemenu:function(tabid, dselected){
+						this[tabid+"-menuitems"]=null
+						this.addEvent(window, function(){ddtabmenu.init(tabid, dselected)}, "load")
+					},
+					
+					showsubmenu:function(tabid, targetitem){
+						var menuitems=this[tabid+"-menuitems"]
+					 for (i=0; i<menuitems.length; i++){
+							menuitems[i].className=""
+							if (typeof menuitems[i].hasSubContent!="undefined")
+								document.getElementById(menuitems[i].getAttribute("rel")).style.display="none"
+						}
+						targetitem.className="current"
+						if (typeof targetitem.hasSubContent!="undefined")
+							document.getElementById(targetitem.getAttribute("rel")).style.display="block"
+					},
+					
+					isSelected:function(menuurl){
+						var menuurl=menuurl.replace("http://"+menuurl.hostname, "").replace(/^\//, "")
+						return (ddtabmenu.currentpageurl==menuurl)
+					},
+					
+					addEvent:function(target, functionref, tasktype){ //assign a function to execute to an event handler (ie: onunload)
+						var tasktype=(window.addEventListener)? tasktype : "on"+tasktype
+						if (target.addEventListener)
+							target.addEventListener(tasktype, functionref, false)
+						else if (target.attachEvent)
+							target.attachEvent(tasktype, functionref)
+					},
+					
+					init:function(tabid, dselected){
+						var menuitems=document.getElementById(tabid).getElementsByTagName("a")
+						this[tabid+"-menuitems"]=menuitems
+						for (var x=0; x<menuitems.length; x++){
+							if (menuitems[x].getAttribute("rel")){
+								this[tabid+"-menuitems"][x].hasSubContent=true
+								if (ddtabmenu.disabletablinks)
+									menuitems[x].onclick=function(){ddtabmenu.showsubmenu(tabid, this);return false}  // [1] replace with: menuitems[x].onclick=function(){return false}
+							}
+							else //for items without a submenu, add onMouseout effect
+								menuitems[x].onmouseout=function(){this.className=""}
+							//menuitems[x].onmouseover=function(){ddtabmenu.showsubmenu(tabid, this)}  // [1] remove // 
+							if (dselected=="auto" && typeof setalready=="undefined" && this.isSelected(menuitems[x].href)){
+								ddtabmenu.showsubmenu(tabid, menuitems[x])
+								var setalready=true
+							}
+							else if (parseInt(dselected)==x)
+								ddtabmenu.showsubmenu(tabid, menuitems[x])
+						}
+					}
+				}
+			</script>
+			
+		<div class="basictab" id="ddtabs1"><ul class="glossymenu">###TABBED_MENU###</ul></div>
+	  <div id="sc1" class="tabcontent">
+			<div style="float:left">
+			###TITLE###
+			###STARTDATE### ###STARTTIME### ###ENDTIME### ###ENDDATE### ###ALLDAY###
+			###FREQUENCY###
+			###UNTIL### ###COUNT### ###INTERVAL###
+			###BY_DAY###
+			###BY_MONTHDAY###
+			###BY_MONTH###
+			###CALENDAR_ID###
+			###LOCATION### ###CAL_LOCATION###
+			###DESCRIPTION###
+			</div>
+			###CATEGORY###
+			<br style="clear:both"/>
+		</div>
+		<div id="sc2" class="tabcontent">
+			###TEASER###
+		</div>
+		<div id="sc3" class="tabcontent">	
+			###ORGANIZER###
+			###CAL_ORGANIZER###
+		</div>
+		<div id="sc4" class="tabcontent">
+			###IMAGE###
+			###IMAGE_CAPTION###
+			###IMAGE_TITLE###
+			###IMAGE_ALT###
+			
+			###ATTACHMENT###
+			###ATTACHMENT_CAPTION###
+		</div>
+		<div id="sc5" class="tabcontent">
+			###NOTIFY###
+			###SHARED###
+			###EXCEPTION###
+		</div>
+		<!-- ###FORM_END### start-->
+	
+	
+			<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+			<input type="submit" value="###L_SAVE###" />
+		</fieldset>
+	</form>
+</div>
+###REQUIRED_LABEL###
+###ADDITIONALJS_POST###
+<script type="text/javascript">
+	freqChanged(document.getElementById('freq'));
+	ddtabmenu.definemenu("ddtabs1", 0)
+</script>
+<!-- ###FORM_END### end-->
+
+<!--/create_event.tmpl-->

@@ -1,0 +1,18 @@
+Thanks goes to:
+
+
+Mark James: http://www.famfamfam.com/lab/icons/silk/
+	- For the refresh button and many other icons.
+	
+Chad Little, Patrick Crowley and the PHP iCalendar team: http://phpicalendar.net/
+	- For inspiration for the frontend look and feel.
+	- For a iCal-powered frontend view in early versions.
+	
+The Horde Project: http://www.horde.org
+	- For the iCalendar import classes.
+	
+Rupert Germann and other tt_news developers: http://www.rgdata.de/
+	- For the category treeview and many other code examples.
+	
+Yusuke Kamiyamane: http://p.yusukekamiyamane.com/
+	- icons of the new_template

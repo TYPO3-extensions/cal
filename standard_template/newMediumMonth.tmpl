@@ -1,0 +1,36 @@
+<html>
+<head>
+</head>
+<body>
+<h1>newyear.tmpl</h1>
+<!-- ###YEAR_SUBPART### start-->
+<h2>###YEAR###</h2>
+<p>###MONTHS###</p>
+<!-- ###YEAR_SUBPART### end -->
+
+<!-- ###MONTH_SUBPART### start-->
+<h3>###MONTH_TITLE###</h3>
+<table class="month-medium">###WEEKDAYS###<tbody>###WEEKS###</tbody></table>
+<!-- ###MONTH_SUBPART### end -->
+
+<!-- ###MONTH_WEEKDAYS_SUBPART### start -->
+<thead><tr><th class="month-weeknums monthCorner"/><th class="weekday">###MONDAY###</th><th class="weekday">###TUESDAY###</th><th class="weekday">###WEDNESDAY###</th><th class="weekday">###THURSDAY###</th><th class="weekday">###FRIDAY###</th><th class="weekday">###SATURDAY###</th><th class="weekday">###SUNDAY###</th></tr></thead>
+<!-- ###MONTH_WEEKDAYS_SUBPART### end -->
+
+<!-- ###SUNDAY_MONTH_WEEKDAYS_SUBPART### start -->
+<thead><tr><th class="month-weeknums monthCorner"/><th class="weekday">###SUNDAY###</th><th class="weekday">###MONDAY###</th><th class="weekday">###TUESDAY###</th><th class="weekday">###WEDNESDAY###</th><th class="weekday">###THURSDAY###</th><th class="weekday">###FRIDAY###</th><th class="weekday">###SATURDAY###</th></tr></thead>
+<!-- ###SUNDAY_MONTH_WEEKDAYS_SUBPART### end -->
+
+<!-- ###WEEK_SUBPART### start-->
+<tr><th class="month-weeknums">###WEEK_LINK###</th>###DAYS###</tr>
+<!-- ###WEEK_SUBPART### end -->
+
+<!-- ###SUNDAY_WEEK_SUBPART### start-->
+<tr><th class="month-weeknums">###WEEK_LINK###</th>###DAYS###</tr>
+<!-- ###SUNDAY_WEEK_SUBPART### end -->
+
+<!-- ###DAY_SUBPART### start-->
+<td class="###DAY_CLASSES###"><span>###DAY_LINK### <span class="popup"><ul>###ALLDAY### ###EVENTS###</ul></span></span></td>
+<!-- ###DAY_SUBPART### end -->
+</body>
+</html>

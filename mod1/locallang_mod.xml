@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description></description>
+        <type>module</type>
+        <csh_table></csh_table>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="mlang_tabs_tab">Cal Indexer</label>
+            <label index="mlang_labels_tabdescr">Index recurring events for calendar base</label>
+            <label index="mlang_labels_tablabel">Index recurring events for calendar base</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="default" type="array">
+            <label index="mlang_tabs_tab" type="integer">58326266</label>
+            <label index="mlang_labels_tabdescr" type="integer">143699304</label>
+            <label index="mlang_labels_tablabel" type="integer">143699304</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="default" type="array">
+        </languageKey>
+        <languageKey index="de" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallang>

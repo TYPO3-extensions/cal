@@ -1,0 +1,176 @@
+<html>
+<head>
+</head>
+<body>
+<h1>newWeek.tmpl</h1>
+<!-- ###WEEK_SUBPART### start-->
+<div class="weekview">
+  <div class="gridcontainer">
+      <table class="gridcontainertop">
+        <tbody>
+          <tr class="daynames">
+            <td rowspan="3"></td>
+            <th scope="col" title="###MONDAY###">
+              <span class="dayname">###DAYNUM0###</span>
+            </th>
+            <th scope="col" title="###TUESDAY###">
+              <span class="dayname">###DAYNUM1###</span>
+            </th>
+            <th scope="col" title="###WEDNESDAY###">
+              <span class="dayname">###DAYNUM2###</span>
+            </th>
+            <th scope="col" title="###THURSDAY###">
+              <span class="dayname">###DAYNUM3###</span>
+            </th>
+            <th scope="col" title="###FRIDAY###">
+              <span class="dayname">###DAYNUM4###</span>
+            </th>
+            <th scope="col" title="###SATURDAY###">
+              <span class="dayname">###DAYNUM5###</span>
+            </th>
+            <th scope="col" title="###SUNDAY###">
+              <span class="dayname">###DAYNUM6###</span>
+            </th>
+            <th rowspan="3" class="dummy">&nbsp;</th>
+          </tr>
+          <tr>
+            <td colspan="7">
+              <table class="allday">
+                <tbody>
+                  ###ALLDAYS###
+                </tbody>
+              </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+	
+	<div class="scrolltime">
+		<table class="timetable" style="height:###TIMETABLE_HEIGHT###px">
+		  <tbody>
+			<tr height="1">
+			  <td class="width"></td>
+			  <td colspan="7">
+				<div class="wrapper" style="height:###TIMETABLE_HEIGHT###px; margin-bottom: -###TIMETABLE_HEIGHT###px">
+				  <div class="hours">
+					<!-- ###HOUR_CELLS### -->
+					<div class="cell">
+					  <div class="line"></div>
+					</div>
+					<!-- ###HOUR_CELLS### -->
+				  </div>
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td class="times">
+				<!-- ###TIME_CELLS### -->
+				<div>
+					<div class="timeborder" id="time_###VALUE###">###TIME###</div>
+				</div>
+				<!-- ###TIME_CELLS### -->
+			  </td>
+			  ###DAYS###
+			</tr>
+		  </tbody>
+		</table>
+	</div>
+  </div>
+</div>
+<script type="text/javascript">
+	var now = new Date();
+	document.getElementById('time_'+now.getHours()).scrollIntoView(true);
+</script>
+<!-- ###WEEK_SUBPART### end -->
+<!-- ###SUNDAY_WEEK_SUBPART### start-->
+<div class="weekview">
+  <div class="gridcontainer">
+      <table class="gridcontainertop">
+        <tbody>
+          <tr class="daynames">
+            <td rowspan="3"></td>
+            <th scope="col" title="###SUNDAY###">
+              <span class="dayname">###DAYNUM0###</span>
+            </th>
+            <th scope="col" title="###MONDAY###">
+              <span class="dayname">###DAYNUM1###</span>
+            </th>
+            <th scope="col" title="###TUESDAY###">
+              <span class="dayname">###DAYNUM2###</span>
+            </th>
+            <th scope="col" title="###WEDNESDAY###">
+              <span class="dayname">###DAYNUM3###</span>
+            </th>
+            <th scope="col" title="###THURSDAY###">
+              <span class="dayname">###DAYNUM4###</span>
+            </th>
+            <th scope="col" title="###FRIDAY###">
+              <span class="dayname">###DAYNUM5###</span>
+            </th>
+            <th scope="col" title="###SATURDAY###">
+              <span class="dayname">###DAYNUM6###</span>
+            </th>
+            <th rowspan="3" class="dummy">&nbsp;</th>
+          </tr>
+          <tr>
+            <td colspan="7">
+              <table class="allday">
+                <tbody>
+                  ###ALLDAYS###
+                </tbody>
+              </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+	<div class="scrolltime">
+		<table class="timetable" style="height:###TIMETABLE_HEIGHT###">
+		  <tbody>
+			<tr height="1">
+			  <td class="width"></td>
+			  <td colspan="7">
+				<div class="wrapper">
+				  <div class="hours">
+					<!-- ###HOUR_CELLS### -->
+					<div class="cell">
+					  <div class="line"></div>
+					</div>
+					<!-- ###HOUR_CELLS### -->
+				  </div>
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td class="times">
+				<!-- ###TIME_CELLS### -->
+				<div>
+					<div class="timeborder" id="time_###VALUE###">###TIME###</div>
+				</div>
+				<!-- ###TIME_CELLS### -->
+			  </td>
+			  ###DAYS###
+			</tr>
+		  </tbody>
+		</table>
+	</div>
+  </div>
+</div>
+<script type="text/javascript">
+	var now = new Date();
+	document.getElementById('time_'+now.getHours()).scrollIntoView(true);
+</script>
+<!-- ###SUNDAY_WEEK_SUBPART### end -->
+<!-- ###DAY_SUBPART### start-->
+          <td class="event-column ###DAY_CLASSES###">
+            <div class="wrapper">
+              ###EVENTS_COLUMN###
+            </div>
+          </td>
+<!-- ###DAY_SUBPART### end -->
+
+<!-- ###ALLDAYS_SUPBART### start -->
+<td rowspan="2">###EVENTS###</td>
+<!-- ###ALLDAYS_SUPBART### end -->
+
+</body>
+</html>

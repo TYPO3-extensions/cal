@@ -1,0 +1,77 @@
+<!--year.tmpl-->
+
+<div class="header-buttons" >
+	<div class="year-button">
+		<!-- ###YEARVIEWLINK### start-->
+			<!-- ###YEARVIEWLINKTEXT### start-->
+			###L_YEAR###
+			<!-- ###YEARVIEWLINKTEXT### end-->
+		<!-- ###YEARVIEWLINK### end-->
+		</div>
+		<div class="month-button">
+		<!-- ###MONTHVIEWLINK### start-->
+			<!-- ###MONTHVIEWLINKTEXT### start-->
+			###L_MONTH###
+			<!-- ###MONTHVIEWLINKTEXT### end-->
+		<!-- ###MONTHVIEWLINK### end-->
+		</div>
+		<div class="week-button">
+		<!-- ###WEEKVIEWLINK### start-->
+			<!-- ###WEEKVIEWLINKTEXT### start-->
+			###L_WEEK###
+			<!-- ###WEEKVIEWLINKTEXT### end-->
+		<!-- ###WEEKVIEWLINK### end-->
+		</div>
+		<div class="day-button">
+		<!-- ###DAYVIEWLINK### start-->
+			<!-- ###DAYVIEWLINKTEXT### start-->
+			###L_DAY###
+			<!-- ###DAYVIEWLINKTEXT### end-->
+		<!-- ###DAYVIEWLINK### end-->
+		</div>
+		<div class="today-button">###TODAY###</div>
+</div>
+<br style="clear: both;"/><br />
+<div class="yearview">	
+	<div class="year-header">
+		<div class="next-button">
+			<!-- ###NEXT_YEARLINK### start-->
+				<!-- ###NEXT_YEARLINKTEXT### start-->
+					<img src="###IMG_PATH###/control.png" alt="[Next Year]"/>
+				<!-- ###NEXT_YEARLINKTEXT### end-->
+			<!-- ###NEXT_YEARLINK### end-->
+		</div>
+		<div class="previous-button">
+			<!-- ###PREV_YEARLINK### start-->
+				<!-- ###PREV_YEARLINKTEXT### start-->
+					<img src="###IMG_PATH###/control-180.png" alt="[Previous Year]"/>
+				<!-- ###PREV_YEARLINKTEXT### end-->
+			<!-- ###PREV_YEARLINK### end-->
+		</div>
+		<h1 title="###L_YEAR### ###THIS_YEAR###">###THIS_YEAR###</h1>
+	</div>
+	<table class="year-table">
+		<tr>
+			<td class="year-month">###MONTH_MEDIUM|01###</td>
+			<td class="year-month">###MONTH_MEDIUM|02###</td>
+			<td class="year-month">###MONTH_MEDIUM|03###</td>
+		</tr>
+		<tr>
+			<td class="year-month">###MONTH_MEDIUM|04###</td>
+			<td class="year-month">###MONTH_MEDIUM|05###</td>
+			<td class="year-month">###MONTH_MEDIUM|06###</td>
+		</tr>
+		<tr>
+			<td class="year-month">###MONTH_MEDIUM|07###</td>
+			<td class="year-month">###MONTH_MEDIUM|08###</td>
+			<td class="year-month">###MONTH_MEDIUM|09###</td>
+		</tr>
+		<tr>
+			<td class="year-month">###MONTH_MEDIUM|10###</td>
+			<td class="year-month">###MONTH_MEDIUM|11###</td>
+			<td class="year-month">###MONTH_MEDIUM|12###</td>
+		</tr>
+	</table>
+	###ICS_LINK###
+</div>
+<!--/year.tmpl-->

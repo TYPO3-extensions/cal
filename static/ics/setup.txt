@@ -1,0 +1,63 @@
+## This enables the cal ics export
+ics = PAGE
+ics {
+	typeNum = {$plugin.tx_cal_controller.view.ics.typeNum} 
+	# use a referenced copy now so that it will always reflect the current cal configuration
+	10 =< plugin.tx_cal_controller
+	10 {
+		pages = {$plugin.tx_cal_controller.pidList}
+		recursive = 1
+		
+		view.allowedViews = ics,single_ics
+		view.ics {
+			eventUidPrefix = {$plugin.tx_cal_controller.view.ics.eventUidPrefix}
+
+			# @description	The maximum date for recurring events
+			maxDate = 20150101
+			minDate = 00000001
+
+			#stdWraps, e.g. to convert Text to utf8
+			event.title {
+				#csConv = utf-8
+			}
+			event.description {
+				#csConv = utf-8
+			}
+			event.location {
+		    	#csConv = utf-8
+			}
+			event.category {
+				#csConv = utf-8
+			}
+#			timezoneId = Berlin
+#			timezone = TEXT
+#			timezone.value (
+#BEGIN:VTIMEZONE
+#TZID:Berlin
+#BEGIN:STANDARD
+#DTSTART:16011028T030000
+#RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=10
+#TZOFFSETFROM:+0200
+#TZOFFSETTO:+0100
+#END:STANDARD
+#BEGIN:DAYLIGHT
+#DTSTART:16010325T020000
+#RRULE:FREQ=YEARLY;BYDAY=-1SU;BYMONTH=3
+#TZOFFSETFROM:+0100
+#TZOFFSETTO:+0200
+#END:DAYLIGHT
+#END:VTIMEZONE
+#			)
+		}
+		view.single_ics {
+			event < ics.10.view.ics.event
+			maxDate = 20150101
+		}
+	}
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:text/calendar
+		xhtml_cleaning = 0
+		admPanel = 0
+	}
+}

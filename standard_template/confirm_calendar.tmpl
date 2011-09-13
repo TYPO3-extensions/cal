@@ -1,0 +1,27 @@
+<!--confirm_calendar.tmpl-->
+<!-- ###FORM_START### begin-->
+<h1>###L_CONFIRM_CALENDAR###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" name="tx_cal_controller[view]" value="###VIEW###" />
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###" />
+		<input type="hidden" name="tx_cal_controller[uid]" value="###UID###" />
+
+		<!-- ###FORM_START### end-->
+			###HIDDEN###
+			###CALENDARTYPE###
+			###EXTURL###
+			###ICSFILE###
+			###REFRESH###
+			###TITLE###
+			###OWNER###
+			###ACTIVATE_FREEANDBUSY###
+			###FREEANDBUSYUSER###
+		<!-- ###FORM_END### start-->
+
+		<input type="button" value="###L_CANCEL###" onclick="location.href='###BACK_LINK###'; return false;" />
+		<input type="submit" value="###L_SAVE###" />
+	</fieldset>
+</form>
+<!-- ###FORM_END### end-->
+<!--/confirm_calendar.tmpl-->

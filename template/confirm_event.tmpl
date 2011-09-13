@@ -1,0 +1,52 @@
+<!--confirm_event.tmpl-->
+<!-- ###FORM_START### start-->
+<h1>###L_CONFIRM_EVENT###</h1>
+<form name="tx_cal_controller" method="post" action="###ACTION_URL###">
+	<fieldset class="noborder">
+		<input type="hidden" name="tx_cal_controller[type]" value="###TYPE###" />
+		<input type="hidden" name="tx_cal_controller[uid]" value="###UID###" />
+		<input type="hidden" name="tx_cal_controller[lastview]" value="###LASTVIEW###" />
+		<input type="hidden" name="tx_cal_controller[option]" value="###OPTION###" />
+
+		<!-- ###FORM_START### end-->
+			###HIDDEN###
+			###CALENDAR_ID###
+			###CATEGORY###
+			###ALLDAY###
+			###STARTDATE###
+			###STARTTIME###
+			###ENDDATE###
+			###ENDTIME###
+			###TITLE###
+			###CAL_ORGANIZER###
+			###ORGANIZER###
+			###CAL_LOCATION###
+			###LOCATION###
+			###TEASER###
+			###DESCRIPTION###
+			###IMAGE###
+			###IMAGE_CAPTION###
+			###IMAGE_TITLE###
+			###IMAGE_ALT###
+			###ATTACHMENT###
+			###ATTACHMENT_CAPTION###
+			###FREQUENCY###
+			###BY_DAY###
+			###BY_MONTHDAY###
+			###BY_MONTH###
+			###UNTIL###
+			###COUNT###
+			###INTERVAL###
+			###RDATE_TYPE### ###RDATE###
+			###NOTIFY###
+			###SHARED###
+			###EXCEPTION###
+		<!-- ###FORM_END### start-->
+
+		<input type="button" value="###L_CANCEL###" onclick="document.forms.tx_cal_controller.action='###BACK_LINK###'; document.forms.tx_cal_controller.submit();" />
+		<input type="submit" value="###L_SAVE###" />
+	</fieldset>
+</form>
+</fieldset>
+<!-- ###FORM_END### end-->
+<!--/confirm_event.tmpl-->

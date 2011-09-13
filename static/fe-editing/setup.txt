@@ -1,0 +1,974 @@
+plugin.tx_cal_controller {
+	view {
+	
+		dontShowConfirmView = 0
+		
+		create_event {
+		
+			# @description	Template for creation of an event in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.event.createEventTemplate}
+			
+			tabbedMenu = COA
+			tabbedMenu {
+				1	= TEXT
+				1	{
+					requiredFields = title,hidden,calendar_id,category,startdate,starttime,enddate,endtime,recurring
+					dataWrap = <li><a href="" rel="sc1"><b>{LLL:EXT:cal/controller/locallang.xml:l_event_general}</b></a></li>
+				}
+				2	= TEXT
+				2 {
+					requiredFields = teaser
+					dataWrap = <li><a href="" rel="sc2"><b>{LLL:EXT:cal/controller/locallang.xml:l_teaser}</b></a></li>
+				}
+				3 = TEXT
+				3 {
+					requiredFields = cal_organizer,organizer
+					dataWrap = <li><a href="" rel="sc3"><b>{LLL:EXT:cal/controller/locallang.xml:l_organizer}</b></a></li>
+				}
+				4 = TEXT
+				4 {
+					requiredFields = image,attachment,image_caption,image_title,image_alt,attachment_caption
+					dataWrap = <li><a href="" rel="sc4"><b>{LLL:EXT:cal/controller/locallang.xml:l_event_files}</b></a></li>
+				}
+				5 = TEXT
+				5 {
+					requiredFields = notify,shared,exception,attendee
+					dataWrap = <li><a href="" rel="sc5"><b>{LLL:EXT:cal/controller/locallang.xml:l_options}</b></a></li>
+				}
+			}
+			
+			# @description	Standard wrap for the calendar field
+			calendar_id_stdWrap {
+				dataWrap = <p><label for="calendar">{LLL:EXT:cal/controller/locallang.xml:l_calendar}:</label><select name="tx_cal_controller[calendar_id]" size="1" onchange="calendarChanged(this);" id="calendar_selector">|</select>###CALENDAR_ID_REQUIRED###</p>
+			}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <p><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label><input type="checkbox" | name="tx_cal_controller[hidden]" value="1" /></p>
+			}
+			
+			# @description	Standard wrap for the category field
+			category_stdWrap {
+				dataWrap = <div id="category_tree"><label for="category">{LLL:EXT:cal/controller/locallang.xml:l_category}###CATEGORY_REQUIRED###:</label><div id="categoryEntries">|</div></div>
+			}
+			
+			# @description	Standard wrap for the allday field
+			allday_stdWrap {
+				dataWrap = 	<p><label for="allday" id="allday">{LLL:EXT:cal/controller/locallang.xml:l_event_allday}:</label><input type="checkbox" | name="tx_cal_controller[allday]" value="1" /></p>
+			}
+			
+			# @description	Standard wrap for the startdate field
+			startdate_stdWrap {
+				dataWrap = 	<p><label for="startdate">{LLL:EXT:cal/controller/locallang.xml:l_when}:</label><input type="text" value="|" name="tx_cal_controller[startdate]" id="startdate" />###STARTDATE_SELECTOR### ###STARTDATE_REQUIRED###
+			}
+			
+			# @description	Standard wrap for the enddate field
+			enddate_stdWrap {
+				dataWrap = 	<input type="text" value="|" name="tx_cal_controller[enddate]" id="enddate" />###ENDDATE_REQUIRED### ###ENDDATE_SELECTOR### ###STARTDATE_CONSTRAIN### ###START_CONSTRAIN###
+			}
+			
+			# @description	Standard wrap for the starttime field
+			starttime_stdWrap {
+				dataWrap = 	<select name="tx_cal_controller[starttime]" id="starttime" size="1">|</select>
+			}
+			
+			startminutes.stepping = 5
+			
+			# @description	Standard wrap for the startMinutes field
+			startminutes_stdWrap {
+				dataWrap = 	:<select name="tx_cal_controller[startminutes]" id="startminutes" size="1">|</select>
+			}
+			
+			# @description	Standard wrap for the endTime field
+			endtime_stdWrap {
+				dataWrap = 	{LLL:EXT:cal/controller/locallang.xml:l_to} <select name="tx_cal_controller[endtime]" id="endtime" size="1">|</select>
+			}
+			
+			endminutes.stepping = 5
+			
+			# @description	Standard wrap for the endMinutes field
+			endminutes_stdWrap {
+				dataWrap = 	:<select name="tx_cal_controller[endminutes]" id="endminutes" size="1">|</select>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <p><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_what}:</label><input type="text" value="|" size="40" name="tx_cal_controller[title]" />###TITLE_REQUIRED###</p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the cal_organizer field
+			cal_organizer_stdWrap {
+				dataWrap = <p><label for="cal_organizer">{LLL:EXT:cal/controller/locallang.xml:l_event_cal_organizer}###CAL_ORGANIZER_REQUIRED###:</label><select name="tx_cal_controller[cal_organizer]" size="1">|</select></p>
+			}
+			
+			# @description	Standard wrap for the organizer field
+			organizer_stdWrap {
+				dataWrap = <p><label for="organizer">{LLL:EXT:cal/controller/locallang.xml:l_organizer}###ORGANIZER_REQUIRED###:</label><input type="text" value="|" size="20" name="tx_cal_controller[organizer]" /></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the cal_location field
+			cal_location_stdWrap {
+				dataWrap = <p><label for="cal_location">{LLL:EXT:cal/controller/locallang.xml:l_where}###CAL_LOCATION_REQUIRED###:</label><select name="tx_cal_controller[cal_location]" size="1">|</select></p>
+			}
+			
+			# @description	Standard wrap for the location field
+			location_stdWrap {
+				dataWrap = <p><label for="location">{LLL:EXT:cal/controller/locallang.xml:l_where}###LOCATION_REQUIRED###:</label><input type="text" value="|" size="20" name="tx_cal_controller[location]" /></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the teaser field
+			teaser_stdWrap {
+				dataWrap = <p><label for="teaser">{LLL:EXT:cal/controller/locallang.xml:l_event_teaser}###TEASER_REQUIRED###:</label><textarea name="tx_cal_controller[teaser]">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the description field
+			description_stdWrap {
+				dataWrap = <p><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_event_description}###DESCRIPTION_REQUIRED###:</label>|</p>
+				// Disable htmlSpecialChars, if you are using the RTE
+				#htmlSpecialChars = 1
+			}
+			
+			# @description	custom width for RTE
+            rte.width = 515
+            
+            # @description	custom height for RTE
+            rte.height = 150
+			
+			# @description	Standard wrap for the image field
+			image_stdWrap {
+				imageCount=2
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <p><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_event_image}:</label><input type="file" value="|" name="tx_cal_controller[image][]" />###IMAGE_PREVIEW###</p>
+			}
+			
+			# @description	Content object for event image
+			event.image < tt_content.image.20
+			event.image {
+				textPos >
+				1.altText.field >
+				1.titleText.field >
+				//17 = in text right
+				textPos = 18
+				maxW = 150
+				stdWrap.dataWrap = |<input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/>
+			}
+			
+			image_caption_stdWrap {
+				dataWrap = <p><label for="image_caption">{LLL:EXT:cal/controller/locallang.xml:l_event_image_caption}###IMAGE_CAPTION_REQUIRED###:</label><textarea name="tx_cal_controller[image_caption]">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <p><label for="image_title">{LLL:EXT:cal/controller/locallang.xml:l_event_image_title}###IMAGE_TITLE_REQUIRED###:</label><textarea name="tx_cal_controller[image_title]">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			image_alt_stdWrap {
+				dataWrap = <p><label for="image_alt">{LLL:EXT:cal/controller/locallang.xml:l_event_image_alt}###IMAGE_ALT_REQUIRED###:</label><textarea name="tx_cal_controller[image_alt]">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the imageUpload field
+			imageUpload_stdWrap {
+				dataWrap = <p><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_image_upload}:</label><input type="file" value="|" name="tx_cal_controller[image][]" /></p>
+			}
+			
+			# @description	Content object for event attachment
+			event.attachment < tt_content.uploads
+			event.attachment {
+				layout = 1
+				20.stdWrap.dataWrap = |<input type="hidden" value="###ATTACHMENT_VALUE###" name="tx_cal_controller[attachment][]"/>
+			}
+			
+			# @description	Standard wrap for the attachment field
+			attachment_stdWrap {
+				imageCount=2
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <p><label for="attachment">{LLL:EXT:cal/controller/locallang.xml:l_event_attachment}:</label><input type="file" value="|" name="tx_cal_controller[attachment][]" />###ATTACHMENT_PREVIEW###</p>
+			}
+			
+			# @description	Standard wrap for the attachmentUpload field
+			attachmentUpload_stdWrap {
+				dataWrap = <p><label for="attachment">{LLL:EXT:cal/controller/locallang.xml:l_attachment_upload}:</label><input type="file" value="|" name="tx_cal_controller[attachment][]" /></p>
+			}
+			
+			attachment_caption_stdWrap {
+				dataWrap = <p><label for="attachment_caption">{LLL:EXT:cal/controller/locallang.xml:l_event_image_caption}###ATTACHMENT_CAPTION_REQUIRED###:</label><textarea name="tx_cal_controller[attachment_caption]">|</textarea></p>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the frequency field
+			frequency_stdWrap {
+				dataWrap = <p><label for="frequency">{LLL:EXT:cal/controller/locallang.xml:l_repeats}:</label><select name="tx_cal_controller[frequency_id]" size="1" onchange="freqChanged(this)" id="freq">|</select></p>
+			}
+			
+			# @description	Standard wrap for the byDay field
+			byDay_stdWrap {
+				split {
+		        		# replace ###SPLITTER### with the split option
+				    token = ###SPLITTER###
+				        # the order is beeing defined in the normal optionSplit style
+				    cObjNum = 1 || 2 || 3 || 4 || 5 || 6 || 7
+				        # define the wraps on every position
+				    1.current = 1
+				    1.wrap = <input type="checkbox" value="mo" name="tx_cal_controller[by_day][]" |
+				    2.current = 1
+				    2.wrap = <input type="checkbox" value="tu" name="tx_cal_controller[by_day][]" |
+				    3.current = 1
+				    3.wrap = <input type="checkbox" value="we" name="tx_cal_controller[by_day][]" |
+				    4.current = 1
+				    4.wrap = <input type="checkbox" value="th" name="tx_cal_controller[by_day][]" |
+				    5.current = 1
+				    5.wrap = <input type="checkbox" value="fr" name="tx_cal_controller[by_day][]" |
+				    6.current = 1
+				    6.wrap = <input type="checkbox" value="sa" name="tx_cal_controller[by_day][]" |
+				    7.current = 1
+				    7.wrap = <input type="checkbox" value="su" name="tx_cal_controller[by_day][]"|
+				}
+				dataWrap = <p id="by_day"><label for="by_day">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_byday}:</label>|</p>
+					
+			}
+			
+			# @description	Standard wrap for the byMonthday field
+			byMonthday_stdWrap {
+				dataWrap = <p id="by_monthday" ><label for="bymonthday">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_bymonthday}:</label><input type="text" value="|" name="tx_cal_controller[by_monthday]" /></p>
+			}
+			
+			# @description	Standard wrap for the byMonth field
+			byMonth_stdWrap {
+				dataWrap = <p id="by_month"><label for="bymonth">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_bymonth}:</label><input type="text" value="|" name="tx_cal_controller[by_month]" /></p>
+			}
+			
+			# @description	Standard wrap for the until field
+			until_stdWrap {
+				dataWrap = <span id="until"><label for="until">{LLL:EXT:cal/controller/locallang.xml:l_until}:</label><input type="text" value="|" name="tx_cal_controller[until]" />###UNTIL_SELECTOR###</span>
+			}
+			
+			# @description	Standard wrap for the count field
+			count_stdWrap {
+				dataWrap = <span id="count">{LLL:EXT:cal/controller/locallang.xml:l_event_count}: <input type="text" value="|" size="5" name="tx_cal_controller[count]" /></span>
+			}
+			
+			# @description	Standard wrap for the interval field
+			interval_stdWrap {
+				dataWrap = <span id="interval">{LLL:EXT:cal/controller/locallang.xml:l_interval}: <input type="text" value="|" size="3" name="tx_cal_controller[interval]" /></span>
+			}
+			
+			# @description	Standard wrap for the notify field
+			notify_stdWrap {
+				dataWrap = <p><label for="notify">{LLL:EXT:cal/controller/locallang.xml:l_event_notify}:</label><span class="notify">|</span></p>
+			}
+			
+			# @description	Standard wrap for the notify field
+			shared_stdWrap {
+				dataWrap = <p><label for="shared">{LLL:EXT:cal/controller/locallang.xml:l_event_shared}:</label><span class="shared">|</span></p>
+			}
+			
+			# @description	Standard wrap for the exception field
+			exception_stdWrap {
+				dataWrap = <p><label for="exception">{LLL:EXT:cal/controller/locallang.xml:l_event_exception}:</label><span class="exception">|</span></p>
+			}
+			
+			# @description	Settings for the category tree
+			tree {
+				calendar =
+				category = 
+				calendarTitle = TEXT
+				calendarTitle {
+					if.equals = ###
+				}
+				rootElement = TEXT
+				rootElement {
+					wrap = <table class="treelevel0"><tr><td>|</td></tr></table>
+				}
+				selector = TEXT
+				selector {
+					wrap = <input type="checkbox" name="tx_cal_controller[category][]" value="###UID###" | />
+				}
+				element = <span class="###HEADERSTYLE###_bullet ###HEADERSTYLE###_legend_bullet" >&bull;</span><span class="###HEADERSTYLE###_text">###TITLE###</span>
+				emptyElement = <br/><br/>
+				
+				subElement = <br /><table class="treelevel###LEVEL###" id="treelevel###UID###">
+				
+				subElement_wrap {
+					wrap = <tr><td>|</td></tr>
+				}
+				
+				subElement_pre = </table>
+
+				categorySelectorSubmit = 
+			}
+		}
+		edit_event < plugin.tx_cal_controller.view.create_event
+		
+		edit_event {
+			image_stdWrap {
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_location_image}:</label>###IMAGE_PREVIEW###<br/>{LLL:EXT:cal/controller/locallang.xml:l_delete_image}:<input type="checkbox" name="tx_cal_controller[remove_image][]" value="###IMAGE_VALUE###"></div>
+			}
+			
+			attachment_stdWrap {
+				dataWrap = <div><label for="attachment">{LLL:EXT:cal/controller/locallang.xml:l_event_attachment}:</label>###ATTACHMENT_PREVIEW###<br/>{LLL:EXT:cal/controller/locallang.xml:l_delete_attachment}:<input type="checkbox" name="tx_cal_controller[remove_attachment][]" value="###ATTACHMENT_VALUE###"></div>
+			}
+			
+			
+		}
+
+		confirm_event {
+			# @description	Template for confirmation of an event created in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.event.confirmEventTemplate}
+			
+			# @description	Standard wrap for the calendar field
+			calendar_id_stdWrap {
+				dataWrap = <div><label for="calendar">{LLL:EXT:cal/controller/locallang.xml:l_calendar}:</label>|<input type="hidden" name="tx_cal_controller[calendar_id]" value="###CALENDAR_ID_VALUE###"></div>
+			}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hide">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the category field
+			category_stdWrap {
+				dataWrap = <div><label for="category">{LLL:EXT:cal/controller/locallang.xml:l_category}:</label>|<input type="hidden" value="###CATEGORY_VALUE###" name="tx_cal_controller[category_ids]" /></div>
+			}
+			
+			# @description	Standard wrap for the allday field
+			allday_stdWrap {
+				dataWrap = <div><label for"allday">{LLL:EXT:cal/controller/locallang.xml:l_event_allday}:</label>|<input type="hidden" value="###ALLDAY_VALUE###" name="tx_cal_controller[allday]" /></div>
+			}
+			
+			# @description	Standard wrap for the startdate field
+			startdate_stdWrap {
+				dataWrap = 	<div><label for="startdate">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_startdate}:</label>|<input type="hidden" value="###STARTDATE_VALUE###" name="tx_cal_controller[startdate]" /></div>
+			}
+			
+			# @description	Standard wrap for the enddate field
+			enddate_stdWrap {
+				dataWrap = 	<div><label for="enddate">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_enddate}:</label>|<input type="hidden" value="###ENDDATE_VALUE###" name="tx_cal_controller[enddate]" /></div>
+			}
+			
+			# @description	Standard wrap for the starttime field
+			starttime_stdWrap {
+				dataWrap = 	<div><label for="starttime">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_starttime}:</label>|<input type="hidden" value="###STARTTIME_VALUE###" name="tx_cal_controller[starttime]" /></div>
+			}
+			
+			# @description	Standard wrap for the endtime field
+			endtime_stdWrap {
+				dataWrap = 	<div><label for="endtime">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_endtime}:</label>|<input type="hidden" value="###ENDTIME_VALUE###" name="tx_cal_controller[endtime]" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_event_title}:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" /></div>
+			}
+			
+			# @description	Standard wrap for the cal_organizer field
+			cal_organizer_stdWrap {
+				dataWrap = <div><label for="cal_organizer">{LLL:EXT:cal/controller/locallang.xml:l_event_cal_organizer}:</label>|<input type="hidden" value="###CAL_ORGANIZER_VALUE###" name="tx_cal_controller[cal_organizer]" /></div>
+			}
+			
+			# @description	Standard wrap for the organizer field
+			organizer_stdWrap {
+				dataWrap = <div><label for="organizer">{LLL:EXT:cal/controller/locallang.xml:l_organizer}:</label>|<input type="hidden" value="###ORGANIZER_VALUE###" name="tx_cal_controller[organizer]" /></div>
+			}
+			
+			# @description	Standard wrap for the cal_location field
+			cal_location_stdWrap {
+				dataWrap = <div><label for="cal_location">{LLL:EXT:cal/controller/locallang.xml:l_event_cal_location}:</label>|<input type="hidden" value="###CAL_LOCATION_VALUE###" name="tx_cal_controller[cal_location]" /></div>
+			}
+			
+			# @description	Standard wrap for the location field
+			location_stdWrap {
+				dataWrap = <div><label for="location">{LLL:EXT:cal/controller/locallang.xml:l_location}:</label>|<input type="hidden" value="###LOCATION_VALUE###" name="tx_cal_controller[location]" /></div>
+			}
+			
+			# @description	Standard wrap for the teaser field
+			teaser_stdWrap {
+				dataWrap = <div><label for="teaser">{LLL:EXT:cal/controller/locallang.xml:l_event_teaser}:</label>|<input type="hidden" value="###TEASER_VALUE###" name="tx_cal_controller[teaser]"/></div>
+			}
+			
+			# @description	Standard wrap for the description field
+			description_stdWrap {
+				dataWrap = <div><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_event_description}:</label>|<input type="hidden" value="###DESCRIPTION_VALUE###" name="tx_cal_controller[description]"/></div>
+			}
+			
+			# @description	Content object for event image
+			event.image < tt_content.image.20
+			event.image {
+				textPos >
+				1.altText.field >
+				1.titleText.field >
+				//17 = in text right
+				textPos = 17
+				maxW = 150
+				stdWrap.dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_event_image}: |</label><input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/></div>
+			}
+			
+			image_caption_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_caption]"/>
+				htmlSpecialChars = 1
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_title]"/>
+				htmlSpecialChars = 1
+			}
+			
+			image_alt_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_alt]"/>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Content object for the attachment field
+			event.attachment < tt_content.uploads
+			event.attachment {
+				layout = 1
+				20.stdWrap.dataWrap = <div><label for="attachment">{LLL:EXT:cal/controller/locallang.xml:l_event_attachment}:|</label><input type="hidden" value="###ATTACHMENT_VALUE###" name="tx_cal_controller[attachment][]"/></div>
+			}
+			
+			attachment_caption_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[attachment_caption]"/>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the frequency field
+			frequency_stdWrap {
+				dataWrap = <div><label for="frequency">{LLL:EXT:cal/controller/locallang.xml:l_event_frequency}:</label>|<input type="hidden" value="###FREQUENCY_VALUE###" name="tx_cal_controller[frequency_id]" /></div>
+			}
+			
+			# @description	Standard wrap for the byDay field
+			byDay_stdWrap {
+				dataWrap = <div><label for="byday">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_byday}:</label>|<input type="hidden" value="###BY_DAY_VALUE###" name="tx_cal_controller[by_day]" /></div>
+			}
+			
+			# @description	Standard wrap for the byMonthday field
+			byMonthday_stdWrap {
+				dataWrap = <div><label for="bymonthday">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_bymonthday}:</label>|<input type="hidden" value="###BY_MONTHDAY_VALUE###" name="tx_cal_controller[by_monthday]" /></div>
+			}
+			
+			# @description	Standard wrap for the byMonth field
+			byMonth_stdWrap {
+				dataWrap = <div><label for="bymonth">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_bymonth}:</label>|<input type="hidden" value="###BY_MONTH_VALUE###" name="tx_cal_controller[by_month]" /></div>
+			}
+			
+			# @description	Standard wrap for the until field
+			until_stdWrap {
+				dataWrap = <div><label for="until">{LLL:EXT:cal/controller/locallang.xml:l_event_edit_until}:</label>|<input type="hidden" value="###UNTIL_VALUE###" name="tx_cal_controller[until]" id="until" /></div>
+			}
+			
+			# @description	Standard wrap for the count field
+			count_stdWrap {
+				dataWrap = <div><label for="count">{LLL:EXT:cal/controller/locallang.xml:l_event_count}:</label>|<input type="hidden" value="###COUNT_VALUE###" name="tx_cal_controller[count]"/></div>
+			}
+			
+			# @description	Standard wrap for the interval field
+			interval_stdWrap {
+				dataWrap = <div><label for="interval">{LLL:EXT:cal/controller/locallang.xml:l_event_interval}:</label>|<input type="hidden" value="###INTERVAL_VALUE###" name="tx_cal_controller[interval]"/></div>
+			}
+			
+			# @description	Standard wrap for the notify field
+			notify_stdWrap {
+				dataWrap = <div><label for="notify">{LLL:EXT:cal/controller/locallang.xml:l_event_notify}:</label>|<input type="hidden" value="###NOTIFY_VALUE###" name="tx_cal_controller[notify_ids]"/></div>
+			}
+			
+			# @description	Standard wrap for the notify field
+			shared_stdWrap {
+				dataWrap = <div><label for="notify">{LLL:EXT:cal/controller/locallang.xml:l_event_shared}:</label>|<input type="hidden" value="###SHARED_VALUE###" name="tx_cal_controller[shared_ids]"/></div>
+			}
+			
+			# @description	Standard wrap for the exception field
+			exception_stdWrap {
+				dataWrap = <div><label for="exception">{LLL:EXT:cal/controller/locallang.xml:l_event_exception}:</label>|<input type="hidden" value="###EXCEPTION_VALUE###" name="tx_cal_controller[exception_ids]"/></div>
+			}
+		}
+		delete_event < plugin.tx_cal_controller.view.confirm_event
+		
+		delete_event {
+			# @description	Template for deleting an event in the frontend.
+			# @also	Constants
+			deleteEventTemplate = {$plugin.tx_cal_controller.view.event.deleteEventTemplate}
+		}
+		
+		create_calendar {
+			# @description	Template for creating a new calendar in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.calendar.createCalendarTemplate}
+
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label><input type="checkbox" | name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_calendar_title}###TITLE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[title]" /></div>
+			}
+			
+			# @description	Standard wrap for the owner field
+			owner_stdWrap {
+				dataWrap = <div><label for="owner">{LLL:EXT:cal/controller/locallang.xml:l_calendar_owner}###OWNER_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the activateFreeAndBusy field
+			activateFreeAndBusy_stdWrap {
+				dataWrap = <div><label for="activateFreeAndBusy">{LLL:EXT:cal/controller/locallang.xml:l_calendar_activateFreeAndBusy}###ACTIVATEFREEANDBUSY_REQUIRED###:</label><input type="checkbox" | name="tx_cal_controller[activateFreeAndBusy]" value="1" /></div>
+			}
+			
+			# @description	Standard wrap for the freeAndBusyUser field
+			freeAndBusyUser_stdWrap {
+				dataWrap = <div><label for="freeAndBusyUser">{LLL:EXT:cal/controller/locallang.xml:l_calendar_freeAndBusyUser}###FREEANDBUSYUSER_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the calendarType field
+			calendarType_stdWrap {
+				dataWrap = <div><label for="calendarType">{LLL:EXT:cal/controller/locallang.xml:l_calendar_type}###CALENDARTYPE_REQUIRED###:</label><select name="tx_cal_controller[calendarType]" size="1" onchange="javascript: typeChanged(this);" id="calendarType">|</select></div>
+			}
+			
+			# @description	Standard wrap for the exturl field
+			exturl_stdWrap {
+				dataWrap = <div id="exturl"><label for="exturl">{LLL:EXT:cal/controller/locallang.xml:l_calendar_exturl}###EXTURL_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[exturl]" /></div>
+			}
+			
+			# @description	Standard wrap for the ics_file field
+			ics_file_stdWrap {
+				imageCount=1
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <div id="ics_file"><label for="ics_file">{LLL:EXT:cal/controller/locallang.xml:l_calendar_icsfile}:</label><input type="file" value="|" name="tx_cal_controller[ics_file][]" />###ICS_FILE_PREVIEW###</div>
+			}
+			
+			# @description	Standard wrap for the ics_fileUpload field
+			ics_fileUpload_stdWrap {
+				dataWrap = <div id="ics_fileUpload"><label for="ics_fileUpload">{LLL:EXT:cal/controller/locallang.xml:l_ics_file_upload}:</label><input type="file" value="|" name="tx_cal_controller[ics_file][]" /></div>
+			}
+			
+			# @description	Standard wrap for the refresh field
+			refresh_stdWrap {
+				dataWrap = <div id="refresh"><label for="refresh">{LLL:EXT:cal/controller/locallang.xml:l_calendar_refresh}###REFRESH_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[refresh]" /></div>
+			}
+		}
+		
+		edit_calendar < plugin.tx_cal_controller.view.create_calendar
+		edit_calendar {
+			ics_file_stdWrap {
+				dataWrap = <div><label for="ics_file">{LLL:EXT:cal/controller/locallang.xml:l_calendar_icsfile}:</label><input type="hidden" value="###ICS_FILE_VALUE###" name="tx_cal_controller[ics_file][]" />###ICS_FILE_PREVIEW###<br/>{LLL:EXT:cal/controller/locallang.xml:l_delete_icsfile}:<input type="checkbox" name="tx_cal_controller[remove_ics_file][]" value="###ICS_FILE_VALUE###"></div>
+			}
+		}
+		
+		confirm_calendar {
+			# @description	Template for confirming creation/editing of a (new) calendar in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.calendar.confirmCalendarTemplate}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_calendar_title}:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" /></div>
+			}
+			
+			# @description	Standard wrap for the owner field
+			owner_stdWrap {
+				dataWrap = <div><label for="owner">{LLL:EXT:cal/controller/locallang.xml:l_calendar_owner}:</label>|<input type="hidden" value="###OWNER_VALUE###" name="tx_cal_controller[owner_ids]" /></div>
+			}
+			
+			# @description	Standard wrap for the activateFreeAndBusy field
+			activateFreeAndBusy_stdWrap {
+				dataWrap = <div><label for="activateFreeAndBusy">{LLL:EXT:cal/controller/locallang.xml:l_calendar_activateFreeAndBusy}:</label>|<input type="hidden" value="###ACTIVATE_FREEANDBUSY_VALUE###" name="tx_cal_controller[activateFreeAndBusy]" /></div>
+			}
+			
+			# @description	Standard wrap for the freeAndBusyUser field
+			freeAndBusyUser_stdWrap {
+				dataWrap = <div><label for="freeAndBusyUser">{LLL:EXT:cal/controller/locallang.xml:l_calendar_freeAndBusyUser}:</label>|<input type="hidden" value="###FREEANDBUSYUSER_VALUE###" name="tx_cal_controller[freeAndBusyUser_ids]" /></div>
+			}
+			
+			# @description	Standard wrap for the calendarType field
+			calendarType_stdWrap {
+				dataWrap = <div><label for="calendarType">{LLL:EXT:cal/controller/locallang.xml:l_calendar_type}:</label>|<input type="hidden" value="###CALENDARTYPE_VALUE###" name="tx_cal_controller[calendarType]" /></div>
+			}
+			
+			# @description	Standard wrap for the exturl field
+			exturl_stdWrap {
+				dataWrap = <div id="exturl"><label for="exturl">{LLL:EXT:cal/controller/locallang.xml:l_calendar_exturl}:</label>|<input type="hidden" value="###EXTURL_VALUE###" name="tx_cal_controller[exturl]" /></div>
+			}
+			
+			# @description	Standard wrap for the icsfile field
+			ics_file_stdWrap {
+				dataWrap = <div id="ics_file"><label for="icsfile">{LLL:EXT:cal/controller/locallang.xml:l_calendar_icsfile}:</label>|<input type="hidden" value="###ICS_FILE_VALUE###" name="tx_cal_controller[ics_file]" /></div>
+			}
+			
+			# @description	Standard wrap for the refresh field
+			refresh_stdWrap {
+				dataWrap = <div id="refresh"><label for="refresh">{LLL:EXT:cal/controller/locallang.xml:l_calendar_refresh}:</label>|<input type="hidden" value="###REFRESH_VALUE###" name="tx_cal_controller[refresh]" /></div>
+			}
+		}
+		
+		delete_calendar < plugin.tx_cal_controller.view.confirm_calendar
+		
+		delete_calendar {
+			# @description	Template for confirming deletion of a calendar in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.calendar.deleteCalendarTemplate}
+		}
+
+		create_category {
+			# @description	Template for creating a new category in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.category.createCategoryTemplate}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}###HIDDEN_REQUIRED###:</label><input type="checkbox" | value="1" name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_category_title}###TITLE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[title]" /></div>
+			}
+			
+			# @description	Standard wrap for the calendar field
+			calendar_id_stdWrap {
+				dataWrap = <div><label for="calendar_id">{LLL:EXT:cal/controller/locallang.xml:l_category_calendar}###CALENDAR_ID_REQUIRED###:</label><select name="tx_cal_controller[calendar_id]" size="1" onchange="calendarChanged(this);" id="calendar_selector">|</select></div>
+			}
+			
+			# @description	Standard wrap for the headerStyle field
+			headerstyle_stdWrap {
+				dataWrap = <div><label for="headerstyle">{LLL:EXT:cal/controller/locallang.xml:l_category_headerstyle}###HEADERSTYLE_REQUIRED###:</label><select name="tx_cal_controller[headerstyle]" size="1" onchange="getNewStyle(this);" id="tx_cal_controller_headerstyle">|</select></div>
+			}
+			
+			# @description	Standard wrap for the bodyStyle field
+			bodystyle_stdWrap {
+				dataWrap = <div><label for="bodystyle">{LLL:EXT:cal/controller/locallang.xml:l_category_bodystyle}###BODYSTYLE_REQUIRED###:</label><select name="tx_cal_controller[bodystyle]" size="1" onchange="getNewStyle(this);" id="tx_cal_controller_bodystyle">|</select></div>
+			}
+			
+			# @description	Standard wrap for the parentCategory field
+			parent_category_stdWrap {
+				dataWrap = <div><label for="parent_category">{LLL:EXT:cal/controller/locallang.xml:l_category_parent_category}###PARENT_CATEGORY_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the sharedUserAllowed field
+			shared_user_allowed_stdWrap {
+				dataWrap = <div><label for="shared_user_allowed">{LLL:EXT:cal/controller/locallang.xml:l_category_shared_user_allowed}###SHARED_USER_ALLOWED_REQUIRED###:</label><input type="checkbox" | name="tx_cal_controller[shared_user_allowed]" value="1" /></div>
+			}
+			
+			# @description	Configuration for the parent category tree
+			tree < plugin.tx_cal_controller.view.create_event.tree
+			tree {
+				selector {
+					wrap = <input type="radio" name="tx_cal_controller[parent_category][]" value="###UID###" | />
+				}
+			}
+		}
+		
+		edit_category < plugin.tx_cal_controller.view.create_category
+
+		
+		confirm_category {
+			
+			# @description	Template for confirming creation of a new category in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.category.confirmCategoryTemplate}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label>|<input type="hidden" value="###HIDDEN_VALUE###" name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the title field
+			title_stdWrap {
+				dataWrap = <div><label for="title">{LLL:EXT:cal/controller/locallang.xml:l_category_title}:</label>|<input type="hidden" value="###TITLE_VALUE###" name="tx_cal_controller[title]" /></div>
+			}
+			
+			# @description	Standard wrap for the calendar_id field
+			calendar_id_stdWrap {
+				dataWrap = <div><label for="calendar_id">{LLL:EXT:cal/controller/locallang.xml:l_category_calendar}:</label>|<input type="hidden" value="###CALENDAR_ID_VALUE###" name="tx_cal_controller[calendar_id]" /></div>
+			}
+			
+			# @description	Standard wrap for the headerstyle field
+			headerstyle_stdWrap {
+				dataWrap = <div><label for="headerstyle">{LLL:EXT:cal/controller/locallang.xml:l_category_headerstyle}:</label>|<input type="hidden" value="###HEADERSTYLE_VALUE###" name="tx_cal_controller[headerstyle]" /></div>
+			}
+			
+			# @description	Standard wrap for the bodystyle field
+			bodystyle_stdWrap {
+				dataWrap = <div><label for="bodystyle">{LLL:EXT:cal/controller/locallang.xml:l_category_bodystyle}:</label>|<input type="hidden" value="###BODYSTYLE_VALUE###" name="tx_cal_controller[bodystyle]" /></div>
+			}
+			
+			# @description	Standard wrap for the parent_category field
+			parent_category_stdWrap {
+				dataWrap = <div><label for="parent_category">{LLL:EXT:cal/controller/locallang.xml:l_category_parent_category}:</label>|<input type="hidden" value="###PARENT_CATEGORY_VALUE###" name="tx_cal_controller[parent_category]" /></div>
+			}
+			
+			# @description	Standard wrap for the shared_user_allowed field
+			shared_user_allowed_stdWrap {
+				dataWrap = <div><label for="shared_user_allowed">{LLL:EXT:cal/controller/locallang.xml:l_category_shared_user_allowed}:</label>|<input type="hidden" value="###SHARED_USER_ALLOWED_VALUE###" name="tx_cal_controller[shared_user_allowed]" /></div>
+			}
+		}
+		
+		delete_category < plugin.tx_cal_controller.view.confirm_category
+		
+		delete_category {
+			# @description	Template for confirming deletion of a category in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.category.deleteCategoryTemplate}
+		}
+		
+		create_location {
+			# @description	Template for creating a location in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.location.createLocationTemplate}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}###HIDDEN_REQUIRED###:</label><input type="checkbox" | value="1" name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the name field
+			name_stdWrap {
+				dataWrap = <div><label for="name">{LLL:EXT:cal/controller/locallang.xml:l_location_name}###NAME_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[name]" /></div>
+			}
+			
+			# @description	Standard wrap for the description field
+			description_stdWrap {
+				dataWrap = <div><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_location_description}###DESCRIPTION_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[description]" /></div>
+			}
+			
+			# @description	Standard wrap for the street field
+			street_stdWrap {
+				dataWrap = <div><label for="street">{LLL:EXT:cal/controller/locallang.xml:l_location_street}###STREET_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[street]" /></div>
+			}
+			
+			# @description	Standard wrap for the zip field
+			zip_stdWrap {
+				dataWrap = <div><label for="zip">{LLL:EXT:cal/controller/locallang.xml:l_location_zip}###ZIP_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[zip]" /></div>
+			}
+			
+			# @description	Standard wrap for the city field
+			city_stdWrap {
+				dataWrap = <div><label for="city">{LLL:EXT:cal/controller/locallang.xml:l_location_city}###CITY_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[city]" /></div>
+			}
+			
+			# @description	Standard wrap for the phone field
+			phone_stdWrap {
+				dataWrap = <div><label for="phone">{LLL:EXT:cal/controller/locallang.xml:l_location_phone}###PHONE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[phone]" /></div>
+			}
+			
+			# @description	Standard wrap for the email field
+			email_stdWrap {
+				dataWrap = <div><label for="email">{LLL:EXT:cal/controller/locallang.xml:l_location_email}###EMAIL_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[email]" /></div>
+			}
+			
+			# @description	Standard wrap for the image field
+			image_stdWrap {
+				file.maxW = 150
+				file.maxH = 150
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_location_image}:</label><input type="file" value="|" name="tx_cal_controller[image][]" />###IMAGE_PREVIEW###</div>
+			}
+			
+			# @description	Standard wrap for the imageUpload field
+			imageUpload_stdWrap {
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_image_upload}###IMAGE_REQUIRED###:</label><input type="file" value="|" name="tx_cal_controller[image][]" /></div>
+			}
+			
+			# @description	Content object for event image
+			location.image < tt_content.image.20
+			location.image {
+				textPos >
+				1.altText.field >
+				1.titleText.field >
+				//17 = in text right
+				textPos = 18
+				maxW = 150
+				stdWrap.dataWrap = |<input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/>
+			}
+			organizer.image < plugin.tx_cal_controller.view.create_location.location.image
+			
+			image_caption_stdWrap {
+				dataWrap = <div><label for="image_caption">{LLL:EXT:cal/controller/locallang.xml:l_event_image_caption}###IMAGE_CAPTION_REQUIRED###:</label><textarea name="tx_cal_controller[image_caption]">|</textarea></div>
+				htmlSpecialChars = 1
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <div><label for="image_title">{LLL:EXT:cal/controller/locallang.xml:l_event_image_title}###IMAGE_TITLE_REQUIRED###:</label><textarea name="tx_cal_controller[image_title]">|</textarea></div>
+				htmlSpecialChars = 1
+			}
+			
+			image_alt_stdWrap {
+				dataWrap = <div><label for="image_alt">{LLL:EXT:cal/controller/locallang.xml:l_event_image_alt}###IMAGE_ALT_REQUIRED###:</label><textarea name="tx_cal_controller[image_alt]">|</textarea></div>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the country field
+			country_stdWrap {
+				dataWrap = <div><label for="country">{LLL:EXT:cal/controller/locallang.xml:l_location_country}###COUNTRY_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[country]" /></div>
+			}
+			
+			# @description	Standard wrap for the country_static_info field
+			country_static_info_stdWrap {
+				dataWrap = <div><label for="country">{LLL:EXT:cal/controller/locallang.xml:l_location_country}###COUNTRY_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the countryzone field
+			countryzone_stdWrap {
+				dataWrap = <div><label for="countryzone">{LLL:EXT:cal/controller/locallang.xml:l_location_countryzone}###COUNTRYZONE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[countryzone]" /></div>
+			}
+			
+			# @description	Standard wrap for the countryzone_static_info field
+			countryzone_static_info_stdWrap {
+				dataWrap = <div><label for="countryzone">{LLL:EXT:cal/controller/locallang.xml:l_location_countryzone}###COUNTRYZONE_REQUIRED###:</label>|</div>
+			}
+			
+			# @description	Standard wrap for the link field
+			link_stdWrap {
+				dataWrap = <div><label for="email">{LLL:EXT:cal/controller/locallang.xml:l_location_link}###LINK_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[link]" /></div>
+			}
+		}
+		
+		edit_location < plugin.tx_cal_controller.view.create_location
+		
+		edit_location {
+			# @description	Standard wrap for the image field
+			image_stdWrap {
+				dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_location_image}:</label>###IMAGE_PREVIEW###<br/>{LLL:EXT:cal/controller/locallang.xml:l_delete_image}:<input type="checkbox" name="tx_cal_controller[remove_image][]" value="###IMAGE_VALUE###"</div>
+			}
+		}
+		
+		confirm_location {
+			# @description	Template for confirming a location created or edited in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.location.confirmLocationTemplate}
+			
+			# @description	Standard wrap for the hidden field
+			hidden_stdWrap {
+				dataWrap = <div><label for="hidden">{LLL:EXT:cal/controller/locallang.xml:l_hidden}:</label>|<input type="hidden" ###HIDDEN_VALUE### name="tx_cal_controller[hidden]" /></div>
+			}
+			
+			# @description	Standard wrap for the name field
+			name_stdWrap {
+				dataWrap = <div><label for="name">{LLL:EXT:cal/controller/locallang.xml:l_location_name}:</label>|<input type="hidden" value="###NAME_VALUE###" name="tx_cal_controller[name]" /></div>
+			}
+			
+			# @description	Standard wrap for the description field
+			description_stdWrap {
+				dataWrap = <div><label for="description">{LLL:EXT:cal/controller/locallang.xml:l_location_description}:</label>|<input type="hidden" value="###DESCRIPTION_VALUE###" name="tx_cal_controller[description]" /></div>
+			}
+			
+			# @description	Standard wrap for the street field
+			street_stdWrap {
+				dataWrap = <div><label for="street">{LLL:EXT:cal/controller/locallang.xml:l_location_street}:</label>|<input type="hidden" value="###STREET_VALUE###" name="tx_cal_controller[street]" /></div>
+			}
+			
+			# @description	Standard wrap for the zip field
+			zip_stdWrap {
+				dataWrap = <div><label for="zip">{LLL:EXT:cal/controller/locallang.xml:l_location_zip}:</label>|<input type="hidden" value="###ZIP_VALUE###" name="tx_cal_controller[zip]" /></div>
+			}
+			
+			# @description	Standard wrap for the city field
+			city_stdWrap {
+				dataWrap = <div><label for="city">{LLL:EXT:cal/controller/locallang.xml:l_location_city}:</label>|<input type="hidden" value="###CITY_VALUE###" name="tx_cal_controller[city]" /></div>
+			}
+			
+			# @description	Standard wrap for the phone field
+			phone_stdWrap {
+				dataWrap = <div><label for="phone">{LLL:EXT:cal/controller/locallang.xml:l_location_phone}:</label>|<input type="hidden" value="###PHONE_VALUE###" name="tx_cal_controller[phone]" /></div>
+			}
+			
+			# @description	Standard wrap for the email field
+			email_stdWrap {
+				dataWrap = <div><label for="email">{LLL:EXT:cal/controller/locallang.xml:l_location_email}:</label>|<input type="hidden" value="###EMAIL_VALUE###" name="tx_cal_controller[email]" /></div>
+			}
+			
+			# @description	Content object for event image
+			location.image < tt_content.image.20
+			location.image {
+				textPos >
+				1.altText.field >
+				1.titleText.field >
+				//17 = in text right
+				textPos = 17
+				maxW = 150
+				stdWrap.dataWrap = <div><label for="image">{LLL:EXT:cal/controller/locallang.xml:l_location_image}: |</label><input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/></div>
+			}
+			organizer.image < plugin.tx_cal_controller.view.confirm_location.location.image
+			
+			image_caption_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_caption]"/>
+				htmlSpecialChars = 1
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_title]"/>
+				htmlSpecialChars = 1
+			}
+			
+			image_alt_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_alt]"/>
+				htmlSpecialChars = 1
+			}
+			
+			# @description	Standard wrap for the country field
+			country_stdWrap {
+				dataWrap = <div><label for="country">{LLL:EXT:cal/controller/locallang.xml:l_location_country}:</label>|<input type="hidden" value="###COUNTRY_VALUE###" name="tx_cal_controller[country]" /></div>
+			}
+			
+			# @description	Standard wrap for the country_static_info field
+			country_static_info_stdWrap {
+				dataWrap = <div><label for="country">{LLL:EXT:cal/controller/locallang.xml:l_location_country}:</label>|<input type="hidden" value="###COUNTRY_VALUE###" name="tx_cal_controller[country]" /></div>
+			}
+			
+			# @description	Standard wrap for the countryzone field
+			countryzone_stdWrap {
+				dataWrap = <div><label for="countryzone">{LLL:EXT:cal/controller/locallang.xml:l_location_countryzone}:</label>|<input type="hidden" value="###COUNTRYZONE_VALUE###" name="tx_cal_controller[countryzone]" /></div>
+			}
+			
+			# @description	Standard wrap for the countryzone_static_info field
+			countryzone_static_info_stdWrap {
+				dataWrap = <div><label for="countryzone">{LLL:EXT:cal/controller/locallang.xml:l_location_countryzone}:</label>|<input type="hidden" value="###COUNTRYZONE_VALUE###" name="tx_cal_controller[countryzone]" /></div>
+			}
+			
+			# @description	Standard wrap for the link field
+			link_stdWrap {
+				dataWrap = <div><label for="email">{LLL:EXT:cal/controller/locallang.xml:l_location_link}:</label>|<input type="hidden" value="###LINK_VALUE###" name="tx_cal_controller[link]" /></div>
+			}
+		}
+		
+		delete_location < plugin.tx_cal_controller.view.location
+		delete_location {
+			# @description	Template for deleting a location in the frontend.
+			# @also			Constants
+			template = {$plugin.tx_cal_controller.view.location.deleteLocationTemplate}
+		}
+		
+		create_organizer < plugin.tx_cal_controller.view.create_location
+		edit_organizer < plugin.tx_cal_controller.view.edit_location
+		confirm_organizer < plugin.tx_cal_controller.view.confirm_location
+		delete_organizer < plugin.tx_cal_controller.view.delete_location
+		
+		translation {
+			# @description	Create links to the different available languages. Insert them in ascending order of the language uid
+			languageMenu {
+				1 = IMAGE
+				1 {
+					file = media/flags/flag_de.gif
+					offset = 2,2
+				}
+				2 = IMAGE
+				2 {
+					file = media/flags/flag_uk.gif
+					offset = 2,2
+				}
+			}
+		}
+	}
+}

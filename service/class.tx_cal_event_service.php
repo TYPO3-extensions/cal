@@ -88,12 +88,13 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$this->setStartAndEndPoint($start_date, $end_date);
 		$dontShowOldEvents = (integer)$this->conf['view.'][$this->conf['view'].'.']['dontShowOldEvents'];
 		if($dontShowOldEvents>0){
+			$now = new tx_cal_date();
 			if ($dontShowOldEvents==2){
-				$now = new tx_cal_date($this->conf['getdate']);
-			} else {
-				$now = new tx_cal_date();
+				$now->setHour(0);
+				$now->setMinute(0);
+				$now->setSecond(0);
 			}
-
+			
 			if($start_date->getTime() <= $now->getTime()){
 				$start_date->copy($now);
 			}
@@ -1510,10 +1511,11 @@ t3lib_div::debug($orderBy);
 		$startDate = $event->getStart();
 		$dontShowOldEvents = (integer)$this->conf['view.'][$this->conf['view'].'.']['dontShowOldEvents'];
 		if($dontShowOldEvents>0){
+			$now = new tx_cal_date();
 			if ($dontShowOldEvents==2){
-				$now = new tx_cal_date($this->conf['getdate']);
-			} else {
-				$now = new tx_cal_date();
+				$now->setHour(0);
+				$now->setMinute(0);
+				$now->setSecond(0);
 			}
 
 			if($startDate->getTime() > $now->getTime()){

@@ -676,6 +676,15 @@ class tx_cal_base_view extends tx_cal_base_service {
 		
 		$sims['###DISPLAY_DATE###'] = $this->local_cObj->cObjGetSingle($this->conf['view.'][$this->conf['view'].'.']['displayDate'],$this->conf['view.'][$this->conf['view'].'.']['displayDate.']);
 
+		$wrapped = array();
+		$hookObjectsArr = tx_cal_functions::getHookObjectsArray('tx_cal_base_model','searchForObjectMarker','model');
+		// Hook: postSearchForObjectMarker
+		foreach ($hookObjectsArr as $hookObj) {
+			if (method_exists($hookObj, 'postSearchForObjectMarker')) {
+				$hookObj->postSearchForObjectMarker($this, $page, $sims, $rems, $wrapped, $this->conf['view']);
+			}
+		}
+
 		$page = tx_cal_functions::substituteMarkerArrayNotCached($page, $sims, $rems, array ());
 
 		$languageArray = array (

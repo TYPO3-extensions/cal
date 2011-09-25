@@ -446,12 +446,24 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 		if($this->dayHasEvent[$weekdayIndex] == 1){
 			$classes .= ' withEventsDay';
 		}
-		if($this->currentDayIndex == $weekdayIndex){
+		
+		$localDayIndex = $this->currentDayIndex+DATE_CALC_BEGIN_WEEKDAY;
+		if ($localDayIndex == 7) {
+			$localDayIndex = 0;
+		} 
+		
+		if($localDayIndex == $weekdayIndex){
 			$classes .= ' currentDayHeader';
 		}
+		
+		$localWeekdayIndex = $weekdayIndex-DATE_CALC_BEGIN_WEEKDAY;
+		if ($localWeekdayIndex == -1) {
+			$localWeekdayIndex = 6;
+		}
+		
 		$controller = &tx_cal_registry::Registry('basic','controller');
 		$daysKeys = array_keys($this->days);
-		if(intval($this->getParentMonth()) != intval($this->days[$daysKeys[$weekdayIndex]]->month)){
+		if(intval($this->getParentMonth()) != intval($this->days[$daysKeys[$localWeekdayIndex]]->month)){
 			$classes .= ' monthOff';
 		}
 

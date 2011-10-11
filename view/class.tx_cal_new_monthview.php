@@ -133,6 +133,18 @@ debug('could not unserialize cache for month:'.$month.'_'.$year);
 		$eventEndWeek = $event->getEnd()->getWeekOfYear();
 		$eventStartYear = $event->getStart()->year;
 		$eventEndYear = $event->getEnd()->year;
+		if(($eventStartWeek == 52 || $eventStartWeek == 53) && $event->getStart()->month == 1){
+			$eventStartYear--;
+		}
+		if(($eventEndWeek == 52 || $eventEndWeek == 53) && $event->getEnd()->month == 1){
+			$eventEndYear--;
+		}
+		if($eventStartWeek == 1 && $event->getStart()->month == 12){
+			$eventStartYear++;
+		}
+		if($eventEndWeek == 1 && $event->getEnd()->month == 12){
+			$eventEndYear++;
+		}
 		do{
 			if($this->weeks[$eventStartYear.'_'.$eventStartWeek]) {
 				$this->weeks[$eventStartYear.'_'.$eventStartWeek]->addEvent($event);

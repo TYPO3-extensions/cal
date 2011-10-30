@@ -2547,7 +2547,7 @@ $TCA['tx_cal_event_deviation'] = Array (
 				'type' => 'input',
 				'size' => '12',
 				'max' => '20',
-				'eval' => 'required,time',
+				'eval' => 'time',
 			)
 		),
 		'start_date' => Array (		

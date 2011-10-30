@@ -31,7 +31,7 @@
 			<label index="tx_cal_event.start_date">Event Start Day</label>
 			<label index="tx_cal_event.orig_start_date">Original recurrence instance start day</label>
 			<label index="tx_cal_event.start_time">Event Start Time</label>
-			<label index="tx_cal_event.orig_start_time">Original recurrence instance start time</label>
+			<label index="tx_cal_event.orig_start_time">Original recurrence instance start time (leave empty for allday)</label>
 			<label index="tx_cal_event.end_date">Event End Day</label>
 			<label index="tx_cal_event.end_time">Event End Time</label>
 			<label index="tx_cal_event.allday">All Day Event</label>

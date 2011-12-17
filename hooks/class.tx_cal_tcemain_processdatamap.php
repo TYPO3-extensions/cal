@@ -97,12 +97,32 @@ class tx_cal_tcemain_processdatamap {
 						$tx_cal_api = &$tx_cal_api->tx_cal_api_without($pageIDForPlugin);
 						
 						$notificationService =& tx_cal_functions::getNotificationService();
+						
+						if ($notificationService->conf['view.']['event.']['phpicalendarEventTemplate']) {
+							$oldPath = &$notificationService->conf['view.']['event.']['phpicalendarEventTemplate'];
+						} else {
+							$oldPath = &$notificationService->conf['view.']['event.']['eventModelTemplate'];
+						}
+						$extPath=t3lib_extMgm::extPath('cal');
+					
+						$oldPath = str_replace('EXT:cal/', $extPath, $oldPath);
+						//$oldPath = str_replace(PATH_site, '', $oldPath);
+						$tx_cal_api->conf['view.']['event.']['phpicalendarEventTemplate'] = $oldPath;
+						$tx_cal_api->conf['view.']['event.']['eventModelTemplate'] = $oldPath;
+						$oldBackPath = $GLOBALS['TSFE']->tmpl->getFileName_backPath;
+						$GLOBALS['TSFE']->tmpl->getFileName_backPath = '';
+						$fileInfo = t3lib_div::split_fileref($oldPath);
+						$GLOBALS['TSFE']->tmpl->allowedPaths[] = $fileInfo['path'];
+						
+						
 						$notificationService->controller->getDateTimeObject = new tx_cal_date($event['start_date'].'000000');
 						$notificationService->notifyOfChanges($event, $fieldArray);
 						if($fieldArray['send_invitation']){
 							$notificationService->invite($event);
 							$fieldArray['send_invitation'] = 0;
 						}
+						
+						$GLOBALS['TSFE']->tmpl->getFileName_backPath = $oldBackPath;
 					}
 				}
 			}
@@ -196,6 +216,23 @@ class tx_cal_tcemain_processdatamap {
 					if($table == 'tx_cal_event' && ($status=='new' || $fieldArray['send_invitation'])){				
 						/* Notify of new event */
 						$notificationService =& tx_cal_functions::getNotificationService();
+						
+						if ($notificationService->conf['view.']['event.']['phpicalendarEventTemplate']) {
+							$oldPath = &$notificationService->conf['view.']['event.']['phpicalendarEventTemplate'];
+						} else {
+							$oldPath = &$notificationService->conf['view.']['event.']['eventModelTemplate'];
+						}
+						$extPath=t3lib_extMgm::extPath('cal');
+					
+						$oldPath = str_replace('EXT:cal/', $extPath, $oldPath);
+						//$oldPath = str_replace(PATH_site, '', $oldPath);
+						$tx_cal_api->conf['view.']['event.']['phpicalendarEventTemplate'] = $oldPath;
+						$tx_cal_api->conf['view.']['event.']['eventModelTemplate'] = $oldPath;
+						$oldBackPath = $GLOBALS['TSFE']->tmpl->getFileName_backPath;
+						$GLOBALS['TSFE']->tmpl->getFileName_backPath = '';
+						$fileInfo = t3lib_div::split_fileref($oldPath);
+						$GLOBALS['TSFE']->tmpl->allowedPaths[] = $fileInfo['path'];
+						
 						$notificationService->controller->getDateTimeObject = new tx_cal_date($event['start_date'].'000000');
 						
 						if($status=='new'){
@@ -205,6 +242,8 @@ class tx_cal_tcemain_processdatamap {
 							$notificationService->invite($fieldArray);
 							$fieldArray['send_invitation'] = 0;
 						}
+						
+						$GLOBALS['TSFE']->tmpl->getFileName_backPath = $oldBackPath;
 					}
 
 					$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);

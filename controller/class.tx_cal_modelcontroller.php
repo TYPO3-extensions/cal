@@ -720,14 +720,14 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 	 * @param	integer	The UID to look up.
 	 * @return	event		The event object matching the serviceKey and UID.
 	 */
-	function find($serviceName, $uid, $type, $subtype, $pidList='', $showHiddenEvents=false, $showDeletedEvents=false, $getAllInstances=false, $disableCalendarSearchString=false, $eventType='0,1,2,3') {
+	function find($serviceName, $uid, $type, $subtype, $pidList='', $showHiddenEvents=false, $showDeletedEvents=false, $getAllInstances=false, $disableCalendarSearchString=false, $disableCategorySearchString=false, $eventType='0,1,2,3') {
 		/* Gets the model for the provided service key */
 		$service = $this->getServiceObjByKey($serviceName, $subtype, $type);
 		if(!is_object($service)){
 			return tx_cal_functions::createErrorMessage('Missing or wrong parameter. The object you are looking for could not be found.', 'Please verify your URL parameters: tx_cal_controller[type] and tx_cal_controller[uid].');
 		}	
 		/* Look up an event with a specific ID inside the model */
-		$event = $service->find($uid, $pidList, $showHiddenEvents, $showDeletedEvents, $getAllInstances, $disableCalendarSearchString, $eventType);
+		$event = $service->find($uid, $pidList, $showHiddenEvents, $showDeletedEvents, $getAllInstances, $disableCalendarSearchString, $disableCategorySearchString, $eventType);
 		return $event;
 	}
 	

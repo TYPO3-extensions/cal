@@ -594,7 +594,7 @@ t3lib_div::debug($orderBy);
 		
 		// categories specified? show only those categories
 		$categorySearchString = '';
-		if($disableCategorySearchString){
+		if(!$disableCategorySearchString){
 			$categorySearchString = $categoryService->getCategorySearchString($pidList,true);
 		}
 

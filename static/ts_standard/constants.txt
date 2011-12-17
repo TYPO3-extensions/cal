@@ -27,7 +27,7 @@ plugin.tx_cal_controller {
 	view.event.remind.time = 30
 	# cat=Calendar Base (General)/general/17; type=string; label=Subscription Page: Page ID where the subscription view is allowed.
 	view.event.notify.subscriptionViewPid =
-	# cat=Calendar Base (General)/general/18; type=string; label=Meeting status Page: Page ID where the meeting-status view is allowed.
+	# cat=Calendar Base (General)/general/18; type=string; label=Meeting status Page: Page ID where the meeting-status view is allowed. This has to be a public page in order to get the link generated
 	view.event.meeting.statusViewPid =
 	
 	# cat=Calendar Base (General)/general/19; type=boolean; label=Enable the google map (wec_map needed)

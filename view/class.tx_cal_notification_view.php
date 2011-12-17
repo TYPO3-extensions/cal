@@ -409,9 +409,22 @@ class tx_cal_notification_view extends tx_cal_base_service {
 					$eventService->updateAttendees($event_new->getUid());
 				}
 				if($attendee->getEmail()){
-					$acceptLink = $this->baseUrl.$this->controller->pi_getPageLink($this->conf['view.']['event.']['meeting.']['statusViewPid'], '', array ('tx_cal_controller[view]' => 'meeting', 'tx_cal_controller[attendee]' => $attendee->getUid(), 'tx_cal_controller[uid]' => $event_old->getUid(), 'tx_cal_controller[status]' => 'accept', 'tx_cal_controller[sid]' => md5($event_old->getUid().$attendee->getEmail().$attendee->row['crdate'])));
-					$declineLink = $this->baseUrl.$this->controller->pi_getPageLink($this->conf['view.']['event.']['meeting.']['statusViewPid'], '', array ('tx_cal_controller[view]' => 'meeting', 'tx_cal_controller[attendee]' => $attendee->getUid(), 'tx_cal_controller[uid]' => $event_old->getUid(), 'tx_cal_controller[status]' => 'decline', 'tx_cal_controller[sid]' => md5($event_old->getUid().$attendee->getEmail().$attendee->row['crdate'])));
+					
+					$conf = Array();
+					$conf['parameter'] = $this->conf['view.']['event.']['meeting.']['statusViewPid'];
+					$conf['forceAbsoluteUrl'] = 1;
+					$urlParameters = Array ('tx_cal_controller[view]' => 'meeting', 'tx_cal_controller[attendee]' => $attendee->getUid(), 'tx_cal_controller[uid]' => $event_old->getUid(), 'tx_cal_controller[status]' => 'accept', 'tx_cal_controller[sid]' => md5($event_old->getUid().$attendee->getEmail().$attendee->row['crdate']));
+					$conf['additionalParams'] .= t3lib_div::implodeArrayForUrl('', $urlParameters);
+					$this->controller->cObj->typolink('', $conf);
+					$acceptLink = $this->controller->cObj->lastTypoLinkUrl;
+					
+					$urlParameters = Array ('tx_cal_controller[view]' => 'meeting', 'tx_cal_controller[attendee]' => $attendee->getUid(), 'tx_cal_controller[uid]' => $event_old->getUid(), 'tx_cal_controller[status]' => 'decline', 'tx_cal_controller[sid]' => md5($event_old->getUid().$attendee->getEmail().$attendee->row['crdate']));
+					$conf['additionalParams'] .= t3lib_div::implodeArrayForUrl('', $urlParameters);
+					$this->controller->cObj->typolink('', $conf);
+					$declineLink = $this->controller->cObj->lastTypoLinkUrl;
+					
 					$ics = $viewObj->drawIcs($eventArray, $this->conf['getdate'], false, $attendee->getEmail());
+
 					$title = $event_new->getTitle().'.ics';
 					$title = strtr($title,array(' '=>'',','=>'_',));
 					$icsAttachmentFile = $this->createTempIcsFile($ics, $title);

@@ -69,7 +69,7 @@ class tx_cal_meeting_manager_view extends tx_cal_base_view {
 
 		/* If we have an event, email, and meeting id, try to subscribe or unsubscribe */
 		if($eventUID > 0 && $attendeeUid && $attendeeStatus && $meetingHash){
-			$event = $this->modelObj->findEvent($eventUID, 'tx_cal_phpicalendar', $this->conf['pidList']);
+			$event = $this->modelObj->findEvent($eventUID, 'tx_cal_phpicalendar', $this->conf['pidList'], false, false, false, true, true);
 			
 			unset($this->controller->piVars['monitor']);
 			unset($this->controller->piVars['attendee']);

@@ -120,6 +120,9 @@ class tx_cal_icsview extends tx_cal_base_view {
 		$select = 'tx_cal_event_deviation.*,tx_cal_index.start_datetime,tx_cal_index.end_datetime';
 		$table = 'tx_cal_event_deviation right outer join tx_cal_index on tx_cal_event_deviation.uid = tx_cal_index.event_deviation_uid';
 		
+		$oldView = $this->conf['view'];
+		$this->conf['view'] = 'single_ics';
+		
 		foreach($this->master_array as $eventDate => $eventTimeArray){
 			if(is_a($eventTimeArray,'tx_cal_model')){
 				$ics_events .= $eventTimeArray->renderEventFor('ics');
@@ -151,6 +154,8 @@ class tx_cal_icsview extends tx_cal_base_view {
 				}
 			}
 		}
+		$this->conf['view'] = $oldView;
+		
 		$rems = array ();
 		$rems['###EVENT###'] = strip_tags($ics_events);
 		$title = $getdate;

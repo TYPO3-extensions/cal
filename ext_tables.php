@@ -27,8 +27,6 @@ $TCA['tx_cal_event'] = Array (
 		'requestUpdate' => 'calendar_id,freq,rdate_type,allday',
 		'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event',
 		'label' => 'title',
-		'label_alt' => 'start_date,start_time,title',
-		'label_alt_force' => 1,	
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -135,8 +133,6 @@ $TCA['tx_cal_exception_event'] = Array (
 		'requestUpdate' => 'calendar_id,freq,rdate_type,allday',
 		'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_exception_event',		
 		'label' => 'title',
-		'label_alt' => 'start_date,title',
-		'label_alt_force' => 1,			
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -312,8 +308,6 @@ $TCA['tx_cal_event_deviation'] = Array (
 
 // enable label_userFunc only for TYPO3 v 4.1 and higher
 if (t3lib_div::int_from_ver(TYPO3_version) >= 4001000) {
-    $TCA['tx_cal_event']['ctrl']['label_userFunc']="tx_cal_labels->getEventRecordLabel";
-	$TCA['tx_cal_exception_event']['ctrl']['label_userFunc']="tx_cal_labels->getEventRecordLabel";
 	$TCA['tx_cal_attendee']['ctrl']['label_userFunc']="tx_cal_labels->getAttendeeRecordLabel";
 	$TCA['tx_cal_fe_user_event_monitor_mm']['ctrl']['label_userFunc']="tx_cal_labels->getMonitoringRecordLabel";
 }

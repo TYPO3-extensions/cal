@@ -755,4 +755,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['tx_cal_cac
 if ($confArr['cachingMode']=='normal') {
 	$GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearAllCache_additionalTables']['tx_cal_cache'] = 'tx_cal_cache';
 }
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['postProcessValue'][] = 'EXT:cal/hooks/class.tx_cal_befunc.php:tx_cal_befunc->postprocessvalue';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_befunc.php']['preProcessValue'][] = 'EXT:cal/hooks/class.tx_cal_befunc.php:tx_cal_befunc->preprocessvalue';
 ?>

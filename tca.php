@@ -276,6 +276,7 @@ $TCA['tx_cal_event'] = Array (
 				'size' => '12',
 				'max' => '20',
 				'eval' => 'required,date',
+				'tx_cal_event' => 'start_date',
 			)
 		),
 		'allday' => Array (
@@ -306,6 +307,7 @@ $TCA['tx_cal_event'] = Array (
 				'size' => '12',
 				'max' => '20',
 				'eval' => 'required,date',
+				'tx_cal_event' => 'end_date',
 			)
 		),
 		'end_time' => Array (		
@@ -1546,6 +1548,7 @@ $TCA['tx_cal_exception_event'] = Array (
 				'size' => '12',
 				'max' => '20',
 				'eval' => 'required,date',
+				'tx_cal_event' => 'start_date',
 			)
 		),
 		'end_date' => Array (		

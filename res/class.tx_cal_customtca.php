@@ -288,8 +288,7 @@ class tx_cal_customtca {
 		$out[] = 'var splittedDate = splittedDateTime[0].split("-");';
 		$out[] = 'if(splittedDateTime.length == 2) {';
 		$out[] = 'splittedDate = splittedDateTime[1].split("-");';
-		$out[] = '} else if(splittedDateTime.length == 1) {';
-		$out[] = 'splittedDate = splittedDateTime[0].split("-");';
+		$out[] = '} else if(splittedDateTime.length == 1 && splittedDate.length == 2) {';
 		$out[] = 'var d=new Date();';
 		$out[] = 'splittedDate[2] = d.getFullYear();';
 		$out[] = '}';

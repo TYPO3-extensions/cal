@@ -52,17 +52,17 @@
 /**
  * Load Date_TimeZone.
  */
-require_once 'Date/TimeZone.php';
+require_once $path . 'Date/TimeZone.php';
 
 /**
  * Load Date_Calc.
  */
-require_once 'Date/Calc.php';
+require_once $path . 'Date/Calc.php';
 
 /**
  * Load Date_Span.
  */
-require_once 'Date/Span.php';
+require_once $path . 'Date/Span.php';
 
 // }}}
 // {{{ Constants

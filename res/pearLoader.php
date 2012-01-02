@@ -34,8 +34,9 @@ if(!class_exists('Date', FALSE)) {
 	}
 	
 	$path = t3lib_extMgm::extPath('cal').'res/PEAR/';
-	set_include_path(get_include_path(). PATH_SEPARATOR . $path);
-	require_once ('Date.php');
+
+	//set_include_path(get_include_path(). PATH_SEPARATOR . $path);
+	require_once ($path.'Date.php');
 }
 require_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_date.php');
 

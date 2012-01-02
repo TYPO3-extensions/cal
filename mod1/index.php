@@ -191,7 +191,9 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 				} else {
 					$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
 					$this->content.='<script type="text/javascript">'.$this->getJScode().'</script>';
-					
+					if (t3lib_div::int_from_ver(TYPO3_version) > 4004999){
+						$this->content.='<script type="text/javascript" src="jsfunc.tbe_editor.js"></script>';
+					}
 					
 					$selectFieldIds = Array();
 					$content.='<table><tbody>';

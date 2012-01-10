@@ -8,9 +8,9 @@ plugin.tx_cal_controller {
 	
 	# cat=Calendar Base (General)/general/10; type=boolean; label=Enable Frontend Editing:  This setting turns frontend editing on. Without it, the other Typoscript options for frontend editing are ignored.
 	rights.edit = 0
-	# cat=Calendar Base (General)/general/11; type=string; label=Frontend Calendar Admin Users: Comma seperated list of frontend user IDs.
+	# cat=Calendar Base (General)/general/11; type=string; label=Frontend Calendar Admin Users: Comma seperated list of frontend user IDs (UID).
 	rights.admin.user = 
-	# cat=Calendar Base (General)/general/12; type=string; label=Frontend Calendar Admin Groups: Comma separated list of frontend group IDs.
+	# cat=Calendar Base (General)/general/12; type=string; label=Frontend Calendar Admin Groups: Comma separated list of frontend group IDs (UID).
 	rights.admin.group = 
 	
 	# cat=Calendar Base (General)/general/13; type=string; label=Free and busy view Page: Page ID where the freeAndBusy view is allowed.

@@ -1231,7 +1231,12 @@ class tx_cal_base_view extends tx_cal_base_service {
 			$monthDate = new tx_cal_date();
 			$monthDate->copy($this->controller->getDateTimeObject);
 			$monthDate->setDay(15);
-			$monthDate->setMonth($offset);
+			if(intval($offset)>12){
+				$monthDate->setYear($monthDate->getYear() + ($offset - ($offset%12)) /12);
+				$monthDate->setMonth($offset%12);
+			} else {
+				$monthDate->setMonth($offset);
+			}
 		}
 
 		require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_monthview.php');

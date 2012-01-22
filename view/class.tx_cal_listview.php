@@ -78,7 +78,6 @@ class tx_cal_listview extends tx_cal_base_view {
 				$this->suggestMessage = 'Please make sure the path is correct and that you included the static template and double-check the path using the Typoscript Object Browser.';
 				return;
 			}
-			$this->_init($master_array);
 		}
 	}
 	
@@ -553,7 +552,16 @@ class tx_cal_listview extends tx_cal_base_view {
 		}
 
 		// reference the event in the rendering array
-		$this->objectsInList[$cal_time][] = &$event;
+		$hookObjectsArr = tx_cal_functions::getHookObjectsArray('tx_cal_listview','sorting','view');
+		if(count($hookObjectsArr)) {
+			foreach ($hookObjectsArr as $hookObj) {
+				if (method_exists($hookObj, 'sorting')) {
+					$hookObj->sorting($this, $cal_time, $event);
+				}
+			}
+		} else {
+			$this->objectsInList[$cal_time][] = &$event;
+		}
 		
 		if($this->conf['view.']['list.']['showLongEventsInEachWrapper']){
 			if($this->conf['view.']['list.']['enableDayWrapper'] && $eventStart->format('%Y%m%d')!=$eventEnd->format('%Y%m%d')){
@@ -652,6 +660,8 @@ class tx_cal_listview extends tx_cal_base_view {
 		$this->objectsInList = Array();
 		
 		$this->initTemplate($page);
+		
+		$this->_init($master_array);
 		
 		if($this->error){
 			return tx_cal_functions::createErrorMessage(

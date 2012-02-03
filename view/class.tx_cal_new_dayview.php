@@ -178,6 +178,8 @@ class tx_cal_new_dayview extends tx_cal_new_timeview {
 		// splitting the events into H:M, to find out if events run in parallel 
 		$pos_array = Array();
 		$i->copy($d_start);
+		$t_array = array();
+		
 		while($i->before($d_end)){
 			$i_formatted = $i->format('%H%M');
 

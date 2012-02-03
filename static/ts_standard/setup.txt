@@ -1818,7 +1818,7 @@ plugin.tx_cal_controller {
 			monthLargeTemplate = {$plugin.tx_cal_controller.view.month.monthLargeTemplate}
 
 			# @description	Template for a mini month as it is in the mini month view
-			monthMiniTemplate = ###MONTH_SMALL|+0###
+			monthMiniTemplate = {$plugin.tx_cal_controller.view.month.monthMiniTemplate}
 
 			# @description	Enable this to create a single small calendar
 			# @also			FlexForm

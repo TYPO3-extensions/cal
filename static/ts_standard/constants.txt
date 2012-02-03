@@ -61,11 +61,13 @@ plugin.tx_cal_controller {
 
 	# cat=Calendar Base (Templates)/file/month/1; type=string; label=Month View Template: Marker-based template for month view.
 	view.month.monthTemplate = EXT:cal/standard_template/month.tmpl
-	# cat=Calendar Base (Templates)/file/month/2; type=string; label=Month View Template (Small): Marker-based template for small month view.
+	# cat=Calendar Base (Templates)/file/month/2; type=string; label=Month View Template: Marker-based template for mini-month view.
+	view.month.monthMiniTemplate = EXT:cal/standard_template/monthMini.tmpl
+	# cat=Calendar Base (Templates)/file/month/3; type=string; label=Month View Template (Small): Marker-based template for small month view.
 	view.month.monthSmallTemplate = EXT:cal/standard_template/month_small.tmpl
-	# cat=Calendar Base (Templates)/file/month/3; type=string; label=Month View Template (Medium): Marker-based template for medium month view.
+	# cat=Calendar Base (Templates)/file/month/4; type=string; label=Month View Template (Medium): Marker-based template for medium month view.
 	view.month.monthMediumTemplate = EXT:cal/standard_template/month_medium.tmpl
-	# cat=Calendar Base (Templates)/file/month/4; type=string; label=Month View Template (Large): Marker-based template for large month view.
+	# cat=Calendar Base (Templates)/file/month/5; type=string; label=Month View Template (Large): Marker-based template for large month view.
 	view.month.monthLargeTemplate = EXT:cal/standard_template/month_large.tmpl
 	
 	# cat=Calendar Base (Templates)/file/misc/1; type=string; label=Calendar Nav Template: Marker-based template for calendar navigation view.

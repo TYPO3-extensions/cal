@@ -48,6 +48,8 @@ class tx_cal_category_service extends tx_cal_base_service {
 	
 	var $categoryArrayCached = Array();
 	
+	public static $categoryToFilter;
+		
 	function tx_cal_category_service(){
 		$this->tx_cal_base_service();
 	}
@@ -165,6 +167,15 @@ class tx_cal_category_service extends tx_cal_base_service {
 		if($this->conf['category']!=''){
 			$categorySearchString .= ' AND tx_cal_event_category_mm.uid_foreign IN ('.$this->conf['category'].')';
 		}
+		
+		// Filter events by categories
+		if($this->conf['view.']['categoryMode']==2 && self::$categoryToFilter){
+			// Query to select all blacklisted events
+			$sql = 'SELECT uid_local FROM tx_cal_event_category_mm WHERE uid_foreign IN (' . self::$categoryToFilter . ')';
+			// Add search substring with tx_cal_event.uid NOT IN
+			$categorySearchString .= ' AND tx_cal_event.uid NOT IN (' . $sql . ')';
+		}
+	
 		return $categorySearchString;
 	}
 	
@@ -207,7 +218,9 @@ class tx_cal_category_service extends tx_cal_base_service {
 			case 2: #exclude selected
 				$allowedCategories = t3lib_div::trimExplode(',',$this->cObj->stdWrap($this->conf['view.']['category'],$this->conf['view.']['category.']),1);
 			    if (!empty($allowedCategories)){
-				    $filterWhere = ' AND tx_cal_category.uid NOT IN ('.implode(',',$allowedCategories).')';
+			    	$implodedAllowedCategories = implode(',',$allowedCategories);
+			        $filterWhere = ' AND tx_cal_category.uid NOT IN ('.$implodedAllowedCategories.')';
+			        self::$categoryToFilter = (self::$categoryToFilter)?self::$categoryToFilter:$implodedAllowedCategories;
 			    }
 				break;
 		}

@@ -169,6 +169,17 @@ class tx_cal_category_service extends tx_cal_base_service {
 		}
 		
 		// Filter events by categories
+
+
+		// Include categories
+		if($this->conf['view.']['categoryMode']==1 && self::$categoryToFilter){
+			// Query to select all blacklisted events
+			$sql = 'SELECT uid_local FROM tx_cal_event_category_mm WHERE uid_foreign IN (' . self::$categoryToFilter . ')';
+			// Add search substring with tx_cal_event.uid NOT IN
+			$categorySearchString .= ' AND tx_cal_event.uid NOT IN (' . $sql . ')';
+		}
+
+		// Exclude categories
 		if($this->conf['view.']['categoryMode']==2 && self::$categoryToFilter){
 			// Query to select all blacklisted events
 			$sql = 'SELECT uid_local FROM tx_cal_event_category_mm WHERE uid_foreign IN (' . self::$categoryToFilter . ')';
@@ -212,7 +223,26 @@ class tx_cal_category_service extends tx_cal_base_service {
 			case 1: #show selected
 				$allowedCategories = t3lib_div::trimExplode(',',$this->cObj->stdWrap($this->conf['view.']['category'],$this->conf['view.']['category.']),1);
 			    if (!empty($allowedCategories)){
-				    $filterWhere = ' AND tx_cal_category.uid IN ('.implode(',',$allowedCategories).')';
+			    	$implodedAllowedCategories = implode(',',$allowedCategories);
+			        $filterWhere = ' AND tx_cal_category.uid IN ('.$implodedAllowedCategories.')';
+			    	
+					$select = 'tx_cal_category.uid';
+					$table = 'tx_cal_category';
+					$groupby = '';
+					$orderby = '';
+					$where = 'tx_cal_category.uid NOT IN ('.$implodedAllowedCategories.')';
+				    
+					$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select,$table,$where,$groupby,$orderby);
+					$foundUids = array();
+					if($result) {
+						$excludedCategories = array();
+						while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {
+							$excludedCategories[] = $row['uid'];
+						}
+						$GLOBALS['TYPO3_DB']->sql_free_result($result);
+						self::$categoryToFilter = (self::$categoryToFilter)?self::$categoryToFilter:implode(',',$excludedCategories);
+					}
+				    
 			    }
 				break;
 			case 2: #exclude selected
@@ -243,7 +273,6 @@ class tx_cal_category_service extends tx_cal_base_service {
 
 		$where .= $this->getAdditionalWhereForLocalizationAndVersioning('tx_cal_category');
 				
-//t3lib_div::debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where.' GROUP BY '.$groupby.' ORDER BY '.$orderby);
 		$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select,$table,$where,$groupby,$orderby);
 		$foundUids = array();
 		$calendarUids = array();

@@ -1384,7 +1384,8 @@ t3lib_div::debug($orderBy);
 	 * @param		$event	object		Instance of this class (tx_cal_model)
 	 */
 	function recurringEvent($event){
-		
+		t3lib_div::deprecationLog('Usage of old recurrence model is deprecated since cal 1.5.' . LF .
+									  'Please use new recurrence model instead, support will be removed after cal 1.6.');
 		$deviations = Array();
 		$select = '*';
 		$table = 'tx_cal_event_deviation';
@@ -1504,6 +1505,7 @@ t3lib_div::debug($orderBy);
 	}
 	
 	function getRecurringEventsFromIndex($event) {
+		
 		$maxRecurringEvents = (int)$this->conf['view.'][$this->conf['view'].'.']['maxRecurringEvents'];
 		$maxRecurringEvents = !empty($maxRecurringEvents) ? $maxRecurringEvents : 99999;
 

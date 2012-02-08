@@ -792,11 +792,15 @@ debug('pflichtfeld nicht bef&uuml;llt: '.str_replace('.','',$name));
 		$remLayout = $this->cObj->data['layout'];
 		$this->cObj->data['layout'] = $this->conf['view.'][$this->conf['view'].'.'][$this->objectString.'.'][$marker.'.']['layout'];
 		$remPath = $this->cObj->data['select_key'];
+		t3lib_div::loadTCA('tt_content');
+		$remUploadFolder = $GLOBALS['TCA']['tt_content']['columns']['media']['config']['uploadfolder'];
 		if($isTemp){
 			$this->cObj->data['select_key'] = 'typo3temp/';
+			$GLOBALS['TCA']['tt_content']['columns']['media']['config']['uploadfolder'] = 'typo3temp';
 		}else{
 			global $TCA;
 			$this->cObj->data['select_key'] = $TCA['tx_cal_'.$this->objectString]['columns'][$marker]['config']['uploadfolder'].'/';
+			$GLOBALS['TCA']['tt_content']['columns']['media']['config']['uploadfolder'] = $TCA['tx_cal_'.$this->objectString]['columns'][$marker]['config']['uploadfolder'];
 		}
 		$temp = $this->cObj->cObjGetSingle($this->conf['view.'][$this->conf['view'].'.'][$this->objectString.'.'][$marker],$this->conf['view.'][$this->conf['view'].'.'][$this->objectString.'.'][$marker.'.']);
 
@@ -804,6 +808,7 @@ debug('pflichtfeld nicht bef&uuml;llt: '.str_replace('.','',$name));
 		$this->cObj->data['layout'] = $remLayout;
 		$this->cObj->data['imagecaption'] = $remCaption;
 		$this->cObj->data['select_key'] = $remPath;
+		$GLOBALS['TCA']['tt_content']['columns']['media']['config']['uploadfolder'] = $remUploadFolder;
 		return $temp;
 	}
 	

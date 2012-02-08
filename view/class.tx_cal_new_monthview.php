@@ -206,6 +206,7 @@ debug('could not unserialize cache for month:'.$month.'_'.$year);
 	function getMonthTitleMarker(& $template, & $sims, & $rems, & $wrapped, $view){
 		$current_month = new tx_cal_date();
 		$current_month->setMonth($this->month);
+		$current_month->setYear($this->year);
 		$conf = &tx_cal_registry::Registry('basic','conf');
 		$sims['###MONTH_TITLE###'] = $current_month->format($conf['view.'][$view.'.']['dateFormatMonth']);
 	}

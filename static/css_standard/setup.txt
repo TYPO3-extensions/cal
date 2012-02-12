@@ -350,7 +350,7 @@ plugin.tx_cal_controller {
 	position: absolute;
 	margin:15px 0px 0px 20px;
 	background-color: beige;
-	max-width:220;
+	max-width:220px;
 	border: 1px solid #C0C0C0;
 	font: normal 10px/12px verdana;
 	color: #000;
@@ -434,7 +434,7 @@ plugin.tx_cal_controller {
 	position: absolute;
 	margin:15px 0px 0px 20px;
 	background-color: beige;
-	max-width:220;
+	max-width:220px;
 	border: 1px solid #C0C0C0;
 	font: normal 10px/12px verdana;
 	color: #000;

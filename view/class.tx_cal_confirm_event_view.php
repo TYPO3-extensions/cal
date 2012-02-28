@@ -224,6 +224,12 @@ class tx_cal_confirm_event_view extends tx_cal_fe_editing_base_view {
 				$value = $this->local_cObj->cObjGetSingle($this->conf['view.'][$this->conf['view'].'.']['organizerDisplayField'], $this->conf['view.'][$this->conf['view'].'.']['organizerDisplayField.']);
 				$sims['###CAL_ORGANIZER###'] = $this->applyStdWrap($value, 'cal_organizer_stdWrap');
 				$sims['###CAL_ORGANIZER_VALUE###'] = htmlspecialchars($organizer->getUid());
+			} else {
+				$this->initLocalCObject();
+				$this->local_cObj->setCurrentVal('');
+				$value = $this->local_cObj->cObjGetSingle($this->conf['view.'][$this->conf['view'].'.']['organizerDisplayField'], $this->conf['view.'][$this->conf['view'].'.']['organizerDisplayField.']);
+				$sims['###CAL_ORGANIZER###'] = $this->applyStdWrap($value, 'cal_organizer_stdWrap');
+				$sims['###CAL_ORGANIZER_VALUE###'] = 0;
 			}
 		}
 	}
@@ -245,6 +251,12 @@ class tx_cal_confirm_event_view extends tx_cal_fe_editing_base_view {
 				$value = $this->local_cObj->cObjGetSingle($this->conf['view.'][$this->conf['view'].'.']['locationDisplayField'], $this->conf['view.'][$this->conf['view'].'.']['locationDisplayField.']);
 				$sims['###CAL_LOCATION###'] = $this->applyStdWrap($value, 'cal_location_stdWrap');
 				$sims['###CAL_LOCATION_VALUE###'] = htmlspecialchars($location->getUid());
+			} else {
+				$this->initLocalCObject();
+				$this->local_cObj->setCurrentVal('');
+				$value = $this->local_cObj->cObjGetSingle($this->conf['view.'][$this->conf['view'].'.']['locationDisplayField'], $this->conf['view.'][$this->conf['view'].'.']['locationDisplayField.']);
+				$sims['###CAL_LOCATION###'] = $this->applyStdWrap($value, 'cal_location_stdWrap');
+				$sims['###CAL_LOCATION_VALUE###'] = 0;
 			}
 		}
 	}

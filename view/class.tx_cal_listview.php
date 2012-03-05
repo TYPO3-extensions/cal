@@ -690,7 +690,7 @@ class tx_cal_listview extends tx_cal_base_view {
 		$sims = array();
 
 		$middle = $this->processObjects($master_array, $sims, $rems);
-	
+
 		$listRems = array();
 		$listRems['###PRE_LIST_TEMPLATE###'] = '';
 		$listRems['###POST_LIST_TEMPLATE###'] = '';
@@ -731,7 +731,8 @@ class tx_cal_listview extends tx_cal_base_view {
 			}
 		}
 		$rems['###LIST###'] = $middle;
-		$middle = tx_cal_functions::substituteMarkerArrayNotCached($listTemplate, array (), $listRems, array ());
+		$listTemplate = tx_cal_functions::substituteMarkerArrayNotCached($listTemplate, array (), $listRems, array ());
+
 		$return = tx_cal_functions::substituteMarkerArrayNotCached($listTemplate, $sims, $rems, array ());
 		$rems = array();
 		return $this->finish($return, $rems);

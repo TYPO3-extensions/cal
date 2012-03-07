@@ -143,6 +143,7 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 					}
 					if(is_object($this->days[$eventStart->format('%Y%m%d')])){
 						$this->days[$eventStart->format('%Y%m%d')]->hasAlldayEvents = true;
+						$this->days[$eventStart->format('%Y%m%d')]->addEvent($event); 
 					}
 					$eventStart->addSeconds(86400);
 					$eventStartYear = $eventStart->year;

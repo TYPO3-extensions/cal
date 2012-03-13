@@ -220,7 +220,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 	}
 
 	
-	function notify(&$newEventDataArray){
+	function notify(&$newEventDataArray,$forceDeletionMode = 0){
 		$event = $this->modelObj->findEvent($newEventDataArray['uid'],'tx_cal_phpicalendar', $this->conf['pidList'], true, true, false, true, true);
 		
 		if(is_object($event)) {
@@ -232,7 +232,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 
 			while ($row1 = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {
 				if($row1['email']!='' && t3lib_div::validEmail($row1['email'])){
-					if($newEventDataArray['deleted']){
+					if(($newEventDataArray['deleted']+$forceDeletionMode)>0){
 						$template = $this->conf['view.']['event.']['notify.']['fe_users_'.$row1['uid'].'.']['onDeleteTemplate'];
 						if(!$template){
 							$template = $this->conf['view.']['event.']['notify.']['all.']['onDeleteTemplate'];
@@ -267,7 +267,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 				if($row1['email']!='' && t3lib_div::validEmail($row1['email'])){
 					$template = $this->conf['view.']['event.']['notify.']['all.']['onCreateTemplate'];
 					$titleText = $this->conf['view.']['event.']['notify.']['all.']['onCreateEmailTitle'];
-					if($newEventDataArray['deleted']){
+					if(($newEventDataArray['deleted']+$forceDeletionMode)>0){
 						$template = $this->conf['view.']['event.']['notify.']['all.']['onDeleteTemplate'];
 						$titleText = $this->conf['view.']['event.']['notify.']['all.']['onDeleteEmailTitle'];
 					}
@@ -280,7 +280,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			foreach($event->getCategories() as $category){
 				foreach($category->getNotificationEmails() as $emailAddress){
 					if($emailAddress!='' && t3lib_div::validEmail($emailAddress)){
-                       if($newEventDataArray['deleted']){
+                       if(($newEventDataArray['deleted']+$forceDeletionMode)>0){
                            $template = $this->conf['view.']['event.']['notify.'][$category->getUid().'.']['onDeleteTemplate'];
                            if(!$template){
                                $template = $this->conf['view.']['event.']['notify.']['all.']['onDeleteTemplate'];
@@ -335,7 +335,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 	
 					if($row2['email']!='' && t3lib_div::validEmail($row2['email'])){
 
-						if($newEventDataArray['deleted']){
+						if(($newEventDataArray['deleted']+$forceDeletionMode)>0{
                        		$template = $this->conf['view.']['event.']['notify.']['fe_groups_'.$row2['uid'].'.']['onDeleteTemplate'];
 							if(!$template){
 								$template = $this->conf['view.']['event.']['notify.']['all.']['onDeleteTemplate'];

@@ -176,11 +176,13 @@ class tx_cal_tcemain_processcmdmap {
 							
 								$page = t3lib_BEfunc::getRecord('pages', intval($pageIDForPlugin), "doktype");
 								if($page['doktype'] != 254) {
+									
 									$tx_cal_api = t3lib_div :: makeInstance('tx_cal_api');
 									$tx_cal_api = &$tx_cal_api->tx_cal_api_without($pageIDForPlugin);
 					
 									$notificationService =& tx_cal_functions::getNotificationService();
-									$notificationService->notify($row);
+									// Need to enforce deletion mode 
+									$notificationService->notify($row,1);
 								}
 							}
 						}

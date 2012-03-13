@@ -229,7 +229,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$table = 'fe_users, tx_cal_fe_user_event_monitor_mm, tx_cal_event';
 			$where = 'fe_users.uid = tx_cal_fe_user_event_monitor_mm.uid_foreign AND  tx_cal_fe_user_event_monitor_mm.uid_local = tx_cal_event.uid AND tx_cal_event.deleted = '.intval($newEventDataArray['deleted']).' AND tx_cal_event.uid = '.$newEventDataArray['uid'];
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select,$table,$where);
-			
+
 			while ($row1 = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {
 				if($row1['email']!='' && t3lib_div::validEmail($row1['email'])){
 					if($newEventDataArray['deleted']){
@@ -276,20 +276,32 @@ class tx_cal_notification_view extends tx_cal_base_service {
 				}
 			}
 			$GLOBALS['TYPO3_DB']->sql_free_result($result);
-	
+
 			foreach($event->getCategories() as $category){
 				foreach($category->getNotificationEmails() as $emailAddress){
 					if($emailAddress!='' && t3lib_div::validEmail($emailAddress)){
-						$template = $this->conf['view.']['category.']['notify.'][$category->getUid().'.']['onCreateTemplate'];
-						if(!$template){
-							$template = $this->conf['view.']['category.']['notify.']['all.']['onCreateTemplate'];
-						}
-						$titleText = $this->conf['view.']['category.']['notify.'][$category->getUid().'.']['onCreateEmailTitle'];
-						if(!$titleText){
-							$titleText = $this->conf['view.']['category.']['notify.']['all.']['onCreateEmailTitle'];
-						}
-						$unsubscribeLink = '';
-						$this->sendNotification($event, $emailAddress, $template, $titleText, $unsubscribeLink);
+                       if($newEventDataArray['deleted']){
+                           $template = $this->conf['view.']['event.']['notify.'][$category->getUid().'.']['onDeleteTemplate'];
+                           if(!$template){
+                               $template = $this->conf['view.']['event.']['notify.']['all.']['onDeleteTemplate'];
+                           }
+                           $titleText = $this->conf['view.']['event.']['notify.'][$category->getUid().'.']['onDeleteEmailTitle'];
+                           if(!$titleText){
+                               $titleText = $this->conf['view.']['event.']['notify.']['all.']['onDeleteEmailTitle'];
+                           }
+                       }
+                       else {
+                           $template = $this->conf['view.']['event.']['notify.'][$category->getUid().'.']['onCreateTemplate'];
+                           if(!$template){
+                               $template = $this->conf['view.']['event.']['notify.']['all.']['onCreateTemplate'];
+                           }
+                           $titleText = $this->conf['view.']['event.']['notify.'][$category->getUid().'.']['onCreateEmailTitle'];
+                           if(!$titleText){
+                               $titleText = $this->conf['view.']['event.']['notify.']['all.']['onCreateEmailTitle'];
+                           }
+                       }
+                       $unsubscribeLink = '';
+                       $this->sendNotification($event, $emailAddress, $template, $titleText, $unsubscribeLink);
 					}
 				}
 			}
@@ -322,15 +334,28 @@ class tx_cal_notification_view extends tx_cal_base_service {
 				while ($row2 = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result2)) {
 	
 					if($row2['email']!='' && t3lib_div::validEmail($row2['email'])){
-						$template = $this->conf['view.']['event.']['notify.']['fe_groups_'.$row2['uid'].'.']['onCreateTemplate'];
-						if(!$template){
-							$template = $this->conf['view.']['event.']['notify.']['all.']['onCreateTemplate'];
+
+						if($newEventDataArray['deleted']){
+                       		$template = $this->conf['view.']['event.']['notify.']['fe_groups_'.$row2['uid'].'.']['onDeleteTemplate'];
+							if(!$template){
+								$template = $this->conf['view.']['event.']['notify.']['all.']['onDeleteTemplate'];
+							}
+							$titleText = $this->conf['view.']['event.']['notify.']['fe_groups_'.$row2['uid'].'.']['onDeleteEmailTitle'];
+							if(!$titleText){
+								$titleText = $this->conf['view.']['event.']['notify.']['all.']['onDeleteEmailTitle'];
+							}
 						}
-						$titleText = $this->conf['view.']['event.']['notify.']['fe_groups_'.$row2['uid'].'.']['onCreateEmailTitle'];
-						if(!$titleText){
-							$titleText = $this->conf['view.']['event.']['notify.']['all.']['onCreateEmailTitle'];
+						else {
+                       		$template = $this->conf['view.']['event.']['notify.']['fe_groups_'.$row2['uid'].'.']['onCreateTemplate'];
+							if(!$template){
+								$template = $this->conf['view.']['event.']['notify.']['all.']['onCreateTemplate'];
+							}
+							$titleText = $this->conf['view.']['event.']['notify.']['fe_groups_'.$row2['uid'].'.']['onCreateEmailTitle'];
+							if(!$titleText){
+								$titleText = $this->conf['view.']['event.']['notify.']['all.']['onCreateEmailTitle'];
+							}
 						}
-	
+
 						$unsubscribeLink = $this->baseUrl.$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription', 'tx_cal_controller[email]' => $row2['email'], 'tx_cal_controller[uid]' => $event->getUid(), 'tx_cal_controller[monitor]' => 'stop', 'tx_cal_controller[sid]' => md5($event->getUid().$row2['email'].$row2['crdate'])));
 						$this->sendNotification($event, $row2['email'], $template, $titleText, $unsubscribeLink);
 					}

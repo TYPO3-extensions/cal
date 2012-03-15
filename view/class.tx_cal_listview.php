@@ -140,11 +140,11 @@ class tx_cal_listview extends tx_cal_base_view {
 			$this->count = 0;
 			$this->eventCounter = array();
 			$this->listStartOffsetCounter = 0;
-			$this->listStartOffset = intval($this->conf['view.'][$this->conf['view'].'.']['listStartOffset']);
+			$this->listStartOffset = intval($this->conf['view.']['list.']['listStartOffset']);
 	
-			if($this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['usePageBrowser']) {
+			if($this->conf['view.']['list.']['pageBrowser.']['usePageBrowser']) {
 				$this->offset=intval($this->controller->piVars[$this->pointerName]);
-				$this->recordsPerPage=intval($this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['recordsPerPage']);
+				$this->recordsPerPage=intval($this->conf['view.']['list.']['pageBrowser.']['recordsPerPage']);
 			}
 			
 			$this->walkThroughMasterArray($master_array, $this->reverse, $firstEventDate);
@@ -195,7 +195,7 @@ class tx_cal_listview extends tx_cal_base_view {
 
 
 				// prepare alternating layouts
-				$alternatingLayoutConfig = $this->conf['view.'][$this->conf['view'].'.']['alternatingLayoutMarkers.'];
+				$alternatingLayoutConfig = $this->conf['view.']['list.']['alternatingLayoutMarkers.'];
 				if (is_array($alternatingLayoutConfig) && count($alternatingLayoutConfig)) {
 					$alternatingLayouts = array();
 					$layout_keys = array_keys($alternatingLayoutConfig);
@@ -515,7 +515,7 @@ class tx_cal_listview extends tx_cal_base_view {
 		$this->eventCounter['byYearDay'][$year][$day]['total']++;
 
 		//Pagebrowser
-		if ($this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['usePageBrowser']) {
+		if ($this->conf['view.']['list.']['pageBrowser.']['usePageBrowser']) {
 			if ($this->count<$this->recordsPerPage*$this->offset) {
 				$this->eventCounter['byDate'][$year][$month][$day]['previousPages']++;
 				$this->eventCounter['byWeek'][$week]['previousPages']++;
@@ -677,7 +677,7 @@ class tx_cal_listview extends tx_cal_base_view {
 		}
 		
 		// ordering of the events
-		switch (strtolower($this->conf['view.'][$this->conf['view'].'.']['order'])) {
+		switch (strtolower($this->conf['view.']['list.']['order'])) {
 			default:
 				$this->reverse = false;
 				break;
@@ -723,9 +723,9 @@ class tx_cal_listview extends tx_cal_base_view {
 			$listRems['###PRE_LIST_TEMPLATE###'] = $this->cObj->getSubpart($page, '###PRE_LIST_TEMPLATE###'); 
 			$listRems['###POST_LIST_TEMPLATE###'] = $this->cObj->getSubpart($page, '###POST_LIST_TEMPLATE###'); 
 
-			$sims['###FOUND###'] = $this->cObj->stdWrap($this->count,$this->conf['view.'][$this->conf['view'].'.']['found_stdWrap.']);
+			$sims['###FOUND###'] = $this->cObj->stdWrap($this->count,$this->conf['view.']['list.']['found_stdWrap.']);
 			// render pagebrowser
-			if(($this->count > $this->recordsPerPage && $this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['onlyShowIfNeeded']) || !$this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['onlyShowIfNeeded']) {
+			if(($this->count > $this->recordsPerPage && $this->conf['view.']['list.']['pageBrowser.']['onlyShowIfNeeded']) || !$this->conf['view.']['list.']['pageBrowser.']['onlyShowIfNeeded']) {
 				$pageBrowser = $this->cObj->getSubpart($page, '###PAGEBROWSER###');
 				$rems['###PAGEBROWSER###'] = $this->getPageBrowser($pageBrowser);
 			}
@@ -743,7 +743,7 @@ class tx_cal_listview extends tx_cal_base_view {
 		$pb = '';
 
 		//render PageBrowser
-		if($this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['usePageBrowser']) {
+		if($this->conf['view.']['list.']['pageBrowser.']['usePageBrowser']) {
 			$this->controller->pointerName = $this->pointerName;
 			// Hook: getPageBrowser
 			$hookObjectsArr = tx_cal_functions::getHookObjectsArray('tx_cal_listview','getPageBrowser','view');
@@ -759,11 +759,11 @@ class tx_cal_listview extends tx_cal_base_view {
 			}
 			
 			// use the piPageBrowser
-			if($this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['useType'] == 'piPageBrowser') {
-				$browserConfig = &$this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['piPageBrowser.'];
+			if($this->conf['view.']['list.']['pageBrowser.']['useType'] == 'piPageBrowser') {
+				$browserConfig = &$this->conf['view.']['list.']['pageBrowser.']['piPageBrowser.'];
 				$this->controller->internal['res_count'] = $this->count;
 				$this->controller->internal['results_at_a_time'] = $this->recordsPerPage;
-				if($maxPages = intval($this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['pagesCount'])) {
+				if($maxPages = intval($this->conf['view.']['list.']['pageBrowser.']['pagesCount'])) {
 					$this->controller->internal['maxPages'] = $maxPages;
 				}
 				$this->controller->internal['pagefloat'] = $browserConfig['pagefloat'];
@@ -813,13 +813,13 @@ class tx_cal_listview extends tx_cal_base_view {
 				
 			} else {
 				// use default page browser of cal
-				$browserConfig = $this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['default.'];
+				$browserConfig = $this->conf['view.']['list.']['pageBrowser.']['default.'];
 				$this->offset=intval($this->controller->piVars[$this->pointerName]);
 				
 				$pagesTotal=intval($this->recordsPerPage)==0?1:ceil($this->count/$this->recordsPerPage);
 				$nextPage=$this->offset+1;
 				$previousPage=$this->offset-1;
-				$pagesCount=$this->conf['view.'][$this->conf['view'].'.']['pageBrowser.']['pagesCount']-1;
+				$pagesCount=$this->conf['view.']['list.']['pageBrowser.']['pagesCount']-1;
 				
 				$min=1;
 				$max=$pagesTotal;

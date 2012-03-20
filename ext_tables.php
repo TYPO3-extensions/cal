@@ -18,6 +18,7 @@ t3lib_extMgm::allowTableOnStandardPages('tx_cal_organizer');
 t3lib_extMgm::allowTableOnStandardPages('tx_cal_unknown_users');
 t3lib_extMgm::allowTableOnStandardPages('tx_cal_attendee');
 t3lib_extMgm::allowTableOnStandardPages('tx_cal_fe_user_event_monitor_mm');
+t3lib_extMgm::allowTableOnStandardPages('tx_cal_event_deviation');
 
 $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
 
@@ -302,6 +303,7 @@ $TCA['tx_cal_event_deviation'] = Array (
 			'disabled' => 'hidden',
 		),
         'versioningWS' => TRUE,
+		'hideTable' => $confArr['hideDeviationRecords'],
 	),
 );
 
@@ -310,6 +312,8 @@ $TCA['tx_cal_event_deviation'] = Array (
 if (t3lib_div::int_from_ver(TYPO3_version) >= 4001000) {
 	$TCA['tx_cal_attendee']['ctrl']['label_userFunc']="tx_cal_labels->getAttendeeRecordLabel";
 	$TCA['tx_cal_fe_user_event_monitor_mm']['ctrl']['label_userFunc']="tx_cal_labels->getMonitoringRecordLabel";
+	$TCA['tx_cal_event_deviation']['ctrl']['label_userFunc']="tx_cal_labels->getDeviationRecordLabel";
+	
 }
 
 // Get the location and organizer structures.

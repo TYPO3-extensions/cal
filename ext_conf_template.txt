@@ -32,6 +32,9 @@ useRecordSelector = 0
 # cat=basic/enable/290; type=boolean; label= Use New Recurring Event Model:  This will use an index table for recurring events, reducing memory consumption and improving performance. If you have already created events, you must visit the Cal Indexer backend module to make sure they are indexed properly. If you use the Scheduler in TYPO3 4.3 with Calendar Base, you must enable this setting.
 useNewRecurringModel = 1
 
+# cat=basic/enable/295; type=boolean; label= Hide Event Deviation records: Event deviation records should be changed only through IRRE editing; the records themselfs can be hidden.  
+hideDeviationRecords = 1
+
 # cat=basic/enable/310; type=text; label= Recurring Event Start Date:  If using the new recurring event model, this is the earliest date recurring events will occur. The date format is YYYYMMDD.
 recurrenceStart = 20000101
 

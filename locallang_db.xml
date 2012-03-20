@@ -461,8 +461,9 @@
 			<label index="tx_cal_event.teaser">Vorschau</label>
 			<label index="tx_cal_event.description">Beschreibung</label>
 			<label index="tx_cal_event.exception">Ausnahme</label>
+			<label index="tx_cal_event.deviation">Abweichender Event</label>
 			<label index="tx_cal_event.fe_cruser_id">Ersteller</label>
-			<label index="tx_cal_event.shared_user">Dieses Ereigns für andere freigeben. Achtung! Beinhaltet Rechte!</label>
+			<label index="tx_cal_event.shared_user">Dieses Ereignis für andere freigeben. Achtung! Beinhaltet Rechte!</label>
 			<label index="tx_cal_event.fe_crgroup_id">Erstellergruppe</label>
 			<label index="tx_cal_event.none">Keine</label>
 			<label index="tx_cal_event.type">Ereignis Typ</label>

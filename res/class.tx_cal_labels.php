@@ -36,6 +36,7 @@
 
 require_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_functions.php');
 require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php');
+require_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_date.php');
 
 class tx_cal_labels {
 		
@@ -113,7 +114,32 @@ class tx_cal_labels {
 		//Write to the label
         $params['title'] =  $label.' ('.$GLOBALS['LANG']->sl('LLL:EXT:cal/locallang_db.php:tx_cal_fe_user_event.offset').': '.$rec['offset'].')';
 	}
+
+	function getDeviationRecordLabel(&$params, &$pObj)	{
+
+        if (!$params['table'] == 'tx_cal_event_deviation') return '';
 		
+		// Get complete record 
+		$rec = t3lib_BEfunc::getRecord($params['table'], $params['row']['uid']);
+		
+		$label = $GLOBALS['LANG']->sl('LLL:EXT:cal/locallang_db.xml:tx_cal_event.deviation').': ';
+
+		if($rec['orig_start_date']){
+			$origStartDate = new tx_cal_date($rec['orig_start_date']);
+			$label .= $origStartDate->format('%Y-%m-%d');
+		}
+/*
+		if($rec['orig_start_time']){
+			$origStartTime = new tx_cal_date($rec['orig_start_time']);
+			$label .= ' ('.$origStartTime->format('%H:%M').')';
+		}
+*/		
+		
+        //Write to the label
+        $params['title'] =  $label;
+	}
+	
+	
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/res/class.tx_cal_labels.php']) {

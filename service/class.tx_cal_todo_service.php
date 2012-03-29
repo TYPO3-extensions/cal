@@ -132,6 +132,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 
 
 		$insertFields['cruser_id'] = $this->rightsObj->getUserId();
+		$insertFields['fe_cruser_id'] = $this->rightsObj->getUserId();
 		
 		if(is_array($this->controller->piVars['notify'])){
 			$insertFields['notify_ids'] = implode(',',$this->controller->piVars['notify']);

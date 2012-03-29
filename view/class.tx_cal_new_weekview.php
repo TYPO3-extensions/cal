@@ -137,13 +137,18 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 			if($eventStartYear == $this->year && $eventStart->getWeekOfYear() == $this->week) {
 				$this->alldays[$eventStartFormatted][] = $event;
 				$this->weekHasEvent = true;
+				$first = true;
 				do{
 					if(is_object($this->dayHasEvent[$eventStart->getDayOfWeek()])){
 						$this->dayHasEvent[$eventStart->getDayOfWeek()] = true;
 					}
 					if(is_object($this->days[$eventStart->format('%Y%m%d')])){
 						$this->days[$eventStart->format('%Y%m%d')]->hasAlldayEvents = true;
-						$this->days[$eventStart->format('%Y%m%d')]->addEvent($event); 
+						if($first){
+							$this->days[$eventStart->format('%Y%m%d')]->addEvent($event);
+							$first = false;
+						}
+						
 					}
 					$eventStart->addSeconds(86400);
 					$eventStartYear = $eventStart->year;
@@ -174,13 +179,18 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 
 	public function getRowspanMarker(& $template, & $sims, & $rems, & $wrapped, $view){
 		if($this->rowspan === false){
-			$this->getAlldaysMarker($template, $sims, $rems, $wrapped, $view);
+			if($view=='month'){
+				$this->getEventsMarker($template, $sims, $rems, $wrapped, $view);
+			} else {
+				$this->getAlldaysMarker($template, $sims, $rems, $wrapped, $view);
+			}
 		}
-		$sims['###ROWSPAN###'] = $this->rowspan + 2;
+		$sims['###ROWSPAN###'] = $this->rowspan + 1;
 	}
 
 	public function getAlldaysMarker(& $template, & $sims, & $rems, & $wrapped, $view){
 		if($this->content === false){
+			
 			$this->content = '';
 
 			$cobj = &tx_cal_registry::Registry('basic','cobj');
@@ -201,105 +211,154 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 				foreach($entryKeys as $entryKey){
 						
 					$event = &$this->alldays[$alldaysKey][$entryKey];
-					$eventStart = $event->getStart()->format('%Y%m%d');
-					$eventEnd = $event->getEnd()->format('%Y%m%d');
-					if($eventStart <= $this->weekStart){
-						if($eventEnd >= $this->weekEnd){
-							//lasts the whole week
-							$length = 7;
-							$start = 0;
-						} else {
-							$length = intval($event->getEnd()->getDayOfWeek());
-							if($length == 0){
-								if(DATE_CALC_BEGIN_WEEKDAY==1){
-									$length = 7;
-								} else {
-									$length = 1;
-								}
-							}
-							$start = 0;
-						}
-					} else {
-						$start = intval($event->getStart()->getDayOfWeek());
-						if(DATE_CALC_BEGIN_WEEKDAY==1){
-							$start--;
-							if($start == -1){
-								$start = 6;
-							}
-						}
-						if($eventEnd >= $this->weekEnd){
-							$length = 7 - $start;
-						} else {
-							$weekEnd = intval($event->getEnd()->getDayOfWeek());
-							if(DATE_CALC_BEGIN_WEEKDAY==1){
-								$weekEnd--;
-								if($weekEnd == -1){
-									$weekEnd = 6;
-								}
-							}
-							$length = ($weekEnd - $start) + 1;
-						}
-					}
-					$lengthArray[$length.'_'.$start][] = &$event;
+					$this->fillLengthArray($lengthArray, $event);
 				}
 			}
 				
-			krsort($lengthArray);
-
-			$theMatrix = Array();
-			$resultMatrix = Array();
-			$lengthArrayKeys = array_keys($lengthArray);
-			$this->rowspan = 1;
-			$alldaysKeys = array_keys($this->alldays);
-
-			foreach($lengthArrayKeys as $lengthArrayKey){
-				$values = explode('_',$lengthArrayKey);
-
-				$eventArrayKeys = array_keys($lengthArray[$lengthArrayKey]);
-				foreach($eventArrayKeys as $eventArrayKey){
-					$done = false;
-					for($i = $values[1]; $i < 7 && !$done; $i++){
-						for($j = 0; $j < 1000 && !$done; $j++){
-							if(!$theMatrix[$i][$j] && $values[0] + $i < 8){
-								//Found an empty start spot
-								$empty = true;
-								for($k = $i; $k < $values[0] + $i && $empty; $k++){
-									if($theMatrix[$k][$j]){
-										$empty = false;
-									}
-								}
-								if($empty){
-									$theMatrix[$i][$j] = &$lengthArray[$lengthArrayKey][$eventArrayKey];
-									$theMatrix[$i][$j]->matrixValue = $values[0];
-									// fill it
-									for($k = $i+1; $k < $values[0] + $i && $empty; $k++){
-										$theMatrix[$k][$j] = true;
-									}
-									$done = true;
-								}
-							}
-						}
-						if($this->rowspan < $j){
-							$this->rowspan = $j;
-						}
-					}
-				}
-			}
-
-			switch($view){
-				case 'month':
-					$this->renderAlldaysForMonth($theMatrix);
-					break;
-				case 'week':
-					$this->renderAlldaysForWeek($theMatrix);
-					break;
-			}
+			$this->renderLengthArray($lengthArray, $view);
 				
 		}
 
 		$sims['###ALLDAYS###'] = $this->content;
 	}
+	
+	public function getEventsMarker(& $template, & $sims, & $rems, & $wrapped, $view){
 
+		if($this->content === false){
+	
+			$this->content = '';
+	
+			$cobj = &tx_cal_registry::Registry('basic','cobj');
+			$conf = &tx_cal_registry::Registry('basic','conf');
+	
+			// 1. find out the start and length of each event in relation to this week
+			// 2. sort by length
+			// 3. start with the larges and position it in a yx-matrix with x = 7 and y = size of alldays
+			// 3a. find an empty spot starting with y = 0;
+			// 3b. reserve the spots and write the position in a 2 dimensional Array
+			// 4. go through the result array and create cells (TS) for each entry
+	
+			$lengthArray = Array();
+			
+			$dayKeys = array_keys($this->days);
+			$controller = &tx_cal_registry::Registry('basic','controller');
+			$currentMonth = $controller->getDateTimeObject->getMonth();
+			
+			for($i = 0; $i < 7; $i++){
+				$timeKeys = array_keys($this->days[$dayKeys[$i]]->events);
+				
+				
+				foreach($timeKeys as $timeKey){
+					$entryKeys = array_keys($this->days[$dayKeys[$i]]->events[$timeKey]);
+					foreach($entryKeys as $entryKey){
+		
+						$event = &$this->days[$dayKeys[$i]]->events[$timeKey][$entryKey];
+						$this->fillLengthArray($lengthArray, $event);
+					}
+				}
+			}
+	
+			$this->renderLengthArray($lengthArray, $view);
+	
+		}
+	
+		$sims['###EVENTS###'] = $this->content;
+	}
+
+	private function fillLengthArray(&$lengthArray, &$event){
+		$eventStart = $event->getStart()->format('%Y%m%d');
+		$eventEnd = $event->getEnd()->format('%Y%m%d');
+		if($eventStart <= $this->weekStart){
+			if($eventEnd >= $this->weekEnd){
+				//lasts the whole week
+				$length = 7;
+				$start = 0;
+			} else {
+				$length = intval($event->getEnd()->getDayOfWeek());
+				if($length == 0){
+					if(DATE_CALC_BEGIN_WEEKDAY==1){
+						$length = 7;
+					} else {
+						$length = 1;
+					}
+				}
+				$start = 0;
+			}
+		} else {
+			$start = intval($event->getStart()->getDayOfWeek());
+			if(DATE_CALC_BEGIN_WEEKDAY==1){
+				$start--;
+				if($start == -1){
+					$start = 6;
+				}
+			}
+			if($eventEnd >= $this->weekEnd){
+				$length = 7 - $start;
+			} else {
+				$weekEnd = intval($event->getEnd()->getDayOfWeek());
+				if(DATE_CALC_BEGIN_WEEKDAY==1){
+					$weekEnd--;
+					if($weekEnd == -1){
+						$weekEnd = 6;
+					}
+				}
+				$length = ($weekEnd - $start) + 1;
+			}
+		}
+		$lengthArray[$length.'_'.$start][] = &$event;
+	}
+	
+	private function renderLengthArray(&$lengthArray, $view){
+		krsort($lengthArray);
+		
+		$theMatrix = Array();
+		$resultMatrix = Array();
+		$lengthArrayKeys = array_keys($lengthArray);
+		$this->rowspan = 1;
+		
+		foreach($lengthArrayKeys as $lengthArrayKey){
+			$values = explode('_',$lengthArrayKey);
+		
+			$eventArrayKeys = array_keys($lengthArray[$lengthArrayKey]);
+			foreach($eventArrayKeys as $eventArrayKey){
+				$done = false;
+				for($i = $values[1]; $i < 7 && !$done; $i++){
+					for($j = 0; $j < 1000 && !$done; $j++){
+						if(!$theMatrix[$i][$j] && $values[0] + $i < 8){
+							//Found an empty start spot
+							$empty = true;
+							for($k = $i; $k < $values[0] + $i && $empty; $k++){
+								if($theMatrix[$k][$j]){
+									$empty = false;
+								}
+							}
+							if($empty){
+								$theMatrix[$i][$j] = &$lengthArray[$lengthArrayKey][$eventArrayKey];
+								$theMatrix[$i][$j]->matrixValue = $values[0];
+								// fill it
+								for($k = $i+1; $k < $values[0] + $i && $empty; $k++){
+									$theMatrix[$k][$j] = true;
+								}
+								$done = true;
+							}
+						}
+					}
+					if($this->rowspan < $j){
+						$this->rowspan = $j;
+					}
+				}
+			}
+		}		
+		switch($view){
+			case 'month':
+				$this->renderAlldaysForMonth($theMatrix);
+				break;
+			case 'week':
+				$this->renderAlldaysForWeek($theMatrix);
+				break;
+		}
+	}
+	
 	private function renderAlldaysForWeek(&$theMatrix){
 		$classes = $this->getWeekClasses();
 		$daysKeys = array_keys($this->days);
@@ -328,8 +387,11 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 		$controller = &tx_cal_registry::Registry('basic','controller');
 		$currentMonth = $controller->getDateTimeObject->getMonth();
 
+		$sims = $rems = $wrapped = Array();
+		$template = '';
+
 		for($j = 0; $j < $this->rowspan; $j++){
-			$this->content .= '<tr class="alldays '.$classes.'">';
+			$this->content .= '<tr class="'.$classes.'">';
 			for($i = 0; $i < 7; $i++){
 				$currentDayClass = ' weekday'.$this->days[$daysKeys[$i]]->weekdayNumber;
 				if($this->currentDayIndex == $i){
@@ -339,10 +401,22 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 					$currentDayClass .= ' monthOff';
 				}
 				if($theMatrix[$i][$j] == false){
-					$this->content .= '<td class="empty '.$classes.$currentDayClass.'"></td>';
+					$this->content .= '<td class="empty '.$classes.$currentDayClass.'">';
+					if($j == $this->rowspan-1){
+						$conf = &tx_cal_registry::Registry('basic','conf');
+						$this->days[$daysKeys[$i]]->getCreateEventLinkMarker($template, $sims, $rems, $wrapped, $conf['view']);
+						$this->content .= $sims['###CREATE_EVENT_LINK###'];
+					}
+					$this->content .= '</td>';
 				} else if(is_object($theMatrix[$i][$j])){
-					$this->content .= '<td class="event '.$classes.$currentDayClass.'" colspan="'.($theMatrix[$i][$j]->matrixValue).'">'.$theMatrix[$i][$j]->renderEventFor('month').'</td>';
+					$this->content .= '<td class="event '.$classes.$currentDayClass.'" colspan="'.($theMatrix[$i][$j]->matrixValue).'">'.$theMatrix[$i][$j]->renderEventFor('month');
 					$this->days[$daysKeys[$i]]->hasAlldayEvents = true;
+					if($j == $this->rowspan-1){
+						$conf = &tx_cal_registry::Registry('basic','conf');
+						$this->days[$daysKeys[$i]]->getCreateEventLinkMarker($template, $sims, $rems, $wrapped, $conf['view']);
+						$this->content .= $sims['###CREATE_EVENT_LINK###'];
+					}
+					$this->content .= '</td>';
 				}
 			}
 			$this->content .= '</tr>';
@@ -468,14 +542,8 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 			$classes .= ' currentDayHeader';
 		}
 		
-		$localWeekdayIndex = $weekdayIndex-DATE_CALC_BEGIN_WEEKDAY;
-		if ($localWeekdayIndex == -1) {
-			$localWeekdayIndex = 6;
-		}
-		
-		$controller = &tx_cal_registry::Registry('basic','controller');
 		$daysKeys = array_keys($this->days);
-		if(intval($this->getParentMonth()) != intval($this->days[$daysKeys[$localWeekdayIndex]]->month)){
+		if(intval($this->getParentMonth()) != intval($this->days[$daysKeys[$weekdayIndex]]->month)){
 			$classes .= ' monthOff';
 		}
 

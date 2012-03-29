@@ -76,7 +76,7 @@ class tx_cal_new_dayview extends tx_cal_new_timeview {
 	public function addEvent(&$event){
 //		if (($event->isAllday())&&($event->getStart()->format('%Y%m%d')!=$this->Ymd) ) {
 //		} else {
-			$this->events[$event->getStart()->format('%H%M')][] = &$event;
+			$this->events[$event->getStart()->format('%H%M')][$event->getUid()] = &$event;
 //		}
 	}
 	

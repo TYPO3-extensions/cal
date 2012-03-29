@@ -72,12 +72,7 @@ class tx_cal_dayview extends tx_cal_base_view {
 				$arrayOfEvents = &$dateArray[$timeKey];
 				$eventKeys = array_keys($arrayOfEvents);
 				foreach ($eventKeys as $eventKey) {
-					// Only add events that either fit the current getdate or that are no allday events to avoid duplicates
-					if ($dateKey==$getdate->format('%Y%m%d')) {
-						$dayModel->addEvent($arrayOfEvents[$eventKey]);
-					} elseif (!$arrayOfEvents[$eventKey]->isAllday()){
-						$dayModel->addEvent($arrayOfEvents[$eventKey]);
-					}
+					$dayModel->addEvent($arrayOfEvents[$eventKey]);
 				}
 			}
 		}							

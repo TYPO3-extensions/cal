@@ -154,7 +154,7 @@ class tx_cal_controller extends tslib_pibase {
 				/* Call appropriate view function */
 				$return .= $this->$viewFunction();
 			} else {
-				$customModel = t3lib_div::makeInstanceService('tx_cal_custom_model', $this->conf['view']);
+				$customModel = t3lib_div::makeInstanceService('cal_view', $this->conf['view']);
 				if(!is_object($customModel)){
 					$return .= $this->conf['view.']['noViewFoundHelpText'].' '.$viewFunction;
 				}else{
@@ -3259,7 +3259,7 @@ class tx_cal_controller extends tslib_pibase {
 				if(!$this->piVars['day']){
 					$this->piVars['day'] = $date->format('%d');
 				}
-				$this->piVars['getdate'] = $this->piVars['year'].$this->piVars['month'].$this->piVars['day'];
+				$this->piVars['getdate'] = str_pad((int)$this->piVars['year'], 4, "0", STR_PAD_LEFT).str_pad((int)$this->piVars['month'], 2, "0", STR_PAD_LEFT).str_pad((int)$this->piVars['day'], 2, "0", STR_PAD_LEFT);
 				unset($this->piVars['year']);
 				unset($this->piVars['month']);
 				unset($this->piVars['day']);

@@ -96,9 +96,22 @@ plugin.tx_cal_controller {
 }
 
 .tx-cal-controller .month-small td,
-.tx-cal-controller .month-medium td,
-.tx-cal-controller .month-large td {
+.tx-cal-controller .month-medium td {
 	border:1px solid #AAAAAA;
+}
+
+.tx-cal-controller .month-large td {
+	border-left:1px solid #AAAAAA;
+	border-right:1px solid #AAAAAA;
+	vertical-align: bottom;
+}
+
+.tx-cal-controller .month-large tr.days td {
+	border:1px solid #AAAAAA;
+}
+
+.tx-cal-controller .month-large tbody tr:last-child td {
+	border-bottom:1px solid #AAAAAA;
 }
 
 .tx-cal-controller .month-small th,
@@ -125,8 +138,8 @@ plugin.tx_cal_controller {
 	text-align: left;
 }
 
-.tx-cal-controller .month-large .day div.vevent,
-.tx-cal-controller .month-large .day div.vtodo {
+.tx-cal-controller .month-large div.vevent,
+.tx-cal-controller .month-large div.vtodo {
 	overflow:hidden;
 	white-space:nowrap;
 }
@@ -138,16 +151,6 @@ plugin.tx_cal_controller {
 	text-align: right;
 	font-size:xx-small;
 	line-height:12px;
-}
-
-.tx-cal-controller .month-large .days td {
-	border-top: none;
-}
-
-.tx-cal-controller .month-large .alldays td {
-	border-top: none;
-	border-bottom: none;
-	vertical-align: top;
 }
 	
 .tx-cal-controller .monthWeekend {
@@ -639,7 +642,9 @@ plugin.tx_cal_controller {
 .tx-cal-controller .alldays .vevent .grey_catheader_text,
 .tx-cal-controller .alldays .vtodo .grey_catheader_text,
 .tx-cal-controller .alldays .vevent .fnb_header_text,
-.tx-cal-controller .alldays .vtodo .fnb_header_text{
+.tx-cal-controller .alldays .vtodo .fnb_header_text, 
+.tx-cal-controller .allday.vevent span:first-child,
+.tx-cal-controller .allday.vtodo span:first-child {
 	color:#FFFFFF;
 }
 

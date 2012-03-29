@@ -465,7 +465,7 @@ CREATE TABLE be_groups (
 );
 
 CREATE TABLE fe_users (
-	tx_cal_calendar int(11) DEFAULT '0' NOT NULL,
+	tx_cal_calendar tinytext NOT NULL,
 	tx_cal_calendar_subscription tinyblob NOT NULL,
 );
 

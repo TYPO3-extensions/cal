@@ -202,12 +202,13 @@ class tx_cal_base_view extends tx_cal_base_service {
 		$rems['###CALENDAR_SELECTOR###'] = '';
 		if ($this->conf['view.']['other.']['showCalendarSelection']) {
 			$temp_sims = array();
+			$selectedCalendars = t3lib_div::trimExplode(',',$this->conf['calendar'],1);
 			$calendarService = $this->modelObj->getServiceObjByKey('cal_calendar_model', 'calendar', 'tx_cal_calendar');
 			$calendarArray = $calendarService->getCalendarFromTable($this->conf['pidList'], $calendarService->getCalendarSearchString($this->conf['pidList'], true,false));
 			if(is_array($calendarArray)){
 				$calendarOptions .= '<option value="">'.$this->controller->pi_getLL('l_all_cal_comb_lang').'</option>';
 				foreach($calendarArray as $calendar){
-					if($this->conf['calendar']==$calendar->row['uid']){
+					if(in_array($calendar->row['uid'],$selectedCalendars)){
 						$calendarOptions .= '<option value="'.$calendar->row['uid'].'" selected="selected">'.$calendar->getTitle().'</option>';
 					}else{
 						$calendarOptions .= '<option value="'.$calendar->row['uid'].'">'.$calendar->getTitle().'</option>';

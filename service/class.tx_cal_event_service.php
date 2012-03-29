@@ -678,6 +678,7 @@ t3lib_div::debug($orderBy);
 
 
 		$insertFields['cruser_id'] = $this->rightsObj->getUserId();
+		$insertFields['fe_cruser_id'] = $this->rightsObj->getUserId();
 		
 		if(is_array($this->controller->piVars['notify'])){
 			$insertFields['notify_ids'] = implode(',',$this->controller->piVars['notify']);
@@ -1775,6 +1776,7 @@ t3lib_div::debug($orderBy);
 
 		// Creating DB records
 		$insertFields['cruser_id'] = $this->rightsObj->getUserId();
+		$insertFields['fe_cruser_id'] = $this->rightsObj->getUserId();
 		if($insertFields['title']==''){
 			$insertFields['title'] = strip_tags($this->controller->piVars['exception_start_day']).' exception';
 		}

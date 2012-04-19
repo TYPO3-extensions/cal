@@ -54,10 +54,14 @@ class tx_cal_labels {
 		if($rec['allday'] || $params['table'] == 'tx_cal_exception_event') {
 			/* If we have an all day event, only show the date */
 			$datetime = $dateObj->format($format);
+			$params['start_date'] = $datetime; 
 		} else {
 			/* For normal events, show both the date and time */
 			// gmdate is ok, as long as $rec['start_time'] just holds information about 24h.
 			$datetime = $dateObj->format($format);
+
+			$params['start_date'] = $datetime; 
+			
 			$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
 			if($extConf['showTimes'] == 1){
 				$datetime .= ' '.gmdate($GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'], $rec['start_time']);
@@ -126,19 +130,19 @@ class tx_cal_labels {
 
 		if($rec['orig_start_date']){
 			$origStartDate = new tx_cal_date($rec['orig_start_date']);
+			$origStartDate->setTZbyId('UTC');
 			$label .= $origStartDate->format('%Y-%m-%d');
 		}
-/*
+
 		if($rec['orig_start_time']){
 			$origStartTime = new tx_cal_date($rec['orig_start_time']);
-			$label .= ' ('.$origStartTime->format('%H:%M').')';
+			$label .= ' ('.gmdate($GLOBALS['TYPO3_CONF_VARS']['SYS']['hhmm'],$rec['orig_start_time']).')';
 		}
-*/		
+		
 		
         //Write to the label
         $params['title'] =  $label;
 	}
-	
 	
 }
 

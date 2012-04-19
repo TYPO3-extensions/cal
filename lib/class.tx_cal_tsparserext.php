@@ -56,7 +56,7 @@ class tx_cal_tsparserext {
    				<div class="message-header">' . $GLOBALS['LANG']->sL('LLL:EXT:cal/locallang.xml:extmng.updatermsgHeader') . '</div>
   				<div class="message-body">
   					' . $GLOBALS['LANG']->sL('LLL:EXT:cal/locallang.xml:extmng.updatermsg') . '<br />
-  					<a style="text-decoration:underline;" href="index.php?&amp;id=0&amp;CMD[showExt]=cal&amp;SET[singleDetails]=updateModule">
+  					<a style="text-decoration:underline;" href="mod.php?id=0&amp;M=tools_em&amp;CMD[showExt]=cal&amp;SET[singleDetails]=updateModule">
   					' . $GLOBALS['LANG']->sL('LLL:EXT:cal/locallang.xml:extmng.updatermsgLink') . '</a>
   				</div>
   			</div>

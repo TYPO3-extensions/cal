@@ -968,57 +968,93 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 									//send confirm email!!
 									$email = $this->controller->piVars['email'];
 
-									require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
-									$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
-									$mailer->start();
-									$mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];
-									$mailer->from_name = $this->conf['view.']['event.']['notify.']['fromName'];
-									$mailer->replyto_email = $this->conf['view.']['event.']['notify.']['emailReplyAddress'];
-									$mailer->replyto_name = $this->conf['view.']['event.']['notify.']['replyToName'];
-									$mailer->organisation = $this->conf['view.']['event.']['notify.']['organisation'];
-
-									$local_template = $cObj->fileResource($this->conf['view.']['event.']['notify.']['confirmTemplate']);
-
-									$htmlTemplate = $cObj->getSubpart($local_template,'###HTML###');
-									$plainTemplate = $cObj->getSubpart($local_template,'###PLAIN###');
-
-									$local_switch = array();
-									$local_rems = array();
-									$local_wrapped = array();
-									$this->getMarker($htmlTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
-									$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'start', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$this->getCreationDate())));
-									$htmlTemplate = tx_cal_functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
-
-									$local_switch = array();
-									$local_rems = array();
-									$local_wrapped = array();
-									$this->getMarker($plainTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
-									$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'start', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$this->getCreationDate())));
-									$plainTemplate = tx_cal_functions::substituteMarkerArrayNotCached($plainTemplate, $local_switch, $local_rems, $local_wrapped);
-
-									$mailer->subject = $this->conf['view.']['event.']['notify.']['confirmTitle'];
-
-
-									$rems['###SUBSCRIPTION###'] = $this->controller->pi_getLL('l_monitor_start_thanks');
-									$this->controller->finish($htmlTemplate);
-									$this->controller->finish($plainTemplate);
-									$mailer->theParts['html']['content'] = $htmlTemplate;
-									$mailer->theParts['html']['path'] = '';
-									$mailer->extractMediaLinks();
-									$mailer->extractHyperLinks();
-									$mailer->fetchHTMLMedia();
-									$mailer->substMediaNamesInHTML(0); // 0 = relative
-									$mailer->substHREFsInHTML();
-									$mailer->setHTML($mailer->encodeMsg($mailer->theParts['html']['content']));
-
-									$mailer->substHREFsInHTML();
-
-									$mailer->setPlain(strip_tags($plainTemplate));
-									$mailer->setHeaders();
-									$mailer->setContent();
-
-									$mailer->setRecipient($email);
-									$mailer->sendtheMail();
+									if (t3lib_div::int_from_ver(TYPO3_version) > 4005010){
+										require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
+										$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
+										$mailer->start();
+										$mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];
+										$mailer->from_name = $this->conf['view.']['event.']['notify.']['fromName'];
+										$mailer->replyto_email = $this->conf['view.']['event.']['notify.']['emailReplyAddress'];
+										$mailer->replyto_name = $this->conf['view.']['event.']['notify.']['replyToName'];
+										$mailer->organisation = $this->conf['view.']['event.']['notify.']['organisation'];
+	
+										$local_template = $cObj->fileResource($this->conf['view.']['event.']['notify.']['confirmTemplate']);
+	
+										$htmlTemplate = $cObj->getSubpart($local_template,'###HTML###');
+										$plainTemplate = $cObj->getSubpart($local_template,'###PLAIN###');
+	
+										$local_switch = array();
+										$local_rems = array();
+										$local_wrapped = array();
+										$this->getMarker($htmlTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'start', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$this->getCreationDate())));
+										$htmlTemplate = tx_cal_functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
+	
+										$local_switch = array();
+										$local_rems = array();
+										$local_wrapped = array();
+										$this->getMarker($plainTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'start', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$this->getCreationDate())));
+										$plainTemplate = tx_cal_functions::substituteMarkerArrayNotCached($plainTemplate, $local_switch, $local_rems, $local_wrapped);
+	
+										$mailer->subject = $this->conf['view.']['event.']['notify.']['confirmTitle'];
+	
+	
+										$rems['###SUBSCRIPTION###'] = $this->controller->pi_getLL('l_monitor_start_thanks');
+										$this->controller->finish($htmlTemplate);
+										$this->controller->finish($plainTemplate);
+										$mailer->theParts['html']['content'] = $htmlTemplate;
+										$mailer->theParts['html']['path'] = '';
+										$mailer->extractMediaLinks();
+										$mailer->extractHyperLinks();
+										$mailer->fetchHTMLMedia();
+										$mailer->substMediaNamesInHTML(0); // 0 = relative
+										$mailer->substHREFsInHTML();
+										$mailer->setHTML($mailer->encodeMsg($mailer->theParts['html']['content']));
+	
+										$mailer->substHREFsInHTML();
+										
+										$mailer->setPlain(strip_tags($plainTemplate));
+										$mailer->setHeaders();
+										$mailer->setContent();
+	
+										$mailer->setRecipient($email);
+										$mailer->sendtheMail();
+									} else {
+										$mailer = $mail = t3lib_div::makeInstance('t3lib_mail_Message');
+										$mailer->setFrom(array($this->conf['view.']['event.']['notify.']['emailAddress'] => $this->conf['view.']['event.']['notify.']['fromName']));
+										$mailer->setReplyTo(array($this->conf['view.']['event.']['notify.']['emailReplyAddress'] => $this->conf['view.']['event.']['notify.']['replyToName']));
+										$mailer->getHeaders()->addTextHeader(array('Organization: ' => $this->conf['view.']['event.']['notify.']['organisation']));
+	
+										$local_template = $cObj->fileResource($this->conf['view.']['event.']['notify.']['confirmTemplate']);
+	
+										$htmlTemplate = $cObj->getSubpart($local_template,'###HTML###');
+										$plainTemplate = $cObj->getSubpart($local_template,'###PLAIN###');
+	
+										$local_switch = array();
+										$local_rems = array();
+										$local_wrapped = array();
+										$this->getMarker($htmlTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'start', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$this->getCreationDate())));
+										$htmlTemplate = tx_cal_functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
+	
+										$local_switch = array();
+										$local_rems = array();
+										$local_wrapped = array();
+										$this->getMarker($plainTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'start', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$this->getCreationDate())));
+										$plainTemplate = tx_cal_functions::substituteMarkerArrayNotCached($plainTemplate, $local_switch, $local_rems, $local_wrapped);
+	
+										$mailer->setSubject($this->conf['view.']['event.']['notify.']['confirmTitle']);
+	
+										$rems['###SUBSCRIPTION###'] = $this->controller->pi_getLL('l_monitor_start_thanks');
+										$this->controller->finish($htmlTemplate);
+										$this->controller->finish($plainTemplate);
+										$mailer->setTo(array($email));
+										$mailer->setBody(strip_tags($plainTemplate),'text/plain');
+										$mailer->addPart($htmlTemplate,'text/html');
+										$mailer->send();
+									}
 									return;
 								}else{
 									$sims_temp['L_CAPTCHA_START_SUCCESS'] = $this->controller->pi_getLL('l_monitor_wrong_captcha');
@@ -1057,56 +1093,94 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										$GLOBALS['TYPO3_DB']->sql_free_result($result);
 									}
 
-									require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
-									$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
-									$mailer->start();
-									$mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];
-									$mailer->from_name = $this->conf['view.']['event.']['notify.']['fromName'];
-									$mailer->replyto_email = $this->conf['view.']['event.']['notify.']['emailReplyAddress'];
-									$mailer->replyto_name = $this->conf['view.']['event.']['notify.']['replyToName'];
-									$mailer->organisation = $this->conf['view.']['event.']['notify.']['organisation'];
-
-									$local_template = $cObj->fileResource($this->conf['view.']['event.']['notify.']['unsubscribeConfirmTemplate']);
-
-									$htmlTemplate = $cObj->getSubpart($local_template,'###HTML###');
-									$plainTemplate = $cObj->getSubpart($local_template,'###PLAIN###');
-
-									$local_switch = array();
-									$local_rems = array();
-									$local_wrapped = array();
-									$this->getMarker($htmlTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
-									$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'stop', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$crdate)));
-									$htmlTemplate = tx_cal_functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
-
-									$local_switch = array();
-									$local_rems = array();
-									$local_wrapped = array();
-									$this->getMarker($plainTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
-									$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'stop', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$crdate)));
-									$plainTemplate = tx_cal_functions::substituteMarkerArrayNotCached($plainTemplate, $local_switch, $local_rems, $local_wrapped);
-
-									$mailer->subject = $this->conf['view.']['event.']['notify.']['unsubscribeConfirmTitle'];
-
-									$rems['###SUBSCRIPTION###'] = $this->controller->pi_getLL('l_monitor_stop_thanks');
-									$this->controller->finish($htmlTemplate);
-									$this->controller->finish($plainTemplate);
-									$mailer->theParts['html']['content'] = $htmlTemplate;
-									$mailer->theParts['html']['path'] = '';
-									$mailer->extractMediaLinks();
-									$mailer->extractHyperLinks();
-									$mailer->fetchHTMLMedia();
-									$mailer->substMediaNamesInHTML(0); // 0 = relative
-									$mailer->substHREFsInHTML();
-									$mailer->setHTML($mailer->encodeMsg($mailer->theParts['html']['content']));
-
-									$mailer->substHREFsInHTML();
-
-									$mailer->setPlain(strip_tags($plainTemplate));
-									$mailer->setHeaders();
-									$mailer->setContent();
-
-									$mailer->setRecipient($email);
-									$mailer->sendtheMail();
+									if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+										require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
+										$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
+										$mailer->start();
+										$mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];
+										$mailer->from_name = $this->conf['view.']['event.']['notify.']['fromName'];
+										$mailer->replyto_email = $this->conf['view.']['event.']['notify.']['emailReplyAddress'];
+										$mailer->replyto_name = $this->conf['view.']['event.']['notify.']['replyToName'];
+										$mailer->organisation = $this->conf['view.']['event.']['notify.']['organisation'];
+	
+										$local_template = $cObj->fileResource($this->conf['view.']['event.']['notify.']['unsubscribeConfirmTemplate']);
+	
+										$htmlTemplate = $cObj->getSubpart($local_template,'###HTML###');
+										$plainTemplate = $cObj->getSubpart($local_template,'###PLAIN###');
+	
+										$local_switch = array();
+										$local_rems = array();
+										$local_wrapped = array();
+										$this->getMarker($htmlTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'stop', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$crdate)));
+										$htmlTemplate = tx_cal_functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
+	
+										$local_switch = array();
+										$local_rems = array();
+										$local_wrapped = array();
+										$this->getMarker($plainTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'stop', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$crdate)));
+										$plainTemplate = tx_cal_functions::substituteMarkerArrayNotCached($plainTemplate, $local_switch, $local_rems, $local_wrapped);
+	
+										$mailer->subject = $this->conf['view.']['event.']['notify.']['unsubscribeConfirmTitle'];
+	
+										$rems['###SUBSCRIPTION###'] = $this->controller->pi_getLL('l_monitor_stop_thanks');
+										$this->controller->finish($htmlTemplate);
+										$this->controller->finish($plainTemplate);
+										$mailer->theParts['html']['content'] = $htmlTemplate;
+										$mailer->theParts['html']['path'] = '';
+										$mailer->extractMediaLinks();
+										$mailer->extractHyperLinks();
+										$mailer->fetchHTMLMedia();
+										$mailer->substMediaNamesInHTML(0); // 0 = relative
+										$mailer->substHREFsInHTML();
+										$mailer->setHTML($mailer->encodeMsg($mailer->theParts['html']['content']));
+	
+										$mailer->substHREFsInHTML();
+	
+										$mailer->setPlain(strip_tags($plainTemplate));
+										$mailer->setHeaders();
+										$mailer->setContent();
+	
+										$mailer->setRecipient($email);
+										$mailer->sendtheMail();
+									} else {
+										$mailer = $mail = t3lib_div::makeInstance('t3lib_mail_Message');
+										$mailer->setFrom(array($this->conf['view.']['event.']['notify.']['emailAddress'] => $this->conf['view.']['event.']['notify.']['fromName']));
+										$mailer->setReplyTo(array($this->conf['view.']['event.']['notify.']['emailReplyAddress'] => $this->conf['view.']['event.']['notify.']['replyToName']));
+										$mailer->getHeaders()->addTextHeader(array('Organization: ' => $this->conf['view.']['event.']['notify.']['organisation']));
+	
+										$local_template = $cObj->fileResource($this->conf['view.']['event.']['notify.']['unsubscribeConfirmTemplate']);
+											
+										$htmlTemplate = $cObj->getSubpart($local_template,'###HTML###');
+										$plainTemplate = $cObj->getSubpart($local_template,'###PLAIN###');
+	
+										$local_switch = array();
+										$local_rems = array();
+										$local_wrapped = array();
+										$this->getMarker($htmlTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'stop', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$crdate)));
+										$htmlTemplate = tx_cal_functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
+	
+										$local_switch = array();
+										$local_rems = array();
+										$local_wrapped = array();
+										$this->getMarker($plainTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'stop', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$crdate)));
+										$plainTemplate = tx_cal_functions::substituteMarkerArrayNotCached($plainTemplate, $local_switch, $local_rems, $local_wrapped);
+	
+										$mailer->setSubject($this->conf['view.']['event.']['notify.']['unsubscribeConfirmTitle']);
+	
+										$rems['###SUBSCRIPTION###'] = $this->controller->pi_getLL('l_monitor_stop_thanks');
+										$this->controller->finish($htmlTemplate);
+										$this->controller->finish($plainTemplate);
+										
+										$mailer->setTo(array($email));
+										$mailer->setBody(strip_tags($plainTemplate),'text/plain');
+										$mailer->addPart($htmlTemplate,'text/html');
+										$mailer->send();										
+									}
+									
 									return;
 
 								}else{

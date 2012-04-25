@@ -201,7 +201,11 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		$rems = array();
 		$wrapped = array();
 		$event_new->getMarker($titleText,$switch,$rems, $wrapped, 'title');
-		$this->mailer->subject = tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped);
+		if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+			$this->mailer->subject = tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped);
+		} else {
+			$this->mailer->setSubject(tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped));
+		}
 		$this->sendEmail($email, $htmlTemplate, $plainTemplate);
 	}
 	
@@ -399,7 +403,11 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		$wrapped = array();
 		$event->getMarker($titleText,$switch,$rems, $wrapped, 'title');
 		
-		$this->mailer->subject = tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped);
+		if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+			$this->mailer->subject = tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped);
+		} else {
+			$this->mailer->setSubject(tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped));
+		}
 		$this->sendEmail($email, $htmlTemplate, $plainTemplate);
 	}
 	
@@ -453,7 +461,12 @@ class tx_cal_notification_view extends tx_cal_base_service {
 					$title = $event_new->getTitle().'.ics';
 					$title = strtr($title,array(' '=>'',','=>'_',));
 					$icsAttachmentFile = $this->createTempIcsFile($ics, $title);
-					$this->mailer->addAttachment($icsAttachmentFile);
+					if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+						$this->mailer->addAttachment($icsAttachmentFile);
+					} else {
+						$attachment = Swift_Attachment::fromPath($icsAttachmentFile, 'text/calendar');
+						$this->mailer->attach($attachment);
+					}
 
 					if(count($newEventDataArray)>0){
 						$this->sendNotificationOfChanges($event_old, $event_new, $attendee->getEmail(), $template, '###TITLE###', '', $acceptLink, $declineLink);
@@ -461,7 +474,9 @@ class tx_cal_notification_view extends tx_cal_base_service {
 						$this->sendNotification($event_old, $attendee->getEmail(), $template, '###TITLE###', '', $acceptLink, $declineLink);
 					}
 					unlink($icsAttachmentFile);
-					$this->mailer->theParts['attach'] = array();
+					if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+						$this->mailer->theParts['attach'] = array();
+					}
 				}
 			}
 		}
@@ -473,10 +488,15 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			foreach(array_keys($globalAttendeeArray[$serviceType]) as $uid){
 				$attendee = &$globalAttendeeArray[$serviceType][$uid];
 				if($attendee->getAttendance()=='CHAIR'){
-					$this->mailer->from_email = $attendee->getEmail();
-					$this->mailer->from_name = $attendee->getName();
-					$this->mailer->replyto_email = $attendee->getEmail();
-					$this->mailer->replyto_name = $attendee->getName();
+					if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+						$this->mailer->from_email = $attendee->getEmail();
+						$this->mailer->from_name = $attendee->getName();
+						$this->mailer->replyto_email = $attendee->getEmail();
+						$this->mailer->replyto_name = $attendee->getName();
+					} else {
+						$this->mailer->setFrom(array($attendee->getEmail() => $attendee->getName()));
+						$this->mailer->setReplyTo(array($attendee->getEmail() => $attendee->getName()));
+					}
 					
 					//do not invite the chairman
 					unset($globalAttendeeArray[$serviceType][$uid]);
@@ -487,38 +507,53 @@ class tx_cal_notification_view extends tx_cal_base_service {
 	}
 	
 	function startMailer(){
-		require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
-		$this->mailer =t3lib_div::makeInstance('t3lib_htmlmail');
-		$this->mailer->start();
-		$this->mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];
-		$this->mailer->from_name = $this->conf['view.']['event.']['notify.']['fromName'];
-		$this->mailer->replyto_email = $this->conf['view.']['event.']['notify.']['emailReplyAddress'];
-		$this->mailer->replyto_name = $this->conf['view.']['event.']['notify.']['replyToName'];
-		$this->mailer->organisation = $this->conf['view.']['event.']['notify.']['organisation'];
+		if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+			require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
+			$this->mailer =t3lib_div::makeInstance('t3lib_htmlmail');
+			$this->mailer->start();
+			$this->mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];
+			$this->mailer->from_name = $this->conf['view.']['event.']['notify.']['fromName'];
+			$this->mailer->replyto_email = $this->conf['view.']['event.']['notify.']['emailReplyAddress'];
+			$this->mailer->replyto_name = $this->conf['view.']['event.']['notify.']['replyToName'];
+			$this->mailer->organisation = $this->conf['view.']['event.']['notify.']['organisation'];
+		} else {
+			$this->mailer = $mail = t3lib_div::makeInstance('t3lib_mail_Message');
+			$this->mailer->setFrom(array($this->conf['view.']['event.']['notify.']['emailAddress'] => $this->conf['view.']['event.']['notify.']['fromName']));
+			$this->mailer->setReplyTo(array($this->conf['view.']['event.']['notify.']['emailReplyAddress'] => $this->conf['view.']['event.']['notify.']['replyToName']));
+			$this->mailer->getHeaders()->addTextHeader(array('Organization: ' => $this->conf['view.']['event.']['notify.']['organisation']));
+		}
 	}
 	
 	function sendEmail($email, $htmlTemplate, $plainTemplate){
 		$this->controller->finish($htmlTemplate);
 		$this->controller->finish($plainTemplate);
 		$plainTemplate = str_replace('&nbsp;',' ',strip_tags($plainTemplate));
-
-		$this->mailer->theParts['html']['content'] = $htmlTemplate;
-		$this->mailer->theParts['html']['path'] = '';
-		$this->mailer->extractMediaLinks();
-		$this->mailer->extractHyperLinks();
-		$this->mailer->fetchHTMLMedia();
-		$this->mailer->substMediaNamesInHTML(0); // 0 = relative
-		$this->mailer->substHREFsInHTML();
-			
-		$this->mailer->setHTML($this->mailer->encodeMsg($this->mailer->theParts['html']['content']));
-
-		$this->mailer->substHREFsInHTML();
+ 		
+		if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+			$this->mailer->theParts['html']['content'] = $htmlTemplate;
+			$this->mailer->theParts['html']['path'] = '';
+			$this->mailer->extractMediaLinks();
+			$this->mailer->extractHyperLinks();
+			$this->mailer->fetchHTMLMedia();
+			$this->mailer->substMediaNamesInHTML(0); // 0 = relative
+			$this->mailer->substHREFsInHTML();
+				
+			$this->mailer->setHTML($this->mailer->encodeMsg($this->mailer->theParts['html']['content']));
 	
-		$this->mailer->setPlain(strip_tags($plainTemplate));
-		$this->mailer->setHeaders();
-		$this->mailer->setContent();
-		$this->mailer->setRecipient($email);
-		$this->mailer->sendtheMail();
+			$this->mailer->substHREFsInHTML();
+		
+			$this->mailer->setPlain(strip_tags($plainTemplate));
+			$this->mailer->setHeaders();
+			$this->mailer->setContent();
+			$this->mailer->setRecipient($email);
+			$this->mailer->sendtheMail();
+		} else {
+			$this->$mailer->setTo(array($email));
+			$this->$mailer->setBody(strip_tags($plainTemplate),'text/plain');
+			$this->$mailer->addPart($htmlTemplate,'text/html');
+			$this->$mailer->send();
+		}
+
 	}
 	
 	function createTempIcsFile($content, $filename){

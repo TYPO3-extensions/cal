@@ -408,6 +408,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		} else {
 			$this->mailer->setSubject(tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped));
 		}
+
 		$this->sendEmail($email, $htmlTemplate, $plainTemplate);
 	}
 	
@@ -550,7 +551,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		} else {
 			$this->mailer->setTo(array($email));
 			$this->mailer->setBody(strip_tags($plainTemplate),'text/plain');
-			$this->mailer->addPart($htmlTemplate,'text/html');
+			$this->mailer->addPart(tx_cal_functions::fixURI($htmlTemplate),'text/html');
 			$this->mailer->send();
 		}
 

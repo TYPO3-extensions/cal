@@ -403,5 +403,27 @@ class tx_cal_functions {
 	public static function replaceLineFeed($string){
 		return str_replace(Array("\n\r","\r\n","\r","\n"), Array('\n','\n','\n','\n'), $string);
 	}
+
+	/**
+	 * Wrapper to replace relative links with absolute ones for notifications
+	 *
+	 * @param	string		$html: HTML code thak can potentially have relative links that need to be fixed
+	 * @return	string		HTML code with absolute links
+	 */	
+	public static function fixURI($html) {
+		require_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_uriHandler.php');
+		$uriHandler = t3lib_div::makeInstance('tx_cal_uriHandler');
+		$uriHandler->setHTML($html);
+		$uriHandler->setPATH('http://'.t3lib_div::getHostname(1).'/');
+
+		$uriHandler->extractMediaLinks();
+		$uriHandler->extractHyperLinks();
+		$uriHandler->fetchHTMLMedia();
+		$uriHandler->substMediaNamesInHTML(0); // 0 = relative
+		$uriHandler->substHREFsInHTML();
+		
+		return $uriHandler->getHTML();
+	}
+		
 }
 ?>

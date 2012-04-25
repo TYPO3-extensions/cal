@@ -1035,9 +1035,11 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										$local_rems = array();
 										$local_wrapped = array();
 										$this->getMarker($htmlTemplate,$local_switch,$local_rems, $local_wrapped, 'event');
+										
 										$local_switch['###CONFIRM_LINK###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$this->controller->pi_getPageLink($this->conf['view.']['event.']['notify.']['subscriptionViewPid'], '', array ('tx_cal_controller[view]' => 'subscription','tx_cal_controller[monitor]' => 'start', 'tx_cal_controller[email]' => $email, 'tx_cal_controller[uid]' => $this->getUid(), 'tx_cal_controller[sid]' => md5($this->getUid().$email.$this->getCreationDate())));
 										$htmlTemplate = tx_cal_functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
-	
+
+										
 										$local_switch = array();
 										$local_rems = array();
 										$local_wrapped = array();
@@ -1052,7 +1054,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										$this->controller->finish($plainTemplate);
 										$mailer->setTo(array($email));
 										$mailer->setBody(strip_tags($plainTemplate),'text/plain');
-										$mailer->addPart($htmlTemplate,'text/html');
+										$mailer->addPart(tx_cal_functions::fixURI($htmlTemplate),'text/html');
 										$mailer->send();
 									}
 									return;
@@ -1177,7 +1179,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										
 										$mailer->setTo(array($email));
 										$mailer->setBody(strip_tags($plainTemplate),'text/plain');
-										$mailer->addPart($htmlTemplate,'text/html');
+										$mailer->addPart(tx_cal_functions::fixURI($htmlTemplate),'text/html');
 										$mailer->send();										
 									}
 									

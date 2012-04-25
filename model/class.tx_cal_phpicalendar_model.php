@@ -968,7 +968,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 									//send confirm email!!
 									$email = $this->controller->piVars['email'];
 
-									if (t3lib_div::int_from_ver(TYPO3_version) > 4005010){
+									if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
 										require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
 										$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
 										$mailer->start();

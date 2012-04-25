@@ -548,10 +548,10 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$this->mailer->setRecipient($email);
 			$this->mailer->sendtheMail();
 		} else {
-			$this->$mailer->setTo(array($email));
-			$this->$mailer->setBody(strip_tags($plainTemplate),'text/plain');
-			$this->$mailer->addPart($htmlTemplate,'text/html');
-			$this->$mailer->send();
+			$this->mailer->setTo(array($email));
+			$this->mailer->setBody(strip_tags($plainTemplate),'text/plain');
+			$this->mailer->addPart($htmlTemplate,'text/html');
+			$this->mailer->send();
 		}
 
 	}

@@ -55,6 +55,7 @@ $TCA['tx_cal_event'] = Array (
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'res/icons/icon_tx_cal_events.gif',
+		'searchFields' => 'title,organizer,organizer_link,location,location_link,teaser,description,ext_url,image,imagecaption,imagealttext,imagetitletext,attachment,attachmentcaption',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'hidden, title, starttime, endtime, start_date, start_time, end_date, end_time, relation_cnt, organizer, organizer_id, organizer_pid, location, location_id, location_pid, description, freq, byday, bymonthday, bymonth, until, count, interval, rdate_type, rdate, notify_cnt'
@@ -86,6 +87,7 @@ $TCA['tx_cal_category'] = Array (
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'res/icons/icon_tx_cal_category.gif',
 //		'treeParentField' => 'calendar_id',
+		'searchFields' => 'title,notification_emails',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'hidden, title, starttime, endtime',
@@ -122,6 +124,7 @@ $TCA['tx_cal_calendar'] = Array (
 		'languageField' => 'sys_language_uid',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'res/icons/icon_tx_cal_calendar.gif',
+		'searchFields' => 'title,ext_url,ext_url_notes,ics_file',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'hidden, title, starttime, endtime',
@@ -147,6 +150,7 @@ $TCA['tx_cal_exception_event'] = Array (
         'versioningWS' => TRUE,
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'res/icons/icon_tx_cal_exception_event.gif',
+		'searchFields' => 'title',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'hidden, title, starttime, endtime, start_date, end_date, relation_cnt, freq, byday, bymonthday, bymonth, until, count, interval'
@@ -170,6 +174,7 @@ $TCA['tx_cal_exception_event_group'] = Array (
 			'disabled' => 'hidden',
 		),
         'versioningWS' => TRUE,
+		'searchFields' => 'title',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'title',
@@ -198,6 +203,7 @@ $TCA['tx_cal_location'] = Array (
 		'transOrigPointerField' => 'l18n_parent',
 		'transOrigDiffSourceField' => 'l18n_diffsource',
 		'languageField' => 'sys_language_uid',
+		'searchFields' => 'name,description,street,zip,city,country_zone,country,phone,fax,email,image,imagecaption,imagealttext,imagetitletext,link,latitute,longitute',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'name',
@@ -226,6 +232,7 @@ $TCA['tx_cal_organizer'] = Array (
 		'transOrigPointerField' => 'l18n_parent',
 		'transOrigDiffSourceField' => 'l18n_diffsource',
 		'languageField' => 'sys_language_uid',
+		'searchFields' => 'name,description,street,zip,city,country_zone,country,phone,fax,email,image,imagecaption,imagealttext,imagetitletext,link',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'name',
@@ -246,6 +253,7 @@ $TCA['tx_cal_unknown_users'] = Array (
         'versioningWS' => TRUE,
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY).'res/icons/icon_tx_cal_unknown_users.gif',
+		'searchFields' => 'email',
 	),
 	'feInterface' => Array (
 		'fe_admin_fieldList' => 'hidden, email',
@@ -269,6 +277,7 @@ $TCA['tx_cal_attendee'] = Array (
 			'disabled' => 'hidden',
 		),
         'versioningWS' => TRUE,
+		'searchFields' => 'email',
 	),
 );
 
@@ -304,6 +313,7 @@ $TCA['tx_cal_event_deviation'] = Array (
 		),
         'versioningWS' => TRUE,
 		'hideTable' => $confArr['hideDeviationRecords'],
+		'searchFields' => 'title,organizer,organizer_link,location,location_link,teaser,description,image,imagecaption,imagealttext,imagetitletext,attachment,attachmentcaption',
 	),
 );
 
@@ -313,6 +323,7 @@ if (t3lib_div::int_from_ver(TYPO3_version) >= 4001000) {
 	$TCA['tx_cal_attendee']['ctrl']['label_userFunc']="tx_cal_labels->getAttendeeRecordLabel";
 	$TCA['tx_cal_fe_user_event_monitor_mm']['ctrl']['label_userFunc']="tx_cal_labels->getMonitoringRecordLabel";
 	$TCA['tx_cal_event_deviation']['ctrl']['label_userFunc']="tx_cal_labels->getDeviationRecordLabel";
+	$TCA['tx_cal_event']['ctrl']['label_userFunc']="tx_cal_labels->getEventRecordLabel";
 	
 }
 

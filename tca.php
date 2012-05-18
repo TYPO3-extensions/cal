@@ -3059,4 +3059,13 @@ if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
 	$GLOBALS['TCA']['tt_content']['columns']['tx_cal_media']['config']['uploadfolder'] = 'uploads/tx_cal/media';
 }
 
+// Append backend search configuration for tt_address:
+if(t3lib_extMgm::isLoaded('tt_address')) {
+	t3lib_div::loadTCA('tt_address');
+	if (isset($TCA['tt_address']['ctrl']['searchFields'])) {
+		$TCA['tt_address']['ctrl']['searchFields'] .= ',';
+	}
+	$TCA['tt_address']['ctrl']['searchFields'] .= 'tx_cal_controller_latitude,tx_cal_controller_longitude';
+}
+
 ?>

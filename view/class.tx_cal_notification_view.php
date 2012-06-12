@@ -519,8 +519,14 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$this->mailer->organisation = $this->conf['view.']['event.']['notify.']['organisation'];
 		} else {
 			$this->mailer = $mail = t3lib_div::makeInstance('t3lib_mail_Message');
-			$this->mailer->setFrom(array($this->conf['view.']['event.']['notify.']['emailAddress'] => $this->conf['view.']['event.']['notify.']['fromName']));
-			$this->mailer->setReplyTo(array($this->conf['view.']['event.']['notify.']['emailReplyAddress'] => $this->conf['view.']['event.']['notify.']['replyToName']));
+
+			if (t3lib_div::validEmail($this->conf['view.']['event.']['notify.']['emailAddress'])) {
+				$this->mailer->setFrom(array($this->conf['view.']['event.']['notify.']['emailAddress'] => $this->conf['view.']['event.']['notify.']['fromName']));
+			}
+
+			if (t3lib_div::validEmail($this->conf['view.']['event.']['notify.']['emailReplyAddress'])) {
+				$this->mailer->setReplyTo(array($this->conf['view.']['event.']['notify.']['emailReplyAddress'] => $this->conf['view.']['event.']['notify.']['replyToName']));
+			}
 			$this->mailer->getHeaders()->addTextHeader(array('Organization: ' => $this->conf['view.']['event.']['notify.']['organisation']));
 		}
 	}

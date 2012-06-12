@@ -1022,8 +1022,15 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										$mailer->sendtheMail();
 									} else {
 										$mailer = $mail = t3lib_div::makeInstance('t3lib_mail_Message');
-										$mailer->setFrom(array($this->conf['view.']['event.']['notify.']['emailAddress'] => $this->conf['view.']['event.']['notify.']['fromName']));
-										$mailer->setReplyTo(array($this->conf['view.']['event.']['notify.']['emailReplyAddress'] => $this->conf['view.']['event.']['notify.']['replyToName']));
+
+										if (t3lib_div::validEmail($this->conf['view.']['event.']['notify.']['emailAddress'])) {
+											$mailer->setFrom(array($this->conf['view.']['event.']['notify.']['emailAddress'] => $this->conf['view.']['event.']['notify.']['fromName']));
+										}
+
+										if (t3lib_div::validEmail($this->conf['view.']['event.']['notify.']['emailReplyAddress'])) {
+											$mailer->setReplyTo(array($this->conf['view.']['event.']['notify.']['emailReplyAddress'] => $this->conf['view.']['event.']['notify.']['replyToName']));
+										}
+										
 										$mailer->getHeaders()->addTextHeader(array('Organization: ' => $this->conf['view.']['event.']['notify.']['organisation']));
 	
 										$local_template = $cObj->fileResource($this->conf['view.']['event.']['notify.']['confirmTemplate']);

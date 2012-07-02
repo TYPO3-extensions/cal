@@ -386,7 +386,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 	 * @param	array	iCalendar component array
 	 * @return	array	insertedOrUpdatedEventUids
 	 */
-	function insertCalEventsIntoDB($iCalendarComponentArray=array(), $calId, $pid='', $cruserId='', $isTemp=1){
+	function insertCalEventsIntoDB($iCalendarComponentArray=array(), $calId, $pid='', $cruserId='', $isTemp=1, $deleteNotUsedCategories=true){
 		$insertedOrUpdatedEventUids = Array();
 		$insertedOrUpdatedCategoryUids = Array();
 		if(empty($iCalendarComponentArray)){
@@ -650,13 +650,15 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 			}
 		}
 
-		/* Delete the categories */
-		$where = ' calendar_id='.$calId;
-		if(!empty($insertedOrUpdatedCategoryUids)){
-			array_unique($insertedOrUpdatedCategoryUids);
-			$where .= ' AND uid NOT IN ('.implode(',',$insertedOrUpdatedCategoryUids).')';
+		if($deleteNotUsedCategories){
+			/* Delete the categories */
+			$where = ' calendar_id='.$calId;
+			if(!empty($insertedOrUpdatedCategoryUids)){
+				array_unique($insertedOrUpdatedCategoryUids);
+				$where .= ' AND uid NOT IN ('.implode(',',$insertedOrUpdatedCategoryUids).')';
+			}
+			$GLOBALS['TYPO3_DB']->exec_DELETEquery('tx_cal_category', $where);
 		}
-		$GLOBALS['TYPO3_DB']->exec_DELETEquery('tx_cal_category', $where);
 		return $insertedOrUpdatedEventUids;
 	}
 	

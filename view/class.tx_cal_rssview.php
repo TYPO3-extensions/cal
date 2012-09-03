@@ -303,7 +303,7 @@ class tx_cal_rssview extends tx_cal_base_view {
 			$markerArray['###NEWS_COPYRIGHT###'] = '';
 		}
 
-		$charset = ($GLOBALS['TSFE']->metaCharset?$GLOBALS['TSFE']->metaCharset:'iso-8859-1');
+		$charset = ($GLOBALS['TSFE']->metaCharset?$GLOBALS['TSFE']->metaCharset:'utf-8');
 		if ($this->conf['view.']['rss.']['xmlDeclaration']) {
 			$markerArray['###XML_DECLARATION###'] = trim($this->conf['view.']['rss.']['xmlDeclaration']);
 		} else {

@@ -109,7 +109,7 @@ class user_htmlCrop {
 		$replaceString = $conf['replaceString'] ? $conf['replaceString'] : '...';
 		// Reset tag counter & quote checker
 		
-		$doc = new DOMDocument('1.0', 'iso-8859-1');
+		$doc = new DOMDocument('1.0', 'utf-8');
 		$doc->loadHTML('<body>' . $content . '</body>');	
 		$bodyTags = $doc->getElementsByTagName('body');
 		$length = 0;

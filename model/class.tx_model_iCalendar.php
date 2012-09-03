@@ -86,7 +86,7 @@ class tx_model_iCalendar {
      */
     var $_version;
     
-    var $defaultCharSet = 'iso-8859-1';
+    var $defaultCharSet = 'utf-8';
 
     function tx_model_iCalendar($version = '2.0')
     {

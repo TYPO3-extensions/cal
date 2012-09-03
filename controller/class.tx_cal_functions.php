@@ -116,7 +116,7 @@ class tx_cal_functions {
 		} elseif (is_object($GLOBALS['LANG']))	{
 			$charset = $GLOBALS['LANG']->charSet;	// If "LANG" is around, that will hold the current charset
 		} else {
-			$charset = 'iso-8859-1';	// THIS is just a hopeful guess!
+			$charset = 'utf-8';	// THIS is just a hopeful guess!
 		}
 		 
 		 return $charset;

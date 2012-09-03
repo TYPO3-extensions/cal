@@ -134,7 +134,7 @@ class tx_cal_tceforms_getmainfields {
 		if($ymdDate) {
 			$dateObj = new tx_cal_date(intval($ymdDate).'000000');
 			$dateObj->setTZbyId('UTC');
-			if(t3lib_div::int_from_ver(TYPO3_version) >= 4003000){
+			if(t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000){
 				return $dateObj->getTime();
 			}
 			$dateString = $dateObj->format($format);

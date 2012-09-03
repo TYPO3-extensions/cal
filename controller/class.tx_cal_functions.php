@@ -54,7 +54,7 @@ class tx_cal_functions {
 	}
 	
 	public static function clearCache() {
-		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
 			// only use cachingFramework if initialized and configured in TYPO3
 			if(t3lib_cache::isCachingFrameworkInitialized() && TYPO3_UseCachingFramework) {
 				$pageCache = $GLOBALS['typo3CacheManager']->getCache('cache_pages');
@@ -349,7 +349,7 @@ class tx_cal_functions {
 	public static function &makeInstance($className) {
 		
 		// for TYPO3 versions older than 4.3
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000) {
 			$className = t3lib_div::makeInstance($className);
 			if (func_num_args() > 1) {
 					// getting the constructor arguments by removing this

@@ -968,7 +968,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 									//send confirm email!!
 									$email = $this->controller->piVars['email'];
 
-									if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+									if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 										require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
 										$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
 										$mailer->start();
@@ -1102,7 +1102,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										$GLOBALS['TYPO3_DB']->sql_free_result($result);
 									}
 
-									if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+									if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 										require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
 										$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
 										$mailer->start();
@@ -1479,7 +1479,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 		//due tue missing TS configuration  support of the uploads rendering of css_styled_content, we have to manually fake some db values for it
 		$tempData = $this->getValuesAsArray();
 		$tempData['filelink_size'] = $this->conf['view.'][$view.'.']['event.']['attachment.']['showFileSize'];
-		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+		if ((TYPO3_version) >= 4003000) {
 			$tempData['tx_cal_media'] = implode(',',$this->getAttachment());
 		} else {
 			$tempData['media'] = implode(',',$this->getAttachment());

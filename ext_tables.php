@@ -319,7 +319,7 @@ $TCA['tx_cal_event_deviation'] = Array (
 
 
 // enable label_userFunc only for TYPO3 v 4.1 and higher
-if (t3lib_div::int_from_ver(TYPO3_version) >= 4001000) {
+if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4001000) {
 	$TCA['tx_cal_attendee']['ctrl']['label_userFunc']="tx_cal_labels->getAttendeeRecordLabel";
 	$TCA['tx_cal_fe_user_event_monitor_mm']['ctrl']['label_userFunc']="tx_cal_labels->getMonitoringRecordLabel";
 	$TCA['tx_cal_event_deviation']['ctrl']['label_userFunc']="tx_cal_labels->getDeviationRecordLabel";

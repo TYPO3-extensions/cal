@@ -113,7 +113,7 @@ switch ($useOrganizerStructure){
 		$organizerOrderBy = 'name';
 	break;
 }
-if (t3lib_div::int_from_ver(TYPO3_version) < 4003000){
+if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
 	/* If date2cal is loaded, include it as a wizard */
 	if(t3lib_extMgm::isLoaded('date2cal')) {
 		$date2CalTCA = Array (
@@ -2984,7 +2984,7 @@ if(t3lib_extMgm::isLoaded('scheduler')) {
 	$TCA['tx_cal_calendar']['columns']['refresh']['displayCond'] = 'EXT:scheduler:LOADED:true';
 }
 
-if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
+if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000) {
 	$TCA['tx_cal_event']['columns']['start_date']['config']['eval'] = 'required,tx_cal_dateeval';
 	$TCA['tx_cal_event']['columns']['start_date']['config']['wizards'] = Array ('calendar' => $date2CalTCA);
 	
@@ -3001,7 +3001,7 @@ if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
 	$TCA['tx_cal_exception_event']['columns']['until']['config']['wizards'] = Array ('calendar' => $date2CalTCA);
 }
 
-if($confArr['newRecurUI'] && (t3lib_div::int_from_ver(TYPO3_version) >= 4001000)) {
+if($confArr['newRecurUI'] && (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4001000)) {
 	require_once(t3lib_extMgm::extPath('cal').'res/class.tx_cal_customtca.php');
 	
 	$TCA['tx_cal_event']['columns']['byday']['label'] = 'LLL:EXT:cal/locallang_db.php:tx_cal_event.byday_short';
@@ -3054,7 +3054,7 @@ if($confArr['newRecurUI'] && (t3lib_div::int_from_ver(TYPO3_version) >= 4001000)
 	
 }
 
-if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
 	t3lib_div::loadTCA('tt_content');
 	$GLOBALS['TCA']['tt_content']['columns']['tx_cal_media']['config']['uploadfolder'] = 'uploads/tx_cal/media';
 }

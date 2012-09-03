@@ -225,7 +225,7 @@ class tx_cal_controller extends tslib_pibase {
 		$this->pi_loadLL();
 
 		$this->conf['cache']=1;
-		if (t3lib_div::int_from_ver(TYPO3_version) >= 4003000) {
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
 			$GLOBALS['TSFE']->addCacheTags(array('cal'));
 		} else {
 			$GLOBALS['TSFE']->page_cache_reg1 = 77;

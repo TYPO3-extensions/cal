@@ -201,7 +201,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		$rems = array();
 		$wrapped = array();
 		$event_new->getMarker($titleText,$switch,$rems, $wrapped, 'title');
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 			$this->mailer->subject = tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped);
 		} else {
 			$this->mailer->setSubject(tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped));
@@ -403,7 +403,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		$wrapped = array();
 		$event->getMarker($titleText,$switch,$rems, $wrapped, 'title');
 		
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 			$this->mailer->subject = tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped);
 		} else {
 			$this->mailer->setSubject(tx_cal_functions::substituteMarkerArrayNotCached($titleText, $switch, $rems, $wrapped));
@@ -462,7 +462,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 					$title = $event_new->getTitle().'.ics';
 					$title = strtr($title,array(' '=>'',','=>'_',));
 					$icsAttachmentFile = $this->createTempIcsFile($ics, $title);
-					if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 						$this->mailer->addAttachment($icsAttachmentFile);
 					} else {
 						$attachment = Swift_Attachment::fromPath($icsAttachmentFile, 'text/calendar');
@@ -475,7 +475,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 						$this->sendNotification($event_old, $attendee->getEmail(), $template, '###TITLE###', '', $acceptLink, $declineLink);
 					}
 					unlink($icsAttachmentFile);
-					if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 						$this->mailer->theParts['attach'] = array();
 					}
 				}
@@ -489,7 +489,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			foreach(array_keys($globalAttendeeArray[$serviceType]) as $uid){
 				$attendee = &$globalAttendeeArray[$serviceType][$uid];
 				if($attendee->getAttendance()=='CHAIR'){
-					if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 						$this->mailer->from_email = $attendee->getEmail();
 						$this->mailer->from_name = $attendee->getName();
 						$this->mailer->replyto_email = $attendee->getEmail();
@@ -508,7 +508,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 	}
 	
 	function startMailer(){
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 			require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
 			$this->mailer =t3lib_div::makeInstance('t3lib_htmlmail');
 			$this->mailer->start();
@@ -536,7 +536,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		$this->controller->finish($plainTemplate);
 		$plainTemplate = str_replace('&nbsp;',' ',strip_tags($plainTemplate));
  		
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4005010){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
 			$this->mailer->theParts['html']['content'] = $htmlTemplate;
 			$this->mailer->theParts['html']['path'] = '';
 			$this->mailer->extractMediaLinks();

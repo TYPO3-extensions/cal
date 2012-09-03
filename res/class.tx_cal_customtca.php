@@ -65,7 +65,7 @@ class tx_cal_customtca {
 		$this->newIcon = '<img'.t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'],'gfx/new_el.gif').' title="'.$LANG->getLL('tx_cal_event.add_recurrence').'" alt="'.$LANG->getLL('tx_cal_event.add_recurrence').'" />';
 		
 		$this->commonJS = '';
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
 			$this->commonJS = '<script type="text/javascript" src="contrib/prototype/prototype.js"></script>'.chr(10);
 		}
 		$this->commonJS .= '<script src="'.t3lib_extMgm::extRelPath('cal').'res/recurui.js" type="text/javascript"></script>'.chr(10).
@@ -273,7 +273,7 @@ class tx_cal_customtca {
 		$out[] = 'var rdate = document.getElementById("data['.$this->table.']['.$this->uid.'][rdate]");';
 		$out[] = 'rdate.value="";';
 		$out[] = 'for(var i=0; i<rdateCount; i++){';
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
 			$out[] = 'var dateFormated = document.getElementById("data_'.$this->table.'_'.$this->uid.'_rdate"+i+"_hr").value;';
 		} else {
 			if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
@@ -323,7 +323,7 @@ class tx_cal_customtca {
 		$out[] = '}';
 		$out[] = '</script>';
 		$calendarWizard = true;
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
 			$calendarWizard = $TCA[$this->table]['columns']['start_date']['config']['wizards']['calendar'];
 		}
 		if($calendarWizard){
@@ -349,9 +349,9 @@ class tx_cal_customtca {
 
 					}
 				}
-				if (t3lib_div::int_from_ver(TYPO3_version) < 4003000){
+				if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
 					$out[] = '<div style="float:left;"><input type="text" value="'.$formatedValue.'" name="rdate'.$key.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="rdateChanged();"/><input type="hidden" value="'.$formatedValue.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'" />';
-				} else if (t3lib_div::int_from_ver(TYPO3_version) < 4004000){
+				} else if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4004000){
 					if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
 						$out[] = '<div style="float:left;"><input type="text" value="'.$formatedValue.'" class="formField tceforms-textfield tceforms-timefield" name="rdate'.$key.'" id="tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="'.
 								'rdateChanged();"/>'.
@@ -386,7 +386,7 @@ class tx_cal_customtca {
 				} else if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
 					$params['wConf']['evalValue'] = 'datetime';
 				}
-				if (t3lib_div::int_from_ver(TYPO3_version) < 4003000){
+				if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
 					t3lib_div::callUserFunction($calendarWizard['userFunc'], $params, $fobj);
 				}
 				

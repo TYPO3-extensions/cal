@@ -739,7 +739,7 @@ require_once(t3lib_extMgm::extPath($_EXTKEY).'res/class.tx_cal_isCalNotAllowedTo
 
 /* XCLASS */
 // enable only for versions less then TYPO3 v 4.3
-#if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
+#if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000) {
 	$GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['typo3/wizard_edit.php'] = t3lib_extMgm::extPath($_EXTKEY).'xclass/class.ux_wizard_edit.php';
 #}
 

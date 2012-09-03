@@ -512,7 +512,7 @@ class tx_cal_tcemain_processdatamap {
 	 * @return		string		The date in Ymd format.
 	 */
 	function convertBackendDateToYMD($dateString) {
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
 			
 			// simple fallback conversion if JS fails for some reason
 			$dateString = strtr($dateString,' ;.:_=/\\','--------');

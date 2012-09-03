@@ -35,7 +35,7 @@ require_once (PATH_tslib.'class.tslib_fe.php');
 
 class tx_cal_tsfe extends tslib_fe {
 	function tx_cal_tsfe($TYPO3_CONF_VARS, $id, $type, $no_cache='', $cHash='', $jumpurl='',$MP='',$RDCT=''){
-		if (t3lib_div::int_from_ver(TYPO3_version) < 4006000){
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4006000){
 			return $this->tslib_fe($TYPO3_CONF_VARS, $id, $type, $no_cache, $cHash, $jumpurl,$MP,$RDCT);
 		}
 		return $this->__construct($TYPO3_CONF_VARS, $id, $type, $no_cache, $cHash, $jumpurl,$MP,$RDCT);

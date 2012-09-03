@@ -475,7 +475,7 @@ plugin.tx_cal_controller {
 					}
 					stdWrap.dataWrap >
 					text =< tt_content.textpic.20.text
-					text.20.field = description
+					text.field = description
 				}
 	
 				# @description	Defines cropping for event description in event view.

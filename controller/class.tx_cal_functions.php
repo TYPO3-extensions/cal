@@ -350,7 +350,7 @@ class tx_cal_functions {
 		
 		// for TYPO3 versions older than 4.3
 		if (t3lib_div::int_from_ver(TYPO3_version) < 4003000) {
-			$className = t3lib_div::makeInstanceClassName($className);
+			$className = t3lib_div::makeInstance($className);
 			if (func_num_args() > 1) {
 					// getting the constructor arguments by removing this
 					// method's first argument (the class name)

@@ -53,7 +53,7 @@ class tx_cal_wizicon {
 	}
 	function includeLocalLang()	{
 		$llFile = t3lib_extMgm::extPath('cal').'locallang.xml';
-        $LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
+        $LOCAL_LANG = t3lib_l10n_parser_Llxml::getParsedData($llFile, $GLOBALS['LANG']->lang);
         return $LOCAL_LANG;
 
 	}

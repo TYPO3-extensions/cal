@@ -297,9 +297,9 @@ class tx_cal_treeview {
 		}
 		
 			// Set max and min items:
-		$maxitems = t3lib_div::intInRange($config['maxitems'],0);
+		$maxitems = t3lib_utility_Math::forceIntegerInRange($config['maxitems'],0);
 		if (!$maxitems) $maxitems=100000;
-		$minitems = t3lib_div::intInRange($config['minitems'],0);
+		$minitems = t3lib_utility_Math::forceIntegerInRange($config['minitems'],0);
 
 			// Register the required number of elements:
 		$test->requiredElements[$PA['itemFormElName']] = array($minitems,$maxitems,'imgName'=>$table.'_'.$row['uid'].'_'.$field);
@@ -322,7 +322,7 @@ class tx_cal_treeview {
 				// Put together the selector box:
 			$selector_itemListStyle = isset($config['itemListStyle']) ? ' style="'.htmlspecialchars($config['itemListStyle']).'"' : ' style="'.$this->defaultMultipleSelectorStyle.'"';
 			$size = intval($config['size']);
-			$size = $config['autoSizeMax'] ? t3lib_div::intInRange(count($itemArray)+1,t3lib_div::intInRange($size,1),$config['autoSizeMax']) : $size;
+			$size = $config['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange(count($itemArray)+1,t3lib_utility_Math::forceIntegerInRange($size,1),$config['autoSizeMax']) : $size;
 			if ($config['exclusiveKeys'])	{
 				$sOnChange = 'setFormValueFromBrowseWin(\''.$PA['itemFormElName'].'\',this.options[this.selectedIndex].value,this.options[this.selectedIndex].text,\''.$config['exclusiveKeys'].'\'); ';
 			} else {
@@ -342,7 +342,7 @@ class tx_cal_treeview {
 		}
 		$params = array(
 			'size' => $config['size'],
-			'autoSizeMax' => t3lib_div::intInRange($config['autoSizeMax'],0),
+			'autoSizeMax' => t3lib_utility_Math::forceIntegerInRange($config['autoSizeMax'],0),
 			'style' => isset($config['selectedListStyle']) ? ' style="'.htmlspecialchars($config['selectedListStyle']).'"' : ' style="'.$this->defaultMultipleSelectorStyle.'"',
 			'dontShowMoveIcons' => ($config['maxitems']<=1),
 			'maxitems' => $config['maxitems'],
@@ -538,9 +538,9 @@ class tx_cal_treeview {
 				$item.= '<input type="hidden" name="'.$PA['itemFormElName'].'_mul" value="'.($config['multiple']?1:0).'" />';
 
 					// Set max and min items:
-				$maxitems = t3lib_div::intInRange($config['maxitems'],0);
+				$maxitems = t3lib_utility_Math::forceIntegerInRange($config['maxitems'],0);
 				if (!$maxitems) $maxitems=100000;
-				$minitems = t3lib_div::intInRange($config['minitems'],0);
+				$minitems = t3lib_utility_Math::forceIntegerInRange($config['minitems'],0);
 
 					// Register the required number of elements:
 				$this->pObj->requiredElements[$PA['itemFormElName']] = array($minitems,$maxitems,'imgName'=>$table.'_'.$row['uid'].'_'.$field);
@@ -848,13 +848,13 @@ class tx_cal_treeview {
 
 					$width = 280; // default width for the field with the category tree
 					if (intval($confArr['categoryTreeWidth'])) { // if a value is set in extConf take this one.
-						$width = t3lib_div::intInRange($confArr['categoryTreeWidth'],1,600);
+						$width = t3lib_utility_Math::forceIntegerInRange($confArr['categoryTreeWidth'],1,600);
 					} elseif ($GLOBALS['CLIENT']['BROWSER']=='msie') { // to suppress the unneeded horizontal scrollbar IE needs a width of at least 320px
 						$width = 320;
 					}
 
-					$config['autoSizeMax'] = t3lib_div::intInRange($config['autoSizeMax'],0);
-					$height = $config['autoSizeMax'] ? t3lib_div::intInRange($treeItemC+2,t3lib_div::intInRange($size,1),$config['autoSizeMax']) : $size;
+					$config['autoSizeMax'] = t3lib_utility_Math::forceIntegerInRange($config['autoSizeMax'],0);
+					$height = $config['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange($treeItemC+2,t3lib_utility_Math::forceIntegerInRange($size,1),$config['autoSizeMax']) : $size;
 						// hardcoded: 16 is the height of the icons
 					$height=$height*16;
 
@@ -869,7 +869,7 @@ class tx_cal_treeview {
 
 						// Put together the select form with selected elements:
 					$selector_itemListStyle = isset($config['itemListStyle']) ? ' style="'.htmlspecialchars($config['itemListStyle']).'"' : ' style="'.$this->pObj->defaultMultipleSelectorStyle.'"';
-					$size = $config['autoSizeMax'] ? t3lib_div::intInRange(count($itemArray)+1,t3lib_div::intInRange($size,1),$config['autoSizeMax']) : $size;
+					$size = $config['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange(count($itemArray)+1,t3lib_utility_Math::forceIntegerInRange($size,1),$config['autoSizeMax']) : $size;
 					$thumbnails = '<select style="width:150px;" name="'.$PA['itemFormElName'].'_sel"'.$this->pObj->insertDefStyle('select').($size?' size="'.$size.'"':'').' onchange="'.htmlspecialchars($sOnChange).'"'.$PA['onFocus'].$selector_itemListStyle.'>';
 					#$thumbnails = '<select						  name="'.$PA['itemFormElName'].'_sel"'.$this->pObj->insertDefStyle('select').($size?' size="'.$size.'"':'').' onchange="'.htmlspecialchars($sOnChange).'"'.$PA['onFocus'].$selector_itemListStyle.'>';
 					foreach($selItems as $p)	{
@@ -895,11 +895,11 @@ class tx_cal_treeview {
 				}
 				$sWidth = 150; // default width for the left field of the category select
 				if (intval($confArr['categorySelectedWidth'])) {
-					$sWidth = t3lib_div::intInRange($confArr['categorySelectedWidth'],1,600);
+					$sWidth = t3lib_utility_Math::forceIntegerInRange($confArr['categorySelectedWidth'],1,600);
 				}
 				$params=array(
 					'size' => $size,
-					'autoSizeMax' => t3lib_div::intInRange($config['autoSizeMax'],0),
+					'autoSizeMax' => t3lib_utility_Math::forceIntegerInRange($config['autoSizeMax'],0),
 					#'style' => isset($config['selectedListStyle']) ? ' style="'.htmlspecialchars($config['selectedListStyle']).'"' : ' style="'.$this->pObj->defaultMultipleSelectorStyle.'"',
 					'style' => ' style="width:'.$sWidth.'px;"',
 					'dontShowMoveIcons' => ($maxitems<=1),
@@ -918,7 +918,6 @@ class tx_cal_treeview {
 				$item = $this->pObj->renderWizards(array($item,$altItem),$config['wizards'],$table,$row,$field,$PA,$PA['itemFormElName'],$specConf);
 			}
 		}
-		#debug($item, "item");
 		return $this->NA_Items.implode($errorMsg,chr(10)).$item;
 
 	}

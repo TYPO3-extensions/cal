@@ -50,7 +50,6 @@ class tx_cal_create_category_view extends tx_cal_fe_editing_base_view {
 	 *	@return		string		The HTML output.
 	 */
 	function drawCreateCategory($pidList, $category=''){	
-//debug($this->controller->piVars);
 		$this->objectString = 'category';	
 		
 		if(!$this->rightsObj->isAllowedToCreateGeneralCategory()){

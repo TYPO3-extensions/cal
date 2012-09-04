@@ -338,7 +338,6 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 		
 		$this->calendarSearchStringCache[$hash] = $calendarSearchString;
 
-//debug($calendarSearchString);
 		return $calendarSearchString;
 	}
 	
@@ -400,7 +399,6 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 			}
 			$table = 'tx_cal_calendar';
 			
-//t3lib_div::debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where);
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, '', $orderBy);
 			if($result) {
 				while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {
@@ -447,7 +445,6 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 				$where .= ' AND uid IN ('.$limitationList.')';
 			}
 			$groupBy = 'tx_cal_calendar.uid';
-//t3lib_div::debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where.' GROUP BY '.$groupBy);
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table ,$where, $groupBy, $orderBy);
 			if($result) {
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {
@@ -468,7 +465,6 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 			$limitationArray = explode(',',$limitationList);
 			$this->calendarIds = array_intersect($this->calendarIds,$limitationArray);
 		}
-//t3lib_div::debug($this->calendarIds);
 		return $this->calendarIds;
 	}
 	

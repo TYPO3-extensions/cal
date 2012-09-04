@@ -205,7 +205,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 		if($onlyMeetingsWithoutStatus){
 			$table .= ', tx_cal_attendee';
 			$where .= ' AND tx_cal_attendee.event_id = tx_cal_event.uid';
-//debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where.' GROUP BY '.$groupBy.' ORDER BY '.$orderBy,'Select');
 		}
 
 		if(TYPO3_MODE!='BE'){
@@ -216,14 +215,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$table .= $this->internalAdditionTable;
 
 		$limit = '';
-/*
-t3lib_div::debug($select);
-t3lib_div::debug($table);
-t3lib_div::debug($where);
-t3lib_div::debug($orderBy);
-*/
-//t3lib_div::debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where.' GROUP BY '.$groupBy.' ORDER BY '.$orderBy,'Select');
-
 
 		$hookObjectsArr = tx_cal_functions::getHookObjectsArray('tx_cal_event_service','eventServiceClass','service');
 
@@ -476,7 +467,6 @@ t3lib_div::debug($orderBy);
 			$groupby = 'tx_cal_event_category_mm.uid_local';
 			$orderby = '';
 			$where = 'tx_cal_event.pid IN ('.$this->conf['pidList'].')';
-//	t3lib_div::debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where.' GROUP BY '.$groupby);
 				
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select,$table,$where,$groupby,$orderby);
 			if($result) {

@@ -453,7 +453,6 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 	 * @return		array		Array of events.
 	 */
 	function findAllWithin($serviceName, &$startDateObject, &$endDateObject, $type='', $subtype='', $pidList='', $eventType='', $additionalWhere='') {
-//t3lib_div::debug('findallWithin Start:'.microtime());
 		/* No key provided so return all events */
 		if ($type == '') {		
 			$serviceChain='';
@@ -495,7 +494,6 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 				ksort($obj);
 				$return[$key] = $obj;
 			}
-//debug('findallWithin end:'.microtime());
 			return $return;
 		} 
 		/* Operate on the provided key only */
@@ -767,8 +765,6 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 				return $obj;
 			}
 		}
-		
-		//debug('No Service Object for model type '.$type.' with key '.$key.' found.', 'Error!');
 	}
 	
 	/**
@@ -788,7 +784,6 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 			$returnArray[] = $obj->getServiceKey();
 		}
 		return $returnArray;
-		//debug('No Service Object for model type '.$type.' with key '.$key.' found.', 'Error!');
 	}
 	
 	function findAllObjects($key, $type, $pidList, $functionTobeCalled = '', $paramsToBePassedOn='') {

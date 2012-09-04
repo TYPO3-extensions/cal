@@ -73,8 +73,6 @@ class tx_cal_controller extends tslib_pibase {
 	 *	@return		string		HTML-representation of calendar data.
 	 */
 	function main($content, $conf) {
-
-#debug('Start:'.tx_cal_functions::getmicrotime());
 		$this->conf = &$conf;
 		
 		$this->conf['useInternalCaching'] = 1;
@@ -106,7 +104,6 @@ class tx_cal_controller extends tslib_pibase {
 		if(!$this->error){
 			$return .= $this->getContent();
 		}
-#debug('End:'.tx_cal_functions::getmicrotime());
 
 		return $return;
 	}
@@ -954,9 +951,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		$timeObj = new tx_cal_date($this->conf['getdate'].'000000');
 		$timeObj->setTZbyId('UTC');
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		$master_array = $modelObj->findEventsForDay($timeObj, $type, $pidList);
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		// Hook: preDayRendering
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists($hookObj, 'preDayRendering')) {
@@ -964,9 +959,7 @@ class tx_cal_controller extends tslib_pibase {
 			}
 		}
 		$viewObj = &tx_cal_registry::Registry('basic','viewcontroller');
-		#debug('$drawnDay:'.tx_cal_functions::getmicrotime());
 		$drawnDay = $viewObj->drawDay($master_array, $getdate);
-		#debug('$drawnDay:'.tx_cal_functions::getmicrotime());
 		// Hook: postDayRendering
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists($hookObj, 'postDayRendering')) {
@@ -990,9 +983,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		$timeObj = new tx_cal_date($this->conf['getdate'].'000000');
 		$timeObj->setTZbyId('UTC');
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		$master_array = $modelObj->findEventsForWeek($timeObj, $type, $pidList);
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		// Hook: preWeekRendering
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists($hookObj, 'preWeekRendering')) {
@@ -1000,9 +991,7 @@ class tx_cal_controller extends tslib_pibase {
 			}
 		}
 		$viewObj = &tx_cal_registry::Registry('basic','viewcontroller');
-		#debug('$drawnWeek:'.tx_cal_functions::getmicrotime());
 		$drawnWeek = $viewObj->drawWeek($master_array, $getdate);
-		#debug('$drawnWeek:'.tx_cal_functions::getmicrotime());
 		// Hook: postWeekRendering
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists($hookObj, 'postWeekRendering')) {
@@ -1033,10 +1022,8 @@ class tx_cal_controller extends tslib_pibase {
 	
 			$timeObj = new tx_cal_date($this->conf['getdate'].'000000');
 			$timeObj->setTZbyId('UTC');
-			#debug('$master_array:'.tx_cal_functions::getmicrotime());
 			$master_array = $modelObj->findEventsForMonth($timeObj, $type, $pidList);
 		}
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		// Hook: preMonthRendering
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists($hookObj, 'preMonthRendering')) {
@@ -1044,9 +1031,7 @@ class tx_cal_controller extends tslib_pibase {
 			}
 		}
 		$viewObj = &tx_cal_registry::Registry('basic','viewcontroller');
-		#debug('$drawnMonth:'.tx_cal_functions::getmicrotime());
 		$drawnMonth = $viewObj->drawMonth($master_array, $getdate);
-		#debug('$drawnMonth:'.tx_cal_functions::getmicrotime());
 		// Hook: postMonthRendering
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists($hookObj, 'postMonthRendering')) {
@@ -1069,9 +1054,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		$timeObj = new tx_cal_date($this->conf['getdate'].'000000');
 		$timeObj->setTZbyId('UTC');
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		$master_array = $modelObj->findEventsForYear($timeObj, $type, $pidList);
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		// Hook: preYearRendering
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists($hookObj, 'preYearRendering')) {
@@ -1080,9 +1063,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 
 		$viewObj = &tx_cal_registry::Registry('basic','viewcontroller');
-		#debug('$drawnYear:'.tx_cal_functions::getmicrotime());
 		$drawnYear = $viewObj->drawYear($master_array, $getdate);
-		#debug('$drawnYear:'.tx_cal_functions::getmicrotime());
 		// Hook: postYearRendering
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists($hookObj, 'postYearRendering')) {
@@ -2472,7 +2453,6 @@ class tx_cal_controller extends tslib_pibase {
 
 		$endObj = new tx_cal_date($this->piVars['end'].'000000');
 		$endObj->setTZbyId('UTC');
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		$eventTypes = '0,1,2,3';
 		
 		if($confArr['todoSubtype']=='event'){
@@ -2633,7 +2613,6 @@ class tx_cal_controller extends tslib_pibase {
 			$type = '';
 		}
 
-		#debug('$master_array:'.tx_cal_functions::getmicrotime());
 		$result_array = $modelObj->findCurrentTodos($type, $pidList);
 		
 		// Hook: preLoadTodosRendering

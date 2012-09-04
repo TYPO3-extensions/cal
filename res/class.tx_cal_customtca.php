@@ -332,7 +332,6 @@ class tx_cal_customtca {
 				$formatedValue = '';
 				$splittedPeriod = Array('','');
 				if($value!=''){
-//debug($value);
 					$splittedPeriod = explode('/',$value);
 					$splittedDateTime = explode('T',$splittedPeriod[0]);
 					if($jsDate=='%d-%m-%Y'){
@@ -343,10 +342,7 @@ class tx_cal_customtca {
 						$formatedValue = 'unknown date format';
 					}
 					if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
-//debug($splittedDateTime);
 						$formatedValue = count($splittedDateTime)==2?substr($splittedDateTime[1],0,2).':'.substr($splittedDateTime[1],2,2).' '.$formatedValue:'00:00 '.$formatedValue;
-//debug($formatedValue);
-
 					}
 				}
 				if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){

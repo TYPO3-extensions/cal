@@ -460,9 +460,6 @@ class tx_cal_base_model extends tx_cal_abstract_model{
 		}
 		preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $template, $match);
 		$allMarkers = array_unique($match[1]);
-		/*if($this->getObjectType()=='event'){
-		 debug($allMarkers);
-		 }*/
 
 		foreach ($allMarkers as $marker) {
 			switch ($marker) {
@@ -484,10 +481,7 @@ class tx_cal_base_model extends tx_cal_abstract_model{
 		preg_match_all('!\###([A-Z0-9_-|]*)\###!is', $template, $match);
 		$allSingleMarkers = array_unique($match[1]);
 		$allSingleMarkers = array_diff($allSingleMarkers, $allMarkers);
-		/*if($this->getObjectType()=='event'){
-		 debug($allSingleMarkers);
-		 }*/
-
+		
 		foreach ($allSingleMarkers as $marker) {
 			switch ($marker) {
 				case 'ACTIONURL':

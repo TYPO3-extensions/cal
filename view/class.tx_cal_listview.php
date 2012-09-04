@@ -878,7 +878,7 @@ class tx_cal_listview extends tx_cal_base_view {
 
 	function hasPeriodChanged($old,$new,$reverse = false,$debug = false) {
 		if($debug) {
-			t3lib_div::debug(array($old,$new,$reverse));
+			t3lib_utility_Debug::debug(array($old,$new,$reverse));
 		}
 		if($reverse) {
 			return (intval($new) < intval($old));

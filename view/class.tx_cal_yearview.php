@@ -49,7 +49,6 @@ class tx_cal_yearview extends tx_cal_monthview {
 	 *	 @return		string		The HTML output.
 	 */
 	function drawYear(&$master_array, $getdate) {
-//debug($master_array);
 		$this->_init($master_array);
 
 		$page = $this->cObj->fileResource($this->conf['view.']['year.']['yearTemplate']);

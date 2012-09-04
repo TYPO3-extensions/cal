@@ -52,7 +52,6 @@ class tx_cal_confirm_location_organizer_view extends tx_cal_fe_editing_base_view
 	 *	@return		string		The HTML output.
 	 */
 	function drawConfirmLocationOrOrganizer($isLocation=true){
-//debug($this->controller->piVars);		
 		$this->isLocation = $isLocation;
 		$this->isConfirm = true;
 		if($isLocation){

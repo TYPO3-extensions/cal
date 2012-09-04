@@ -80,9 +80,6 @@ class tx_cal_tceFunc_selectTreeView extends t3lib_treeview {
 	 * @return	string		the wrapped title
 	 */
 	function wrapTitle($title,$v)	{
-		
-#debug($v, "wrapTitle");
-		
 		if($v['uid']>0) {
 			if(in_array($v['uid'],$this->MOUNTS) || in_array($v['uid'],$this->TCEforms_nonSelectableItemsArray)){
 				return '<a href="#" title="'.$v['title'].'"><span style="color:#999;cursor:default;">'.$title.'</span></a>';
@@ -452,9 +449,7 @@ class tx_cal_treeview {
 
 			// Getting the selector box items from the system
 		$selItems = $this->pObj->addSelectOptionsToItemArray($this->pObj->initItemArray($PA['fieldConf']),$PA['fieldConf'],$this->pObj->setTSconfig($table,$row),$field);
-		#debug($selItems, "selItems");
 		$selItems = $this->pObj->addItems($selItems,$PA['fieldTSConfig']['addItems.']);
-		#debug($selItems, "selItems");
 		#if ($config['itemsProcFunc']) $selItems = $this->pObj->procItems($selItems,$PA['fieldTSConfig']['itemsProcFunc.'],$config,$table,$row,$field);
 
 			// Possibly remove some items:
@@ -475,8 +470,6 @@ class tx_cal_treeview {
 			}
 		}
 		
-		#debug($selItems, "selItems");
-
 			// Creating the label for the "No Matching Value" entry.
 		$nMV_label = isset($PA['fieldTSConfig']['noMatchingValue_label']) ? $this->pObj->sL($PA['fieldTSConfig']['noMatchingValue_label']) : '[ '.$this->pObj->getLL('l_noMatchingValue').' ]';
 		$nMV_label = @sprintf($nMV_label, $PA['itemFormElValue']);
@@ -512,7 +505,6 @@ class tx_cal_treeview {
 				$na = false;
 				if($catres) {
 					while ($catrow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($catres)) {
-	#t3lib_div::debug($catrow, "catrow");
 						if(in_array($catrow['uid'],$notAllowedItems)) {
 							$categories[$catrow['uid']] = $NACats[] = '<p style="padding:0px;color:red;font-weight:bold;">- '.$catrow['title'].' <span class="typo3-dimmed"><em>['.$catrow['uid'].']</em></span></p>';
 							$na = true;
@@ -829,9 +821,6 @@ class tx_cal_treeview {
 						// render tree html
 					$treeContent=$treeViewObj->getBrowsableTree();
 					$treeItemC = count($treeViewObj->dataLookup);
-					#debug($treeViewObj->tree, "treeViewObj");
-					
-					#debug($treeItemC, "treeItemC");
 
 					/*
 					if ($defItems[0]) { // add default items to the tree table. In this case the value [not categorized]

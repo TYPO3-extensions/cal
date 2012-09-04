@@ -327,7 +327,6 @@ class tx_cal_base_view extends tx_cal_base_service {
 			$now->setHour(23);
 			$now->setMinute(59);
 		}
-//debug($cal_time_obj->format('%Y%m%d %H%M').' after'.$now->format('%Y%m%d %H%M'),'hier:'.$createOffset);
 		if (($cal_time_obj->after($now) || $this->rightsObj->isAllowedToCreateEventInPast()) && $isAllowedToCreateEvent) {
 			$this->initLocalCObject();
 			if($this->conf['view.']['enableAjax']){
@@ -463,9 +462,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 		}
 		preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $template, $match);
 		$allMarkers = array_unique($match[1]);
-		/*if($this->getObjectType()=='event'){
-		 debug($allMarkers);
-		 }*/
+
 		foreach ($allMarkers as $marker) {
 			switch ($marker) {
 				default :
@@ -487,9 +484,6 @@ class tx_cal_base_view extends tx_cal_base_service {
 		preg_match_all('!\###([A-Z0-9_-|]*)\###!is', $template, $match);
 		$allSingleMarkers = array_unique($match[1]);
 		$allSingleMarkers = array_diff($allSingleMarkers, $allMarkers);
-		/*if($this->getObjectType()=='event'){
-		 debug($allSingleMarkers);
-		 }*/
 
 		foreach ($allSingleMarkers as $marker) {
 			switch ($marker) {

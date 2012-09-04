@@ -70,7 +70,7 @@ class tx_cal_new_monthview extends tx_cal_new_timeview {
 		if($cache != ''){
 			$return = unserialize($cache);
 			if($return === FALSE){
-debug('could not unserialize cache for month:'.$month.'_'.$year);
+//debug('could not unserialize cache for month:'.$month.'_'.$year);
 			}
 			return $return;
 		} else {

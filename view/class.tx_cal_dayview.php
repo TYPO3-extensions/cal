@@ -421,7 +421,6 @@ class tx_cal_dayview extends tx_cal_base_view {
 			
 			$i->addSeconds($gridLength *60);
 		}
-//debug($t_array);		
 
 		$event_length = array ();
 		$border = 0;
@@ -434,7 +433,7 @@ class tx_cal_dayview extends tx_cal_base_view {
 			preg_match('/([0-9]{2})([0-9]{2})/', $cal_time, $dTimeStart);
 			$cal_time_obj->setHour($dTimeStart[1]);
 			$cal_time_obj->setMinute($dTimeStart[2]);
-//debug($cal_time_obj->format('%Y%m%d %H%M'));
+
 			$key = $cal_time_obj->format($this->conf['view.']['day.']['timeFormatDay']);
 			if (intval($dTimeStart[2])==0) {
 				$daydisplay .= sprintf($this->conf['view.']['day.']['dayTimeCell'],(60 / $gridLength),$key, $gridLength);

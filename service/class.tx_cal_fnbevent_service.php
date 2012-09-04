@@ -267,8 +267,7 @@ class tx_cal_fnbevent_service extends tx_cal_event_service {
 				$select = 'uid';
 			}
 			$table = 'tx_cal_calendar';
-			
-//t3lib_div::debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where);
+
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, '', $orderBy);
 			if($result) {
 				while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {

@@ -751,7 +751,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		foreach($this->conf['rights.'][($this->isEditMode?'edit':'create').'.'][$this->objectString.'.']['fields.'] as $name => $field){
 			
 			if($field['required'] && $this->controller->piVars[str_replace('.','',$name)]==''){
-debug('pflichtfeld nicht bef&uuml;llt: '.str_replace('.','',$name));
+//debug('pflichtfeld nicht bef&uuml;llt: '.str_replace('.','',$name));
 			}
 		}
 //		if([strtolower($marker).'.']['required']){

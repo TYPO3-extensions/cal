@@ -79,9 +79,7 @@ abstract class tx_cal_new_timeview {
 		}
 		preg_match_all('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $template, $match);
 		$allMarkers = array_unique($match[1]);
-		/*if($this->getObjectType()=='event'){
-		 debug($allMarkers);
-		 }*/
+
 		foreach ($allMarkers as $marker) {
 			switch ($marker) {
 				default :
@@ -103,9 +101,6 @@ abstract class tx_cal_new_timeview {
 		preg_match_all('!\###([A-Z0-9_-|]*)\###!is', $template, $match);
 		$allSingleMarkers = array_unique($match[1]);
 		$allSingleMarkers = array_diff($allSingleMarkers, $allMarkers);
-		//if($this->getObjectType()=='event'){
-//debug($allSingleMarkers);
-		 //}*/
 
 		foreach ($allSingleMarkers as $marker) {
 			switch ($marker) {
@@ -299,7 +294,7 @@ abstract class tx_cal_new_timeview {
 		$date->setDay($this->day);
 		$date->setMonth($this->month);
 		$date->setYear($this->year);
-//debug($date->format('%Y%m%d %H%M').' after'.$now->format('%Y%m%d %H%M'),'hier:'.$createOffset);
+		
 		if (($date->after($now) || $rightsObj->isAllowedToCreateEventInPast()) && $isAllowedToCreateEvent) {
 			$local_cObj = $this->getLocalCObject();
 			$conf['clear_anyway'] = 1;

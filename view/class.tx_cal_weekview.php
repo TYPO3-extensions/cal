@@ -397,8 +397,6 @@ class tx_cal_weekview extends tx_cal_base_view {
 							}
 						}
 					}
-					//debug($t_array);
-					 
 				} else {
 					$t_array[$week_key][$timeKey] = '';
 				}

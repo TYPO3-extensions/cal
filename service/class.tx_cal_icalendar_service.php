@@ -524,7 +524,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					}
 					$indexEntry = t3lib_BEfunc::getRecordRaw('tx_cal_index', 'event_uid='.$eventRow['uid'].' AND start_datetime='.$recurrenceIdStart->format('%Y%m%d%H%M%S'));
 					if($indexEntry){
-//debug($indexEntry,'uid='.$eventRow['uid']);
 						$origStartDate = new tx_cal_date();
 						$origStartDate = new tx_cal_date();
 						$table = 'tx_cal_event_deviation';

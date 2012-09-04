@@ -378,7 +378,6 @@ class tx_cal_category_service extends tx_cal_base_service {
 		$groupby = '';
 		$orderby = 'uid_local ASC, sorting ASC';
 		$where = '';
-//t3lib_div::debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where.' ORDER BY '.$orderby);
 		$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select,$table,$where,$groupby,$orderby);
 		if($result) {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {

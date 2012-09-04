@@ -130,7 +130,6 @@ class tx_cal_rssview extends tx_cal_base_view {
 
 		// header data
 		$markerArray = $this->getXmlHeader($lastBuildTimestamp);
-//debug($subpartArray['###CONTENT###']);
 		$subpartArray['###HEADER###'] = $this->cObj->substituteMarkerArray($this->getNewsSubpart($t['total'], '###HEADER###'), $markerArray);
 		// substitute the xml declaration (it's not included in the subpart ###HEADER###)
 		$t['total'] = $this->cObj->substituteMarkerArray($t['total'], array('###XML_DECLARATION###' => $markerArray['###XML_DECLARATION###']));

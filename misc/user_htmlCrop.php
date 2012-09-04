@@ -56,7 +56,6 @@ class user_htmlCrop {
 		$body = $doc->get_elements_by_tagname('body');
 		$length = 0;
 		$content = $this->getContentAsStringPHP4($body[0], $length, $minimum_length, $replaceString);
-		//	t3lib_div::debug($body[0]);
 		return $content;
 	}
 	

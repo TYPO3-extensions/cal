@@ -1265,7 +1265,6 @@ class tx_cal_model extends tx_cal_base_model {
 			$values['category_string'] = $this->getCategoriesAsString(false);
 
 			return $values;
-//t3lib_div::debug($values);
 	}
 	
 	function getCategoriesAsString($asLink = true){

@@ -402,10 +402,14 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 
 	    if($this->conf['rights.']['create.']['event.']['fields.']['dynamicStarttimeOffset']){
 			$now = new tx_cal_date();
+			
 			$now->addSeconds(intval($this->conf['rights.']['create.']['event.']['fields.']['dynamicStarttimeOffset']));
-			$start->setHour($now->getHour());
-			$start->setMinute($now->getMinute());
-			$this->setStart($start);			
+
+			if (is_object($start)){
+				$start->setHour($now->getHour());
+				$start->setMinute($now->getMinute());
+				$this->setStart($start);
+			}			
 	    }
 		
 		if(!$startDateIsSet && $piVars['mygetdate']){

@@ -52,10 +52,22 @@ class tx_cal_wizicon {
 		return $wizardItems;
 	}
 	function includeLocalLang()	{
-		$llFile = t3lib_extMgm::extPath('cal').'locallang.xml';
-        $LOCAL_LANG = t3lib_l10n_parser_Llxml::getParsedData($llFile, $GLOBALS['LANG']->lang);
-        return $LOCAL_LANG;
+		$localizationParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
+        $llFile = t3lib_extMgm::extPath('cal') . 'locallang.xml';
+        return $localizationParser->getParsedData($llFile, $GLOBALS['LANG']->lang);
+   	}
 
+	//get used charset
+	public static function getCharset() {
+		 if ($GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'])	{	// First priority: forceCharset! If set, this will be authoritative!
+			$charset = $GLOBALS['TYPO3_CONF_VARS']['BE']['forceCharset'];
+		} elseif (is_object($GLOBALS['LANG']))	{
+			$charset = $GLOBALS['LANG']->charSet;	// If "LANG" is around, that will hold the current charset
+		} else {
+			$charset = 'utf-8';	// THIS is just a hopeful guess!
+		}
+		 
+		 return $charset;
 	}
 }
 

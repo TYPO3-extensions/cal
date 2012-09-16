@@ -15,7 +15,7 @@ plugin.tx_cal_controller {
 	pidList = {$plugin.tx_cal_controller.pidList}
 
 	# @description	List of csv of piVars, which should not appear in the url, but should be stored inside the users session. Attention: this works only, if the piVar is the same through a whole single page
-	sessionPiVars = page_id,lastview
+	sessionPiVars = backlink,page_id,lastview
 
 	# @description	Name of the calendar.
 	# @also			FlexForm

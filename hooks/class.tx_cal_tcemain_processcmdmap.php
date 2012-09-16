@@ -106,9 +106,12 @@ class tx_cal_tcemain_processcmdmap {
 						$service->deleteScheduledUpdates($id);
 					}
 				}
+
 			break;
+
 			case 'tx_cal_exception_event_group' :
 			case 'tx_cal_exception_event' :
+			case 'tx_cal_event_deviation' :
 				$select = '*';
 				$where = 'uid = '.$id;
 				$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select,$table,$where);

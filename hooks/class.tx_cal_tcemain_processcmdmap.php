@@ -106,7 +106,22 @@ class tx_cal_tcemain_processcmdmap {
 						$service->deleteScheduledUpdates($id);
 					}
 				}
+				
+				if ($command == 'copy') {
+					$newCalendarIds = $tce->copyMappingArray['tx_cal_calendar'];
 
+					// check if source of copy has a scheduler task attached
+					$calendarRow = t3lib_BEfunc::getRecord('tx_cal_calendar', $id);
+					if ($calendarRow['schedulerId']>0) {
+						$scheduler = new tx_scheduler();
+						require_once(t3lib_extMgm::extPath('cal').'service/class.tx_cal_icalendar_service.php');
+						$service = t3lib_div::makeInstance('tx_cal_icalendar_service');
+						foreach ($newCalendarIds as $newCalendarId) {
+							$service->createSchedulerTask($scheduler,0,$newCalendarId);
+						}
+					}
+					 					
+				}
 			break;
 
 			case 'tx_cal_exception_event_group' :

@@ -104,6 +104,7 @@ class tx_cal_tcemain_processcmdmap {
 						$service->deleteTemporaryEvents($id);
 						$service->deleteTemporaryCategories($id);
 						$service->deleteScheduledUpdates($id);
+						$service->deleteSchedulerTask($id);
 					}
 				}
 				

@@ -265,6 +265,23 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		$scheduler->addTask($task);
 		$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_cal_calendar','uid='.$calendarUid,Array('schedulerId' => $task->getTaskUid()));
 	}
+
+	function deleteSchedulerTask($calendarUid) {
+		if(t3lib_extMgm::isLoaded('scheduler')) {
+				$calendarRow = t3lib_BEfunc::getRecordRaw('tx_cal_calendar', 'uid='.$calendarUid);
+				$taskId = $calendarRow['schedulerId'];
+				if($taskId > 0){
+					require_once(t3lib_extMgm::extPath('scheduler').'class.tx_scheduler.php');
+					$scheduler = new tx_scheduler();
+					
+					$task = $scheduler->fetchTask($taskId);
+					
+					$task->setDisabled(true);
+					$task->remove();
+					$task->save();
+				}	
+		}	
+	}
 	
 	function deleteScheduledUpdates($uid) {
 		if (t3lib_extMgm::isLoaded('gabriel')) {

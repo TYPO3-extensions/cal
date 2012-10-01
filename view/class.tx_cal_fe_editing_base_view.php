@@ -564,7 +564,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		if(count($viewParts)==2 && is_array($this->conf['rights.'][$viewParts[0].'.'][$viewParts[1].'.']['fields.'])>0){
 			foreach($this->conf['rights.'][$viewParts[0].'.'][$viewParts[1].'.']['fields.'] as $field => $fieldSetup){
 				$myField = str_replace('.','',$field);
-				if($this->isAllowed($myField) && $fieldSetup['required'] && $this->controller->piVars[$myField]=='') {
+				if($this->isAllowed($myField) && is_array($fieldSetup) && $fieldSetup['required'] && $this->controller->piVars[$myField]=='') {
 					$allRequiredFieldsAreFilled = false;
 					$requiredFieldsSims['###'.strtoupper($myField).'_REQUIRED###'] = $this->conf['view.']['required'];
 				}else{
@@ -614,6 +614,13 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		$result = Array();
 		foreach($constrainConfig as $rule){
 			$value = $this->ruleParser($field, $rule);
+
+			if (($value!='')&&($field == 'start' || $field=='end')&&($rule['rule']=='after')&&($rule['field']=='now')) {
+				$rightsObj = &tx_cal_registry::Registry('basic','rightscontroller');
+				if ($rightsObj->isAllowedToCreateEventInPast()) {
+					$value='';
+				}
+			}
 			if($value!=''){
 				$result[] = $value;
 			}

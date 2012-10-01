@@ -139,9 +139,7 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 				$this->weekHasEvent = true;
 				$first = true;
 				do{
-					if(is_object($this->dayHasEvent[$eventStart->getDayOfWeek()])){
-						$this->dayHasEvent[$eventStart->getDayOfWeek()] = true;
-					}
+					$this->dayHasEvent[$eventStart->getDayOfWeek()] = true;
 					if(is_object($this->days[$eventStart->format('%Y%m%d')])){
 						$this->days[$eventStart->format('%Y%m%d')]->hasAlldayEvents = true;
 						if($first){

@@ -568,8 +568,8 @@ class tx_cal_base_view extends tx_cal_base_service {
 		
 		$this->getSidebarMarker($page, $sims, $rems, $this->conf['view']);
 		$this->getCalendarNavMarker($page, $sims, $rems, $this->conf['view']);
-		$page = $this->replaceViewMarker($page);
 		$page = $this->checkForMonthMarker($page);
+		$page = $this->replaceViewMarker($page);
 		
 		$this->getMarker($page, $sims, $rems, $wrapped);
 		$sims['###VIEW###'] = $this->conf['view'];

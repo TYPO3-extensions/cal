@@ -530,6 +530,15 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					$insertFields['end_date'] = $date->format('%Y%m%d');
 				}
 				$eventRow = t3lib_BEfunc::getRecordRaw('tx_cal_event', 'icsUid="'.$insertFields['icsUid'].'"');
+				
+				if($eventRow['uid']){
+					$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery($table,'uid='.$eventRow['uid'],$insertFields);
+					$eventUid = $eventRow['uid'];
+				} else {
+					$result = $GLOBALS['TYPO3_DB']->exec_INSERTquery($table,$insertFields);
+					$eventUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+				}
+				
 				$extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
 				
 				if($component->getAttribute('RECURRENCE-ID') && $extConf['useNewRecurringModel']){
@@ -539,12 +548,12 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					if($timezone){
 						$recurrenceIdStart->convertTZbyID($timezone);
 					}
-					$indexEntry = t3lib_BEfunc::getRecordRaw('tx_cal_index', 'event_uid='.$eventRow['uid'].' AND start_datetime='.$recurrenceIdStart->format('%Y%m%d%H%M%S'));
+
 					if($indexEntry){
 						$origStartDate = new tx_cal_date();
 						$origStartDate = new tx_cal_date();
 						$table = 'tx_cal_event_deviation';
-						$insertFields['parentid']=$eventRow['uid'];
+						$insertFields['parentid']=$eventUid;
 						$insertFields['orig_start_time'] = $recurrenceIdStart->getHour() * 3600 + $recurrenceIdStart->getMinute() * 60;
 						$recurrenceIdStart->setHour(0);
 						$recurrenceIdStart->setMinute(0);
@@ -562,14 +571,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 						$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_cal_index','uid='.$indexEntry['uid'],Array('event_deviation_uid' => $eventDeviationUid));
 					}
 				} else {
-					
-					if($eventRow['uid']){
-						$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery($table,'uid='.$eventRow['uid'],$insertFields);
-						$eventUid = $eventRow['uid'];
-					} else {
-						$result = $GLOBALS['TYPO3_DB']->exec_INSERTquery($table,$insertFields);
-						$eventUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
-					}
 					
 					/* Delete the old exception relations */
 					$exceptionEventUidsToBeDeleted = Array();

@@ -36,6 +36,8 @@ require_once (t3lib_extMgm :: extPath('cal') . 'model/class.tx_cal_phpicalendar_
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
 class tx_cal_phpicalendar_rec_deviation_model extends tx_cal_phpicalendar_model {
+	
+	private $origStartDate;
 
 	function tx_cal_phpicalendar_rec_deviation_model($event, $row, $start, $end) {
 		
@@ -55,10 +57,23 @@ class tx_cal_phpicalendar_rec_deviation_model extends tx_cal_phpicalendar_model 
 		
 		$this->setStart($start);
 		$this->setEnd($end);
+		
+		$this->origStartDate = new tx_cal_date($row['orig_start_date']);
+		$this->origStartDate->addSeconds($row['orig_start_time']);
 	}
 	
 	function getRRuleMarker(&$template, &$sims, &$rems, &$wrapped, $view ) {
-		$sims['###RRULE###'] = 'RECURRENCE-ID:'.$this->getStart()->format('%Y%m%dT%H%M%SZ');
+		$eventStart = $this->origStartDate;
+		if ($this->isAllday()) {
+			$sims['###RRULE###'] = 'RECURRENCE-ID;VALUE=DATE:'.$eventStart->format('%Y%m%d');
+		}else if($this->conf['view.']['ics.']['timezoneId']!=''){
+			$sims['###RRULE###'] = 'RECURRENCE-ID;TZID='.$this->conf['view.']['ics.']['timezoneId'].':'.$eventStart->format('%Y%m%dT%H%M%S');
+		}else{
+			$offset = tx_cal_functions::strtotimeOffset($eventStart->getTime());
+			$eventStart->subtractSeconds($offset);
+			$sims['###RRULE###'] = 'RECURRENCE-ID:'.$eventStart->format('%Y%m%dT%H%M%SZ');
+			$eventStart->addSeconds($offset);
+		}
 	}
 }
 

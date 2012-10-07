@@ -132,7 +132,7 @@ class tx_cal_icsview extends tx_cal_base_view {
 						if (is_object($event)) {
 							$ics_events .= $event->renderEventFor('ics');
 							
-							$where = 'tx_cal_event_deviation.parentid = '.$event->getUid();
+							$where = 'tx_cal_event_deviation.parentid = '.$event->getUid().$this->cObj->enableFields('tx_cal_event_deviation');
 							$deviationResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where);
 							if($deviationResult) {
 								while ($deviationRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($deviationResult)) {

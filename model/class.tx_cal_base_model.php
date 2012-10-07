@@ -425,7 +425,7 @@ class tx_cal_base_model extends tx_cal_abstract_model{
 
 	function getDescriptionMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		if(($view == 'ics') || ($view == 'single_ics')) {
-			$description = preg_replace('/'.chr(10).'|'.chr(13).'/', '\n', html_entity_decode(preg_replace('/&nbsp;/', ' ',strip_tags($this->getDescription()))));
+			$description = preg_replace('/,/', '\,', preg_replace('/'.chr(10).'|'.chr(13).'/', '\r\n', html_entity_decode(preg_replace('/&nbsp;/', ' ',strip_tags($this->getDescription())))));
 		} else {
 			$description = $this->getDescription();
 		}

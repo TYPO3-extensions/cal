@@ -118,7 +118,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			// get the uids of recurring events from index
 			$select = 'event_uid';
 			$table = 'tx_cal_index';
-			$where = 'start_datetime >= '.$this->starttime->format('%Y%m%d%H%M%S').' AND start_datetime <= '.$this->endtime->format('%Y%m%d%H%M%S');
+			$where = '(start_datetime >= '.$this->starttime->format('%Y%m%d%H%M%S').' AND start_datetime <= '.$this->endtime->format('%Y%m%d%H%M%S').') OR (start_datetime < '.$this->starttime->format('%Y%m%d%H%M%S').' AND end_datetime > '.$this->starttime->format('%Y%m%d%H%M%S').')  OR (start_datetime < '.$this->endtime->format('%Y%m%d%H%M%S').' AND end_datetime > '.$this->endtime->format('%Y%m%d%H%M%S').')';
 			$group = 'event_uid';
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table,$where,$group);
 			$tmpUids = array();
@@ -1535,7 +1535,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 					$nextOccuranceEndTime = new tx_cal_date($row['end_datetime']);
 					$new_event = null;
 					if($row['event_deviation_uid'] > 0){
-						$result2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_event_deviation','uid='.$row['event_deviation_uid']);
+						$result2 = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_event_deviation','uid='.$row['event_deviation_uid']).$this->cObj->enableFields('tx_cal_event_deviation');
 						if($result2){
 							while ($row2 = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result2)) {
 								$new_event = tx_cal_functions::makeInstance('tx_cal_phpicalendar_rec_deviation_model',$event,$row2,$nextOccuranceTime,$nextOccuranceEndTime);

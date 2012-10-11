@@ -55,8 +55,15 @@ class ux_SC_wizard_edit extends SC_wizard_edit {
 				$fTable = $this->P['currentValue']<0 ? $this->P['params']['neg_table'] : $this->P['params']['table'];
 			}
 
-				// Detecting the various allowed field type setups and acting accordingly.
-			if (is_array($config) && $config['type']=='select' && !$config['MM'] && $config['maxitems']<=1 && t3lib_utility_Math::canBeInterpretedAsInteger($this->P['currentValue']) && $this->P['currentValue'] && $fTable)	{	// SINGLE value:
+			// Detecting the various allowed field type setups and acting accordingly.
+        	if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4006000) {
+				$is_P_int = t3lib_utility_Math::canBeInterpretedAsInteger($this->P['currentValue']) && $this->P['currentValue'];
+        	} else {
+        		$is_P_int = t3lib_div::testInt($this->P['currentValue']);
+        	}
+        		
+			
+			if (is_array($config) && $config['type']=='select' && !$config['MM'] && $config['maxitems']<=1 && $is_P_int && $this->P['currentValue'] && $fTable)	{	// SINGLE value:
 				header('Location: '.t3lib_div::locationHeaderUrl('alt_doc.php?returnUrl='.rawurlencode('wizard_edit.php?doClose=1').'&edit['.$fTable.']['.$this->P['currentValue'].']=edit'));
 			} elseif (is_array($config) && $this->P['currentSelectedValues'] && (($config['type']=='select' && $config['foreign_table']) || ($config['type']=='group' && $config['internal_type']=='db')))	{	// MULTIPLE VALUES:
 

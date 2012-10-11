@@ -52,9 +52,15 @@ class tx_cal_wizicon {
 		return $wizardItems;
 	}
 	function includeLocalLang()	{
-		$localizationParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
         $llFile = t3lib_extMgm::extPath('cal') . 'locallang.xml';
-        return $localizationParser->getParsedData($llFile, $GLOBALS['LANG']->lang);
+        if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4006000) {
+        	$localizationParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
+        	$LOCAL_LANG = $localizationParser->getParsedData($llFile, $GLOBALS['LANG']->lang);
+        } else {
+        	$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
+        }
+        
+		return $LOCAL_LANG;
    	}
 
 	//get used charset

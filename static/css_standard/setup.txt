@@ -352,7 +352,7 @@ plugin.tx_cal_controller {
 .tx-cal-controller .month-medium .dayNum:hover span.popup {
 	position: absolute;
 	margin:15px 0px 0px 20px;
-	background-color: beige;
+	background-color: #F5F5DC;
 	max-width:220px;
 	border: 1px solid #C0C0C0;
 	font: normal 10px/12px verdana;
@@ -436,7 +436,7 @@ plugin.tx_cal_controller {
 .tx-cal-controller .month-medium .dayNum:hover span.popup {
 	position: absolute;
 	margin:15px 0px 0px 20px;
-	background-color: beige;
+	background-color: #F5F5DC;
 	max-width:220px;
 	border: 1px solid #C0C0C0;
 	font: normal 10px/12px verdana;

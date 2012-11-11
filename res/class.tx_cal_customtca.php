@@ -65,9 +65,6 @@ class tx_cal_customtca {
 		$this->newIcon = '<img'.t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'],'gfx/new_el.gif').' title="'.$LANG->getLL('tx_cal_event.add_recurrence').'" alt="'.$LANG->getLL('tx_cal_event.add_recurrence').'" />';
 		
 		$this->commonJS = '';
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
-			$this->commonJS = '<script type="text/javascript" src="contrib/prototype/prototype.js"></script>'.chr(10);
-		}
 		$this->commonJS .= '<script src="'.t3lib_extMgm::extRelPath('cal').'res/recurui.js" type="text/javascript"></script>'.chr(10).
 						  '<script src="'.t3lib_extMgm::extRelPath('cal').'res/url.js" type="text/javascript"></script>';
 						
@@ -273,14 +270,10 @@ class tx_cal_customtca {
 		$out[] = 'var rdate = document.getElementById("data['.$this->table.']['.$this->uid.'][rdate]");';
 		$out[] = 'rdate.value="";';
 		$out[] = 'for(var i=0; i<rdateCount; i++){';
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
-			$out[] = 'var dateFormated = document.getElementById("data_'.$this->table.'_'.$this->uid.'_rdate"+i+"_hr").value;';
+		if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
+			$out[] = 'var dateFormated = document.getElementById("tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate"+i+"_hr").value;';
 		} else {
-			if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
-				$out[] = 'var dateFormated = document.getElementById("tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate"+i+"_hr").value;';
-			} else {
-				$out[] = 'var dateFormated = document.getElementById("tceforms-datefield-data_'.$this->table.'_'.$this->uid.'_rdate"+i+"_hr").value;';
-			}
+			$out[] = 'var dateFormated = document.getElementById("tceforms-datefield-data_'.$this->table.'_'.$this->uid.'_rdate"+i+"_hr").value;';
 		}
 		$out[] = 'if(dateFormated!=""){';
 		$out[] = 'var splittedDateTime = dateFormated.split(" ");';
@@ -322,86 +315,61 @@ class tx_cal_customtca {
 		$out[] = 'rdate.value = rdate.value.substr(0,rdate.value.length-1);';
 		$out[] = '}';
 		$out[] = '</script>';
-		$calendarWizard = true;
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
-			$calendarWizard = $TCA[$this->table]['columns']['start_date']['config']['wizards']['calendar'];
-		}
-		if($calendarWizard){
-			$key = 0;
-			foreach($this->rdateValues as $value){
-				$formatedValue = '';
-				$splittedPeriod = Array('','');
-				if($value!=''){
-					$splittedPeriod = explode('/',$value);
-					$splittedDateTime = explode('T',$splittedPeriod[0]);
-					if($jsDate=='%d-%m-%Y'){
-						$formatedValue = substr($splittedDateTime[0],6,2).'-'.substr($splittedDateTime[0],4,2).'-'.substr($splittedDateTime[0],0,4);
-					}else if($jsDate=='%m-%d-%Y'){
-						$formatedValue = substr($splittedDateTime[0],4,2).'-'.substr($splittedDateTime[0],6,2).'-'.substr($splittedDateTime[0],0,4);
-					} else {
-						$formatedValue = 'unknown date format';
-					}
-					if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
-						$formatedValue = count($splittedDateTime)==2?substr($splittedDateTime[1],0,2).':'.substr($splittedDateTime[1],2,2).' '.$formatedValue:'00:00 '.$formatedValue;
-					}
+		$key = 0;
+		foreach($this->rdateValues as $value){
+			$formatedValue = '';
+			$splittedPeriod = Array('','');
+			if($value!=''){
+				$splittedPeriod = explode('/',$value);
+				$splittedDateTime = explode('T',$splittedPeriod[0]);
+				if($jsDate=='%d-%m-%Y'){
+					$formatedValue = substr($splittedDateTime[0],6,2).'-'.substr($splittedDateTime[0],4,2).'-'.substr($splittedDateTime[0],0,4);
+				}else if($jsDate=='%m-%d-%Y'){
+					$formatedValue = substr($splittedDateTime[0],4,2).'-'.substr($splittedDateTime[0],6,2).'-'.substr($splittedDateTime[0],0,4);
+				} else {
+					$formatedValue = 'unknown date format';
 				}
-				if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
-					$out[] = '<div style="float:left;"><input type="text" value="'.$formatedValue.'" name="rdate'.$key.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="rdateChanged();"/><input type="hidden" value="'.$formatedValue.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'" />';
-				} else if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4004000){
-					if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
-						$out[] = '<div style="float:left;"><input type="text" value="'.$formatedValue.'" class="formField tceforms-textfield tceforms-timefield" name="rdate'.$key.'" id="tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="'.
-								'rdateChanged();"/>'.
-								'<input type="hidden" value="'.$formatedValue.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'" />'.
-								'<img id="picker-tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" alt="" style="cursor: pointer; vertical-align: middle;" src="gfx/datepicker.gif" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-datetime"/></div>';
-					} else {
-						$out[] = '<div style="float:left;"><input type="text" value="'.$formatedValue.'" class="tceforms-datefield" name="rdate'.$key.'" id="tceforms-datefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="'.
-								'rdateChanged();"/>'.
-								'<input type="hidden" value="'.$formatedValue.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'" />'.
-								'<img id="picker-tceforms-datefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" alt="" style="cursor: pointer; vertical-align: middle;" src="gfx/datepicker.gif" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></div>';
-					}
-				}else {
-					if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
-						$out[] = '<span class="t3-form-palette-fieldclass-main5"><input type="text" value="'.$formatedValue.'" class="tceforms-datetimefield" name="rdate'.$key.'" id="tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="'.
-								'rdateChanged();"/>'.
-								'<input type="hidden" value="'.$formatedValue.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'" />'.
-								'<span id="picker-tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" style="cursor: pointer; vertical-align: middle;" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></span>';
-					} else {
-						$out[] = '<span class="t3-form-palette-fieldclass-main5"><input type="text" value="'.$formatedValue.'" class="tceforms-datefield" name="rdate'.$key.'" id="tceforms-datefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="'.
-								'rdateChanged();"/>'.
-								'<input type="hidden" value="'.$formatedValue.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'" />'.
-								'<span id="picker-tceforms-datefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" style="cursor: pointer; vertical-align: middle;" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></span>';
-					}
+				if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
+					$formatedValue = count($splittedDateTime)==2?substr($splittedDateTime[1],0,2).':'.substr($splittedDateTime[1],2,2).' '.$formatedValue:'00:00 '.$formatedValue;
 				}
-				$params = Array();
-				$params['table'] = $this->table;
-				$params['uid'] = $this->uid;
-				$params['field'] = 'rdate'.$key;
-				$params['md5ID'] = $this->table.'_'.$this->uid.'_'.'rdate'.$key;
-				if($this->rdateType == 'date') {
-					$params['wConf']['evalValue'] = 'date';
-				} else if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
-					$params['wConf']['evalValue'] = 'datetime';
-				}
-				if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
-					t3lib_div::callUserFunction($calendarWizard['userFunc'], $params, $fobj);
-				}
-				
-				if($this->rdateType == 'period') {
-					preg_match ('/P((\d+)Y)?((\d+)M)?((\d+)W)?((\d+)D)?T((\d+)H)?((\d+)M)?((\d+)S)?/',$splittedPeriod[1],$periodArray);
-					$params['item'] .= '<span style="padding-left:10px;">'.$LANG->getLL('l_duration').':</span>'.
-							$LANG->getLL('l_year').':<input type="text" value="'.intval($periodArray[2]).'" name="rdateYear'.$key.'" id="rdateYear'.$key.'" size="2" onchange="rdateChanged();" />'.
-							$LANG->getLL('l_month').':<input type="text" value="'.intval($periodArray[4]).'" name="rdateMonth'.$key.'" id="rdateMonth'.$key.'" size="2" onchange="rdateChanged();" />'.
-							$LANG->getLL('l_week').':<input type="text" value="'.intval($periodArray[6]).'" name="rdateWeek'.$key.'" id="rdateWeek'.$key.'" size="2" onchange="rdateChanged();" />'.
-							$LANG->getLL('l_day').':<input type="text" value="'.intval($periodArray[8]).'" name="rdateDay'.$key.'" id="rdateDay'.$key.'" size="2" onchange="rdateChanged();" />'.
-							$LANG->getLL('l_hour').':<input type="text" value="'.intval($periodArray[10]).'" name="rdateHour'.$key.'" id="rdateHour'.$key.'" size="2" onchange="rdateChanged();" />'.
-							$LANG->getLL('l_minute').':<input type="text" value="'.intval($periodArray[12]).'" name="rdateMinute'.$key.'" id="rdateMinute'.$key.'" size="2" onchange="rdateChanged();" />'.
-							'<br/>';
-				}
-				$out[] = $params['item'];
-				
-				$key++;
 			}
-		}		
+			if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
+				$out[] = '<span class="t3-form-palette-fieldclass-main5"><input type="text" value="'.$formatedValue.'" class="tceforms-datetimefield" name="rdate'.$key.'" id="tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="'.
+						'rdateChanged();"/>'.
+						'<input type="hidden" value="'.$formatedValue.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'" />'.
+						'<span id="picker-tceforms-datetimefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" style="cursor: pointer; vertical-align: middle;" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></span>';
+			} else {
+				$out[] = '<span class="t3-form-palette-fieldclass-main5"><input type="text" value="'.$formatedValue.'" class="tceforms-datefield" name="rdate'.$key.'" id="tceforms-datefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" onchange="'.
+						'rdateChanged();"/>'.
+						'<input type="hidden" value="'.$formatedValue.'" id="data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'" />'.
+						'<span id="picker-tceforms-datefield-data_'.$this->table.'_'.$this->uid.'_rdate'.$key.'_hr" style="cursor: pointer; vertical-align: middle;" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></span>';
+			}
+			$params = Array();
+			$params['table'] = $this->table;
+			$params['uid'] = $this->uid;
+			$params['field'] = 'rdate'.$key;
+			$params['md5ID'] = $this->table.'_'.$this->uid.'_'.'rdate'.$key;
+			if($this->rdateType == 'date') {
+				$params['wConf']['evalValue'] = 'date';
+			} else if($this->rdateType == 'date_time' || $this->rdateType == 'period') {
+				$params['wConf']['evalValue'] = 'datetime';
+			}
+			
+			if($this->rdateType == 'period') {
+				preg_match ('/P((\d+)Y)?((\d+)M)?((\d+)W)?((\d+)D)?T((\d+)H)?((\d+)M)?((\d+)S)?/',$splittedPeriod[1],$periodArray);
+				$params['item'] .= '<span style="padding-left:10px;">'.$LANG->getLL('l_duration').':</span>'.
+						$LANG->getLL('l_year').':<input type="text" value="'.intval($periodArray[2]).'" name="rdateYear'.$key.'" id="rdateYear'.$key.'" size="2" onchange="rdateChanged();" />'.
+						$LANG->getLL('l_month').':<input type="text" value="'.intval($periodArray[4]).'" name="rdateMonth'.$key.'" id="rdateMonth'.$key.'" size="2" onchange="rdateChanged();" />'.
+						$LANG->getLL('l_week').':<input type="text" value="'.intval($periodArray[6]).'" name="rdateWeek'.$key.'" id="rdateWeek'.$key.'" size="2" onchange="rdateChanged();" />'.
+						$LANG->getLL('l_day').':<input type="text" value="'.intval($periodArray[8]).'" name="rdateDay'.$key.'" id="rdateDay'.$key.'" size="2" onchange="rdateChanged();" />'.
+						$LANG->getLL('l_hour').':<input type="text" value="'.intval($periodArray[10]).'" name="rdateHour'.$key.'" id="rdateHour'.$key.'" size="2" onchange="rdateChanged();" />'.
+						$LANG->getLL('l_minute').':<input type="text" value="'.intval($periodArray[12]).'" name="rdateMinute'.$key.'" id="rdateMinute'.$key.'" size="2" onchange="rdateChanged();" />'.
+						'<br/>';
+			}
+			$out[] = $params['item'];
+			
+			$key++;
+		}
 
 		$out[] = '<input type="hidden" name="data['.$this->table.']['.$this->uid.'][rdate]" id="data['.$this->table.']['.$this->uid.'][rdate]" value="'.$this->row['rdate'].'" />';
 		

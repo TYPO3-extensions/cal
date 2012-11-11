@@ -43,13 +43,6 @@ class tx_cal_tsparserext {
 	function displayMessage(&$params, &$tsObj) {
 
 		$out = '';
-
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000) {
-				// 4.3.0 comes with flashmessages styles. For older versions we include the needed styles here
-			$cssPath = $GLOBALS['BACK_PATH'] . t3lib_extMgm::extRelPath('cal');
-			$out .= '<link rel="stylesheet" type="text/css" href="' . $cssPath . 'compat/flashmessages.css" media="screen" />';
-		}
-
 		$out .= '
 		<div style="position:absolute;top:10px;right:10px; width:300px;">
 			<div class="typo3-message message-information">

@@ -1483,11 +1483,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 		//due tue missing TS configuration  support of the uploads rendering of css_styled_content, we have to manually fake some db values for it
 		$tempData = $this->getValuesAsArray();
 		$tempData['filelink_size'] = $this->conf['view.'][$view.'.']['event.']['attachment.']['showFileSize'];
-		if ((TYPO3_version) >= 4003000) {
-			$tempData['tx_cal_media'] = implode(',',$this->getAttachment());
-		} else {
-			$tempData['media'] = implode(',',$this->getAttachment());
-		}
+		$tempData['tx_cal_media'] = implode(',',$this->getAttachment());
 		$tempData['layout'] = $this->conf['view.'][$view.'.']['event.']['attachment.']['layout'];
 		$tempData['imagecaption'] = implode(chr(10),$this->getAttachmentCaption());
 		$filePath = $this->conf['view.'][$view.'.']['event.']['attachment.']['filePath'] ? $this->conf['view.'][$view.'.']['event.']['attachment.']['filePath'] : '';

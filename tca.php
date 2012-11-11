@@ -113,21 +113,6 @@ switch ($useOrganizerStructure){
 		$organizerOrderBy = 'name';
 	break;
 }
-if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
-	/* If date2cal is loaded, include it as a wizard */
-	if(t3lib_extMgm::isLoaded('date2cal')) {
-		$date2CalTCA = Array (
-			'type' => 'userFunc',
-			'userFunc' => 'EXT:date2cal/class.tx_date2cal_wizard.php:tx_date2cal_wizard->renderWizard',
-			'evalValue' => 'date',
-		);
-		if(@is_dir(t3lib_extMgm::extPath('date2cal').'/src')){
-			$date2CalTCA['userFunc'] = 'EXT:date2cal/src/class.tx_date2cal_wizard.php:tx_date2cal_wizard->renderWizard';
-		}
-	} else {
-		$date2CalTCA = Array ();
-	}
-}
 
 $TCA['tx_cal_event'] = Array (
 	'ctrl' => $TCA['tx_cal_event']['ctrl'],
@@ -2982,23 +2967,6 @@ if(t3lib_extMgm::isLoaded('wec_map')) {
 
 if(t3lib_extMgm::isLoaded('scheduler')) {
 	$TCA['tx_cal_calendar']['columns']['refresh']['displayCond'] = 'EXT:scheduler:LOADED:true';
-}
-
-if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000) {
-	$TCA['tx_cal_event']['columns']['start_date']['config']['eval'] = 'required,tx_cal_dateeval';
-	$TCA['tx_cal_event']['columns']['start_date']['config']['wizards'] = Array ('calendar' => $date2CalTCA);
-	
-	$TCA['tx_cal_event']['columns']['end_date']['config']['eval'] = 'required,tx_cal_dateeval';
-	$TCA['tx_cal_event']['columns']['end_date']['config']['wizards'] = Array ('calendar' => $date2CalTCA);
-	
-	$TCA['tx_cal_event']['columns']['until']['config']['eval'] = 'tx_cal_dateeval';
-	$TCA['tx_cal_event']['columns']['until']['config']['wizards'] = Array ('calendar' => $date2CalTCA);
-	
-	$TCA['tx_cal_exception_event']['columns']['start_date']['config']['eval'] = 'required,tx_cal_dateeval';
-	$TCA['tx_cal_exception_event']['columns']['start_date']['config']['wizards'] = Array ('calendar' => $date2CalTCA);
-	
-	$TCA['tx_cal_exception_event']['columns']['until']['config']['eval'] = 'tx_cal_dateeval';
-	$TCA['tx_cal_exception_event']['columns']['until']['config']['wizards'] = Array ('calendar' => $date2CalTCA);
 }
 
 if($confArr['newRecurUI'] && (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4001000)) {

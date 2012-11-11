@@ -512,23 +512,6 @@ class tx_cal_tcemain_processdatamap {
 	 * @return		string		The date in Ymd format.
 	 */
 	function convertBackendDateToYMD($dateString) {
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000){
-			
-			// simple fallback conversion if JS fails for some reason
-			$dateString = strtr($dateString,' ;.:_=/\\','--------');
-			$dateArray = explode('-',$dateString);
-			if(count($dateArray) > 1) {
-				if($GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] == '1'){
-					$ymdString = sprintf("%04d", $dateArray[2]).sprintf("%02d", $dateArray[0]).sprintf("%02d", $dateArray[1]);
-				}else{
-					$ymdString = sprintf("%04d", $dateArray[2]).sprintf("%02d", $dateArray[1]).sprintf("%02d", $dateArray[0]);
-				}
-			} else {
-				// We already had a YMD string
-				$ymdString = $dateString;
-			}
-			return $ymdString;
-		}
 		$date = new tx_cal_date($dateString);
 		return $date->format('%Y%m%d');
 	}

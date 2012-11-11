@@ -54,14 +54,10 @@ class tx_cal_functions {
 	}
 	
 	public static function clearCache() {
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) >= 4003000) {
-			// only use cachingFramework if initialized and configured in TYPO3
-			if(t3lib_cache::isCachingFrameworkInitialized() && TYPO3_UseCachingFramework) {
-				$pageCache = $GLOBALS['typo3CacheManager']->getCache('cache_pages');
-				$pageCache->flushByTag('cal');
-			} else {
-				$GLOBALS['TYPO3_DB']->exec_DELETEquery('cache_pages', 'reg1=77');
-			}
+		// only use cachingFramework if initialized and configured in TYPO3
+		if(t3lib_cache::isCachingFrameworkInitialized() && TYPO3_UseCachingFramework) {
+			$pageCache = $GLOBALS['typo3CacheManager']->getCache('cache_pages');
+			$pageCache->flushByTag('cal');
 		} else {
 			$GLOBALS['TYPO3_DB']->exec_DELETEquery('cache_pages', 'reg1=77');
 		}
@@ -348,31 +344,8 @@ class tx_cal_functions {
 	 */
 	public static function &makeInstance($className) {
 		
-		// for TYPO3 versions older than 4.3
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4003000) {
-			$className = t3lib_div::makeInstance($className);
-			if (func_num_args() > 1) {
-					// getting the constructor arguments by removing this
-					// method's first argument (the class name)
-				$constructorArguments = func_get_args();
-				array_shift($constructorArguments);
-
-				$reflectedClass = new ReflectionClass($className);
-				if(method_exists($reflectedClass,'newInstanceArgs')) {
-					$instance = $reflectedClass->newInstanceArgs($constructorArguments);
-				} else {
-					// workaround for php versions lower 5.1.3
-					$instance = call_user_func_array(array(&$reflectedClass, 'newInstance'), $constructorArguments);
-				}
-			} else {
-				$instance = new $className;
-			}
-			return $instance;
-		} else {
-			// for TYPO3 4.3 just call the according method
-			$constructorArguments = func_get_args();
-			return call_user_func_array(array('t3lib_div','makeInstance'),$constructorArguments);
-		}
+		$constructorArguments = func_get_args();
+		return call_user_func_array(array('t3lib_div','makeInstance'),$constructorArguments);
 	}
 	
 	public function removeEmptyLines($string) { 

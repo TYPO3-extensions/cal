@@ -419,24 +419,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			if(!$includeRecurring){
 				$eventStart = $event->getStart();
 				$events_tmp[$eventStart->format('%Y%m%d')][$event->isAllday()?'-1':($eventStart->format('%H%M'))][$event->getUid()] = $event;
-			}else if(is_object($event)){
-				if($this->extConf['useNewRecurringModel']){
-					if(in_array($event->getFreq(),Array('year','month','week','day')) || ($event->getRdate() && in_array($event->getRdateType(),Array('date','date_time','period')))) {
-						$events_tmp = $this->getRecurringEventsFromIndex($event);
-					} else {
-						$eventStart = $event->getStart();
-						$events_tmp[$eventStart->format('%Y%m%d')][$event->isAllday()?'-1':($eventStart->format('%H%M'))][$event->getUid()] = $event;
-					}
-				} else {
-					$events_tmp = $this->recurringEvent($event);
-				}
-			}
-	
-			if($includeRecurring){
-				foreach($ex_events_group as $ex_events){
-					$this->removeEvents($events_tmp, $ex_events);
-				}
-			} else {
+				
 				$eventStart = $event->getStart();
 				foreach($ex_events_group as $ex_events){
 					foreach($ex_events as $ex_event_day){
@@ -447,7 +430,32 @@ class tx_cal_event_service extends tx_cal_base_service {
 						}
 					}
 				}
+			}else if(is_object($event)){
+				if($this->extConf['useNewRecurringModel']){
+					if(in_array($event->getFreq(),Array('year','month','week','day')) || ($event->getRdate() && in_array($event->getRdateType(),Array('date','date_time','period')))) {
+						$ex_events_dates = Array();
+						foreach($ex_events_group as $ex_events){
+							foreach($ex_events as $ex_event_day){
+								foreach($ex_event_day as $ex_event_array){
+									foreach($ex_event_array as $ex_event){
+										$ex_events_dates[$ex_event->getStart()->format('%Y%m%d')] = 1;
+									}
+								}
+							}
+						}
+						$events_tmp = $this->getRecurringEventsFromIndex($event, $ex_events_dates);
+					} else {
+						$eventStart = $event->getStart();
+						$events_tmp[$eventStart->format('%Y%m%d')][$event->isAllday()?'-1':($eventStart->format('%H%M'))][$event->getUid()] = $event;
+					}
+				} else {
+					$events_tmp = $this->recurringEvent($event);
+					foreach($ex_events_group as $ex_events){
+						$this->removeEvents($events_tmp, $ex_events);
+					}
+				}
 			}
+	
 			if(!empty($events)){
 				$this->mergeEvents($events,$events_tmp);
 			}else{
@@ -1495,7 +1503,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		return $master_array;
 	}
 	
-	function getRecurringEventsFromIndex($event) {
+	function getRecurringEventsFromIndex($event, $ex_event_dates = Array()) {
 		
 		$maxRecurringEvents = (int)$this->conf['view.'][$this->conf['view'].'.']['maxRecurringEvents'];
 		$maxRecurringEvents = !empty($maxRecurringEvents) ? $maxRecurringEvents : 99999;
@@ -1511,10 +1519,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 				$now->setSecond(0);
 			}
 
-			if($startDate->getTime() > $now->getTime()){
+			if($startDate->getTime() > $now->getTime() && !$ex_event_dates[$startDate->format('%Y%m%d')]){
 				$master_array[$startDate->format('%Y%m%d')][$event->isAllday()?'-1':($startDate->format('%H%M'))][$event->getUid()] = &$event;
 			}
-		} else {
+		} else if(!$ex_event_dates[$startDate->format('%Y%m%d')]){
 			$master_array[$startDate->format('%Y%m%d')][$event->isAllday()?'-1':($startDate->format('%H%M'))][$event->getUid()] = &$event;
 		}
 
@@ -1544,13 +1552,14 @@ class tx_cal_event_service extends tx_cal_base_service {
 					} else {
 						$new_event = &tx_cal_functions::makeInstance('tx_cal_phpicalendar_rec_model',$event,$nextOccuranceTime,$nextOccuranceEndTime);
 					}
-					
-					if($new_event->isAllday()){
-						$master_array[$nextOccuranceTime->format('%Y%m%d')]['-1'][$event->getUid()] = $new_event;
-					}else{
-						$master_array[$nextOccuranceTime->format('%Y%m%d')][$nextOccuranceTime->format('%H%M')][$event->getUid()] = $new_event;
+					if(!$ex_event_dates[$new_event->getStart()->format('%Y%m%d')]){
+						if($new_event->isAllday()){
+							$master_array[$nextOccuranceTime->format('%Y%m%d')]['-1'][$event->getUid()] = $new_event;
+						}else{
+							$master_array[$nextOccuranceTime->format('%Y%m%d')][$nextOccuranceTime->format('%H%M')][$event->getUid()] = $new_event;
+						}
+						$added++;
 					}
-					$added++;
 				}
 			}
 			$GLOBALS['TYPO3_DB']->sql_free_result($result);

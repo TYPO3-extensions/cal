@@ -123,7 +123,12 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 			$eventEndYear++;
 		}
 		if($event->isAllday() || $eventStartFormatted != $eventEndFormatted){
-			if($eventStart->year.sprintf("%02d",$eventStart->getWeekOfYear()) < $this->year.sprintf("%02d",$this->week) && $event->getEnd()->year.sprintf("%02d",$event->getEnd()->getWeekOfYear()) >= $this->year.sprintf("%02d",$this->week)){
+			$eventYearEnd = $event->getEnd()->year;
+			if($event->getEnd()->month == 12 && $event->getEnd()->getWeekOfYear() == 1){
+				$eventYearEnd++;
+			}
+			
+			if($eventStart->year.sprintf("%02d",$eventStart->getWeekOfYear()) < $this->year.sprintf("%02d",$this->week) && $eventYearEnd.sprintf("%02d",$event->getEnd()->getWeekOfYear()) >= $this->year.sprintf("%02d",$this->week)){
 				do {
 					$eventStart->addSeconds(86400);
 					$eventStartYear = $eventStart->year;

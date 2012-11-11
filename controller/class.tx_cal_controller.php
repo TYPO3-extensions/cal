@@ -3293,6 +3293,9 @@ class tx_cal_controller extends tslib_pibase {
 					$piVars['tx_cal_controller']['weekday'] = $date->getDayOfWeek();
 					$sessionVars['month'] = substr($piVars['tx_cal_controller']['getdate'],4,2);
 					$sessionVars['day'] = substr($piVars['tx_cal_controller']['getdate'],6,2);
+					if($date->getMonth() == 12 && $piVars['tx_cal_controller']['week'] == 1){
+						$piVars['tx_cal_controller']['year']++;
+					}
 
 					unset($piVars['tx_cal_controller']['view']);
 					unset($piVars['tx_cal_controller']['getdate']);

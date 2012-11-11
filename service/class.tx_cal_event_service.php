@@ -445,6 +445,8 @@ class tx_cal_event_service extends tx_cal_base_service {
 						}
 						$events_tmp = $this->getRecurringEventsFromIndex($event, $ex_events_dates);
 					} else {
+						t3lib_div::deprecationLog('Usage of old recurrence model is deprecated since cal 1.5.' . LF .
+								'Please use new recurrence model instead, support will be removed after cal 1.6.');
 						$eventStart = $event->getStart();
 						$events_tmp[$eventStart->format('%Y%m%d')][$event->isAllday()?'-1':($eventStart->format('%H%M'))][$event->getUid()] = $event;
 					}
@@ -1383,8 +1385,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 	 * @param		$event	object		Instance of this class (tx_cal_model)
 	 */
 	function recurringEvent($event){
-		t3lib_div::deprecationLog('Usage of old recurrence model is deprecated since cal 1.5.' . LF .
-									  'Please use new recurrence model instead, support will be removed after cal 1.6.');
 		$deviations = Array();
 		$select = '*';
 		$table = 'tx_cal_event_deviation';
@@ -1436,7 +1436,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 		}
 
 		// new feature for limiting f.e. the listed recurring events in listView
-		$maxRecurringEvents = (int)$this->conf['view.'][$this->conf['view'].'.']['maxRecurringEvents'];
+		$maxRecurringEvents = Array();
+		if (TYPO3_MODE != 'BE') {
+			$maxRecurringEvents = (int)$this->conf['view.'][$this->conf['view'].'.']['maxRecurringEvents'];
+		}
 		$maxRecurringEvents = !empty($maxRecurringEvents) ? $maxRecurringEvents : $count;
 
 		$counter = 1;

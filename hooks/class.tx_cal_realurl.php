@@ -277,7 +277,7 @@ class tx_cal_realurl {
 			'alias_field' => $aliasField,
 			'addWhereClause' => $where,
 			'useUniqueCache' => 1,
-			'userUniqueCache_conf' => array(
+			'useUniqueCache_conf' => array(
 				'strtolower' => 1,
 				'spaceCharacter' => '_',
 			),

@@ -14,7 +14,6 @@ $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
 // page where records will be stored in that have been created with a wizard
 $sPid = '###CURRENT_PID###'; // storage pid????
 
-$limitCalendarsToUidWhere = '';
 $limitViewOnlyToPidsWhere = '';
 $wizzardSuggestDefaults = Array();
 if (TYPO3_MODE=="BE") {
@@ -23,37 +22,7 @@ if (TYPO3_MODE=="BE") {
 	}else if($_POST['popViewId']>0){
 		$pageTSConf = t3lib_befunc::getPagesTSconfig($_POST['popViewId']);
 	}
-    if(!is_object($GLOBALS['BE_USER']))  {
-        define('TYPO3_PROCEED_IF_NO_USER', true);  //patch for crawler
-        $GLOBALS['BE_USER'] = t3lib_div::makeInstance('t3lib_beUserAuth');	// New backend user object
-        $GLOBALS['BE_USER']->start();			// Object is initialized
-        $GLOBALS['BE_USER']->backendCheckLogin();	// Checking if there's a user logged in
-        define('TYPO3_PROCEED_IF_NO_USER', false); 
-    }
-	$be_userCategories = t3lib_div::trimExplode(',',$GLOBALS['BE_USER']->user['tx_cal_category'],1);
-	$be_userCalendars = t3lib_div::trimExplode(',',$GLOBALS['BE_USER']->user['tx_cal_calendar'],1);
-	$be_userCalendars[] = 0;
-	$enableAccessControl = false;
-    
-	if($GLOBALS['BE_USER']->user['tx_cal_enable_accesscontroll']){
-		$enableAccessControl = true;
-	}
-	if (is_object($GLOBALS['BE_USER']) && is_array($GLOBALS['BE_USER']->userGroups)) {
-		foreach ($GLOBALS['BE_USER']->userGroups as $gid => $group) {
-			if($group['tx_cal_enable_accesscontroll']){
-				$enableAccessControl = true;
-				if ($group['tx_cal_category']) {
-					$be_userCategories[] = $group['tx_cal_category'];
-				}
-				if ($group['tx_cal_calendar']) {
-					$be_userCalendars[] = $group['tx_cal_calendar'];
-				}
-			}
-		}
-	}
-	if($enableAccessControl){
-		$limitCalendarsToUidWhere = ' AND tx_cal_calendar.uid IN ('.implode(',',$be_userCalendars).')';
-	}
+	
 	if(is_object($GLOBALS['BE_USER'])){
 	
 		$GLOBALS['BE_USER']->fetchGroupData();
@@ -64,18 +33,6 @@ if (TYPO3_MODE=="BE") {
 		}
 	}
 } 
-// FAKTOR-E HACK:
-//if (empty($limitViewOnlyToPidsWhere) && isset($GLOBALS['SOBE']->viewId)) {
-//    $limitViewOnlyToPidsWhere = '.pid IN ('.$GLOBALS['SOBE']->viewId.')';
-//    $wizzardSuggestDefaults['pidList'] = $GLOBALS['SOBE']->viewId;
-//} elseif (empty($limitViewOnlyToPidsWhere) && isset($_POST['popViewId'])) {
-//    $limitViewOnlyToPidsWhere = '.pid IN ('.$_POST['popViewId'].')';
-//    $wizzardSuggestDefaults['pidList'] = $_POST['popViewId'];
-//}
-// ### FAKTOR-E HACK END ###
-
-
-
 
 // hide new localizations
 $hideOrganizerTextfield = ($confArr['hideOrganizerTextfield']?'mergeIfNotBlank':'');

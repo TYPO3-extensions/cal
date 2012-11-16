@@ -545,8 +545,12 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 			$classes .= ' currentDayHeader';
 		}
 		
+		$localDayIndex = $weekdayIndex-DATE_CALC_BEGIN_WEEKDAY;
+		if ($localDayIndex == 7) {
+			$localDayIndex = 0;
+		}
 		$daysKeys = array_keys($this->days);
-		if(intval($this->getParentMonth()) != intval($this->days[$daysKeys[$weekdayIndex]]->month)){
+		if(intval($this->getParentMonth()) != intval($this->days[$daysKeys[$localDayIndex]]->month)){
 			$classes .= ' monthOff';
 		}
 

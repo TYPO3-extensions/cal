@@ -546,8 +546,8 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 		}
 		
 		$localDayIndex = $weekdayIndex-DATE_CALC_BEGIN_WEEKDAY;
-		if ($localDayIndex == 7) {
-			$localDayIndex = 0;
+		if ($localDayIndex == -1) {
+			$localDayIndex = 6;
 		}
 		$daysKeys = array_keys($this->days);
 		if(intval($this->getParentMonth()) != intval($this->days[$daysKeys[$localDayIndex]]->month)){

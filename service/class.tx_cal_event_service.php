@@ -173,7 +173,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		'tx_cal_event.*';
 		$table = 'tx_cal_event LEFT JOIN tx_cal_calendar ON tx_cal_calendar.uid = tx_cal_event.calendar_id ';
 		if(0 === strpos($this->conf['view'],'search') && $GLOBALS['TSFE']->sys_language_content > 0){
-			$select .= ',tx_cal_event_l18n.*';
+			$select .= implode(',tx_cal_event_l18n.',t3lib_div::trimExplode(',',$this->conf['view.']['search.']['searchEventFieldList'],1));
 			$table .= 'LEFT JOIN tx_cal_event as tx_cal_event_l18n ON tx_cal_event.uid = tx_cal_event_l18n.l18n_parent ';
 		}
 		$where = '1=1 '.$additionalWhere;

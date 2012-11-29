@@ -392,8 +392,9 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 
 		$sims = $rems = $wrapped = Array();
 		$template = '';
-
-		for($j = 0; $j < $this->rowspan; $j++){
+		
+		$conf = &tx_cal_registry::Registry('basic','conf');
+		for($j = 0; $j < $this->rowspan ; $j++){
 			$this->content .= '<tr class="'.$classes.'">';
 			for($i = 0; $i < 7; $i++){
 				$currentDayClass = ' weekday'.$this->days[$daysKeys[$i]]->weekdayNumber;
@@ -405,25 +406,21 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 				}
 				if($theMatrix[$i][$j] == false){
 					$this->content .= '<td class="empty '.$classes.$currentDayClass.'">';
-					if($j == $this->rowspan-1){
-						$conf = &tx_cal_registry::Registry('basic','conf');
-						$this->days[$daysKeys[$i]]->getCreateEventLinkMarker($template, $sims, $rems, $wrapped, $conf['view']);
-						$this->content .= $sims['###CREATE_EVENT_LINK###'];
-					}
-					$this->content .= '</td>';
 				} else if(is_object($theMatrix[$i][$j])){
 					$this->content .= '<td class="event '.$classes.$currentDayClass.'" colspan="'.($theMatrix[$i][$j]->matrixValue).'">'.$theMatrix[$i][$j]->renderEventFor('month');
 					$this->days[$daysKeys[$i]]->hasAlldayEvents = true;
-					if($j == $this->rowspan-1){
-						$conf = &tx_cal_registry::Registry('basic','conf');
-						$this->days[$daysKeys[$i]]->getCreateEventLinkMarker($template, $sims, $rems, $wrapped, $conf['view']);
-						$this->content .= $sims['###CREATE_EVENT_LINK###'];
-					}
-					$this->content .= '</td>';
 				}
+				$this->content .= '</td>';
 			}
 			$this->content .= '</tr>';
 		}
+		$this->content .= '<tr class="create">';
+		for($i = 0; $i < 7; $i++){
+			$this->days[$daysKeys[$i]]->getCreateEventLinkMarker($template, $sims, $rems, $wrapped, $conf['view']);
+			$this->content .= '<td>'.$sims['###CREATE_EVENT_LINK###'].'</td>';
+		}
+		$this->content .= '</tr>';
+		$this->rowspan++;
 	}
 
 	public function getWeekClassesMarker(& $template, & $sims, & $rems, & $wrapped, $view){

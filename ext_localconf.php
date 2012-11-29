@@ -741,12 +741,31 @@ require_once(t3lib_extMgm::extPath($_EXTKEY).'res/class.tx_cal_isCalNotAllowedTo
 $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['typo3/wizard_edit.php'] = t3lib_extMgm::extPath($_EXTKEY).'xclass/class.ux_wizard_edit.php';
 
 // caching framework configuration
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['backend'] = 't3lib_cache_backend_DbBackend';
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['frontend'] = 't3lib_cache_frontend_VariableFrontend';
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['options'] = array(
-	'cacheTable' => 'tx_cal_cache',
-	'tagsTable' => 'tx_cal_cache_tags'
-);
+// Register cache 'tx_cal_cache'
+if (!is_array($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache'])) {
+	$TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache'] = array();
+}
+// Define string frontend as default frontend, this must be set with TYPO3 4.5 and below
+// and overrides the default variable frontend of 4.6
+if (!isset($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['frontend'])) {
+	$TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['frontend'] = 't3lib_cache_frontend_StringFrontend';
+}
+if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < '4006000') {
+	// Define database backend as backend for 4.5 and below (default in 4.6)
+	if (!isset($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['backend'])) {
+		$TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['backend'] = 't3lib_cache_backend_DbBackend';
+	}
+	// Define data and tags table for 4.5 and below (obsolete in 4.6)
+	if (!isset($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['options'])) {
+		$TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['options'] = array();
+	}
+	if (!isset($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['options']['cacheTable'])) {
+		$TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['options']['cacheTable'] = 'tx_cal_cache';
+	}
+	if (!isset($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['options']['tagsTable'])) {
+		$TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['tx_cal_cache']['options']['tagsTable'] = 'tx_cal_cache_tags';
+	}
+}
 
 // register cal cache table for "clear all caches"
 if ($confArr['cachingMode']=='normal') {

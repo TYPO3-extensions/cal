@@ -170,14 +170,7 @@ class tx_cal_new_monthview extends tx_cal_new_timeview {
 		if(DATE_CALC_BEGIN_WEEKDAY == 0){
 			$this->mySubpart = 'SUNDAY_MONTH_WEEKDAYS_SUBPART';
 		}
-		$controller = &tx_cal_registry::Registry('basic','controller');
-		$cache = $controller->cache->get($this->weekDayLength.'_'.$this->mySubpart);
-		if($cache != ''){
-			$sims['###WEEKDAYS###'] = $cache;
-		} else {
-			$sims['###WEEKDAYS###'] = $this->render($this->template);
-			$controller->cache->set($this->weekDayLength.'_'.$this->mySubpart,$sims['###WEEKDAYS###'],'month',60*60*24*365*100);
-		}
+		$sims['###WEEKDAYS###'] = $this->render($this->template);
 		$this->mySubpart = 'MONTH_SUBPART';
 	}
 	

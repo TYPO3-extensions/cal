@@ -58,7 +58,7 @@ class tx_cal_monthview extends tx_cal_base_view {
 			$page = $this->cObj->fileResource($this->conf['view.']['month.']['monthMiniTemplate']);
 			if ($page == '') {
 				$page = $this->conf['view.']['month.']['monthMiniTemplate'];
-				if (!(preg_match('/^###([A-Z0-9_|+-]*)###$/', $page))) {				
+				if (!(preg_match('/###([A-Z0-9_|+-]*)###/', $page))) {				
 					return '<h3>calendar: no template file found:</h3>'.$this->conf['view.']['month.']['monthMiniTemplate'].'<br />Please check your template record and add both cal items at "include static (from extension)"';
 				}
 			}

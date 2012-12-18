@@ -52,12 +52,16 @@ class tx_cal_phpicalendar_rec_deviation_model extends tx_cal_phpicalendar_model 
 		unset($row['hidden']);
 		unset($row['starttime']);
 		unset($row['endtime']);
-		$row = array_merge($event->row,array_filter($row));	
+		// storing allday in a temp var, in case it is set from 1 to 0
+		$allday = $row['allday'];
+		$row = array_merge($event->row,array_filter($row));
+		$row['allday'] = $allday;
 		$this->createEvent($row, false);
 		
 		$this->setStart($start);
 		$this->setEnd($end);
 		
+		$this->setAllday($row['allday']);
 		$this->origStartDate = new tx_cal_date($row['orig_start_date']);
 		$this->origStartDate->addSeconds($row['orig_start_time']);
 	}

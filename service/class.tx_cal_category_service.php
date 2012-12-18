@@ -221,6 +221,7 @@ class tx_cal_category_service extends tx_cal_base_service {
 			case 0: # show all
 				break;
 			case 1: #show selected
+			case 3:
 				$allowedCategories = t3lib_div::trimExplode(',',$this->cObj->stdWrap($this->conf['view.']['category'],$this->conf['view.']['category.']),1);
 				if (!empty($allowedCategories)){
 					$implodedAllowedCategories = implode(',',$allowedCategories);

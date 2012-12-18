@@ -65,8 +65,9 @@
 			<label index="cal.pi_flexform.calendarMode.excludeSelected">Don't show selected calendars</label>
 			<label index="cal.pi_flexform.categoryMode">Category selection mode</label>
 			<label index="cal.pi_flexform.categoryMode.showAll">Show all categories (don't care about selection below)</label>
-			<label index="cal.pi_flexform.categoryMode.showSelected">Show only selected categories</label>
+			<label index="cal.pi_flexform.categoryMode.showSelected">Show only selected categories (exact match)</label>
 			<label index="cal.pi_flexform.categoryMode.excludeSelected">Don't show selected categories</label>
+			<label index="cal.pi_flexform.categoryMode.showSelectedOr">Show only selected categories (any)</label>
 			<label index="cal.pi_flexform.sheetYearView">Year View</label>
 			<label index="cal.pi_flexform.yearViewPid">Year view page</label>
 			<label index="cal.pi_flexform.yearTemplate">Year template</label>

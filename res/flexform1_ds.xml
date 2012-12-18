@@ -319,7 +319,11 @@
 						            <numIndex index="2" type="array">
 							            <numIndex index="0">LLL:EXT:cal/locallang_tca.xml:cal.pi_flexform.categoryMode.excludeSelected</numIndex>
 							            <numIndex index="1">2</numIndex>
-						            </numIndex>						
+						            </numIndex>
+						            <numIndex index="3" type="array">
+							            <numIndex index="0">LLL:EXT:cal/locallang_tca.xml:cal.pi_flexform.categoryMode.showSelectedOr</numIndex>
+							            <numIndex index="1">3</numIndex>
+						            </numIndex>					
 					            </items>
 					            <maxitems>1</maxitems>
 					            <size>1</size>

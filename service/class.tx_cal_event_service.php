@@ -469,7 +469,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$categoryArray = t3lib_div::trimExplode(',',implode(',',(Array)$this->controller->piVars['category']),1);
 
 		//TODO: checking the piVar is not a very good thing
-		if($this->conf['view.']['categoryMode']!=1 && $categoryWhere!='' && !(($this->conf['view']=='ics' || $this->conf['view']=='search_event') && !empty($categoryArray))){
+		if($this->conf['view.']['categoryMode']!=1 && $this->conf['view.']['categoryMode']!=3 && $categoryWhere!='' && !(($this->conf['view']=='ics' || $this->conf['view']=='search_event') && !empty($categoryArray))){
 			$uidCollector = array();
 				
 			$select = 'tx_cal_event_category_mm.*, tx_cal_event.pid, tx_cal_event.uid';

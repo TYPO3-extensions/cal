@@ -52,9 +52,13 @@ class tx_cal_weekview extends tx_cal_base_view {
 		}
 		
 		require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_weekview.php');
-		
-		
-		$weekModel = new tx_cal_new_weekview($getdate->getWeekOfYear(), $getdate->year);
+
+		$week = $getdate->getWeekOfYear();
+		$year = $getdate->year;
+		if($getdate->month == 12 && $week == 1){
+			$year++;
+		}
+		$weekModel = new tx_cal_new_weekview($week, $year);
 		$today = new tx_cal_date();
 		$weekModel->setCurrent($today);
 		$weekModel->setSelected($getdate);

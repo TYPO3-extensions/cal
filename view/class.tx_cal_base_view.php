@@ -760,7 +760,15 @@ class tx_cal_base_view extends tx_cal_base_service {
 			}
 			$this->local_cObj->setCurrentVal($this->cObj->getSubpart($template, '###'.strtoupper($view).'VIEWLINKTEXT###'));
 			$this->local_cObj->data['view'] = $viewTarget;
-			$this->controller->getParametersForTyposcriptLink($this->local_cObj->data, array ('getdate'=>$this->conf['getdate'],'view' => $viewTarget,  $this->pointerName => NULL), $this->conf['cache'], $this->conf['clear_anyway'], $this->conf['view.'][$viewTarget.'.'][$viewTarget.'ViewPid']);
+			if($viewTarget == 'week' && DATE_CALC_BEGIN_WEEKDAY == 0){
+				$date = new tx_cal_date($this->conf['getdate']);
+				if($date->format('%w')==0){
+					$date->addSeconds(86400);
+				}
+				$this->controller->getParametersForTyposcriptLink($this->local_cObj->data, array ('getdate'=>$date->format('%Y%m%d'),'view' => $viewTarget,  $this->pointerName => NULL), $this->conf['cache'], $this->conf['clear_anyway'], $this->conf['view.'][$viewTarget.'.'][$viewTarget.'ViewPid']);
+			} else {
+				$this->controller->getParametersForTyposcriptLink($this->local_cObj->data, array ('getdate'=>$this->conf['getdate'],'view' => $viewTarget,  $this->pointerName => NULL), $this->conf['cache'], $this->conf['clear_anyway'], $this->conf['view.'][$viewTarget.'.'][$viewTarget.'ViewPid']);
+			}
 			$rems[$viewMarker] = $this->local_cObj->cObjGetSingle($this->conf['view.'][$viewTarget.'.'][$viewTarget.'ViewLink'],$this->conf['view.'][$viewTarget.'.'][$viewTarget.'ViewLink.']);
 		}
 	}

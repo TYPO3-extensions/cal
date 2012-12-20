@@ -72,15 +72,8 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 	}
 
 	private function generateDays(){
-		$date = new tx_cal_date($this->year.'0101');
-		$oldYearWeek = ($date->format('%U') > 1 )?0:1;
-		$offset = $date->format('%w');
-		if($offset==0){
-			$offset = 7;
-		}
-		$days = Date_Calc::dateToDays($date->day,$date->month,$date->year);
-		$daysTotal = ($this->week - $oldYearWeek) * 7 - $offset + $days + DATE_CALC_BEGIN_WEEKDAY;
-		$weekStart = new tx_cal_date(Date_Calc::daysToDate($daysTotal,'%Y%m%d'));
+		$weekStart = new tx_cal_date(tx_cal_functions::getDayByWeek($this->year, $this->week, DATE_CALC_BEGIN_WEEKDAY));
+		
 		$this->weekStart = $weekStart->format('%Y%m%d');
 		$this->month = $weekStart->getMonth();
 

@@ -3204,20 +3204,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		if(!$this->piVars['getdate']){
 			if($this->piVars['week']){
-				$date = new tx_cal_date($this->piVars['year'].'0101');
-				$date->setTZbyID('UTC');
-	
-				$oldYearWeek = ($date->format('%U') > 1)?'0':'1';
-
-				$offset = $date->format('%w') - $this->piVars['weekday'] + DATE_CALC_BEGIN_WEEKDAY;
-				if($offset<=0){
-					$offset = 7;
-				} 
-				
-				$days = Date_Calc::dateToDays($date->getDay(),$date->getMonth(),$date->getYear());
-				$daysTotal = ($this->piVars['week'] - $oldYearWeek) * 7 - $offset + $days+ DATE_CALC_BEGIN_WEEKDAY;
-
-				$this->piVars['getdate'] = Date_Calc::daysToDate($daysTotal,'%Y%m%d');
+				$this->piVars['getdate'] = tx_cal_functions::getDayByWeek($this->piVars['year'], $this->piVars['week'], $this->piVars['weekday']);
 				
 				unset($this->piVars['year']);
 				unset($this->piVars['week']);

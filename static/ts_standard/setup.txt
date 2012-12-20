@@ -1558,7 +1558,7 @@ plugin.tx_cal_controller {
 			weekViewLink {
 				current = 0
 				field = link_timestamp
-				strftime = %W
+				date = W
 				stdWrap {
 					prioriCalc = intval
 				}

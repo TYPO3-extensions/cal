@@ -368,6 +368,24 @@ class tx_cal_functions {
 		return $weekdayNames;
 	}
 	
+	public static function getDayByWeek($year, $week, $weekday){
+	
+		$date = new tx_cal_date($year.'0101');
+		$date->setTZbyID('UTC');
+	
+		$offset = $weekday - $date->format('%w');
+	
+		// correct weekday
+		$date->addSeconds($offset * 86400);
+	
+		$oldYearWeek = ($date->format('%U') > 1)?'0':'1';
+	
+		// correct week
+		$date->addSeconds((($week - $oldYearWeek) * 7) * 86400);
+	
+		return $date->format('%Y%m%d');
+	}
+	
 	
 	public static function createErrorMessage($error,$note){
 		return '<div class="error"><h2>Calendar Base Error</h2><p class="message"><strong>Message:</strong> '.$error.'</p><p class="note"><strong>Note:</strong> '.$note.'</p></div>';

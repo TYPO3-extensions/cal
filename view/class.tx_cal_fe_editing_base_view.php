@@ -646,7 +646,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 							$functionB = 'get'.ucwords($rule['field']);
 							if(method_exists($this->object, $functionB)){
 								$b = $this->object->$functionB();
-								if(is_object($a) && method_exists($a, $rule['rule'])){
+								if(is_object($a) && method_exists($a, $rulePart)){
 									$result = $a->compareTo($b);
 									if($result != -1){
 										$failed = true;
@@ -676,7 +676,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 							if(method_exists($this->object, $functionB)){
 								$b = $this->object->$functionB();
 								
-								if(is_object($a) && method_exists($a, $rule['rule'])){
+								if(is_object($a) && method_exists($a, $rulePart)){
 								$result = $a->compareTo($b);
 									if($result != 1){
 										$failed = true;
@@ -705,7 +705,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 							if(method_exists($this->object, $functionB)){
 								$b = $this->object->$functionB();
 								
-								if(is_object($a) && method_exists($a, $rule['rule'])){
+								if(is_object($a) && method_exists($a, $rulePart)){
 									$result = $a->compareTo($b);
 									if($result != 0){
 										$failed = true;

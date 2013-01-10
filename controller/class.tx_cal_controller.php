@@ -904,7 +904,11 @@ class tx_cal_controller extends tslib_pibase {
 			$tempCategoryMode = $this->conf['view.']['categoryMode'];
 			$tempCategory = $this->conf['view.']['category'];
 			
-			$this->conf['view.']['categoryMode'] = 1;
+			if($tempCategoryMode == 1 || $tempCategoryMode==3){
+				// nothing to do here
+			} else {
+				$this->conf['view.']['categoryMode'] = 1;
+			}
 			$this->conf['view.']['category'] = $categoryArray;
 			$this->conf['category'] = $this->conf['view.']['category'];
 			$relatedEvents = &$this->findRelatedEvents('event',' AND tx_cal_event.uid != '.$event->getUid());

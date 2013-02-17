@@ -47,8 +47,19 @@ class tx_cal_realurl {
 			$config['postVarSets']['_DEFAULT'] = array();
 		}
 		$config['postVarSets']['_DEFAULT'] = array_merge($config['postVarSets']['_DEFAULT'], $this->addPostVarSets());
+		
+		if(!is_array($config['fileName']['index'])) {
+			$config['fileName']['index'] = array();
+		}
+		$config['fileName']['index'] = array_merge($config['fileName']['index'], $this->addFilenameSet());
 
 		return $config;
+	}
+	
+	function addFilenameSet(){
+		$calendarRSS = array();
+		$calendarRSS['calendarRSS.xml'] = array('keyValues' => array('type' => 151));
+		return $calendarRSS;
 	}
 	
 	/**

@@ -1,3 +1,5 @@
+plugin.tx_cal_controller.view.ics.eventUidPrefix = {$plugin.tx_cal_controller.view.ics.eventUidPrefix}
+
 ## This enables the cal ics export
 ics = PAGE
 ics {

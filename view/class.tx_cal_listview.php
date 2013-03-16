@@ -152,9 +152,7 @@ class tx_cal_listview extends tx_cal_base_view {
 			if($firstEventDate){
 				$GLOBALS['TSFE']->register['cal_list_firstevent'] = $firstEventDate->getTime();
 			}
-			if($lastEventDate){
-				$GLOBALS['TSFE']->register['cal_list_lastevent'] = $lastEventDate->getTime();
-			}
+			
 			if($this->count) {
 				$GLOBALS['TSFE']->register['cal_list_events_total'] = $this->count;
 				// reference the array with all event counts in the TYPO3 register for usage from within hooks or whatever
@@ -550,6 +548,7 @@ class tx_cal_listview extends tx_cal_base_view {
 				return $finished;
 			}
 		}
+		$GLOBALS['TSFE']->register['cal_list_lastevent'] = $event->getStart()->getTime();
 
 		// reference the event in the rendering array
 		$hookObjectsArr = tx_cal_functions::getHookObjectsArray('tx_cal_listview','sorting','view');

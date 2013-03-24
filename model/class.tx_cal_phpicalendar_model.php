@@ -2016,7 +2016,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 	function getRdateMarker(&$template, &$sims, &$rems, &$wrapped, $view ) {
 		$sims['###RDATE###'] = '';
 		if($this->getRdateType()!='' && $this->getRdateType()!='none' && $this->getRdate()!='') {
-			$sims['###RDATE###'] = 'RDATE:'.($this->getRdateType()=='date_time'?'':';'.strtoupper($this->getRdateType()).':'.$this->getRdate());
+			$sims['###RDATE###'] = 'RDATE;VALUE='.strtoupper($this->getRdateType().':'.$this->getRdate());
 		}
 	}
 

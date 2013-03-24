@@ -339,7 +339,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 				}
 				$GLOBALS['TYPO3_DB']->sql_free_result($result);
 			}
-			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('tx_cal_exception_group.uid','tx_cal_exception_event_mm inner join tx_cal_exception_event on tx_cal_exception_event_mm.uid_foreign = tx_cal_exception_event.uid', 'tx_cal_exception_event_mm.uid_local in ('.implode(',',$eventUidArray).') and tx_cal_exception_event_mm.tablenames = "tx_cal_exception_group"');
+			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('tx_cal_exception_event_group.uid','tx_cal_exception_event_group_mm inner join tx_cal_exception_event_group on tx_cal_exception_event_group_mm.uid_foreign = tx_cal_exception_event_group.uid', 'tx_cal_exception_event_group_mm.uid_local in ('.implode(',',$eventUidArray).') and tx_cal_exception_event_group_mm.tablenames = "tx_cal_exception_group"');
 			$exceptionGroupUids = Array();
 			if($result) {
 				while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)){

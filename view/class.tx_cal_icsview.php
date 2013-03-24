@@ -50,7 +50,21 @@ class tx_cal_icsview extends tx_cal_base_view {
 		$this->_init($master_array);		
 		$page = $this->cObj->fileResource($this->conf['view.']['ics.']['icsListTemplate']);
 		if ($page == '') {
-			return '<h3>calendar: no icsListTemplate file found:</h3>'.$this->conf['view.']['ics.']['icsListTemplate'];
+			//return '<h3>calendar: no icsListTemplate file found:</h3>'.$this->conf['view.']['ics.']['icsListTemplate'];
+			// falling back to default:
+			$page = '<h3>###L_ICSLISTTITLE###:</h3><br />
+<h4>###CALENDAR_LABEL###</h4>
+<!-- ###CALENDARLINK_LOOP### start -->
+###LINK###<br />
+<!-- ###CALENDARLINK_LOOP### end -->
+<br/>
+<h4>###CATEGORY_LABEL###</h4>
+<!-- ###CATEGORYLINK_LOOP### start -->
+###LINK###<br />
+<!-- ###CATEGORYLINK_LOOP### end -->
+
+<br />
+###BACK_LINK###';
 		}
 		
 		$calendarLinkLoop = $this->cObj->getSubpart($page, '###CALENDARLINK_LOOP###');
@@ -113,7 +127,16 @@ class tx_cal_icsview extends tx_cal_base_view {
 		$page = t3lib_div::getURL($absFile);
 		
 		if ($page == '') {
-			return '<h3>calendar: no ics template file found:</h3>'.$this->conf['view.']['ics.']['icsTemplate'];
+			//return '<h3>calendar: no ics template file found:</h3>'.$this->conf['view.']['ics.']['icsTemplate'];
+			// falling back to default:
+			$page = 'BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//TYPO3/NONSGML Calendar Base (cal) V###CAL_VERSION###//EN
+METHOD:###METHOD###
+<!--###EVENT### start-->
+<!--###EVENT### end-->
+END:VCALENDAR
+			';
 		}
 		$ics_events = '';
 		

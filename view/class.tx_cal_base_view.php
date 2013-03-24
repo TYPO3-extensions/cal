@@ -1708,6 +1708,59 @@ class tx_cal_base_view extends tx_cal_base_service {
 	function getAllowedToCreateEventsMarker(&$page, &$sims, &$rems, $view){
 		$sims['###ALLOWED_TO_CREATE_EVENTS###'] = $this->rightsObj->isAllowedToCreateEvent();
 	}
+	
+	function renderWithFluid(){
+		$templateFile = t3lib_div::getFileAbsFileName($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'TemplateFluid']);
+		$view = t3lib_div::makeInstance('Tx_Fluid_View_StandaloneView');
+		$view->setTemplatePathAndFilename($templateFile);
+		$view->assign($this->conf['view'].'View', $this);
+		$view->assign('settings', tx_cal_functions::getTsSetup('tx_cal_controller'));
+		return $view->render();
+	}
+	
+	function getCount(){
+		$count = 0;
+		if(count($this->master_array)) {
+			
+			// parse the master_array for "valid" events of the current listView and reference them in a separate array that is used for rendering
+			// use array keys for the loops, so that references can be used and less memory is needed :)
+			$master_array_keys = array_keys($this->master_array);
+		
+			foreach ($master_array_keys as $cal_time) {
+				// create a reference
+				$event_times = &$this->master_array[$cal_time];
+				if (is_array($event_times)) {
+					$event_times_keys = array_keys($event_times);
+					foreach ($event_times_keys as $a_key) {
+						$a = &$event_times[$a_key];
+						if (is_array($a)) {
+							$a_keys = array_keys($a);
+							foreach ($a_keys as $uid) {
+								$event = &$a[$uid];
+		
+								if (!is_object($event)){
+									unset($this->master_array[$cal_time][$event_times][$a_keys]);
+									continue;
+								}
+								if($this->conf['view.'][$this->conf['view'].'.']['hideStartedEvents'] == 1 && $event->getStart()->before($this->starttime)){
+									unset($this->master_array[$cal_time][$event_times][$a_keys]);
+									continue;
+								}
+		
+								if ($event->getEnd()->before($this->starttime) || $event->getStart()->after($this->endtime)){
+									unset($this->master_array[$cal_time][$event_times][$a_keys]);
+									continue;
+								}
+								$count++;
+							}
+						}
+					}
+				}
+			}
+		
+		}
+		return $count;
+	}
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/view/class.tx_cal_base_view.php']) {

@@ -2089,6 +2089,8 @@ plugin.tx_cal_controller {
 			# @description	Template for list view.
 			# @also			Constants
 			listTemplate = {$plugin.tx_cal_controller.view.list.listTemplate}
+			
+			listTemplateFluid = {$plugin.tx_cal_controller.view.list.listTemplateFluid}
 
 			# @description	Template for list view with teaser.
 			# @also			Constants

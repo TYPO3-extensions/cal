@@ -658,6 +658,11 @@ class tx_cal_listview extends tx_cal_base_view {
 		$this->endtime = $endtime;
 		$this->objectsInList = Array();
 		
+		if($this->conf['activateFluid'] == 1){
+			$this->_init($master_array);
+			return $this->renderWithFluid();
+		}
+		
 		$this->initTemplate($page);
 		
 		$this->_init($master_array);

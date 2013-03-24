@@ -1,0 +1,17 @@
+<div class="list-view">
+<h1><f:format.date format="F d">@{listView.starttime.time}</f:format.date> - <f:format.date format="F d">@{listView.endtime.time}</f:format.date></h1>
+<f:if condition="{listView.master_array}">
+<p class="found">{listView.count} entries found</p>
+<dl>
+<f:for each="{listView.master_array}" as="entriesOfADay" key="day">
+	<f:if condition="{day} >= {f:format.date(format:'Ymd' date:'@{listView.starttime.time}')}">
+		<f:for each="{entriesOfADay}" as="entriesOfAnHour">
+			<f:for each="{entriesOfAnHour}" as="event">
+				<f:render partial="List/event" arguments="{event:event, settings:settings}" />
+			</f:for>
+		</f:for>
+	</f:if>
+</f:for>
+</dl>
+</f:if>
+</div>

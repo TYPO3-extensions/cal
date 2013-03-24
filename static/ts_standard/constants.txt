@@ -142,6 +142,8 @@ plugin.tx_cal_controller {
 	view.list.listTemplate = EXT:cal/standard_template/list.tmpl
 	# cat=Calendar Base (Templates)/file/list/2; type=string; label=List View Template: Marker-based template for list view with teaser enabled.
 	view.list.listWithTeaserTemplate = EXT:cal/standard_template/list_w_teaser.tmpl
+	# cat=Calendar Base (Templates)/file/list/3; type=string; label=Fluid List View Template: Marker-based template for list view.
+	view.list.listTemplateFluid = EXT:cal/standard_template/list.html
 	
 	# cat=Calendar Base (Templates)/file/module/1; type=string; label=Locationloader Template: Marker-based template to add location information into the event view.
 	module.locationloader.template = EXT:cal/standard_template/module_locationloader.tmpl

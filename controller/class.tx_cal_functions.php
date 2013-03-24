@@ -415,6 +415,53 @@ class tx_cal_functions {
 		
 		return $uriHandler->getHTML();
 	}
+	
+	/**
+	 * Gibt fuer $_EXTKEY das 'plugin.'-Array (ohne Punkte) zurueck
+	 *
+	 * @param	string		Extension-Key z.B.'tx_extbase'
+	 * @param	boolean		true für plugin TS, falls für config TS
+	 * @return	array
+	 */
+	public static function getTsSetup($_EXTKEY, $plugin = true) {
+		// fall Aufruf aus dem Controller dann über $this->objectManager
+		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		$configurationManager = $objectManager->get('Tx_Extbase_Configuration_ConfigurationManagerInterface');
+		/**
+		 * mögliche Werte:
+		 *
+		 * const CONFIGURATION_TYPE_FRAMEWORK = 'Framework';
+		 * const CONFIGURATION_TYPE_SETTINGS = 'Settings';
+		 * const CONFIGURATION_TYPE_FULL_TYPOSCRIPT = 'FullTypoScript';
+		*/
+		$frameworkConfiguration = $configurationManager->getConfiguration(
+				Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+		);
+		$settings = $frameworkConfiguration;
+		return self::removeDots($settings[$plugin ? 'plugin.' : 'config.'][$_EXTKEY.'.']);
+	}
+	
+	/**
+	 * Entfernt Punkte in dem TypoScript-Array
+	 *
+	 * @return	void
+	 */
+	private static function removeDots($settings) {
+		$conf = array();
+		foreach ($settings as $key => $value)
+			$conf[self::removeDotAtTheEnd($key)] = is_array($value) ? self::removeDots($value) : $value;
+		return $conf;
+	}
+	
+	/**
+	 * Entfernt einen Punkt am ende von $string
+	 *
+	 * @param	string		$string
+	 * @return	string		$string
+	 */
+	private static function removeDotAtTheEnd($string) {
+		return preg_replace('/\.$/', '', $string);
+	}
 		
 }
 ?>

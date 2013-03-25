@@ -1711,10 +1711,14 @@ class tx_cal_base_view extends tx_cal_base_service {
 	
 	function renderWithFluid(){
 		$templateFile = t3lib_div::getFileAbsFileName($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'TemplateFluid']);
+
+        /** @var $view Tx_Fluid_View_StandaloneView */
 		$view = t3lib_div::makeInstance('Tx_Fluid_View_StandaloneView');
 		$view->setTemplatePathAndFilename($templateFile);
 		$view->assign($this->conf['view'].'View', $this);
-		$view->assign('settings', tx_cal_functions::getTsSetup('tx_cal_controller'));
+
+        // TODO: Add support for flexform. This is just the typoscript-setup as plain-array.
+		$view->assign('settings', tx_cal_functions::getTsSetupAsPlainArray());
 		return $view->render();
 	}
 	

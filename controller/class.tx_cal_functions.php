@@ -415,53 +415,36 @@ class tx_cal_functions {
 		
 		return $uriHandler->getHTML();
 	}
-	
-	/**
-	 * Gibt fuer $_EXTKEY das 'plugin.'-Array (ohne Punkte) zurueck
-	 *
-	 * @param	string		Extension-Key z.B.'tx_extbase'
-	 * @param	boolean		true für plugin TS, falls für config TS
-	 * @return	array
-	 */
-	public static function getTsSetup($_EXTKEY, $plugin = true) {
-		// fall Aufruf aus dem Controller dann über $this->objectManager
+
+    /**
+     * Returns a plain-array representation of the typoscript-setup
+     *
+     * @param  string $extensionName
+     * @param  string $pluginName
+     * @return array
+     */
+	public static function getTsSetupAsPlainArray($extensionName = 'cal', $pluginName = 'controller') {
 		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+
+        /** @var $configurationManager Tx_Extbase_Configuration_ConfigurationManagerInterface */
 		$configurationManager = $objectManager->get('Tx_Extbase_Configuration_ConfigurationManagerInterface');
+
 		/**
-		 * mögliche Werte:
-		 *
+		 * possible values:
 		 * const CONFIGURATION_TYPE_FRAMEWORK = 'Framework';
 		 * const CONFIGURATION_TYPE_SETTINGS = 'Settings';
 		 * const CONFIGURATION_TYPE_FULL_TYPOSCRIPT = 'FullTypoScript';
+         * @doc http://forge.typo3.org/projects/typo3v4-mvc/wiki/ConfigurationManager_rework
 		*/
-		$frameworkConfiguration = $configurationManager->getConfiguration(
-				Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+		$setup = $configurationManager->getConfiguration(
+            Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            $extensionName,
+            $pluginName
 		);
-		$settings = $frameworkConfiguration;
-		return self::removeDots($settings[$plugin ? 'plugin.' : 'config.'][$_EXTKEY.'.']);
+
+        /** @var $typoScriptService Tx_Extbase_Service_TypoScriptService */
+        $typoScriptService = $objectManager->get('Tx_Extbase_Service_TypoScriptService');
+        return $typoScriptService->convertTypoScriptArrayToPlainArray($setup);
 	}
-	
-	/**
-	 * Entfernt Punkte in dem TypoScript-Array
-	 *
-	 * @return	void
-	 */
-	private static function removeDots($settings) {
-		$conf = array();
-		foreach ($settings as $key => $value)
-			$conf[self::removeDotAtTheEnd($key)] = is_array($value) ? self::removeDots($value) : $value;
-		return $conf;
-	}
-	
-	/**
-	 * Entfernt einen Punkt am ende von $string
-	 *
-	 * @param	string		$string
-	 * @return	string		$string
-	 */
-	private static function removeDotAtTheEnd($string) {
-		return preg_replace('/\.$/', '', $string);
-	}
-		
 }
 ?>

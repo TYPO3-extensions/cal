@@ -275,6 +275,12 @@ class tx_cal_treeview {
 		$selItems = array();
 		if($calres) {
 			while ($calrow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($calres)) {
+				if((TYPO3_MODE == 'BE') || ($GLOBALS['TSFE']->beUserLogin && $GLOBALS['BE_USER']->extAdmEnabled)) {
+					$tempRow = t3lib_befunc::getRecordLocalization('tx_cal_calendar',$calrow['uid'], $PA['row']['sys_language_uid'],'');
+					if(is_array($tempRow)){
+						$calrow = $tempRow[0];
+					}
+				}
 				$itemArray[] = array($calrow['title'],$calrow['uid'],'');
 			}
 			$GLOBALS['TYPO3_DB']->sql_free_result($calres);
@@ -527,12 +533,23 @@ class tx_cal_treeview {
 				}
 					// get categories of the translation original
 				//$catres = $GLOBALS['TYPO3_DB']->exec_SELECT_mm_query ('tx_cal_category.uid,tx_cal_category.title,tt_news_cat_mm.sorting AS mmsorting', 'tt_news', 'tt_news_cat_mm', 'tt_news_cat', ' AND tt_news_cat_mm.uid_local='.$row['l18n_parent'].$SPaddWhere,'', 'mmsorting');
-				$catres = $GLOBALS['TYPO3_DB']->exec_SELECTquery('tx_cal_category.uid, tx_cal_category.title', 'tx_cal_category','tx_cal_category.uid='.$row['l18n_parent'].$SPaddWhere);
+				$catres = false;
+				if($table=='tx_cal_event'){
+					$catres = $GLOBALS['TYPO3_DB']->exec_SELECTquery('tx_cal_category.uid, tx_cal_category.title', 'tx_cal_category,tx_cal_event_category_mm','tx_cal_category.uid = tx_cal_event_category_mm.uid_foreign and tx_cal_event_category_mm.uid_local='.$row['l18n_parent'].$SPaddWhere);
+				} else {
+					$catres = $GLOBALS['TYPO3_DB']->exec_SELECTquery('tx_cal_category.uid, tx_cal_category.title', 'tx_cal_category','tx_cal_category.uid='.$row['l18n_parent'].$SPaddWhere);
+				}
 				$categories = array();
 				$NACats = array();
 				$na = false;
 				if($catres) {
 					while ($catrow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($catres)) {
+						if((TYPO3_MODE == 'BE') || ($GLOBALS['TSFE']->beUserLogin && $GLOBALS['BE_USER']->extAdmEnabled)) {
+							$tempRow = t3lib_befunc::getRecordLocalization('tx_cal_category',$catrow['uid'], $PA['row']['sys_language_uid'],'');
+							if(is_array($tempRow)){
+								$catrow = $tempRow[0];
+							}
+						}
 						if(in_array($catrow['uid'],$notAllowedItems)) {
 							$categories[$catrow['uid']] = $NACats[] = '<p style="padding:0px;color:red;font-weight:bold;">- '.$catrow['title'].' <span class="typo3-dimmed"><em>['.$catrow['uid'].']</em></span></p>';
 							$na = true;
@@ -735,6 +752,12 @@ class tx_cal_treeview {
 					$allCategoryByParentId = array();
 					if($catres) {
 						while ($catrow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($catres)) {
+							if((TYPO3_MODE == 'BE') || ($GLOBALS['TSFE']->beUserLogin && $GLOBALS['BE_USER']->extAdmEnabled)) {
+								$tempRow = t3lib_befunc::getRecordLocalization('tx_cal_category',$catrow['uid'], $PA['row']['sys_language_uid'],'');
+								if(is_array($tempRow)){
+									$catrow = $tempRow[0];
+								}
+							}
 	
 							if(($allowAllCalendars && $allowAllCategories) || (($catrow['calendar_id']==0 || in_array($catrow['calendar_id'],$be_userCalendars)) && in_array($catrow['uid'],$be_userCategories))){
 								$categoryById[$catrow['uid']] = $catrow;

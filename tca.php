@@ -933,9 +933,9 @@ $TCA['tx_cal_event'] = Array (
 		'4' => Array('showitem' => '--div--;LLL:EXT:cal/locallang_db.xml:tx_cal_event.general_sheet,type, title;;1;;,--palette--;LLL:EXT:cal/locallang_db.php:tx_cal_event.start;5,--palette--;LLL:EXT:cal/locallang_db.php:tx_cal_event.due;6,calendar_id,category_id,description;;5;richtext:rte_transform[flag=rte_enabled|mode=ts_css],--div--;LLL:EXT:cal/locallang_db.xml:tx_cal_event.todo_sheet, status, priority, completed,--div--;LLL:EXT:cal/locallang_db.xml:tx_cal_event.recurrence_sheet, freq;;2;;, byday, bymonthday, bymonth, rdate_type;;7;;, deviation, exception_cnt,--div--;LLL:EXT:cal/locallang_db.xml:tx_cal_event.location_sheet,'.($hideLocationTextfield?'location_id,location_pid,location_link':'location,location_id,location_pid,location_link').',--div--;LLL:EXT:cal/locallang_db.xml:tx_cal_event.organizer_sheet,'.($hideOrganizerTextfield?'organizer_id,organizer_pid,organizer_link':'organizer,organizer_id,organizer_pid,organizer_link').',--div--;LLL:EXT:cal/locallang_db.xml:tx_cal_event.files_sheet,attachment,attachmentcaption'),
 	),
 	'palettes' => Array (
-		'1' => Array('showitem' => 'hidden,l18n_parent,sys_language_uid,t3ver_label'),
+		'1' => Array('showitem' => 'hidden,l18n_parent,sys_language_uid,t3ver_label', 'canNotCollapse' => 1),
 		'2' => Array('showitem' => 'until, cnt, intrval', 'canNotCollapse' => 1),
-		'4' => Array('showitem' => 'imagealttext,imagetitletext'),
+		'4' => Array('showitem' => 'imagealttext,imagetitletext', 'canNotCollapse' => 1),
 		'5' => Array('showitem' => 'start_date,start_time,allday','canNotCollapse' => 1),
 		'6' => Array('showitem' => 'end_date,end_time','canNotCollapse' => 1),
 		'7' => Array('showitem' => 'rdate','canNotCollapse' => 1),

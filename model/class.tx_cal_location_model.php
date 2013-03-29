@@ -212,6 +212,7 @@ class tx_cal_location_model extends tx_cal_base_model{
 			$centerLat = $this->conf['view.'][$this->conf['view'].'.'][$this->getObjectType().'.']['map.']['centerLat'];
 			$centerLong = $this->conf['view.'][$this->conf['view'].'.'][$this->getObjectType().'.']['map.']['centerLong'];
 			$zoomLevel = $this->conf['view.'][$this->conf['view'].'.'][$this->getObjectType().'.']['map.']['zoomLevel'];
+			$initialMapType = $this->conf['view.'][$this->conf['view'].'.'][$this->getObjectType().'.']['map.']['initialMapType'];
 
 			$controlSize = $this->conf['view.'][$this->conf['view'].'.'][$this->getObjectType().'.']['map.']['controlSize'];
 			$showOverviewMap = $this->conf['view.'][$this->conf['view'].'.'][$this->getObjectType().'.']['map.']['showOverviewMap'];
@@ -238,6 +239,7 @@ class tx_cal_location_model extends tx_cal_base_model{
 			if($showScale) $map->addControl('scale');
 			if($showOverviewMap) $map->addControl('overviewMap');
 			if($showMapType) $map->addControl('mapType');
+			if($initialMapType ) $map->setType($initialMapType);
 
 			// check whether to show the directions tab and/or prefill addresses and/or written directions
 			if($showDirections && $showWrittenDirections && $prefillAddress) $map->enableDirections(true, 'directions-'.$mapName);

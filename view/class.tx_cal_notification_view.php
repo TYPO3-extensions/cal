@@ -527,7 +527,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			if (t3lib_div::validEmail($this->conf['view.']['event.']['notify.']['emailReplyAddress'])) {
 				$this->mailer->setReplyTo(array($this->conf['view.']['event.']['notify.']['emailReplyAddress'] => $this->conf['view.']['event.']['notify.']['replyToName']));
 			}
-			$this->mailer->getHeaders()->addTextHeader(array('Organization: ' => $this->conf['view.']['event.']['notify.']['organisation']));
+			$this->mailer->getHeaders()->addTextHeader('Organization',$this->conf['view.']['event.']['notify.']['organisation']);
 		}
 	}
 	

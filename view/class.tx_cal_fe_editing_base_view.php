@@ -651,7 +651,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 									if($result != -1){
 										$failed = true;
 									}
-								}else{
+								} else if(is_numeric($a) && is_numeric($b)){
 									if($a >= $b){
 										$failed = true;
 									}
@@ -681,7 +681,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 									if($result != 1){
 										$failed = true;
 									}
-								} else {
+								} else if(is_numeric($a) && is_numeric($b)){
 									if($a <= $b){
 										$failed = true;
 									}
@@ -710,7 +710,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 									if($result != 0){
 										$failed = true;
 									}
-								} else {
+								} else if(is_numeric($a) && is_numeric($b)){
 									if($a != $b){
 										$failed = true;
 									}

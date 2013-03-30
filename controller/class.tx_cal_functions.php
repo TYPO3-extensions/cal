@@ -419,32 +419,15 @@ class tx_cal_functions {
     /**
      * Returns a plain-array representation of the typoscript-setup
      *
-     * @param  string $extensionName
-     * @param  string $pluginName
+     * @param  array $conf
      * @return array
      */
-	public static function getTsSetupAsPlainArray($extensionName = 'cal', $pluginName = 'controller') {
+	public static function getTsSetupAsPlainArray(&$conf) {
 		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-
-        /** @var $configurationManager Tx_Extbase_Configuration_ConfigurationManagerInterface */
-		$configurationManager = $objectManager->get('Tx_Extbase_Configuration_ConfigurationManagerInterface');
-
-		/**
-		 * possible values:
-		 * const CONFIGURATION_TYPE_FRAMEWORK = 'Framework';
-		 * const CONFIGURATION_TYPE_SETTINGS = 'Settings';
-		 * const CONFIGURATION_TYPE_FULL_TYPOSCRIPT = 'FullTypoScript';
-         * @doc http://forge.typo3.org/projects/typo3v4-mvc/wiki/ConfigurationManager_rework
-		*/
-		$setup = $configurationManager->getConfiguration(
-            Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
-            $extensionName,
-            $pluginName
-		);
 
         /** @var $typoScriptService Tx_Extbase_Service_TypoScriptService */
         $typoScriptService = $objectManager->get('Tx_Extbase_Service_TypoScriptService');
-        return $typoScriptService->convertTypoScriptArrayToPlainArray($setup);
+        return $typoScriptService->convertTypoScriptArrayToPlainArray($conf);
 	}
 }
 ?>

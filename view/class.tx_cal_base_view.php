@@ -1717,8 +1717,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 		$view->setTemplatePathAndFilename($templateFile);
 		$view->assign($this->conf['view'].'View', $this);
 
-        // TODO: Add support for flexform. This is just the typoscript-setup as plain-array.
-		$view->assign('settings', tx_cal_functions::getTsSetupAsPlainArray());
+		$view->assign('settings', tx_cal_functions::getTsSetupAsPlainArray($this->conf));
 		return $view->render();
 	}
 	

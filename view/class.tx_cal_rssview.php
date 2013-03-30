@@ -100,25 +100,28 @@ class tx_cal_rssview extends tx_cal_base_view {
 		$count = 0;
 		
 		foreach($master_array as $eventDate => $eventTimeArray){
-			if($eventDate >= $getdate){
-					
-				if(is_object($eventTimeArray)){
-					if($count < $this->config['limit']){
-						$subpartArray['###CONTENT###'] .= $eventTimeArray->renderEventFor('rss');
-						$count++;
-					} else {
-						break;
-					}
-				}else{
-					foreach ($eventTimeArray as $key => $eventArray) {
-						foreach($eventArray as $eventUid => $event){
-							if (is_object($event)){
-								if ($count < $this->config['limit']) {
-									$subpartArray['###CONTENT###'] .= $event->renderEventFor('rss');
-									$count++;
-								} else {
-									break;
-								}
+			if(is_object($eventTimeArray)){
+				if($eventTimeArray->getEnd()->format('%Y%m%d')<$getdate){
+					break;
+				}
+				if($count < $this->config['limit']){
+					$subpartArray['###CONTENT###'] .= $eventTimeArray->renderEventFor('rss');
+					$count++;
+				} else {
+					break;
+				}
+			}else{
+				foreach ($eventTimeArray as $key => $eventArray) {
+					foreach($eventArray as $eventUid => $event){
+						if (is_object($event)){
+							if($event->getEnd()->format('%Y%m%d')<$getdate){
+								break;
+							}
+							if ($count < $this->config['limit']) {
+								$subpartArray['###CONTENT###'] .= $event->renderEventFor('rss');
+								$count++;
+							} else {
+								break;
 							}
 						}
 					}

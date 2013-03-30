@@ -142,8 +142,8 @@ class tx_cal_searchviews extends tx_cal_listview {
 		$locationArray = $this->modelObj->findAllLocations($this->confArr['useLocationStructure']?$this->confArr['useLocationStructure']:'tx_cal_location',$this->conf['pidList']);
 
 		$locationIdArray = Array();
-		if($locationIds!=''){
-			$locationIdArray = t3lib_div::intExplode(',',$locationIds);
+		if($this->controller->piVars['submit'] && $this->controller->piVars['location_ids']){
+			$locationIdArray = $this->controller->piVars['location_ids'];
 		}
 		
 		if(is_array($locationArray)){

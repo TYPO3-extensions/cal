@@ -246,7 +246,7 @@ class tx_cal_delete_event_view extends tx_cal_fe_editing_base_view {
 	function getNotifyMarker(& $template, & $sims, & $rems, & $wrapped){
 		$sims['###NOTIFY###'] = '';
 		$cal_notify_user = Array();
-		$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('fe_users.username','fe_users, tx_cal_fe_user_event_monitor_mm','pid in ('.$this->conf['pidList'].') AND fe_users.uid = tx_cal_fe_user_event_monitor_mm.uid_foreign AND tx_cal_fe_user_event_monitor_mm.uid_local = '.$this->object->getUid());
+		$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('fe_users.username','fe_users, tx_cal_fe_user_event_monitor_mm','tx_cal_fe_user_event_monitor_mm.pid in ('.$this->conf['pidList'].') AND fe_users.uid = tx_cal_fe_user_event_monitor_mm.uid_foreign AND tx_cal_fe_user_event_monitor_mm.uid_local = '.$this->object->getUid());
 		while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) {
 			$cal_notify_user[] = $row['username'];
 		}

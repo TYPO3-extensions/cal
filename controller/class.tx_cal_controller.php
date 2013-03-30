@@ -3225,6 +3225,15 @@ class tx_cal_controller extends tslib_pibase {
 				if(!$this->piVars['day']){
 					$this->piVars['day'] = $date->format('%d');
 				}
+				if($this->piVars['month'] == 2) {
+					if((($this->piVars['year'] % 400) == 0 || (($this->piVars['year'] % 4) == 0 && ($this->piVars['year'] % 100) != 0)) && $this->piVars['day'] > 29) {
+						$this->piVars['day'] = 29;
+					} else if($this->piVars['day'] > 28) {
+					$this->piVars['day'] = 28;
+					}
+				} else if(in_array($this->piVars['month'], array(4,6,9,11)) && $this->piVars['day'] > 30) {
+					$this->piVars['day'] = 30;
+				}
 				$this->piVars['getdate'] = str_pad((int)$this->piVars['year'], 4, "0", STR_PAD_LEFT).str_pad((int)$this->piVars['month'], 2, "0", STR_PAD_LEFT).str_pad((int)$this->piVars['day'], 2, "0", STR_PAD_LEFT);
 				unset($this->piVars['year']);
 				unset($this->piVars['month']);

@@ -184,6 +184,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 		if(!empty($allowedEventTypes)){
 			$where .= ' AND tx_cal_event.type IN ('.implode(',',$allowedEventTypes).')';
 		}
+		
+		if($this->conf['view.'][$this->conf['view'].'.']['event.']['additionalWhere']){
+			$where .= ' '.$this->cObj->cObjGetSingle($this->conf['view.'][$this->conf['view'].'.']['event.']['additionalWhere'],$this->conf['view.'][$this->conf['view'].'.']['event.']['additionalWhere.']);
+		}
 
 		if($categoryWhere!=''){
 			$select .= 	', tx_cal_event_category_mm.uid_foreign AS category_uid ' ;

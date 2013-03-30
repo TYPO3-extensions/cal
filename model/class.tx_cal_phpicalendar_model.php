@@ -2006,7 +2006,11 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 			}
 			$until = $event->getUntil();
 			if (is_object($until) && $until->format('%Y%m%d')>19700101){
-				$rruleConfiguration['UNTIL'] = 'UNTIL=' . $until->format('%Y%m%dT000000Z');
+				$eventEnd = $this->getEnd();
+                $offset = tx_cal_functions::strtotimeOffset($eventEnd->getTime());
+                $eventEnd->subtractSeconds($offset);
+                $rruleConfiguration['UNTIL'] = 'UNTIL=' . $until->format('%Y%m%dT').$eventEnd->format('%H%M%SZ');
+                $eventEnd->addSeconds($offset);
 			}
 			$rrule = implode(';',$rruleConfiguration);
 		}

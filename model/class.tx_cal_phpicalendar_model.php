@@ -118,7 +118,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 				case 'allday':
 					if(intval($piVars[$key])==1){
 						$this->setAllday(true);
-					}else{
+					}else if (strlen($piVars[$key])>0){
 						$this->setAllday(false);
 					}
 					break;

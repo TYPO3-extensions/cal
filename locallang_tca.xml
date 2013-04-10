@@ -208,8 +208,9 @@
 			<label index="cal.pi_flexform.calendarMode.excludeSelected">Zeige ausgewählte Kalender nicht</label>
 			<label index="cal.pi_flexform.categoryMode">Kategorie Auswahlmodus</label>
 			<label index="cal.pi_flexform.categoryMode.showAll">Zeige alle (unabhängig von der Auswahl)</label>
-			<label index="cal.pi_flexform.categoryMode.showSelected">Zeige nur ausgewählte Kategorien</label>
+			<label index="cal.pi_flexform.categoryMode.showSelected">Zeige exakt die ausgewählte Kategorien</label>
 			<label index="cal.pi_flexform.categoryMode.excludeSelected">Zeige ausgewählte Kategorien nicht</label>
+			<label index="cal.pi_flexform.categoryMode.showSelectedOr">Zeige irgend eine der ausgewählten Kategorien</label>
 			<label index="cal.pi_flexform.sheetYearView">Jahres-Ansicht</label>
 			<label index="cal.pi_flexform.yearViewPid">Jahres-Ansicht Seite</label>
 			<label index="cal.pi_flexform.yearTemplate">Jahres-Ansicht Template</label>

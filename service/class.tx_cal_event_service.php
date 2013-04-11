@@ -449,12 +449,12 @@ class tx_cal_event_service extends tx_cal_base_service {
 						}
 						$events_tmp = $this->getRecurringEventsFromIndex($event, $ex_events_dates);
 					} else {
-						t3lib_div::deprecationLog('Usage of old recurrence model is deprecated since cal 1.5.' . LF .
-								'Please use new recurrence model instead, support will be removed after cal 1.6.');
 						$eventStart = $event->getStart();
 						$events_tmp[$eventStart->format('%Y%m%d')][$event->isAllday()?'-1':($eventStart->format('%H%M'))][$event->getUid()] = $event;
 					}
 				} else {
+					t3lib_div::deprecationLog('Usage of old recurrence model is deprecated since cal 1.5.' . LF .
+							'Please use new recurrence model instead, support will be removed after cal 1.6.');
 					$events_tmp = $this->recurringEvent($event);
 					foreach($ex_events_group as $ex_events){
 						$this->removeEvents($events_tmp, $ex_events);

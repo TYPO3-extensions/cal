@@ -909,7 +909,7 @@ $TCA['tx_cal_event'] = Array (
 					Array('', 0),
 				),
 				'foreign_table' => 'tx_cal_event',
-				'foreign_table_where' => 'AND tx_cal_event.uid=###REC_FIELD_l18n_parent### AND tx_cal_event.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_cal_event.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => Array(
@@ -1150,7 +1150,7 @@ $TCA['tx_cal_calendar'] = Array (
 					Array('', 0),
 				),
 				'foreign_table' => 'tx_cal_calendar',
-				'foreign_table_where' => 'AND tx_cal_calendar.uid=###REC_FIELD_l18n_parent### AND tx_cal_calendar.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_cal_calendar.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => Array(
@@ -1406,7 +1406,7 @@ $TCA['tx_cal_category'] = Array (
 					Array('', 0),
 				),
 				'foreign_table' => 'tx_cal_category',
-				'foreign_table_where' => 'AND tx_cal_category.uid=###REC_FIELD_l18n_parent### AND tx_cal_category.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_cal_category.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => Array(
@@ -1884,7 +1884,7 @@ $TCA['tx_cal_organizer'] = Array (
 					Array('', 0),
 				),
 				'foreign_table' => 'tx_cal_organizer',
-				'foreign_table_where' => 'AND tx_cal_organizer.uid=###REC_FIELD_l18n_parent### AND tx_cal_organizer.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_cal_organizer.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => Array(
@@ -2181,7 +2181,7 @@ $TCA['tx_cal_location'] = Array (
 					Array('', 0),
 				),
 				'foreign_table' => 'tx_cal_location',
-				'foreign_table_where' => 'AND tx_cal_location.uid=###REC_FIELD_l18n_parent### AND tx_cal_location.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_cal_location.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => Array(
@@ -2846,7 +2846,7 @@ $TCA['tx_cal_event_deviation'] = Array (
 					Array('', 0),
 				),
 				'foreign_table' => 'tx_cal_event',
-				'foreign_table_where' => 'AND tx_cal_event.uid=###REC_FIELD_l18n_parent### AND tx_cal_event.sys_language_uid IN (-1,0)',
+				'foreign_table_where' => 'AND tx_cal_event.sys_language_uid IN (-1,0)',
 			)
 		),
 		'l18n_diffsource' => Array(

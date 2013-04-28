@@ -66,5 +66,9 @@ class tx_cal_DayByWeek_testcase extends tx_phpunit_testcase {
 		$this->assertEquals('20130106',tx_cal_functions::getDayByWeek(2013, 1, 0));
 	}
 	
+	public function testFirstDayOfWeek1OfYear2013WeekstartSunday_is_20130304() {
+		$this->assertEquals('20130304',tx_cal_functions::getDayByWeek(2013, 10, 1));
+	}
+	
 }
 ?>

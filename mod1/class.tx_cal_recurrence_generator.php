@@ -110,6 +110,11 @@ require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_registry.php
 			$results = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 			if($results) {
 				while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($results)){
+					// make sure that rdate is empty in case that something went wrong during event creation (e.g. by copying)
+					if($row["rdate_type"] == "none" || $row["rdate_type"] == "" || $row["rdate_type"] == "0") { 
+						$row["rdate"] = "";
+					}
+
 					$event = $eventService->createEvent($row, false);
 					$eventService->recurringEvent($event);
 				}

@@ -548,6 +548,8 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					if($timezone){
 						$recurrenceIdStart->convertTZbyID($timezone);
 					}
+					
+					$indexEntry = t3lib_BEfunc::getRecordRaw('tx_cal_index', 'event_uid="'.$eventUid.'" AND start_datetime="'.$recurrenceIdStart->format('%Y%m%d%H%M%S').'"');
 
 					if($indexEntry){
 						$origStartDate = new tx_cal_date();

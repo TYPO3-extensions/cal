@@ -358,17 +358,17 @@ class tx_cal_phpicalendar_rec_model extends tx_cal_model {
 
 	function getEventLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$eventStart = $this->getStart();
-		$wrapped['###EVENT_LINK###'] = explode('|',$this->parentEvent->getLinkToEvent('|',$view, $eventStart->format('%Y%m%d')));
+		$wrapped['###EVENT_LINK###'] = explode('$5&xs2',$this->parentEvent->getLinkToEvent('$5&xs2',$view, $eventStart->format('%Y%m%d')));
 	}
 	
 	function getEventUrlMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$eventStart = $this->getStart();
-		$sims['###EVENT_URL###'] = htmlspecialchars($this->parentEvent->getLinkToEvent('|',$view, $eventStart->format('%Y%m%d'),true));
+		$sims['###EVENT_URL###'] = htmlspecialchars($this->parentEvent->getLinkToEvent('$5&xs2',$view, $eventStart->format('%Y%m%d'),true));
 	}
 	
 	function getAbsoluteEventLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$eventStart = $this->getStart();
-		$wrapped['###ABSOLUTE_EVENT_LINK###'] = explode('|',$this->parentEvent->getLinkToEvent('|',$view, $eventStart->format('%Y%m%d')));
+		$wrapped['###ABSOLUTE_EVENT_LINK###'] = explode('$5&xs2',$this->parentEvent->getLinkToEvent('$5&xs2',$view, $eventStart->format('%Y%m%d')));
 	}
 
 	function getStartdate(){

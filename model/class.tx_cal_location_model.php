@@ -290,11 +290,11 @@ class tx_cal_location_model extends tx_cal_base_model{
 	}
 	
 	function getLocationLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view){
-		$wrapped['###LOCATION_LINK###'] = explode('|',$this->getLinkToLocation('|'));
+		$wrapped['###LOCATION_LINK###'] = explode('$5&xs2',$this->getLinkToLocation('$5&xs2'));
 	}
 	
 	function getOrganizerLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view){
-		$wrapped['###ORGANIZER_LINK###'] = explode('|',$this->getLinkToOrganizer('|'));
+		$wrapped['###ORGANIZER_LINK###'] = explode('$5&xs2',$this->getLinkToOrganizer('$5&xs2'));
 	}
 	
 	function getEditLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view){

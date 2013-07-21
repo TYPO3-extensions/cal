@@ -1425,7 +1425,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 				$uid = $this->row['l18n_parent'];
 			}
 			$this->controller->getParametersForTyposcriptLink($this->local_cObj->data, array('type' => $this->getType(),'view' => 'single_ics','uid' => $uid),$this->conf['cache'],$this->conf['clearAnyway'],$GLOBALS['TSFE']->id);
-			$wrapped['###ICS_LINK###'] = explode('|',$this->local_cObj->cObjGetSingle($this->conf['view.'][$view.'.']['event.']['ics'], $this->conf['view.'][$view.'.']['event.']['ics.']));
+			$wrapped['###ICS_LINK###'] = explode('$5&xs2',$this->local_cObj->cObjGetSingle($this->conf['view.'][$view.'.']['event.']['ics'], $this->conf['view.'][$view.'.']['event.']['ics.']));
 		}else{
 			$rems['###ICS_LINK###'] = '';
 		}
@@ -1509,17 +1509,17 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 
 	function getEventLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$eventStart = $this->getStart();
-		$wrapped['###EVENT_LINK###'] = explode('|',$this->getLinkToEvent('|',$view, $eventStart->format('%Y%m%d')));
+		$wrapped['###EVENT_LINK###'] = explode('$5&xs2',$this->getLinkToEvent('$5&xs2',$view, $eventStart->format('%Y%m%d')));
 	}
 
 	function getEventUrlMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$eventStart = $this->getStart();
-		$sims['###EVENT_URL###'] = htmlspecialchars($this->getLinkToEvent('|',$view, $eventStart->format('%Y%m%d'),true));
+		$sims['###EVENT_URL###'] = htmlspecialchars($this->getLinkToEvent('$5&xs2',$view, $eventStart->format('%Y%m%d'),true));
 	}
 
 	function getAbsoluteEventLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$eventStart = $this->getStart();
-		$wrapped['###ABSOLUTE_EVENT_LINK###'] = explode('|',$this->getLinkToEvent('|',$view, $eventStart->format('%Y%m%d')));
+		$wrapped['###ABSOLUTE_EVENT_LINK###'] = explode('$5&xs2',$this->getLinkToEvent('$5&xs2',$view, $eventStart->format('%Y%m%d')));
 	}
 
 	function getStartdate(){

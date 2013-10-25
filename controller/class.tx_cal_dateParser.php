@@ -619,7 +619,7 @@ class tx_cal_dateParser {
 					$date->subtractSeconds(60*60*24*$days);
 				}
 			} else if($rangeValue=='year'){
-				$date->setYear($date->getYear()+$range);
+				$date->setYear($date->getYear()-$range);
 			}else if($rangeValue=='hour'){
 				$date->subtractSeconds(abs($range)*3600);
 			}else if($rangeValue=='minute'){

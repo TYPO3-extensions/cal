@@ -739,6 +739,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 					$functionA = 'get'.ucwords($field);
 					if(method_exists($this->object, $functionA)){
 						$value = $this->object->$functionA();
+						$rule['parent'] = $this;
 						if(!$this->cObj->callUserFunction($rule['userFunc'],$rule,$value)){
 							$failed = true;
 						}

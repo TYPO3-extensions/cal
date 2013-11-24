@@ -601,45 +601,48 @@ class tx_cal_controller extends tslib_pibase {
 		$eventType = intval($this->piVars['event_type']);
 		$uid = intval($this->piVars['uid']);	
 		$modelObj = &tx_cal_registry::Registry('basic','modelcontroller');
+		
+		if($GLOBALS['TSFE']->fe_user->sesData['tx_cal_controller_creatingEvent']=='1') {
 
-		$event = null;
-		if($eventType==tx_cal_model::EVENT_TYPE_TODO){
-			$event = $modelObj->saveTodo($this->conf['uid'], $this->conf['type'], $pid);
-		} else {
-			$event = $modelObj->saveEvent($this->conf['uid'], $this->conf['type'], $pid);
-		}
-
-		// Hook: postSaveEvent
-		$this->executeHookObjectsFunction($hookObjectsArr, 'postSaveEvent');
-
-		if($this->conf['view.']['enableAjax']){
-			if(is_object($event)){
-				if(in_array($event->getFreq(),Array('year','month','week','day')) || ($event->getRdate() && in_array($event->getRdateType(),Array('date','datetime','period')))){
-					$this->conf['view.'][$this->conf['view'].'.']['minDate'] = $event->start->format('%Y%m%d');
-					$this->conf['view.'][$this->conf['view'].'.']['maxDate'] = $this->piVars['maxDate'];
-					
-					$eventArray = $modelObj->findEvent($event->getUid(), $this->conf['type'], $this->conf['pidList'], false, false, true, false, false, '0,1,2,3,4');
-
-					$dateKeys = array_keys($eventArray);
-					foreach ($dateKeys as $dateKey) {
-						$timeKeys = array_keys($eventArray[$dateKey]);
-						foreach ($timeKeys as $timeKey) {
-							$eventKeys = array_keys($eventArray[$dateKey][$timeKey]);
-							foreach ($eventKeys as $eventKey) {
-								$eventX = &$eventArray[$dateKey][$timeKey][$eventKey];
-								$ajaxStringArray[] = '{'.$this->getEventAjaxString($eventX).'}';
+			$event = null;
+			if($eventType==tx_cal_model::EVENT_TYPE_TODO){
+				$event = $modelObj->saveTodo($this->conf['uid'], $this->conf['type'], $pid);
+			} else {
+				$event = $modelObj->saveEvent($this->conf['uid'], $this->conf['type'], $pid);
+			}
+	
+			// Hook: postSaveEvent
+			$this->executeHookObjectsFunction($hookObjectsArr, 'postSaveEvent');
+	
+			if($this->conf['view.']['enableAjax']){
+				if(is_object($event)){
+					if(in_array($event->getFreq(),Array('year','month','week','day')) || ($event->getRdate() && in_array($event->getRdateType(),Array('date','datetime','period')))){
+						$this->conf['view.'][$this->conf['view'].'.']['minDate'] = $event->start->format('%Y%m%d');
+						$this->conf['view.'][$this->conf['view'].'.']['maxDate'] = $this->piVars['maxDate'];
+						
+						$eventArray = $modelObj->findEvent($event->getUid(), $this->conf['type'], $this->conf['pidList'], false, false, true, false, false, '0,1,2,3,4');
+	
+						$dateKeys = array_keys($eventArray);
+						foreach ($dateKeys as $dateKey) {
+							$timeKeys = array_keys($eventArray[$dateKey]);
+							foreach ($timeKeys as $timeKey) {
+								$eventKeys = array_keys($eventArray[$dateKey][$timeKey]);
+								foreach ($eventKeys as $eventKey) {
+									$eventX = &$eventArray[$dateKey][$timeKey][$eventKey];
+									$ajaxStringArray[] = '{'.$this->getEventAjaxString($eventX).'}';
+								}
 							}
 						}
+						$ajaxString = implode(',',$ajaxStringArray);
+						echo '['.$ajaxString.']';
+					} else {
+						$ajaxString = $this->getEventAjaxString($event);
+						$ajaxString = str_replace(Array(chr(13),"\n"), Array("",""),$ajaxString);
+						echo '[{'.$ajaxString.'}]';
 					}
-					$ajaxString = implode(',',$ajaxStringArray);
-					echo '['.$ajaxString.']';
-				} else {
-					$ajaxString = $this->getEventAjaxString($event);
-					$ajaxString = str_replace(Array(chr(13),"\n"), Array("",""),$ajaxString);
-					echo '[{'.$ajaxString.'}]';
+				}else{
+					echo '{"success": false,"errors": {text:"event was not saved"}}';
 				}
-			}else{
-				echo '{"success": false,"errors": {text:"event was not saved"}}';
 			}
 		}
 
@@ -647,6 +650,9 @@ class tx_cal_controller extends tslib_pibase {
 		unset($this->conf['type']);
 		$this->conf['type'] = '';
 		$this->clearConfVars();
+		
+		$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_cal_controller_creatingEvent', '0');
+		$GLOBALS['TSFE']->storeSessionData();
 
 		$this->checkRedirect($uid?'edit':'create', 'event');
 	}

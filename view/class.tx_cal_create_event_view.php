@@ -124,7 +124,8 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 		$noComplains = $this->checkContrains($constrainFieldSims);
 		
 		if($allRequiredFieldsAreFilled && $noComplains){
-			
+			$GLOBALS['TSFE']->fe_user->setKey('ses', 'tx_cal_controller_creatingEvent', '1');
+			$GLOBALS['TSFE']->storeSessionData();
 			$this->conf['lastview'] = $this->controller->extendLastView();
 			$this->conf['view'] = 'confirm_'.$this->objectString;
 			$this->controller->piVars = $lastPiVars;

@@ -27,16 +27,7 @@
  *
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_functions.php');
 
-require_once (PATH_tslib.'/class.tslib_content.php');
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_tsfe.php');
-require_once(PATH_t3lib.'class.t3lib_userauth.php');
-require_once(PATH_tslib.'class.tslib_feuserauth.php');
-require_once(PATH_t3lib.'class.t3lib_tsparser_ext.php');
-require_once(PATH_t3lib.'class.t3lib_befunc.php');
-require_once(PATH_t3lib.'class.t3lib_page.php');
-	
 // Exit, if script is called directly (must be included via eID in index_ts.php)
 if (!defined ('PATH_typo3conf')) die ('Could not access this script directly!');
 

@@ -29,9 +29,6 @@
  ***************************************************************/
 
 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_base_view.php');
-require_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_functions.php');
-
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -50,8 +47,6 @@ class tx_cal_dayview extends tx_cal_base_view {
 		} else {
 			$getdate = new tx_cal_date($getdate);
 		}
-		
-		require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_dayview.php');
 		
 		$dayModel = new tx_cal_new_dayview($getdate->day, $getdate->month, $getdate->year);
 		$today = new tx_cal_date();

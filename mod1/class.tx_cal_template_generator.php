@@ -1,7 +1,5 @@
 <?php
 	
-require_once (t3lib_extMgm::extPath('cal').'model/class.tx_cal_year_model.php');
-
 	/* 
 	* @author: Mario Matzulla
 	*/

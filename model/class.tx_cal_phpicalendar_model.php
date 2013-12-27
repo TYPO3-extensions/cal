@@ -28,11 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm :: extPath('cal') . 'model/class.tx_cal_model.php');
-require_once (t3lib_extMgm :: extPath('cal') . 'model/class.tx_cal_attendee_model.php');
-require_once (t3lib_extMgm :: extPath('cal') . 'controller/class.tx_cal_calendar.php');
-
-
 /**
  * A concrete model for the calendar.
  *
@@ -435,7 +430,6 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 	}
 
 	function createEvent(&$row, $isException) {
-		require_once (t3lib_extMgm :: extPath('cal') . 'controller/class.tx_cal_functions.php');
 
 		$this->row = &$row;
 		$this->setType($this->serviceKey);
@@ -973,7 +967,6 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 									$email = $this->controller->piVars['email'];
 
 									if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
-										require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
 										$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
 										$mailer->start();
 										$mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];
@@ -1107,7 +1100,6 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 									}
 
 									if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
-										require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
 										$mailer =t3lib_div::makeInstance('t3lib_htmlmail');
 										$mailer->start();
 										$mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];

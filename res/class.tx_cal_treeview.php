@@ -60,8 +60,8 @@
  *
  */
 
-require_once(PATH_t3lib.'class.t3lib_treeview.php');
-require_once(PATH_t3lib.'class.t3lib_tceforms.php');
+#require_once(PATH_t3lib.'class.t3lib_treeview.php');
+#require_once(PATH_t3lib.'class.t3lib_tceforms.php');
 
 	/**
 	 * extend class t3lib_treeview to change function wrapTitle().

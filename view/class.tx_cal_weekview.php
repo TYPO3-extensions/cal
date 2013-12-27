@@ -29,8 +29,6 @@
  ***************************************************************/
 
 	 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_base_view.php');
- 
 /**
 * A concrete view for the calendar.
 * It is based on the phpicalendar project
@@ -51,8 +49,6 @@ class tx_cal_weekview extends tx_cal_base_view {
 			$getdate = new tx_cal_date($getdate);
 		}
 		
-		require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_weekview.php');
-
 		$week = $getdate->getWeekOfYear();
 		$year = $getdate->year;
 		if($getdate->month == 12 && $week == 1){

@@ -29,9 +29,6 @@
  ***************************************************************/
 
 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_fe_editing_base_view.php');
-require_once (t3lib_extMgm :: extPath('cal').'controller/class.tx_cal_calendar.php');
-
 /**
  * A service which renders a form to create / edit a location or organizer.
  *

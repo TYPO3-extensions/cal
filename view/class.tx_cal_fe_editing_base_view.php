@@ -29,8 +29,6 @@
  ***************************************************************/
 
 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_base_view.php');
-
 /**
  * A service which serves as base for all fe-editing clases.
  *
@@ -345,7 +343,6 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 	function getFileMarker($marker, & $template, & $sims, & $rems){
 		global $TYPO3_CONF_VARS,$TCA;
 		
-		require_once (PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 		t3lib_div::loadTCA('tx_cal_'.$this->objectString);
 		$max = $TCA['tx_cal_'.$this->objectString]['columns'][$marker]['config']['size'];
 		$sims['###'.strtoupper($marker).'###'] = '';

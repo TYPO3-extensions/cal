@@ -37,7 +37,6 @@
  * @package TYPO3
  * @subpackage cal
  */
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_base_controller.php');
 class tx_cal_viewcontroller extends tx_cal_base_controller{
 	
 	function tx_cal_viewcontroller(){

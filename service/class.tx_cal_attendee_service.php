@@ -28,8 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('cal').'service/class.tx_cal_base_service.php');
-require_once (t3lib_extMgm :: extPath('cal') . 'model/class.tx_cal_attendee_model.php');
 
 /**
  * Base model for the category.  Provides basic model functionality that other

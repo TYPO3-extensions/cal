@@ -28,8 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
  
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_base_view.php');
-
 /**
  *
  * @author Mario Matzulla <mario(at)matzullas.de>

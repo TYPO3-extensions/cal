@@ -28,9 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_base_view.php');
-require_once (t3lib_extMgm :: extPath('cal').'controller/class.tx_cal_functions.php');
-
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project

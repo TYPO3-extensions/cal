@@ -29,8 +29,6 @@
  ***************************************************************/
 
 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_base_view.php');
-
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project

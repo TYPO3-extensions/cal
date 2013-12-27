@@ -28,8 +28,8 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once(PATH_tslib.'class.tslib_pibase.php');
-require_once(PATH_t3lib.'class.t3lib_svbase.php');
+#require_once(PATH_tslib.'class.tslib_pibase.php');
+#require_once(PATH_t3lib.'class.t3lib_svbase.php');
 require_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_location_model.php');
 
 /**

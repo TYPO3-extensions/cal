@@ -28,9 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_fe_editing_base_view.php');
-require_once (t3lib_extMgm :: extPath('cal').'controller/class.tx_cal_calendar.php');
-
 /**
  * A service which renders a form to create / edit an event location / organizer.
  *
@@ -87,8 +84,6 @@ class tx_cal_create_location_organizer_view extends tx_cal_fe_editing_base_view 
 		if ($page=='') {
 			return '<h3>calendar: no create location template file found:</h3>'.$this->conf['view.']['create_location.']['template'];
 		}
-		
-		require_once (t3lib_extMgm :: extPath('cal').'model/class.tx_cal_'.$this->objectString.'.php');
 		
 		if(is_object($object) && !$object->isUserAllowedToEdit()){
 			return $this->controller->pi_getLL('l_not_allowed_edit').$this->objectString;

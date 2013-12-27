@@ -29,9 +29,6 @@
  ***************************************************************/
 
 
-require_once(t3lib_extMgm::extPath('cal').'view/class.tx_cal_notification_view.php');
-
-
 /**
  * 
  *

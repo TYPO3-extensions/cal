@@ -28,9 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_calendar.php');
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_base_controller.php');
-
 /**
  * Back controller for the calendar base.  Takes requests from the main
  * controller and starts processing in the appropriate calendar models by

@@ -29,9 +29,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_timeview.php');
-require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_dayview.php');
-
 /**
  * Base model for the day.
  *

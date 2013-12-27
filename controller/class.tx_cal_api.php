@@ -28,11 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_controller.php');
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_modelcontroller.php');
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_viewcontroller.php');
-require_once(PATH_t3lib.'class.t3lib_stdgraphic.php');
-require_once(PATH_tslib.'class.tslib_gifbuilder.php');
 /**
  * API for calendar base (cal)
  *
@@ -79,8 +74,6 @@ class tx_cal_api {
 		$this->controller->conf = &$this->conf;
 		
 		$this->controller->setWeekStartDay();
-		require_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_date.php');
-		require_once(t3lib_extMgm::extPath('cal').'res/pearLoader.php');
 
 		$this->controller->cleanPiVarParam($this->piVars);
 		$this->controller->clearPiVarParams();
@@ -108,16 +101,8 @@ class tx_cal_api {
 	}
 	
 	function tx_cal_api_without($pid, $feUserObj=''){
-		require_once (PATH_tslib.'/class.tslib_content.php');
-		require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_tsfe.php');
-		require_once(PATH_t3lib.'class.t3lib_userauth.php');
-		require_once(PATH_tslib.'class.tslib_feuserauth.php');
-		require_once(PATH_t3lib.'class.t3lib_tsparser_ext.php');
-		require_once(PATH_t3lib.'class.t3lib_befunc.php');
-		require_once(PATH_t3lib.'class.t3lib_page.php');
 		$cObj = t3lib_div :: makeInstance('tslib_cObj');
 		
-		require_once(PATH_t3lib.'class.t3lib_timetrack.php');
 		$GLOBALS['TT'] = new t3lib_timeTrack();
 		
 		// ***********************************

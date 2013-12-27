@@ -28,11 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm :: extPath('cal').'controller/class.tx_cal_functions.php');
-require_once (t3lib_extMgm :: extPath('cal').'controller/class.tx_cal_calendar.php');
-require_once(t3lib_extMgm::extPath('cal').'service/class.tx_cal_base_service.php');
-require_once(PATH_t3lib.'class.t3lib_cs.php');
-
 /**
  * TODO
  *
@@ -1242,7 +1237,6 @@ class tx_cal_base_view extends tx_cal_base_service {
 			}
 		}
 
-		require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_monthview.php');
 		$page = $this->cObj->fileResource($this->conf['view.']['month.']['new'.ucwords($type).'MonthTemplate']);
 		
 		$monthModel = tx_cal_new_monthview::getMonth($monthDate->month, $monthDate->year);

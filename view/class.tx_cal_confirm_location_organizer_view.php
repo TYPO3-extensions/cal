@@ -28,9 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm :: extPath('cal').'view/class.tx_cal_fe_editing_base_view.php');
-require_once (t3lib_extMgm :: extPath('cal').'controller/class.tx_cal_calendar.php');
-
 /**
  * A service which renders a form to confirm the location/organizer create/edit.
  *
@@ -64,8 +61,6 @@ class tx_cal_confirm_location_organizer_view extends tx_cal_fe_editing_base_view
 		if ($page=='') {
 			return '<h3>calendar: no confirm '.$this->objectString.' template file found:</h3>'.$this->conf['view.']['confirm_location.']['template'];
 		}
-		
-		require_once (t3lib_extMgm :: extPath('cal').'model/class.tx_cal_'.$this->objectString.'.php');
 		
 		if($isLocation){
 			$this->object = new tx_cal_location(null, '');

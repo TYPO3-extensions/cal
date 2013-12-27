@@ -1,6 +1,4 @@
 <?php
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_registry.php');
-	
 	/* 
 	* @author: Mario Matzulla
 	*/

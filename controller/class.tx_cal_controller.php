@@ -28,16 +28,6 @@
  *
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
-#for BE calls
-if (!defined('PATH_tslib')) define('PATH_tslib', t3lib_extMgm::extPath('cms').'tslib/');
-
-require_once (PATH_tslib.'class.tslib_pibase.php');
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_modelcontroller.php');
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_viewcontroller.php');
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_registry.php');
-require_once(t3lib_extMgm::extPath('cal').'service/class.tx_cal_rights_service.php');
-require_once (t3lib_extMgm::extPath('cal').'model/class.tx_cal_model.php');
-require_once (t3lib_extMgm::extPath('cal').'lib/class.tx_cal_cache.php');
 
 /**
  * Main controller for the calendar base.  All requests come through this class
@@ -2947,7 +2937,7 @@ class tx_cal_controller extends tslib_pibase {
 		
 		$flexformTyposcript = $this->pi_getFFvalue($piFlexForm, 'myTS','s_TS_View'); 
 		if($flexformTyposcript) {
-			require_once(PATH_t3lib.'class.t3lib_tsparser.php'); 
+			#require_once(PATH_t3lib.'class.t3lib_tsparser.php'); 
 			$tsparser = t3lib_div::makeInstance('t3lib_tsparser'); 
 			// Copy conf into existing setup 
 			$tsparser->setup = $this->conf; 

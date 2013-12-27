@@ -509,7 +509,6 @@ class tx_cal_notification_view extends tx_cal_base_service {
 	
 	function startMailer(){
 		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4005010){
-			require_once (PATH_t3lib.'class.t3lib_htmlmail.php');
 			$this->mailer =t3lib_div::makeInstance('t3lib_htmlmail');
 			$this->mailer->start();
 			$this->mailer->from_email = $this->conf['view.']['event.']['notify.']['emailAddress'];
@@ -564,7 +563,6 @@ class tx_cal_notification_view extends tx_cal_base_service {
 	}
 	
 	function createTempIcsFile($content, $filename){
-		require_once (PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 		$fileFunc = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 		$all_files = Array();
 		$all_files['webspace']['allow'] = '*';

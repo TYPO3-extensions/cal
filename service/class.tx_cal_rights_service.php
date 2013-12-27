@@ -29,8 +29,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm::extPath('cal').'service/class.tx_cal_base_service.php');
-
 /**
  * This class handles all cal(endar)-rights of a current logged-in user
  *

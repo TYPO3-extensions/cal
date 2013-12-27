@@ -39,11 +39,6 @@ include_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_functions.php
 #require ($BACK_PATH.'template.php');
 
 $GLOBALS['LANG']->includeLLFile('EXT:cal/mod1/locallang.xml');
-require_once (PATH_t3lib.'class.t3lib_scbase.php');
-// include this to enable accessing the database via tce
-require_once (PATH_t3lib.'class.t3lib_tcemain.php');
-require_once (PATH_t3lib.'class.t3lib_loaddbgroup.php');
-require_once (PATH_t3lib.'class.t3lib_extfilefunc.php');
 $BE_USER->modAccess($MCONF,1);	// This checks permissions and exits if the users has no permission for entry.
 	// DEFAULT initialization of a module [END]
 

@@ -210,7 +210,6 @@ class tx_cal_base_service extends t3lib_svbase {
 				}
 
 				if(!$this->fileFunc){
-					require_once (PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 					$this->fileFunc = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 					$all_files = Array();
 					$all_files['webspace']['allow'] = '*';
@@ -275,7 +274,6 @@ class tx_cal_base_service extends t3lib_svbase {
 	
 	function _checkOnTempFile($file, $uploadPath){
 		if(!$this->fileFunc){
-			require_once (PATH_t3lib . 'class.t3lib_basicfilefunc.php');
 			$this->fileFunc = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 			$all_files = Array();
 			$all_files['webspace']['allow'] = '*';

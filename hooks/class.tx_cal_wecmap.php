@@ -46,7 +46,6 @@ class tx_cal_wecmap {
 		$locationStructure = $this->confArr['useLocationStructure'] ? $this->confArr['useLocationStructure'] : 'tx_cal_location';
 		
 		if($table == $locationStructure && is_object($markerObj)) {
-			require_once (t3lib_extMgm::extPath('cal').'/controller/class.tx_cal_api.php');
 			$tx_cal_api = t3lib_div :: makeInstance('tx_cal_api');
 
 			$cObj = t3lib_div::makeInstance('tslib_cObj');

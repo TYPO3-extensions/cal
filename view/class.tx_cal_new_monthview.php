@@ -29,11 +29,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once (t3lib_extMgm::extPath('cal').'controller/class.tx_cal_calendar.php');
-require_once (t3lib_extMgm::extPath('cal').'model/class.tx_cal_date.php');
-require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_timeview.php');
-require_once (t3lib_extMgm::extPath('cal').'view/class.tx_cal_new_weekview.php');
-
 /**
  * Base model for the day.
  *

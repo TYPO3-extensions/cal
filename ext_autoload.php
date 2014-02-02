@@ -8,6 +8,7 @@
 $extensionPath = t3lib_extMgm::extPath('cal');
 
 return array(
+	'tx_cal_controller' => $extensionPath . 'controller/class.tx_cal_controller.php',
 	'tx_cal_functions' => $extensionPath . 'controller/class.tx_cal_functions.php',
 	'tx_cal_viewcontroller' => $extensionPath . 'controller/class.tx_cal_viewcontroller.php',
 	'tx_cal_modelcontroller' => $extensionPath . 'controller/class.tx_cal_modelcontroller.php',

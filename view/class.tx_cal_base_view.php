@@ -1431,7 +1431,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 
 				if ($i == 0 && !empty($weeknum)){
 					$start_day->addSeconds(86400);
-					$num = $numPlain = $start_day->format('%U');
+					$num = $numPlain = $start_day->getWeekOfYear();
 					$hasEvent = false;
 					$start_day->subtractSeconds(86400);
 					for($j = 0; $j < 7; $j++){

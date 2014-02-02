@@ -240,7 +240,7 @@ class tx_cal_listview extends tx_cal_base_view {
 					$cal_day = $calTimeObject->getDay();
 					$cal_month = $calTimeObject->getMonth();
 					$cal_year = $calTimeObject->getYear();
-					$cal_week = $calTimeObject->format('%U');
+					$cal_week = $calTimeObject->getWeekOfYear();
 					
 					if(count($hookObjectsArr)) {
 						$hookParams = array(
@@ -318,7 +318,7 @@ class tx_cal_listview extends tx_cal_base_view {
 							if(!$firstTime) $monthItemCounter = 0;
 						}
 						//weekwrapper
-						if($this->conf['view.']['list.']['enableWeekWrapper'] && ($this->hasPeriodChanged($lastEventWeek->format('%U'),$cal_week,$this->reverse) || $firstTime || $this->hasPeriodChanged($lastEventWeek->getYear(),$cal_year,$this->reverse))){
+						if($this->conf['view.']['list.']['enableWeekWrapper'] && ($this->hasPeriodChanged($lastEventWeek->getWeekOfYear(),$cal_week,$this->reverse) || $firstTime || $this->hasPeriodChanged($lastEventWeek->getYear(),$cal_year,$this->reverse))){
 							$this->initLocalCObject();
 							if($this->conf['view.']['list.']['enableSectionMenu']){
 								$this->local_cObj->setCurrentVal($calTimeObject->format($this->conf['view.']['list.']['weekSectionMenuFormat']));
@@ -501,7 +501,7 @@ class tx_cal_listview extends tx_cal_base_view {
 		$year = $eventStart->getYear();
 		$month = $eventStart->getMonth();
 		$day = $eventStart->getDay();
-		$week = $eventStart->format('%U');
+		$week = $eventStart->getWeekOfYear();
 		$this->eventCounter['byDate'][$year][$month][$day]['total']++;
 		$this->eventCounter['byWeek'][$week]['total']++;
 		$this->eventCounter['byYear'][$year]['total']++;

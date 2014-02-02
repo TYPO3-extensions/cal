@@ -373,12 +373,12 @@ class tx_cal_functions {
 		$date = new tx_cal_date($year.'0101');
 		$date->setTZbyID('UTC');
 	
-		$offset = $weekday + (DATE_CALC_BEGIN_WEEKDAY==0?1:0) - $date->format('%w');
+		$offset = $weekday - $date->format('%w');
 	
 		// correct weekday
 		$date->addSeconds($offset * 86400);
 	
-		$oldYearWeek = ($date->format('%U') > 1)?'0':'1';
+		$oldYearWeek = ($date->getWeekOfYear() > 1)?'0':'1';
 	
 		// correct week
 		$date->addSeconds((($week - $oldYearWeek) * 7) * 86400);

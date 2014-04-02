@@ -1,5 +1,9 @@
+{namespace cal=Tx_Cal_ViewHelpers}
+<cal:tempStore get="test" />
+
+
 <div class="list-view">
-<h1><f:format.date format="F d">@{listView.starttime.time}</f:format.date> - <f:format.date format="F d">@{listView.endtime.time}</f:format.date></h1>
+<h1><f:format.date format="F d Y">{listView.starttime.time}</f:format.date> - <f:format.date format="F d Y">{listView.endtime.time}</f:format.date></h1>
 <f:if condition="{listView.master_array}">
 <p class="found">{listView.count} entries found</p>
 <dl>

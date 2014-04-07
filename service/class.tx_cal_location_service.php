@@ -28,9 +28,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
-require_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_location.php');
-require_once(t3lib_extMgm::extPath('cal').'service/class.tx_cal_base_service.php');
-
 /**
  * Base model for the calendar organizer.  Provides basic model functionality that other
  * models can use or override by extending the class.  

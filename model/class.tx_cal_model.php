@@ -28,9 +28,9 @@
  *
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
-require_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_calendar.php');
-require_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_functions.php');
-require_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_base_model.php');
+#require_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_calendar.php');
+#require_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_functions.php');
+#require_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_base_model.php');
 
 /**
  * Base model for the calendar.  Provides basic model functionality that other

@@ -42,7 +42,7 @@ class tx_cal_registry {
 	 * @param  string $var        The variable to retrieve.
 	 * @return mixed  A reference to the variable. If not set it will be null.
 	 */
-	function &Registry($namespace, $var) {
+	static function &Registry($namespace, $var) {
 		static $instances = array();
 		// remove to get case-insensitive namespace
 		$namespace = strtolower($namespace);
@@ -50,7 +50,7 @@ class tx_cal_registry {
 		return $instances[$namespace][$var];
 	}
 	
-	function setInstance(&$object,$namespace,$var){
+	static function setInstance(&$object,$namespace,$var){
 		$myObject = &tx_publication_registry::Registry($namespace,$var);
 		$myObject = $object;
 		$object = $myObject;

@@ -35,14 +35,11 @@
  * @subpackage cal
  */
 class tx_cal_abstract_model {
-
+	
 	var $noAutoFetchMethods = Array(); // array with method names as array values, where the method has the naming scheme 'getCustomMethodName', where a setter with the same naming and where the get-method itself expects parameters and thus can not be fetched dynamically
 	function getNoAutoFetchMethods(){
 		return $this->noAutoFetchMethods;
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/model/class.tx_cal_abstract_model.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/model/class.tx_cal_abstract_model.php']);
-}
 ?>

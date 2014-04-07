@@ -79,7 +79,7 @@ class tx_cal_tceFunc_selectTreeView extends t3lib_treeview {
 	 * @param	array		$v: an array with uid and title of the current item.
 	 * @return	string		the wrapped title
 	 */
-	function wrapTitle($title,$v)	{
+	function wrapTitle($title,$v, $bank = 0)	{
 		if($v['uid']>0) {
 			if(in_array($v['uid'],$this->MOUNTS) || in_array($v['uid'],$this->TCEforms_nonSelectableItemsArray)){
 				return '<a href="#" title="'.$v['title'].'"><span style="color:#999;cursor:default;">'.$title.'</span></a>';

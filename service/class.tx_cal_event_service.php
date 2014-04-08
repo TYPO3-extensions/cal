@@ -1178,6 +1178,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 		}
 		if($this->rightsObj->isAllowedTo('create','event','image')){
 			$this->checkOnNewOrDeletableFiles('tx_cal_event', 'image', $insertFields);
+			if($insertFields['image'] == null){
+				$insertFields['image'] = '';
+			}
 			$insertFields['imagecaption'] = implode(chr(10),$object->getImageCaption());
 			$insertFields['imagealttext'] = implode(chr(10),$object->getImageAltText());
 			$insertFields['imagetitletext'] = implode(chr(10),$object->getImageTitleText());
@@ -1185,6 +1188,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 		
 		if($this->rightsObj->isAllowedTo('create','event','attachment')){
 			$this->checkOnNewOrDeletableFiles('tx_cal_event', 'attachment', $insertFields);
+			if($insertFields['attachment'] == null){
+				$insertFields['attachment'] = '';
+			}
 			$insertFields['attachmentcaption'] = implode(chr(10),$object->getAttachmentCaption());
 		}
 
@@ -1284,6 +1290,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 		}
 		if($this->rightsObj->isAllowedTo('edit','event','image')){
 			$this->checkOnNewOrDeletableFiles('tx_cal_event', 'image', $insertFields);
+			if($insertFields['image'] == null){
+				$insertFields['image'] = '';
+			}
 			$insertFields['imagecaption'] = implode(chr(10),$object->getImageCaption());
 			$insertFields['imagealttext'] = implode(chr(10),$object->getImageAltText());
 			$insertFields['imagetitletext'] = implode(chr(10),$object->getImageTitleText());
@@ -1291,6 +1300,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 		
 		if($this->rightsObj->isAllowedTo('edit','event','attachment')){
 			$this->checkOnNewOrDeletableFiles('tx_cal_event', 'attachment', $insertFields);
+			if($insertFields['attachment'] == null){
+				$insertFields['attachment'] = '';
+			}
 			$insertFields['attachmentcaption'] = implode(chr(10),$object->getAttachmentCaption());
 		}
 

@@ -39,6 +39,7 @@ return array(
 	'tx_cal_date' => $extensionPath . 'model/class.tx_cal_date.php',
 	'tx_cal_location_model' => $extensionPath . 'model/class.tx_cal_location_model.php',
 	'tx_cal_location' => $extensionPath . 'model/class.tx_cal_location.php',
+	'tx_cal_organizer' => $extensionPath . 'model/class.tx_cal_organizer.php',
 	'tx_cal_organizer_partner' => $extensionPath . 'model/class.tx_cal_organizer_partner.php',
 	'tx_cal_location_partner' => $extensionPath . 'model/class.tx_cal_location_partner.php',
 

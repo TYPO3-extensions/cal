@@ -1,18 +1,19 @@
 <?php
-/***************************************************************
+/**
+ * *************************************************************
  * Copyright notice
  *
  * (c) 2008 Christian Technology Ministries International Inc.
  * All rights reserved
  *
  * This file is part of the Web-Empowered Church (WEC)
- * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries 
+ * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries
  * International (http://CTMIinc.org). The WEC is developing TYPO3-based
  * (http://typo3.org) free software for churches around the world. Our desire
  * is to use the Internet to help offer new life through Jesus Christ. Please
  * see http://WebEmpoweredChurch.org/Jesus.
  *
- * You can redistribute this file and/or modify it under the terms of the 
+ * You can redistribute this file and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation;
  * either version 2 of the License, or (at your option) any later version.
  *
@@ -25,22 +26,22 @@
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the file!
- ***************************************************************/
-
+ * *************************************************************
+ */
 class tx_cal_dateeval {
 	
 	/**
-	 * Javascript evaluation for cal date fields. Transforms various date 
-	 * formats into the standard date format just like the evaluation 
+	 * Javascript evaluation for cal date fields.
+	 * Transforms various date
+	 * formats into the standard date format just like the evaluation
 	 * performed on regular TYPO3 date fields.
 	 *
-	 * @return	JavaScript code for evaluating the date field.
-	 * @todo 	Add evaluations similar to what the backend already uses,
-	 *			converting periods and slashes into dashes and taking US date
-	 *			format into account.
+	 * @return JavaScript code for evaluating the date field.
+	 * @todo Add evaluations similar to what the backend already uses,
+	 *       converting periods and slashes into dashes and taking US date
+	 *       format into account.
 	 */
 	function returnFieldJS() {
-
 		return '
 			//Convert the date to a timstamp using standard TYPO3 methods
 			value = evalFunc.input("date", value);
@@ -51,8 +52,7 @@ class tx_cal_dateeval {
 	}
 }
 
-
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/hooks/class.tx_cal_dateeval.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/hooks/class.tx_cal_dateeval.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_dateeval.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_dateeval.php']);
 }
 ?>

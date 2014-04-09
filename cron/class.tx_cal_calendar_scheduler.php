@@ -1,5 +1,6 @@
 <?php
-/***************************************************************
+/**
+ * *************************************************************
  * Copyright notice
  *
  * (c) 2005-2008 Mario Matzulla
@@ -26,46 +27,38 @@
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the file!
- ***************************************************************/
-
-
+ * *************************************************************
+ */
 class tx_cal_calendar_scheduler extends tx_scheduler_Task {
 	var $uid;
-
+	
 	/**
 	 * PHP4 wrapper for constructor,
 	 * have to be here even though the constructor is not defined in the derived class,
 	 * else the constructor of the parent class will not be called in PHP4
-	 *
 	 */
 	function tx_cal_calendar_scheduler() {
-		$this->__construct();
+		$this->__construct ();
 	}
-
 	public function execute() {
 		$success = true;
-		require_once(t3lib_extMgm::extPath('cal').'service/class.tx_cal_icalendar_service.php');
-		$service = t3lib_div::makeInstance('tx_cal_icalendar_service');
-
-		$service->update($this->uid);
-
+		require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_icalendar_service.php');
+		$service = t3lib_div::makeInstance ('tx_cal_icalendar_service');
+		
+		$service->update ($this->uid);
+		
 		return $success;
 	}
-
-
 	function getUID() {
 		return $this->uid;
 	}
-
 	function setUID($uid) {
 		$this->uid = $uid;
 	}
-
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/cron/class.tx_cal_calendar_scheduler.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/cron/class.tx_cal_calendar_scheduler.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/cron/class.tx_cal_calendar_scheduler.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/cron/class.tx_cal_calendar_scheduler.php']);
 }
-
 
 ?>

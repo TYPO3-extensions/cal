@@ -1,5 +1,6 @@
 <?php
-/***************************************************************
+/**
+ * *************************************************************
  * Copyright notice
  *
  * (c) 2005-2008 Mario Matzulla
@@ -7,13 +8,13 @@
  * All rights reserved
  *
  * This file is part of the Web-Empowered Church (WEC)
- * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries 
+ * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries
  * International (http://CTMIinc.org). The WEC is developing TYPO3-based
  * (http://typo3.org) free software for churches around the world. Our desire
  * is to use the Internet to help offer new life through Jesus Christ. Please
  * see http://WebEmpoweredChurch.org/Jesus.
  *
- * You can redistribute this file and/or modify it under the terms of the 
+ * You can redistribute this file and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation;
  * either version 2 of the License, or (at your option) any later version.
  *
@@ -26,8 +27,8 @@
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the file!
- ***************************************************************/
-
+ * *************************************************************
+ */
 
 /**
  * A concrete view for the calendar.
@@ -36,44 +37,43 @@
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
 class tx_cal_eventview extends tx_cal_base_view {
-
-	function tx_cal_eventview(){
-		$this->tx_cal_base_view();
+	function tx_cal_eventview() {
+		$this->tx_cal_base_view ();
 	}
 	
 	/**
-	 *  Draws a single event.
-	 *  @param		$event		object		The event to be drawn.
-	 *  @param		$getdate	integer		The date of the event
-	 *	@return		string		The HTML output.
+	 * Draws a single event.
+	 * 
+	 * @param $event object
+	 *        	to be drawn.
+	 * @param $getdate integer
+	 *        	of the event
+	 * @return string HTML output.
 	 */
-	function drawEvent(&$event, $getdate, $relatedEvents=Array()) {
+	function drawEvent(&$event, $getdate, $relatedEvents = Array()) {
+		$this->_init ($relatedEvents);
 		
-		$this->_init($relatedEvents);
-
-		$page = $this->cObj->fileResource($this->conf['view.']['event.']['eventTemplate']);
+		$page = $this->cObj->fileResource ($this->conf ['view.'] ['event.'] ['eventTemplate']);
 		if ($page == '') {
-			return '<h3>calendar: no template file found:</h3>'.$this->conf['view.']['event.']['eventTemplate'];
+			return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['event.'] ['eventTemplate'];
 		}
 		if ($event == null) {
-			$rems['###EVENT###'] = $this->cObj->cObjGetSingle($this->conf['view.']['event.']['event.']['noEventFound'], $this->conf['view.']['event.']['event.']['noEventFound.']);
-		}else if($this->conf['preview']){
-			$rems['###EVENT###'] = $event->renderEventPreview();
-		}else{
-			$rems['###EVENT###'] = $event->renderEvent();
-			if($this->conf['view.']['event.']['substitutePageTitle']==1){
-				$GLOBALS['TSFE']->page['title'] = $event->getTitle();
-				$GLOBALS['TSFE']->indexedDocTitle = $event->getTitle();
+			$rems ['###EVENT###'] = $this->cObj->cObjGetSingle ($this->conf ['view.'] ['event.'] ['event.'] ['noEventFound'], $this->conf ['view.'] ['event.'] ['event.'] ['noEventFound.']);
+		} else if ($this->conf ['preview']) {
+			$rems ['###EVENT###'] = $event->renderEventPreview ();
+		} else {
+			$rems ['###EVENT###'] = $event->renderEvent ();
+			if ($this->conf ['view.'] ['event.'] ['substitutePageTitle'] == 1) {
+				$GLOBALS ['TSFE']->page ['title'] = $event->getTitle ();
+				$GLOBALS ['TSFE']->indexedDocTitle = $event->getTitle ();
 			}
 		}
-
-		return $this->finish($page, $rems);
+		
+		return $this->finish ($page, $rems);
 	}
-
-
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/view/class.tx_cal_eventview.php']) {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/view/class.tx_cal_eventview.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/view/class.tx_cal_eventview.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/view/class.tx_cal_eventview.php']);
 }
 ?>

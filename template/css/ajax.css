@@ -35,7 +35,7 @@
 .dd-proxy {
 	opacity: 0.4;
 	-moz-opacity: 0.4;
-	filter: alpha(opacity = 40);
+	filter: alpha(opacity =  40);
 }
 
 .dd-over {

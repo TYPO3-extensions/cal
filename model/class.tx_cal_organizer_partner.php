@@ -1,5 +1,6 @@
 <?php
-/***************************************************************
+/**
+ * *************************************************************
  * Copyright notice
  *
  * (c) 2005-2008 Mario Matzulla
@@ -26,13 +27,15 @@
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the file!
- ***************************************************************/
+ * *************************************************************
+ */
 
-#require_once(PATH_tslib.'class.tslib_pibase.php');
-#require_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_organizer.php');
+// equire_once(PATH_tslib.'class.tslib_pibase.php');
+// equire_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_organizer.php');
 
 /**
- * Base model for the calendar organizer.  Provides basic model functionality that other
+ * Base model for the calendar organizer.
+ * Provides basic model functionality that other
  * models can use or override by extending the class.
  *
  * @author Mario Matzulla <mario@matzullas.de>
@@ -40,93 +43,82 @@
  * @subpackage cal
  */
 class tx_cal_organizer_partner extends tx_cal_organizer {
-		
 	var $partner;
-		
-		
+	
 	/**
 	 * Constructor
-	 * @param	integer		$uid		The uid to search for
-	 * @param	string		$pidList	The pid-list to search in
+	 * 
+	 * @param integer $uid
+	 *        	to search for
+	 * @param string $pidList
+	 *        	to search in
 	 */
-	function tx_cal_organizer_partner($uid, $pidList){
-		require_once(t3lib_extMgm::extPath('partner').'api/class.tx_partner_main.php');
-		require_once(t3lib_extMgm::extPath('partner').'api/class.tx_partner_div.php');
-
-		$this->partner = &t3lib_div :: makeInstance('tx_partner_main');
-		$this->partner->getPartner($uid);
-		$this->partner->getContactInfo($this->conf['view.']['organizer.']['contactInfoType']);
-		 
-		$this->tx_cal_organizer($this->partner->data, $this->getType());
-		 
-		$this->setType('tx_partner_main');
-		$this->setObjectType('organizer');
-		$this->templatePath = $this->conf['view.']['organizer.']['organizerModelTemplate4Partner'];
-	}
+	function tx_cal_organizer_partner($uid, $pidList) {
+		require_once (t3lib_extMgm::extPath ('partner') . 'api/class.tx_partner_main.php');
+		require_once (t3lib_extMgm::extPath ('partner') . 'api/class.tx_partner_div.php');
 		
-	function getName(){
+		$this->partner = &t3lib_div::makeInstance ('tx_partner_main');
+		$this->partner->getPartner ($uid);
+		$this->partner->getContactInfo ($this->conf ['view.'] ['organizer.'] ['contactInfoType']);
+		
+		$this->tx_cal_organizer ($this->partner->data, $this->getType ());
+		
+		$this->setType ('tx_partner_main');
+		$this->setObjectType ('organizer');
+		$this->templatePath = $this->conf ['view.'] ['organizer.'] ['organizerModelTemplate4Partner'];
+	}
+	function getName() {
 		$partnername = '';
-		switch ($this->partner->data['type']) {
-			case 0:
-				$partnername = $this->partner->data['first_name'].' '.$this->partner->data['last_name'];
+		switch ($this->partner->data ['type']) {
+			case 0 :
+				$partnername = $this->partner->data ['first_name'] . ' ' . $this->partner->data ['last_name'];
 				break;
-			case 1:
-				$partnername = $this->partner->data['org_name'];
+			case 1 :
+				$partnername = $this->partner->data ['org_name'];
 				break;
-			default:
-				$partnername = $this->partner->data['label'];
+			default :
+				$partnername = $this->partner->data ['label'];
 		}
 		return $partnername;
 	}
-
-	function getFirstName(){
-		return $this->partner->data['first_name'];
+	function getFirstName() {
+		return $this->partner->data ['first_name'];
 	}
-
-	function setFirstName($t){
-		$this->partner->data['first_name'] = $t;
+	function setFirstName($t) {
+		$this->partner->data ['first_name'] = $t;
 	}
-
-	function getMiddleName(){
-		return $this->partner->data['middle_name'];
+	function getMiddleName() {
+		return $this->partner->data ['middle_name'];
 	}
-
-	function setMiddleName($t){
-		$this->partner->data['middle_name'] = $t;
+	function setMiddleName($t) {
+		$this->partner->data ['middle_name'] = $t;
 	}
-
-	function getLastName(){
-		return $this->partner->data['last_name'];
+	function getLastName() {
+		return $this->partner->data ['last_name'];
 	}
-
-	function setLastName($t){
-		$this->partner->data['last_name'] = $t;
+	function setLastName($t) {
+		$this->partner->data ['last_name'] = $t;
 	}
-
-	function getStreetNumber(){
-		return $this->partner->data['street_number'];
+	function getStreetNumber() {
+		return $this->partner->data ['street_number'];
 	}
-
-	function setStreetNumber($t){
-		$this->partner->data['street_number'] = $t;
+	function setStreetNumber($t) {
+		$this->partner->data ['street_number'] = $t;
 	}
-
-	function getZip(){
-		return $this->partner->data['postal_code'];
+	function getZip() {
+		return $this->partner->data ['postal_code'];
 	}
-
-	function setZip($t){
-		$this->partner->data['postal_code'] = $t;
+	function setZip($t) {
+		$this->partner->data ['postal_code'] = $t;
 	}
-	
-	function fillTemplate($subpartMarker){
+	function fillTemplate($subpartMarker) {
 		global $LANG;
-		$LANG->includeLLFile('EXT:partner/locallang.php');
-		return parent::fillTemplate($subpartMarker);
+		$LANG->includeLLFile ('EXT:partner/locallang.php');
+		return parent::fillTemplate ($subpartMarker);
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/model/class.tx_cal_organizer_partner.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/model/class.tx_cal_organizer_partner.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/model/class.tx_cal_organizer_partner.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/model/class.tx_cal_organizer_partner.php']);
 }
 ?>

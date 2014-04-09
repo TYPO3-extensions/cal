@@ -1,6 +1,7 @@
 <?php
 
-/***************************************************************
+/**
+ * *************************************************************
  * Copyright notice
  *
  * (c) 2005-2009 Mario Matzulla
@@ -8,13 +9,13 @@
  * All rights reserved
  *
  * This file is part of the Web-Empowered Church (WEC)
- * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries 
+ * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries
  * International (http://CTMIinc.org). The WEC is developing TYPO3-based
  * (http://typo3.org) free software for churches around the world. Our desire
  * is to use the Internet to help offer new life through Jesus Christ. Please
  * see http://WebEmpoweredChurch.org/Jesus.
  *
- * You can redistribute this file and/or modify it under the terms of the 
+ * You can redistribute this file and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation;
  * either version 2 of the License, or (at your option) any later version.
  *
@@ -27,51 +28,48 @@
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the file!
- ***************************************************************/
-require_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_functions.php');
-
+ * *************************************************************
+ */
+require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 class tx_cal_logoff_post_processing {
-	
-	function clearSessionApiAfterLogin($params,&$pObj){
-		
-		if($_COOKIE['fe_typo_user']){
-			session_id($_COOKIE['fe_typo_user']);
-			session_start();
-			if(!is_array($_SESSION)){
-				$_SESSION = Array();
+	function clearSessionApiAfterLogin($params, &$pObj) {
+		if ($_COOKIE ['fe_typo_user']) {
+			session_id ($_COOKIE ['fe_typo_user']);
+			session_start ();
+			if (! is_array ($_SESSION)) {
+				$_SESSION = Array ();
 			}
 			
-			$sessionEntries = array_keys($_SESSION);
-			foreach($sessionEntries as $key){
-				if(tx_cal_functions::beginsWith($key,'cal_api')){
-					unset($_SESSION[$key]);
+			$sessionEntries = array_keys ($_SESSION);
+			foreach ($sessionEntries as $key) {
+				if (tx_cal_functions::beginsWith ($key, 'cal_api')) {
+					unset ($_SESSION [$key]);
 				}
 			}
 		}
 	}
-	
-	function clearSessionApiAfterLogoff($_params, &$pObj){
-		if(t3lib_div::_GP('logintype') === 'logout' && $_COOKIE['fe_typo_user']){
-			session_id($_COOKIE['fe_typo_user']);
-			session_start();
+	function clearSessionApiAfterLogoff($_params, &$pObj) {
+		if (t3lib_div::_GP ('logintype') === 'logout' && $_COOKIE ['fe_typo_user']) {
+			session_id ($_COOKIE ['fe_typo_user']);
+			session_start ();
 			
-			if(!$_SESSION['cal_api_logoff'] == 1){
-
-				if(is_array($_SESSION)){
-					$sessionEntries = array_keys($_SESSION);
-					foreach($sessionEntries as $key){
-						if(tx_cal_functions::beginsWith($key,'cal_api')){
-							unset($_SESSION[$key]);
+			if (! $_SESSION ['cal_api_logoff'] == 1) {
+				
+				if (is_array ($_SESSION)) {
+					$sessionEntries = array_keys ($_SESSION);
+					foreach ($sessionEntries as $key) {
+						if (tx_cal_functions::beginsWith ($key, 'cal_api')) {
+							unset ($_SESSION [$key]);
 						}
 					}
 				}
-				$_SESSION['cal_api_logoff'] = 1;
+				$_SESSION ['cal_api_logoff'] = 1;
 			}
 		}
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/hooks/class.tx_cal_logoff_post_processing.php']) {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/hooks/class.tx_cal_logoff_post_processing.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_logoff_post_processing.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_logoff_post_processing.php']);
 }
 ?>

@@ -60,11 +60,13 @@
 			<label index="cal.pi_flexform.itemsHeader">Special options:</label>
 			<label index="cal.pi_flexform.category_selection_notCategorized">[not categorized]</label>
 			<label index="cal.pi_flexform.calendarMode">Calendar selection mode</label>
-			<label index="cal.pi_flexform.calendarMode.showAll">Show all calendars (don't care about selection below)</label>
+			<label index="cal.pi_flexform.calendarMode.showAll">Show all calendars (don't care about selection
+				below)</label>
 			<label index="cal.pi_flexform.calendarMode.showSelected">Show only selected calendars</label>
 			<label index="cal.pi_flexform.calendarMode.excludeSelected">Don't show selected calendars</label>
 			<label index="cal.pi_flexform.categoryMode">Category selection mode</label>
-			<label index="cal.pi_flexform.categoryMode.showAll">Show all categories (don't care about selection below)</label>
+			<label index="cal.pi_flexform.categoryMode.showAll">Show all categories (don't care about selection
+				below)</label>
 			<label index="cal.pi_flexform.categoryMode.showSelected">Show only selected categories (exact match)</label>
 			<label index="cal.pi_flexform.categoryMode.excludeSelected">Don't show selected categories</label>
 			<label index="cal.pi_flexform.categoryMode.showSelectedOr">Show only selected categories (any)</label>
@@ -256,9 +258,11 @@
 			<label index="cal.pi_flexform.listView.usePageBrowser.use">Benutze Seitenaufteilung</label>
 			<label index="cal.pi_flexform.listView.usePageBrowser.dontUse">keine Seitenaufteilung</label>
 			<label index="cal.pi_flexform.listView.recordsPerPage">Einträge je Seite (bei Seitenaufteilung)</label>
-			<label index="cal.pi_flexform.listView.pagesCount">max. Anzahl darzustellender Seiten (bei Seitenaufteilung)</label>
+			<label index="cal.pi_flexform.listView.pagesCount">max. Anzahl darzustellender Seiten (bei
+				Seitenaufteilung)</label>
 			<label index="cal.pi_flexform.maxEvents">Höchstzahl der Ereignisse</label>
-			<label index="cal.pi_flexform.maxRecurringEvents">Max. Darstellung des selben wiederholenden Ereignisses</label>
+			<label index="cal.pi_flexform.maxRecurringEvents">Max. Darstellung des selben wiederholenden
+				Ereignisses</label>
 			<label index="cal.pi_flexform.sheetEventView">Ereignis-Ansicht</label>
 			<label index="cal.pi_flexform.eventViewPid">Ereignis-Ansicht Seite</label>
 			<label index="cal.pi_flexform.eventTemplate">Ereignis-Ansicht Template</label>
@@ -605,15 +609,18 @@
 			<label index="cal.pi_flexform.calendar_selection" type="integer">137184497</label>
 			<label index="cal.pi_flexform.select_deselect_categories" type="integer">127450452</label>
 			<label index="cal.pi_flexform.itemsHeader" type="integer">20791966</label>
-			<label index="cal.pi_flexform.category_selection_notCategorized" type="integer">207488249</label>
+			<label index="cal.pi_flexform.category_selection_notCategorized"
+				type="integer">207488249</label>
 			<label index="cal.pi_flexform.calendarMode" type="integer">205006161</label>
 			<label index="cal.pi_flexform.calendarMode.showAll" type="integer">68915411</label>
 			<label index="cal.pi_flexform.calendarMode.showSelected" type="integer">174428642</label>
-			<label index="cal.pi_flexform.calendarMode.excludeSelected" type="integer">214178485</label>
+			<label index="cal.pi_flexform.calendarMode.excludeSelected"
+				type="integer">214178485</label>
 			<label index="cal.pi_flexform.categoryMode" type="integer">178801017</label>
 			<label index="cal.pi_flexform.categoryMode.showAll" type="integer">156352581</label>
 			<label index="cal.pi_flexform.categoryMode.showSelected" type="integer">173202696</label>
-			<label index="cal.pi_flexform.categoryMode.excludeSelected" type="integer">224060550</label>
+			<label index="cal.pi_flexform.categoryMode.excludeSelected"
+				type="integer">224060550</label>
 			<label index="cal.pi_flexform.sheetYearView" type="integer">31017419</label>
 			<label index="cal.pi_flexform.yearViewPid" type="integer">117993603</label>
 			<label index="cal.pi_flexform.yearTemplate" type="integer">149538707</label>
@@ -740,11 +747,13 @@
 			<label index="cal.pi_flexform.itemsHeader">Special options:</label>
 			<label index="cal.pi_flexform.category_selection_notCategorized">[not categorized]</label>
 			<label index="cal.pi_flexform.calendarMode">Calendar selection mode</label>
-			<label index="cal.pi_flexform.calendarMode.showAll">Show all calendars (don't care about selection below)</label>
+			<label index="cal.pi_flexform.calendarMode.showAll">Show all calendars (don't care about selection
+				below)</label>
 			<label index="cal.pi_flexform.calendarMode.showSelected">Show only selected calendars</label>
 			<label index="cal.pi_flexform.calendarMode.excludeSelected">Don't show selected calendars</label>
 			<label index="cal.pi_flexform.categoryMode">Category selection mode</label>
-			<label index="cal.pi_flexform.categoryMode.showAll">Show all categories (don't care about selection below)</label>
+			<label index="cal.pi_flexform.categoryMode.showAll">Show all categories (don't care about selection
+				below)</label>
 			<label index="cal.pi_flexform.categoryMode.showSelected">Show only selected categories</label>
 			<label index="cal.pi_flexform.categoryMode.excludeSelected">Don't show selected categories</label>
 			<label index="cal.pi_flexform.sheetYearView">Year View</label>

@@ -11,33 +11,50 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index=".description">Organizers for Calendar Base event records.</label>
-			<label index=".details">If your events regularly use a particular organizer, or if you want to provide the organizer's information for registration or for other reasons, you may create a Calendar Event Organizer record that includes more information than the Event Record contains in the Organizer Tab.</label>
-			<label index="hidden.description">Use this to temporarily exclude this organizer from display.</label>
-			<label index="name.description">Name of the individual, group, or company responsible for organizing the event.</label>
+			<label index=".details">If your events regularly use a particular
+				organizer, or if you want to provide the organizer's information for
+				registration or for other reasons, you may create a Calendar Event
+				Organizer record that includes more information than the Event
+				Record contains in the Organizer Tab.</label>
+			<label index="hidden.description">Use this to temporarily exclude this organizer
+				from display.</label>
+			<label index="name.description">Name of the individual, group, or company
+				responsible for organizing the event.</label>
 			<label index="description.description">The description of the organizer.</label>
 			<label index="street.description">The street address of the organizer.</label>
 			<label index="zip.description">The ZIP code or postal code of the organizer.</label>
 			<label index="city.description">The city of the organizer.</label>
 			<label index="country.description">The country of the organizer.</label>
-			<label index="country_zone.description">The state of the organizer. The drop-down menu will not be available until you have included the country information and saved the form.</label>
+			<label index="country_zone.description">The state of the organizer. The drop-down menu
+				will not be available until you have included the country
+				information and saved the form.</label>
 			<label index="phone.description">The phone number of the organizer.</label>
 			<label index="email.description">The email address of the organizer.</label>
 			<label index="image.description">A logo or photo of the organizer or their company.</label>
 			<label index="link.description">The website of the organizer.</label>
-			<label index="link.details">This link can be used to provide more information about the organizer.</label>
-			<label index="imagealttext.description">Alternate text shown if images are not found or not supported.</label>
-			<label index="imagealttext.details">If you have multiple images, alt text entries must be listed on separate lines.</label>
+			<label index="link.details">This link can be used to provide more information
+				about the organizer.</label>
+			<label index="imagealttext.description">Alternate text shown if images are not found or
+				not supported.</label>
+			<label index="imagealttext.details">If you have multiple images, alt text entries must
+				be listed on separate lines.</label>
 			<label index="imagetitletext.description">Tooltip or hover text.</label>
-			<label index="imagetitletext.details">If you have multiple images, title text entries must be listed on separate lines.</label>
+			<label index="imagetitletext.details">If you have multiple images, title text entries
+				must be listed on separate lines.</label>
 			<label index="imagecaption.description">Adds a caption beneath each image.</label>
-			<label index="imagecaption.details">If you have multiple images, captions must be listed on separate lines.</label>
+			<label index="imagecaption.details">If you have multiple images, captions must be
+				listed on separate lines.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index=".description">Veranstalter die Ereignisse des Kalenders organisieren.</label>
-			<label index=".details">Erstellt Veranstalter (Organizer), die in Ereignissen angegeben werden können.</label>
-			<label index="hidden.description">Verwenden Sie diese Funktion, um einen Veranstalter temporär nicht anzeigen zu lassen.</label>
+			<label index=".description">Veranstalter die Ereignisse des Kalenders
+				organisieren.</label>
+			<label index=".details">Erstellt Veranstalter (Organizer), die in
+				Ereignissen angegeben werden können.</label>
+			<label index="hidden.description">Verwenden Sie diese Funktion, um einen
+				Veranstalter temporär nicht anzeigen zu lassen.</label>
 			<label index="name.description">Der Name des Veranstalters</label>
-			<label index="description.description">Geben Sie hier eine möglichst aussagekräftige Beschreibung des Veranstalters ein.</label>
+			<label index="description.description">Geben Sie hier eine möglichst aussagekräftige
+				Beschreibung des Veranstalters ein.</label>
 			<label index="street.description">Die Straße (und Nummer) des Veranstalters.</label>
 			<label index="zip.description">Die Postleitzahl des Veranstalters.</label>
 			<label index="city.description">Die Stadt des Veranstalters.</label>
@@ -45,7 +62,10 @@
 			<label index="email.description">Eine E-Mail-Adresse des Veranstalters.</label>
 			<label index="image.description">Ein Bild des Veranstaltungsortes.</label>
 			<label index="link.description">Die Webseite des Veranstalters.</label>
-			<label index="link.details">Es erweist sich für den Webseitenbesucher als überaus nützlich eine evtl. vorhandende Webseite (URL) des Veranstalters anzugeben, wo sich weitere Informationen über den Veranstalter und die von ihm organisierten Ereignisse finden.</label>
+			<label index="link.details">Es erweist sich für den Webseitenbesucher als
+				überaus nützlich eine evtl. vorhandende Webseite (URL) des
+				Veranstalters anzugeben, wo sich weitere Informationen über den
+				Veranstalter und die von ihm organisierten Ereignisse finden.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 		</languageKey>
@@ -151,7 +171,8 @@
 		<languageKey index="de" type="array">
 			<label index=".description">Organizers for THE Calendar for TYPO3</label>
 			<label index=".details">Create Organizers which can be used in events.</label>
-			<label index="hidden.description">Use this to temporarily exclude this organizer from display.</label>
+			<label index="hidden.description">Use this to temporarily exclude this organizer
+				from display.</label>
 			<label index="name.description">Enter a name for the organizer-record.</label>
 			<label index="description.description">This is the description of the organizer.</label>
 			<label index="street.description">Street.</label>
@@ -161,7 +182,8 @@
 			<label index="email.description">A email-adress of the organizer</label>
 			<label index="image.description">A picture (for example a logo) of the organizer.</label>
 			<label index="link.description">The website of the organizer.</label>
-			<label index="link.details">It's useful to give a webesite, where more Information about the organizer and the events can be found.</label>
+			<label index="link.details">It's useful to give a webesite, where more
+				Information about the organizer and the events can be found.</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

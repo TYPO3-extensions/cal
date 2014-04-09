@@ -102,7 +102,8 @@
 			<label index="l_todo">To do items</label>
 			<label index="l_unfinished">Unfinished</label>
 			<label index="l_prefs_set">Your preferences have been set.</label>
-			<label index="l_prefs_unset">Preferences unset. Changes will take place next page load.</label>
+			<label index="l_prefs_unset">Preferences unset. Changes will take place next
+				page load.</label>
 			<label index="l_unset_prefs">Unset preferences:</label>
 			<label index="l_organizer">Organizer</label>
 			<label index="l_edit_organizer">Edit Organizer</label>
@@ -119,7 +120,8 @@
 			<label index="l_login">Login</label>
 			<label index="l_invalid_login">Wrong username or password.</label>
 			<label index="l_addupdate_cal">Add or Update a Calendar</label>
-			<label index="l_addupdate_desc">Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.</label>
+			<label index="l_addupdate_desc">Add a calendar by uploading a new file. Update a
+				calendar by uploading a file of the same name.</label>
 			<label index="l_delete_cal">Delete a Calendar</label>
 			<label index="l_logout">Logout</label>
 			<label index="l_cal_file">Calendar File</label>
@@ -185,26 +187,40 @@
 			<label index="l_daysofweek_lang_saturday">Saturday</label>
 			<label index="l_error_title">Error!</label>
 			<label index="l_error_window">There was an error!</label>
-			<label index="l_error_calendar">The calendar &quot;%s&quot; was being processed when this error occurred.</label>
+			<label index="l_error_calendar">The calendar &quot;%s&quot; was being processed
+				when this error occurred.</label>
 			<label index="l_error_path">Unable to open the path: &quot;%s&quot;</label>
 			<label index="l_error_back">Please use the &quot;Back&quot; button to return.</label>
-			<label index="l_error_remotecal">This server blocks remote calendars which have not been approved.</label>
-			<label index="l_error_restrictedcal">You have tried to access a calendar that is restricted on this server.</label>
-			<label index="l_error_invalidcal">Invalid calendar file. Please try a different calendar.</label>
+			<label index="l_error_remotecal">This server blocks remote calendars which have not
+				been approved.</label>
+			<label index="l_error_restrictedcal">You have tried to access a calendar that is
+				restricted on this server.</label>
+			<label index="l_error_invalidcal">Invalid calendar file. Please try a different
+				calendar.</label>
 			<label index="l_error_cantopen">Unable to open calendar.</label>
-			<label index="l_error_cache">Unable to write to cache directory. Please check your config.</label>
-			<label index="l_error_noCategory">You can not create an event without a category. Please create a category first</label>
+			<label index="l_error_cache">Unable to write to cache directory. Please check
+				your config.</label>
+			<label index="l_error_noCategory">You can not create an event without a category.
+				Please create a category first</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">Subscribe to this event?</label>
 			<label index="l_monitor_event_logged_in_monitoring">Unsubscribe?</label>
 			<label index="l_monitor_login_in_for_monitoring">Please log in to manage your subscriptions.</label>
 			<label index="l_manage_subscription">Manage your subscriptions</label>
-			<label index="l_monitor_event_unsubscribe_successful">You have been unsubscribed from the event &quot;%s&quot;. You will no longer receive notifications about this event.</label>
-			<label index="l_monitor_event_unsubscribe_error">There were problems unsubscribing you from the event &quot;%s&quot;.</label>
-			<label index="l_monitor_event_unsubscribe_noevent">The event you are trying to unsubscribe does not exist anymore.</label>
-			<label index="l_monitor_event_subscribe_successful">You have been subscribed to the event &quot;%s&quot;.  You will receive notifications when the event approaches or if any important details are changed.</label>
-			<label index="l_monitor_event_subscribe_error">There were problems subscribing you to the event &quot;%s&quot;.</label>
-			<label index="l_monitor_event_subscribe_noevent">The event you are trying to subscribe does not exist anymore.</label>
+			<label index="l_monitor_event_unsubscribe_successful">You have been unsubscribed from the event
+				&quot;%s&quot;. You will no longer receive notifications about this
+				event.</label>
+			<label index="l_monitor_event_unsubscribe_error">There were problems unsubscribing you from the
+				event &quot;%s&quot;.</label>
+			<label index="l_monitor_event_unsubscribe_noevent">The event you are trying to unsubscribe does not
+				exist anymore.</label>
+			<label index="l_monitor_event_subscribe_successful">You have been subscribed to the event
+				&quot;%s&quot;. You will receive notifications when the event
+				approaches or if any important details are changed.</label>
+			<label index="l_monitor_event_subscribe_error">There were problems subscribing you to the event
+				&quot;%s&quot;.</label>
+			<label index="l_monitor_event_subscribe_noevent">The event you are trying to subscribe does not
+				exist anymore.</label>
 			<label index="l_fe_user">User</label>
 			<label index="l_calendar_title">Title</label>
 			<label index="l_calendar_owner">Owner</label>
@@ -347,18 +363,26 @@
 			<label index="l_delete_event">Delete Event</label>
 			<label index="l_event_has_been_delete">The event has been deleted</label>
 			<label index="l_event_has_been_restored">The event has been restored</label>
-			<label index="l_event_has_been_hidden">The event has been hidden and will not be shown in the frontend</label>
-			<label index="l_event_has_been_unhidden">The previouisly hidden event has now been unhidden and will be shown in the frontend</label>
-			<label index="l_wrong_split_symbol_msg">Date split symbol is: \'###DATE_SPLIT_SYMBOL###\' !\n</label>
+			<label index="l_event_has_been_hidden">The event has been hidden and will not be shown in
+				the frontend</label>
+			<label index="l_event_has_been_unhidden">The previouisly hidden event has now been unhidden
+				and will be shown in the frontend</label>
+			<label index="l_wrong_split_symbol_msg">Date split symbol is: \'###DATE_SPLIT_SYMBOL###\'
+				!\n</label>
 			<label index="l_wrong_date">Wrong date!</label>
 			<label index="l_wrong_time">Wrong time!</label>
 			<label index="l_is_in_past">is a past date!</label>
 			<label index="l_page">Page</label>
 			<label index="l_page_of">Page %s of %s</label>
 			<label index="l_search_found">entries found</label>
-			<label index="l_monitor_start_thanks">Thank you. An email has been sent to you. Please confirm the monitoring by clicking on the confirm link inside the email.</label>
-			<label index="l_monitor_stop_thanks">Thank you. An email has been sent to you. Please confirm the monitoring stop by clicking on the confirm link inside the email.</label>
-			<label index="l_monitor_wrong_captcha">Sorry, but you didn't type in the correct letters. Please try again.</label>
+			<label index="l_monitor_start_thanks">Thank you. An email has been sent to you. Please
+				confirm the monitoring by clicking on the confirm link inside the
+				email.</label>
+			<label index="l_monitor_stop_thanks">Thank you. An email has been sent to you. Please
+				confirm the monitoring stop by clicking on the confirm link inside
+				the email.</label>
+			<label index="l_monitor_wrong_captcha">Sorry, but you didn't type in the correct letters.
+				Please try again.</label>
 			<label index="l_not_allowed_edit">You are not allowed to edit this </label>
 			<label index="l_not_allowed_create">You are not allowed to create a/an </label>
 			<label index="l_delete_image">Delete image</label>
@@ -367,10 +391,16 @@
 			<label index="l_attachment_upload">Upload attachment</label>
 			<label index="l_meeting_accept">Accept</label>
 			<label index="l_meeting_decline">Decline</label>
-			<label index="l_meeting_accepted">Your status for &quot;%s&quot; has been successfully changed to &quot;ACCPETED&quot;.</label>
-			<label index="l_meeting_declined">Your status for &quot;%s&quot; has been successfully changed to &quot;DECLINED&quot;.</label>
-			<label index="l_meeting_update_error">There were problems updating your participation status to &quot;%s&quot;.</label>
-			<label index="l_meeting_error">If you see this message, you probably have received an invitation to a meeting and you have clicked on the accept or decline link. But maybe not all of the parameters made it to the url? Please make sure all parameters are there.</label>
+			<label index="l_meeting_accepted">Your status for &quot;%s&quot; has been
+				successfully changed to &quot;ACCPETED&quot;.</label>
+			<label index="l_meeting_declined">Your status for &quot;%s&quot; has been
+				successfully changed to &quot;DECLINED&quot;.</label>
+			<label index="l_meeting_update_error">There were problems updating your participation
+				status to &quot;%s&quot;.</label>
+			<label index="l_meeting_error">If you see this message, you probably have
+				received an invitation to a meeting and you have clicked on the
+				accept or decline link. But maybe not all of the parameters made it
+				to the url? Please make sure all parameters are there.</label>
 			<label index="l_meeting_changestatus"> Change meeting status: </label>
 			<label index="l_required">(*) Required fields</label>
 			<label index="l_constrain_start_before_end">Start has to be before end</label>
@@ -492,7 +522,8 @@
 			<label index="l_todo">Arbejdsopgaver</label>
 			<label index="l_unfinished">Uafsluttet</label>
 			<label index="l_prefs_set">Dine præferencer er gemt.</label>
-			<label index="l_prefs_unset">Præferencer normaliseret. ændringer træder i kraft ved næste indhentning af siden.</label>
+			<label index="l_prefs_unset">Præferencer normaliseret. ændringer træder i kraft
+				ved næste indhentning af siden.</label>
 			<label index="l_unset_prefs">Normaliser præferencer:</label>
 			<label index="l_organizer">Arrangør</label>
 			<label index="l_attendee">Deltager</label>
@@ -503,7 +534,8 @@
 			<label index="l_login">Login</label>
 			<label index="l_invalid_login">Forkert brugernavn eller kodeord.</label>
 			<label index="l_addupdate_cal">Tilføj eller opdater kalender</label>
-			<label index="l_addupdate_desc">Tilføj en kalender ved at uploade en ny fil med det samme navn.</label>
+			<label index="l_addupdate_desc">Tilføj en kalender ved at uploade en ny fil med
+				det samme navn.</label>
 			<label index="l_delete_cal">Slet en kalender</label>
 			<label index="l_logout">Logout</label>
 			<label index="l_cal_file">Kalenderfil</label>
@@ -559,14 +591,18 @@
 			<label index="l_daysofweek_lang_saturday">Lørdag</label>
 			<label index="l_error_title">Fejl!</label>
 			<label index="l_error_window">Der opstod en fejl!</label>
-			<label index="l_error_calendar">Der opstod en fej under behandlingen af kalenderen &quot;%s</label>
+			<label index="l_error_calendar">Der opstod en fej under behandlingen af kalenderen
+				&quot;%s</label>
 			<label index="l_error_path">Var ikke i stand til at åbne stien: &quot;%s&quot;</label>
-			<label index="l_error_back">Brug venligst &quot;Tilbage&quot; knappen for at komme retur.</label>
-			<label index="l_error_remotecal">Denne server tillader fjern kalendere der ikke er blevet godkendt.</label>
+			<label index="l_error_back">Brug venligst &quot;Tilbage&quot; knappen for at
+				komme retur.</label>
+			<label index="l_error_remotecal">Denne server tillader fjern kalendere der ikke er
+				blevet godkendt.</label>
 			<label index="l_error_restrictedcal">Du forsøgte at tilgå en begrænset kalender.</label>
 			<label index="l_error_invalidcal">Ugyldig kalenderfil. Prøv en anden kalender.</label>
 			<label index="l_error_cantopen">Kunne ikke åbne kalenderen.</label>
-			<label index="l_error_cache">Kunne ikke skrive til cache bibliotek. Tjeck venligst dine indstillinger.</label>
+			<label index="l_error_cache">Kunne ikke skrive til cache bibliotek. Tjeck
+				venligst dine indstillinger.</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_monitoring">&lt;br /&gt;&lt;br /&gt;</label>
@@ -672,7 +708,7 @@
 			<label index="l_printer">Drucker</label>
 			<label index="l_select_lang">Standardsprache wählen:</label>
 			<label index="l_select_cal">Standardkalender wählen:</label>
-			<label index="l_select_view">Standardansicht  wählen:</label>
+			<label index="l_select_view">Standardansicht wählen:</label>
 			<label index="l_select_time">Tag beginnt um:</label>
 			<label index="l_select_day">Woche beginnt mit:</label>
 			<label index="l_select_style">Standardstil wählen:</label>
@@ -691,7 +727,8 @@
 			<label index="l_todo">Aufgaben</label>
 			<label index="l_unfinished">Andauernd</label>
 			<label index="l_prefs_set">Einstellungen wurden gespeichert.</label>
-			<label index="l_prefs_unset">Einstellungen gelöscht. Änderungen werden beim Aufruf der nächsten Seite aktiv.</label>
+			<label index="l_prefs_unset">Einstellungen gelöscht. Änderungen werden beim
+				Aufruf der nächsten Seite aktiv.</label>
 			<label index="l_unset_prefs">Einstellungen löschen:</label>
 			<label index="l_organizer">Organisator</label>
 			<label index="l_edit_organizer">Organisator bearbeiten</label>
@@ -708,12 +745,15 @@
 			<label index="l_login">Anmelden</label>
 			<label index="l_invalid_login">Falscher Benutzername oder Passwort.</label>
 			<label index="l_addupdate_cal">Kalender aktualisieren oder hochladen</label>
-			<label index="l_addupdate_desc">Um einen Kalendar hinzuzufügen, laden Sie ein neues Kalender-Dokument hoch. Um einen Kalender zu aktualisieren, laden Sie ein Kalender-Dokument mit dem selben Namen hoch.</label>
+			<label index="l_addupdate_desc">Um einen Kalendar hinzuzufügen, laden Sie ein
+				neues Kalender-Dokument hoch. Um einen Kalender zu aktualisieren,
+				laden Sie ein Kalender-Dokument mit dem selben Namen hoch.</label>
 			<label index="l_delete_cal">Einen Kalender löschen</label>
 			<label index="l_logout">Abmelden</label>
 			<label index="l_cal_file">Kalender-Dokument</label>
 			<label index="l_php_error">PHP Fehler</label>
-			<label index="l_upload_error_type">Nur Dokumente mit der Suffix .ics dürfen hochgeladen werden.</label>
+			<label index="l_upload_error_type">Nur Dokumente mit der Suffix .ics dürfen
+				hochgeladen werden.</label>
 			<label index="l_copy_error">Kopieren des Dokuments nicht erfolgreich</label>
 			<label index="l_delete_confirm">Wollen Sie wirklich löschen?</label>
 			<label index="l_delete_error">Löschen des Dokuments nicht erfolgreich</label>
@@ -740,7 +780,8 @@
 			<label index="l_event_view">Ereignis-Ansicht</label>
 			<label index="l_search_view">Suche</label>
 			<label index="l_ics_view">ICS</label>
-			<label index="l_icslist_title">Liste der verfügbaren ICS-Dateien zum Herunterladen</label>
+			<label index="l_icslist_title">Liste der verfügbaren ICS-Dateien zum
+				Herunterladen</label>
 			<label index="l_list_view">Listen-Ansicht</label>
 			<label index="format_recur_lang_delimiter">,</label>
 			<label index="l_format_recur_lang_yearly_single">Jahr</label>
@@ -774,31 +815,47 @@
 			<label index="l_daysofweek_lang_saturday">Samstag</label>
 			<label index="l_error_title">Fehler!</label>
 			<label index="l_error_window">Es ist ein Fehler aufgetreten!</label>
-			<label index="l_error_calendar">Der Kalender &quot;%s&quot; wurde bearbeitet, als dieser Fehler auftrat.</label>
-			<label index="l_error_path">Der Pfad &quot;%s&quot; kann nicht geöffnet werden.</label>
-			<label index="l_error_back">Bitte klicken Sie die &quot;Zurück&quot;-Schaltfläche des Browsers, um zurückzuspringen.</label>
-			<label index="l_error_remotecal">Dieser Server blockiert entfernte Kalender, welche nicht freigegeben wurden.</label>
-			<label index="l_error_restrictedcal">Sie haben versucht, einen Kalender mit eingeschränktem Zugriff auf diesem Server aufzurufen.</label>
-			<label index="l_error_invalidcal">Dieser Kalender enthält Fehler. Bitte wählen Sie einen anderen aus.</label>
+			<label index="l_error_calendar">Der Kalender &quot;%s&quot; wurde bearbeitet, als
+				dieser Fehler auftrat.</label>
+			<label index="l_error_path">Der Pfad &quot;%s&quot; kann nicht geöffnet
+				werden.</label>
+			<label index="l_error_back">Bitte klicken Sie die
+				&quot;Zurück&quot;-Schaltfläche des Browsers, um zurückzuspringen.</label>
+			<label index="l_error_remotecal">Dieser Server blockiert entfernte Kalender, welche
+				nicht freigegeben wurden.</label>
+			<label index="l_error_restrictedcal">Sie haben versucht, einen Kalender mit
+				eingeschränktem Zugriff auf diesem Server aufzurufen.</label>
+			<label index="l_error_invalidcal">Dieser Kalender enthält Fehler. Bitte wählen Sie
+				einen anderen aus.</label>
 			<label index="l_error_cantopen">Konnte Kalender nicht öffnen</label>
-			<label index="l_error_cache">Konnte nicht ins Cache-Verzeichnis schreiben. Bitte Konfiguration überprüfen.</label>
-			<label index="l_error_noCategory">Es ist nicht möglich, ein Ereignis ohne eine Kategorie zu erstellen. Bitte zuerst Kategorie wählen.</label>
+			<label index="l_error_cache">Konnte nicht ins Cache-Verzeichnis schreiben.
+				Bitte Konfiguration überprüfen.</label>
+			<label index="l_error_noCategory">Es ist nicht möglich, ein Ereignis ohne eine
+				Kategorie zu erstellen. Bitte zuerst Kategorie wählen.</label>
 			<label index="l_monitor_event_not_logged_in">nicht angemeldet</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">Dieses Ereignis beobachten</label>
 			<label index="l_monitor_event_logged_in_monitoring">Beobachtung beenden</label>
 			<label index="l_monitor_login_in_for_monitoring">Bitte einloggen, um Abos verwalten zu können.</label>
 			<label index="l_manage_subscription">Abonnement-Verwaltung</label>
-			<label index="l_monitor_event_unsubscribe_successful">Sie beobachten das Event &quot;%s&quot; nun nicht mehr.</label>
-			<label index="l_monitor_event_unsubscribe_error">Es gab Probleme, Sie als Beobachter vom Event &quot;%s&quot; abzumelden.</label>
-			<label index="l_monitor_event_unsubscribe_noevent">Sie können nicht als Beobachter abgemeldet werden, da der Event nicht mehr existiert.</label>
-			<label index="l_monitor_event_subscribe_successful">Sie beobachten nun das Event &quot;%s&quot;. Sie werden benachrichtigt, wenn sich etwas an dem Event verändert. Außerdem erhalten Sie eine Erinnerung kurz vor dem Ereignis</label>
-			<label index="l_monitor_event_subscribe_error">Es gab Probleme, Sie als Beobachter zum Event &quot;%s&quot; anzumelden</label>
-			<label index="l_monitor_event_subscribe_noevent">Sie können nicht als Beobachter angemeldet werden, da der Event nicht mehr existiert.</label>
+			<label index="l_monitor_event_unsubscribe_successful">Sie beobachten das Event &quot;%s&quot; nun nicht
+				mehr.</label>
+			<label index="l_monitor_event_unsubscribe_error">Es gab Probleme, Sie als Beobachter vom Event
+				&quot;%s&quot; abzumelden.</label>
+			<label index="l_monitor_event_unsubscribe_noevent">Sie können nicht als Beobachter abgemeldet werden,
+				da der Event nicht mehr existiert.</label>
+			<label index="l_monitor_event_subscribe_successful">Sie beobachten nun das Event &quot;%s&quot;. Sie
+				werden benachrichtigt, wenn sich etwas an dem Event verändert.
+				Außerdem erhalten Sie eine Erinnerung kurz vor dem Ereignis</label>
+			<label index="l_monitor_event_subscribe_error">Es gab Probleme, Sie als Beobachter zum Event
+				&quot;%s&quot; anzumelden</label>
+			<label index="l_monitor_event_subscribe_noevent">Sie können nicht als Beobachter angemeldet werden,
+				da der Event nicht mehr existiert.</label>
 			<label index="l_fe_user">Benutzer</label>
 			<label index="l_calendar_title">Titel</label>
 			<label index="l_calendar_owner">Besitzer</label>
 			<label index="l_calendar_activate_freeandbusy">Frei- und Besetztzeiten anzeigen</label>
-			<label index="l_calendar_freeandbusyuser">Benutzer, die ausschließlich Frei- und Besetztzeiten sehen dürfen</label>
+			<label index="l_calendar_freeandbusyuser">Benutzer, die ausschließlich Frei- und
+				Besetztzeiten sehen dürfen</label>
 			<label index="l_calendar_type">Typ</label>
 			<label index="l_calendar_type0">Normal</label>
 			<label index="l_calendar_exturl">Externe URL</label>
@@ -839,7 +896,9 @@
 			<label index="l_event_cal_organizer">Cal Organisator</label>
 			<label index="l_event_cal_location">Ortauswahl</label>
 			<label index="l_event_frequency">Frequenz</label>
-			<label index="l_event_edit_byday">Nach Wochentag (Eine Kombination von: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, oder &quot;all&quot; für alle)</label>
+			<label index="l_event_edit_byday">Nach Wochentag (Eine Kombination von:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, oder &quot;all&quot; für alle)</label>
 			<label index="l_event_edit_bymonthday">Nach Monatstag (z.B.: 1,2,30 or all)</label>
 			<label index="l_event_edit_bymonth">Nach Monat (z.B.: 1,2,3,4,12 or all)</label>
 			<label index="l_event_edit_until">Bis Datum (Format: yyyymmdd)</label>
@@ -931,34 +990,50 @@
 			<label index="l_confirm_location">Ort bestätigen</label>
 			<label index="l_confirm_organizer">Veranstalter bestätigen</label>
 			<label index="l_enter_email">E-Mail-Addresse angeben:</label>
-			<label index="l_captcha_text">Bitte geben Sie den Text ein, den Sie auf dem Bild sehen</label>
+			<label index="l_captcha_text">Bitte geben Sie den Text ein, den Sie auf dem Bild
+				sehen</label>
 			<label index="l_delete_event">Event löschen</label>
 			<label index="l_event_has_been_delete">Das Ereignis wurde gelöscht.</label>
 			<label index="l_event_has_been_restored">Das Ereignis wurde wiederhergestellt.</label>
-			<label index="l_event_has_been_hidden">Das Ereignis wurde versteckt und wird nicht auf der Webseite angezeigt.</label>
-			<label index="l_event_has_been_unhidden">Das vorher versteckte Ereignis ist nun wieder sichtbar und wird auf der Webseite angezeigt.</label>
-			<label index="l_wrong_split_symbol_msg">Trennzeichen für die Datumseingabe ist: \'###DATE_SPLIT_SYMBOL###\' !\n</label>
+			<label index="l_event_has_been_hidden">Das Ereignis wurde versteckt und wird nicht auf
+				der Webseite angezeigt.</label>
+			<label index="l_event_has_been_unhidden">Das vorher versteckte Ereignis ist nun wieder
+				sichtbar und wird auf der Webseite angezeigt.</label>
+			<label index="l_wrong_split_symbol_msg">Trennzeichen für die Datumseingabe ist:
+				\'###DATE_SPLIT_SYMBOL###\' !\n</label>
 			<label index="l_wrong_date">Ungültiges Datum!</label>
 			<label index="l_wrong_time">Ungültige Uhrzeit!</label>
 			<label index="l_is_in_past">Uhr liegt in der Vergangenheit!</label>
 			<label index="l_page">Seite</label>
 			<label index="l_page_of">Seite %s von %s</label>
 			<label index="l_search_found">Einträge gefunden</label>
-			<label index="l_monitor_start_thanks">Vielen Dank. Sie erhalten nun eine Email mit einem Bestätigungslink.</label>
-			<label index="l_monitor_stop_thanks">Vielen Dank. Sie erhalten nun eine Email mit einem Bestätigungslink.</label>
-			<label index="l_monitor_wrong_captcha">Leider waren die Buchstaben nicht korrekt. Bitte versuchen Sie es noch einmal.</label>
-			<label index="l_not_allowed_edit">Sie haben keine Berechtigung diesen Datensatz zu editieren: </label>
-			<label index="l_not_allowed_create">Sie haben keine Berechtigung diesen Datensatz anzulegen: </label>
+			<label index="l_monitor_start_thanks">Vielen Dank. Sie erhalten nun eine Email mit einem
+				Bestätigungslink.</label>
+			<label index="l_monitor_stop_thanks">Vielen Dank. Sie erhalten nun eine Email mit einem
+				Bestätigungslink.</label>
+			<label index="l_monitor_wrong_captcha">Leider waren die Buchstaben nicht korrekt. Bitte
+				versuchen Sie es noch einmal.</label>
+			<label index="l_not_allowed_edit">Sie haben keine Berechtigung diesen Datensatz zu
+				editieren: </label>
+			<label index="l_not_allowed_create">Sie haben keine Berechtigung diesen Datensatz
+				anzulegen: </label>
 			<label index="l_delete_image">Bild löschen</label>
 			<label index="l_image_upload">Bild hochladen</label>
 			<label index="l_delete_attachment">Anhang löschen</label>
 			<label index="l_attachment_upload">Anhang hochladen</label>
 			<label index="l_meeting_accept">Annehmen</label>
 			<label index="l_meeting_decline">Ablehnen</label>
-			<label index="l_meeting_accepted">Ihr Status für &quot;%s&quot; wurde erfolgreich auf &quot;angenommen&quot; geändert.</label>
-			<label index="l_meeting_declined">Ihr Status für &quot;%s&quot; wurde erfolgreich auf &quot;abgelehnt&quot; geändert.</label>
-			<label index="l_meeting_update_error">Es gab Probleme, Ihren Status für &quot;%s&quot; zu aktualisieren</label>
-			<label index="l_meeting_error">Wenn Sie diese Nachricht sehen, haben Sie sehr wahrscheinlich eine Einladung zu einer Veranstaltung/Meeting/Konferenz erhalten und einen entsprechenden Link ausgewählt. Leider wurden nicht alle Parameter übertragen. Bitte stellen Sie sicher, dass alle Parameter vorhanden sind.</label>
+			<label index="l_meeting_accepted">Ihr Status für &quot;%s&quot; wurde erfolgreich
+				auf &quot;angenommen&quot; geändert.</label>
+			<label index="l_meeting_declined">Ihr Status für &quot;%s&quot; wurde erfolgreich
+				auf &quot;abgelehnt&quot; geändert.</label>
+			<label index="l_meeting_update_error">Es gab Probleme, Ihren Status für &quot;%s&quot;
+				zu aktualisieren</label>
+			<label index="l_meeting_error">Wenn Sie diese Nachricht sehen, haben Sie sehr
+				wahrscheinlich eine Einladung zu einer
+				Veranstaltung/Meeting/Konferenz erhalten und einen entsprechenden
+				Link ausgewählt. Leider wurden nicht alle Parameter übertragen.
+				Bitte stellen Sie sicher, dass alle Parameter vorhanden sind.</label>
 			<label index="l_meeting_changestatus">Status aktualisieren</label>
 			<label index="l_required">(*) Pflichtfelder</label>
 			<label index="l_constrain_start_before_end">Start muss vor dem Ende liegen</label>
@@ -1081,7 +1156,8 @@
 			<label index="l_todo">Ting å gjøre</label>
 			<label index="l_unfinished">Ikke ferdig</label>
 			<label index="l_prefs_set">Dine preferanser har blitt satt.</label>
-			<label index="l_prefs_unset">Preferanser satt tilbake. Endringer vil vises neste gang siden lastes.</label>
+			<label index="l_prefs_unset">Preferanser satt tilbake. Endringer vil vises
+				neste gang siden lastes.</label>
 			<label index="l_unset_prefs">Sett tilbake perferanser:</label>
 			<label index="l_organizer">Organisator</label>
 			<label index="l_attendee">Deltager</label>
@@ -1092,7 +1168,8 @@
 			<label index="l_login">Logg inn</label>
 			<label index="l_invalid_login">Galt passord eller brukernavn.</label>
 			<label index="l_addupdate_cal">Legg til eller oppdater en kalender</label>
-			<label index="l_addupdate_desc">Legg til en kalender med å laste opp en ny fil. Oppdater ved å laste opp en fil med samme navn.</label>
+			<label index="l_addupdate_desc">Legg til en kalender med å laste opp en ny fil.
+				Oppdater ved å laste opp en fil med samme navn.</label>
 			<label index="l_delete_cal">Slett en kalender</label>
 			<label index="l_logout">Logg ut</label>
 			<label index="l_cal_file">Kalenderfil</label>
@@ -1109,7 +1186,8 @@
 			<label index="l_admin_subhead">Administrer dine kalendere fra din side</label>
 			<label index="l_prefs_subhead">Setter en cookie ved besøk på denne side</label>
 			<label index="l_rss_info">RSS informasjon</label>
-			<label index="l_rss_subhead">Basis &quot;RSS feeds&quot; tilgjengelig for kalenderene</label>
+			<label index="l_rss_subhead">Basis &quot;RSS feeds&quot; tilgjengelig for
+				kalenderene</label>
 			<label index="l_rss_notenabled">RSS er ikke påslått på denne side</label>
 			<label index="l_back">Tilbake</label>
 			<label index="l_next">Neste</label>
@@ -1148,14 +1226,19 @@
 			<label index="l_daysofweek_lang_saturday">Lørdag</label>
 			<label index="l_error_title">Feil!</label>
 			<label index="l_error_window">Det var en feil!</label>
-			<label index="l_error_calendar">Kalenderen &quot;%s&quot; ble prosessers når feilen skjedde.</label>
+			<label index="l_error_calendar">Kalenderen &quot;%s&quot; ble prosessers når
+				feilen skjedde.</label>
 			<label index="l_error_path">Kan ikke åpne stien: &quot;%s&quot;</label>
 			<label index="l_error_back">Bruk &quot;Tilbake&quot; knappen for å returnere.</label>
-			<label index="l_error_remotecal">Denne serveren blokkerer fjerne kalendere som ikke er godkjent.</label>
-			<label index="l_error_restrictedcal">Du har prøvd å få tilgang ti en kalender som har restriksjoner på denne server.</label>
-			<label index="l_error_invalidcal">Invalid kalenderfil. Vennligst prøv en annen kalender.</label>
+			<label index="l_error_remotecal">Denne serveren blokkerer fjerne kalendere som ikke
+				er godkjent.</label>
+			<label index="l_error_restrictedcal">Du har prøvd å få tilgang ti en kalender som har
+				restriksjoner på denne server.</label>
+			<label index="l_error_invalidcal">Invalid kalenderfil. Vennligst prøv en annen
+				kalender.</label>
 			<label index="l_error_cantopen">Kan ikke åpne kalender.</label>
-			<label index="l_error_cache">Kan ikke skrive til mellomlager. Sjekk konfigureringa.</label>
+			<label index="l_error_cache">Kan ikke skrive til mellomlager. Sjekk
+				konfigureringa.</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_monitoring">&lt;br /&gt;&lt;br /&gt;</label>
@@ -1273,7 +1356,8 @@
 			<label index="l_todo">Cose da fare</label>
 			<label index="l_unfinished">Incompleto</label>
 			<label index="l_prefs_set">Le tue preferenze sono state definite.</label>
-			<label index="l_prefs_unset">Preferenze rimosse. Le modifiche saranno attive al prossimo caricamento di pagina.</label>
+			<label index="l_prefs_unset">Preferenze rimosse. Le modifiche saranno attive al
+				prossimo caricamento di pagina.</label>
 			<label index="l_unset_prefs">Rimuovi preferenze:</label>
 			<label index="l_organizer">Organizzatore</label>
 			<label index="l_edit_organizer">Modifica Organizzatore</label>
@@ -1290,7 +1374,8 @@
 			<label index="l_login">Login</label>
 			<label index="l_invalid_login">Username o password errati</label>
 			<label index="l_addupdate_cal">Aggiungi o Modifica un Calendario</label>
-			<label index="l_addupdate_desc">Aggiungi un calendario caricando un nuovo file. Aggiorna un calendario caricando un file con lo stesso nome.</label>
+			<label index="l_addupdate_desc">Aggiungi un calendario caricando un nuovo file.
+				Aggiorna un calendario caricando un file con lo stesso nome.</label>
 			<label index="l_delete_cal">Elimina un Calendario</label>
 			<label index="l_logout">Esci</label>
 			<label index="l_cal_file">File calendario</label>
@@ -1475,7 +1560,8 @@
 			<label index="l_select_cal">Sélectionner votre calendrier par défaut :</label>
 			<label index="l_select_view">Sélectionner votre vue par défaut :</label>
 			<label index="l_select_time">Sélectionner votre temps de début par défaut :</label>
-			<label index="l_select_day">Sélectionner votre jour de début de semaine par défaut:</label>
+			<label index="l_select_day">Sélectionner votre jour de début de semaine par
+				défaut:</label>
 			<label index="l_select_style">Sélectionner votre style par défaut :</label>
 			<label index="l_set_prefs">Ajuster les préférences</label>
 			<label index="l_completed_date">Terminé le</label>
@@ -1491,7 +1577,8 @@
 			<label index="l_todo">A faire</label>
 			<label index="l_unfinished">Non terminé</label>
 			<label index="l_prefs_set">Vos préférences ont été ajustées.</label>
-			<label index="l_prefs_unset">Préférences non ajustées. Les modifications seront effectives au prochain chargement de page.</label>
+			<label index="l_prefs_unset">Préférences non ajustées. Les modifications seront
+				effectives au prochain chargement de page.</label>
 			<label index="l_unset_prefs">Préférences non ajustées :</label>
 			<label index="l_organizer">Organisateur</label>
 			<label index="l_delete_organizer">Suppression organiseur</label>
@@ -1506,7 +1593,9 @@
 			<label index="l_login">Connexion</label>
 			<label index="l_invalid_login">Mauvais identifiant ou mot de passe.</label>
 			<label index="l_addupdate_cal">Ajouter ou modifier un calendrier</label>
-			<label index="l_addupdate_desc">Ajouter un calendrier en transférant un nouveau fichier. Modifier un calendrier en transférant un fichier du même nom.</label>
+			<label index="l_addupdate_desc">Ajouter un calendrier en transférant un nouveau
+				fichier. Modifier un calendrier en transférant un fichier du même
+				nom.</label>
 			<label index="l_delete_cal">Supprimer un calendrier</label>
 			<label index="l_logout">Déconnexion</label>
 			<label index="l_cal_file">fichier calendrier</label>
@@ -1524,7 +1613,8 @@
 			<label index="l_admin_subhead">Gérez vos calendriers depuis cette page</label>
 			<label index="l_prefs_subhead">Met un cookie pour visiter ce site</label>
 			<label index="l_rss_info">Information RSS</label>
-			<label index="l_rss_subhead">Fils RSS de base disponibles pour chaque calendrier</label>
+			<label index="l_rss_subhead">Fils RSS de base disponibles pour chaque
+				calendrier</label>
 			<label index="l_rss_notenabled">RSS n'est pas actif sur ce site</label>
 			<label index="l_back">Retour</label>
 			<label index="l_next">Suivant</label>
@@ -1536,7 +1626,8 @@
 			<label index="l_event_view">Vue Evènement</label>
 			<label index="l_search_view">Recherche</label>
 			<label index="l_ics_view">ICS</label>
-			<label index="l_icslist_title">Liste des fichiers ics disponibles au téléchargement</label>
+			<label index="l_icslist_title">Liste des fichiers ics disponibles au
+				téléchargement</label>
 			<label index="l_list_view">Voir la liste</label>
 			<label index="format_recur_lang_delimiter">, </label>
 			<label index="l_format_recur_lang_yearly_single">an</label>
@@ -1570,26 +1661,41 @@
 			<label index="l_daysofweek_lang_saturday">Samedi</label>
 			<label index="l_error_title">Erreur !</label>
 			<label index="l_error_window">Il y a eu une erreur !</label>
-			<label index="l_error_calendar">Le calendrier &quot;%s&quot; était en cours de traitement lorsque cette erreur est survenue.</label>
+			<label index="l_error_calendar">Le calendrier &quot;%s&quot; était en cours de
+				traitement lorsque cette erreur est survenue.</label>
 			<label index="l_error_path">Impossible d'ouvrir le chemin: &quot;%s&quot;</label>
-			<label index="l_error_back">Utilisez le bouton &quot;Retour&quot; pour revenir.</label>
-			<label index="l_error_remotecal">Ce serveur bloque les calendriers distants qui n'ont pas été approuvés.</label>
-			<label index="l_error_restrictedcal">Vous avez tenté d'accéder a un calendrier en accès restreint sur ce serveur.</label>
-			<label index="l_error_invalidcal">Fichier calendrier invalide. Essayez un autre calendrier SVP.</label>
+			<label index="l_error_back">Utilisez le bouton &quot;Retour&quot; pour
+				revenir.</label>
+			<label index="l_error_remotecal">Ce serveur bloque les calendriers distants qui
+				n'ont pas été approuvés.</label>
+			<label index="l_error_restrictedcal">Vous avez tenté d'accéder a un calendrier en accès
+				restreint sur ce serveur.</label>
+			<label index="l_error_invalidcal">Fichier calendrier invalide. Essayez un autre
+				calendrier SVP.</label>
 			<label index="l_error_cantopen">Impossible d'ouvrir le calendrier.</label>
-			<label index="l_error_cache">Impossible d'écrire dans le répertoire du cache. Vérifiez votre configuration SVP.</label>
-			<label index="l_error_noCategory">Vous ne pouvez créer un évènement sans catégorie. Créez d'abord une catégorie SVP.</label>
+			<label index="l_error_cache">Impossible d'écrire dans le répertoire du cache.
+				Vérifiez votre configuration SVP.</label>
+			<label index="l_error_noCategory">Vous ne pouvez créer un évènement sans catégorie.
+				Créez d'abord une catégorie SVP.</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">S'inscrire a cet évènement ?</label>
 			<label index="l_monitor_event_logged_in_monitoring">Se désinscrire ?</label>
 			<label index="l_monitor_login_in_for_monitoring">Identifiez vous pour gérer les inscriptions.</label>
 			<label index="l_manage_subscription">Gérer les inscriptions</label>
-			<label index="l_monitor_event_unsubscribe_successful">Vous avez été désinscrit de l'évènement &quot;%s&quot;. vous ne recevrez plus les notifications liées a cet évènement.</label>
-			<label index="l_monitor_event_unsubscribe_error">Il y a eu un problème lors de la désinscription à l'évènement &quot;%s&quot;.</label>
-			<label index="l_monitor_event_unsubscribe_noevent">Il y a eu un problème lors de la désinscription à l'évènement parce que il n'existe plus.</label>
-			<label index="l_monitor_event_subscribe_successful">Vous avez été inscrit à l'évènement &quot;%s&quot;.  Vous recevrez des notifications lorsque l'évènement approchera ou qu'un détail important aura été modifié.</label>
-			<label index="l_monitor_event_subscribe_error">Il y a eu des problèmes en vous inscrivant a l'évènement &quot;%s&quot;.</label>
-			<label index="l_monitor_event_subscribe_noevent">Il y a eu un problème en vous inscrivant a l'évènement parce que il n'existe plus.</label>
+			<label index="l_monitor_event_unsubscribe_successful">Vous avez été désinscrit de l'évènement
+				&quot;%s&quot;. vous ne recevrez plus les notifications liées a cet
+				évènement.</label>
+			<label index="l_monitor_event_unsubscribe_error">Il y a eu un problème lors de la désinscription à
+				l'évènement &quot;%s&quot;.</label>
+			<label index="l_monitor_event_unsubscribe_noevent">Il y a eu un problème lors de la désinscription à
+				l'évènement parce que il n'existe plus.</label>
+			<label index="l_monitor_event_subscribe_successful">Vous avez été inscrit à l'évènement
+				&quot;%s&quot;. Vous recevrez des notifications lorsque l'évènement
+				approchera ou qu'un détail important aura été modifié.</label>
+			<label index="l_monitor_event_subscribe_error">Il y a eu des problèmes en vous inscrivant a
+				l'évènement &quot;%s&quot;.</label>
+			<label index="l_monitor_event_subscribe_noevent">Il y a eu un problème en vous inscrivant a
+				l'évènement parce que il n'existe plus.</label>
 			<label index="l_fe_user">Utilisateur</label>
 			<label index="l_calendar_title">Titre</label>
 			<label index="l_calendar_owner">Possesseur</label>
@@ -1647,7 +1753,8 @@
 			<label index="l_event_fe_cruser">Createur</label>
 			<label index="l_event_fe_crgroup">Groupe de créateurs</label>
 			<label index="l_event_notify">Prévenir lors d'un changement</label>
-			<label index="l_event_icslink">Récupérer cet évènement en tant qu'entrée de calendrier *.ics</label>
+			<label index="l_event_icslink">Récupérer cet évènement en tant qu'entrée de
+				calendrier *.ics</label>
 			<label index="l_event_image">Image</label>
 			<label index="l_event_attachment">Pièce attachée</label>
 			<label index="l_location_name">Nom</label>
@@ -1700,18 +1807,26 @@
 			<label index="l_delete_event">Supprimer l'évènement</label>
 			<label index="l_event_has_been_delete">L'évènement a été supprimé</label>
 			<label index="l_event_has_been_restored">L'évènement a été restauré</label>
-			<label index="l_event_has_been_hidden">L'évènement a été caché et ne sera pas montré en frontend</label>
-			<label index="l_event_has_been_unhidden">L'évènement anciennement caché a été activé et sera montré en frontend</label>
-			<label index="l_wrong_split_symbol_msg">Le symbole séparateur de date est : \'###DATE_SPLIT_SYMBOL###\' !\n</label>
+			<label index="l_event_has_been_hidden">L'évènement a été caché et ne sera pas montré en
+				frontend</label>
+			<label index="l_event_has_been_unhidden">L'évènement anciennement caché a été activé et
+				sera montré en frontend</label>
+			<label index="l_wrong_split_symbol_msg">Le symbole séparateur de date est :
+				\'###DATE_SPLIT_SYMBOL###\' !\n</label>
 			<label index="l_wrong_date">Mauvaise date !\n</label>
 			<label index="l_wrong_time">Mauvaise heure !\n</label>
 			<label index="l_is_in_past">est une date passée !\n</label>
 			<label index="l_page">Page</label>
 			<label index="l_page_of">Page %s de %s</label>
 			<label index="l_search_found">entrées trouvées</label>
-			<label index="l_monitor_start_thanks">Merci. Un email vient de vous être envoyé. Confirmez le suivi en cliquant sur le lien de confirmation situé dans ce mail.</label>
-			<label index="l_monitor_stop_thanks">Merci. Un email vient de vous être envoyé. Confirmez l'annulation du suivi en cliquant sur le lien de confirmation situé dans ce mail.</label>
-			<label index="l_monitor_wrong_captcha">Désolé, vous n'avez pas tapé les bonnes lettres. Essayez à nouveau.</label>
+			<label index="l_monitor_start_thanks">Merci. Un email vient de vous être envoyé.
+				Confirmez le suivi en cliquant sur le lien de confirmation situé
+				dans ce mail.</label>
+			<label index="l_monitor_stop_thanks">Merci. Un email vient de vous être envoyé.
+				Confirmez l'annulation du suivi en cliquant sur le lien de
+				confirmation situé dans ce mail.</label>
+			<label index="l_monitor_wrong_captcha">Désolé, vous n'avez pas tapé les bonnes lettres.
+				Essayez à nouveau.</label>
 			<label index="l_not_allowed_edit">Vous n'êtes pas autorisé a éditer cet élément </label>
 			<label index="l_not_allowed_create">Vous n'êtes pas autorisés a créer un </label>
 			<label index="l_delete_image">Supprimer l'image</label>
@@ -1793,7 +1908,8 @@
 			<label index="l_todo">Items por hacer</label>
 			<label index="l_unfinished">Sin terminar</label>
 			<label index="l_prefs_set">Sus preferencias han sido guardadas.</label>
-			<label index="l_prefs_unset">Preferencias borradas. Los cambios tomarán lugar en la próxima carga de página.</label>
+			<label index="l_prefs_unset">Preferencias borradas. Los cambios tomarán lugar
+				en la próxima carga de página.</label>
 			<label index="l_unset_prefs">Borrar preferencias:</label>
 			<label index="l_organizer">Organizador</label>
 			<label index="l_attendee">Atiende</label>
@@ -1804,12 +1920,14 @@
 			<label index="l_login">Accesar</label>
 			<label index="l_invalid_login">Usuario o clave erróneos.</label>
 			<label index="l_addupdate_cal">Agregar o Actualizar un Calendario</label>
-			<label index="l_addupdate_desc">Agregar un calendario cargando un archivo nuevo. Actualizar un calendario cargando un archivo del mismo nombre.</label>
+			<label index="l_addupdate_desc">Agregar un calendario cargando un archivo nuevo.
+				Actualizar un calendario cargando un archivo del mismo nombre.</label>
 			<label index="l_delete_cal">Borrar un Calendario</label>
 			<label index="l_logout">Salir</label>
 			<label index="l_cal_file">Archivo de Calendario</label>
 			<label index="l_php_error">Error de PHP</label>
-			<label index="l_upload_error_type">Solamente se pueden cargar archivos con extension &quot;.ics&quot;.</label>
+			<label index="l_upload_error_type">Solamente se pueden cargar archivos con extension
+				&quot;.ics&quot;.</label>
 			<label index="l_copy_error">Fallo al copiar el archivo</label>
 			<label index="l_delete_error">Fallo al borrar el archivo</label>
 			<label index="l_delete_success">fue borrado con éxito.</label>
@@ -1819,9 +1937,11 @@
 			<label index="l_all_cal_comb_lang">Todos Combinados</label>
 			<label index="l_legend">Leyenda</label>
 			<label index="l_admin_subhead">Administre sus calendarios desde esta página</label>
-			<label index="l_prefs_subhead">Guarda un &quot;cookie&quot; por visitar este sitio</label>
+			<label index="l_prefs_subhead">Guarda un &quot;cookie&quot; por visitar este
+				sitio</label>
 			<label index="l_rss_info">Información RSS</label>
-			<label index="l_rss_subhead">Alimentaciones RSS básicas están disponibles para cada calendario</label>
+			<label index="l_rss_subhead">Alimentaciones RSS básicas están disponibles para
+				cada calendario</label>
 			<label index="l_rss_notenabled">RSS no está habilitado en este sitio</label>
 			<label index="l_back">Atrás</label>
 			<label index="l_next">Siguiente</label>
@@ -1860,15 +1980,22 @@
 			<label index="l_daysofweek_lang_saturday">Sábado</label>
 			<label index="l_error_title">¡Error!</label>
 			<label index="l_error_window">¡Hubo un error!</label>
-			<label index="l_error_calendar">El calendario &quot;%s&quot; estaba siendo procesado cuando este error occurrió.</label>
+			<label index="l_error_calendar">El calendario &quot;%s&quot; estaba siendo
+				procesado cuando este error occurrió.</label>
 			<label index="l_error_path">No se puede abrir la ruta: &quot;%s&quot;</label>
-			<label index="l_error_back">Por favor utilice el botón &quot;Atrás&quot; para volver.</label>
-			<label index="l_error_remotecal">Este servidor bloquea calendarios remotos que no han sido aprovados.</label>
-			<label index="l_error_restrictedcal">Usted ha intentado accesar un calendario que está restringido en este servidor.</label>
-			<label index="l_error_invalidcal">Archivo de calendario inválido. Por favor intente con otro calendario.</label>
+			<label index="l_error_back">Por favor utilice el botón &quot;Atrás&quot; para
+				volver.</label>
+			<label index="l_error_remotecal">Este servidor bloquea calendarios remotos que no
+				han sido aprovados.</label>
+			<label index="l_error_restrictedcal">Usted ha intentado accesar un calendario que está
+				restringido en este servidor.</label>
+			<label index="l_error_invalidcal">Archivo de calendario inválido. Por favor intente
+				con otro calendario.</label>
 			<label index="l_error_cantopen">Imposible abrir el calendario.</label>
-			<label index="l_error_cache">Imposible escribir al directorio de caché. Por favor revise su configuración.</label>
-			<label index="l_error_noCategory">Usted no puede crear un evento sin categoría. Por favor cree una categoría primero</label>
+			<label index="l_error_cache">Imposible escribir al directorio de caché. Por
+				favor revise su configuración.</label>
+			<label index="l_error_noCategory">Usted no puede crear un evento sin categoría. Por
+				favor cree una categoría primero</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">¿Inscribirse al evento?</label>
 			<label index="l_monitor_event_logged_in_monitoring">¿Desinscribirse?</label>
@@ -1891,7 +2018,9 @@
 			<label index="l_event_cal_organizer">Organizador de Cal</label>
 			<label index="l_event_cal_location">Ubicación de Cal</label>
 			<label index="l_event_frequency">Frecuencia</label>
-			<label index="l_event_edit_byday">Por Día (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="l_event_edit_byday">Por Día (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="l_event_edit_bymonthday">Por Día del Mes (e.g.: 1, 2, 30 o todos)</label>
 			<label index="l_event_edit_bymonth">Por Mes (e.g.: 1, 2, 3, 4, 12 o todos)</label>
 			<label index="l_event_edit_until">Hasta la Fecha (format: aaaammdd)</label>
@@ -2015,7 +2144,8 @@
 			<label index="l_todo">To do items</label>
 			<label index="l_unfinished">Niet gereed</label>
 			<label index="l_prefs_set">Uw voorkeuren zijn ingesteld</label>
-			<label index="l_prefs_unset">Voorkeuren hersteld. Wijzigingen vinden plaats bij het herladen van de pagina.</label>
+			<label index="l_prefs_unset">Voorkeuren hersteld. Wijzigingen vinden plaats bij
+				het herladen van de pagina.</label>
 			<label index="l_unset_prefs">Herstel voorkeuren:</label>
 			<label index="l_organizer">Organisator</label>
 			<label index="l_attendee">Deelnemer</label>
@@ -2026,7 +2156,9 @@
 			<label index="l_login">Log in</label>
 			<label index="l_invalid_login">Foutieve gebruikersnaam of wachtwoord</label>
 			<label index="l_addupdate_cal">Toevoegen of actualiseren van kalender</label>
-			<label index="l_addupdate_desc">Een kalender toevoegen door een nieuw bestand te uploaden. Een kalender actualiseren door een nieuw bestand te uploaden.</label>
+			<label index="l_addupdate_desc">Een kalender toevoegen door een nieuw bestand te
+				uploaden. Een kalender actualiseren door een nieuw bestand te
+				uploaden.</label>
 			<label index="l_delete_cal">Een kalender verwijderen</label>
 			<label index="l_logout">Log uit</label>
 			<label index="l_cal_file">Kalender bestand</label>
@@ -2082,14 +2214,20 @@
 			<label index="l_daysofweek_lang_saturday">zaterdag</label>
 			<label index="l_error_title">Fout!</label>
 			<label index="l_error_window">Er vond een fout plaats!</label>
-			<label index="l_error_calendar">De kalender &quot;%s&quot; werd verwerkt toen deze fout plaatsvond.</label>
+			<label index="l_error_calendar">De kalender &quot;%s&quot; werd verwerkt toen deze
+				fout plaatsvond.</label>
 			<label index="l_error_path">Kan het pad: &quot;%s&quot; niet openen.</label>
-			<label index="l_error_back">Gebruik aub de &quot;Terug&quot; knop om terug te gaan</label>
-			<label index="l_error_remotecal">Deze server blokkeert agenda's op afstand die niet zijn goedgekeurd.</label>
-			<label index="l_error_restrictedcal">U probeerde toegang tot een kalender te krijgen die beperkt toegankelijk is.</label>
-			<label index="l_error_invalidcal">Ongeldig kalender bestand. Probeer aub een andere kalender.</label>
+			<label index="l_error_back">Gebruik aub de &quot;Terug&quot; knop om terug te
+				gaan</label>
+			<label index="l_error_remotecal">Deze server blokkeert agenda's op afstand die niet
+				zijn goedgekeurd.</label>
+			<label index="l_error_restrictedcal">U probeerde toegang tot een kalender te krijgen
+				die beperkt toegankelijk is.</label>
+			<label index="l_error_invalidcal">Ongeldig kalender bestand. Probeer aub een andere
+				kalender.</label>
 			<label index="l_error_cantopen">Kan kalender niet openen.</label>
-			<label index="l_error_cache">Kan niet schrijven naar cache map. Controleer aub uw configuratie.</label>
+			<label index="l_error_cache">Kan niet schrijven naar cache map. Controleer aub
+				uw configuratie.</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_monitoring">&lt;br /&gt;&lt;br /&gt;</label>
@@ -2211,7 +2349,8 @@
 			<label index="l_todo">Rzeczy do zrobienia</label>
 			<label index="l_unfinished">Nieskończone</label>
 			<label index="l_prefs_set">Twoje ustawienia zostały zapisane.</label>
-			<label index="l_prefs_unset">Ustawienia nie zapisane. Zmiany zostaną wprowadzone przy następnym przeładowaniu strony.</label>
+			<label index="l_prefs_unset">Ustawienia nie zapisane. Zmiany zostaną
+				wprowadzone przy następnym przeładowaniu strony.</label>
 			<label index="l_unset_prefs">Brak ustawień dla:</label>
 			<label index="l_organizer">Organizator</label>
 			<label index="l_attendee">Uczestnicy</label>
@@ -2222,7 +2361,8 @@
 			<label index="l_login">Login</label>
 			<label index="l_invalid_login">Złe hasło lub użytkownik.</label>
 			<label index="l_addupdate_cal">Dodaj lub uaktualnij kalendarz</label>
-			<label index="l_addupdate_desc">Dodaj kalendarz przez załadowanie nowego pliku. Uaktualnij kalendarz przez załadowanie pliku z taką samą nazwą.</label>
+			<label index="l_addupdate_desc">Dodaj kalendarz przez załadowanie nowego pliku.
+				Uaktualnij kalendarz przez załadowanie pliku z taką samą nazwą.</label>
 			<label index="l_delete_cal">Usuń kalendarz</label>
 			<label index="l_logout">Wyloguj</label>
 			<label index="l_cal_file">Plik kalendarza</label>
@@ -2239,9 +2379,11 @@
 			<label index="l_all_cal_comb_lang">Wszystkie razem</label>
 			<label index="l_legend">Legenda</label>
 			<label index="l_admin_subhead">Zarządzaj swomi kalendarzami z tej stron</label>
-			<label index="l_prefs_subhead">Ustaw ciasteczko, żeby zaznaczyć, że odwiedziłeś tą stronę</label>
+			<label index="l_prefs_subhead">Ustaw ciasteczko, żeby zaznaczyć, że odwiedziłeś
+				tą stronę</label>
 			<label index="l_rss_info">Kanał RSS</label>
-			<label index="l_rss_subhead">Podstawowy kanał RSS dostępny dla każdego z kalendarzy</label>
+			<label index="l_rss_subhead">Podstawowy kanał RSS dostępny dla każdego z
+				kalendarzy</label>
 			<label index="l_rss_notenabled">RSS nie jest włączone na tej stronie</label>
 			<label index="l_back">Wstecz</label>
 			<label index="l_next">Następny</label>
@@ -2287,15 +2429,21 @@
 			<label index="l_daysofweek_lang_saturday">Sobota</label>
 			<label index="l_error_title">Błąd!</label>
 			<label index="l_error_window">Pojawił się bład!</label>
-			<label index="l_error_calendar">Kalendarz &quot;%s&quot; był przetwarzany, kiedy pojawił się następujący błąd.</label>
+			<label index="l_error_calendar">Kalendarz &quot;%s&quot; był przetwarzany, kiedy
+				pojawił się następujący błąd.</label>
 			<label index="l_error_path">Nie można otworzyć ścieżki: &quot;%s&quot;</label>
-			<label index="l_error_back">Proszę użyć przycisku &quot;Wstecz&quot;, żeby powrócić.</label>
-			<label index="l_error_remotecal">Serwer blokuje zdalne kalendarze, które nie zostały zaakceptowane.</label>
-			<label index="l_error_restrictedcal">Próbujesz uzyskać dostęp do kalendarza, który jest chroniony na tym serwerze.</label>
+			<label index="l_error_back">Proszę użyć przycisku &quot;Wstecz&quot;, żeby
+				powrócić.</label>
+			<label index="l_error_remotecal">Serwer blokuje zdalne kalendarze, które nie
+				zostały zaakceptowane.</label>
+			<label index="l_error_restrictedcal">Próbujesz uzyskać dostęp do kalendarza, który jest
+				chroniony na tym serwerze.</label>
 			<label index="l_error_invalidcal">Blędny plik kalendarza. Wybierz inny kalendarz.</label>
 			<label index="l_error_cantopen">Nie mozna otworzyć kalendarza.</label>
-			<label index="l_error_cache">Nie można zapisywać do katalogu 'cache'. Sprawdź swoją konfigurację.</label>
-			<label index="l_error_noCategory">Nie możesz stworzyć zdarzenia bez kategorii. Stwórz najpierw kategorię.</label>
+			<label index="l_error_cache">Nie można zapisywać do katalogu 'cache'. Sprawdź
+				swoją konfigurację.</label>
+			<label index="l_error_noCategory">Nie możesz stworzyć zdarzenia bez kategorii.
+				Stwórz najpierw kategorię.</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">Zapisać na to wydarzenie?</label>
 			<label index="l_monitor_event_logged_in_monitoring">Wypisać?</label>
 			<label index="l_monitor_login_in_for_monitoring">Zaloguj się, żeby zarządzać subskrypcjami.</label>
@@ -2325,7 +2473,9 @@
 			<label index="l_event_cal_organizer">Organizator (cal)</label>
 			<label index="l_event_cal_location">Lokalizacja (cal)</label>
 			<label index="l_event_frequency">Częstotliwość</label>
-			<label index="l_event_edit_byday">Określona dniem tygodnia (kombinacja &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="l_event_edit_byday">Określona dniem tygodnia (kombinacja
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="l_event_edit_bymonthday">Określona dniem miesiąca (np.: 1,2,30 lub all)</label>
 			<label index="l_event_edit_bymonth">Określona miesiącem (np.: 1,2,3,4,12 lub all)</label>
 			<label index="l_event_edit_until">Do daty</label>
@@ -2387,9 +2537,12 @@
 			<label index="l_delete_event">Skasuj wydarzenie</label>
 			<label index="l_event_has_been_delete">Wydarzenie zostało skasowane</label>
 			<label index="l_event_has_been_restored">Wydarzenie zostało odtworzone</label>
-			<label index="l_event_has_been_hidden">To wydarzenie zostało ukryte i nie będzie pokazywane na witrynie</label>
-			<label index="l_event_has_been_unhidden">Poprzednio ukryte wydarzenia zostały teraz odsłonięte i będą pokazywane na witrynie</label>
-			<label index="l_wrong_split_symbol_msg">Rozdzielnikiem daty jest: \'###DATE_SPLIT_SYMBOL###\' !\n</label>
+			<label index="l_event_has_been_hidden">To wydarzenie zostało ukryte i nie będzie
+				pokazywane na witrynie</label>
+			<label index="l_event_has_been_unhidden">Poprzednio ukryte wydarzenia zostały teraz
+				odsłonięte i będą pokazywane na witrynie</label>
+			<label index="l_wrong_split_symbol_msg">Rozdzielnikiem daty jest:
+				\'###DATE_SPLIT_SYMBOL###\' !\n</label>
 			<label index="l_wrong_date">Błędna data!\n</label>
 			<label index="l_wrong_time">Błędny czas!\n</label>
 			<label index="l_is_in_past">jest czasem w przeszłości!\n</label>
@@ -2404,9 +2557,14 @@
 			<label index="l_organizer_countryzone">Województwo</label>
 			<label index="l_organizer_country">Kraj</label>
 			<label index="l_search_found">wpisów znalezionych</label>
-			<label index="l_monitor_start_thanks">Dziękujemy. Został do Ciebie wysłany email. Potwierdź, że chcesz monitorować wydarzenie przez kliknięcie w odsyłacz, który znajduje się w tym emailu.</label>
-			<label index="l_monitor_stop_thanks">Dziękujemy. Został do Ciebie wysłany email. Potwierdź, że chcesz przestać monitorować wydarzenie przez kliknięcie w odsyłacz, który znajduje się w tym emailu.</label>
-			<label index="l_monitor_wrong_captcha">Niestety, ale wpisałeś niepoprawne litery z obrazka.</label>
+			<label index="l_monitor_start_thanks">Dziękujemy. Został do Ciebie wysłany email.
+				Potwierdź, że chcesz monitorować wydarzenie przez kliknięcie w
+				odsyłacz, który znajduje się w tym emailu.</label>
+			<label index="l_monitor_stop_thanks">Dziękujemy. Został do Ciebie wysłany email.
+				Potwierdź, że chcesz przestać monitorować wydarzenie przez
+				kliknięcie w odsyłacz, który znajduje się w tym emailu.</label>
+			<label index="l_monitor_wrong_captcha">Niestety, ale wpisałeś niepoprawne litery z
+				obrazka.</label>
 		</languageKey>
 		<languageKey index="si" type="array">
 			<label index="l_day">Dan</label>
@@ -2483,7 +2641,8 @@
 			<label index="l_todo">Naloge</label>
 			<label index="l_unfinished">Nekončano</label>
 			<label index="l_prefs_set">Nastavitve so shranjene.</label>
-			<label index="l_prefs_unset">Nastavitve so shranjene. Spremembe bodo vidne na naslednji strani.</label>
+			<label index="l_prefs_unset">Nastavitve so shranjene. Spremembe bodo vidne na
+				naslednji strani.</label>
 			<label index="l_unset_prefs">Spremenjene:</label>
 			<label index="l_organizer">Organizator</label>
 			<label index="l_attendee">Prisotni</label>
@@ -2494,7 +2653,8 @@
 			<label index="l_login">Prijava</label>
 			<label index="l_invalid_login">Napačno uporabniško ime ali geslo.</label>
 			<label index="l_addupdate_cal">Dodaj ali popravi koledar</label>
-			<label index="l_addupdate_desc">Dodaj koledar s prenosom nove datoteke. Popravi koledar s prenosom datoteke z istim imenom.</label>
+			<label index="l_addupdate_desc">Dodaj koledar s prenosom nove datoteke. Popravi
+				koledar s prenosom datoteke z istim imenom.</label>
 			<label index="l_delete_cal">Izbriši koledar</label>
 			<label index="l_logout">Odjava</label>
 			<label index="l_cal_file">Datoteka koledarja</label>
@@ -2550,14 +2710,18 @@
 			<label index="l_daysofweek_lang_saturday">Sobota</label>
 			<label index="l_error_title">Napaka!</label>
 			<label index="l_error_window">Prišlo je do napake!</label>
-			<label index="l_error_calendar">Napaka je prišla med obdelovanjem koledarja &quot;%s&quot;.</label>
+			<label index="l_error_calendar">Napaka je prišla med obdelovanjem koledarja
+				&quot;%s&quot;.</label>
 			<label index="l_error_path">Ne morem dostopati do poti: &quot;%s&quot;</label>
 			<label index="l_error_back">Za vrnitev brskalniku kliknite Nazaj (Back).</label>
 			<label index="l_error_remotecal">Ta strežnik blokira koledarje, ki niso odobreni.</label>
-			<label index="l_error_restrictedcal">Dostopati želite do koledarja, ki ga lahko uporablja le strežnik.</label>
-			<label index="l_error_invalidcal">Napačna datoteka koledarja. Prosim poizkusite z drugim koledajem.</label>
+			<label index="l_error_restrictedcal">Dostopati želite do koledarja, ki ga lahko
+				uporablja le strežnik.</label>
+			<label index="l_error_invalidcal">Napačna datoteka koledarja. Prosim poizkusite z
+				drugim koledajem.</label>
 			<label index="l_error_cantopen">Ne morem odpreti koledarja.</label>
-			<label index="l_error_cache">Ne morem pisati v začasni direktorij. Preverite nastavitve.</label>
+			<label index="l_error_cache">Ne morem pisati v začasni direktorij. Preverite
+				nastavitve.</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_monitoring">&lt;br /&gt;&lt;br /&gt;</label>
@@ -2667,7 +2831,8 @@
 			<label index="l_todo">Tehtävät</label>
 			<label index="l_unfinished">Viimeistelemättömät</label>
 			<label index="l_prefs_set">Asetuksesi on tallennettu.</label>
-			<label index="l_prefs_unset">Asetuksia ei talletettu. Muutokset tulevat voimaan seuraavalla selaimen päivitystoiminnalla.</label>
+			<label index="l_prefs_unset">Asetuksia ei talletettu. Muutokset tulevat voimaan
+				seuraavalla selaimen päivitystoiminnalla.</label>
 			<label index="l_unset_prefs">Tallentamattomat asetukset:</label>
 			<label index="l_organizer">Organisaattori</label>
 			<label index="l_attendee">Osallistuja</label>
@@ -2678,7 +2843,8 @@
 			<label index="l_login">Kirjaudu sisään</label>
 			<label index="l_invalid_login">Väärä käyttäjänimi tai salasana.</label>
 			<label index="l_addupdate_cal">Lisää tai päivitä kalenteri</label>
-			<label index="l_addupdate_desc">Lisää kalenteri viemällä uusi tiedosto. Päivitä kalenteri viemällä jo olemassaolevan niminen tiedosto.</label>
+			<label index="l_addupdate_desc">Lisää kalenteri viemällä uusi tiedosto. Päivitä
+				kalenteri viemällä jo olemassaolevan niminen tiedosto.</label>
 			<label index="l_delete_cal">Poista kalenteri</label>
 			<label index="l_logout">Kirjaudu ulos</label>
 			<label index="l_cal_file">Kalenteritiedosto</label>
@@ -2737,15 +2903,22 @@
 			<label index="l_daysofweek_lang_saturday">lauantai</label>
 			<label index="l_error_title">Virhe!</label>
 			<label index="l_error_window">Virhe!</label>
-			<label index="l_error_calendar">Kalenteri &quot;%s&quot; oli prosessoitavana virheen ilmetessä.</label>
+			<label index="l_error_calendar">Kalenteri &quot;%s&quot; oli prosessoitavana
+				virheen ilmetessä.</label>
 			<label index="l_error_path">Ei voida avata polkua: &quot;%s&quot;</label>
-			<label index="l_error_back">Ole hyvä ja käytä selaime paluu toimintoa palataksesi</label>
-			<label index="l_error_remotecal">Tämä serveri poistaa etäkalenterit, joita ei ole hyväksyttä.</label>
-			<label index="l_error_restrictedcal">Olet yrittänyt katsoa kalenteria, jolla on rajattu käyttäjäryhmä.</label>
-			<label index="l_error_invalidcal">Epäkelpo kalenteritiedosto. Ole hyvä ja yritä toista kalenteria.</label>
+			<label index="l_error_back">Ole hyvä ja käytä selaime paluu toimintoa
+				palataksesi</label>
+			<label index="l_error_remotecal">Tämä serveri poistaa etäkalenterit, joita ei ole
+				hyväksyttä.</label>
+			<label index="l_error_restrictedcal">Olet yrittänyt katsoa kalenteria, jolla on rajattu
+				käyttäjäryhmä.</label>
+			<label index="l_error_invalidcal">Epäkelpo kalenteritiedosto. Ole hyvä ja yritä
+				toista kalenteria.</label>
 			<label index="l_error_cantopen">Kalenteria ei voida avata.</label>
-			<label index="l_error_cache">Ei voida kirjoittaa välimuistikansioon. Ole hyvä ja tarkasta asetukset.</label>
-			<label index="l_error_noCategory">Et voi luoda tapahtumaa ilman kategorioita. Luo kategoria ensin</label>
+			<label index="l_error_cache">Ei voida kirjoittaa välimuistikansioon. Ole hyvä
+				ja tarkasta asetukset.</label>
+			<label index="l_error_noCategory">Et voi luoda tapahtumaa ilman kategorioita. Luo
+				kategoria ensin</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">Ilmoittaudu tapahtumaan?</label>
 			<label index="l_monitor_event_logged_in_monitoring">Peru ilmoittautuminen?</label>
@@ -2768,7 +2941,9 @@
 			<label index="l_event_cal_organizer">Kalenteriorganisaattori</label>
 			<label index="l_event_cal_location">Kalenterisijainti</label>
 			<label index="l_event_frequency">Taajuus</label>
-			<label index="l_event_edit_byday">Viikonpäivän mukaan (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="l_event_edit_byday">Viikonpäivän mukaan (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="l_event_edit_bymonthday">Kuukaden päivän mukaan (esim.: 1,2,30 tai kaikki)</label>
 			<label index="l_event_edit_bymonth">Kuukauden mukaan (esim.: 1,2,3,4,12 tai kaikki)</label>
 			<label index="l_event_edit_until">Asti pvm (muoto: vvvvkkpp)</label>
@@ -2954,9 +3129,11 @@
 			<label index="l_daysofweek_lang_saturday">laugardagur</label>
 			<label index="l_error_title">Villa!</label>
 			<label index="l_error_window">Það kom upp villa!</label>
-			<label index="l_error_calendar">Dagatalið &quot;%s&quot; var í vinnslu þegar villan kom upp.</label>
+			<label index="l_error_calendar">Dagatalið &quot;%s&quot; var í vinnslu þegar
+				villan kom upp.</label>
 			<label index="l_error_path">Ekki tókst að opna slóðina: &quot;%s&quot;</label>
-			<label index="l_error_back">Vinsamlegast notið &quot;Til baka&quot; til að fara til baka</label>
+			<label index="l_error_back">Vinsamlegast notið &quot;Til baka&quot; til að
+				fara til baka</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">Fylgjast með þessum viðburði?</label>
 			<label index="l_monitor_event_logged_in_monitoring">Hætta að fylgjast með þessum viðburði?</label>
 			<label index="l_calendar_title">Heiti</label>
@@ -3071,9 +3248,11 @@
 			<label index="l_delete_event">Eyða viðburði</label>
 			<label index="l_event_has_been_delete">Þessum viðburði hefur verið eytt</label>
 			<label index="l_event_has_been_restored">Þessi viðburður hefur verið endurheimtur</label>
-			<label index="l_event_has_been_hidden">Þessi viðburður hefur verið falinn og mun ekki birtast framhlið</label>
+			<label index="l_event_has_been_hidden">Þessi viðburður hefur verið falinn og mun ekki
+				birtast framhlið</label>
 			<label index="l_event_has_been_unhidden">Þessi atburður er ekki lengur falinn á framhlið</label>
-			<label index="l_wrong_split_symbol_msg">Til að skilja á milli dags, mánaðar og árs skal nota: \'###DATE_SPLIT_SYMBOL###\' !\n</label>
+			<label index="l_wrong_split_symbol_msg">Til að skilja á milli dags, mánaðar og árs skal
+				nota: \'###DATE_SPLIT_SYMBOL###\' !\n</label>
 			<label index="l_wrong_date">Röng dagsetning!</label>
 			<label index="l_wrong_time">Rangur tími!</label>
 			<label index="l_is_in_past">er liðin dagsetning!</label>
@@ -3846,9 +4025,14 @@
 			<label index="l_location_countryzone">State/Province</label>
 			<label index="l_location_country">Country</label>
 			<label index="l_search_found">entries found</label>
-			<label index="l_monitor_start_thanks">Thank you. An email has been sent to you. Please confirm the monitoring by clicking on the confirm link inside the email.</label>
-			<label index="l_monitor_stop_thanks">Thank you. An email has been sent to you. Please confirm the monitoring stop by clicking on the confirm link inside the email.</label>
-			<label index="l_monitor_wrong_captcha">Sorry, but you didn't type in the correct letters. Please try again.</label>
+			<label index="l_monitor_start_thanks">Thank you. An email has been sent to you. Please
+				confirm the monitoring by clicking on the confirm link inside the
+				email.</label>
+			<label index="l_monitor_stop_thanks">Thank you. An email has been sent to you. Please
+				confirm the monitoring stop by clicking on the confirm link inside
+				the email.</label>
+			<label index="l_monitor_wrong_captcha">Sorry, but you didn't type in the correct letters.
+				Please try again.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="l_day">Day</label>
@@ -3941,7 +4125,8 @@
 			<label index="l_todo">To do items</label>
 			<label index="l_unfinished">Unfinished</label>
 			<label index="l_prefs_set">Your preferences have been set.</label>
-			<label index="l_prefs_unset">Preferences unset. Changes will take place next page load.</label>
+			<label index="l_prefs_unset">Preferences unset. Changes will take place next
+				page load.</label>
 			<label index="l_unset_prefs">Unset preferences:</label>
 			<label index="l_organizer">Organizer</label>
 			<label index="l_edit_organizer">Edit Organizer</label>
@@ -3958,7 +4143,8 @@
 			<label index="l_login">Login</label>
 			<label index="l_invalid_login">Wrong username or password.</label>
 			<label index="l_addupdate_cal">Add or Update a Calendar</label>
-			<label index="l_addupdate_desc">Add a calendar by uploading a new file. Update a calendar by uploading a file of the same name.</label>
+			<label index="l_addupdate_desc">Add a calendar by uploading a new file. Update a
+				calendar by uploading a file of the same name.</label>
 			<label index="l_delete_cal">Delete a Calendar</label>
 			<label index="l_logout">Logout</label>
 			<label index="l_cal_file">Calendar File</label>
@@ -4024,26 +4210,40 @@
 			<label index="l_daysofweek_lang_saturday">Saturday</label>
 			<label index="l_error_title">Error!</label>
 			<label index="l_error_window">There was an error!</label>
-			<label index="l_error_calendar">The calendar &quot;%s&quot; was being processed when this error occurred.</label>
+			<label index="l_error_calendar">The calendar &quot;%s&quot; was being processed
+				when this error occurred.</label>
 			<label index="l_error_path">Unable to open the path: &quot;%s&quot;</label>
 			<label index="l_error_back">Please use the &quot;Back&quot; button to return.</label>
-			<label index="l_error_remotecal">This server blocks remote calendars which have not been approved.</label>
-			<label index="l_error_restrictedcal">You have tried to access a calendar that is restricted on this server.</label>
-			<label index="l_error_invalidcal">Invalid calendar file. Please try a different calendar.</label>
+			<label index="l_error_remotecal">This server blocks remote calendars which have not
+				been approved.</label>
+			<label index="l_error_restrictedcal">You have tried to access a calendar that is
+				restricted on this server.</label>
+			<label index="l_error_invalidcal">Invalid calendar file. Please try a different
+				calendar.</label>
 			<label index="l_error_cantopen">Unable to open calendar.</label>
-			<label index="l_error_cache">Unable to write to cache directory. Please check your config.</label>
-			<label index="l_error_noCategory">You can not create an event without a category. Please create a category first</label>
+			<label index="l_error_cache">Unable to write to cache directory. Please check
+				your config.</label>
+			<label index="l_error_noCategory">You can not create an event without a category.
+				Please create a category first</label>
 			<label index="l_monitor_event_not_logged_in">&lt;br /&gt;&lt;br /&gt;</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">Subscribe to this event?</label>
 			<label index="l_monitor_event_logged_in_monitoring">Unsubscribe?</label>
 			<label index="l_monitor_login_in_for_monitoring">Please log in to manage your subscriptions.</label>
 			<label index="l_manage_subscription">Manage your subscriptions</label>
-			<label index="l_monitor_event_unsubscribe_successful">You have been unsubscribed from the event &quot;%s&quot;. You will no longer receive notifications about this event.</label>
-			<label index="l_monitor_event_unsubscribe_error">There were problems unsubscribing you from the event &quot;%s&quot;.</label>
-			<label index="l_monitor_event_unsubscribe_noevent">The event you are trying to subscribe does not exist anymore.</label>
-			<label index="l_monitor_event_subscribe_successful">You have been subscribed to the event &quot;%s&quot;.  You will receive notifications when the event approaches or if any important details are changed.</label>
-			<label index="l_monitor_event_subscribe_error">There were problems subscribing you to the event &quot;%s&quot;.</label>
-			<label index="l_monitor_event_subscribe_noevent">The event you are trying to subscribe does not exist anymore.</label>
+			<label index="l_monitor_event_unsubscribe_successful">You have been unsubscribed from the event
+				&quot;%s&quot;. You will no longer receive notifications about this
+				event.</label>
+			<label index="l_monitor_event_unsubscribe_error">There were problems unsubscribing you from the
+				event &quot;%s&quot;.</label>
+			<label index="l_monitor_event_unsubscribe_noevent">The event you are trying to subscribe does not
+				exist anymore.</label>
+			<label index="l_monitor_event_subscribe_successful">You have been subscribed to the event
+				&quot;%s&quot;. You will receive notifications when the event
+				approaches or if any important details are changed.</label>
+			<label index="l_monitor_event_subscribe_error">There were problems subscribing you to the event
+				&quot;%s&quot;.</label>
+			<label index="l_monitor_event_subscribe_noevent">The event you are trying to subscribe does not
+				exist anymore.</label>
 			<label index="l_fe_user">User</label>
 			<label index="l_calendar_title">Title</label>
 			<label index="l_calendar_owner">Owner</label>
@@ -4165,18 +4365,26 @@
 			<label index="l_delete_event">Delete Event</label>
 			<label index="l_event_has_been_delete">The event has been deleted</label>
 			<label index="l_event_has_been_restored">The event has been restored</label>
-			<label index="l_event_has_been_hidden">The event has been hidden and will not be shown in the frontend</label>
-			<label index="l_event_has_been_unhidden">The previouisly hidden event has now been unhidden and will be shown in the frontend</label>
-			<label index="l_wrong_split_symbol_msg">Date split symbol is: \'###DATE_SPLIT_SYMBOL###\' !\n</label>
+			<label index="l_event_has_been_hidden">The event has been hidden and will not be shown in
+				the frontend</label>
+			<label index="l_event_has_been_unhidden">The previouisly hidden event has now been unhidden
+				and will be shown in the frontend</label>
+			<label index="l_wrong_split_symbol_msg">Date split symbol is: \'###DATE_SPLIT_SYMBOL###\'
+				!\n</label>
 			<label index="l_wrong_date">Wrong date!</label>
 			<label index="l_wrong_time">Wrong time!</label>
 			<label index="l_is_in_past">is a past date!</label>
 			<label index="l_page">Page</label>
 			<label index="l_page_of">Page %s of %s</label>
 			<label index="l_search_found">entries found</label>
-			<label index="l_monitor_start_thanks">Thank you. An email has been sent to you. Please confirm the monitoring by clicking on the confirm link inside the email.</label>
-			<label index="l_monitor_stop_thanks">Thank you. An email has been sent to you. Please confirm the monitoring stop by clicking on the confirm link inside the email.</label>
-			<label index="l_monitor_wrong_captcha">Sorry, but you didn't type in the correct letters. Please try again.</label>
+			<label index="l_monitor_start_thanks">Thank you. An email has been sent to you. Please
+				confirm the monitoring by clicking on the confirm link inside the
+				email.</label>
+			<label index="l_monitor_stop_thanks">Thank you. An email has been sent to you. Please
+				confirm the monitoring stop by clicking on the confirm link inside
+				the email.</label>
+			<label index="l_monitor_wrong_captcha">Sorry, but you didn't type in the correct letters.
+				Please try again.</label>
 			<label index="l_not_allowed_edit">You are not allowed to edit this </label>
 			<label index="l_not_allowed_create">You are not allowed to create a/an </label>
 			<label index="l_delete_image">Delete image</label>
@@ -4185,10 +4393,16 @@
 			<label index="l_attachment_upload">Upload attachment</label>
 			<label index="l_meeting_accept">Accept</label>
 			<label index="l_meeting_decline">Decline</label>
-			<label index="l_meeting_accepted">Your status for &quot;%s&quot; has been successfully changed to &quot;ACCPETED&quot;.</label>
-			<label index="l_meeting_declined">Your status for &quot;%s&quot; has been successfully changed to &quot;DECLINED&quot;.</label>
-			<label index="l_meeting_update_error">There were problems updating your participation status to &quot;%s&quot;.</label>
-			<label index="l_meeting_error">If you see this message, you probably have received an invitation to a meeting and you have clicked on the accept or decline link. But maybe not all of the parameters made it to the url? Please make sure all parameters are there.</label>
+			<label index="l_meeting_accepted">Your status for &quot;%s&quot; has been
+				successfully changed to &quot;ACCPETED&quot;.</label>
+			<label index="l_meeting_declined">Your status for &quot;%s&quot; has been
+				successfully changed to &quot;DECLINED&quot;.</label>
+			<label index="l_meeting_update_error">There were problems updating your participation
+				status to &quot;%s&quot;.</label>
+			<label index="l_meeting_error">If you see this message, you probably have
+				received an invitation to a meeting and you have clicked on the
+				accept or decline link. But maybe not all of the parameters made it
+				to the url? Please make sure all parameters are there.</label>
 			<label index="l_meeting_changestatus"> Change meeting status: </label>
 			<label index="l_required">(*) Required fields</label>
 			<label index="l_constrain_start_before_end">Start has to be before end</label>
@@ -4377,7 +4591,8 @@
 			<label index="l_daysofweek_lang_saturday">Saturday</label>
 			<label index="l_error_title">Error!</label>
 			<label index="l_error_window">There was an error!</label>
-			<label index="l_error_calendar">The calendar &quot;%s&quot; was being processed when this error occurred.</label>
+			<label index="l_error_calendar">The calendar &quot;%s&quot; was being processed
+				when this error occurred.</label>
 			<label index="l_error_path">Unable to open the path: &quot;%s&quot;</label>
 			<label index="l_error_back">Please use the &quot;Back&quot; button to return.</label>
 			<label index="l_monitor_event_logged_in_nomonitoring">Subscribe to this event?</label>
@@ -4494,9 +4709,12 @@
 			<label index="l_delete_event">Delete Event</label>
 			<label index="l_event_has_been_delete">The event has been deleted</label>
 			<label index="l_event_has_been_restored">The event has been restored</label>
-			<label index="l_event_has_been_hidden">The event has been hidden and will not be shown in the frontend</label>
-			<label index="l_event_has_been_unhidden">The previouisly hidden event has now been unhidden and will be shown in the frontend</label>
-			<label index="l_wrong_split_symbol_msg">Date split symbol is: \'###DATE_SPLIT_SYMBOL###\' !\n</label>
+			<label index="l_event_has_been_hidden">The event has been hidden and will not be shown in
+				the frontend</label>
+			<label index="l_event_has_been_unhidden">The previouisly hidden event has now been unhidden
+				and will be shown in the frontend</label>
+			<label index="l_wrong_split_symbol_msg">Date split symbol is: \'###DATE_SPLIT_SYMBOL###\'
+				!\n</label>
 			<label index="l_wrong_date">Wrong date!</label>
 			<label index="l_wrong_time">Wrong time!</label>
 			<label index="l_is_in_past">is a past date!</label>

@@ -11,34 +11,47 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index=".description">Locations for Calendar Base event records.</label>
-			<label index=".details">The Location record facilitates the easy addition of repetitious locations, addresses, and even maps for your events.</label>
-			<label index="hidden.description">Use this to temporarily exclude this location from display.</label>
-			<label index="name.description">The name of this location such as Office or Church.</label>
+			<label index=".details">The Location record facilitates the easy addition
+				of repetitious locations, addresses, and even maps for your events.</label>
+			<label index="hidden.description">Use this to temporarily exclude this location from
+				display.</label>
+			<label index="name.description">The name of this location such as Office or
+				Church.</label>
 			<label index="description.description">A description of the location.</label>
 			<label index="street.description">The street address.</label>
 			<label index="zip.description">The ZIP code or postal code of the location.</label>
 			<label index="city.description">The location's city.</label>
 			<label index="country.description">The country of the location.</label>
-			<label index="country_zone.description">The state of the location. The drop-down menu will not be available until you have included the country information and saved the form.</label>
+			<label index="country_zone.description">The state of the location. The drop-down menu will
+				not be available until you have included the country information and
+				saved the form.</label>
 			<label index="phone.description">The location's contact phone number.</label>
 			<label index="email.description">The location's contact email address.</label>
 			<label index="image.description">A picture of the location or its logo.</label>
 			<label index="link.description">An alternative website for the location.</label>
-			<label index="imagealttext.description">Alternate text shown if images are not found or not supported.</label>
-			<label index="imagealttext.details">If you have multiple images, alt text entries must be listed on separate lines.</label>
+			<label index="imagealttext.description">Alternate text shown if images are not found or
+				not supported.</label>
+			<label index="imagealttext.details">If you have multiple images, alt text entries must
+				be listed on separate lines.</label>
 			<label index="imagetitletext.description">Tooltip or hover text.</label>
-			<label index="imagetitletext.details">If you have multiple images, title text entries must be listed on separate lines.</label>
+			<label index="imagetitletext.details">If you have multiple images, title text entries
+				must be listed on separate lines.</label>
 			<label index="imagecaption.description">Adds a caption beneath each image.</label>
-			<label index="imagecaption.details">If you have multiple images, captions must be listed on separate lines.</label>
+			<label index="imagecaption.details">If you have multiple images, captions must be
+				listed on separate lines.</label>
 			<label index="tx_wecmap_geocode.description">Latitute and longitude of the location.</label>
 			<label index="tx_wecmap_map.description">Map of the location.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
-			<label index=".description">Orte an denen Ereignisse des Kalenders stattfinden.</label>
-			<label index=".details">Erstellt (Veranstaltungs-)Orte (Locations), die in Ereignissen angegeben werden können.</label>
-			<label index="hidden.description">Verwenden Sie diese Funktion, um einen Veranstaltungsort temporär nicht anzeigen zu lassen.</label>
+			<label index=".description">Orte an denen Ereignisse des Kalenders
+				stattfinden.</label>
+			<label index=".details">Erstellt (Veranstaltungs-)Orte (Locations), die in
+				Ereignissen angegeben werden können.</label>
+			<label index="hidden.description">Verwenden Sie diese Funktion, um einen
+				Veranstaltungsort temporär nicht anzeigen zu lassen.</label>
 			<label index="name.description">Der Name des Veranstaltungsortes</label>
-			<label index="description.description">Geben Sie hier eine möglichst aussagekräftige Beschreibung des Veranstaltungsortes ein.</label>
+			<label index="description.description">Geben Sie hier eine möglichst aussagekräftige
+				Beschreibung des Veranstaltungsortes ein.</label>
 			<label index="street.description">Die Straße (und Nummer) des Veranstaltungsortes.</label>
 			<label index="zip.description">Die Postleitzahl des Veranstaltungsortes.</label>
 			<label index="city.description">Die Stadt des Veranstaltungsortes.</label>
@@ -46,7 +59,10 @@
 			<label index="email.description">Eine E-Mail-Adresse des Veranstaltungsortes.</label>
 			<label index="image.description">Ein Bild des Veranstaltungsortes.</label>
 			<label index="link.description">Die Webseite des Veranstaltungsortes.</label>
-			<label index="link.details">Es erweist sich für den Webseitenbesucher als überaus nützlich eine evtl. vorhandende Webseite (URL) des Veranstaltungsortes anzugeben, wo sich weitere Informationen über den Veranstaltungsort und die dort stattfindenden Ereignisse finden.</label>
+			<label index="link.details">Es erweist sich für den Webseitenbesucher als
+				überaus nützlich eine evtl. vorhandende Webseite (URL) des
+				Veranstaltungsortes anzugeben, wo sich weitere Informationen über
+				den Veranstaltungsort und die dort stattfindenden Ereignisse finden.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 		</languageKey>
@@ -152,7 +168,8 @@
 		<languageKey index="de" type="array">
 			<label index=".description">Locations for THE Calendar for TYPO3</label>
 			<label index=".details">Create Locations which can be used in events.</label>
-			<label index="hidden.description">Use this to temporarily exclude this location from display.</label>
+			<label index="hidden.description">Use this to temporarily exclude this location from
+				display.</label>
 			<label index="name.description">Enter a name for the location-record.</label>
 			<label index="description.description">This is the description of the location.</label>
 			<label index="street.description">Street.</label>
@@ -162,7 +179,8 @@
 			<label index="email.description">A email-adress of the location</label>
 			<label index="image.description">A picture of the location.</label>
 			<label index="link.description">The website of the location.</label>
-			<label index="link.details">It's useful to give a webesite, where more Information about the location and the events can be found.</label>
+			<label index="link.details">It's useful to give a webesite, where more
+				Information about the location and the events can be found.</label>
 		</languageKey>
 	</orig_text>
 </T3locallang>

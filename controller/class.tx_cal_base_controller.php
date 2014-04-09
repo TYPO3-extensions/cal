@@ -1,5 +1,6 @@
 <?php
-/***************************************************************
+/**
+ * *************************************************************
  * Copyright notice
  *
  * (c) 2005-2008 Mario Matzulla
@@ -7,13 +8,13 @@
  * All rights reserved
  *
  * This file is part of the Web-Empowered Church (WEC)
- * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries 
+ * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries
  * International (http://CTMIinc.org). The WEC is developing TYPO3-based
  * (http://typo3.org) free software for churches around the world. Our desire
  * is to use the Internet to help offer new life through Jesus Christ. Please
  * see http://WebEmpoweredChurch.org/Jesus.
  *
- * You can redistribute this file and/or modify it under the terms of the 
+ * You can redistribute this file and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation;
  * either version 2 of the License, or (at your option) any later version.
  *
@@ -26,9 +27,10 @@
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the file!
- ***************************************************************/
+ * *************************************************************
+ */
 
-/** 
+/**
  *
  * @author Mario Matzulla <mario@matzullas.de>
  * @package TYPO3
@@ -41,21 +43,19 @@ class tx_cal_base_controller {
 	var $rightsObj;
 	var $controller;
 	var $prefixId = 'tx_cal_controller';
-	
-	function tx_cal_base_controller(){
-		$this->cObj = &tx_cal_registry::Registry('basic','cobj');
-		$this->local_cObj = &tx_cal_registry::Registry('basic','local_cobj');
-		$this->controller = &tx_cal_registry::Registry('basic','controller');
-		$this->conf = &tx_cal_registry::Registry('basic','conf');
-		$this->rightsObj = &tx_cal_registry::Registry('basic','rightscontroller');
+	function tx_cal_base_controller() {
+		$this->cObj = &tx_cal_registry::Registry ('basic', 'cobj');
+		$this->local_cObj = &tx_cal_registry::Registry ('basic', 'local_cobj');
+		$this->controller = &tx_cal_registry::Registry ('basic', 'controller');
+		$this->conf = &tx_cal_registry::Registry ('basic', 'conf');
+		$this->rightsObj = &tx_cal_registry::Registry ('basic', 'rightscontroller');
 	}
-	
-	function __toString(){
-		return get_class($this);
+	function __toString() {
+		return get_class ($this);
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/controller/class.tx_cal_base_controller.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/controller/class.tx_cal_base_controller.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/controller/class.tx_cal_base_controller.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/controller/class.tx_cal_base_controller.php']);
 }
 ?>

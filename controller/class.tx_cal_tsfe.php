@@ -1,5 +1,6 @@
 <?php
-/***************************************************************
+/**
+ * *************************************************************
  * Copyright notice
  *
  * (c) 2005-2008 Mario Matzulla
@@ -7,13 +8,13 @@
  * All rights reserved
  *
  * This file is part of the Web-Empowered Church (WEC)
- * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries 
+ * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries
  * International (http://CTMIinc.org). The WEC is developing TYPO3-based
  * (http://typo3.org) free software for churches around the world. Our desire
  * is to use the Internet to help offer new life through Jesus Christ. Please
  * see http://WebEmpoweredChurch.org/Jesus.
  *
- * You can redistribute this file and/or modify it under the terms of the 
+ * You can redistribute this file and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation;
  * either version 2 of the License, or (at your option) any later version.
  *
@@ -26,27 +27,25 @@
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the file!
- ***************************************************************/
-
+ * *************************************************************
+ */
 class tx_cal_tsfe extends tslib_fe {
-	function tx_cal_tsfe($TYPO3_CONF_VARS, $id, $type, $no_cache='', $cHash='', $jumpurl='',$MP='',$RDCT=''){
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < 4006000){
-			return $this->tslib_fe($TYPO3_CONF_VARS, $id, $type, $no_cache, $cHash, $jumpurl,$MP,$RDCT);
+	function tx_cal_tsfe($TYPO3_CONF_VARS, $id, $type, $no_cache = '', $cHash = '', $jumpurl = '', $MP = '', $RDCT = '') {
+		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4006000) {
+			return $this->tslib_fe ($TYPO3_CONF_VARS, $id, $type, $no_cache, $cHash, $jumpurl, $MP, $RDCT);
 		}
-		return $this->__construct($TYPO3_CONF_VARS, $id, $type, $no_cache, $cHash, $jumpurl,$MP,$RDCT);
+		return $this->__construct ($TYPO3_CONF_VARS, $id, $type, $no_cache, $cHash, $jumpurl, $MP, $RDCT);
 	}
-	
-	function pageNotFoundHandler($code, $header='', $reason='')	{
-		//do nothing
+	function pageNotFoundHandler($code, $header = '', $reason = '') {
+		// do nothing
 	}
-	
-	function pageNotFoundAndExit($reason='', $header='')	{
+	function pageNotFoundAndExit($reason = '', $header = '') {
 		// do nothing
 	}
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/controller/class.tx_cal_tsfe.php'])	{
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/controller/class.tx_cal_tsfe.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/controller/class.tx_cal_tsfe.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/controller/class.tx_cal_tsfe.php']);
 }
 
 ?>

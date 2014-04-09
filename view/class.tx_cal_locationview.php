@@ -1,5 +1,6 @@
 <?php
-/***************************************************************
+/**
+ * *************************************************************
  * Copyright notice
  *
  * (c) 2005-2008 Mario Matzulla
@@ -7,13 +8,13 @@
  * All rights reserved
  *
  * This file is part of the Web-Empowered Church (WEC)
- * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries 
+ * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries
  * International (http://CTMIinc.org). The WEC is developing TYPO3-based
  * (http://typo3.org) free software for churches around the world. Our desire
  * is to use the Internet to help offer new life through Jesus Christ. Please
  * see http://WebEmpoweredChurch.org/Jesus.
  *
- * You can redistribute this file and/or modify it under the terms of the 
+ * You can redistribute this file and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation;
  * either version 2 of the License, or (at your option) any later version.
  *
@@ -26,8 +27,8 @@
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the file!
- ***************************************************************/
-
+ * *************************************************************
+ */
 
 /**
  * A concrete view for the calendar.
@@ -36,46 +37,43 @@
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
 class tx_cal_locationview extends tx_cal_base_view {
-
-	function tx_cal_locationview(){
-		$this->tx_cal_base_view();
+	function tx_cal_locationview() {
+		$this->tx_cal_base_view ();
 	}
 	
 	/**
-	 *  Draws a location.
-	 *  @param		object		The location to be drawn.
-	 *	@return		string		The HTML output.
+	 * Draws a location.
+	 * 
+	 * @param
+	 *        	object		The location to be drawn.
+	 * @return string HTML output.
 	 */
-	function drawLocation($location, $relatedEvents=Array()) {
-		$this->_init($relatedEvents);
-		$lastview = $this->controller->extendLastView();
-		$uid = $this->conf['uid'];
-		$type = $this->conf['type'];
-		$page = $this->cObj->fileResource($this->conf['view.']['location.']['locationTemplate']);
+	function drawLocation($location, $relatedEvents = Array()) {
+		$this->_init ($relatedEvents);
+		$lastview = $this->controller->extendLastView ();
+		$uid = $this->conf ['uid'];
+		$type = $this->conf ['type'];
+		$page = $this->cObj->fileResource ($this->conf ['view.'] ['location.'] ['locationTemplate']);
 		if ($page == '') {
-			return $this->createErrorMessage(
-				'No location template file found at: >'.$this->conf['view.']['location.']['locationTemplate'].'<.',
-				'Please make sure the path is correct and that you included the static template and double-check the path using the Typoscript Object Browser.'
-			);
+			return $this->createErrorMessage ('No location template file found at: >' . $this->conf ['view.'] ['location.'] ['locationTemplate'] . '<.', 'Please make sure the path is correct and that you included the static template and double-check the path using the Typoscript Object Browser.');
 		}
-		$rems = Array();
-		$sims = Array();
-		$wrapped = Array();
-		if(is_object($location)){
-			$rems['###LOCATION###'] = $location->renderLocation();
-			if($this->conf['view.']['location.']['substitutePageTitle']==1){
-				$GLOBALS['TSFE']->page['title'] = $location->getName();
-				$GLOBALS['TSFE']->indexedDocTitle = $location->getName();
+		$rems = Array ();
+		$sims = Array ();
+		$wrapped = Array ();
+		if (is_object ($location)) {
+			$rems ['###LOCATION###'] = $location->renderLocation ();
+			if ($this->conf ['view.'] ['location.'] ['substitutePageTitle'] == 1) {
+				$GLOBALS ['TSFE']->page ['title'] = $location->getName ();
+				$GLOBALS ['TSFE']->indexedDocTitle = $location->getName ();
 			}
-		}else{
-			$rems['###LOCATION###'] = $this->cObj->cObjGetSingle($this->conf['view.']['location.']['noLocationFound'],$this->conf['view.']['location.']['noLocationFound.']);
+		} else {
+			$rems ['###LOCATION###'] = $this->cObj->cObjGetSingle ($this->conf ['view.'] ['location.'] ['noLocationFound'], $this->conf ['view.'] ['location.'] ['noLocationFound.']);
 		}
-		return $this->finish($page, $rems);
+		return $this->finish ($page, $rems);
 	}
-
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/view/class.tx_cal_locationview.php']) {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/view/class.tx_cal_locationview.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/view/class.tx_cal_locationview.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/view/class.tx_cal_locationview.php']);
 }
 ?>

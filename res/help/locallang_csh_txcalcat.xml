@@ -13,12 +13,16 @@
 			<label index=".description">Categories for the Calendar Base extension.</label>
 			<label index=".details">Categories that events can be assigned to.</label>
 			<label index="title.description">Category name.</label>
-			<label index="hidden.description">Disables the category so that it is not visible in the frontend.</label>
-			<label index="starttime.description">Sets a date at which the category will be visible in the frontend.</label>
+			<label index="hidden.description">Disables the category so that it is not visible in
+				the frontend.</label>
+			<label index="starttime.description">Sets a date at which the category will be visible
+				in the frontend.</label>
 			<label index="_starttime.seeAlso">tx_cal_category:hidden</label>
-			<label index="endtime.description">Sets a date at which the category will no longer be visible in the frontend.</label>
+			<label index="endtime.description">Sets a date at which the category will no longer
+				be visible in the frontend.</label>
 			<label index="_endtime.seeAlso">tx_cal_category:hidden</label>
-			<label index="headerstyle.description">CSS class used to format all event headers in this category.</label>
+			<label index="headerstyle.description">CSS class used to format all event headers in this
+				category.</label>
 			<label index="headerstyle.details">
 				<![CDATA[
 				You can assign each category a different colored bullet that precedes the events in the Month View and the Header colors in the Day and Week views. To use the out-of-the-box bullet colors, simply enter the corresponding style in the Header Style field:
@@ -34,7 +38,8 @@
 				Note: If you would like to expand or change the color choices, you can do so by modifying the default style sheet.
 				]]>
 			</label>
-			<label index="bodystyle.description">CSS class used to format all event bodies in this category.</label>
+			<label index="bodystyle.description">CSS class used to format all event bodies in this
+				category.</label>
 			<label index="bodystyle.details">
 				<![CDATA[
 				You can assign each category a different colored “Busy Time” in the Day and Week views. To use the out-of-the-box colors, simply enter the corresponding style in the Body Style field:
@@ -52,31 +57,50 @@
 				]]>
 			</label>
 			<label index="calendar_id.description">Calendar that this category appears on.</label>
-			<label index="calendar_id.details">By limiting the category to a specific calendar, you can limit users or usergroups who can view the category's events</label>
+			<label index="calendar_id.details">By limiting the category to a specific calendar,
+				you can limit users or usergroups who can view the category's events</label>
 			<label index="parent_category.description">Sets the current category as a sub-category.</label>
-			<label index="shared_user_allowed.description">Allows the category to be shared with anyone who has shared event priviliges already.</label>
-			<label index="single_pid.description">Page where individual events from this category will be shown.</label>
+			<label index="shared_user_allowed.description">Allows the category to be shared with anyone who
+				has shared event priviliges already.</label>
+			<label index="single_pid.description">Page where individual events from this category
+				will be shown.</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index=".description">Kategorien für den TYPO3-Kalender</label>
-			<label index=".details">Erstellt Kategorien für den TYPO3-Kalender, in welche dann Ereignisse einsortiert werden.</label>
+			<label index=".details">Erstellt Kategorien für den TYPO3-Kalender, in
+				welche dann Ereignisse einsortiert werden.</label>
 			<label index="title.description">Titel dieser Kategorie</label>
 			<label index="hidden.description">Versteckt diese Kategorie</label>
-			<label index="starttime.description">Die &quot;Start&quot;-Zeit definiert, ab wann dieser Datensatz aktiv sein sein soll. Vor diesem Zeitpunkt wird die Kategorie nicht verwendet. Siehe auch &quot;verstecken&quot;</label>
-			<label index="endtime.description">Die &quot;End&quot;-Zeit definiert, ab wann dieser Datensatz nicht mehr aktiv sein sein soll. Nach diesem Zeitpunkt wird die Kategorie nicht verwendet. Siehe auch &quot;verstecken&quot;</label>
-			<label index="headerstyle.description">Definiert den Style, der für alle Ereignis-Überschriften dieser Kategorie verwendet wird.</label>
-			<label index="bodystyle.description">Definiert den Style, der für alle Ereignis-body-texte dieser Kategorie verwendet wird.</label>
-			<label index="calendar_id.description">Gibt den Kalender an, in dem diese Kategorie erscheinen soll.</label>
-			<label index="title.details">Die Kategorie wird diesen Namen tragen, welcher auch an diversen Stellen im Front-End auftaucht.</label>
-			<label index="fe_user_id.description">Definiert die FE-Benutzer-Gruppe, die dieser Kategorie zugeordnet ist.</label>
+			<label index="starttime.description">Die &quot;Start&quot;-Zeit definiert, ab wann
+				dieser Datensatz aktiv sein sein soll. Vor diesem Zeitpunkt wird die
+				Kategorie nicht verwendet. Siehe auch &quot;verstecken&quot;</label>
+			<label index="endtime.description">Die &quot;End&quot;-Zeit definiert, ab wann dieser
+				Datensatz nicht mehr aktiv sein sein soll. Nach diesem Zeitpunkt
+				wird die Kategorie nicht verwendet. Siehe auch
+				&quot;verstecken&quot;</label>
+			<label index="headerstyle.description">Definiert den Style, der für alle
+				Ereignis-Überschriften dieser Kategorie verwendet wird.</label>
+			<label index="bodystyle.description">Definiert den Style, der für alle
+				Ereignis-body-texte dieser Kategorie verwendet wird.</label>
+			<label index="calendar_id.description">Gibt den Kalender an, in dem diese Kategorie
+				erscheinen soll.</label>
+			<label index="title.details">Die Kategorie wird diesen Namen tragen, welcher
+				auch an diversen Stellen im Front-End auftaucht.</label>
+			<label index="fe_user_id.description">Definiert die FE-Benutzer-Gruppe, die dieser
+				Kategorie zugeordnet ist.</label>
 			<label index="ext_url.description">Die URL des externen Kalenders.</label>
-			<label index="relation_cnt.description">Diese Frontend-Benutzer sind dieser Kategorie zugeordnet.</label>
+			<label index="relation_cnt.description">Diese Frontend-Benutzer sind dieser Kategorie
+				zugeordnet.</label>
 			<label index="type.description">Der Typ der Kategorie</label>
 			<label index="type.details">Es gibt drei Typen:
-&lt;b&gt;- Standard Kategorie&lt;/b&gt;: Eine normale Kategorie, welche in der lokalen Datenbank gespeichert wird.
-&lt;b&gt;- Einbinden einer ICS-Datei&lt;/b&gt;: Bindet eine ICS-Datei ein, in der die Ereignisse gespeichert sind.
-&lt;b&gt;- Externer Kalender&lt;/b&gt;: Bindet einen externen Kalender per URL ein, aus welchem die Ereignisse übernommen werden sollen.</label>
-			<label index="ics_file.description">Die ICS-Datei, in der die Ereignisse gespeichert sind.</label>
+				&lt;b&gt;- Standard Kategorie&lt;/b&gt;: Eine normale Kategorie, welche in der
+				lokalen Datenbank gespeichert wird.
+				&lt;b&gt;- Einbinden einer ICS-Datei&lt;/b&gt;: Bindet eine ICS-Datei ein, in
+				der die Ereignisse gespeichert sind.
+				&lt;b&gt;- Externer Kalender&lt;/b&gt;: Bindet einen externen Kalender per URL
+				ein, aus welchem die Ereignisse übernommen werden sollen.</label>
+			<label index="ics_file.description">Die ICS-Datei, in der die Ereignisse gespeichert
+				sind.</label>
 			<label index="ics_file.details">Es muss eine ICS-Datei sein: icalendar-Standard.</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
@@ -189,23 +213,35 @@
 			<label index=".description">Categories for the Calendar Base extension.</label>
 			<label index="title.description">Category name.</label>
 			<label index="type.description">The Type of the Category</label>
-			<label index="hidden.description">Disables the category so that it is not visible in the frontend.</label>
-			<label index="category_id.description">Here you can assign categories to the current event.</label>
-			<label index="ext_url.description">Insert a internet-link here, where the cal is located.</label>
+			<label index="hidden.description">Disables the category so that it is not visible in
+				the frontend.</label>
+			<label index="category_id.description">Here you can assign categories to the current
+				event.</label>
+			<label index="ext_url.description">Insert a internet-link here, where the cal is
+				located.</label>
 			<label index=".details">Categories that events can be assigned to.</label>
-			<label index="relation_cnt.description">defines the FE-User which are assigned to the events of this category</label>
+			<label index="relation_cnt.description">defines the FE-User which are assigned to the
+				events of this category</label>
 			<label index="type.details">There are three types:
-&lt;b&gt;- standard category&lt;/b&gt;: This is a normal category, located in the database.
-&lt;b&gt;- include ICS-File&lt;/b&gt;: Include a ICS-File where the events are located.
-&lt;b&gt;- external calendar&lt;/b&gt;: Include a URL, from where the the events are grabed.</label>
+				&lt;b&gt;- standard category&lt;/b&gt;: This is a normal category, located in
+				the database.
+				&lt;b&gt;- include ICS-File&lt;/b&gt;: Include a ICS-File where the events are
+				located.
+				&lt;b&gt;- external calendar&lt;/b&gt;: Include a URL, from where the the
+				events are grabed.</label>
 			<label index="ics_file.description">Choose the ics-File</label>
 			<label index="ics_file.details">... where the events are stored in.</label>
-			<label index="headerstyle.description">CSS class used to format all event headers in this category.</label>
-			<label index="bodystyle.description">CSS class used to format all event bodies in this category.</label>
+			<label index="headerstyle.description">CSS class used to format all event headers in this
+				category.</label>
+			<label index="bodystyle.description">CSS class used to format all event bodies in this
+				category.</label>
 			<label index="title.details">This becomes the title of the category</label>
-			<label index="starttime.description">Sets a date at which the category will be visible in the frontend.</label>
-			<label index="endtime.description">Sets a date at which the category will no longer be visible in the frontend.</label>
-			<label index="fe_user_id.description">Defines the fe-group, which is assigned to this category.</label>
+			<label index="starttime.description">Sets a date at which the category will be visible
+				in the frontend.</label>
+			<label index="endtime.description">Sets a date at which the category will no longer
+				be visible in the frontend.</label>
+			<label index="fe_user_id.description">Defines the fe-group, which is assigned to this
+				category.</label>
 			<label index="calendar_id.description">Calendar that this category appears on.</label>
 		</languageKey>
 	</orig_text>

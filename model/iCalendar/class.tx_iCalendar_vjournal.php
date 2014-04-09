@@ -9,30 +9,22 @@
  * See the enclosed file COPYING for license information (LGPL). If you
  * did not receive this file, see http://www.fsf.org/copyleft/lgpl.html.
  *
- * @author  Mike Cochrane <mike@graftonhall.co.nz>
- * @since   Horde 3.0
+ * @author Mike Cochrane <mike@graftonhall.co.nz>
+ * @since Horde 3.0
  * @package Horde_iCalendar
  */
-
 class tx_iCalendar_vjournal extends tx_model_iCalendar {
-
-    function getType()
-    {
-        return 'vJournal';
-    }
-
-    function parsevCalendar($data)
-    {
-        parent::parsevCalendar($data, 'VJOURNAL');
-    }
-
-    function exportvCalendar()
-    {
-        return parent::_exportvData('VJOURNAL');
-    }
-
+	function getType() {
+		return 'vJournal';
+	}
+	function parsevCalendar($data) {
+		parent::parsevCalendar ($data, 'VJOURNAL');
+	}
+	function exportvCalendar() {
+		return parent::_exportvData ('VJOURNAL');
+	}
 }
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/model/iCalendar/class.tx_iCalendar_vjournal.php']) {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/cal/model/iCalendar/class.tx_iCalendar_vjournal.php']);
+if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/model/iCalendar/class.tx_iCalendar_vjournal.php']) {
+	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/model/iCalendar/class.tx_iCalendar_vjournal.php']);
 }
 ?>

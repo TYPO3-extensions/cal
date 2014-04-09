@@ -31,7 +31,8 @@
 			<label index="tx_cal_event.start_date">Event Start Day</label>
 			<label index="tx_cal_event.orig_start_date">Original recurrence instance start day</label>
 			<label index="tx_cal_event.start_time">Event Start Time</label>
-			<label index="tx_cal_event.orig_start_time">Original recurrence instance start time (leave empty for allday)</label>
+			<label index="tx_cal_event.orig_start_time">Original recurrence instance start time (leave
+				empty for allday)</label>
 			<label index="tx_cal_event.end_date">Event End Day</label>
 			<label index="tx_cal_event.end_time">Event End Time</label>
 			<label index="tx_cal_event.allday">All Day Event</label>
@@ -49,7 +50,9 @@
 			<label index="tx_cal_event.remove_recurrence">Remove Recurrence</label>
 			<label index="tx_cal_event.recurs_every_month">of every month.</label>
 			<label index="tx_cal_event.recurs_selected_months">of selected months.</label>
-			<label index="tx_cal_event.byday">By Day (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">By Day (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_event.byday_short">By Day of the Week</label>
 			<label index="tx_cal_event.byday_all">All Days</label>
 			<label index="tx_cal_event.byday_count_first">First</label>
@@ -126,7 +129,9 @@
 			<label index="tx_cal_exception_event.end_time">Exception End Time</label>
 			<label index="tx_cal_exception_event.allday">All Day Exception</label>
 			<label index="tx_cal_exception_event.freq">Exception Frequency</label>
-			<label index="tx_cal_exception_event.byday">By Day (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_exception_event.byday">By Day (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_exception_event.byday_short">By Day of the Week</label>
 			<label index="tx_cal_exception_event.bymonthday">By Monthday (e.g.: 1,2,30 or all)</label>
 			<label index="tx_cal_exception_event.bymonthday_short">By Day of the Month</label>
@@ -163,10 +168,12 @@
 			<label index="tx_cal_calendar.refresh">Refresh Interval (Minutes)</label>
 			<label index="tx_cal_calendar.owner">Owner</label>
 			<label index="tx_cal_calendar.activate_fnb">Enable free and busy view</label>
-			<label index="tx_cal_calendar.fb_users_groups">Limit the free and busy view to these users and/or Groups (else public)</label>
+			<label index="tx_cal_calendar.fb_users_groups">Limit the free and busy view to these users and/or
+				Groups (else public)</label>
 			<label index="tx_cal_calendar.createNew">create a new calendar</label>
 			<label index="tx_cal_calendar.edit">edit selected calendar</label>
-			<label index="tx_cal_calendar.nearby">Show only events within a certain distance of a user</label>
+			<label index="tx_cal_calendar.nearby">Show only events within a certain distance of a
+				user</label>
 			<label index="tx_cal_calendar_private">The users private calendar</label>
 			<label index="tx_cal_calendar.schedulerId">Scheduler ID</label>
 			<label index="tx_cal_category">Calendar Category</label>
@@ -306,7 +313,9 @@
 			<label index="tx_cal_event.location">Sted</label>
 			<label index="tx_cal_event.location_id">Cal sted</label>
 			<label index="tx_cal_event.freq">Hyppighed</label>
-			<label index="tx_cal_event.byday">Pr dag (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">Pr dag (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_event.bymonthday">Pr m?nedsdag (eks.: 1, 2, 30 eller alle)</label>
 			<label index="tx_cal_event.bymonth">Pr m?ned (eks.: 1, 2 ,3 ,4 , 12 eller alle)</label>
 			<label index="tx_cal_event.until">Indtil dato</label>
@@ -331,7 +340,9 @@
 			<label index="tx_cal_exception_event.end_date">Begivenheds slutdato</label>
 			<label index="tx_cal_exception_event.end_time">Begivenheds sluttid</label>
 			<label index="tx_cal_exception_event.freq">Hyppighed</label>
-			<label index="tx_cal_exception_event.byday">Pr dag (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_exception_event.byday">Pr dag (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_exception_event.bymonthday">Pr m?nedsdag (eks.: 1, 2, 30 eller alle)</label>
 			<label index="tx_cal_exception_event.bymonth">Pr m?ned (eks.: 1, 2 ,3 ,4 , 12 eller alle)</label>
 			<label index="tx_cal_exception_event.until">Indtil dato</label>
@@ -420,7 +431,9 @@
 			<label index="tx_cal_event.remove_recurrence">Wiederholung löschen</label>
 			<label index="tx_cal_event.recurs_every_month">jeden Monats</label>
 			<label index="tx_cal_event.recurs_selected_months">der selektierten Monate</label>
-			<label index="tx_cal_event.byday">Nach Tag (eine Kombination von: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, oder &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">Nach Tag (eine Kombination von:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, oder &quot;all&quot;)</label>
 			<label index="tx_cal_event.byday_short">Nach Wochentag</label>
 			<label index="tx_cal_event.byday_all">Alle Tage</label>
 			<label index="tx_cal_event.byday_count_first">Erster</label>
@@ -463,7 +476,8 @@
 			<label index="tx_cal_event.exception">Ausnahme</label>
 			<label index="tx_cal_event.deviation">Abweichender Event</label>
 			<label index="tx_cal_event.fe_cruser_id">Ersteller</label>
-			<label index="tx_cal_event.shared_user">Dieses Ereignis für andere freigeben. Achtung! Beinhaltet Rechte!</label>
+			<label index="tx_cal_event.shared_user">Dieses Ereignis für andere freigeben. Achtung!
+				Beinhaltet Rechte!</label>
 			<label index="tx_cal_event.fe_crgroup_id">Erstellergruppe</label>
 			<label index="tx_cal_event.none">Keine</label>
 			<label index="tx_cal_event.type">Ereignis Typ</label>
@@ -489,7 +503,9 @@
 			<label index="tx_cal_exception_event.end_time">Event End Zeit</label>
 			<label index="tx_cal_exception_event.allday">Ganztägige Ausnahme</label>
 			<label index="tx_cal_exception_event.freq">Frequenz</label>
-			<label index="tx_cal_exception_event.byday">Nach Tag (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, oder &quot;all&quot;)</label>
+			<label index="tx_cal_exception_event.byday">Nach Tag (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, oder &quot;all&quot;)</label>
 			<label index="tx_cal_exception_event.byday_short">Nach Wochentag</label>
 			<label index="tx_cal_exception_event.bymonthday">Nach Monatstag (z.B.: 1,2,30 oder all)</label>
 			<label index="tx_cal_exception_event.bymonthday_short">Nach Monatstag</label>
@@ -519,8 +535,10 @@
 			<label index="tx_cal_calendar.ics_file">ICS-Datei</label>
 			<label index="tx_cal_calendar.refresh">Auffrischungsintervall</label>
 			<label index="tx_cal_calendar.owner">Besitzer</label>
-			<label index="tx_cal_calendar.activate_fnb">&quot;Free&quot; und &quot;busy&quot; -Ansichten aktivieren</label>
-			<label index="tx_cal_calendar.fb_users_groups">Limitiere &quot;free&quot; und &quot;busy&quot; auf folgende Benutzer und/oder Gruppen</label>
+			<label index="tx_cal_calendar.activate_fnb">&quot;Free&quot; und &quot;busy&quot; -Ansichten
+				aktivieren</label>
+			<label index="tx_cal_calendar.fb_users_groups">Limitiere &quot;free&quot; und &quot;busy&quot;
+				auf folgende Benutzer und/oder Gruppen</label>
 			<label index="tx_cal_calendar.createNew">Neuen Kalender anlegen</label>
 			<label index="tx_cal_calendar.edit">Ausgew&amp;auml;hlten Kalender bearbeiten</label>
 			<label index="tx_cal_calendar_private">Privater Kalender des Benutzers</label>
@@ -532,11 +550,14 @@
 			<label index="tx_cal_category.bodycolor">Body Farbe (z.B. green oder #15E337)</label>
 			<label index="tx_cal_category.calendar">Kalender</label>
 			<label index="tx_cal_category.parent_category">&amp;Uuml;bergeordnete Kategorie</label>
-			<label index="tx_cal_category.shared_user_allowed">Erlaube freigegebenen Benutzern, diese Kategorie auszuw&amp;auml;hlen</label>
-			<label index="tx_cal_category.single_pid">Einzelansichtsseite f&amp;uuml;r Events mit dieser Kategorie</label>
+			<label index="tx_cal_category.shared_user_allowed">Erlaube freigegebenen Benutzern, diese Kategorie
+				auszuw&amp;auml;hlen</label>
+			<label index="tx_cal_category.single_pid">Einzelansichtsseite f&amp;uuml;r Events mit dieser
+				Kategorie</label>
 			<label index="tx_cal_category.createNew">Neue Kategorie anlegen</label>
 			<label index="tx_cal_category.edit">Ausgew&amp;auml;hlte Kategorie bearbeiten</label>
-			<label index="tx_cal_category.notification_emails">Benachrichtigungs-Emailadressen (getrennt mit Komma)</label>
+			<label index="tx_cal_category.notification_emails">Benachrichtigungs-Emailadressen (getrennt mit
+				Komma)</label>
 			<label index="tx_cal_category.icon">Icon</label>
 			<label index="tx_cal_organizer">Kalender Organisation</label>
 			<label index="tx_cal_organizer.name">Name</label>
@@ -575,7 +596,8 @@
 			<label index="tx_cal_location.islocation">Ist Cal Ort</label>
 			<label index="tx_cal_location.createNew">Neuen Ort anlegen</label>
 			<label index="tx_cal_location.edit">Ausgew&amp;auml;hlten Ort bearbeiten</label>
-			<label index="tx_cal_unknown_users">Nicht registrierte Benutzer die das Event beobachten</label>
+			<label index="tx_cal_unknown_users">Nicht registrierte Benutzer die das Event
+				beobachten</label>
 			<label index="tx_cal_unknown_users.email">Email</label>
 			<label index="tx_cal_controller_flexform.sheet_general">[ Allgemeine Einstellungen ]</label>
 			<label index="tx_cal_controller_flexform.sheet_general-mode">Plugin Modus:</label>
@@ -651,8 +673,11 @@
 			<label index="tx_cal_event.organizer_id">Cal organisator</label>
 			<label index="tx_cal_event.location">Sted</label>
 			<label index="tx_cal_event.freq">Frekvens</label>
-			<label index="tx_cal_event.byday">Ved dag (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
-			<label index="tx_cal_event.bymonthday">Ved dag i m&amp;aring;ned (f.eks.: 1,2,30 eller alle)</label>
+			<label index="tx_cal_event.byday">Ved dag (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.bymonthday">Ved dag i m&amp;aring;ned (f.eks.: 1,2,30 eller
+				alle)</label>
 			<label index="tx_cal_event.bymonth">Ved m&amp;aring;ned (f.eks.: 1,2,3,4,12 or all)</label>
 			<label index="tx_cal_event.until">Inntil dato</label>
 			<label index="tx_cal_event.count">Antall</label>
@@ -670,8 +695,11 @@
 			<label index="tx_cal_exception_event.end_date">Sluttdag for hendelse</label>
 			<label index="tx_cal_exception_event.end_time">Sluttid for hendelse</label>
 			<label index="tx_cal_exception_event.freq">Frekvens</label>
-			<label index="tx_cal_exception_event.byday">Ved dag (f.eks.: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
-			<label index="tx_cal_exception_event.bymonthday">Ved dag i m&amp;aring;ned (f.eks.: 1,2,30 eller alle)</label>
+			<label index="tx_cal_exception_event.byday">Ved dag (f.eks.:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_exception_event.bymonthday">Ved dag i m&amp;aring;ned (f.eks.: 1,2,30 eller
+				alle)</label>
 			<label index="tx_cal_exception_event.bymonth">Ved m&amp;aring;ned (f.eks.: 1,2,3,4,12 or all)</label>
 			<label index="tx_cal_exception_event.until">Inntil dato</label>
 			<label index="tx_cal_exception_event.count">Antall</label>
@@ -689,7 +717,8 @@
 			<label index="tx_cal_category">Kalender kategori</label>
 			<label index="tx_cal_category.title">Kategori tittel</label>
 			<label index="tx_cal_category.headercolor">Overskift farge (f.eks. green eller #15E337)</label>
-			<label index="tx_cal_category.bodycolor">Tekstomr&amp;aring;de farge (f.eks. green eller #15E337)</label>
+			<label index="tx_cal_category.bodycolor">Tekstomr&amp;aring;de farge (f.eks. green eller
+				#15E337)</label>
 			<label index="tx_cal_organizer">Kalender organisator</label>
 			<label index="tx_cal_organizer.name">Navn</label>
 			<label index="tx_cal_organizer.description">Beskrivelse</label>
@@ -777,7 +806,9 @@
 			<label index="tx_cal_event.location">Endroit</label>
 			<label index="tx_cal_event.location_id">Répertoire d'endroits</label>
 			<label index="tx_cal_event.freq">Fréquence</label>
-			<label index="tx_cal_event.byday">Par jour (ex.: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">Par jour (ex.:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_event.bymonthday">Par jour du mois (ex.: 1,2,30 ou tous)</label>
 			<label index="tx_cal_event.bymonth">Par mois (ex.: 1,2,3,4,12 ou tous)</label>
 			<label index="tx_cal_event.until">Jusque</label>
@@ -796,7 +827,8 @@
 			<label index="tx_cal_exception_event.end_date">Date de fin</label>
 			<label index="tx_cal_exception_event.end_time">Heure de fin</label>
 			<label index="tx_cal_exception_event.freq">Fréquence</label>
-			<label index="tx_cal_exception_event.byday">Par jour (ex.: lundi,mardi, mercedi, jeudi, vendredi ou tous)</label>
+			<label index="tx_cal_exception_event.byday">Par jour (ex.: lundi,mardi, mercedi, jeudi,
+				vendredi ou tous)</label>
 			<label index="tx_cal_exception_event.bymonthday">Par jour du mois (ex.: 1,2,30 ou tous)</label>
 			<label index="tx_cal_exception_event.bymonth">Par mois (ex.: 1,2,3,4,12 ou tous)</label>
 			<label index="tx_cal_exception_event.until">Jusque</label>
@@ -853,7 +885,9 @@
 			<label index="tx_cal_event.location">Ubicación</label>
 			<label index="tx_cal_event.location_id">Ubicación del Cal</label>
 			<label index="tx_cal_event.freq">Frecuencia</label>
-			<label index="tx_cal_event.byday">Por Día (e.g.: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">Por Día (e.g.:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_event.bymonthday">Por Día del Mes (e.g.: 1, 2, 30 o todos)</label>
 			<label index="tx_cal_event.bymonth">Por Mes (e.g.: 1, 2, 3, 4, 12 o todos)</label>
 			<label index="tx_cal_event.until">Hasta</label>
@@ -879,7 +913,9 @@
 			<label index="tx_cal_exception_event.end_date">Día de Finalización del Evento</label>
 			<label index="tx_cal_exception_event.end_time">Hora de Finalización del Evento</label>
 			<label index="tx_cal_exception_event.freq">Frecuencia</label>
-			<label index="tx_cal_exception_event.byday">Por Día (e.g.: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_exception_event.byday">Por Día (e.g.:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_exception_event.bymonthday">Por Día del Mes (e.g.: 1, 2, 30 o todos)</label>
 			<label index="tx_cal_exception_event.bymonth">Por Mes (e.g.: 1, 2, 3, 4, 12 o todos)</label>
 			<label index="tx_cal_exception_event.until">Hasta</label>
@@ -949,7 +985,9 @@
 			<label index="tx_cal_event.organizer_id">Kalender organisator</label>
 			<label index="tx_cal_event.location">Locatie</label>
 			<label index="tx_cal_event.freq">Frequentie</label>
-			<label index="tx_cal_event.byday">Op dag (b.v.: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">Op dag (b.v.:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_event.bymonthday">Op dag van de maand (b.v.: 1,2,30 of alle)</label>
 			<label index="tx_cal_event.bymonth">Op maand (b.v.: 1,2,3,4,12 of alle)</label>
 			<label index="tx_cal_event.until">Tot datum</label>
@@ -968,7 +1006,9 @@
 			<label index="tx_cal_exception_event.end_date">gebeurtenis einddag</label>
 			<label index="tx_cal_exception_event.end_time">Gebeurtenis eindtijd</label>
 			<label index="tx_cal_exception_event.freq">Frequentie</label>
-			<label index="tx_cal_exception_event.byday">Op dag (b.v.: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_exception_event.byday">Op dag (b.v.:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_exception_event.bymonthday">Op maanddag (b.v.: 1,2,30 of all)</label>
 			<label index="tx_cal_exception_event.bymonth">Op maand (b.v.: 1,2,3,4,12 of all)</label>
 			<label index="tx_cal_exception_event.until">Tot datum</label>
@@ -1035,7 +1075,9 @@
 			<label index="tx_cal_event.location_id">Lokalizacja (cal) lub ...</label>
 			<label index="tx_cal_event.location_pid">Odsyłacz do strony z lokalizacją</label>
 			<label index="tx_cal_event.freq">Częstotliwość</label>
-			<label index="tx_cal_event.byday">Określona przez dzień (kombinacja: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">Określona przez dzień (kombinacja:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_event.bymonthday">Określona przez dzień miesiąca (np. 1,2,30 or all)</label>
 			<label index="tx_cal_event.bymonth">Określona przez miesiąc (np. 1,2,3,4,12 or all)</label>
 			<label index="tx_cal_event.until">Do daty</label>
@@ -1045,7 +1087,8 @@
 			<label index="tx_cal_event.description">Opis</label>
 			<label index="tx_cal_event.exception">Wydarzenia wyjątki (wydarzenia negatywne)</label>
 			<label index="tx_cal_event.fe_cruser_id">Twórca</label>
-			<label index="tx_cal_event.shared_user">Współdziel to wydarzenie z innym użytkownikiem! Uwaga. Wpółdzielone są też prawa dostępu.</label>
+			<label index="tx_cal_event.shared_user">Współdziel to wydarzenie z innym użytkownikiem!
+				Uwaga. Wpółdzielone są też prawa dostępu.</label>
 			<label index="tx_cal_event.fe_crgroup_id">Grupa twórcy</label>
 			<label index="tx_cal_event.none">Żaden</label>
 			<label index="tx_cal_event.type">Typ wydarzenia</label>
@@ -1065,7 +1108,9 @@
 			<label index="tx_cal_exception_event.end_date">Koniec wydarzenia - data</label>
 			<label index="tx_cal_exception_event.end_time">Początek wydarzenia - data</label>
 			<label index="tx_cal_exception_event.freq">Częstotliwość</label>
-			<label index="tx_cal_exception_event.byday">Okteślona przez dzień (kombinacja: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_exception_event.byday">Okteślona przez dzień (kombinacja:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_exception_event.bymonthday">Określona przez dzień miesiąca (np. 1,2,30 or all)</label>
 			<label index="tx_cal_exception_event.bymonth">Określona przez miesiąc (np. 1,2,3,4,12 or all)</label>
 			<label index="tx_cal_exception_event.until">Do daty</label>
@@ -1080,7 +1125,8 @@
 			<label index="tx_cal_fe_group_event">Grupa FE - relacja do wydarzeń</label>
 			<label index="tx_cal_fe_group_event.fe_group">Grupa</label>
 			<label index="tx_cal_fe_group_event.event">Wydarzenie</label>
-			<label index="tx_cal_fe_user_event.monitor">Użytkownicy FE mają być powiadamiani o stworzeniu, zmianie lub skasowaniu</label>
+			<label index="tx_cal_fe_user_event.monitor">Użytkownicy FE mają być powiadamiani o stworzeniu,
+				zmianie lub skasowaniu</label>
 			<label index="tx_cal_calendar">Kalendarz</label>
 			<label index="tx_cal_calendar.title">Tytuł kalendarza</label>
 			<label index="tx_cal_calendar.type">Typ kalendarza</label>
@@ -1092,7 +1138,9 @@
 			<label index="tx_cal_calendar.refresh">Interwał odświeżania (minuty)</label>
 			<label index="tx_cal_calendar.owner">Właściciel</label>
 			<label index="tx_cal_calendar.activate_fnb">Włącz widok Wolny i Zajęty</label>
-			<label index="tx_cal_calendar.fb_users_groups">Zezwól na oglądanie widoku Wolny i Zajęty tylko dla wybranych użytkowników/grup użytkowników (w przeciwnym wypadku widok jest publiczny)</label>
+			<label index="tx_cal_calendar.fb_users_groups">Zezwól na oglądanie widoku Wolny i Zajęty tylko
+				dla wybranych użytkowników/grup użytkowników (w przeciwnym wypadku
+				widok jest publiczny)</label>
 			<label index="tx_cal_category">Kalendarz - Kategorie</label>
 			<label index="tx_cal_category.title">Tytuł kategorii</label>
 			<label index="tx_cal_category.headerstyle">Styl nagłówka</label>
@@ -1101,7 +1149,8 @@
 			<label index="tx_cal_category.bodycolor">Kolor body (np. green or #15E337)</label>
 			<label index="tx_cal_category.calendar">Kalendarz</label>
 			<label index="tx_cal_category.parent_category">Katergoria rodzic</label>
-			<label index="tx_cal_category.shared_user_allowed">Zezwól użytkownikom wybrać tę kategorię (shared user)</label>
+			<label index="tx_cal_category.shared_user_allowed">Zezwól użytkownikom wybrać tę kategorię (shared
+				user)</label>
 			<label index="tx_cal_organizer">Kalendarz - Organizatorzy</label>
 			<label index="tx_cal_organizer.name">Nazwa</label>
 			<label index="tx_cal_organizer.description">Opis</label>
@@ -1212,7 +1261,8 @@
 			<label index="tx_cal_exception_event_group.exception_event_cnt">Wydarzenia wyjątki</label>
 			<label index="tx_cal_organizer.country">Państwo</label>
 			<label index="tx_cal_organizer.countryzone">Województwo</label>
-			<label index="tx_cal_unknown_users">Żaden zarejestrowany użytkownik nie monitoruje wydarzeń</label>
+			<label index="tx_cal_unknown_users">Żaden zarejestrowany użytkownik nie monitoruje
+				wydarzeń</label>
 			<label index="tx_cal_unknown_users.email">email</label>
 		</languageKey>
 		<languageKey index="si" type="array">
@@ -1225,7 +1275,9 @@
 			<label index="tx_cal_events.organizer">Jï¿½rjestï¿½jï¿½</label>
 			<label index="tx_cal_events.location">Sijainti</label>
 			<label index="tx_cal_events.freq">Toistuvuus</label>
-			<label index="tx_cal_events.byday">Pï¿½ivittï¿½in (esim.: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; and &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_events.byday">Pï¿½ivittï¿½in (esim.:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				and &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_events.bymonthday">Kuukaudenpï¿½ivï¿½nï¿½ (esim.: 1,2,30 tai kaikki)</label>
 			<label index="tx_cal_events.bymonth">Kuukausittain (esim.: 1,2,3,4,12 tai kaikki)</label>
 			<label index="tx_cal_events.until">saakka (muoto VVVVKKPP)</label>
@@ -1378,7 +1430,8 @@
 			<label index="tx_cal_exception_event.byday_short" type="integer">127492883</label>
 			<label index="tx_cal_exception_event.bymonthday_short" type="integer">222205205</label>
 			<label index="tx_cal_exception_event.bymonth_short" type="integer">127403160</label>
-			<label index="tx_cal_exception_event_group.exception_event_cnt" type="integer">107460741</label>
+			<label index="tx_cal_exception_event_group.exception_event_cnt"
+				type="integer">107460741</label>
 			<label index="tx_cal_organizer.country" type="integer">93787849</label>
 			<label index="tx_cal_organizer.countryzone" type="integer">140252960</label>
 			<label index="tx_cal_unknown_users" type="integer">146726758</label>
@@ -1500,7 +1553,8 @@
 			<label index="tx_cal_exception_event.description" type="integer">190479069</label>
 			<label index="tx_cal_exception_event_group" type="integer">68377223</label>
 			<label index="tx_cal_exception_event_group.title" type="integer">192455458</label>
-			<label index="tx_cal_exception_event_group.exception_event_cnt" type="integer">107460741</label>
+			<label index="tx_cal_exception_event_group.exception_event_cnt"
+				type="integer">107460741</label>
 			<label index="tx_cal_fe_user_event" type="integer">97590023</label>
 			<label index="tx_cal_fe_user_event.fe_user" type="integer">150585321</label>
 			<label index="tx_cal_fe_user_event.event" type="integer">172937159</label>
@@ -1573,31 +1627,54 @@
 			<label index="tx_cal_unknown_users" type="integer">147098227</label>
 			<label index="tx_cal_unknown_users.email" type="integer">216575645</label>
 			<label index="tx_cal_controller_flexform.sheet_general" type="integer">177986581</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode" type="integer">41664888</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.1" type="integer">29454801</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.11" type="integer">199725104</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.2" type="integer">122121700</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.3" type="integer">166676841</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.4" type="integer">30210797</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.30" type="integer">89362857</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.31" type="integer">177983638</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.32" type="integer">4758303</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.33" type="integer">132397966</label>
-			<label index="tx_cal_controller_flexform.sheet_general-mode2.99" type="integer">236824211</label>
-			<label index="tx_cal_controller_flexform.sheet_general-debugmode" type="integer">194214981</label>
-			<label index="tx_cal_controller_flexform.sheet_general-debugmode.0" type="integer">30563240</label>
-			<label index="tx_cal_controller_flexform.sheet_general-debugmode.1" type="integer">11605804</label>
-			<label index="tx_cal_controller_flexform.sheet_general-debugmode.2" type="integer">81908307</label>
-			<label index="tx_cal_controller_flexform.sheet_general-template" type="integer">26203726</label>
-			<label index="tx_cal_controller_flexform.sheet_general-listpage" type="integer">236555930</label>
-			<label index="tx_cal_controller_flexform.sheet_general-editpage" type="integer">20847167</label>
-			<label index="tx_cal_controller_flexform.sheet_general-editpopup" type="integer">208986071</label>
-			<label index="tx_cal_controller_flexform.sheet_general-backpage" type="integer">259532064</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode"
+				type="integer">41664888</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.1"
+				type="integer">29454801</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.11"
+				type="integer">199725104</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.2"
+				type="integer">122121700</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.3"
+				type="integer">166676841</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.4"
+				type="integer">30210797</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.30"
+				type="integer">89362857</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.31"
+				type="integer">177983638</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.32"
+				type="integer">4758303</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.33"
+				type="integer">132397966</label>
+			<label index="tx_cal_controller_flexform.sheet_general-mode2.99"
+				type="integer">236824211</label>
+			<label index="tx_cal_controller_flexform.sheet_general-debugmode"
+				type="integer">194214981</label>
+			<label index="tx_cal_controller_flexform.sheet_general-debugmode.0"
+				type="integer">30563240</label>
+			<label index="tx_cal_controller_flexform.sheet_general-debugmode.1"
+				type="integer">11605804</label>
+			<label index="tx_cal_controller_flexform.sheet_general-debugmode.2"
+				type="integer">81908307</label>
+			<label index="tx_cal_controller_flexform.sheet_general-template"
+				type="integer">26203726</label>
+			<label index="tx_cal_controller_flexform.sheet_general-listpage"
+				type="integer">236555930</label>
+			<label index="tx_cal_controller_flexform.sheet_general-editpage"
+				type="integer">20847167</label>
+			<label index="tx_cal_controller_flexform.sheet_general-editpopup"
+				type="integer">208986071</label>
+			<label index="tx_cal_controller_flexform.sheet_general-backpage"
+				type="integer">259532064</label>
 			<label index="tx_cal_controller_flexform.sheet_more" type="integer">225688337</label>
-			<label index="tx_cal_controller_flexform.sheet_statistics" type="integer">1052501</label>
-			<label index="tx_cal_controller_flexform.sheet_statistics-template" type="integer">26203726</label>
+			<label index="tx_cal_controller_flexform.sheet_statistics"
+				type="integer">1052501</label>
+			<label index="tx_cal_controller_flexform.sheet_statistics-template"
+				type="integer">26203726</label>
 			<label index="tx_cal_controller_flexform.sheet_localconf" type="integer">174757693</label>
-			<label index="tx_cal_controller_flexform.sheet_localconf-data" type="integer">113191694</label>
+			<label index="tx_cal_controller_flexform.sheet_localconf-data"
+				type="integer">113191694</label>
 			<label index="tt_content.list_type" type="integer">232545207</label>
 			<label index="frequency.none" type="integer">112064895</label>
 			<label index="frequency.day" type="integer">206646120</label>
@@ -1639,7 +1716,9 @@
 			<label index="tx_cal_event.remove_recurrence">Remove Recurrence</label>
 			<label index="tx_cal_event.recurs_every_month">of every month.</label>
 			<label index="tx_cal_event.recurs_selected_months">of selected months.</label>
-			<label index="tx_cal_event.byday">By Day (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">By Day (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_event.byday_short">By Day of the Week</label>
 			<label index="tx_cal_event.byday_all">All Days</label>
 			<label index="tx_cal_event.byday_count_first">First</label>
@@ -1719,7 +1798,9 @@
 			<label index="tx_cal_event.remove_recurrence">Remove Recurrence</label>
 			<label index="tx_cal_event.recurs_every_month">of every month.</label>
 			<label index="tx_cal_event.recurs_selected_months">of selected months.</label>
-			<label index="tx_cal_event.byday">By Day (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_event.byday">By Day (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_event.byday_short">By Day of the Week</label>
 			<label index="tx_cal_event.byday_all">All Days</label>
 			<label index="tx_cal_event.byday_count_first">First</label>
@@ -1787,7 +1868,9 @@
 			<label index="tx_cal_exception_event.end_time">Exception End Time</label>
 			<label index="tx_cal_exception_event.allday">All Day Exception</label>
 			<label index="tx_cal_exception_event.freq">Frequency</label>
-			<label index="tx_cal_exception_event.byday">By Day (a combination of: &quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot; und &quot;su&quot;, or &quot;all&quot;)</label>
+			<label index="tx_cal_exception_event.byday">By Day (a combination of:
+				&quot;mo&quot;,&quot;tu&quot;,&quot;we&quot;,&quot;th&quot;,&quot;fr&quot;,&quot;sa&quot;
+				und &quot;su&quot;, or &quot;all&quot;)</label>
 			<label index="tx_cal_exception_event.byday_short">By Day of the Week</label>
 			<label index="tx_cal_exception_event.bymonthday">By Monthday (e.g.: 1,2,30 or all)</label>
 			<label index="tx_cal_exception_event.bymonthday_short">By Day of the Month</label>
@@ -1818,7 +1901,8 @@
 			<label index="tx_cal_calendar.refresh">Refresh Interval (Minutes)</label>
 			<label index="tx_cal_calendar.owner">Owner</label>
 			<label index="tx_cal_calendar.activate_fnb">Enable free and busy view</label>
-			<label index="tx_cal_calendar.fb_users_groups">Limit the free and busy view to these users and/or Groups (else public)</label>
+			<label index="tx_cal_calendar.fb_users_groups">Limit the free and busy view to these users and/or
+				Groups (else public)</label>
 			<label index="tx_cal_calendar.createNew">create a new calendar</label>
 			<label index="tx_cal_calendar.edit">edit selected calendar</label>
 			<label index="tx_cal_calendar_private">The users private calendar</label>

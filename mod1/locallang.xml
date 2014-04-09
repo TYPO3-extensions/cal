@@ -1,296 +1,302 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-    <meta type="array">
-        <description></description>
-        <type>module</type>
-        <csh_table></csh_table>
-        <labelContext type="array">
-        </labelContext>
-    </meta>
-    <data type="array">
-        <languageKey index="default" type="array">
-            <label index="title">Index generator for calendar base recurring events</label>
-            <label index="function1">Information</label>
-            <label index="function2">Generate</label>
-            <label index="notice_header">Welcome</label>
-            <label index="notice">&lt;div align=center&gt;&lt;strong&gt;Notice header&lt;/strong&gt;&lt;/div&gt;&lt;BR&gt;Before you proceed, please read carefully:</label>
-            <label index="capabilities_header">Capabilities of this tool</label>
-            <label index="capabilities">This tool will create an index for all recurring tx_cal_event and tx_cal_exception_event instances.</label>
-            <label index="tableHeader1">Page/Folder containing events/exception events</label>
-            <label index="tableHeader2">Frontend Page with calendar plugin</label>
-            <label index="browse">Browse for records</label>
-            <label index="submit">Submit</label>
-            <label index="selectPage">Select the page where the typoscript of calendar base can be found. This should be a normal frontend page.</label>
-            <label index="indexStart">Enter the start time the index should start generating (YYYYMMDD)</label>
-            <label index="indexEnd">Enter the index ending time (YYYYMMDD)</label>
-            <label index="startIndexing">Click on submit to start indexing</label>
-            <label index="notAllPagesAssigned">You need to assign a frontend page to all found storage places in order to start indexing!</label>
-            <label index="result">Result: </label>
-            <label index="toBeIndexed"> -&gt; Events to be indexed: </label>
-            <label index="droppingTable">Dropping index table </label>
-            <label index="indexing">Indexing</label>
-        </languageKey>
-        <languageKey index="dk" type="array">
-        </languageKey>
-        <languageKey index="de" type="array">
-        </languageKey>
-        <languageKey index="no" type="array">
-        </languageKey>
-        <languageKey index="it" type="array">
-        </languageKey>
-        <languageKey index="fr" type="array">
-        </languageKey>
-        <languageKey index="es" type="array">
-        </languageKey>
-        <languageKey index="nl" type="array">
-        </languageKey>
-        <languageKey index="cz" type="array">
-        </languageKey>
-        <languageKey index="pl" type="array">
-        </languageKey>
-        <languageKey index="si" type="array">
-        </languageKey>
-        <languageKey index="fi" type="array">
-        </languageKey>
-        <languageKey index="tr" type="array">
-        </languageKey>
-        <languageKey index="se" type="array">
-        </languageKey>
-        <languageKey index="pt" type="array">
-        </languageKey>
-        <languageKey index="ru" type="array">
-        </languageKey>
-        <languageKey index="ro" type="array">
-        </languageKey>
-        <languageKey index="ch" type="array">
-        </languageKey>
-        <languageKey index="sk" type="array">
-        </languageKey>
-        <languageKey index="lt" type="array">
-        </languageKey>
-        <languageKey index="is" type="array">
-        </languageKey>
-        <languageKey index="hr" type="array">
-        </languageKey>
-        <languageKey index="hu" type="array">
-        </languageKey>
-        <languageKey index="gl" type="array">
-        </languageKey>
-        <languageKey index="th" type="array">
-        </languageKey>
-        <languageKey index="gr" type="array">
-        </languageKey>
-        <languageKey index="hk" type="array">
-        </languageKey>
-        <languageKey index="eu" type="array">
-        </languageKey>
-        <languageKey index="bg" type="array">
-        </languageKey>
-        <languageKey index="br" type="array">
-        </languageKey>
-        <languageKey index="et" type="array">
-        </languageKey>
-        <languageKey index="ar" type="array">
-        </languageKey>
-        <languageKey index="he" type="array">
-        </languageKey>
-        <languageKey index="ua" type="array">
-        </languageKey>
-        <languageKey index="lv" type="array">
-        </languageKey>
-        <languageKey index="jp" type="array">
-        </languageKey>
-        <languageKey index="vn" type="array">
-        </languageKey>
-        <languageKey index="ca" type="array">
-        </languageKey>
-        <languageKey index="ba" type="array">
-        </languageKey>
-        <languageKey index="kr" type="array">
-        </languageKey>
-    </data>
-    <orig_hash type="array">
-        <languageKey index="default" type="array">
-            <label index="title" type="integer">160190671</label>
-            <label index="function1" type="integer">176340495</label>
-            <label index="function2" type="integer">53186973</label>
-            <label index="notice_header" type="integer">137500844</label>
-            <label index="notice" type="integer">244197590</label>
-            <label index="capabilities_header" type="integer">235312747</label>
-            <label index="capabilities" type="integer">265998735</label>
-            <label index="tableHeader1" type="integer">124841659</label>
-            <label index="tableHeader2" type="integer">250451894</label>
-            <label index="browse" type="integer">3203407</label>
-            <label index="submit" type="integer">172833558</label>
-            <label index="selectPage" type="integer">13186099</label>
-            <label index="indexStart" type="integer">92521741</label>
-            <label index="indexEnd" type="integer">132549580</label>
-            <label index="startIndexing" type="integer">182684290</label>
-            <label index="notAllPagesAssigned" type="integer">252237131</label>
-            <label index="result" type="integer">257132644</label>
-            <label index="toBeIndexed" type="integer">44755805</label>
-            <label index="droppingTable" type="integer">114304630</label>
-            <label index="indexing" type="integer">86103277</label>
-        </languageKey>
-        <languageKey index="dk" type="array">
-        </languageKey>
-        <languageKey index="de" type="array">
-        </languageKey>
-        <languageKey index="no" type="array">
-        </languageKey>
-        <languageKey index="it" type="array">
-        </languageKey>
-        <languageKey index="fr" type="array">
-        </languageKey>
-        <languageKey index="es" type="array">
-        </languageKey>
-        <languageKey index="nl" type="array">
-        </languageKey>
-        <languageKey index="cz" type="array">
-        </languageKey>
-        <languageKey index="pl" type="array">
-        </languageKey>
-        <languageKey index="si" type="array">
-        </languageKey>
-        <languageKey index="fi" type="array">
-        </languageKey>
-        <languageKey index="tr" type="array">
-        </languageKey>
-        <languageKey index="se" type="array">
-        </languageKey>
-        <languageKey index="pt" type="array">
-        </languageKey>
-        <languageKey index="ru" type="array">
-        </languageKey>
-        <languageKey index="ro" type="array">
-        </languageKey>
-        <languageKey index="ch" type="array">
-        </languageKey>
-        <languageKey index="sk" type="array">
-        </languageKey>
-        <languageKey index="lt" type="array">
-        </languageKey>
-        <languageKey index="is" type="array">
-        </languageKey>
-        <languageKey index="hr" type="array">
-        </languageKey>
-        <languageKey index="hu" type="array">
-        </languageKey>
-        <languageKey index="gl" type="array">
-        </languageKey>
-        <languageKey index="th" type="array">
-        </languageKey>
-        <languageKey index="gr" type="array">
-        </languageKey>
-        <languageKey index="hk" type="array">
-        </languageKey>
-        <languageKey index="eu" type="array">
-        </languageKey>
-        <languageKey index="bg" type="array">
-        </languageKey>
-        <languageKey index="br" type="array">
-        </languageKey>
-        <languageKey index="et" type="array">
-        </languageKey>
-        <languageKey index="ar" type="array">
-        </languageKey>
-        <languageKey index="he" type="array">
-        </languageKey>
-        <languageKey index="ua" type="array">
-        </languageKey>
-        <languageKey index="lv" type="array">
-        </languageKey>
-        <languageKey index="jp" type="array">
-        </languageKey>
-        <languageKey index="vn" type="array">
-        </languageKey>
-        <languageKey index="ca" type="array">
-        </languageKey>
-        <languageKey index="ba" type="array">
-        </languageKey>
-        <languageKey index="kr" type="array">
-        </languageKey>
-    </orig_hash>
-    <orig_text type="array">
-        <languageKey index="default" type="array">
-        </languageKey>
-        <languageKey index="dk" type="array">
-        </languageKey>
-        <languageKey index="de" type="array">
-        </languageKey>
-        <languageKey index="no" type="array">
-        </languageKey>
-        <languageKey index="it" type="array">
-        </languageKey>
-        <languageKey index="fr" type="array">
-        </languageKey>
-        <languageKey index="es" type="array">
-        </languageKey>
-        <languageKey index="nl" type="array">
-        </languageKey>
-        <languageKey index="cz" type="array">
-        </languageKey>
-        <languageKey index="pl" type="array">
-        </languageKey>
-        <languageKey index="si" type="array">
-        </languageKey>
-        <languageKey index="fi" type="array">
-        </languageKey>
-        <languageKey index="tr" type="array">
-        </languageKey>
-        <languageKey index="se" type="array">
-        </languageKey>
-        <languageKey index="pt" type="array">
-        </languageKey>
-        <languageKey index="ru" type="array">
-        </languageKey>
-        <languageKey index="ro" type="array">
-        </languageKey>
-        <languageKey index="ch" type="array">
-        </languageKey>
-        <languageKey index="sk" type="array">
-        </languageKey>
-        <languageKey index="lt" type="array">
-        </languageKey>
-        <languageKey index="is" type="array">
-        </languageKey>
-        <languageKey index="hr" type="array">
-        </languageKey>
-        <languageKey index="hu" type="array">
-        </languageKey>
-        <languageKey index="gl" type="array">
-        </languageKey>
-        <languageKey index="th" type="array">
-        </languageKey>
-        <languageKey index="gr" type="array">
-        </languageKey>
-        <languageKey index="hk" type="array">
-        </languageKey>
-        <languageKey index="eu" type="array">
-        </languageKey>
-        <languageKey index="bg" type="array">
-        </languageKey>
-        <languageKey index="br" type="array">
-        </languageKey>
-        <languageKey index="et" type="array">
-        </languageKey>
-        <languageKey index="ar" type="array">
-        </languageKey>
-        <languageKey index="he" type="array">
-        </languageKey>
-        <languageKey index="ua" type="array">
-        </languageKey>
-        <languageKey index="lv" type="array">
-        </languageKey>
-        <languageKey index="jp" type="array">
-        </languageKey>
-        <languageKey index="vn" type="array">
-        </languageKey>
-        <languageKey index="ca" type="array">
-        </languageKey>
-        <languageKey index="ba" type="array">
-        </languageKey>
-        <languageKey index="kr" type="array">
-        </languageKey>
-    </orig_text>
+	<meta type="array">
+		<description></description>
+		<type>module</type>
+		<csh_table></csh_table>
+		<labelContext type="array">
+		</labelContext>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title">Index generator for calendar base recurring events</label>
+			<label index="function1">Information</label>
+			<label index="function2">Generate</label>
+			<label index="notice_header">Welcome</label>
+			<label index="notice">&lt;div align=center&gt;&lt;strong&gt;Notice
+				header&lt;/strong&gt;&lt;/div&gt;&lt;BR&gt;Before you proceed,
+				please read carefully:</label>
+			<label index="capabilities_header">Capabilities of this tool</label>
+			<label index="capabilities">This tool will create an index for all recurring
+				tx_cal_event and tx_cal_exception_event instances.</label>
+			<label index="tableHeader1">Page/Folder containing events/exception events</label>
+			<label index="tableHeader2">Frontend Page with calendar plugin</label>
+			<label index="browse">Browse for records</label>
+			<label index="submit">Submit</label>
+			<label index="selectPage">Select the page where the typoscript of calendar
+				base can be found. This should be a normal frontend page.</label>
+			<label index="indexStart">Enter the start time the index should start
+				generating (YYYYMMDD)</label>
+			<label index="indexEnd">Enter the index ending time (YYYYMMDD)</label>
+			<label index="startIndexing">Click on submit to start indexing</label>
+			<label index="notAllPagesAssigned">You need to assign a frontend page to all found
+				storage places in order to start indexing!</label>
+			<label index="result">Result: </label>
+			<label index="toBeIndexed"> -&gt; Events to be indexed: </label>
+			<label index="droppingTable">Dropping index table </label>
+			<label index="indexing">Indexing</label>
+		</languageKey>
+		<languageKey index="dk" type="array">
+		</languageKey>
+		<languageKey index="de" type="array">
+		</languageKey>
+		<languageKey index="no" type="array">
+		</languageKey>
+		<languageKey index="it" type="array">
+		</languageKey>
+		<languageKey index="fr" type="array">
+		</languageKey>
+		<languageKey index="es" type="array">
+		</languageKey>
+		<languageKey index="nl" type="array">
+		</languageKey>
+		<languageKey index="cz" type="array">
+		</languageKey>
+		<languageKey index="pl" type="array">
+		</languageKey>
+		<languageKey index="si" type="array">
+		</languageKey>
+		<languageKey index="fi" type="array">
+		</languageKey>
+		<languageKey index="tr" type="array">
+		</languageKey>
+		<languageKey index="se" type="array">
+		</languageKey>
+		<languageKey index="pt" type="array">
+		</languageKey>
+		<languageKey index="ru" type="array">
+		</languageKey>
+		<languageKey index="ro" type="array">
+		</languageKey>
+		<languageKey index="ch" type="array">
+		</languageKey>
+		<languageKey index="sk" type="array">
+		</languageKey>
+		<languageKey index="lt" type="array">
+		</languageKey>
+		<languageKey index="is" type="array">
+		</languageKey>
+		<languageKey index="hr" type="array">
+		</languageKey>
+		<languageKey index="hu" type="array">
+		</languageKey>
+		<languageKey index="gl" type="array">
+		</languageKey>
+		<languageKey index="th" type="array">
+		</languageKey>
+		<languageKey index="gr" type="array">
+		</languageKey>
+		<languageKey index="hk" type="array">
+		</languageKey>
+		<languageKey index="eu" type="array">
+		</languageKey>
+		<languageKey index="bg" type="array">
+		</languageKey>
+		<languageKey index="br" type="array">
+		</languageKey>
+		<languageKey index="et" type="array">
+		</languageKey>
+		<languageKey index="ar" type="array">
+		</languageKey>
+		<languageKey index="he" type="array">
+		</languageKey>
+		<languageKey index="ua" type="array">
+		</languageKey>
+		<languageKey index="lv" type="array">
+		</languageKey>
+		<languageKey index="jp" type="array">
+		</languageKey>
+		<languageKey index="vn" type="array">
+		</languageKey>
+		<languageKey index="ca" type="array">
+		</languageKey>
+		<languageKey index="ba" type="array">
+		</languageKey>
+		<languageKey index="kr" type="array">
+		</languageKey>
+	</data>
+	<orig_hash type="array">
+		<languageKey index="default" type="array">
+			<label index="title" type="integer">160190671</label>
+			<label index="function1" type="integer">176340495</label>
+			<label index="function2" type="integer">53186973</label>
+			<label index="notice_header" type="integer">137500844</label>
+			<label index="notice" type="integer">244197590</label>
+			<label index="capabilities_header" type="integer">235312747</label>
+			<label index="capabilities" type="integer">265998735</label>
+			<label index="tableHeader1" type="integer">124841659</label>
+			<label index="tableHeader2" type="integer">250451894</label>
+			<label index="browse" type="integer">3203407</label>
+			<label index="submit" type="integer">172833558</label>
+			<label index="selectPage" type="integer">13186099</label>
+			<label index="indexStart" type="integer">92521741</label>
+			<label index="indexEnd" type="integer">132549580</label>
+			<label index="startIndexing" type="integer">182684290</label>
+			<label index="notAllPagesAssigned" type="integer">252237131</label>
+			<label index="result" type="integer">257132644</label>
+			<label index="toBeIndexed" type="integer">44755805</label>
+			<label index="droppingTable" type="integer">114304630</label>
+			<label index="indexing" type="integer">86103277</label>
+		</languageKey>
+		<languageKey index="dk" type="array">
+		</languageKey>
+		<languageKey index="de" type="array">
+		</languageKey>
+		<languageKey index="no" type="array">
+		</languageKey>
+		<languageKey index="it" type="array">
+		</languageKey>
+		<languageKey index="fr" type="array">
+		</languageKey>
+		<languageKey index="es" type="array">
+		</languageKey>
+		<languageKey index="nl" type="array">
+		</languageKey>
+		<languageKey index="cz" type="array">
+		</languageKey>
+		<languageKey index="pl" type="array">
+		</languageKey>
+		<languageKey index="si" type="array">
+		</languageKey>
+		<languageKey index="fi" type="array">
+		</languageKey>
+		<languageKey index="tr" type="array">
+		</languageKey>
+		<languageKey index="se" type="array">
+		</languageKey>
+		<languageKey index="pt" type="array">
+		</languageKey>
+		<languageKey index="ru" type="array">
+		</languageKey>
+		<languageKey index="ro" type="array">
+		</languageKey>
+		<languageKey index="ch" type="array">
+		</languageKey>
+		<languageKey index="sk" type="array">
+		</languageKey>
+		<languageKey index="lt" type="array">
+		</languageKey>
+		<languageKey index="is" type="array">
+		</languageKey>
+		<languageKey index="hr" type="array">
+		</languageKey>
+		<languageKey index="hu" type="array">
+		</languageKey>
+		<languageKey index="gl" type="array">
+		</languageKey>
+		<languageKey index="th" type="array">
+		</languageKey>
+		<languageKey index="gr" type="array">
+		</languageKey>
+		<languageKey index="hk" type="array">
+		</languageKey>
+		<languageKey index="eu" type="array">
+		</languageKey>
+		<languageKey index="bg" type="array">
+		</languageKey>
+		<languageKey index="br" type="array">
+		</languageKey>
+		<languageKey index="et" type="array">
+		</languageKey>
+		<languageKey index="ar" type="array">
+		</languageKey>
+		<languageKey index="he" type="array">
+		</languageKey>
+		<languageKey index="ua" type="array">
+		</languageKey>
+		<languageKey index="lv" type="array">
+		</languageKey>
+		<languageKey index="jp" type="array">
+		</languageKey>
+		<languageKey index="vn" type="array">
+		</languageKey>
+		<languageKey index="ca" type="array">
+		</languageKey>
+		<languageKey index="ba" type="array">
+		</languageKey>
+		<languageKey index="kr" type="array">
+		</languageKey>
+	</orig_hash>
+	<orig_text type="array">
+		<languageKey index="default" type="array">
+		</languageKey>
+		<languageKey index="dk" type="array">
+		</languageKey>
+		<languageKey index="de" type="array">
+		</languageKey>
+		<languageKey index="no" type="array">
+		</languageKey>
+		<languageKey index="it" type="array">
+		</languageKey>
+		<languageKey index="fr" type="array">
+		</languageKey>
+		<languageKey index="es" type="array">
+		</languageKey>
+		<languageKey index="nl" type="array">
+		</languageKey>
+		<languageKey index="cz" type="array">
+		</languageKey>
+		<languageKey index="pl" type="array">
+		</languageKey>
+		<languageKey index="si" type="array">
+		</languageKey>
+		<languageKey index="fi" type="array">
+		</languageKey>
+		<languageKey index="tr" type="array">
+		</languageKey>
+		<languageKey index="se" type="array">
+		</languageKey>
+		<languageKey index="pt" type="array">
+		</languageKey>
+		<languageKey index="ru" type="array">
+		</languageKey>
+		<languageKey index="ro" type="array">
+		</languageKey>
+		<languageKey index="ch" type="array">
+		</languageKey>
+		<languageKey index="sk" type="array">
+		</languageKey>
+		<languageKey index="lt" type="array">
+		</languageKey>
+		<languageKey index="is" type="array">
+		</languageKey>
+		<languageKey index="hr" type="array">
+		</languageKey>
+		<languageKey index="hu" type="array">
+		</languageKey>
+		<languageKey index="gl" type="array">
+		</languageKey>
+		<languageKey index="th" type="array">
+		</languageKey>
+		<languageKey index="gr" type="array">
+		</languageKey>
+		<languageKey index="hk" type="array">
+		</languageKey>
+		<languageKey index="eu" type="array">
+		</languageKey>
+		<languageKey index="bg" type="array">
+		</languageKey>
+		<languageKey index="br" type="array">
+		</languageKey>
+		<languageKey index="et" type="array">
+		</languageKey>
+		<languageKey index="ar" type="array">
+		</languageKey>
+		<languageKey index="he" type="array">
+		</languageKey>
+		<languageKey index="ua" type="array">
+		</languageKey>
+		<languageKey index="lv" type="array">
+		</languageKey>
+		<languageKey index="jp" type="array">
+		</languageKey>
+		<languageKey index="vn" type="array">
+		</languageKey>
+		<languageKey index="ca" type="array">
+		</languageKey>
+		<languageKey index="ba" type="array">
+		</languageKey>
+		<languageKey index="kr" type="array">
+		</languageKey>
+	</orig_text>
 </T3locallang>

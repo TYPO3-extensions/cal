@@ -2543,8 +2543,7 @@ class tx_cal_controller extends tslib_pibase {
 				"\x99", // single quote closing
 				"\x8c", // double quote opening
 				"\x9d"  // double quote closing
-	    )// double quote closing
-		null;
+	    );
 		
 		$goodchr = array (
 				'',
@@ -2588,8 +2587,7 @@ class tx_cal_controller extends tslib_pibase {
 		$result_array = $modelObj->findCurrentTodos ($type, $pidList);
 		
 		// Hook: preLoadTodosRendering
-		foreach// Hook: preLoadTodosRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'preLoadTodosRendering')) {
 				$hookObj->preLoadTodosRendering ($result_array, $this);
 			}
@@ -2600,8 +2598,7 @@ class tx_cal_controller extends tslib_pibase {
 		$this->conf ['view'] = $this->piVars ['targetView'];
 		if (! empty ($result_array)) {
 			// use array keys for the loop in order to be able to use referenced events instead of copies and save some memory
-			$resultArrayKeys// use array keys for the loop in order to be able to use referenced events instead of copies and save some memory
-			null = array_keys ($result_array);
+			$resultArrayKeys = array_keys ($result_array);
 			foreach ($resultArrayKeys as $resultArrayKey) {
 				$masterArrayKeys = array_keys ($result_array [$resultArrayKey]);
 				foreach ($masterArrayKeys as $dateKey) {
@@ -2627,8 +2624,7 @@ class tx_cal_controller extends tslib_pibase {
 		$page = tx_cal_functions::substituteMarkerArrayNotCached ('[' . implode (',', $ajaxStringArray) . ']', $sims, $rems, $wrapped);
 		
 		// Hook: postLoadTodosRendering
-		foreach// Hook: postLoadTodosRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'postLoadTodosRendering')) {
 				$hookObj->postLoadTodosRendering ($page, $this);
 			}
@@ -2650,8 +2646,7 @@ class tx_cal_controller extends tslib_pibase {
 		$calendarArray = $modelObj->findAllCalendar ('tx_cal_calendar');
 		
 		// Hook: preLoadCalendarsRendering
-		foreach// Hook: preLoadCalendarsRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'preLoadCalendarsRendering')) {
 				$hookObj->preLoadCalendarsRendering ($calendarArray, $this);
 			}
@@ -2664,8 +2659,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		
 		// Hook: postLoadCalendarsRendering
-		foreach// Hook: postLoadCalendarsRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'postLoadCalendarsRendering')) {
 				$hookObj->postLoadCalendarsRendering ($ajaxStringArray, $this);
 			}
@@ -2679,8 +2673,7 @@ class tx_cal_controller extends tslib_pibase {
 		$categoryArray = $modelObj->findAllCategories ('cal_category_model', 'tx_cal_category', $this->conf ['pidList']);
 		
 		// Hook: preLoadCategoriesRendering
-		foreach// Hook: preLoadCategoriesRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'preLoadCategoriesRendering')) {
 				$hookObj->preLoadCategoriesRendering ($categoryArray, $this);
 			}
@@ -2691,8 +2684,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		
 		// Hook: postLoadCategoriesRendering
-		foreach// Hook: postLoadCategoriesRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'postLoadCategoriesRendering')) {
 				$hookObj->postLoadCategoriesRendering ($ajaxStringArray, $this);
 			}
@@ -2709,8 +2701,7 @@ class tx_cal_controller extends tslib_pibase {
 		$locationArray = $modelObj->findAllLocations ($type, $pidList);
 		
 		// Hook: preLoadLocationsRendering
-		foreach// Hook: preLoadLocationsRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'preLoadLocationsRendering')) {
 				$hookObj->preLoadLocationsRendering ($locationArray, $this);
 			}
@@ -2721,8 +2712,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		
 		// Hook: postLoadLocationsRendering
-		foreach// Hook: postLoadLocationsRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'postLoadLocationsRendering')) {
 				$hookObj->postLoadLocationsRendering ($ajaxStringArray, $this);
 			}
@@ -2739,8 +2729,7 @@ class tx_cal_controller extends tslib_pibase {
 		$organizerArray = $modelObj->findAllOrganizer ($type, $pidList);
 		
 		// Hook: preLoadOrganizersRendering
-		foreach// Hook: preLoadOrganizersRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'preLoadOrganizersRendering')) {
 				$hookObj->preLoadOrganizersRendering ($organizerArray, $this);
 			}
@@ -2751,8 +2740,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		
 		// Hook: postLoadOrganizersRendering
-		foreach// Hook: postLoadOrganizersRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'postLoadOrganizersRendering')) {
 				$hookObj->postLoadOrganizersRendering ($ajaxStringArray, $this);
 			}
@@ -2781,8 +2769,7 @@ class tx_cal_controller extends tslib_pibase {
 		$rights [] = 'userGroups:[' . implode (',', $rightsObj->getUserGroups ()) . ']';
 		
 		// Hook: postLoadRightsRendering
-		foreach// Hook: postLoadRightsRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'postLoadRightsRendering')) {
 				$hookObj->postLoadRightsRendering ($rights, $this);
 			}
@@ -2791,9 +2778,8 @@ class tx_cal_controller extends tslib_pibase {
 	}
 	function updateConfWithFlexform(&$piFlexForm) {
 		// $this->updateIfNotEmpty($this->conf['pages'], $this->pi_getFFvalue($piFlexForm, 'pages'));
-		//		$this->updateIfNotEmpty($this->conf['recursive'], $this->pi_getFFvalue($piFlexForm, 'recursive'));
-		if// $this->updateIfNotEmpty($this->conf['recursive'], $this->pi_getFFvalue($piFlexForm, 'recursive'));
-		null ($this->conf ['dontListenToFlexForm'] == 1) {
+		// $this->updateIfNotEmpty($this->conf['recursive'], $this->pi_getFFvalue($piFlexForm, 'recursive'));
+		if ($this->conf ['dontListenToFlexForm'] == 1) {
 			return;
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['general.'] ['calendarName'] != 1) {
@@ -2919,17 +2905,13 @@ class tx_cal_controller extends tslib_pibase {
 		$flexformTyposcript = $this->pi_getFFvalue ($piFlexForm, 'myTS', 's_TS_View');
 		if ($flexformTyposcript) {
 			#require_once(PATH_t3lib.'class.t3lib_tsparser.php'); 
-			$tsparser// equire_once(PATH_t3lib.'class.t3lib_tsparser.php');
-			null = t3lib_div::makeInstance ('t3lib_tsparser');
+			$tsparser = t3lib_div::makeInstance ('t3lib_tsparser');
 			// Copy conf into existing setup 
-			$tsparser// Copy conf into existing setup
-			null->setup = $this->conf;
+			$tsparser->setup = $this->conf;
 			// Parse the new Typoscript 
-			$tsparser// Parse the new Typoscript
-			null->parse ($flexformTyposcript);
+			$tsparser->parse ($flexformTyposcript);
 			// Copy the resulting setup back into conf 
-			$this// Copy the resulting setup back into conf
-			null->conf = $tsparser->setup;
+			$this->conf = $tsparser->setup;
 		}
 	}
 	function updateIfNotEmpty(&$confVar, $newConfVar) {
@@ -2964,15 +2946,13 @@ class tx_cal_controller extends tslib_pibase {
 			$sims = array ();
 			foreach ($tags as $tag => $data) {
 				// This replaces any tags
-				$sims// This replaces any tags
-				null ['###' . strtoupper ($tag) . '###'] = tx_cal_functions::substituteMarkerArrayNotCached ($data, '###' . strtoupper ($tag) . '###', array (), array ());
+				$sims ['###' . strtoupper ($tag) . '###'] = tx_cal_functions::substituteMarkerArrayNotCached ($data, '###' . strtoupper ($tag) . '###', array (), array ());
 			}
 			
 			$page = tx_cal_functions::substituteMarkerArrayNotCached ($page, $sims, array (), array ());
 		} else {
 			//die('No tags designated for replacement.');
-		}// die('No tags designated for replacement.');
-		null
+		}
 		return $page;
 	}
 	function shortenLastViewAndGetTargetViewParameters($takeFirstInsteadOfLast = false) {
@@ -3098,8 +3078,7 @@ class tx_cal_controller extends tslib_pibase {
 		$myController = $controller;
 		$controller = &$myController;
 		// besides of the regular cObj we provide a localCobj, whos data can be overridden with custom data for a more flexible rendering of TSObjects
-		$local_cObj// besides of the regular cObj we provide a localCobj, whos data can be overridden with custom data for a more flexible rendering of TSObjects
-		null = &tx_cal_registry::Registry ('basic', 'local_cobj');
+		$local_cObj = &tx_cal_registry::Registry ('basic', 'local_cobj');
 		$local_cObj = t3lib_div::makeInstance ('tslib_cObj');
 		$local_cObj->start (array ());
 		$cache = &tx_cal_registry::Registry ('basic', 'cache');
@@ -3241,8 +3220,7 @@ class tx_cal_controller extends tslib_pibase {
 	function getParametersForTyposcriptLink(&$parameterArray, $overrulePIvars = array(), $cache = false, $clearAnyway = false, $altPageId = 0) {
 		
 		// copied from function 'pi_linkTP_keepPIvars'
-		if// copied from function 'pi_linkTP_keepPIvars'
-		null (is_array ($this->piVars) && is_array ($overrulePIvars) && ! $clearAnyway) {
+		if (is_array ($this->piVars) && is_array ($overrulePIvars) && ! $clearAnyway) {
 			$piVars = $this->piVars;
 			unset ($piVars ['DATA']);
 			$overrulePIvars = t3lib_div::array_merge_recursive_overrule ($piVars, $overrulePIvars);
@@ -3299,27 +3277,23 @@ class tx_cal_controller extends tslib_pibase {
 			
 			foreach ($sessionVars as $key => $value) {
 				//$_SESSION[$this->prefixId][$key] = $value;
-			}// $_SESSION[$this->prefixId][$key] = $value;
-			null
+			}
 		}
 		/* TEST */
 		
 		// use internal method for cleaning up piVars
-		$this// use internal method for cleaning up piVars
-		null->cleanupUrlParameter ($piVars);
+		$this->cleanupUrlParameter ($piVars);
 		
 		// copied and modified logic of function 'pi_linkTP'
 		# once useCacheHash property in typolinks has stdWrap, we can use this flag - until then it's unfortunately useless :(
 		#$parameterArray['link_useCacheHash'] = $this->pi_USER_INT_obj ? 0 : $cache;
-		$parameterArray// copied and modified logic of function 'pi_linkTP'
-		null ['link_no_cache'] = $this->pi_USER_INT_obj ? 0 : ! $cache;
+		$parameterArray ['link_no_cache'] = $this->pi_USER_INT_obj ? 0 : ! $cache;
 		$parameterArray ['link_parameter'] = $altPageId ? $altPageId : ($this->pi_tmpPageId ? $this->pi_tmpPageId : $GLOBALS ['TSFE']->id);
 		$parameterArray ['link_additionalParams'] = $this->conf ['parent.'] ['addParams'] . t3lib_div::implodeArrayForUrl ('', $piVars, '', true) . $this->pi_moreParams;
 		$parameterArray ['link_ATagParams'] = 'class="url"';
 		
 		# add time/date related parameters to all link objects, so that they can use them e.g. to display the monthname etc.
-		$parameterArray// add time/date related parameters to all link objects, so that they can use them e.g. to display the monthname etc.
-		null ['getdate'] = $this->conf ['getdate'];
+		$parameterArray ['getdate'] = $this->conf ['getdate'];
 		if ($overrulePIvars ['getdate'] && is_object ($date)) {
 			$parameterArray ['link_timestamp'] = $date->getTime ();
 			$parameterArray ['link_getdate'] = $overrulePIvars ['getdate'];
@@ -3357,8 +3331,7 @@ class tx_cal_controller extends tslib_pibase {
 		$lastViewParams = array ();
 		$useLastView = true;
 		// temporary fix for BACK_LINK urls
-		$dontExtendLastView// temporary fix for BACK_LINK urls
-		null = $params ['dontExtendLastView'];
+		$dontExtendLastView = $params ['dontExtendLastView'];
 		unset ($params ['dontExtendLastView']);
 		
 		switch (trim ($params ['view'])) {
@@ -3413,7 +3386,7 @@ class tx_cal_controller extends tslib_pibase {
 			$this->pi_linkTP ('|', $linkParams, $this->conf ['cache'], $this->conf ['view.'] [$action . '_' . $object . '.'] ['redirectAfter' . ucwords ($action) . 'ToPid']);
 			$rURL = $this->cObj->lastTypoLinkUrl;
 			Header ('Location: ' . t3lib_div::locationHeaderUrl ($rURL));
-			exit ();
+			exit;
 		}
 	}
 	
@@ -3425,20 +3398,17 @@ class tx_cal_controller extends tslib_pibase {
 	function finish(&$content) {
 		$hookObjectsArr = $this->getHookObjectsArray ('finishViewRendering');
 		// Hook: preFinishViewRendering
-		foreach// Hook: preFinishViewRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'preFinishViewRendering')) {
 				$hookObj->preFinishViewRendering ($this, $content);
 			}
 		}
 		
 		// translate output
-		$this// translate output
-		null->translateLanguageMarker ($content);
+		$this->translateLanguageMarker ($content);
 		
 		// Hook: postFinishViewRendering
-		foreach// Hook: postFinishViewRendering
-		null ($hookObjectsArr as $hookObj) {
+		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'postFinishViewRendering')) {
 				$hookObj->postFinishViewRendering ($this, $content);
 			}
@@ -3448,8 +3418,7 @@ class tx_cal_controller extends tslib_pibase {
 	function translateLanguageMarker(&$content) {
 		// translate leftover markers
 		
-		// translate leftover markers
-		nullpreg_match_all ('!(###|%%%)([A-Z0-9_-|]*)\1!is', $content, $match);
+		preg_match_all ('!(###|%%%)([A-Z0-9_-|]*)\1!is', $content, $match);
 		$allLanguageMarkers = array_unique ($match [2]);
 		
 		if (count ($allLanguageMarkers)) {
@@ -3497,8 +3466,7 @@ class tx_cal_controller extends tslib_pibase {
 	function setWeekStartDay() {
 		if ($this->cObj->data ['pi_flexform']) {
 			$this->pi_initPIflexForm (); // Init and get the flexform data of the plugin
-			$piFlexForm// Init and get the flexform data of the plugin
-			null = $this->cObj->data ['pi_flexform'];
+			$piFlexForm = $this->cObj->data ['pi_flexform'];
 			
 			if ($this->conf ['dontListenToFlexForm.'] ['day.'] ['weekStartDay'] != 1) {
 				$this->updateIfNotEmpty ($this->conf ['view.'] ['weekStartDay'], $this->pi_getFFvalue ($piFlexForm, 'weekStartDay'));

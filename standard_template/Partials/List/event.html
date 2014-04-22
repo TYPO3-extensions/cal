@@ -9,10 +9,6 @@
 	</div>
 	<div class="summary">
 		<f:link.page
-			additionalParams="{tx_cal_controller: '{view: \'event\',type: event.type, uid: event.uid, year: event.start.year, month: event.start.month, day: event.start.day  }'}">{event.title}</f:link.page>
-	</div>
-	<div class="ics">
-		<f:link.page pageType="150"
-			additionalParams="{tx_cal_controller: '{view: \'single_ics\',type: \'tx_cal_phpicalendar\', uid:event.uid}'}">ffff</f:link.page>
+			additionalParams="{tx_cal_controller: '{view: \'event\',type: event.type, uid: event.uid, year: event.start.year, month: event.start.month, day: event.start.day  }'}">{event.title} {event.locationObject.city}</f:link.page>
 	</div>
 </dt>

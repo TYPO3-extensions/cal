@@ -441,24 +441,32 @@ plugin.tx_cal_controller {
 				# @description	Content object for event image
 				image =< tt_content.image.20
 				image {
+					rendering.singleCaption.fallbackRendering.if.isTrue.data = register:ORIG_FILENAME
+					
 					//17 = in text right
 					textPos.override = 17
 					layout.key.override = 17
 					1 {
-						altText.override.field = imagealttext
-						titleText.override.field = imagetitletext
-						caption.override.field = imagecaption
+						file.import.data = register:ORIG_FILENAME
+						
+						altText.data = field:imagealttext
+						titleText.data = field:imagetitletext
+						caption.data = field:imagecaption
+						
+						imageLinkWrap.typolink.parameter.data = register:ORIG_FILENAME
+						imageLinkWrap.typolink.ATagParams.dataWrap = class="{$styles.content.imgtext.linkWrap.lightboxCssClass}" rel="{$styles.content.imgtext.linkWrap.lightboxRelAttribute}"
 					}
+					
+					caption.1.1.data = field:imagecaption
 
 					imgMax = 4
 					imgList >
 					imgList.override.current = 1
 					imgPath = {$plugin.tx_cal_controller.uploadPath.image}
 
-					stdWrap.dataWrap = <div>%%%IMAGE_LABEL%%%:&nbsp; |</div>
 					stdWrap.required = 1
-					1.imageLinkWrap.enable.field >
-					1.imageLinkWrap.enable.override = 1
+					stdWrap.dataWrap = <div>%%%IMAGE_LABEL%%%:&nbsp; |</div>
+					
 					maxW = {$plugin.tx_cal_controller.singleMaxW}
 					# switch to turn on the lightbox: kj_imagelightbox2 
 					# 1.imageLightbox2 = 1

@@ -541,13 +541,13 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 			}
 		}
 		
-		// se alternativ way of MODULE__MARKER
-		// yntax: ###MODULE__MODULENAME___MODULEMARKER###
-		// ollect them, call each Modul, retrieve Array of Markers and replace them
-		// his allows to spread the Module-Markers over complete template instead of one time
-		// lso work with old way of MODULE__-Marker
+		// alternativ way of MODULE__MARKER
+		// syntax: ###MODULE__MODULENAME___MODULEMARKER###
+		// collect them, call each Modul, retrieve Array of Markers and replace them
+		// this allows to spread the Module-Markers over complete template instead of one time
+		// also work with old way of MODULE__-Marker
 		
-		if (is_array ($modules)) { // ODULE-MARKER FOUND
+		if (is_array ($modules)) { // MODULE-MARKER FOUND
 			foreach ($modules as $themodule => $markerArray) {
 				$module = t3lib_div::makeInstanceService ($themodule, 'module');
 				if (is_object ($module)) {

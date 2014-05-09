@@ -848,8 +848,8 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$tempCategoryConf = $this->conf['category'];
 		
 
-		$event = $this->find($uid, $this->conf['pidList'], true, true,false,false,false,'0,1,2,3,4');
-		$event_old = $this->find($uid, $this->conf['pidList'], true, true,false,false,false,'0,1,2,3,4');
+		$event = $this->find($uid, $this->conf['pidList'], true, true,false,true,true,'0,1,2,3,4');
+		$event_old = $this->find($uid, $this->conf['pidList'], true, true,false,true,true,'0,1,2,3,4');
 		
 		$uid = $this->checkUidForLanguageOverlay($uid,'tx_cal_event');
 		

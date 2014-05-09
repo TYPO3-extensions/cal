@@ -61,7 +61,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		if($pidList==''){
 			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_calendar', ' type IN (1,2) AND uid='.$uid.' '.$enableFields);
 		}else{
-			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_calendar', ' type IN (1,2) pid IN ('.$pidList.') AND uid='.$uid.' '.$enableFields);
+			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_calendar', ' type IN (1,2) AND pid IN ('.$pidList.') AND uid='.$uid.' '.$enableFields);
 		}
 		if($result) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result);
@@ -87,9 +87,9 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		}
 		$return = array();
 		if($pidList==''){
-			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_calendar', ' type IN (2,3) '.$enableFields, '', $orderBy);
+			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_calendar', ' type IN (1,2) '.$enableFields, '', $orderBy);
 		}else{
-			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_calendar', ' type IN (2,3) pid IN ('.$pidList.') '.$enableFields, '', $orderBy);
+			$result = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tx_cal_calendar', ' type IN (1,2) AND pid IN ('.$pidList.') '.$enableFields, '', $orderBy);
 		}
 		if($result) {
 			while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)){

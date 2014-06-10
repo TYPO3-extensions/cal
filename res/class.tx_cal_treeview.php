@@ -308,10 +308,10 @@ class tx_cal_treeview {
 				$maxitems = 100000;
 			$minitems = t3lib_utility_Math::forceIntegerInRange ($config ['minitems'], 0);
 		} else {
-			$maxitems = t3lib_div::intInRange ($config ['maxitems'], 0);
+			$maxitems = t3lib_div::forceIntegerInRange ($config ['maxitems'], 0);
 			if (! $maxitems)
 				$maxitems = 100000;
-			$minitems = t3lib_div::intInRange ($config ['minitems'], 0);
+			$minitems = t3lib_div::forceIntegerInRange ($config ['minitems'], 0);
 		}
 		// Register the required number of elements:
 		$test->requiredElements [$PA ['itemFormElName']] = array (
@@ -339,7 +339,7 @@ class tx_cal_treeview {
 			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
 				$size = $config ['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange (count ($itemArray) + 1, t3lib_utility_Math::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 			} else {
-				$size = $config ['autoSizeMax'] ? t3lib_div::intInRange (count ($itemArray) + 1, t3lib_div::intInRange ($size, 1), $config ['autoSizeMax']) : $size;
+				$size = $config ['autoSizeMax'] ? t3lib_div::forceIntegerInRange (count ($itemArray) + 1, t3lib_div::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 			}
 			if ($config ['exclusiveKeys']) {
 				$sOnChange = 'setFormValueFromBrowseWin(\'' . $PA ['itemFormElName'] . '\',this.options[this.selectedIndex].value,this.options[this.selectedIndex].text,\'' . $config ['exclusiveKeys'] . '\'); ';
@@ -373,7 +373,7 @@ class tx_cal_treeview {
 		} else {
 			$params = array (
 					'size' => $config ['size'],
-					'autoSizeMax' => t3lib_div::intInRange ($config ['autoSizeMax'], 0),
+					'autoSizeMax' => t3lib_div::forceIntegerInRange ($config ['autoSizeMax'], 0),
 					'style' => isset ($config ['selectedListStyle']) ? ' style="' . htmlspecialchars ($config ['selectedListStyle']) . '"' : ' style="' . $this->defaultMultipleSelectorStyle . '"',
 					'dontShowMoveIcons' => ($config ['maxitems'] <= 1),
 					'maxitems' => $config ['maxitems'],
@@ -580,10 +580,10 @@ class tx_cal_treeview {
 						$maxitems = 100000;
 					$minitems = t3lib_utility_Math::forceIntegerInRange ($config ['minitems'], 0);
 				} else {
-					$maxitems = t3lib_div::intInRange ($config ['maxitems'], 0);
+					$maxitems = t3lib_div::forceIntegerInRange ($config ['maxitems'], 0);
 					if (! $maxitems)
 						$maxitems = 100000;
-					$minitems = t3lib_div::intInRange ($config ['minitems'], 0);
+					$minitems = t3lib_div::forceIntegerInRange ($config ['minitems'], 0);
 				}
 				// Register the required number of elements:
 				$this->pObj->requiredElements [$PA ['itemFormElName']] = array (
@@ -900,7 +900,7 @@ class tx_cal_treeview {
 						if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
 							$width = t3lib_utility_Math::forceIntegerInRange ($confArr ['categoryTreeWidth'], 1, 600);
 						} else {
-							$width = t3lib_div::intInRange ($confArr ['categoryTreeWidth'], 1, 600);
+							$width = t3lib_div::forceIntegerInRange ($confArr ['categoryTreeWidth'], 1, 600);
 						}
 					} elseif ($GLOBALS ['CLIENT'] ['BROWSER'] == 'msie') { // to suppress the unneeded horizontal scrollbar IE needs a width of at least 320px
 						$width = 320;
@@ -910,8 +910,8 @@ class tx_cal_treeview {
 						$config ['autoSizeMax'] = t3lib_utility_Math::forceIntegerInRange ($config ['autoSizeMax'], 0);
 						$height = $config ['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange ($treeItemC + 2, t3lib_utility_Math::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 					} else {
-						$config ['autoSizeMax'] = t3lib_div::intInRange ($config ['autoSizeMax'], 0);
-						$height = $config ['autoSizeMax'] ? t3lib_div::intInRange ($treeItemC + 2, t3lib_div::intInRange ($size, 1), $config ['autoSizeMax']) : $size;
+						$config ['autoSizeMax'] = t3lib_div::forceIntegerInRange ($config ['autoSizeMax'], 0);
+						$height = $config ['autoSizeMax'] ? t3lib_div::forceIntegerInRange ($treeItemC + 2, t3lib_div::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 					}
 					// hardcoded: 16 is the height of the icons
 					$height = $height * 16;
@@ -929,7 +929,7 @@ class tx_cal_treeview {
 					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
 						$size = $config ['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange (count ($itemArray) + 1, t3lib_utility_Math::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 					} else {
-						$size = $config ['autoSizeMax'] ? t3lib_div::intInRange (count ($itemArray) + 1, t3lib_div::intInRange ($size, 1), $config ['autoSizeMax']) : $size;
+						$size = $config ['autoSizeMax'] ? t3lib_div::forceIntegerInRange (count ($itemArray) + 1, t3lib_div::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 					}
 					
 					$thumbnails = '<select style="width:150px;" name="' . $PA ['itemFormElName'] . '_sel"' . $this->pObj->insertDefStyle ('select') . ($size ? ' size="' . $size . '"' : '') . ' onchange="' . htmlspecialchars ($sOnChange) . '"' . $PA ['onFocus'] . $selector_itemListStyle . '>';
@@ -959,7 +959,7 @@ class tx_cal_treeview {
 					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
 						$sWidth = t3lib_utility_Math::forceIntegerInRange ($confArr ['categorySelectedWidth'], 1, 600);
 					} else {
-						$sWidth = t3lib_div::intInRange ($confArr ['categorySelectedWidth'], 1, 600);
+						$sWidth = t3lib_div::forceIntegerInRange ($confArr ['categorySelectedWidth'], 1, 600);
 					}
 				}
 				if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
@@ -981,7 +981,7 @@ class tx_cal_treeview {
 				} else {
 					$params = array (
 							'size' => $size,
-							'autoSizeMax' => t3lib_div::intInRange ($config ['autoSizeMax'], 0),
+							'autoSizeMax' => t3lib_div::forceIntegerInRange ($config ['autoSizeMax'], 0),
 							// style' => isset($config['selectedListStyle']) ? ' style="'.htmlspecialchars($config['selectedListStyle']).'"' : ' style="'.$this->pObj->defaultMultipleSelectorStyle.'"',
 							'style' => ' style="width:' . $sWidth . 'px;"',
 							'dontShowMoveIcons' => ($maxitems <= 1),

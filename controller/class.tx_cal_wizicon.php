@@ -55,7 +55,7 @@ class tx_cal_wizicon {
 			$localizationParser = t3lib_div::makeInstance ('t3lib_l10n_parser_Llxml');
 			$LOCAL_LANG = $localizationParser->getParsedData ($llFile, $GLOBALS ['LANG']->lang);
 		} else {
-			$LOCAL_LANG = t3lib_div::readLLXMLfile ($llFile, $GLOBALS ['LANG']->lang);
+			$LOCAL_LANG = t3lib_div::readLLfile ($llFile, $GLOBALS ['LANG']->lang);
 		}
 		
 		return $LOCAL_LANG;

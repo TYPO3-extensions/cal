@@ -88,10 +88,10 @@ class tx_cal_dayview extends tx_cal_base_view {
 	 * @return string HTML output.
 	 */
 	function drawDay(&$master_array, $getdate) {
+		$this->_init ($master_array);
 		if ($this->conf ['useNewTemplatesAndRendering']) {
 			return $this->newDrawDay ($master_array, $getdate);
 		}
-		$this->_init ($master_array);
 		
 		$page = $this->cObj->fileResource ($this->conf ['view.'] ['day.'] ['dayTemplate']);
 		if ($page == '') {

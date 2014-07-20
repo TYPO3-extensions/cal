@@ -311,6 +311,7 @@ class tx_cal_new_dayview extends tx_cal_new_timeview {
 		$local_cObj = &$this->getLocalCObject ();
 		$local_cObj->setCurrentVal ($value);
 		$local_cObj->data ['view'] = $dayLinkViewTarget;
+		$local_cObj->data ['link_timestamp'] = $value;
 		$controller = &tx_cal_registry::Registry ('basic', 'controller');
 		
 		if (($rightsObj->isViewEnabled ($dayLinkViewTarget) || $conf ['view.'] [$dayLinkViewTarget . '.'] [$dayLinkViewTarget . 'ViewPid']) && (! empty ($this->events) || $hasEvent || $this->hasAlldayEvents || $isAllowedToCreateEvent)) {

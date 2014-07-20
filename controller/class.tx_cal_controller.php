@@ -901,7 +901,7 @@ class tx_cal_controller extends tslib_pibase {
 		$modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
 		$availableTypes = $modelObj->getServiceTypes ('cal_event_model', 'event');
 		if (! in_array ($type, $availableTypes)) {
-			$type = '';
+			$type = null;
 		}
 		$modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
 		$event = $modelObj->findEvent ($uid, $type, $pidList);

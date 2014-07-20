@@ -51,10 +51,13 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 		if ($uid == '') {
 			return;
 		}
+		if ($type == '') {
+			$type = 'tx_cal_phpicalendar';
+		}
 		$event = $this->find ('cal_event_model', $uid, $type, 'event', $pidList, $showHiddenEvents, $showDeletedEvents, $getAllInstances, $disableCalendarSearchString, $disableCategorySearchString, $eventType);
 		return $event;
 	}
-	function findTodo($uid, $type = '', $pidList = '', $showHiddenEvents = false, $showDeletedEvents = false, $getAllInstances = false, $disableCalendarSearchString = false, $disableCategorySearchString = false, $eventType = '0,1,2,3') {
+	function findTodo($uid, $type = 'tx_cal_todo', $pidList = '', $showHiddenEvents = false, $showDeletedEvents = false, $getAllInstances = false, $disableCalendarSearchString = false, $disableCategorySearchString = false, $eventType = '0,1,2,3') {
 		if ($uid == '') {
 			return;
 		}
@@ -116,6 +119,9 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 		if ($uid == '') {
 			return;
 		}
+		if ($type == '') {
+			$type = 'tx_cal_location';
+		}
 		/* Gets the model for the provided service key */
 		$service = $this->getServiceObjByKey ('cal_location_model', 'location', $type);
 		/* Look up an event with a specific ID inside the model */
@@ -149,6 +155,9 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 	function findOrganizer($uid, $type = '', $pidList = '') {
 		if ($uid == '') {
 			return;
+		}
+		if ($type == '') {
+			$type = 'tx_cal_organizer';
 		}
 		/* Gets the model for the provided service key */
 		$service = $this->getServiceObjByKey ('cal_organizer_model', 'organizer', $type);

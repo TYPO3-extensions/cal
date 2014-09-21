@@ -204,15 +204,15 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 	 */
 	function scheduleUpdates($refreshInterval, $uid) {
 		global $TYPO3_CONF_VARS;
-		if (t3lib_div::inList ($TYPO3_CONF_VARS ['EXT'] ['extList'], 'scheduler')) {
+		
+		if (t3lib_extMgm::isLoaded ('scheduler')) {
 			$recurring = $refreshInterval * 60;
 			/* If calendar has a refresh time, schedule recurring gabriel event for refresh */
 			if ($recurring) {
 				$calendarRow = t3lib_BEfunc::getRecordRaw ('tx_cal_calendar', 'uid=' . $uid);
 				$taskId = $calendarRow ['schedulerId'];
 				
-				require_once (t3lib_extMgm::extPath ('scheduler') . 'class.tx_scheduler.php');
-				$scheduler = new tx_scheduler ();
+				$scheduler = new TYPO3\CMS\Scheduler\Scheduler();
 				
 				if ($taskId > 0) {
 					try {
@@ -254,6 +254,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		/* Set up the scheduler event */
 		$task = t3lib_div::getUserObj ('EXT:cal/cron/class.tx_cal_calendar_scheduler.php:tx_cal_calendar_scheduler');
 		$task->setUID ($calendarUid);
+		$task->setTaskGroup(0);
 		/* Schedule the event */
 		$execution = t3lib_div::makeInstance ('tx_scheduler_Execution');
 		$execution->setStart (time () + ($offset));
@@ -466,6 +467,9 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					$insertFields ['organizer'] = str_replace ('"', '', $component->organizerName ());
 				}
 				$insertFields ['location'] = $component->getAttribute ('LOCATION');
+				if($insertFields ['location'] == null) {
+					$insertFields ['location'] = '';
+				}
 				$insertFields ['description'] = $component->getAttribute ('DESCRIPTION');
 				$categoryString = $component->getAttribute ('CATEGORY');
 				if ($categoryString == "")

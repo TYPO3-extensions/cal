@@ -29,9 +29,9 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_base_service.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
+//require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_base_service.php');
+//require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+//require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
 define ('ICALENDAR_PATH', t3lib_extMgm::extPath ('cal') . 'model/class.tx_model_iCalendar.php');
 
 /**
@@ -116,7 +116,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		/* @todo	Where do other arguments come from? */
 		$this->insertCalEventsIntoDB ($iCalendar, $calendar_id, $pid, $cruser_id);
 		
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		//require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		tx_cal_functions::clearCache ();
 	}
 	function update($uid) {
@@ -190,7 +190,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 			/* Delete old events, that have not been updated */
 			$this->deleteTemporaryEvents ($uid, $notInUids);
 			
-			require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+			//require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 			tx_cal_functions::clearCache ();
 			
 			return $newMD5;
@@ -217,7 +217,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 				if ($taskId > 0) {
 					try {
 						$task = $scheduler->fetchTask ($taskId);
-						$execution = t3lib_div::makeInstance ('tx_scheduler_Execution');
+						$execution = new TYPO3\CMS\Scheduler\Execution();
 						$execution->setStart (time () + $recurring);
 						$execution->setIsNewSingleExecution (true);
 						$execution->setMultiple (true);
@@ -254,9 +254,26 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		/* Set up the scheduler event */
 		$task = t3lib_div::getUserObj ('EXT:cal/cron/class.tx_cal_calendar_scheduler.php:tx_cal_calendar_scheduler');
 		$task->setUID ($calendarUid);
-		$task->setTaskGroup(0);
+		$taskGroup = t3lib_BEfunc::getRecordRaw ('tx_scheduler_task_group', 'groupName="cal"');
+		if($taskGroup['uid']){
+			$task->setTaskGroup($taskGroup['uid']);
+		} else {
+			$crdate = time ();
+			$insertFields = Array ();
+			$insertFields ['pid'] = 0;
+			$insertFields ['tstamp'] = $crdate;
+			$insertFields ['crdate'] = $crdate;
+			$insertFields ['cruser_id'] = 0;
+			$insertFields ['groupName'] = 'cal';
+			$insertFields ['description'] = 'Calendar Base';
+			$table = 'tx_scheduler_task_group';
+			$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
+			$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
+			$task->setTaskGroup($uid);
+		}
+		$task->setDescription('Import of external calendar (calendar_id='.$calendarUid.')');
 		/* Schedule the event */
-		$execution = t3lib_div::makeInstance ('tx_scheduler_Execution');
+		$execution = new TYPO3\CMS\Scheduler\Execution();
 		$execution->setStart (time () + ($offset));
 		$execution->setIsNewSingleExecution (true);
 		$execution->setMultiple (true);
@@ -271,8 +288,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 			$calendarRow = t3lib_BEfunc::getRecordRaw ('tx_cal_calendar', 'uid=' . $calendarUid);
 			$taskId = $calendarRow ['schedulerId'];
 			if ($taskId > 0) {
-				require_once (t3lib_extMgm::extPath ('scheduler') . 'class.tx_scheduler.php');
-				$scheduler = new tx_scheduler ();
+				$scheduler = new TYPO3\CMS\Scheduler\Scheduler();
 				
 				$task = $scheduler->fetchTask ($taskId);
 				
@@ -642,7 +658,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					
 					if ($this->conf ['view.'] ['event.'] ['remind']) {
 						/* Schedule reminders for new and changed events */
-						require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+						//require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 						$pageTSConf = t3lib_befunc::getPagesTSconfig ($pid);
 						$offset = is_numeric ($pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time']) ? $pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time'] * 60 : 0;
 						$date = new tx_cal_date ($insertFields ['start_date'] . '000000');

@@ -911,6 +911,16 @@ $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['tx_wecmap_pi3'] ['markerHook'] ['cal'
 $GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['tce'] ['formevals'] ['tx_cal_dateeval'] = 'EXT:cal/hooks/class.tx_cal_dateeval.php';
 $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['felogin'] ['loginFormOnSubmitFuncs'] [] = 'EXT:cal/hooks/class.tx_cal_logoff_post_processing.php:tx_cal_logoff_post_processing->clearSessionApiAfterLogoff';
 $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['felogin'] ['login_confirmed'] [] = 'EXT:cal/hooks/class.tx_cal_logoff_post_processing.php:tx_cal_logoff_post_processing->clearSessionApiAfterLogin';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_cal_calendar_scheduler']  = array(
+		'extension' => $_EXTKEY,
+		'title' => 'Calendar importer',
+		'description' => 'Importing ICS information from URL',
+);
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_cal_reminder_scheduler']  = array(
+		'extension' => $_EXTKEY,
+		'title' => 'Sending reminders',
+		'description' => '',
+);
 
 if (! isset ($confArr ['enableRealURLAutoConfiguration']) || $confArr ['enableRealURLAutoConfiguration']) {
 	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['ext/realurl/class.tx_realurl_autoconfgen.php'] ['extensionConfiguration'] ['cal'] = 'EXT:cal/hooks/class.tx_cal_realurl.php:&tx_cal_realurl->addRealURLConfig';

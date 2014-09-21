@@ -885,8 +885,11 @@ class tx_cal_treeview {
 					}
 					
 					// render tree html
-					$treeContent = $treeViewObj->getBrowsableTree ();
-					$treeItemC = count ($treeViewObj->dataLookup);
+					$lockBeUserToDBmounts = $GLOBALS['TYPO3_CONF_VARS']['BE']['lockBeUserToDBmounts'];
+					$GLOBALS['TYPO3_CONF_VARS']['BE']['lockBeUserToDBmounts'] = 0;
+					$treeContent = $treeViewObj->getBrowsableTree();
+					$treeItemC = count($treeViewObj->dataLookup);
+					$GLOBALS['TYPO3_CONF_VARS']['BE']['lockBeUserToDBmounts'] = $lockBeUserToDBmounts;
 					
 					/*
 					 * if ($defItems[0]) { // add default items to the tree table. In this case the value [not categorized] $treeItemC += count($defItems); $treeContent .= '<table border="0" cellpadding="0" cellspacing="0"><tr> <td>'.$this->pObj->sL($config['itemsHeader']).'&nbsp;</td><td>'.implode($defItems,'<br />').'</td> </tr></table>'; }

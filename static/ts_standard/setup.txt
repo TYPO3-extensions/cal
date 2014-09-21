@@ -441,6 +441,14 @@ plugin.tx_cal_controller {
 				# @description	Content object for event image
 				image =< tt_content.image.20
 				image {
+					preRenderRegisters.allImageCaptions.cObject {
+			            references {
+				        	table = tx_cal_event
+				            uid.data = uid
+				            fieldName = image
+				        }
+				        renderObj.data = title
+				    }
 					rendering.singleCaption.fallbackRendering.if.isTrue.data = register:ORIG_FILENAME
 					
 					//17 = in text right
@@ -460,7 +468,14 @@ plugin.tx_cal_controller {
 					caption.1.1.data = field:imagecaption
 
 					imgMax = 4
-					imgList >
+					imgList.cObject {
+			        	references {
+			            	table = tx_cal_event
+			            	uid.data = uid
+			            	fieldName = image
+			            }
+			            renderObj.data = title
+			        }
 					imgList.override.current = 1
 					imgPath = {$plugin.tx_cal_controller.uploadPath.image}
 
@@ -499,8 +514,17 @@ plugin.tx_cal_controller {
 					layout = 1
 					showFileSize = 1
 					filePath = {$plugin.tx_cal_controller.uploadPath.media}
-					20.stdWrap.if.isTrue.field = media
-					20.stdWrap.dataWrap = <div>%%%ATTACHMENT_LABEL%%%:&nbsp;|</div>
+					20 {
+						stdWrap {
+							if.isTrue.field = media
+							dataWrap = <div>%%%ATTACHMENT_LABEL%%%:&nbsp;|</div>
+						}
+						references {
+				            table = tx_cal_event
+				            uid.data = uid
+				            fieldName = attachment
+				        }
+					}
 				}
 				
 				freq = CASE

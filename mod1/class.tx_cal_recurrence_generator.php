@@ -199,8 +199,7 @@ class tx_cal_recurrence_generator {
 		require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_registry.php');
 		$modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
 		if (! $modelObj) {
-			require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
-			$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
+			$tx_cal_api = new tx_cal_api();
 			$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($this->pageIDForPlugin);
 			$modelObj = $tx_cal_api->modelObj;
 		}

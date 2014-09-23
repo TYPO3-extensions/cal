@@ -155,7 +155,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 		
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $GLOBALS ['TSFE']->id);
+			$rgc = new tx_cal_recurrence_generator($GLOBALS ['TSFE']->id);
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
@@ -295,7 +295,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 		
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $GLOBALS ['TSFE']->id);
+			$rgc = new tx_cal_recurrence_generator($GLOBALS ['TSFE']->id);
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		

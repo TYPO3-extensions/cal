@@ -2905,7 +2905,7 @@ class tx_cal_controller extends tslib_pibase {
 		$flexformTyposcript = $this->pi_getFFvalue ($piFlexForm, 'myTS', 's_TS_View');
 		if ($flexformTyposcript) {
 			#require_once(PATH_t3lib.'class.t3lib_tsparser.php'); 
-			$tsparser = t3lib_div::makeInstance ('t3lib_tsparser');
+			$tsparser = new t3lib_tsparser();
 			// Copy conf into existing setup 
 			$tsparser->setup = $this->conf;
 			// Parse the new Typoscript 
@@ -3079,7 +3079,7 @@ class tx_cal_controller extends tslib_pibase {
 		$controller = &$myController;
 		// besides of the regular cObj we provide a localCobj, whos data can be overridden with custom data for a more flexible rendering of TSObjects
 		$local_cObj = &tx_cal_registry::Registry ('basic', 'local_cobj');
-		$local_cObj = t3lib_div::makeInstance ('tslib_cObj');
+		$local_cObj = new tslib_cObj();
 		$local_cObj->start (array ());
 		$cache = &tx_cal_registry::Registry ('basic', 'cache');
 		$cache = Array ();

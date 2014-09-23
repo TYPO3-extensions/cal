@@ -51,7 +51,7 @@ class tx_cal_api {
 	/**
 	 * Example:
 	 * require_once ('class.tx_cal_api.php');
-	 * $calAPI = &tx_cal_functions::makeInstance('tx_cal_api',$this->cObj, &$conf);
+	 * $calAPI = new tx_cal_api($this->cObj, &$conf);
 	 * $event = $calAPI->findEvent('2','tx_cal_phpicalendar');
 	 */
 	function tx_cal_api_with(&$cObj, &$conf) {
@@ -68,7 +68,7 @@ class tx_cal_api {
 		
 		$GLOBALS ['TSFE']->settingLocale ();
 		
-		$this->controller = &t3lib_div::makeInstance ('tx_cal_controller');
+		$this->controller = new tx_cal_controller();
 		$this->controller->cObj = &$this->cObj;
 		$this->controller->conf = &$this->conf;
 		
@@ -86,10 +86,10 @@ class tx_cal_api {
 		$this->rightsObj->setDefaultSaveToPage ();
 		
 		$this->modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
-		$this->modelObj = tx_cal_functions::makeInstance ('tx_cal_modelcontroller');
+		$this->modelObj = new tx_cal_modelcontroller();
 		
 		$this->viewObj = &tx_cal_registry::Registry ('basic', 'viewcontroller');
-		$this->viewObj = tx_cal_functions::makeInstance ('tx_cal_viewcontroller');
+		$this->viewObj = new tx_cal_viewcontroller();
 		
 		/*
 		 * $this->rightsObj = &tx_cal_registry::Registry('basic','rightscontroller'); $this->modelObj = &tx_cal_registry::Registry('basic','modelcontroller'); $this->viewObj = &tx_cal_registry::Registry('basic','viewcontroller');
@@ -97,7 +97,7 @@ class tx_cal_api {
 		return $this;
 	}
 	function tx_cal_api_without($pid, $feUserObj = '') {
-		$cObj = t3lib_div::makeInstance ('tslib_cObj');
+		$cObj = new tslib_cObj();
 		
 		$GLOBALS ['TT'] = new t3lib_timeTrack ();
 		
@@ -122,11 +122,11 @@ class tx_cal_api {
 		$GLOBALS ['TSFE']->settingLocale ();
 		
 		// we need to get the plugin setup to create correct source URLs
-		$template = t3lib_div::makeInstance ('t3lib_tsparser_ext'); // Defined global here!
+		$template = new t3lib_tsparser_ext(); // Defined global here!
 		$template->tt_track = 0;
 		// Do not log time-performance information
 		$template->init ();
-		$sys_page = t3lib_div::makeInstance ('t3lib_pageSelect');
+		$sys_page = new t3lib_pageSelect();
 		$rootLine = $sys_page->getRootLine ($pid);
 		$template->runThroughTemplates ($rootLine); // This generates the constants/config + hierarchy info for the template.
 		$template->generateConfig (); //

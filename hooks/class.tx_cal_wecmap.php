@@ -47,9 +47,9 @@ class tx_cal_wecmap {
 		$locationStructure = $this->confArr ['useLocationStructure'] ? $this->confArr ['useLocationStructure'] : 'tx_cal_location';
 		
 		if ($table == $locationStructure && is_object ($markerObj)) {
-			$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
+			$tx_cal_api = new tx_cal_api();
 			
-			$cObj = t3lib_div::makeInstance ('tslib_cObj');
+			$cObj = new tslib_cObj();
 			$conf = $GLOBALS ['TSFE']->tmpl->setup ['plugin.'] ['tx_cal_controller.'];
 			$conf ['view.'] ['allowedViews'] = 'location';
 			

@@ -193,7 +193,7 @@ class tx_cal_location_model extends tx_cal_base_model {
 			
 			include_once (t3lib_extMgm::extPath ('wec_map') . 'map_service/google/class.tx_wecmap_map_google.php');
 			$mapName = 'map' . $this->getUid ();
-			$map = &tx_cal_functions::makeInstance ('tx_wecmap_map_google', $apiKey, $width, $height, $centerLat, $centerLong, $zoomLevel, $mapName);
+			$map = new tx_wecmap_map_google($apiKey, $width, $height, $centerLat, $centerLong, $zoomLevel, $mapName);
 			
 			// evaluate config to see which map controls we need to show
 			if ($controlSize == 'large') {
@@ -236,8 +236,7 @@ class tx_cal_location_model extends tx_cal_base_model {
 	function getCountryMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
 		if (t3lib_extMgm::isLoaded ('static_info_tables')) {
-			require_once (t3lib_extMgm::extPath ('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-			$staticInfo = t3lib_div::makeInstance ('tx_staticinfotables_pi1');
+			$staticInfo = new tx_staticinfotables_pi1();
 			$staticInfo->init ();
 			$current = $staticInfo->getStaticInfoName ('COUNTRIES', $this->getCountry ());
 			$this->local_cObj->setCurrentVal ($current);
@@ -251,8 +250,7 @@ class tx_cal_location_model extends tx_cal_base_model {
 	function getCountryZoneMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
 		if (t3lib_extMgm::isLoaded ('static_info_tables')) {
-			require_once (t3lib_extMgm::extPath ('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-			$staticInfo = t3lib_div::makeInstance ('tx_staticinfotables_pi1');
+			$staticInfo = new tx_staticinfotables_pi1();
 			$staticInfo->init ();
 			$current = $staticInfo->getStaticInfoName ('SUBDIVISIONS', $this->getCountryzone (), $this->getCountry ());
 			$this->local_cObj->setCurrentVal ($current);

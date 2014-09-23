@@ -95,7 +95,7 @@ class tx_cal_reminder_scheduler extends tx_scheduler_Task {
 		$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 		
 		if ($page ['doktype'] != 254) {
-			$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
+			$tx_cal_api = new tx_cal_api();
 			$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 			
 			$eventObject = $tx_cal_api->modelObj->findEvent ($event ['uid'], 'tx_cal_phpicalendar', $tx_cal_api->conf ['pidList'], false, false, false, true);

@@ -33,8 +33,6 @@
 // nset($MCONF);
 
 // include my own class file for database copying
-include_once ('class.tx_cal_recurrence_generator.php');
-include_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 // equire ('conf.php');
 // equire ($BACK_PATH.'init.php');
 // equire ($BACK_PATH.'template.php');
@@ -87,7 +85,7 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 		if (($this->id && $access) || ($BE_USER->user ['admin'] && ! $this->id)) {
 			
 			// Draw the header.
-			$this->doc = t3lib_div::makeInstance ('mediumDoc');
+			$this->doc = new mediumDoc();
 			$this->doc->backPath = $BACK_PATH;
 			$this->doc->form = '<form action="" method="POST">';
 			
@@ -127,7 +125,7 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 		} else {
 			// If no access or if ID == zero
 			
-			$this->doc = t3lib_div::makeInstance ('mediumDoc');
+			$this->doc = new mediumDoc();
 			$this->doc->backPath = $BACK_PATH;
 			
 			$this->content .= $this->doc->startPage ($GLOBALS ['LANG']->getLL ('title'));
@@ -171,7 +169,7 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 				}
 				if (! empty ($pageIds) && is_int ($starttime) && is_int ($endtime)) {
 					$content = $GLOBALS ['LANG']->getLL ('indexing') . '<br/>';
-					$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', 0, $starttime, $endtime);
+					$rgc = new tx_cal_recurrence_generator(0, $starttime, $endtime);
 					$this->content .= $this->doc->section ($GLOBALS ['LANG']->getLL ('droppingTable'), $rgc->cleanIndexTable (), 0, 1);
 					foreach ($pageIds as $eventPage => $pluginPage) {
 						$rgc->pageIDForPlugin = $pluginPage;
@@ -218,7 +216,7 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 		}
 	}
 	private function getJScode() {
-		$t3lib_TCEforms = t3lib_div::makeInstance ("t3lib_TCEforms");
+		$t3lib_TCEforms = new t3lib_TCEforms();
 		$t3lib_TCEforms->backPath = $GLOBALS ["BACK_PATH"];
 		return $t3lib_TCEforms->dbFileCon ();
 	}
@@ -229,7 +227,7 @@ if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal
 }
 
 // Make instance:
-$SOBE = t3lib_div::makeInstance ('tx_cal_recurrence_generator_module1');
+$SOBE = new tx_cal_recurrence_generator_module1;
 $SOBE->init ();
 
 // Include files?

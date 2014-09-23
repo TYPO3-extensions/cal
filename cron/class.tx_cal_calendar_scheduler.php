@@ -42,8 +42,7 @@ class tx_cal_calendar_scheduler extends tx_scheduler_Task {
 	}
 	public function execute() {
 		$success = true;
-		require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_icalendar_service.php');
-		$service = t3lib_div::makeInstance ('tx_cal_icalendar_service');
+		$service = new tx_cal_icalendar_service();
 		
 		$service->update ($this->uid);
 		

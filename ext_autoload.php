@@ -15,6 +15,7 @@ return array (
 		'tx_cal_base_controller' => $extensionPath . 'controller/class.tx_cal_base_controller.php',
 		'tx_cal_api' => $extensionPath . '/controller/class.tx_cal_api.php',
 		'tx_cal_tsfe' => $extensionPath . 'controller/class.tx_cal_tsfe.php',
+		'tx_cal_uriHandler' => $extensionPath . 'controller/class.tx_cal_uriHandler.php',
 		
 		'tx_cal_cache' => $extensionPath . 'lib/class.tx_cal_cache.php',
 		
@@ -40,6 +41,7 @@ return array (
 		'tx_cal_organizer' => $extensionPath . 'model/class.tx_cal_organizer.php',
 		'tx_cal_organizer_partner' => $extensionPath . 'model/class.tx_cal_organizer_partner.php',
 		'tx_cal_location_partner' => $extensionPath . 'model/class.tx_cal_location_partner.php',
+		'tx_cal_calendar_model' => $extensionPath . 'model/class.tx_cal_calendar_model.php',
 		
 		'tx_cal_fnbevent_service' => $extensionPath . 'service/class.tx_cal_fnbevent_service.php',
 		'tx_cal_event_service' => $extensionPath . 'service/class.tx_cal_event_service.php',
@@ -56,6 +58,7 @@ return array (
 		'tx_cal_calendar_service' => $extensionPath . 'service/class.tx_cal_calendar_service.php',
 		'tx_cal_category_service' => $extensionPath . 'service/class.tx_cal_category_service.php',
 		'tx_cal_rights_service' => $extensionPath . 'service/class.tx_cal_rights_service.php',
+		'tx_cal_icalendar_service' => $extensionPath . 'service/class.tx_cal_icalendar_service.php',
 		'tx_cal_base_service' => $extensionPath . 'service/class.tx_cal_base_service.php',
 		
 		'tx_cal_base_view' => $extensionPath . 'view/class.tx_cal_base_view.php',
@@ -95,6 +98,9 @@ return array (
 		
 		'module_example' => $extensionPath . 'misc/class.module_example.php',
 		'module_locationloader' => $extensionPath . 'misc/class.module_locationloader.php',
-		'module_organizerloader' => $extensionPath . 'misc/class.module_organizerloader.php' 
+		'module_organizerloader' => $extensionPath . 'misc/class.module_organizerloader.php',
+		
+		'tx_cal_recurrence_generator' => $extensionPath . 'mod1/class.tx_cal_recurrence_generator.php',
+		'tx_cal_recurrence_generator_module1' => $extensionPath . 'mod1/index.php'
 );
 ?>

@@ -29,13 +29,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_phpicalendar_model.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_phpicalendar_rec_model.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_phpicalendar_rec_deviation_model.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_calendar.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_base_service.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
 
 /**
  * A concrete model for the calendar.
@@ -697,7 +690,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $GLOBALS ['TSFE']->id);
+			$rgc = new tx_cal_recurrence_generator($GLOBALS ['TSFE']->id);
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
@@ -917,7 +910,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $GLOBALS ['TSFE']->id);
+			$rgc = new tx_cal_recurrence_generator($GLOBALS ['TSFE']->id);
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		

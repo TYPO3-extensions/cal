@@ -93,7 +93,7 @@ class tx_cal_tcemain_processdatamap {
 					$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
 					if ($page ['doktype'] != 254) {
 						/* Notify of changes to existing event */
-						$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
+						$tx_cal_api = new tx_cal_api();
 						$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 						
 						$notificationService = & tx_cal_functions::getNotificationService ();
@@ -151,8 +151,7 @@ class tx_cal_tcemain_processdatamap {
 		if ($table == 'tx_cal_calendar') {
 			$calendar = t3lib_BEfunc::getRecord ('tx_cal_calendar', $id);
 			
-			require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_icalendar_service.php');
-			$service = t3lib_div::makeInstance ('tx_cal_icalendar_service');
+			$service = new tx_cal_icalendar_service();
 			
 			if ($calendar ['type'] == 1 or $calendar ['type'] == 2) {
 				tx_cal_tcemain_processdatamap::processICS ($calendar, $fieldArray, $service);
@@ -174,7 +173,7 @@ class tx_cal_tcemain_processdatamap {
 			}
 			
 			/* Geocode the address */
-			$lookupTable = t3lib_div::makeInstance ('tx_wecmap_cache');
+			$lookupTable = new tx_wecmap_cache();
 			$latlong = $lookupTable->lookup ($location ['street'], $location ['city'], $location ['state'], $location ['zip'], $location ['country']);
 			$fieldArray ['latitude'] = $latlong ['lat'];
 			$fieldArray ['longitude'] = $latlong ['long'];
@@ -201,7 +200,7 @@ class tx_cal_tcemain_processdatamap {
 				$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
 				
 				if ($page ['doktype'] != 254) {
-					$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
+					$tx_cal_api = new tx_cal_api();
 					$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 					
 					if ($event ['event_type'] == 3 && ! $event ['ref_event_id']) {
@@ -244,8 +243,7 @@ class tx_cal_tcemain_processdatamap {
 					
 					$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 					if ($extConf ['useNewRecurringModel']) {
-						require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
-						$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $pageIDForPlugin);
+						$rgc = new tx_cal_recurrence_generator($pageIDForPlugin);
 						$rgc->generateIndexForUid ($event ['uid'], $table);
 					}
 					
@@ -349,8 +347,7 @@ class tx_cal_tcemain_processdatamap {
 			/* Get the calendar info from the db */
 			$calendar = t3lib_BEfunc::getRecord ('tx_cal_calendar', $id);
 			
-			require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_icalendar_service.php');
-			$service = t3lib_div::makeInstance ('tx_cal_icalendar_service');
+			$service = new tx_cal_icalendar_service();
 			
 			// Here we have to check if the calendar belongs to the type
 			// problem with case 2 & 3 -> what to do with events of type database? delete them without warning? keep them and assign them to a default category?
@@ -362,7 +359,6 @@ class tx_cal_tcemain_processdatamap {
 						
 						$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 						if ($extConf ['useNewRecurringModel']) {
-							require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
 							tx_cal_recurrence_generator::cleanIndexTableOfCalendarUid ($id);
 						}
 					}
@@ -394,9 +390,8 @@ class tx_cal_tcemain_processdatamap {
 					$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 					
 					if ($page ['doktype'] != 254) {
-						$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
-						$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
-						require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
+						$tx_cal_api = new tx_cal_api();
+						$tx_cal_api = $tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 						tx_cal_recurrence_generator::cleanIndexTableOfExceptionGroupUid ($id);
 					}
 				}
@@ -481,8 +476,7 @@ class tx_cal_tcemain_processdatamap {
 				$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 				$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 				if ($extConf ['useNewRecurringModel'] && $page ['doktype'] != 254) {
-					require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
-					$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $pageIDForPlugin);
+					$rgc = new tx_cal_recurrence_generator($pageIDForPlugin);
 					$rgc->generateIndexForCalendarUid ($calendar ['uid']);
 				}
 			}

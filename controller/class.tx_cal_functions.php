@@ -613,7 +613,7 @@ class tx_cal_functions {
 	 */
 	public static function fixURI($html) {
 		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_uriHandler.php');
-		$uriHandler = t3lib_div::makeInstance ('tx_cal_uriHandler');
+		$uriHandler = tx_cal_uriHandler();
 		$uriHandler->setHTML ($html);
 		$uriHandler->setPATH ('http://' . t3lib_div::getHostname (1) . '/');
 		
@@ -633,7 +633,7 @@ class tx_cal_functions {
 	 * @return array
 	 */
 	public static function getTsSetupAsPlainArray(&$conf) {
-		$objectManager = t3lib_div::makeInstance ('Tx_Extbase_Object_ObjectManager');
+		$objectManager = new Tx_Extbase_Object_ObjectManager();
 		
 		/**
 		 * @var $typoScriptService Tx_Extbase_Service_TypoScriptService

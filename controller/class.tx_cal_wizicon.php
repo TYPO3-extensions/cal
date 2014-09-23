@@ -52,7 +52,7 @@ class tx_cal_wizicon {
 	function includeLocalLang() {
 		$llFile = t3lib_extMgm::extPath ('cal') . 'locallang.xml';
 		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-			$localizationParser = t3lib_div::makeInstance ('t3lib_l10n_parser_Llxml');
+			$localizationParser = new t3lib_l10n_parser_Llxml();
 			$LOCAL_LANG = $localizationParser->getParsedData ($llFile, $GLOBALS ['LANG']->lang);
 		} else {
 			$LOCAL_LANG = t3lib_div::readLLfile ($llFile, $GLOBALS ['LANG']->lang);

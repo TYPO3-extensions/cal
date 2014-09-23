@@ -29,10 +29,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_base_service.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_calendar_model.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 
 /**
  *
@@ -48,8 +44,7 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 		$this->tx_cal_base_service ();
 	}
 	function createCalendar($row) {
-		$calendar = &tx_cal_functions::makeInstance ('tx_cal_calendar_model', $row, $this->getServiceKey ());
-		return $calendar;
+		return new tx_cal_calendar_model($row, $this->getServiceKey ());
 	}
 	
 	/**
@@ -127,7 +122,7 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $GLOBALS ['TSFE']->id);
+				$rgc = new tx_cal_recurrence_generator($GLOBALS ['TSFE']->id);
 				$rgc->generateIndexForCalendarUid ($uid);
 			}
 		} else {
@@ -135,7 +130,6 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
 				tx_cal_recurrence_generator::cleanIndexTableOfCalendarUid ($uid);
 			}
 		}
@@ -259,15 +253,12 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 		
 		if ($insertFields ['type'] == 1 or $insertFields ['type'] == 2) {
-			require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_icalendar_service.php');
-			require_once (t3lib_extMgm::extPath ('cal') . 'hooks/class.tx_cal_tcemain_processdatamap.php');
-			
-			$service = t3lib_div::makeInstance ('tx_cal_icalendar_service');
+			$service = new tx_cal_icalendar_service();
 			tx_cal_tcemain_processdatamap::processICS (t3lib_BEfunc::getRecord ('tx_cal_calendar', $uid), $insertFields, $service);
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $GLOBALS ['TSFE']->id);
+				$rgc = new tx_cal_recurrence_generator($GLOBALS ['TSFE']->id);
 				$rgc->generateIndexForCalendarUid ($uid);
 			}
 		}

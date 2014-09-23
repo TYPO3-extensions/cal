@@ -62,7 +62,7 @@ class tx_cal_tcemain_processcmdmap {
 							
 							$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 							if ($page ['doktype'] != 254) {
-								$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
+								$tx_cal_api = new tx_cal_api();
 								$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 								
 								$notificationService = & tx_cal_functions::getNotificationService ();
@@ -78,7 +78,6 @@ class tx_cal_tcemain_processcmdmap {
 									
 									$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 									if ($extConf ['useNewRecurringModel']) {
-										require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
 										tx_cal_recurrence_generator::cleanIndexTableOfUid ($id, $table);
 									}
 									
@@ -103,8 +102,7 @@ class tx_cal_tcemain_processcmdmap {
 					$calendarRow = t3lib_BEfunc::getRecordRaw ('tx_cal_calendar', 'uid=' . $id);
 					/* If the calendar is an External URL or ICS file, then we need to clean up */
 					if (($calendarRow ['type'] == 1) or ($calendarRow ['type'] == 2)) {
-						require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_icalendar_service.php');
-						$service = t3lib_div::makeInstance ('tx_cal_icalendar_service');
+						$service = new tx_cal_icalendar_service();
 						$service->deleteTemporaryEvents ($id);
 						$service->deleteTemporaryCategories ($id);
 						$service->deleteScheduledUpdates ($id);
@@ -119,8 +117,7 @@ class tx_cal_tcemain_processcmdmap {
 					$calendarRow = t3lib_BEfunc::getRecord ('tx_cal_calendar', $id);
 					if ($calendarRow ['schedulerId'] > 0) {
 						$scheduler = new tx_scheduler ();
-						require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_icalendar_service.php');
-						$service = t3lib_div::makeInstance ('tx_cal_icalendar_service');
+						$service = new tx_cal_icalendar_service();
 						foreach ($newCalendarIds as $newCalendarId) {
 							$service->createSchedulerTask ($scheduler, 0, $newCalendarId);
 						}
@@ -151,13 +148,12 @@ class tx_cal_tcemain_processcmdmap {
 							
 							$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 							if ($page ['doktype'] != 254) {
-								$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
+								$tx_cal_api = new tx_cal_api();
 								$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 								
 								if ($command == 'delete') {
 									$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 									if ($extConf ['useNewRecurringModel']) {
-										require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
 										tx_cal_recurrence_generator::cleanIndexTableOfUid ($id, $table);
 									}
 								}
@@ -196,7 +192,7 @@ class tx_cal_tcemain_processcmdmap {
 								$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 								if ($page ['doktype'] != 254) {
 									
-									$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
+									$tx_cal_api = new tx_cal_api();
 									$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 									
 									$notificationService = & tx_cal_functions::getNotificationService ();

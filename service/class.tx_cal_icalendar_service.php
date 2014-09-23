@@ -29,9 +29,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-//require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_base_service.php');
-//require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-//require_once (t3lib_extMgm::extPath ('cal') . 'mod1/class.tx_cal_recurrence_generator.php');
 define ('ICALENDAR_PATH', t3lib_extMgm::extPath ('cal') . 'model/class.tx_model_iCalendar.php');
 
 /**
@@ -652,7 +649,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 						} else {
 							$pageIDForPlugin = $pid;
 						}
-						$rgc = &tx_cal_functions::makeInstance ('tx_cal_recurrence_generator', $pageIDForPlugin);
+						$rgc = new tx_cal_recurrence_generator($pageIDForPlugin);
 						$rgc->generateIndexForUid ($eventUid, 'tx_cal_event');
 					}
 					

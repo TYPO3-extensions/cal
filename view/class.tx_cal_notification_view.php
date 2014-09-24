@@ -556,7 +556,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 	}
 	function startMailer() {
 		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
-			$this->mailer = t3lib_div::makeInstance ('t3lib_htmlmail');
+			$this->mailer = new t3lib_htmlmail();
 			$this->mailer->start ();
 			$this->mailer->from_email = $this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'];
 			$this->mailer->from_name = $this->conf ['view.'] ['event.'] ['notify.'] ['fromName'];
@@ -564,7 +564,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$this->mailer->replyto_name = $this->conf ['view.'] ['event.'] ['notify.'] ['replyToName'];
 			$this->mailer->organisation = $this->conf ['view.'] ['event.'] ['notify.'] ['organisation'];
 		} else {
-			$this->mailer = $mail = t3lib_div::makeInstance ('t3lib_mail_Message');
+			$this->mailer = $mail = new t3lib_mail_Message();
 			
 			if (t3lib_div::validEmail ($this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'])) {
 				$this->mailer->setFrom (array (
@@ -613,7 +613,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		}
 	}
 	function createTempIcsFile($content, $filename) {
-		$fileFunc = t3lib_div::makeInstance ('t3lib_basicFileFunctions');
+		$fileFunc = new t3lib_basicFileFunctions();
 		$all_files = Array ();
 		$all_files ['webspace'] ['allow'] = '*';
 		$all_files ['webspace'] ['deny'] = '';

@@ -129,7 +129,7 @@ class tx_cal_organizer_address_service extends tx_cal_base_service {
 		
 		if ($result) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				$organizers [] = &tx_cal_functions::makeInstance ('tx_cal_organizer_address', $row, $pidList);
+				$organizers [] = new tx_cal_organizer_address( $row, $pidList);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 		}

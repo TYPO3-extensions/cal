@@ -360,7 +360,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 							$this->addAttendee ($attendeeIndex [$serviceKey . '_' . $idname [2]]);
 						} else {
 							$initRow = Array ();
-							$attendee = &tx_cal_functions::makeInstance ('tx_cal_attendee_model', $initRow, 'cal_attendee_model');
+							$attendee = new tx_cal_attendee_model($initRow, 'cal_attendee_model');
 							if ($idname [1] == 'u') {
 								$attendee->setFeUserId ($idname [2]);
 								$attendee->setAttendance ($attendance [$entry]);
@@ -378,7 +378,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 							$this->addAttendee ($attendeeIndex [$serviceKey . '_' . $emailAddress]);
 						} else {
 							$initRow = Array ();
-							$attendee = &tx_cal_functions::makeInstance ('tx_cal_attendee_model', $initRow, 'cal_attendee_model');
+							$attendee = new tx_cal_attendee_model($initRow, 'cal_attendee_model');
 							$attendee->setEmail ($emailAddress);
 							$attendee->setAttendance ('OPT-PARTICIPANT');
 							$this->addAttendee ($attendee);
@@ -604,7 +604,8 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 		}
 	}
 	function cloneEvent() {
-		$event = &tx_cal_functions::makeInstance (get_class ($this), $this->getValuesAsArray (), $this->isException, $this->getType ());
+		$thisClass = get_class ($this);
+		$event = new $thisClass($this->getValuesAsArray (), $this->isException, $this->getType ());
 		$event->markerCache = $this->markerCache;
 		$event->setIsClone (true);
 		return $event;
@@ -938,7 +939,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 									$email = $this->controller->piVars ['email'];
 									
 									if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
-										$mailer = t3lib_div::makeInstance ('t3lib_htmlmail');
+										$mailer = new t3lib_htmlmail();
 										$mailer->start ();
 										$mailer->from_email = $this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'];
 										$mailer->from_name = $this->conf ['view.'] ['event.'] ['notify.'] ['fromName'];
@@ -1000,7 +1001,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										$mailer->setRecipient ($email);
 										$mailer->sendtheMail ();
 									} else {
-										$mailer = $mail = t3lib_div::makeInstance ('t3lib_mail_Message');
+										$mailer = $mail = new t3lib_mail_Message();
 										
 										if (t3lib_div::validEmail ($this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'])) {
 											$mailer->setFrom (array (
@@ -1100,7 +1101,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 									}
 									
 									if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
-										$mailer = t3lib_div::makeInstance ('t3lib_htmlmail');
+										$mailer = new t3lib_htmlmail();
 										$mailer->start ();
 										$mailer->from_email = $this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'];
 										$mailer->from_name = $this->conf ['view.'] ['event.'] ['notify.'] ['fromName'];
@@ -1162,7 +1163,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										$mailer->setRecipient ($email);
 										$mailer->sendtheMail ();
 									} else {
-										$mailer = $mail = t3lib_div::makeInstance ('t3lib_mail_Message');
+										$mailer = $mail = new t3lib_mail_Message();
 										$mailer->setFrom (array (
 												$this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'] => $this->conf ['view.'] ['event.'] ['notify.'] ['fromName'] 
 										));

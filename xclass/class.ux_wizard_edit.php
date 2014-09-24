@@ -72,7 +72,7 @@ class ux_SC_wizard_edit extends SC_wizard_edit {
 				$params = '';
 				
 				// Selecting selected values into an array:
-				$dbAnalysis = t3lib_div::makeInstance ('t3lib_loadDBGroup');
+				$dbAnalysis = new t3lib_loadDBGroup();
 				$dbAnalysis->start ($this->P ['currentSelectedValues'], $allowedTables);
 				$value = $dbAnalysis->getValueArray ($prependName);
 				

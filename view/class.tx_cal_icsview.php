@@ -171,7 +171,7 @@ END:VCALENDAR
 									$end->setMinute (substr ($deviationRow ['end_datetime'], 10, 2));
 									unset ($deviationRow ['start_datetime']);
 									unset ($deviationRow ['end_datetime']);
-									$new_event = tx_cal_functions::makeInstance ('tx_cal_phpicalendar_rec_deviation_model', $event, $deviationRow, $start, $end);
+									$new_event = new tx_cal_phpicalendar_rec_deviation_model( $event, $deviationRow, $start, $end);
 									$ics_events .= $new_event->renderEventFor ('ics');
 								}
 								$GLOBALS ['TYPO3_DB']->sql_free_result ($deviationResult);

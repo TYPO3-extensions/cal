@@ -113,9 +113,7 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 		$table = 'tx_cal_calendar';
 		$where = 'uid = ' . $uid;
 		
-		require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_icalendar_service.php');
-		require_once (t3lib_extMgm::extPath ('cal') . 'hooks/class.tx_cal_tcemain_processdatamap.php');
-		$service = t3lib_div::makeInstance ('tx_cal_icalendar_service');
+		$service = new tx_cal_icalendar_service();
 		
 		if (($insertFields ['type'] == 1 && $insertFields ['ext_url']) or ($insertFields ['type'] == 2 && $insertFields ['ics_file'])) {
 			tx_cal_tcemain_processdatamap::processICS (t3lib_BEfunc::getRecord ('tx_cal_calendar', $uid), $insertFields, $service);

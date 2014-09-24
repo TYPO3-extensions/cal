@@ -534,9 +534,9 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 				require_once (t3lib_extMgm::extPath ('tinymce_rte') . 'pi1/class.tx_tinymce_rte_pi1.php'); // alternative RTE
 			}
 			if (! $this->RTEObj && t3lib_extMgm::isLoaded ('rtehtmlarea')) {
-				$this->RTEObj = t3lib_div::makeInstance ('tx_rtehtmlarea_pi2');
+				$this->RTEObj = new tx_rtehtmlarea_pi2();
 			} else if (! $this->RTEObj && t3lib_extMgm::isLoaded ('tinymce_rte')) {
-				$this->RTEObj = t3lib_div::makeInstance ('tx_tinymce_rte_pi1'); // load alternative RTE
+				$this->RTEObj = new tx_tinymce_rte_pi1(); // load alternative RTE
 			}
 			if (is_object ($this->RTEObj) && $this->RTEObj->isAvailable () && $this->conf ['rights.'] [$this->isEditMode ? 'edit.' : 'create.'] ['event.'] ['enableRTE']) {
 				$this->RTEcounter ++;

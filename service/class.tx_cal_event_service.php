@@ -534,7 +534,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			return array ();
 	}
 	function createEvent($row, $isException) {
-		$event = tx_cal_functions::makeInstance ('tx_cal_phpicalendar_model', $row, $isException, $this->getServiceKey ());
+		$event = new tx_cal_phpicalendar_model( $row, $isException, $this->getServiceKey ());
 		return $event;
 	}
 	
@@ -1584,11 +1584,11 @@ class tx_cal_event_service extends tx_cal_base_service {
 						$result2 = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'tx_cal_event_deviation', 'uid=' . $row ['event_deviation_uid'] . $this->cObj->enableFields ('tx_cal_event_deviation'));
 						if ($result2) {
 							while ($row2 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result2)) {
-								$new_event = tx_cal_functions::makeInstance ('tx_cal_phpicalendar_rec_deviation_model', $event, $row2, $nextOccuranceTime, $nextOccuranceEndTime);
+								$new_event = new tx_cal_phpicalendar_rec_deviation_model( $event, $row2, $nextOccuranceTime, $nextOccuranceEndTime);
 							}
 						}
 					} else {
-						$new_event = &tx_cal_functions::makeInstance ('tx_cal_phpicalendar_rec_model', $event, $nextOccuranceTime, $nextOccuranceEndTime);
+						$new_event = new tx_cal_phpicalendar_rec_model( $event, $nextOccuranceTime, $nextOccuranceEndTime);
 					}
 					if (! $ex_event_dates [$new_event->getStart ()->format ('%Y%m%d')]) {
 						if ($new_event->isAllday ()) {

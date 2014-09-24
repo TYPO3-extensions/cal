@@ -655,7 +655,7 @@ class tx_model_iCalendar {
 			$csConvObj = &$GLOBALS ['TSFE']->csConvObj;
 		} else {
 			require_once (t3lib_extMgm::extPath ('lang') . 'lang.php');
-			$LANG = t3lib_div::makeInstance ('language');
+			$LANG = new language();
 			if (TYPO3_MODE == 'BE') {
 				$LANG->init ($BE_USER->uc ['lang']);
 				$csConvObj = &$LANG->csConvObj;

@@ -61,7 +61,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 		return parent::findAll ($pidList, '4');
 	}
 	function createEvent($row, $isException) {
-		$todo = tx_cal_functions::makeInstance ('tx_cal_todo_model', $row, $this->getServiceKey ());
+		$todo = new tx_cal_todo_model( $row, $this->getServiceKey ());
 		return $todo;
 	}
 	
@@ -667,7 +667,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
 				$nextOccuranceTime = new tx_cal_date ($row ['start_datetime']);
 				$nextOccuranceEndTime = new tx_cal_date ($row ['end_datetime']);
-				$new_event = &tx_cal_functions::makeInstance ('tx_cal_todo_rec_model', $event, $nextOccuranceTime, $nextOccuranceEndTime);
+				$new_event = new tx_cal_todo_rec_model( $event, $nextOccuranceTime, $nextOccuranceEndTime);
 				if ($new_event->isAllday ()) {
 					$master_array [$nextOccuranceTime->format ('%Y%m%d')] ['-1'] [$event->getUid ()] = $new_event;
 				} else {

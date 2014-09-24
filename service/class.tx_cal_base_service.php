@@ -215,7 +215,7 @@ class tx_cal_base_service extends t3lib_svbase {
 				}
 				
 				if (! $this->fileFunc) {
-					$this->fileFunc = t3lib_div::makeInstance ('t3lib_basicFileFunctions');
+					$this->fileFunc = new t3lib_basicFileFunctions();
 					$all_files = Array ();
 					$all_files ['webspace'] ['allow'] = '*';
 					$all_files ['webspace'] ['deny'] = '';
@@ -277,7 +277,7 @@ class tx_cal_base_service extends t3lib_svbase {
 	}
 	function _checkOnTempFile($file, $uploadPath) {
 		if (! $this->fileFunc) {
-			$this->fileFunc = t3lib_div::makeInstance ('t3lib_basicFileFunctions');
+			$this->fileFunc = new t3lib_basicFileFunctions();
 			$all_files = Array ();
 			$all_files ['webspace'] ['allow'] = '*';
 			$all_files ['webspace'] ['deny'] = '';

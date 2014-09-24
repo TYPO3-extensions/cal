@@ -20,6 +20,7 @@ return array (
 		'tx_cal_cache' => $extensionPath . 'lib/class.tx_cal_cache.php',
 		
 		'pearLoader' => $extensionPath . 'res/pearLoader.php',
+		'tx_cal_tceFunc_selectTreeView' => $extensionPath . 'res/class.tx_cal_tceFunc_selectTreeView.php',
 		
 		'tx_cal_calendar_scheduler' => $extensionPath . 'cron/class.tx_cal_calendar_scheduler.php',
 		'tx_cal_reminder_scheduler' => $extensionPath . 'cron/class.tx_cal_reminder_scheduler.php',
@@ -42,6 +43,8 @@ return array (
 		'tx_cal_organizer_partner' => $extensionPath . 'model/class.tx_cal_organizer_partner.php',
 		'tx_cal_location_partner' => $extensionPath . 'model/class.tx_cal_location_partner.php',
 		'tx_cal_calendar_model' => $extensionPath . 'model/class.tx_cal_calendar_model.php',
+		'tx_cal_attendee_model' => $extensionPath . 'model/class.tx_cal_attendee_model.php',
+		'tx_cal_phpicalendar_rec_deviation_model' => $extensionPath . 'model/class.tx_cal_phpicalendar_rec_deviation_model.php',
 		
 		'tx_cal_fnbevent_service' => $extensionPath . 'service/class.tx_cal_fnbevent_service.php',
 		'tx_cal_event_service' => $extensionPath . 'service/class.tx_cal_event_service.php',

@@ -57,7 +57,7 @@ class tx_cal_organizer_partner extends tx_cal_organizer {
 		require_once (t3lib_extMgm::extPath ('partner') . 'api/class.tx_partner_main.php');
 		require_once (t3lib_extMgm::extPath ('partner') . 'api/class.tx_partner_div.php');
 		
-		$this->partner = &t3lib_div::makeInstance ('tx_partner_main');
+		$this->partner = new tx_partner_main();
 		$this->partner->getPartner ($uid);
 		$this->partner->getContactInfo ($this->conf ['view.'] ['organizer.'] ['contactInfoType']);
 		

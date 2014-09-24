@@ -145,7 +145,7 @@ class tx_cal_organizer_partner_service extends tx_cal_base_service {
 		
 		if ($result) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				$organizers [] = &tx_cal_functions::makeInstance ('tx_cal_organizer_partner', $row ['uid'], $pidList);
+				$organizers [] = new tx_cal_organizer_partner( $row ['uid'], $pidList);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 		}

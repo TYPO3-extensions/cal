@@ -1398,7 +1398,8 @@ class tx_cal_model extends tx_cal_base_model {
 		return $this->categoryUidsAsArray;
 	}
 	function cloneEvent() {
-		$event = &tx_cal_functions::makeInstance (get_class ($this), $this->getType ());
+		$thisClass = get_class ($this);
+		$event = new $thisClass( $this->getType ());
 		$event->setIsClone (true);
 		return $event;
 	}

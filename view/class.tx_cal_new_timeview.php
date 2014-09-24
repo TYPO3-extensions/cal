@@ -255,7 +255,7 @@ abstract class tx_cal_new_timeview {
 	}
 	public function getWeekdayString($timestamp) {
 		if (! is_object ($this->cs_convert)) {
-			$this->cs_convert = t3lib_div::makeInstance ('t3lib_cs');
+			$this->cs_convert = new t3lib_cs();
 		}
 		$conf = &tx_cal_registry::Registry ('basic', 'conf');
 		return $this->cs_convert->substr (tx_cal_functions::getCharset (), strftime ($this->weekDayFormat, $timestamp), 0, $this->weekDayLength);

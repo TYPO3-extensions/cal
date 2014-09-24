@@ -145,9 +145,8 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 			}
 			
 			if (t3lib_extMgm::isLoaded ('scheduler')) {
-				require_once (t3lib_extMgm::extPath ('scheduler') . 'class.tx_scheduler.php');
 				
-				$scheduler = new tx_scheduler ();
+				$scheduler = new TYPO3\CMS\Scheduler\Scheduler();
 				$date = new tx_cal_date ($start_datetime);
 				$date->setTZbyId ('UTC');
 				$timestamp = $date->getTime ();
@@ -159,7 +158,7 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 					if ($offsetTime->isFuture ()) {
 						try {
 							$task = $scheduler->fetchTask ($taskId);
-							$execution = t3lib_div::makeInstance ('tx_scheduler_Execution');
+							$execution = new TYPO3\CMS\Scheduler\Execution();
 							$execution->setStart ($timestamp - ($offset * 60));
 							$execution->setIsNewSingleExecution (true);
 							$execution->setMultiple (false);
@@ -208,8 +207,26 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 			/* Set up the scheduler event */
 			$task = t3lib_div::getUserObj ('EXT:cal/cron/class.tx_cal_reminder_scheduler.php:tx_cal_reminder_scheduler');
 			$task->setUID ($calEventUID);
+			$taskGroup = t3lib_BEfunc::getRecordRaw ('tx_scheduler_task_group', 'groupName="cal"');
+			if($taskGroup['uid']){
+				$task->setTaskGroup($taskGroup['uid']);
+			} else {
+				$crdate = time ();
+				$insertFields = Array ();
+				$insertFields ['pid'] = 0;
+				$insertFields ['tstamp'] = $crdate;
+				$insertFields ['crdate'] = $crdate;
+				$insertFields ['cruser_id'] = 0;
+				$insertFields ['groupName'] = 'cal';
+				$insertFields ['description'] = 'Calendar Base';
+				$table = 'tx_scheduler_task_group';
+				$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
+				$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
+				$task->setTaskGroup($uid);
+			}
+			$task->setDescription('Reminder of a calendar event (id='.$calEventUID.')');
 			/* Schedule the event */
-			$execution = t3lib_div::makeInstance ('tx_scheduler_Execution');
+			$execution = new TYPO3\CMS\Scheduler\Execution();
 			$execution->setStart ($timestamp - ($offset * 60));
 			$execution->setIsNewSingleExecution (true);
 			$execution->setMultiple (false);
@@ -229,8 +246,7 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 			$eventRow = t3lib_BEfunc::getRecordRaw ('tx_cal_fe_user_event_monitor_mm', 'uid_local=' . $eventUid);
 			$taskId = $eventRow ['schedulerId'];
 			if ($taskId > 0) {
-				require_once (t3lib_extMgm::extPath ('scheduler') . 'class.tx_scheduler.php');
-				$scheduler = new tx_scheduler ();
+				$scheduler = new TYPO3\CMS\Scheduler\Scheduler();
 				try {
 					$task = $scheduler->fetchTask ($taskId);
 					$scheduler->removeTask ($task);

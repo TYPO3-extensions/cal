@@ -226,7 +226,7 @@ class tx_cal_itemsProcFunc {
 				$pidlist = $cache [$GLOBALS ['BE_USER']->user ['uid']] ['pidlist'];
 			} else {
 				$mounts = $GLOBALS ['WEBMOUNTS'];
-				$qG = t3lib_div::makeInstance ('t3lib_queryGenerator');
+				$qG = new t3lib_queryGenerator();
 				$pidlist = '';
 				foreach ($mounts as $idx => $uid) {
 					$list = $qG->getTreeList ($uid, 99, 0, $GLOBALS ['BE_USER']->getPagePermsClause (1));

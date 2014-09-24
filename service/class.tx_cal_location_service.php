@@ -137,7 +137,7 @@ class tx_cal_location_service extends tx_cal_base_service {
 					$GLOBALS ['TSFE']->sys_page->versionOL ('tx_cal_location', $row);
 				}
 				
-				$lastLocation = &tx_cal_functions::makeInstance ('tx_cal_location', $row, $pidList);
+				$lastLocation = new tx_cal_location( $row, $pidList);
 				
 				$select = 'uid_foreign,tablenames';
 				$table = 'tx_cal_location_shared_user_mm';
@@ -334,8 +334,7 @@ class tx_cal_location_service extends tx_cal_base_service {
 		
 		if (t3lib_extMgm::isLoaded ('wec_map') && ($insertFields ['street'] != '' || $insertFields ['city'] != '' || $insertFields ['country_zone'] != '' || $insertFields ['zip'] != '' || $insertFields ['country'])) {
 			/* Geocode the address */
-			include_once (t3lib_extMgm::extPath ('wec_map') . 'class.tx_wecmap_cache.php');
-			$lookupTable = t3lib_div::makeInstance ('tx_wecmap_cache');
+			$lookupTable = new tx_wecmap_cache();
 			$latlong = $lookupTable->lookup ($insertFields ['street'], $insertFields ['city'], $insertFields ['country_zone'], $insertFields ['zip'], $insertFields ['country']);
 			$insertFields ['latitude'] = $latlong ['lat'];
 			$insertFields ['longitude'] = $latlong ['long'];

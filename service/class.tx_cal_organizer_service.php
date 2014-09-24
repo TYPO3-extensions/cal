@@ -136,7 +136,7 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 					$GLOBALS ['TSFE']->sys_page->versionOL ('tx_cal_organizer', $row);
 				}
 				
-				$lastOrganizer = &tx_cal_functions::makeInstance ('tx_cal_organizer', $row, $pidList);
+				$lastOrganizer = new tx_cal_organizer( $row, $pidList);
 				
 				$select = 'uid_foreign,tablenames';
 				$table = 'tx_cal_organizer_shared_user_mm';

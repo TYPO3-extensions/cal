@@ -113,7 +113,7 @@ class tx_cal_confirm_location_organizer_view extends tx_cal_fe_editing_base_view
 		if ($this->isAllowed ('country')) {
 			if (t3lib_extMgm::isLoaded ('static_info_tables')) {
 				require_once (t3lib_extMgm::extPath ('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-				$this->staticInfo = t3lib_div::makeInstance ('tx_staticinfotables_pi1');
+				$this->staticInfo = new tx_staticinfotables_pi1();
 				$this->staticInfo->init ();
 				$sims ['###COUNTRY###'] = $this->applyStdWrap ($this->staticInfo->getStaticInfoName ('COUNTRIES', $this->object->getCountry ()), 'country_static_info_stdWrap');
 				$sims ['###COUNTRY_VALUE###'] = strip_tags ($this->object->getCountry ());
@@ -130,7 +130,7 @@ class tx_cal_confirm_location_organizer_view extends tx_cal_fe_editing_base_view
 		if ($this->isAllowed ('countryzone')) {
 			if (t3lib_extMgm::isLoaded ('static_info_tables')) {
 				require_once (t3lib_extMgm::extPath ('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-				$this->staticInfo = t3lib_div::makeInstance ('tx_staticinfotables_pi1');
+				$this->staticInfo = new tx_staticinfotables_pi1();
 				$this->staticInfo->init ();
 				$sims ['###COUNTRYZONE###'] = $this->applyStdWrap ($this->staticInfo->getStaticInfoName ('SUBDIVISIONS', $this->object->getCountryZone (), $this->object->getCountry ()), 'countryzone_static_info_stdWrap');
 				$sims ['###COUNTRYZONE_VALUE###'] = $this->object->getCountryZone ();

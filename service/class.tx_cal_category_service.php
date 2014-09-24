@@ -506,7 +506,7 @@ class tx_cal_category_service extends tx_cal_base_service {
 		return $categories;
 	}
 	function createCategory($row) {
-		$category = &tx_cal_functions::makeInstance ('tx_cal_category_model', $row, $this->getServiceKey ());
+		$category = new tx_cal_category_model( $row, $this->getServiceKey ());
 		return $category;
 	}
 	function getCategoriesForEvent($eventUid) {

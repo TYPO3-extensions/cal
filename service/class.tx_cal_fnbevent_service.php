@@ -278,7 +278,7 @@ class tx_cal_fnbevent_service extends tx_cal_event_service {
 		return $this->calendarIds;
 	}
 	function createEvent($row, $isException) {
-		$event = tx_cal_functions::makeInstance ('tx_cal_phpicalendar_model', $row, $isException, $this->getServiceKey ());
+		$event = new tx_cal_phpicalendar_model( $row, $isException, $this->getServiceKey ());
 		$event->row ['isFreeAndBusyEvent'] = 1;
 		return $event;
 	}

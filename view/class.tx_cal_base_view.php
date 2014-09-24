@@ -49,7 +49,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 
 	function _init(&$master_array){
 		#store cs_convert-object
-		$this->cs_convert=t3lib_div::makeInstance('t3lib_cs');
+		$this->cs_convert=new t3lib_cs();
 		$this->master_array = &$master_array;
 		$this->initLocalCObject();
 		$this->pointerName = $this->controller->getPointerName();
@@ -1707,7 +1707,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 		$templateFile = t3lib_div::getFileAbsFileName($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'TemplateFluid']);
 
         /** @var $view Tx_Fluid_View_StandaloneView */
-		$view = t3lib_div::makeInstance('Tx_Fluid_View_StandaloneView');
+		$view = new Tx_Fluid_View_StandaloneView();
 		$view->setTemplatePathAndFilename($templateFile);
 		$view->assign($this->conf['view'].'View', $this);
 

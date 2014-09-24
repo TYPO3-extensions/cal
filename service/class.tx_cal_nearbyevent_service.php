@@ -48,7 +48,7 @@ class tx_cal_nearbyevent_service extends tx_cal_event_service {
 			$user = $GLOBALS ['TSFE']->fe_user->user;
 			
 			/* Geocode the address */
-			$lookupTable = t3lib_div::makeInstance ('tx_wecmap_cache');
+			$lookupTable = new tx_wecmap_cache();
 			$latlong = $lookupTable->lookup ($user ['street'], $user ['city'], $user ['state'], $user ['zip'], $user ['country']);
 			if (isset ($latlong ['long']) && isset ($latlong ['lat'])) {
 				$this->internalAdditionTable = ',' . $this->conf ['view.'] ['calendar.'] ['nearbyAdditionalTable'];

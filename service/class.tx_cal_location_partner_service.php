@@ -127,7 +127,7 @@ class tx_cal_location_partner_service extends tx_cal_base_service {
 		
 		if ($result) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				$locations [] = &tx_cal_functions::makeInstance ('tx_cal_location_partner', $row ['uid'], $pidList);
+				$locations [] = new tx_cal_location_partner( $row ['uid'], $pidList);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 		}

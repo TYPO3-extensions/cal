@@ -59,17 +59,16 @@ $calendar = intval ($controllerPiVars ['calendar']);
 $pidList = $controllerPiVars ['pidList'];
 $view = $controllerPiVars ['view'];
 $type = $controllerPiVars ['type'];
-require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
 
 if (is_array ($_SESSION ['cal_api_' . $pid . '_conf'])) {
-	$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
-	$cObj = t3lib_div::makeInstance ('tslib_cObj');
+	$tx_cal_api = new tx_cal_api();
+	$cObj = new tslib_cObj();
 	$GLOBALS ['TSFE'] = &$_SESSION ['cal_api_' . $pid . '_tsfe'];
 	$GLOBALS ['TCA'] = &$_SESSION ['cal_api_' . $pid . '_tca'];
-	$tx_cal_api = &$tx_cal_api->tx_cal_api_with ($cObj, $_SESSION ['cal_api_' . $pid . '_conf']);
+	$tx_cal_api = $tx_cal_api->tx_cal_api_with ($cObj, $_SESSION ['cal_api_' . $pid . '_conf']);
 } else {
-	$tx_cal_api = t3lib_div::makeInstance ('tx_cal_api');
-	$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pid, $feUserObj);
+	$tx_cal_api = new tx_cal_api();
+	$tx_cal_api = $tx_cal_api->tx_cal_api_without ($pid, $feUserObj);
 	$_SESSION ['cal_api_' . $pid . '_conf'] = $tx_cal_api->conf;
 	$_SESSION ['cal_api_' . $pid . '_tsfe'] = $GLOBALS ['TSFE'];
 	$_SESSION ['cal_api_' . $pid . '_tca'] = $GLOBALS ['TCA'];

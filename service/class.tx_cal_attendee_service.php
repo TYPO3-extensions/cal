@@ -182,7 +182,7 @@ class tx_cal_attendee_service extends tx_cal_base_service {
 		return ' AND tx_cal_attendee.event_id = ' . $eventUid;
 	}
 	function createAttendee($row) {
-		$attendee = &tx_cal_functions::makeInstance ('tx_cal_attendee_model', $row, $this->getServiceKey ());
+		$attendee = new tx_cal_attendee_model( $row, $this->getServiceKey ());
 		return $attendee;
 	}
 	function findEventAttendees($eventUid) {

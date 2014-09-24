@@ -41,87 +41,6 @@
  * @package TYPO3
  * @subpackage cal
  */
-/**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- *
- *
- *
- * 58: class tx_ttnews_tceFunc_selectTreeView extends t3lib_treeview
- * 70: function wrapTitle($title,$v)
- *
- *
- * 89: class tx_ttnews_treeview
- * 99: function displayCategoryTree($PA, $fobj)
- * 353: function getNotAllowedItems($PA,$SPaddWhere)
- * 397: function findRecursiveCategories ($PA,$row,$table,$storagePid,$treeIds)
- * 438: function compareCategoryVals ($treeIds,$catString)
- * 466: function displayTypeFieldCheckCategories($PA, $fobj)
- *
- * TOTAL FUNCTIONS: 6
- * (This index is automatically created/updated by the extension "extdeveval")
- */
-
-// equire_once(PATH_t3lib.'class.t3lib_treeview.php');
-// equire_once(PATH_t3lib.'class.t3lib_tceforms.php');
-
-/**
- * extend class t3lib_treeview to change function wrapTitle().
- */
-class tx_cal_tceFunc_selectTreeView extends t3lib_treeview {
-	var $TCEforms_itemFormElName = '';
-	var $TCEforms_nonSelectableItemsArray = array ();
-	
-	/**
-	 * wraps the record titles in the tree with links or not depending on if they are in the TCEforms_nonSelectableItemsArray.
-	 *
-	 * @param string $title:
-	 *        	title
-	 * @param array $v:
-	 *        	array with uid and title of the current item.
-	 * @return string wrapped title
-	 */
-	function wrapTitle($title, $v, $bank = 0) {
-		if ($v ['uid'] > 0) {
-			if (in_array ($v ['uid'], $this->MOUNTS) || in_array ($v ['uid'], $this->TCEforms_nonSelectableItemsArray)) {
-				return '<a href="#" title="' . $v ['title'] . '"><span style="color:#999;cursor:default;">' . $title . '</span></a>';
-			} else {
-				$hrefTitle = $v ['title'];
-				$aOnClick = 'setFormValueFromBrowseWin(\'' . $this->TCEforms_itemFormElName . '\',' . $v ['uid'] . ',\'' . addslashes ($title) . '\'); return false;';
-				return '<a href="#" onclick="' . htmlspecialchars ($aOnClick) . '" title="' . htmlentities ($v ['title']) . '">' . $title . '</a>';
-			}
-		} else {
-			return $title;
-		}
-	}
-	
-	/**
-	 * Get icon for the row.
-	 * If $this->iconPath and $this->iconName is set, try to get icon based on those values.
-	 *
-	 * @param
-	 *        	array		Item row.
-	 * @return string tag.
-	 */
-	function getIcon($row) {
-		if (in_array ($row ['uid'], $this->MOUNTS)) {
-			$this->table = 'tx_cal_calendar';
-		}
-		$return = parent::getIcon ($row);
-		$this->table = 'tx_cal_category';
-		return $return;
-	}
-	
-	/**
-	 * Returns the root icon for a tree/mountpoint (defaults to the globe)
-	 *
-	 * @param
-	 *        	array		Record for root.
-	 * @return string image tag.
-	 */
-	function getRootIcon($rec) {
-		return $this->wrapIcon ('<img src="' . t3lib_extMgm::extRelPath ('cal') . 'res/icons/icon_tx_cal_calendar.gif" width="18" height="16" alt="" />', array ());
-	}
-}
 
 /**
  * this class displays a tree selector with nested tt_news categories.
@@ -730,7 +649,7 @@ class tx_cal_treeview {
 					$catWhere .= ' AND tx_cal_category.sys_language_uid IN (-1,0)';
 					if ($config ['treeViewClass'] and is_object ($treeViewObj = &t3lib_div::getUserObj ($config ['treeViewClass'], 'user_', false))) {
 					} else {
-						$treeViewObj = t3lib_div::makeInstance ('tx_cal_tceFunc_selectTreeView');
+						$treeViewObj = new tx_cal_tceFunc_selectTreeView();
 					}
 					
 					if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {

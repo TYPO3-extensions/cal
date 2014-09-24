@@ -335,7 +335,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		if ($this->isConfirm) {
 			$sims ['###' . strtoupper ($marker) . '###'] = '';
 			
-			$fileFunc = t3lib_div::makeInstance ('t3lib_basicFileFunctions');
+			$fileFunc = new t3lib_basicFileFunctions();
 			$all_files = Array ();
 			$all_files ['webspace'] ['allow'] = '*';
 			$all_files ['webspace'] ['deny'] = '';

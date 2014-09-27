@@ -1490,18 +1490,8 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 	}
 	function getAttachmentMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$sims ['###ATTACHMENT###'] = '';
-		
-		// due tue missing TS configuration support of the uploads rendering of css_styled_content, we have to manually fake some db values for it
 		$tempData = $this->getValuesAsArray ();
-		$tempData ['filelink_size'] = $this->conf ['view.'] [$view . '.'] ['event.'] ['attachment.'] ['showFileSize'];
-		$tempData ['tx_cal_media'] = implode (',', $this->getAttachment ());
-		$tempData ['layout'] = $this->conf ['view.'] [$view . '.'] ['event.'] ['attachment.'] ['layout'];
-		$tempData ['imagecaption'] = implode (chr (10), $this->getAttachmentCaption ());
-		$filePath = $this->conf ['view.'] [$view . '.'] ['event.'] ['attachment.'] ['filePath'] ? $this->conf ['view.'] [$view . '.'] ['event.'] ['attachment.'] ['filePath'] : '';
-		$filePath = ($filePath == '1' || $filePath == 'true') ? $GLOBALS ['TCA'] ['tx_cal_event'] ['columns'] ['attachment'] ['config'] ['uploadfolder'] . '/' : $filePath;
-		$tempData ['select_key'] = $filePath;
 		$this->initLocalCObject ($tempData);
-		$this->local_cObj->setCurrentVal ($tempData ['media']);
 		$sims ['###ATTACHMENT###'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] [$view . '.'] ['event.'] ['attachment'], $this->conf ['view.'] [$view . '.'] ['event.'] ['attachment.']);
 	}
 	function getAttachmentUrlMarker(& $template, & $sims, & $rems, & $wrapped, $view) {

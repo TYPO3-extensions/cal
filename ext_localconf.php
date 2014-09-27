@@ -1026,4 +1026,9 @@ if ($confArr ['cachingMode'] == 'normal') {
 
 $GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['t3lib/class.t3lib_befunc.php'] ['postProcessValue'] [] = 'EXT:cal/hooks/class.tx_cal_befunc.php:tx_cal_befunc->postprocessvalue';
 $GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['t3lib/class.t3lib_befunc.php'] ['preProcessValue'] [] = 'EXT:cal/hooks/class.tx_cal_befunc.php:tx_cal_befunc->preprocessvalue';
+
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cal_event_file_uploads'] = 'TYPO3\\CMS\\Cal\\Updates\\TxCalUploadsUpdateWizard';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cal_event_images'] = 'TYPO3\\CMS\\Cal\\Updates\\TxCalEventImagesUpdateWizard';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cal_location_images'] = 'TYPO3\\CMS\\Cal\\Updates\\TxCalLocationImagesUpdateWizard';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['cal_organizer_images'] = 'TYPO3\\CMS\\Cal\\Updates\\TxCalOrganizerImagesUpdateWizard';
 ?>

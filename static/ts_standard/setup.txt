@@ -437,7 +437,7 @@ plugin.tx_cal_controller {
 					required = 1
 					dataWrap = <div>%%%DESCRIPTION_LABEL%%%:&nbsp; |</div>
 				}
-	
+				
 				# @description	Content object for event image
 				image =< tt_content.image.20
 				image {
@@ -449,53 +449,32 @@ plugin.tx_cal_controller {
 				        }
 				        renderObj.data = title
 				    }
-					rendering.singleCaption.fallbackRendering.if.isTrue.data = register:ORIG_FILENAME
-					
+				    
+				    imgList.cObject.references < plugin.tx_cal_controller.view.event.event.image.preRenderRegisters.allImageCaptions.cObject.references
+						
 					//17 = in text right
 					textPos.override = 17
 					layout.key.override = 17
 					1 {
-						file.import.data = register:ORIG_FILENAME
-						
-						altText.data = field:imagealttext
-						titleText.data = field:imagetitletext
-						caption.data = field:imagecaption
-						
-						imageLinkWrap.typolink.parameter.data = register:ORIG_FILENAME
-						imageLinkWrap.typolink.ATagParams.dataWrap = class="{$styles.content.imgtext.linkWrap.lightboxCssClass}" rel="{$styles.content.imgtext.linkWrap.lightboxRelAttribute}"
+						imageLinkWrap {
+							# We just need a value > 0, which could be pid or uid ;)
+							enable.field = uid
+							typolink.ATagParams.dataWrap = class="{$styles.content.imgtext.linkWrap.lightboxCssClass}" rel="{$styles.content.imgtext.linkWrap.lightboxRelAttribute}"
+						}
 					}
 					
-					caption.1.1.data = field:imagecaption
-
 					imgMax = 4
-					imgList.cObject {
-			        	references {
-			            	table = tx_cal_event
-			            	uid.data = uid
-			            	fieldName = image
-			            }
-			            renderObj.data = title
-			        }
-					imgList.override.current = 1
-					imgPath = {$plugin.tx_cal_controller.uploadPath.image}
 
 					stdWrap.required = 1
 					stdWrap.dataWrap = <div>%%%IMAGE_LABEL%%%:&nbsp; |</div>
 					
 					maxW = {$plugin.tx_cal_controller.singleMaxW}
-					# switch to turn on the lightbox: kj_imagelightbox2 
-					# 1.imageLightbox2 = 1
-					# switch to turn on the lightbox: perfectlightbox
-					tx_perfectlightbox_activate = 1
+					
 				}
 	
 				# @description_image	Content object for rendering the description and the images with the regular 'text with image' (TEXTPIC) cObject
 				description_image < .image
 				description_image {
-					imgList.override {
-						current >
-						field = image
-					}
 					stdWrap.dataWrap >
 					text =< tt_content.textpic.20.text
 					text.field = description
@@ -509,21 +488,28 @@ plugin.tx_cal_controller {
 				}
 
 				# @description	Content object for event attachment
-				attachment =< tt_content.uploads
+				attachment = COA
 				attachment {
-					layout = 1
-					showFileSize = 1
-					filePath = {$plugin.tx_cal_controller.uploadPath.media}
+					10 = < lib.stdheader
+
+					20 = FILES
 					20 {
+						references {
+						  table = tx_cal_event
+						  uid.data = uid
+						  fieldName = attachment
+						}
+										
 						stdWrap {
-							if.isTrue.field = media
+							if.isTrue.field = attachment
 							dataWrap = <div>%%%ATTACHMENT_LABEL%%%:&nbsp;|</div>
 						}
-						references {
-				            table = tx_cal_event
-				            uid.data = uid
-				            fieldName = attachment
-				        }
+	
+						# render the files
+						renderObj =< tt_content.uploads.20.renderObj
+			
+						layout = 1
+						showFileSize = 1
 					}
 				}
 				
@@ -623,7 +609,7 @@ plugin.tx_cal_controller {
 				ics =< plugin.tx_cal_controller.view.defaultLinkSetup
 				ics {
 					current = 0
-					value = |
+					value = $5&xs2
 					required = 1
 					typolink {
 						# wrapping the parameter with the typenum of the ics page
@@ -1075,6 +1061,14 @@ plugin.tx_cal_controller {
 			    
 			    # @description	Content object for location image
 				image =< plugin.tx_cal_controller.view.event.event.image
+				image {
+					preRenderRegisters.allImageCaptions.cObject {
+			            references {
+				        	table = tx_cal_location
+				        }
+				    }
+				    imgList.cObject.references < plugin.tx_cal_controller.view.location.location.image.preRenderRegisters.allImageCaptions.cObject.references
+				}
 	
 				# @description	Displays location related events
 				includeEventsInResult = 1
@@ -1197,6 +1191,15 @@ plugin.tx_cal_controller {
 				noOrganizerFound = TEXT
 				noOrganizerFound {
 					dataWrap = %%%NO_ORGANIZER_RESULTS%%%
+				}
+				
+				image {
+					preRenderRegisters.allImageCaptions.cObject {
+			            references {
+				        	table = tx_cal_organizer
+				        }
+				    }
+				    imgList.cObject.references < plugin.tx_cal_controller.view.organizer.organizer.image.preRenderRegisters.allImageCaptions.cObject.references
 				}
 
 				addLink {
@@ -2989,9 +2992,3 @@ plugin.tx_cal_controller.lib.list {
 	enableMonthWrapper = 0
 	blub = 1
 }
-
-[compatVersion = 4.3]
-plugin.tx_cal_controller.view.event.event.attachment.20.stdWrap.if.isTrue.field = tx_cal_media
-plugin.tx_cal_controller.view.event.event.attachment.20.field = tx_cal_media
-plugin.tx_cal_controller.view.event.event.attachment.20.filePath.field = nothing
-[GLOBAL]

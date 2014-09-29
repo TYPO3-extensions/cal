@@ -56,7 +56,11 @@ class tx_cal_monthview extends tx_cal_base_view {
 		$this->_init ($master_array);
 		$page = '';
 		if ($this->conf ['view.'] ['month.'] ['monthMakeMiniCal']) {
-			$page = $this->cObj->fileResource ($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
+			$incFile = $GLOBALS['TSFE']->tmpl->getFileName($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
+			if(file_exists (PATH_site . $incFile )) {
+				$page = $this->cObj->fileResource ($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
+			}
+			
 			if ($page == '') {
 				$page = $this->conf ['view.'] ['month.'] ['monthMiniTemplate'];
 				if (! (preg_match ('/###([A-Z0-9_|+-]*)###/', $page))) {

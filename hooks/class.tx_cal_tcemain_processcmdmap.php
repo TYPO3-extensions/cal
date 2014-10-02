@@ -51,7 +51,7 @@ class tx_cal_tcemain_processcmdmap {
 						require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
 						
 						/* If we're in a workspace, don't notify anyone about the event */
-						if ($row ['pid'] > 0) {
+						if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 							/* Check Page TSConfig for a preview page that we should use */
 							$pageTSConf = t3lib_befunc::getPagesTSconfig ($row ['pid']);
 							if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
@@ -137,7 +137,7 @@ class tx_cal_tcemain_processcmdmap {
 						require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
 						
 						/* If we're in a workspace, don't notify anyone about the event */
-						if ($row ['pid'] > 0) {
+						if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 							/* Check Page TSConfig for a preview page that we should use */
 							$pageTSConf = t3lib_befunc::getPagesTSconfig ($row ['pid']);
 							if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
@@ -180,7 +180,7 @@ class tx_cal_tcemain_processcmdmap {
 							require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
 							
 							/* If we're in a workspace, don't notify anyone about the event */
-							if ($row ['pid'] > 0) {
+							if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 								/* Check Page TSConfig for a preview page that we should use */
 								$pageTSConf = t3lib_befunc::getPagesTSconfig ($row ['pid']);
 								if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {

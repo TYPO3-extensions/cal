@@ -76,7 +76,7 @@ class tx_cal_tcemain_processdatamap {
 					unset ($fieldArray ['until']);
 				}
 				/* If we're in a workspace, don't notify anyone about the event */
-				if ($event ['pid'] > 0 && count ($fieldArray) > 1) {
+				if ($event ['pid'] > 0 && count ($fieldArray) > 1 && !$GLOBALS['BE_USER']->workspace) {
 					if ($fieldArray ['calendar_id'] && $event ['calendar_id'] != $fieldArray ['calendar_id']) {
 						$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_event_category_mm', 'uid_local=' . intval ($id));
 					}
@@ -188,7 +188,7 @@ class tx_cal_tcemain_processdatamap {
 			$event = t3lib_BEfunc::getRecord ($table, $status == 'new' ? $tcemain->substNEWwithIDs [$id] : $id);
 			
 			/* If we're in a workspace, don't notify anyone about the event */
-			if ($event ['pid'] > 0) {
+			if ($event ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 				/* Check Page TSConfig for a preview page that we should use */
 				$pageTSConf = t3lib_befunc::getPagesTSconfig ($event ['pid']);
 				if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
@@ -378,7 +378,7 @@ class tx_cal_tcemain_processdatamap {
 				$exceptionEvent = t3lib_BEfunc::getRecord ('tx_cal_exception_event_group', $id);
 				
 				/* If we're in a workspace, don't notify anyone about the event */
-				if ($exceptionEvent ['pid'] > 0) {
+				if ($exceptionEvent ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 					/* Check Page TSConfig for a preview page that we should use */
 					$pageTSConf = t3lib_befunc::getPagesTSconfig ($exceptionEvent ['pid']);
 					if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {

@@ -2484,24 +2484,9 @@ plugin.tx_cal_controller {
 				}
 
 				# @description	Content object for the event image
-				image >
-				image = IMAGE
 				image {
-					file {
-						import = {$plugin.tx_cal_controller.uploadPath.image}
-						import {
-							current = 1
-							listNum = 0
-						}
-						maxW = {$plugin.tx_cal_controller.listMaxW}
-					}
-					altText {
-						field = imagealttext
-						listNum = 0
-						listNum.splitChar = 10
-					}
-					titleText < .altText
-					titleText.field = imagetitletext
+					maxW = {$plugin.tx_cal_controller.listMaxW}
+					stdWrap.dataWrap >
 				}
 
 				# @description	Content object for the event description

@@ -97,6 +97,7 @@ class tx_cal_controller extends tslib_pibase {
 
 		$this->cleanPiVarParam($this->piVars);
 		$this->clearPiVarParams();
+		$this->validateDateRanges();
 		$this->getParamsFromSession();
 		$this->initCaching();
 		$return = $this->initConfigs();
@@ -124,6 +125,47 @@ class tx_cal_controller extends tslib_pibase {
 		} else {
 			// Don't use default replaceString of <x> because strip-tags will later remove it.
 			$param = tx_cal_functions::removeXSS($param, '--xxx--');
+		}
+	}
+
+	/**
+	 * Validates that various date piVars are within valid ranges.  Any dates outside a valid range have
+	 * their piVars unset.
+	 *
+	 * @return none
+	 */
+	function validateDateRanges() {
+		
+		if (isset($this->piVars['day'])) {
+			$this->piVars['day'] = intval($this->piVars['day']);
+			if ($this->piVars['day'] < 1 || $this->piVars['day'] > 31) {
+				unset($this->piVars['day']);
+			}
+		}
+	
+		if (isset($this->piVars['month'])) {
+			$this->piVars['month'] = intval($this->piVars['month']);
+			if ($this->piVars['month'] < 1 || $this->piVars['month'] > 12) {
+				unset($this->piVars['month']);
+			}
+		}
+	
+		if (isset($this->piVars['year'])) {
+			$this->piVars['year'] = intval($this->piVars['year']);
+			if ($this->piVars['year'] < 1900 || $this->piVars['year'] > 5000) {
+				unset($this->piVars['year']);
+			}
+		}
+	
+		if (isset($this->piVars['weekday'])) {
+			$this->piVars['weekday'] = intval($this->piVars['weekday']);
+			if ($this->piVars['weekday'] < 0 || $this->piVars['weekday'] > 6) {
+				unset($this->piVars['weekday']);
+			}
+		}
+	
+		if (isset($this->piVars['getdate']) && strlen($this->piVars['getdate']) !== 8) {
+			unset($this->piVars['getdate']);
 		}
 	}
 

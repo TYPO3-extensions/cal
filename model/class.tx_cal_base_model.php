@@ -79,13 +79,7 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 	function getImageMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$sims ['###IMAGE###'] = '';
 		$this->initLocalCObject ();
-// 		$this->local_cObj->setCurrentVal (implode (',', $this->getImage ()));
-		
-// 		if ($this->conf ['view.'] [$view . '.'] [$this->getObjectType () . '.'] ['image.'] ['tx_perfectlightbox_activate'] == 1) {
-// 			$this->local_cObj->data ['image_zoom'] = 1;
-// 			$this->local_cObj->data ['tx_perfectlightbox_activate'] = 1;
-// 		}
-		
+
 		$sims ['###IMAGE###'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] [$view . '.'] [$this->getObjectType () . '.'] ['image'], $this->conf ['view.'] [$view . '.'] [$this->getObjectType () . '.'] ['image.']);
 	}
 	

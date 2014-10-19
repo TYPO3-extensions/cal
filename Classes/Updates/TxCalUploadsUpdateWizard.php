@@ -243,9 +243,9 @@ class TxCalUploadsUpdateWizard extends \TYPO3\CMS\Install\Updates\AbstractUpdate
 		$this->quoteIdentifiers($mapping);
 
 		$where = sprintf(
-			'WHERE %s <> \'\'',
-			$mapping['mapFieldNames']['attachment']
-		);
+				'WHERE %s <> \'\'',
+				$mapping['mapFieldNames']['attachment']
+		). ' AND cast( '.$mapping['mapFieldNames']['attachment'].' AS decimal ) <> '.$mapping['mapFieldNames']['attachment'];
 
 		return $where;
 	}

@@ -438,42 +438,43 @@ plugin.tx_cal_controller {
 				# @description	Content object for event image
 				image =< tt_content.image.20
 				image {
+					preRenderRegisters.allImageCaptions.cObject {
+			            references {
+				        	table = tx_cal_event
+				            uid.data = uid
+				            fieldName = image
+				        }
+				        renderObj.data = title
+				    }
+				    
+				    imgList.cObject.references < plugin.tx_cal_controller.view.event.event.image.preRenderRegisters.allImageCaptions.cObject.references
+						
 					//17 = in text right
 					textPos.override = 17
 					layout.key.override = 17
 					1 {
-						altText.override.field = imagealttext
-						titleText.override.field = imagetitletext
-						caption.override.field = imagecaption
+						imageLinkWrap {
+							# We just need a value > 0, which could be pid or uid ;)
+							enable.field = uid
+							typolink.ATagParams.dataWrap = class="{$styles.content.imgtext.linkWrap.lightboxCssClass}" rel="{$styles.content.imgtext.linkWrap.lightboxRelAttribute}"
+						}
 					}
-
+					
 					imgMax = 4
-					imgList >
-					imgList.override.current = 1
-					imgPath = {$plugin.tx_cal_controller.uploadPath.image}
 
-					stdWrap.dataWrap = <div>%%%IMAGE_LABEL%%%:&nbsp; |</div>
 					stdWrap.required = 1
-					1.imageLinkWrap.enable.field >
-					1.imageLinkWrap.enable.override = 1
+					stdWrap.dataWrap = <div>%%%IMAGE_LABEL%%%:&nbsp; |</div>
+					
 					maxW = {$plugin.tx_cal_controller.singleMaxW}
-					maxWInText = {$plugin.tx_cal_controller.singleMaxW}
-					# switch to turn on the lightbox: kj_imagelightbox2 
-					# 1.imageLightbox2 = 1
-					# switch to turn on the lightbox: perfectlightbox
-					tx_perfectlightbox_activate = 1
+					
 				}
 	
 				# @description_image	Content object for rendering the description and the images with the regular 'text with image' (TEXTPIC) cObject
 				description_image < .image
 				description_image {
-					imgList.override {
-						current >
-						field = image
-					}
 					stdWrap.dataWrap >
 					text =< tt_content.textpic.20.text
-					text.20.field = description
+					text.field = description
 				}
 	
 				# @description	Defines cropping for event description in event view.
@@ -1014,6 +1015,14 @@ plugin.tx_cal_controller {
 			    
 			    # @description	Content object for location image
 				image =< plugin.tx_cal_controller.view.event.event.image
+				image {
+					preRenderRegisters.allImageCaptions.cObject {
+			            references {
+				        	table = tx_cal_location
+				        }
+				    }
+				    imgList.cObject.references < plugin.tx_cal_controller.view.location.location.image.preRenderRegisters.allImageCaptions.cObject.references
+				}
 	
 				# @description	Displays location related events
 				includeEventsInResult = 1
@@ -1136,6 +1145,15 @@ plugin.tx_cal_controller {
 				noOrganizerFound = TEXT
 				noOrganizerFound {
 					dataWrap = %%%NO_ORGANIZER_RESULTS%%%
+				}
+				
+				image {
+					preRenderRegisters.allImageCaptions.cObject {
+			            references {
+				        	table = tx_cal_organizer
+				        }
+				    }
+				    imgList.cObject.references < plugin.tx_cal_controller.view.organizer.organizer.image.preRenderRegisters.allImageCaptions.cObject.references
 				}
 
 				addLink {

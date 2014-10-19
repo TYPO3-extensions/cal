@@ -251,7 +251,7 @@ class TxCalLocationImagesUpdateWizard extends \TYPO3\CMS\Install\Updates\Abstrac
 		$where = sprintf(
 			'WHERE %s <> \'\'',
 			$mapping['mapFieldNames']['image']
-		). ' AND cast( '.$mapping['mapFieldNames']['image'].' AS decimal ) <> '.$mapping['mapFieldNames']['image'];
+		). ' AND cast( '.$mapping['mapFieldNames']['image'].' AS decimal ) = 0';
 
 		return $where;
 	}

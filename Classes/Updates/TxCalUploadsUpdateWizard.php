@@ -245,7 +245,7 @@ class TxCalUploadsUpdateWizard extends \TYPO3\CMS\Install\Updates\AbstractUpdate
 		$where = sprintf(
 				'WHERE %s <> \'\'',
 				$mapping['mapFieldNames']['attachment']
-		). ' AND cast( '.$mapping['mapFieldNames']['attachment'].' AS decimal ) <> '.$mapping['mapFieldNames']['attachment'];
+		). ' AND cast( '.$mapping['mapFieldNames']['attachment'].' AS decimal ) = 0';
 
 		return $where;
 	}

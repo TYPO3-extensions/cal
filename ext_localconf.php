@@ -989,9 +989,6 @@ if (t3lib_div::inList ($TYPO3_CONF_VARS ['EXT'] ['extList'], 'scheduler')) {
 /* Include a custom userFunc for checking whether we're in frontend editing mode */
 require_once (t3lib_extMgm::extPath ($_EXTKEY) . 'res/class.tx_cal_isCalNotAllowedToBeCached.php');
 
-/* XCLASS */
-$GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['XCLASS'] ['typo3/wizard_edit.php'] = t3lib_extMgm::extPath ($_EXTKEY) . 'xclass/class.ux_wizard_edit.php';
-
 // caching framework configuration
 // Register cache 'tx_cal_cache'
 if (! is_array ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'])) {

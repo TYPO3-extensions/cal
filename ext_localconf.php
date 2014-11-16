@@ -7,8 +7,8 @@ t3lib_extMgm::addUserTSConfig ('options.saveDocNew.tx_cal_event=1');
 t3lib_extMgm::addUserTSConfig ('options.saveDocNew.tx_cal_exception_event=1');
 
 t3lib_extMgm::addTypoScript ($_EXTKEY, 'setup', '
-	tt_content.shortcut.20.0.conf.tx_cal_event = < plugin.tx_cal_controller
-	tt_content.shortcut.20.0.conf.tx_cal_event {
+	tt_content.shortcut.20.conf.tx_cal_event = < plugin.tx_cal_controller
+	tt_content.shortcut.20.conf.tx_cal_event {
 		displayCurrentRecord = 1
 		// If you don\'t want that this record is reacting on certain piVars, add those to this list. To clear all piVars, use keyword "all"
 		clearPiVars = uid,getdate,type,view

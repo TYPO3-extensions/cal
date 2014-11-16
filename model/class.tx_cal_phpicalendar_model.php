@@ -1015,9 +1015,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 											));
 										}
 										
-										$mailer->getHeaders ()->addTextHeader (array (
-												'Organization: ' => $this->conf ['view.'] ['event.'] ['notify.'] ['organisation'] 
-										));
+										$mailer->getHeaders ()->addTextHeader ('Organization: ', $this->conf ['view.'] ['event.'] ['notify.'] ['organisation']);
 										
 										$local_template = $cObj->fileResource ($this->conf ['view.'] ['event.'] ['notify.'] ['confirmTemplate']);
 										
@@ -1170,9 +1168,7 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										$mailer->setReplyTo (array (
 												$this->conf ['view.'] ['event.'] ['notify.'] ['emailReplyAddress'] => $this->conf ['view.'] ['event.'] ['notify.'] ['replyToName'] 
 										));
-										$mailer->getHeaders ()->addTextHeader (array (
-												'Organization: ' => $this->conf ['view.'] ['event.'] ['notify.'] ['organisation'] 
-										));
+										$mailer->getHeaders ()->addTextHeader ('Organization: ', $this->conf ['view.'] ['event.'] ['notify.'] ['organisation']);
 										
 										$local_template = $cObj->fileResource ($this->conf ['view.'] ['event.'] ['notify.'] ['unsubscribeConfirmTemplate']);
 										

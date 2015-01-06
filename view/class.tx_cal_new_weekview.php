@@ -493,14 +493,14 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 		$sims ['###CLASSES6###'] = $this->getDayClasses (6);
 	}
 	private function getDayClasses($weekdayIndex) {
+		$conf = &tx_cal_registry::Registry ('basic', 'conf');
 		if ($this->initialized === false) {
-			$conf = &tx_cal_registry::Registry ('basic', 'conf');
 			$this->getAlldaysMarker ($template, $sims, $rems, $wrapped, $conf ['view']);
 			$this->initialized = true;
 		}
 		$classes = '';
 		if ($this->dayHasEvent [$weekdayIndex] == 1) {
-			$classes .= ' withEventsDay';
+			$classes .= ' ' . $conf['view.']['month.']['eventDayStyle'];
 		}
 		
 		$localDayIndex = $this->currentDayIndex + DATE_CALC_BEGIN_WEEKDAY;
@@ -509,7 +509,7 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 		}
 		
 		if ($localDayIndex == $weekdayIndex) {
-			$classes .= ' currentDayHeader';
+			$classes .= ' ' . $conf['view.']['month.']['monthTodayStyle'];
 		}
 		
 		$localDayIndex = $weekdayIndex - DATE_CALC_BEGIN_WEEKDAY;
@@ -518,7 +518,7 @@ class tx_cal_new_weekview extends tx_cal_new_timeview {
 		}
 		$daysKeys = array_keys ($this->days);
 		if (intval ($this->getParentMonth ()) != intval ($this->days [$daysKeys [$localDayIndex]]->month)) {
-			$classes .= ' monthOff';
+			$classes .= ' ' . $conf['view.']['month.']['monthOffStyle'];
 		}
 		
 		return $classes;

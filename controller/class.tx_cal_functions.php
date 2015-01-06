@@ -611,8 +611,8 @@ class tx_cal_functions {
 	 * @return string code with absolute links
 	 */
 	public static function fixURI($html) {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_uriHandler.php');
-		$uriHandler = tx_cal_uriHandler();
+		require_once (t3lib_extMgm::extPath('cal') . 'controller/class.tx_cal_uriHandler.php');
+		$uriHandler = new tx_cal_uriHandler();
 		$uriHandler->setHTML ($html);
 		$uriHandler->setPATH ('http://' . t3lib_div::getHostname (1) . '/');
 		

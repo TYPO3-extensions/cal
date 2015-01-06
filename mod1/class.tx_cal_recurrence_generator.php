@@ -23,8 +23,8 @@ class tx_cal_recurrence_generator {
 	function getInfo() {
 		return $this->info;
 	}
-	function cleanIndexTable() {
-		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', '');
+	function cleanIndexTable($pageId) {
+		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid in (select uid from tx_cal_event where pid = '. intval($pageId).')');
 	}
 	function cleanIndexTableOfUid($uid, $table) {
 		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid = ' . $uid . ' AND tablename = "' . $table . '"');
@@ -87,13 +87,15 @@ class tx_cal_recurrence_generator {
 		return $count;
 	}
 	function generateIndex($eventPage = 0) {
-		$eventService = $this->getEventService ();
-		if (! is_object ($eventService)) {
+		if (!is_object($this->eventService)){
+			$this->eventService = $this->getEventService ();
+		}
+		if (! is_object ($this->eventService)) {
 			$this->info = 'Could not fetch the event service! Please make sure the page id is correct!';
 			return;
 		}
-		$eventService->starttime = new tx_cal_date ($this->starttime);
-		$eventService->endtime = new tx_cal_date ($this->endtime);
+		$this->eventService->starttime = new tx_cal_date ($this->starttime);
+		$this->eventService->endtime = new tx_cal_date ($this->endtime);
 		$select = '*';
 		$table = 'tx_cal_event';
 		$this->info .= '<h3>tx_cal_event</h3><br/><ul>';
@@ -109,8 +111,8 @@ class tx_cal_recurrence_generator {
 					$row ["rdate"] = "";
 				}
 				$this->info .= '<li>'.$row['title'].'</li>';
-				$event = $eventService->createEvent ($row, false);
-				$eventService->recurringEvent ($event);
+				$event = $this->eventService->createEvent ($row, false);
+				$this->eventService->recurringEvent ($event);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
 		}
@@ -121,22 +123,23 @@ class tx_cal_recurrence_generator {
 		if ($results) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
 				$this->info .= '<li>'.$row['title'].'</li>';
-				$event = $eventService->createEvent ($row, true);
-				$eventService->recurringEvent ($event);
+				$event = $this->eventService->createEvent ($row, true);
+				$this->eventService->recurringEvent ($event);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
 		}
 		$this->info .= '</ul>';
 		$this->info .= 'Done.';
+		$this->info .= '<br/><br/><a href="javascript:history.back();">'.$GLOBALS ['LANG']->getLL ('back').'</a>';
 	}
 	function generateIndexForUid($uid, $table) {
-		$eventService = $this->getEventService ();
-		if (! is_object ($eventService)) {
+		$this->eventService = $this->getEventService ();
+		if (! is_object ($this->eventService)) {
 			$this->info = 'Could not fetch the event service! Please make sure the page id is correct!';
 			return;
 		}
-		$eventService->starttime = new tx_cal_date ($this->starttime);
-		$eventService->endtime = new tx_cal_date ($this->endtime);
+		$this->eventService->starttime = new tx_cal_date ($this->starttime);
+		$this->eventService->endtime = new tx_cal_date ($this->endtime);
 		
 		$this->cleanIndexTableOfUid ($uid, $table);
 		
@@ -145,21 +148,21 @@ class tx_cal_recurrence_generator {
 		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
-				$event = $eventService->createEvent ($row, $table == 'tx_cal_exception_event');
-				$eventService->recurringEvent ($event);
+				$event = $this->eventService->createEvent ($row, $table == 'tx_cal_exception_event');
+				$this->eventService->recurringEvent ($event);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
 		}
 		$this->info = 'Done.';
 	}
 	function generateIndexForCalendarUid($uid) {
-		$eventService = $this->getEventService ();
-		if (! is_object ($eventService)) {
+		$this->eventService = $this->getEventService ();
+		if (! is_object ($this->eventService)) {
 			$this->info = 'Could not fetch the event service! Please make sure the page id is correct!';
 			return;
 		}
-		$eventService->starttime = new tx_cal_date ($this->starttime);
-		$eventService->endtime = new tx_cal_date ($this->endtime);
+		$this->eventService->starttime = new tx_cal_date ($this->starttime);
+		$this->eventService->endtime = new tx_cal_date ($this->endtime);
 		
 		$this->cleanIndexTableOfCalendarUid ($uid);
 		
@@ -169,21 +172,21 @@ class tx_cal_recurrence_generator {
 		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
-				$event = $eventService->createEvent ($row, false);
-				$eventService->recurringEvent ($event);
+				$event = $this->eventService->createEvent ($row, false);
+				$this->eventService->recurringEvent ($event);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
 		}
 		$this->info = 'Done.';
 	}
 	function generateIndexForExceptionGroupUid($uid) {
-		$eventService = $this->getEventService ();
-		if (! is_object ($eventService)) {
+		$this->eventService = $this->getEventService ();
+		if (! is_object ($this->eventService)) {
 			$this->info = 'Could not fetch the event service! Please make sure the page id is correct!';
 			return;
 		}
-		$eventService->starttime = new tx_cal_date ($this->starttime);
-		$eventService->endtime = new tx_cal_date ($this->endtime);
+		$this->eventService->starttime = new tx_cal_date ($this->starttime);
+		$this->eventService->endtime = new tx_cal_date ($this->endtime);
 		
 		$this->cleanIndexTableOfExceptionGroupUid ($uid);
 		
@@ -192,8 +195,8 @@ class tx_cal_recurrence_generator {
 		$results = $GLOBALS ['TYPO3_DB']->exec_SELECT_mm_query ('tx_cal_exception_event_group.*', 'tx_cal_exception_event', 'tx_cal_exception_event_mm', 'tx_cal_exception_event_group', $where);
 		if ($results) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
-				$event = $eventService->createEvent ($row, false);
-				$eventService->recurringEvent ($event);
+				$event = $this->eventService->createEvent ($row, false);
+				$this->eventService->recurringEvent ($event);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
 		}

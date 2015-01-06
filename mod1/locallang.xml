@@ -27,8 +27,9 @@
 			<label index="notAllPagesAssigned">You need to assign a frontend page to all found storage places in order to start indexing!</label>
 			<label index="result">Result: </label>
 			<label index="toBeIndexed"> -&gt; Events to be indexed: </label>
-			<label index="droppingTable">Dropping index table </label>
+			<label index="droppingTable">Removing events with pid %s from index</label>
 			<label index="indexing">Indexing</label>
+			<label index="back">Back</label>
 		</languageKey>
 		<languageKey index="dk" type="array">
 		</languageKey>

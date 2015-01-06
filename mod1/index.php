@@ -173,11 +173,11 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 				if ($endtime) {
 					$endtime = intval ($endtime);
 				}
-				if (! empty ($pageIds) && is_int ($starttime) && is_int ($endtime)) {
+				if (count($pageIds) > 0 && is_int ($starttime) && is_int ($endtime)) {
 					$content = $GLOBALS ['LANG']->getLL ('indexing') . '<br/>';
 					$rgc = new tx_cal_recurrence_generator(0, $starttime, $endtime);
-					$this->content .= $this->doc->section ($GLOBALS ['LANG']->getLL ('droppingTable'), $rgc->cleanIndexTable (), 0, 1);
 					foreach ($pageIds as $eventPage => $pluginPage) {
+						$this->content .= $this->doc->section (sprintf($GLOBALS ['LANG']->getLL ('droppingTable'),$eventPage), $rgc->cleanIndexTable ($eventPage), 0, 1);
 						$rgc->pageIDForPlugin = $pluginPage;
 						$this->content .= $this->doc->section ('PID ' . $eventPage . $GLOBALS ['LANG']->getLL ('toBeIndexed'), $rgc->countRecurringEvents ($eventPage), 0, 1);
 						$rgc->generateIndex ($eventPage);

@@ -45,15 +45,15 @@ class tx_cal_realurl {
 		$config = &$params ['config'];
 		$extKey = &$params ['extKey'];
 		
-		if (! is_array ($config ['postVarSets'] ['_DEFAULT'])) {
+		if (! is_array ( $config ['postVarSets'] ['_DEFAULT'] )) {
 			$config ['postVarSets'] ['_DEFAULT'] = array ();
 		}
-		$config ['postVarSets'] ['_DEFAULT'] = array_merge ($config ['postVarSets'] ['_DEFAULT'], $this->addPostVarSets ());
+		$config ['postVarSets'] ['_DEFAULT'] = array_merge ( $config ['postVarSets'] ['_DEFAULT'], $this->addPostVarSets () );
 		
-		if (! is_array ($config ['fileName'] ['index'])) {
+		if (! is_array ( $config ['fileName'] ['index'] )) {
 			$config ['fileName'] ['index'] = array ();
 		}
-		$config ['fileName'] ['index'] = array_merge ($config ['fileName'] ['index'], $this->addFilenameSet ());
+		$config ['fileName'] ['index'] = array_merge ( $config ['fileName'] ['index'], $this->addFilenameSet () );
 		
 		return $config;
 	}
@@ -63,6 +63,11 @@ class tx_cal_realurl {
 				'keyValues' => array (
 						'type' => 151 
 				) 
+		);
+		$calendarRSS ['calendar.ics'] = array (
+				'keyValues' => array (
+						'type' => 150
+				)
 		);
 		return $calendarRSS;
 	}
@@ -76,7 +81,7 @@ class tx_cal_realurl {
 		$postVarSets = array ();
 		
 		$postVarSets ['calendar'] = array (
-				$this->addValueMap ('tx_cal_controller[year]', array (
+				$this->addValueMap ( 'tx_cal_controller[year]', array (
 						'2000' => '2000',
 						'2001' => '2001',
 						'2002' => '2002',
@@ -98,8 +103,8 @@ class tx_cal_realurl {
 						'2018' => '2018',
 						'2019' => '2019',
 						'2020' => '2020' 
-				)),
-				$this->addValueMap ('tx_cal_controller[month]', array (
+				) ),
+				$this->addValueMap ( 'tx_cal_controller[month]', array (
 						'01' => '01',
 						'02' => '02',
 						'03' => '03',
@@ -112,8 +117,8 @@ class tx_cal_realurl {
 						'10' => '10',
 						'11' => '11',
 						'12' => '12' 
-				)),
-				$this->addValueMap ('tx_cal_controller[day]', array (
+				) ),
+				$this->addValueMap ( 'tx_cal_controller[day]', array (
 						'01' => '01',
 						'02' => '02',
 						'03' => '03',
@@ -145,8 +150,8 @@ class tx_cal_realurl {
 						'29' => '29',
 						'30' => '30',
 						'31' => '31' 
-				)),
-				$this->addValueMap ('tx_cal_controller[view]', array (
+				) ),
+				$this->addValueMap ( 'tx_cal_controller[view]', array (
 						'month' => 'month',
 						'year' => 'year',
 						'week' => 'week',
@@ -214,8 +219,8 @@ class tx_cal_realurl {
 						'translation' => 'translation',
 						'todo' => 'todo',
 						'ajax' => 'ajax' 
-				)),
-				$this->addValueMap ('tx_cal_controller[type]', array (
+				) ),
+				$this->addValueMap ( 'tx_cal_controller[type]', array (
 						'tx_cal_phpicalendar' => 'tx_cal_phpicalendar',
 						'tx_cal_organizer' => 'tx_cal_organizer',
 						'tx_cal_location' => 'tx_cal_location',
@@ -225,12 +230,28 @@ class tx_cal_realurl {
 						'tx_tt_address' => 'tx_tt_address',
 						'tx_feuser' => 'tx_feuser',
 						'tx_partner_main' => 'tx_feuser' 
-				)),
-				$this->addTable ('tx_cal_controller[uid]', 'tx_cal_event', 'title', 'tx_cal_phpicalendar'),
-				$this->addTable ('tx_cal_controller[uid]', 'tx_cal_organizer', 'name', 'tx_cal_organizer'),
-				$this->addTable ('tx_cal_controller[uid]', 'tx_cal_location', 'name', 'tx_cal_location') 
-		)
-		;
+				) ),
+				$this->addTable ( 'tx_cal_controller[uid]', 'tx_cal_event', 'title', 'tx_cal_phpicalendar' ),
+				$this->addTable ( 'tx_cal_controller[uid]', 'tx_cal_organizer', 'name', 'tx_cal_organizer' ),
+				$this->addTable ( 'tx_cal_controller[uid]', 'tx_cal_location', 'name', 'tx_cal_location' ) 
+		);
+		
+		$postVarSets ['export'] = array (
+				0 => array (
+						'GETvar' => 'tx_cal_controller[calendar]',
+						'lookUpTable' => array (
+								'table' => 'tx_cal_calendar',
+								'id_field' => 'uid',
+								'alias_field' => 'title',
+								'addWhereClause' => ' AND NOT deleted',
+								'useUniqueCache' => 1,
+								'useUniqueCache_conf' => array (
+										'strtolower' => 1,
+										'spaceCharacter' => '_' 
+								) 
+						) 
+				) 
+		);
 		
 		return $postVarSets;
 	}
@@ -335,8 +356,8 @@ class tx_cal_realurl {
 		$configArray = array ();
 		$configArray ['GETvar'] = $key;
 		
-		if (is_array ($valueMapArray)) {
-			foreach ($valueMapArray as $key => $value) {
+		if (is_array ( $valueMapArray )) {
+			foreach ( $valueMapArray as $key => $value ) {
 				$configArray ['valueMap'] [$key] = $value;
 			}
 		}
@@ -364,8 +385,8 @@ class tx_cal_realurl {
 		$configArray = array ();
 		$configArray ['type'] = 'single';
 		
-		if (is_array ($keyValueArray)) {
-			foreach ($keyValueArray as $key => $value) {
+		if (is_array ( $keyValueArray )) {
+			foreach ( $keyValueArray as $key => $value ) {
 				$configArray ['keyValues'] [$key] = $value;
 			}
 		}
@@ -374,7 +395,7 @@ class tx_cal_realurl {
 	}
 }
 
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_realurl.php']) {
+if (defined ( 'TYPO3_MODE' ) && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_realurl.php']) {
 	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_realurl.php']);
 }
 ?>

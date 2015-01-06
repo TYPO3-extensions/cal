@@ -524,7 +524,8 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 						);
 						$piVars = $this->piVars;
 						unset ($piVars ['DATA']);
-						$overrulePIvars = t3lib_div::array_merge_recursive_overrule ((array) $piVars, $overrulePIvars);
+						\TYPO3\Cal\Utility\CompatibilityUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
+						$overrulePIvars = $piVars;
 						$sims ['###TRANSLATION_OPTIONS###'] .= ' ' . $this->controller->pi_linkTP ($this->cObj->cObjGetSingle ($this->conf ['view.'] ['translation.'] ['languageMenu.'] [$langId], $this->conf ['view.'] ['translation.'] ['languageMenu.'] [$langId . '.']), Array (
 								$this->controller->prefixId => $overrulePIvars,
 								Array (

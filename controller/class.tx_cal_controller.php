@@ -3267,7 +3267,8 @@ class tx_cal_controller extends tslib_pibase {
 		if (is_array ($this->piVars) && is_array ($overrulePIvars) && ! $clearAnyway) {
 			$piVars = $this->piVars;
 			unset ($piVars ['DATA']);
-			$overrulePIvars = t3lib_div::array_merge_recursive_overrule ($piVars, $overrulePIvars);
+			\TYPO3\Cal\Utility\CompatibilityUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
+			$overrulePIvars = $piVars;
 			if ($this->pi_autoCacheEn) {
 				$cache = $this->pi_autoCache ($overrulePIvars);
 			}

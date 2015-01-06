@@ -3171,7 +3171,7 @@ if (t3lib_extMgm::isLoaded ('wec_map')) {
 			)
 	);
 
-	t3lib_extMgm::addTCAcolumns ('tx_cal_location', $geocodeTCA, 1);
+	t3lib_extMgm::addTCAcolumns ('tx_cal_location', $geocodeTCA);
 	$TCA ['tx_cal_location'] ['interface'] ['showRecordFieldList'] .= ',tx_wecmap_geocode';
 	t3lib_extMgm::addToAllTCAtypes ('tx_cal_location', 'tx_wecmap_geocode');
 
@@ -3187,7 +3187,7 @@ if (t3lib_extMgm::isLoaded ('wec_map')) {
 			)
 	);
 
-	t3lib_extMgm::addTCAcolumns ('tx_cal_location', $mapTCA, 1);
+	t3lib_extMgm::addTCAcolumns ('tx_cal_location', $mapTCA);
 	$TCA ['tx_cal_location'] ['interface'] ['showRecordFieldList'] .= ',tx_wecmap_map';
 	t3lib_extMgm::addToAllTCAtypes ('tx_cal_location', 'tx_wecmap_map');
 }

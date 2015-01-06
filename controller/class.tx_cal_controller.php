@@ -3,7 +3,7 @@
  * *************************************************************
  * Copyright notice
  *
- * (c) 2005-2008 Mario Matzulla
+ * (c) 2005-2015 Mario Matzulla
  * (c) 2005-2008 Steffen Kamper
  * (c) 2005-2008 Christian Technology Ministries International Inc.
  * All rights reserved

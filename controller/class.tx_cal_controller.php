@@ -1449,7 +1449,8 @@ class tx_cal_controller extends tslib_pibase {
 		
 		$start_day = $this->piVars ['start_day'];
 		$end_day = $this->piVars ['end_day'];
-		$searchword = strip_tags ($this->piVars ['query']);
+		$searchword = preg_replace('/["\']/', '', strip_tags ($this->piVars ['query']));
+		$this->piVars ['query'] = $searchword;
 		
 		include_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		

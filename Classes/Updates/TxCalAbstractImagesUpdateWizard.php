@@ -15,40 +15,23 @@ namespace TYPO3\CMS\Cal\Updates;
  */
 
 /**
- * Upgrade wizard which goes through all files referenced in the tx_cal_event.attachment filed
+ * Upgrade wizard which goes through all files referenced in the tx_cal_event.image filed
  * and creates sys_file records as well as sys_file_reference records for the individual usages.
  *
  * @author Mario Matzulla <mario@matzullas.de>
  */
-class TxCalUploadsUpdateWizard extends TxCalAbstractUpdateWizard {
+abstract class TxCalAbstractImagesUpdateWizard extends TxCalAbstractUpdateWizard {
 
-	/**
-	 * @var string
-	 */
-	protected $title = 'Migrate file relations of tx_cal_event "attachments"';
-
-	/**
-	 * Returns the migration description
-	 * @return string The description
-	 */
-	protected function getMigrationDescription() {
-		return 'There are Content Elements of type "upload" which are referencing files that are not using ' . ' the File Abstraction Layer. This wizard will move the files to fileadmin/' . self::FOLDER_ContentUploads . ' and index them.';
-	}
-	
-	protected function getRecordTableName() {
-		return 'tx_cal_event';
-	}
-	
 	/**
 	 * Returns the table column names
 	 * @return array:string Array containing the table column names
 	 */
 	protected function getColumnNameArray() {
-		return array('uid', 'pid', 'attachment', 'attachmentcaption');
+		return array('uid', 'pid', 'image', 'imagecaption', 'imagetitletext');
 	}
 	
 	protected function getColumnName() {
-		return 'attachment';
+		return 'image';
 	}
 
 	/**
@@ -60,13 +43,15 @@ class TxCalUploadsUpdateWizard extends TxCalAbstractUpdateWizard {
 	protected function migrateRecord(array $record) {
 		$collections = array();
 
-		$files = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $record['attachment'], TRUE);
+		$files = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $record['image'], TRUE);
 		$descriptions = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('
-', $record['attachmentcaption']);
+', $record['imagecaption']);
+		$titleText = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('
+', $record['imagetitletext']);
 		$i = 0;
 		foreach ($files as $file) {
-			if (file_exists(PATH_site . 'uploads/tx_cal/media/' . $file)) {
-				\TYPO3\CMS\Core\Utility\GeneralUtility::upload_copy_move(PATH_site . 'uploads/tx_cal/media/' . $file, $this->targetDirectory . $file);
+			if (file_exists(PATH_site . 'uploads/tx_cal/pics/' . $file)) {
+				\TYPO3\CMS\Core\Utility\GeneralUtility::upload_copy_move(PATH_site . 'uploads/tx_cal/pics/' . $file, $this->targetDirectory . $file);
 				$fileObject = $this->storage->getFile(self::FOLDER_ContentUploads . '/' . $file);
 				//TYPO3 >= 6.2.0
 				if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 6002000) {
@@ -77,19 +62,22 @@ class TxCalUploadsUpdateWizard extends TxCalAbstractUpdateWizard {
 				}
 				$dataArray = array(
 					'uid_local' => $fileObject->getUid(),
-					'tablenames' => 'tx_cal_event',
+					'tablenames' => $this->getRecordTableName(),
 					'uid_foreign' => $record['uid'],
 					// the sys_file_reference record should always placed on the same page
 					// as the record to link to, see issue #46497
 					'pid' => $record['pid'],
-					'fieldname' => 'attachment',
+					'fieldname' => 'image',
 					'sorting_foreign' => $i
 				);
 				if (isset($descriptions[$i])) {
 					$dataArray['description'] = $descriptions[$i];
 				}
+				if (isset($titleText[$i])) {
+					$dataArray['alternative'] = $titleText[$i];
+				}
 				$GLOBALS['TYPO3_DB']->exec_INSERTquery('sys_file_reference', $dataArray);
-				unlink(PATH_site . 'uploads/tx_cal/media/' . $file);
+				unlink(PATH_site . 'uploads/tx_cal/pics/' . $file);
 			}
 			$i++;
 		}
@@ -105,12 +93,13 @@ class TxCalUploadsUpdateWizard extends TxCalAbstractUpdateWizard {
 	 * @return void
 	 */
 	protected function cleanRecord(array $record, $fileCount, array $collectionUids) {
-		$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_cal_event', 'uid = ' . $record['uid'], array(
-			'attachment' => $fileCount,
-			'attachmentcaption' => ''
+		$GLOBALS['TYPO3_DB']->exec_UPDATEquery($this->getRecordTableName(), 'uid = ' . $record['uid'], array(
+			'image' => $fileCount,
+			'imagecaption' => '',
+			'imagetitletext' => ''
 		));
 	}
-
+	
 	/**
 	 * Returns the table and column mapping.
 	 *
@@ -118,21 +107,23 @@ class TxCalUploadsUpdateWizard extends TxCalAbstractUpdateWizard {
 	 */
 	protected function getTableColumnMapping() {
 		$mapping = array(
-			'mapTableName' => 'tx_cal_event',
+			'mapTableName' => $this->getRecordTableName(),
 			'mapFieldNames' => array(
 				'uid'          => 'uid',
 				'pid'          => 'pid',
-				'attachment'        => 'attachment',
-				'attachmentcaption' => 'attachmentcaption',
+				'image'        => 'image',
+				'imagecaption' => 'imagecaption',
+				'imagetitletext' => 'imagetitletext',
 			)
 		);
 
 		if ($GLOBALS['TYPO3_DB'] instanceof \TYPO3\CMS\Dbal\Database\DatabaseConnection) {
-			if (!empty($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['dbal']['mapping']['tx_cal_event'])) {
-				$mapping = array_merge_recursive($mapping, $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['dbal']['mapping']['tx_cal_event']);
+			if (!empty($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['dbal']['mapping'][$this->getRecordTableName()])) {
+				$mapping = array_merge_recursive($mapping, $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['dbal']['mapping'][$this->getRecordTableName()]);
 			}
 		}
 
 		return $mapping;
 	}
+
 }

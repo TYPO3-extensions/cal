@@ -151,13 +151,19 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 			case 2 :
 				$postVarArray = t3lib_div::_POST ();
 				$pageIds = Array ();
-				foreach ($postVarArray as $name => $value) {
-					if (strpos ($name, 'pageId') === 0) {
-						$valuePageArray = explode ('_', $value);
-						preg_match ('/pageId([0-9]*)_list/', $name, $matches);
-						$pageIds [intval ($matches [1])] = intval ($valuePageArray [1]);
+				if(isset($postVarArray['pageIds']) && isset($postVarArray['tsPage'])){
+					$tsPage = intval($postVarArray['tsPage']);
+					foreach(explode(',',$postVarArray['pageIds']) as $pageId){
+						$pageIds [intval ($pageId)] = $tsPage;
 					}
 				}
+// 				foreach ($postVarArray as $name => $value) {
+// 					if (strpos ($name, 'pageId') === 0) {
+// 						$valuePageArray = explode ('_', $value);
+// 						preg_match ('/pageId([0-9]*)_list/', $name, $matches);
+// 						$pageIds [intval ($matches [1])] = intval ($valuePageArray [1]);
+// 					}
+// 				}
 				
 				$starttime = t3lib_div::_POST ('starttime');
 				if ($starttime) {
@@ -180,21 +186,22 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 				} else {
 					$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 					$this->content .= '<script type="text/javascript">' . $this->getJScode () . '</script>';
-					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) > 4004999) {
-						$this->content .= '<script type="text/javascript" src="jsfunc.tbe_editor.js"></script>';
-					}
+// 					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) > 4004999) {
+// 						$this->content .= '<script type="text/javascript" src="jsfunc.tbe_editor.js"></script>';
+// 					}
 					
 					$selectFieldIds = Array ();
-					$content .= '<table><tbody>';
-					$content .= '<tr><td>';
-					$content .= '"' . $GLOBALS ['LANG']->getLL ('tableHeader2') . ' :';
-					$content .= '</td><td>';
-					$content .= '<select id="pageId' . $pid . '" class="formField3 tceforms-multiselect" style="width: 150px;" name="pageId' . $pid . '_list" multiple="multiple" size="1"></select>';
-					$content .= '<a href="#" onclick="setFormValueOpenBrowser(\'db\',\'pageId' . $pid . '|||pages\'); return false;"><img src="sysext/t3skin/icons/gfx/insert3.gif" alt="' . $GLOBALS ['LANG']->getLL ('browse') . '" title="' . $GLOBALS ['LANG']->getLL ('browse') . '" border="0" height="15" width="15"></a>';
-					$content .= '</td></tr>';
-					$selectFieldIds [] = 'pageId' . $pid;
-					$content .= '<tbody></table>';
-					// $content.='<input name="pageId_list" id="pageId" type="text" value="" size="5" maxlength="5"><br />';
+// 					$content .= '<table><tbody>';
+// 					$content .= '<tr><td>';
+// 					$content .= '"' . $GLOBALS ['LANG']->getLL ('tableHeader2') . ' :';
+// 					$content .= '</td><td>';
+// 					$content .= '<select id="pageId' . $pid . '" class="formField3 tceforms-multiselect" style="width: 150px;" name="pageId' . $pid . '_list" multiple="multiple" size="1"></select>';
+// 					$content .= '<a href="#" onclick="setFormValueOpenBrowser(\'db\',\'pageId' . $pid . '|||pages\'); return false;"><img src="sysext/t3skin/icons/gfx/insert3.gif" alt="' . $GLOBALS ['LANG']->getLL ('browse') . '" title="' . $GLOBALS ['LANG']->getLL ('browse') . '" border="0" height="15" width="15"></a>';
+// 					$content .= '</td></tr>';
+// 					$selectFieldIds [] = 'pageId' . $pid;
+// 					$content .= '<tbody></table>';
+					$content .=$GLOBALS ['LANG']->getLL ('tableHeader1').'<input name="pageIds" id="pageId" type="text" value="" size="10" maxlength="100"><br />';
+					$content .=$GLOBALS ['LANG']->getLL ('tableHeader2').'<input name="tsPage" id="tsPageId" type="text" value="" size="5" maxlength="5"><br />';
 					$scontent .= '<input type="submit" value="' . $GLOBALS ['LANG']->getLL ('submit') . '" onclick="return markSelections();"/>';
 					
 					$selectFields = '';

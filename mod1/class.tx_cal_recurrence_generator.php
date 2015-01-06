@@ -96,6 +96,7 @@ class tx_cal_recurrence_generator {
 		$eventService->endtime = new tx_cal_date ($this->endtime);
 		$select = '*';
 		$table = 'tx_cal_event';
+		$this->info .= '<h3>tx_cal_event</h3><br/><ul>';
 		$where = 'deleted = 0 AND (freq IN ("day","week","month","year") OR (rdate AND rdate_type IN ("date_time","date","period")))';
 		if ($eventPage > 0) {
 			$where = 'pid = ' . $eventPage . ' AND ' . $where;
@@ -107,23 +108,26 @@ class tx_cal_recurrence_generator {
 				if ($row ["rdate_type"] == "none" || $row ["rdate_type"] == "" || $row ["rdate_type"] == "0") {
 					$row ["rdate"] = "";
 				}
-				
+				$this->info .= '<li>'.$row['title'].'</li>';
 				$event = $eventService->createEvent ($row, false);
 				$eventService->recurringEvent ($event);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
 		}
-		
+		$this->info .= '</ul>';
+		$this->info .= '<h3>tx_cal_exception_event</h3><br/><ul>';
 		$table = 'tx_cal_exception_event';
 		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+				$this->info .= '<li>'.$row['title'].'</li>';
 				$event = $eventService->createEvent ($row, true);
 				$eventService->recurringEvent ($event);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
 		}
-		$this->info = 'Done.';
+		$this->info .= '</ul>';
+		$this->info .= 'Done.';
 	}
 	function generateIndexForUid($uid, $table) {
 		$eventService = $this->getEventService ();

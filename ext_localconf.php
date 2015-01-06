@@ -678,7 +678,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_creat
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_create_category_view.php',
 		'className' => 'tx_cal_create_category_view' 
 ));
 
@@ -693,7 +692,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confi
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_confirm_category_view.php',
 		'className' => 'tx_cal_confirm_category_view' 
 ));
 
@@ -708,7 +706,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delet
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_delete_category_view.php',
 		'className' => 'tx_cal_delete_category_view' 
 ));
 
@@ -723,7 +720,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remov
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_delete_category_view.php',
 		'className' => 'tx_cal_delete_category_view' 
 ));
 
@@ -738,7 +734,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searc
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_searchviews.php',
 		'className' => 'tx_cal_searchviews' 
 ));
 
@@ -753,7 +748,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searc
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_searchviews.php',
 		'className' => 'tx_cal_searchviews' 
 ));
 
@@ -768,7 +762,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searc
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_searchviews.php',
 		'className' => 'tx_cal_searchviews' 
 ));
 
@@ -783,7 +776,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searc
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_searchviews.php',
 		'className' => 'tx_cal_searchviews' 
 ));
 
@@ -798,7 +790,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_notif
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_notification_view.php',
 		'className' => 'tx_cal_notification_view' 
 ));
 
@@ -813,7 +804,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remin
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_reminder_view.php',
 		'className' => 'tx_cal_reminder_view' 
 ));
 
@@ -828,7 +818,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_rights_model' /* sv type */,  'tx_cal_r
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'service/class.tx_cal_rights_service.php',
 		'className' => 'tx_cal_rights_service' 
 ));
 // Example for a module
@@ -842,7 +831,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'TEST' /* sv type */,  'tx_cal_module' /* sv
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'misc/class.module_example.php',
 		'className' => 'module_example' 
 ));
 
@@ -857,7 +845,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'LOCATIONLOADER' /* sv type */,  'tx_cal_mod
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'misc/class.module_locationloader.php',
 		'className' => 'module_locationloader' 
 ));
 
@@ -871,7 +858,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'ORGANIZERLOADER' /* sv type */,  'tx_cal_mo
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'misc/class.module_organizerloader.php',
 		'className' => 'module_organizerloader' 
 ));
 
@@ -885,7 +871,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_cal_subscript
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_subscription_manager_view.php',
 		'className' => 'tx_cal_subscription_manager_view' 
 ));
 
@@ -899,7 +884,6 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_cal_meeting' 
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'classFile' => t3lib_extMgm::extPath ($_EXTKEY) . 'view/class.tx_cal_meeting_manager_view.php',
 		'className' => 'tx_cal_meeting_manager_view' 
 ));
 

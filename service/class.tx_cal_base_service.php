@@ -203,7 +203,6 @@ class tx_cal_base_service extends t3lib_svbase {
 	}
 	function checkOnNewOrDeletableFiles($object, $type, &$insertFields) {
 		global $TYPO3_CONF_VARS, $TCA;
-		t3lib_div::loadTCA ($object);
 		$uploadPath = $TCA [$object] ['columns'] [$type] ['config'] ['uploadfolder'];
 		
 		if ($this->conf ['view.'] ['enableAjax'] || $this->conf ['view.'] ['dontShowConfirmView'] == 1) {

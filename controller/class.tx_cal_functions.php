@@ -111,7 +111,6 @@ class tx_cal_functions {
 	}
 	public static function getOrderBy($table) {
 		global $TCA;
-		t3lib_div::loadTCA ($table);
 		
 		if (isset ($TCA [$table] ['ctrl'] ['default_sortby'])) {
 			$orderBy = str_replace ("ORDER BY ", "", $TCA [$table] ['ctrl'] ['default_sortby']);

@@ -334,7 +334,6 @@ if ($useLocationStructure == 'tx_tt_address') {
 			) 
 	);
 	
-	t3lib_div::loadTCA ('tt_address');
 	t3lib_extMgm::addTCAcolumns ('tt_address', $tempColumns);
 	t3lib_extMgm::addToAllTCAtypes ('tt_address', 'tx_cal_controller_islocation,');
 }
@@ -351,7 +350,6 @@ if ($useOrganizerStructure == 'tx_tt_address') {
 			) 
 	);
 	
-	t3lib_div::loadTCA ('tt_address');
 	t3lib_extMgm::addTCAcolumns ('tt_address', $tempColumns);
 	t3lib_extMgm::addToAllTCAtypes ('tt_address', 'tx_cal_controller_isorganizer,');
 }
@@ -369,13 +367,11 @@ $tempColumns = Array (
 );
 
 // Add the checkbox for backend users.
-t3lib_div::loadTCA ('be_users');
 t3lib_extMgm::addTCAcolumns ('be_users', $tempColumns);
 t3lib_extMgm::addToAllTCAtypes ('be_users', 'tx_cal_enable_accesscontroll;;;;1-1-1', '0');
 $TCA ['be_users'] ['ctrl'] ['requestUpdate'] = $TCA ['be_users'] ['ctrl'] ['requestUpdate'] . ',tx_cal_enable_accesscontroll';
 
 // Add the checkbox for backend groups.
-t3lib_div::loadTCA ('be_groups');
 t3lib_extMgm::addTCAcolumns ('be_groups', $tempColumns);
 t3lib_extMgm::addToAllTCAtypes ('be_groups', 'tx_cal_enable_accesscontroll;;;;1-1-1');
 $TCA ['be_groups'] ['ctrl'] ['requestUpdate'] = $TCA ['be_groups'] ['ctrl'] ['requestUpdate'] . ',tx_cal_enable_accesscontroll';
@@ -399,12 +395,10 @@ $tempColumns = Array (
 );
 
 // Add the calendar selector for backend users.
-t3lib_div::loadTCA ('be_users');
 t3lib_extMgm::addTCAcolumns ('be_users', $tempColumns);
 t3lib_extMgm::addToAllTCAtypes ('be_users', 'tx_cal_calendar;;;;1-1-1', '0');
 
 // Add the calendar selector for backend groups.
-t3lib_div::loadTCA ('be_groups');
 t3lib_extMgm::addTCAcolumns ('be_groups', $tempColumns);
 t3lib_extMgm::addToAllTCAtypes ('be_groups', 'tx_cal_calendar;;;;1-1-1');
 
@@ -432,12 +426,10 @@ $tempColumns = Array (
 );
 
 // Add the category selecor for backend users.
-t3lib_div::loadTCA ('be_users');
 t3lib_extMgm::addTCAcolumns ('be_users', $tempColumns);
 t3lib_extMgm::addToAllTCAtypes ('be_users', 'tx_cal_category;;;;1-1-1', '0');
 
 // Add the category selector for backeng groups.
-t3lib_div::loadTCA ('be_groups');
 t3lib_extMgm::addTCAcolumns ('be_groups', $tempColumns);
 t3lib_extMgm::addToAllTCAtypes ('be_groups', 'tx_cal_category;;;;1-1-1');
 
@@ -498,7 +490,6 @@ $tempColumns = Array (
 );
 
 // Add the calendar selector for backend users.
-t3lib_div::loadTCA ('fe_users');
 t3lib_extMgm::addTCAcolumns ('fe_users', $tempColumns);
 t3lib_extMgm::addToAllTCAtypes ('fe_users', 'tx_cal_calendar,tx_cal_calendar_subscription;;;;1-1-1');
 
@@ -506,7 +497,6 @@ include_once (t3lib_extMgm::extPath ($_EXTKEY) . 'res/class.tx_cal_treeview.php'
 t3lib_extMgm::addPiFlexFormValue ($_EXTKEY . '_controller', 'FILE:EXT:cal/res/flexform1_ds.xml');
 
 // Set up the tt_content table to hide layout and select key, but show pi_flexform.
-t3lib_div::loadTCA ('tt_content');
 $TCA ['tt_content'] ['types'] ['list'] ['subtypes_excludelist'] [$_EXTKEY . '_controller'] = 'layout,select_key';
 $TCA ['tt_content'] ['types'] ['list'] ['subtypes_addlist'] [$_EXTKEY . '_controller'] = 'pi_flexform';
 

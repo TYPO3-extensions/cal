@@ -324,7 +324,6 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 	function getFileMarker($marker, & $template, & $sims, & $rems) {
 		global $TYPO3_CONF_VARS, $TCA;
 		
-		t3lib_div::loadTCA ('tx_cal_' . $this->objectString);
 		$max = $TCA ['tx_cal_' . $this->objectString] ['columns'] [$marker] ['config'] ['size'];
 		$sims ['###' . strtoupper ($marker) . '###'] = '';
 		$sims ['###' . strtoupper ($marker) . '_VALUE###'] = '';
@@ -791,7 +790,6 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		$remLayout = $this->cObj->data ['layout'];
 		$this->cObj->data ['layout'] = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker . '.'] ['layout'];
 		$remPath = $this->cObj->data ['select_key'];
-		t3lib_div::loadTCA ('tt_content');
 		$remUploadFolder = $GLOBALS ['TCA'] ['tt_content'] ['columns'] ['media'] ['config'] ['uploadfolder'];
 		if ($isTemp) {
 			$this->cObj->data ['select_key'] = 'typo3temp/';
@@ -814,7 +812,6 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		unset ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['imgList.']);
 		$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['imgList'] = basename ($file);
 		
-		t3lib_div::loadTCA ('tx_cal_' . $this->objectString);
 		if ($isTemp) {
 			$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['imgPath'] = 'typo3temp/';
 		} else {

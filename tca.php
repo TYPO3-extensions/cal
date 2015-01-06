@@ -3146,7 +3146,6 @@ $TCA ['tx_cal_event_deviation'] = Array (
 
 /* If wec_map is present, define the address fields */
 if (t3lib_extMgm::isLoaded ('wec_map')) {
-	t3lib_div::loadTCA ('tx_cal_location');
 
 	$TCA ['tx_cal_location'] ['ctrl'] ['EXT'] ['wec_map'] = array (
 			'isMappable' => 1,
@@ -3249,13 +3248,11 @@ if ($confArr ['newRecurUI'] && (t3lib_utility_VersionNumber::convertVersionNumbe
 }
 
 if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4003000) {
-	t3lib_div::loadTCA ('tt_content');
 	$GLOBALS ['TCA'] ['tt_content'] ['columns'] ['tx_cal_media'] ['config'] ['uploadfolder'] = 'uploads/tx_cal/media';
 }
 
 // Append backend search configuration for tt_address:
 if (t3lib_extMgm::isLoaded ('tt_address')) {
-	t3lib_div::loadTCA ('tt_address');
 	if (isset ($TCA ['tt_address'] ['ctrl'] ['searchFields'])) {
 		$TCA ['tt_address'] ['ctrl'] ['searchFields'] .= ',';
 	}

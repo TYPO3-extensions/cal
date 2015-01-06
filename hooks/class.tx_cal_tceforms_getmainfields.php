@@ -40,7 +40,6 @@ class tx_cal_tceforms_getmainfields {
 	function getMainFields_preProcess($table, &$row, $tceform) {
 		if ($table == 'tx_cal_event') {
 			global $TCA;
-			t3lib_div::loadTCA ('tx_cal_event');
 			
 			/* If the event is temporary, make it read only. */
 			if ($row ['isTemp']) {
@@ -89,7 +88,6 @@ class tx_cal_tceforms_getmainfields {
 		
 		if ($table == 'tx_cal_exception_event') {
 			global $TCA;
-			t3lib_div::loadTCA ('tx_cal_exception_event');
 			
 			if (! strstr ($row ['uid'], 'NEW')) {
 				if ($GLOBALS ['TYPO3_CONF_VARS'] ['SYS'] ['USdateFormat'] == '1') {

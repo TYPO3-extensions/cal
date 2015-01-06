@@ -20,9 +20,6 @@ treeOrderBy = uid
 # cat=basic/enable/227; type=boolean; label= Show time values in BE lists
 showTimes = 1
 
-# cat=basic/enable/230; type=boolean; label= New Recurring Event Interface:  Enable the new recurring event user interface.  Requires TYPO3 4.1 for Prototype Javascript library.
-newRecurUI = 1
-
 # cat=basic/enable/250; type=boolean; label= Use Teaser Field:  Show the teaser field in addition to title and description.
 useTeaser = 0
 
@@ -36,13 +33,10 @@ useNewRecurringModel = 1
 hideDeviationRecords = 1
 
 # cat=basic/enable/310; type=text; label= Recurring Event Start Date:  If using the new recurring event model, this is the earliest date recurring events will occur. The date format is YYYYMMDD.
-recurrenceStart = 20000101
+recurrenceStart = 20140101
 
 # cat=basic/enable/320; type=text; label= Value for useNewRecurringModel:  If using the new recurring event model, this is the latest date recurring events will occur. The date format is YYYYMMDD.
 recurrenceEnd = 20201231
-
-# cat=basic/dev/1000; type=user[EXT:cal/lib/class.tx_cal_tsparserext.php:tx_cal_tsparserext->displayMessage]; label=LLL:EXT:cal/locallang.xml:extmng.updatermsgOption
-updateMessage=0
 
 # cat=basic/enable/150; type=boolean; label=LLL:EXT:cal/locallang.xml:extmng.useInternalCaching
 useInternalCaching = 1

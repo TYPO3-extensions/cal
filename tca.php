@@ -519,31 +519,28 @@ $TCA ['tx_cal_event'] = Array (
 				'byday' => Array (
 						'exclude' => 1,
 						'displayCond' => 'FIELD:freq:IN:week,month,year',
-						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.byday',
+						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.byday_short',
 						'config' => Array (
-								'type' => 'input',
-								'size' => '30',
-								'max' => '128'
+								'type' => 'user',
+								'userFunc' => 'tx_cal_customtca->byDay'
 						)
 				),
 				'bymonthday' => Array (
 						'exclude' => 1,
 						'displayCond' => 'FIELD:freq:IN:month,year',
-						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonthday',
+						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonthday_short',
 						'config' => Array (
-								'type' => 'input',
-								'size' => '30',
-								'max' => '128'
+								'type' => 'user',
+								'userFunc' => 'tx_cal_customtca->byMonthDay'
 						)
 				),
 				'bymonth' => Array (
 						'exclude' => 1,
-						'displayCond' => 'FIELD:freq:IN:month,year',
-						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonth',
+						'displayCond' => 'FIELD:freq:IN:year',
+						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonth_short',
 						'config' => Array (
-								'type' => 'input',
-								'size' => '30',
-								'max' => '128'
+								'type' => 'user',
+								'userFunc' => 'tx_cal_customtca->byMonth'
 						)
 				),
 				'until' => Array (
@@ -611,9 +608,8 @@ $TCA ['tx_cal_event'] = Array (
 						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.rdate',
 						'displayCond' => 'FIELD:rdate_type:IN:date_time,date,period',
 						'config' => Array (
-								'type' => 'text',
-								'cols' => '40',
-								'rows' => '2'
+								'type' => 'user',
+								'userFunc' => 'tx_cal_customtca->rdate'
 						)
 				),
 				'deviation' => Array (
@@ -1689,37 +1685,34 @@ $TCA ['tx_cal_exception_event'] = Array (
 								)
 						)
 				),
-
+				
 				'byday' => Array (
 						'exclude' => 1,
 						'displayCond' => 'FIELD:freq:IN:week,month,year',
-						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_exception_event.byday',
+						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.byday_short',
 						'config' => Array (
-								'type' => 'input',
-								'size' => '30',
-								'max' => '128'
+								'type' => 'user',
+								'userFunc' => 'tx_cal_customtca->byDay'
 						)
 				),
 
 				'bymonthday' => Array (
 						'exclude' => 1,
 						'displayCond' => 'FIELD:freq:IN:month,year',
-						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_exception_event.bymonthday',
+						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonthday_short',
 						'config' => Array (
-								'type' => 'input',
-								'size' => '30',
-								'max' => '128'
+								'type' => 'user',
+								'userFunc' => 'tx_cal_customtca->byMonthDay'
 						)
 				),
 
 				'bymonth' => Array (
 						'exclude' => 1,
-						'displayCond' => 'FIELD:freq:IN:month,year',
-						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_exception_event.bymonth',
+						'displayCond' => 'FIELD:freq:IN:year',
+						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonth_short',
 						'config' => Array (
-								'type' => 'input',
-								'size' => '30',
-								'max' => '128'
+								'type' => 'user',
+								'userFunc' => 'tx_cal_customtca->byMonth'
 						)
 				),
 
@@ -1750,15 +1743,14 @@ $TCA ['tx_cal_exception_event'] = Array (
 								'default' => 0
 						)
 				),
-
+				
 				'rdate' => Array (
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_exception_event.rdate',
 						'displayCond' => 'FIELD:rdate_type:IN:date_time,date,period',
 						'config' => Array (
-								'type' => 'text',
-								'cols' => '40',
-								'rows' => '2'
+								'type' => 'user',
+								'userFunc' => 'tx_cal_customtca->rdate'
 						)
 				),
 
@@ -3193,58 +3185,6 @@ if (t3lib_extMgm::isLoaded ('wec_map')) {
 
 if (t3lib_extMgm::isLoaded ('scheduler')) {
 	$TCA ['tx_cal_calendar'] ['columns'] ['refresh'] ['displayCond'] = 'EXT:scheduler:LOADED:true';
-}
-
-if ($confArr ['newRecurUI'] && (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4001000)) {
-	require_once (t3lib_extMgm::extPath ('cal') . 'res/class.tx_cal_customtca.php');
-
-	$TCA ['tx_cal_event'] ['columns'] ['byday'] ['label'] = 'LLL:EXT:cal/locallang_db.php:tx_cal_event.byday_short';
-	$TCA ['tx_cal_event'] ['columns'] ['byday'] ['config'] = Array (
-			'type' => 'user',
-			'userFunc' => 'tx_cal_customtca->byDay'
-	);
-
-	$TCA ['tx_cal_event'] ['columns'] ['bymonthday'] ['label'] = 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonthday_short';
-	$TCA ['tx_cal_event'] ['columns'] ['bymonthday'] ['config'] = Array (
-			'type' => 'user',
-			'userFunc' => 'tx_cal_customtca->byMonthDay'
-	);
-
-	$TCA ['tx_cal_event'] ['columns'] ['bymonth'] ['label'] = 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonth_short';
-	$TCA ['tx_cal_event'] ['columns'] ['bymonth'] ['displayCond'] = 'FIELD:freq:IN:year';
-	$TCA ['tx_cal_event'] ['columns'] ['bymonth'] ['config'] = Array (
-			'type' => 'user',
-			'userFunc' => 'tx_cal_customtca->byMonth'
-	);
-
-	$TCA ['tx_cal_exception_event'] ['columns'] ['byday'] ['label'] = 'LLL:EXT:cal/locallang_db.php:tx_cal_event.byday_short';
-	$TCA ['tx_cal_exception_event'] ['columns'] ['byday'] ['config'] = Array (
-			'type' => 'user',
-			'userFunc' => 'tx_cal_customtca->byDay'
-	);
-
-	$TCA ['tx_cal_event'] ['columns'] ['rdate'] ['config'] = Array (
-			'type' => 'user',
-			'userFunc' => 'tx_cal_customtca->rdate'
-	);
-
-	$TCA ['tx_cal_exception_event'] ['columns'] ['rdate'] ['config'] = Array (
-			'type' => 'user',
-			'userFunc' => 'tx_cal_customtca->rdate'
-	);
-
-	$TCA ['tx_cal_exception_event'] ['columns'] ['bymonthday'] ['label'] = 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonthday_short';
-	$TCA ['tx_cal_exception_event'] ['columns'] ['bymonthday'] ['config'] = Array (
-			'type' => 'user',
-			'userFunc' => 'tx_cal_customtca->byMonthDay'
-	);
-
-	$TCA ['tx_cal_exception_event'] ['columns'] ['bymonth'] ['label'] = 'LLL:EXT:cal/locallang_db.php:tx_cal_event.bymonth_short';
-	$TCA ['tx_cal_exception_event'] ['columns'] ['bymonth'] ['displayCond'] = 'FIELD:freq:IN:year';
-	$TCA ['tx_cal_exception_event'] ['columns'] ['bymonth'] ['config'] = Array (
-			'type' => 'user',
-			'userFunc' => 'tx_cal_customtca->byMonth'
-	);
 }
 
 if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4003000) {

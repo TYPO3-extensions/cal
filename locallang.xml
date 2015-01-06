@@ -12,10 +12,6 @@
 			<label index="pi1_title">Calendar</label>
 			<label index="pi1_plus_wiz_description">A Calendar designed to fit the needs of a
 				community, FE and BE entries</label>
-			<label index="extmng.updatermsg">cal 1.3.2 comes with a new updater-script.</label>
-			<label index="extmng.updatermsgHeader">Important!</label>
-			<label index="extmng.updatermsgLink">[Click here to open the updater]</label>
-			<label index="extmng.updatermsgOption">Updater</label>
 			<label index="extmng.useInternalCaching">Internal caching: If enabled cal caches some
 				processing intensive information (archive period count,
 				category count, categories) in an internal cache.</label>

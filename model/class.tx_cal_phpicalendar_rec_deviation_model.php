@@ -39,6 +39,7 @@ class tx_cal_phpicalendar_rec_deviation_model extends tx_cal_phpicalendar_model 
 	private $origStartDate;
 	function tx_cal_phpicalendar_rec_deviation_model($event, $row, $start, $end) {
 		$this->tx_cal_model ($event->serviceKey);
+		$deviationId = $row ['uid'];
 		unset ($row ['uid']);
 		unset ($row ['pid']);
 		unset ($row ['parentid']);
@@ -53,6 +54,7 @@ class tx_cal_phpicalendar_rec_deviation_model extends tx_cal_phpicalendar_model 
 		$allday = $row ['allday'];
 		$row = array_merge ($event->row, array_filter ($row));
 		$row ['allday'] = $allday;
+		$row ['deviationId'] = $deviationId;
 		$this->createEvent ($row, false);
 		
 		$this->setStart ($start);
@@ -74,6 +76,14 @@ class tx_cal_phpicalendar_rec_deviation_model extends tx_cal_phpicalendar_model 
 			$sims ['###RRULE###'] = 'RECURRENCE-ID:' . $eventStart->format ('%Y%m%dT%H%M%SZ');
 			$eventStart->addSeconds ($offset);
 		}
+	}
+	
+	public function getDeviationId() {
+		return $row ['deviationId'];
+	}
+	
+	public function setDeviationId($deviationId) {
+		$row ['deviationId'] = $deviationId;
 	}
 }
 

@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * This is a collection of many useful functions
  *
@@ -42,8 +44,8 @@ class tx_cal_functions {
 	public static function expandPath($path) {
 		if (! strcmp (substr ($path, 0, 4), 'EXT:')) {
 			list ($extKey, $script) = explode ('/', substr ($path, 4), 2);
-			if ($extKey && t3lib_extMgm::isLoaded ($extKey)) {
-				$extPath = t3lib_extMgm::extPath ($extKey);
+			if ($extKey && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ($extKey)) {
+				$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($extKey);
 				$path = substr ($extPath, strlen (PATH_site)) . $script;
 			}
 		}
@@ -52,7 +54,7 @@ class tx_cal_functions {
 	}
 	public static function clearCache() {
 		// only use cachingFramework if initialized and configured in TYPO3
-		if (t3lib_cache::isCachingFrameworkInitialized () && TYPO3_UseCachingFramework) {
+		if (\TYPO3\CMS\Core\Cache\Cache::isCachingFrameworkInitialized () && TYPO3_UseCachingFramework) {
 			$pageCache = $GLOBALS ['typo3CacheManager']->getCache ('cache_pages');
 			$pageCache->flushByTag ('cal');
 		} else {
@@ -63,7 +65,7 @@ class tx_cal_functions {
 		$key = 'tx_default_notification';
 		$serviceChain = '';
 		/* Loop over all services providign the specified service type and subtype */
-		while (is_object ($notificationService = t3lib_div::makeInstanceService ('cal_view', 'notify', $serviceChain))) {
+		while (is_object ($notificationService = GeneralUtility::makeInstanceService ('cal_view', 'notify', $serviceChain))) {
 			$serviceChain .= ',' . $notificationService->getServiceKey ();
 			/* If the key of the current service matches what we're looking for, return the object */
 			if ($key == $notificationService->getServiceKey ()) {
@@ -76,7 +78,7 @@ class tx_cal_functions {
 		$serviceChain = '';
 		
 		/* Loop over all services providign the specified service type and subtype */
-		while (is_object ($reminderService = t3lib_div::makeInstanceService ('cal_view', 'remind', $serviceChain))) {
+		while (is_object ($reminderService = GeneralUtility::makeInstanceService ('cal_view', 'remind', $serviceChain))) {
 			$serviceChain .= ',' . $reminderService->getServiceKey ();
 			/* If the key of the current service matches what we're looking for, return the object */
 			if ($key == $reminderService->getServiceKey ()) {
@@ -88,7 +90,7 @@ class tx_cal_functions {
 		$key = 'tx_cal_phpicalendar';
 		$serviceChain = '';
 		/* Loop over all services providign the specified service type and subtype */
-		while (is_object ($eventService = t3lib_div::makeInstanceService ('cal_event_model', 'event', $serviceChain))) {
+		while (is_object ($eventService = GeneralUtility::makeInstanceService ('cal_event_model', 'event', $serviceChain))) {
 			$serviceChain .= ',' . $eventService->getServiceKey ();
 			/* If the key of the current service matches what we're looking for, return the object */
 			if ($key == $eventService->getServiceKey ()) {
@@ -518,7 +520,7 @@ class tx_cal_functions {
 		$hookObjectsArr = array ();
 		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName])) {
 			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName] as $classRef) {
-				$hookObjectsArr [] = & t3lib_div::getUserObj ($classRef);
+				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}
 		
@@ -544,12 +546,12 @@ class tx_cal_functions {
 	 *        	string		className
 	 * @return object reference to the object
 	 *        
-	 * @todo Once TYPO3 4.3 is released and required by cal, remove this method and replace calls to it with t3lib_div::makeInstance.
+	 * @todo Once TYPO3 4.3 is released and required by cal, remove this method and replace calls to it with GeneralUtility::makeInstance.
 	 */
 	public static function &makeInstance($className) {
 		$constructorArguments = func_get_args ();
 		return call_user_func_array (array (
-				't3lib_div',
+				'GeneralUtility',
 				'makeInstance' 
 		), $constructorArguments);
 	}
@@ -611,10 +613,10 @@ class tx_cal_functions {
 	 * @return string code with absolute links
 	 */
 	public static function fixURI($html) {
-		require_once (t3lib_extMgm::extPath('cal') . 'controller/class.tx_cal_uriHandler.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal') . 'controller/class.tx_cal_uriHandler.php');
 		$uriHandler = new tx_cal_uriHandler();
 		$uriHandler->setHTML ($html);
-		$uriHandler->setPATH ('http://' . t3lib_div::getHostname (1) . '/');
+		$uriHandler->setPATH ('http://' . GeneralUtility::getHostname (1) . '/');
 		
 		$uriHandler->extractMediaLinks ();
 		$uriHandler->extractHyperLinks ();

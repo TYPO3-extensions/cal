@@ -30,9 +30,7 @@
  * *************************************************************
  */
 
-// equire_once(PATH_tslib.'class.tslib_pibase.php');
-// equire_once(PATH_t3lib.'class.t3lib_svbase.php');
-// equire_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_location_model.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'model/class.tx_cal_location_model.php');
 
 /**
  * Base model for the calendar organizer.

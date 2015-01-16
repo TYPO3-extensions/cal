@@ -71,8 +71,8 @@ class tx_cal_cache {
 	}
 	function initCachingFramework() {
 		try {
-			$GLOBALS ['typo3CacheFactory']->create ('tx_cal_cache', 't3lib_cache_frontend_StringFrontend', $GLOBALS ['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'], $GLOBALS ['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options']);
-		} catch (t3lib_cache_exception_DuplicateIdentifier $e) {
+			$GLOBALS ['typo3CacheFactory']->create ('tx_cal_cache', 'TYPO3\\CMS\\Core\\Cache\\Frontend\\StringFrontend', $GLOBALS ['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'], $GLOBALS ['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options']);
+		} catch (\TYPO3\CMS\Core\Cache\Exception\DuplicateIdentifierException $e) {
 			// do nothing, a cal_cache cache already exists
 		}
 		

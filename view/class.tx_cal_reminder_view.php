@@ -30,6 +30,10 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
+
 /**
  *
  * @author Jeff Segars <jeff@webempoweredchurch.org>
@@ -45,14 +49,14 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 		
 		switch ($eventMonitor ['tablenames']) {
 			case 'fe_users' :
-				$feUserRec = t3lib_BEfunc::getRecord ('fe_users', $eventMonitor ['uid_foreign']);
+				$feUserRec = BackendUtility::getRecord ('fe_users', $eventMonitor ['uid_foreign']);
 				$this->process ($event, $feUserRec ['email'], $eventMonitor ['tablenames'] . '_' . $feUserRec ['uid']);
 				break;
 			case 'fe_groups' :
 				$subType = 'getGroupsFE';
 				$groups = array ();
 				$serviceObj = null;
-				$serviceObj = t3lib_div::makeInstanceService ('auth', $subType);
+				$serviceObj = GeneralUtility::makeInstanceService ('auth', $subType);
 				if ($serviceObj == null) {
 					return;
 				}
@@ -75,13 +79,13 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 				$GLOBALS ['TYPO3_DB']->sql_free_result ($result2);
 				break;
 			case 'tx_cal_unknown_users' :
-				$feUserRec = t3lib_BEfunc::getRecord ('tx_cal_unknown_users', $eventMonitor ['uid_foreign']);
+				$feUserRec = BackendUtility::getRecord ('tx_cal_unknown_users', $eventMonitor ['uid_foreign']);
 				$this->process ($event, $feUserRec ['email'], $eventMonitor ['tablenames'] . '_' . $feUserRec ['uid']);
 				break;
 		}
 	}
 	function process(&$event, $email, $userId) {
-		if ($email != '' && t3lib_div::validEmail ($email)) {
+		if ($email != '' && GeneralUtility::validEmail ($email)) {
 			$template = $this->conf ['view.'] ['event.'] ['remind.'] [$userId . '.'] ['template'];
 			if (! $template) {
 				$template = $this->conf ['view.'] ['event.'] ['remind.'] ['all.'] ['template'];
@@ -99,7 +103,7 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 		global $TYPO3_CONF_VARS;
 		
 		// Get complete record
-		$eventRecord = t3lib_BEfunc::getRecord ('tx_cal_event', $calEventUID);
+		$eventRecord = BackendUtility::getRecord ('tx_cal_event', $calEventUID);
 		
 		// get the related monitoring records
 		$taskId = null;
@@ -144,9 +148,9 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 				$GLOBALS ['TYPO3_DB']->sql_free_result ($result2);
 			}
 			
-			if (t3lib_extMgm::isLoaded ('scheduler')) {
+			if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('scheduler')) {
 				
-				$scheduler = new TYPO3\CMS\Scheduler\Scheduler();
+				$scheduler = new \TYPO3\CMS\Scheduler\Scheduler();
 				$date = new tx_cal_date ($start_datetime);
 				$date->setTZbyId ('UTC');
 				$timestamp = $date->getTime ();
@@ -158,7 +162,7 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 					if ($offsetTime->isFuture ()) {
 						try {
 							$task = $scheduler->fetchTask ($taskId);
-							$execution = new TYPO3\CMS\Scheduler\Execution();
+							$execution = new \TYPO3\CMS\Scheduler\Execution();
 							$execution->setStart ($timestamp - ($offset * 60));
 							$execution->setIsNewSingleExecution (true);
 							$execution->setMultiple (false);
@@ -176,7 +180,7 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 					// taskId == 0 -> schedule task
 					$this->createSchedulerTask ($scheduler, $date, $calEventUID, $timestamp, $offset, $row ['uid']);
 				}
-			} else if (t3lib_extMgm::isLoaded ('gabriel')) {
+			} else if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('gabriel')) {
 				
 				$date = new tx_cal_date ($eventRecord ['start_date'] . '000000');
 				$date->setTZbyId ('UTC');
@@ -191,12 +195,12 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 				if ($date->isFuture ()) {
 					
 					/* Set up the gabriel event */
-					$cron = t3lib_div::getUserObj ('EXT:cal/cron/class.tx_cal_reminder_cron.php:tx_cal_reminder_cron');
+					$cron = GeneralUtility::getUserObj ('EXT:cal/cron/class.tx_cal_reminder_cron.php:tx_cal_reminder_cron');
 					$cron->setUID ($calEventUID);
 					
 					/* Schedule the gabriel event */
 					$cron->registerSingleExecution ($timestamp - ($offset * 60));
-					$gabriel = t3lib_div::getUserObj ('EXT:gabriel/class.tx_gabriel.php:&tx_gabriel');
+					$gabriel = GeneralUtility::getUserObj ('EXT:gabriel/class.tx_gabriel.php:&tx_gabriel');
 					$gabriel->addEvent ($cron, $monitoringUID);
 				}
 			}
@@ -205,9 +209,9 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 	function createSchedulerTask(&$scheduler, $date, $calEventUID, $timestamp, $offset, $uid) {
 		if ($date->isFuture ()) {
 			/* Set up the scheduler event */
-			$task = t3lib_div::getUserObj ('EXT:cal/cron/class.tx_cal_reminder_scheduler.php:tx_cal_reminder_scheduler');
+			$task = GeneralUtility::getUserObj ('EXT:cal/cron/class.tx_cal_reminder_scheduler.php:tx_cal_reminder_scheduler');
 			$task->setUID ($calEventUID);
-			$taskGroup = t3lib_BEfunc::getRecordRaw ('tx_scheduler_task_group', 'groupName="cal"');
+			$taskGroup = BackendUtility::getRecordRaw ('tx_scheduler_task_group', 'groupName="cal"');
 			if($taskGroup['uid']){
 				$task->setTaskGroup($taskGroup['uid']);
 			} else {
@@ -226,7 +230,7 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 			}
 			$task->setDescription('Reminder of a calendar event (id='.$calEventUID.')');
 			/* Schedule the event */
-			$execution = new TYPO3\CMS\Scheduler\Execution();
+			$execution = new \TYPO3\CMS\Scheduler\Execution();
 			$execution->setStart ($timestamp - ($offset * 60));
 			$execution->setIsNewSingleExecution (true);
 			$execution->setMultiple (false);
@@ -242,18 +246,18 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 	
 	/* @todo	Figure out where this should live */
 	function deleteReminder($eventUid) {
-		if (t3lib_extMgm::isLoaded ('scheduler')) {
-			$eventRow = t3lib_BEfunc::getRecordRaw ('tx_cal_fe_user_event_monitor_mm', 'uid_local=' . $eventUid);
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('scheduler')) {
+			$eventRow = BackendUtility::getRecordRaw ('tx_cal_fe_user_event_monitor_mm', 'uid_local=' . $eventUid);
 			$taskId = $eventRow ['schedulerId'];
 			if ($taskId > 0) {
-				$scheduler = new TYPO3\CMS\Scheduler\Scheduler();
+				$scheduler = new \TYPO3\CMS\Scheduler\Scheduler();
 				try {
 					$task = $scheduler->fetchTask ($taskId);
 					$scheduler->removeTask ($task);
 				} catch (OutOfBoundsException $e) {
 				}
 			}
-		} else if (t3lib_extMgm::isLoaded ('gabriel')) {
+		} else if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('gabriel')) {
 			$monitoringUID = 'tx_cal_fe_user_event_monitor_mm:' . $eventUid;
 			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_gabriel', ' crid="' . $eventUid . '"');
 		}

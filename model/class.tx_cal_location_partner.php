@@ -30,8 +30,7 @@
  * *************************************************************
  */
 
-// equire_once(PATH_tslib.'class.tslib_pibase.php');
-// equire_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_location.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'model/class.tx_cal_location.php');
 
 /**
  * Base model for the calendar location.
@@ -54,8 +53,8 @@ class tx_cal_location_partner extends tx_cal_location {
 	 *        	to search in
 	 */
 	function tx_cal_location_partner($uid, $pidList) {
-		require_once (t3lib_extMgm::extPath ('partner') . 'api/class.tx_partner_main.php');
-		require_once (t3lib_extMgm::extPath ('partner') . 'api/class.tx_partner_div.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('partner') . 'api/class.tx_partner_main.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('partner') . 'api/class.tx_partner_div.php');
 		
 		$this->partner = new tx_partner_main();
 		$this->partner->getPartner ($uid);

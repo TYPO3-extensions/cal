@@ -81,7 +81,7 @@ abstract class tx_cal_new_timeview {
 			switch ($marker) {
 				default :
 					if (preg_match ('/MODULE__([A-Z0-9_-])*/', $marker)) {
-						$module = t3lib_div::makeInstanceService (substr ($marker, 8), 'module');
+						$module = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstanceService (substr ($marker, 8), 'module');
 						if (is_object ($module)) {
 							$rems ['###' . $marker . '###'] = $module->start ($this);
 						}
@@ -146,7 +146,7 @@ abstract class tx_cal_new_timeview {
 		
 		if (is_array ($modules)) { // ODULE-MARKER FOUND
 			foreach ($modules as $themodule => $markerArray) {
-				$module = t3lib_div::makeInstanceService ($themodule, 'module');
+				$module = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstanceService ($themodule, 'module');
 				if (is_object ($module)) {
 					if ($markerArray [0] == '') {
 						$sims ['###MODULE__' . $themodule . '###'] = $module->start ($this); // ld way
@@ -255,7 +255,7 @@ abstract class tx_cal_new_timeview {
 	}
 	public function getWeekdayString($timestamp) {
 		if (! is_object ($this->cs_convert)) {
-			$this->cs_convert = new t3lib_cs();
+			$this->cs_convert = new \TYPO3\CMS\Core\Charset\CharsetConverter();
 		}
 		$conf = &tx_cal_registry::Registry ('basic', 'conf');
 		return $this->cs_convert->substr (tx_cal_functions::getCharset (), strftime ($this->weekDayFormat, $timestamp), 0, $this->weekDayLength);

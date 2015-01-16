@@ -49,7 +49,7 @@ class tx_cal_wecmap {
 		if ($table == $locationStructure && is_object ($markerObj)) {
 			$tx_cal_api = new tx_cal_api();
 			
-			$cObj = new tslib_cObj();
+			$cObj = new \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer();
 			$conf = $GLOBALS ['TSFE']->tmpl->setup ['plugin.'] ['tx_cal_controller.'];
 			$conf ['view.'] ['allowedViews'] = 'location';
 			

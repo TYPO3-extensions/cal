@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  *
  * @author Mario Matzulla <mario@matzullas.de>
@@ -107,7 +109,7 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 			
 			if ($cachedValues != '') {
 				if ($this->conf ['writeCachingInfoToDevlog'] == 1) {
-					t3lib_div::devLog ('CACHE HIT (' . __CLASS__ . '::' . __FUNCTION__ . ')', 'cal', - 1, array ());
+					GeneralUtility::devLog ('CACHE HIT (' . __CLASS__ . '::' . __FUNCTION__ . ')', 'cal', - 1, array ());
 				}
 				$cachedValues = unserialize ($cachedValues);
 				$this->classMethodVars = $cachedValues [0];
@@ -142,7 +144,7 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 					}
 				}
 				if ($this->conf ['writeCachingInfoToDevlog'] == 1) {
-					t3lib_div::devLog ('CACHE MISS (' . __CLASS__ . '::' . __FUNCTION__ . ')', 'cal', 2, array ());
+					GeneralUtility::devLog ('CACHE MISS (' . __CLASS__ . '::' . __FUNCTION__ . ')', 'cal', 2, array ());
 				}
 				$this->controller->cache->set ($storeKey, serialize (Array (
 						$this->classMethodVars,
@@ -468,7 +470,7 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 			switch ($marker) {
 				default :
 					if (preg_match ('/MODULE__([A-Z0-9_-])*/', $marker)) {
-						$module = t3lib_div::makeInstanceService (substr ($marker, 8), 'module');
+						$module = GeneralUtility::makeInstanceService (substr ($marker, 8), 'module');
 						if (is_object ($module)) {
 							$rems ['###' . $marker . '###'] = $module->start ($this);
 						}
@@ -543,7 +545,7 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 		
 		if (is_array ($modules)) { // MODULE-MARKER FOUND
 			foreach ($modules as $themodule => $markerArray) {
-				$module = t3lib_div::makeInstanceService ($themodule, 'module');
+				$module = GeneralUtility::makeInstanceService ($themodule, 'module');
 				if (is_object ($module)) {
 					if ($markerArray [0] == '') {
 						$sims ['###MODULE__' . $themodule . '###'] = $module->start ($this); // ld way

@@ -29,8 +29,8 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_organizer_partner.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_base_service.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_cal_organizer_partner.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'service/class.tx_cal_base_service.php');
 
 /**
  * Base model for the calendar organizer.
@@ -52,7 +52,7 @@ class tx_cal_organizer_partner_service extends tx_cal_base_service {
 			$this->extensionIsNotLoaded = true;
 			return;
 		}
-		require_once (t3lib_extMgm::extPath ('partner') . 'api/class.tx_partner_main.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('partner') . 'api/class.tx_partner_main.php');
 	}
 	
 	/**

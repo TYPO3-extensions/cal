@@ -29,7 +29,10 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-include_once (t3lib_extMgm::extPath ('gabriel', 'class.tx_gabriel_event.php'));
+
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
+include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('gabriel', 'class.tx_gabriel_event.php'));
 class tx_cal_reminder_cron extends tx_gabriel_event {
 	var $uid;
 	
@@ -42,10 +45,10 @@ class tx_cal_reminder_cron extends tx_gabriel_event {
 		$this->__construct ();
 	}
 	function execute() {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-		$eventMonitor = t3lib_BEfunc::getRecord ('tx_cal_fe_user_event_monitor_mm', $this->uid);
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		$eventMonitor = BackendUtility::getRecord ('tx_cal_fe_user_event_monitor_mm', $this->uid);
 		
-		$event = t3lib_BEfunc::getRecord ('tx_cal_event', $eventMonitor ['uid_local']);
+		$event = BackendUtility::getRecord ('tx_cal_event', $eventMonitor ['uid_local']);
 		
 		if (! is_array ($event))
 			return;
@@ -77,14 +80,14 @@ class tx_cal_reminder_cron extends tx_gabriel_event {
 		}
 		
 		/* Check Page TSConfig for a preview page that we should use */
-		$pageTSConf = t3lib_befunc::getPagesTSconfig ($event ['pid']);
+		$pageTSConf = BackendUtility::getPagesTSconfig ($event ['pid']);
 		if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 			$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 		} else {
 			$pageIDForPlugin = $event ['pid'];
 		}
 		
-		$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+		$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 		
 		if ($page ['doktype'] != 254) {
 			$tx_cal_api = new tx_cal_api();

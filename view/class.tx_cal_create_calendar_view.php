@@ -122,7 +122,7 @@ class tx_cal_create_calendar_view extends tx_cal_fe_editing_base_view {
 		$sims ['###OWNER###'] = '';
 		if ($this->isAllowed ('owner')) {
 			$cal_owner_user = '';
-			$allowedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
+			$allowedUsers = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
 			$selectedUsers = $this->object->getOwner ('fe_users');
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_users', 'pid in (' . $this->conf ['pidList'] . ')');
 			if ($result) {
@@ -143,7 +143,7 @@ class tx_cal_create_calendar_view extends tx_cal_fe_editing_base_view {
 				}
 				$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 			}
-			$allowedGroups = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedGroups'], 1);
+			$allowedGroups = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedGroups'], 1);
 			$selectedGroups = $this->object->getOwner ('fe_groups');
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_groups', 'pid in (' . $this->conf ['pidList'] . ')');
 			if ($result) {
@@ -187,7 +187,7 @@ class tx_cal_create_calendar_view extends tx_cal_fe_editing_base_view {
 		$sims ['###FREEANDBUSYUSER###'] = '';
 		if ($this->isAllowed ('freeAndBusyUser')) {
 			$freeAndBusyUser = '';
-			$allowedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
+			$allowedUsers = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
 			$selectedUsers = $this->object->getFreeAndBusyUser ('fe_users');
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_users', 'pid in (' . $this->conf ['pidList'] . ')');
 			if ($result) {

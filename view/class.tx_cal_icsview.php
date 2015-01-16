@@ -127,8 +127,8 @@ class tx_cal_icsview extends tx_cal_base_view {
 	function drawIcs(&$master_array, $getdate, $sendHeaders = true, $limitAttendeeToThisEmail = '') {
 		$this->_init ($master_array);
 		$this->limitAttendeeToThisEmail = $limitAttendeeToThisEmail;
-		$absFile = t3lib_div::getFileAbsFileName ($this->conf ['view.'] ['ics.'] ['icsTemplate']);
-		$page = t3lib_div::getURL ($absFile);
+		$absFile = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName ($this->conf ['view.'] ['ics.'] ['icsTemplate']);
+		$page = \TYPO3\CMS\Core\Utility\GeneralUtility::getURL ($absFile);
 		
 		if ($page == '') {
 			// return '<h3>calendar: no ics template file found:</h3>'.$this->conf['view.']['ics.']['icsTemplate'];
@@ -214,7 +214,7 @@ END:VCALENDAR
 			header ('Pragma: ');
 			header ('Cache-Control:');
 		}
-		include (t3lib_extMgm::extPath ('cal') . 'ext_emconf.php');
+		include (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'ext_emconf.php');
 		$myem_conf = array_pop ($EM_CONF);
 		$method = 'PUBLISH';
 		if ($this->limitAttendeeToThisEmail) {

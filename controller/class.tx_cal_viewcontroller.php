@@ -627,7 +627,7 @@ class tx_cal_viewcontroller extends tx_cal_base_controller {
 	function getServiceObjByKey($type, $subtype = '', $key) {
 		$serviceChain = '';
 		/* Loop over all services providign the specified service type and subtype */
-		while (is_object ($obj = &t3lib_div::makeInstanceService ($type, $subtype, $serviceChain))) {
+		while (is_object ($obj = &\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstanceService ($type, $subtype, $serviceChain))) {
 			$serviceChain .= ',' . $obj->getServiceKey ();
 			return $obj;
 		}

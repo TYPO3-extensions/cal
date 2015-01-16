@@ -31,20 +31,22 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
 /**
  *
  * @author Steffen Kamper <info(at)sk-typo3.de>
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'res/pearLoader.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_date.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/pearLoader.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_cal_date.php');
 class tx_cal_labels {
 	function getEventRecordLabel(&$params, &$pObj) {
 		if ($params ['table'] != 'tx_cal_event' && $params ['table'] != 'tx_cal_exception_event')
 			return '';
 			
 			// Get complete record
-		$rec = t3lib_BEfunc::getRecordWSOL ($params ['table'], $params ['row'] ['uid']);
+		$rec = BackendUtility::getRecordWSOL ($params ['table'], $params ['row'] ['uid']);
 		$dateObj = new tx_cal_date ($rec ['start_date'] . '000000');
 		$dateObj->setTZbyId ('UTC');
 		
@@ -87,11 +89,11 @@ class tx_cal_labels {
 			return '';
 			
 			// Get complete record
-		$rec = t3lib_BEfunc::getRecord ($params ['table'], $params ['row'] ['uid']);
+		$rec = BackendUtility::getRecord ($params ['table'], $params ['row'] ['uid']);
 		
 		$label = $rec ['email'];
 		if ($rec ['fe_user_id']) {
-			$feUserRec = t3lib_BEfunc::getRecord ('fe_users', $rec ['fe_user_id']);
+			$feUserRec = BackendUtility::getRecord ('fe_users', $rec ['fe_user_id']);
 			$label = $feUserRec ['name'] != '' ? $feUserRec ['name'] : $feUserRec ['username'];
 		}
 		$label .= ' (' . $GLOBALS ['LANG']->sl ('LLL:EXT:cal/locallang_db.php:tx_cal_attendee.attendance.' . $rec ['attendance']) . ' -> ' . $rec ['status'] . ')';
@@ -104,20 +106,20 @@ class tx_cal_labels {
 			return '';
 			
 			// Get complete record
-		$rec = t3lib_BEfunc::getRecord ($params ['table'], $params ['row'] ['uid']);
+		$rec = BackendUtility::getRecord ($params ['table'], $params ['row'] ['uid']);
 		
 		$label = '';
 		switch ($rec ['tablenames']) {
 			case 'fe_users' :
-				$feUserRec = t3lib_BEfunc::getRecord ('fe_users', $rec ['uid_foreign']);
+				$feUserRec = BackendUtility::getRecord ('fe_users', $rec ['uid_foreign']);
 				$label = $feUserRec ['name'] != '' ? $feUserRec ['name'] : $feUserRec ['username'];
 				break;
 			case 'fe_groups' :
-				$feUserRec = t3lib_BEfunc::getRecord ('fe_groups', $rec ['uid_foreign']);
+				$feUserRec = BackendUtility::getRecord ('fe_groups', $rec ['uid_foreign']);
 				$label = $feUserRec ['title'];
 				break;
 			case 'tx_cal_unknown_users' :
-				$feUserRec = t3lib_BEfunc::getRecord ('tx_cal_unknown_users', $rec ['uid_foreign']);
+				$feUserRec = BackendUtility::getRecord ('tx_cal_unknown_users', $rec ['uid_foreign']);
 				$label = $feUserRec ['email'];
 				break;
 		}
@@ -130,7 +132,7 @@ class tx_cal_labels {
 			return '';
 			
 			// Get complete record
-		$rec = t3lib_BEfunc::getRecord ($params ['table'], $params ['row'] ['uid']);
+		$rec = BackendUtility::getRecord ($params ['table'], $params ['row'] ['uid']);
 		
 		$label = $GLOBALS ['LANG']->sl ('LLL:EXT:cal/locallang_db.xml:tx_cal_event.deviation') . ': ';
 		

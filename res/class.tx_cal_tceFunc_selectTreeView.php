@@ -43,9 +43,9 @@
  */
 
 /**
- * extend class t3lib_treeview to change function wrapTitle().
+ * extend class \TYPO3\CMS\Backend\Tree\View\AbstractTreeView to change function wrapTitle().
  */
-class tx_cal_tceFunc_selectTreeView extends t3lib_treeview {
+class tx_cal_tceFunc_selectTreeView extends \TYPO3\CMS\Backend\Tree\View\AbstractTreeView {
 	var $TCEforms_itemFormElName = '';
 	var $TCEforms_nonSelectableItemsArray = array ();
 	
@@ -97,7 +97,7 @@ class tx_cal_tceFunc_selectTreeView extends t3lib_treeview {
 	 * @return string image tag.
 	 */
 	function getRootIcon($rec) {
-		return $this->wrapIcon ('<img src="' . t3lib_extMgm::extRelPath ('cal') . 'res/icons/icon_tx_cal_calendar.gif" width="18" height="16" alt="" />', array ());
+		return $this->wrapIcon ('<img src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'res/icons/icon_tx_cal_calendar.gif" width="18" height="16" alt="" />', array ());
 	}
 }
 

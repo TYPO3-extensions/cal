@@ -888,7 +888,7 @@ class tx_cal_listview extends tx_cal_base_view {
 	}
 	function hasPeriodChanged($old, $new, $reverse = false, $debug = false) {
 		if ($debug) {
-			t3lib_utility_Debug::debug (array (
+			\TYPO3\CMS\Core\Utility\DebugUtility::debug (array (
 					$old,
 					$new,
 					$reverse 

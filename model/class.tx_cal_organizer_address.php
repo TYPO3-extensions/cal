@@ -30,7 +30,7 @@
  * *************************************************************
  */
 
-// equire_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_organizer.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'model/class.tx_cal_organizer.php');
 
 /**
  * Base model for the calendar organizer.
@@ -67,7 +67,7 @@ class tx_cal_organizer_address extends tx_cal_organizer {
 		$this->setCity ($row ['city']);
 		$this->setPhone ($row ['phone']);
 		$this->setEmail ($row ['email']);
-		$this->setImage (t3lib_div::trimExplode (',', $row ['image'], 1));
+		$this->setImage (\TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $row ['image'], 1));
 		$this->setLink ($row ['www']);
 		$this->row = $row;
 	}

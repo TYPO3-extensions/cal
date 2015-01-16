@@ -29,9 +29,12 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_todo_model.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_todo_rec_model.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_event_service.php');
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_cal_todo_model.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_cal_todo_rec_model.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'service/class.tx_cal_event_service.php');
 
 /**
  * A concrete model for the calendar.
@@ -187,17 +190,17 @@ class tx_cal_todo_service extends tx_cal_event_service {
 				$group = Array ();
 				$this->splitUserAndGroupIds (explode (',', strip_tags ($tempValues ['notify_ids'])), $user, $group);
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', $user, $uid, 'fe_users');
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['addFeGroupToNotify.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['addFeGroupToNotify.'] ['ignore'], 1);
 				$groupArray = array_diff ($group, $ignore);
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', array_unique ($groupArray), $uid, 'fe_groups');
 			}
 		} else if ($this->conf ['rights.'] ['create.'] ['todo.'] ['fields.'] ['notify.'] ['defaultUser'] || $this->conf ['rights.'] ['create.'] ['todo.'] ['fields.'] ['notify.'] ['defaultGroup']) {
-			$idArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
+			$idArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['create.'] ['event.'] ['addFeUserToNotify']) {
 				$idArray [] = $this->rightsObj->getUserId ();
 			}
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', array_unique ($idArray), $uid, 'fe_users');
-			$idArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
+			$idArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['create.'] ['todo.'] ['addFeGroupToNotify']) {
 				$idArray = array_merge ($idArray, $this->rightsObj->getUserGroups ());
 			}
@@ -208,7 +211,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 			), $uid, 'fe_users');
 		}
 		if ($this->conf ['rights.'] ['create.'] ['todo.'] ['public']) {
-			$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['notifyUsersOnPublicCreate'], 1), $uid, 'fe_users');
+			$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['notifyUsersOnPublicCreate'], 1), $uid, 'fe_users');
 		}
 		
 		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'shared')) {
@@ -218,7 +221,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 				$user [] = $this->rightsObj->getUserId ();
 			}
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($user), $uid, 'fe_users');
-			$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['addFeGroupToShared.'] ['ignore'], 1);
+			$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['addFeGroupToShared.'] ['ignore'], 1);
 			$groupArray = array_diff ($group, $ignore);
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');
 		} else {
@@ -228,10 +231,10 @@ class tx_cal_todo_service extends tx_cal_event_service {
 			}
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($idArray), $uid, 'fe_users');
 			
-			$groupArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+			$groupArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['create.'] ['todo.'] ['addFeGroupToShared']) {
 				$idArray = $this->rightsObj->getUserGroups ();
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['addFeGroupToShared.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['todo.'] ['addFeGroupToShared.'] ['ignore'], 1);
 				$groupArray = array_diff ($idArray, $ignore);
 			}
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');
@@ -299,7 +302,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		
 		// Hook: updateEvent
 		$hookObjectsArr = tx_cal_functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
@@ -351,15 +354,15 @@ class tx_cal_todo_service extends tx_cal_event_service {
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', $group, $uid, 'fe_groups');
 			}
 		} else {
-			$userIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
+			$userIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['event.'] ['addFeUserToNotify']) {
 				$userIdArray [] = $this->rightsObj->getUserId ();
 			}
 			
-			$groupIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
+			$groupIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['todo.'] ['addFeGroupToNotify']) {
 				$groupIdArray = $this->rightsObj->getUserGroups ();
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['addFeGroupToNotify.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['addFeGroupToNotify.'] ['ignore'], 1);
 				$groupIdArray = array_diff ($groupIdArray, $ignore);
 			}
 			if (! empty ($userIdArray) || ! empty ($groupIdArray)) {
@@ -374,15 +377,15 @@ class tx_cal_todo_service extends tx_cal_event_service {
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($object->getSharedUsers ()), $uid, 'fe_users');
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($object->getSharedGroups ()), $uid, 'fe_groups');
 		} else {
-			$userIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
+			$userIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['todo.'] ['addFeUserToShared']) {
 				$userIdArray [] = $this->rightsObj->getUserId ();
 			}
 			
-			$groupIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+			$groupIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['event.'] ['addFeGroupToShared']) {
 				$groupIdArray = $this->rightsObj->getUserGroups ();
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['addFeGroupToShared.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['todo.'] ['addFeGroupToShared.'] ['ignore'], 1);
 				$groupIdArray = array_diff ($groupIdArray, $ignore);
 			}
 			if (! empty ($userIdArray) || ! empty ($groupIdArray)) {
@@ -408,7 +411,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 			$where = 'uid = ' . $uid;
 			$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $updateFields);
 			
-			require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 			$fields = $event->getValuesAsArray ();
 			$fields ['deleted'] = 1;
 			$fields ['tstamp'] = $updateFields ['tstamp'];
@@ -528,7 +531,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 		$hookObjectsArr = array ();
 		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'])) {
 			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'] as $classRef) {
-				$hookObjectsArr [] = & t3lib_div::getUserObj ($classRef);
+				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}
 		
@@ -642,7 +645,7 @@ class tx_cal_todo_service extends tx_cal_event_service {
 		$hookObjectsArr = array ();
 		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'])) {
 			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'] as $classRef) {
-				$hookObjectsArr [] = & t3lib_div::getUserObj ($classRef);
+				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}
 		

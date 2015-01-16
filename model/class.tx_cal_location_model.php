@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Base model for the calendar location.
  * Provides basic model functionality that other
@@ -161,17 +163,17 @@ class tx_cal_location_model extends tx_cal_base_model {
 		$this->setCountry ($row ['country']);
 		$this->setPhone ($row ['phone']);
 		$this->setEmail ($row ['email']);
-		$this->setImage (t3lib_div::trimExplode (',', $row ['image'], 1));
-		$this->setImageTitleText (t3lib_div::trimExplode (chr (10), $row ['imagetitletext']));
-		$this->setImageAltText (t3lib_div::trimExplode (chr (10), $row ['imagealttext']));
-		$this->setImageCaption (t3lib_div::trimExplode (chr (10), $row ['imagecaption']));
+		$this->setImage (GeneralUtility::trimExplode (',', $row ['image'], 1));
+		$this->setImageTitleText (GeneralUtility::trimExplode (chr (10), $row ['imagetitletext']));
+		$this->setImageAltText (GeneralUtility::trimExplode (chr (10), $row ['imagealttext']));
+		$this->setImageCaption (GeneralUtility::trimExplode (chr (10), $row ['imagecaption']));
 		$this->setLink ($row ['link']);
 		$this->setLatitude ($row ['latitude']);
 		$this->setLongitude ($row ['longitude']);
 	}
 	function getMapMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$sims ['###MAP###'] = '';
-		if ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['showMap'] && t3lib_extMgm::isLoaded ('wec_map')) {
+		if ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['showMap'] && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map')) {
 			
 			$apiKey = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['apiKey'];
 			$width = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['mapWidth'];
@@ -191,7 +193,7 @@ class tx_cal_location_model extends tx_cal_base_model {
 			$showWrittenDirections = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['showWrittenDirections'];
 			$prefillAddress = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['prefillAddress'];
 			
-			include_once (t3lib_extMgm::extPath ('wec_map') . 'map_service/google/class.tx_wecmap_map_google.php');
+			include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('wec_map') . 'map_service/google/class.tx_wecmap_map_google.php');
 			$mapName = 'map' . $this->getUid ();
 			$map = new tx_wecmap_map_google($apiKey, $width, $height, $centerLat, $centerLong, $zoomLevel, $mapName);
 			
@@ -235,7 +237,7 @@ class tx_cal_location_model extends tx_cal_base_model {
 	}
 	function getCountryMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
-		if (t3lib_extMgm::isLoaded ('static_info_tables')) {
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
 			$staticInfo = new tx_staticinfotables_pi1();
 			$staticInfo->init ();
 			$current = $staticInfo->getStaticInfoName ('COUNTRIES', $this->getCountry ());
@@ -249,7 +251,7 @@ class tx_cal_location_model extends tx_cal_base_model {
 	}
 	function getCountryZoneMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
-		if (t3lib_extMgm::isLoaded ('static_info_tables')) {
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
 			$staticInfo = new tx_staticinfotables_pi1();
 			$staticInfo->init ();
 			$current = $staticInfo->getStaticInfoName ('SUBDIVISIONS', $this->getCountryzone (), $this->getCountry ());
@@ -423,7 +425,7 @@ class tx_cal_location_model extends tx_cal_base_model {
 					$this->setSharedUsers (array ());
 					$values = $piVars [$key];
 					if (! is_array ($piVars [$key])) {
-						$values = t3lib_div::trimExplode (',', $piVars [$key], 1);
+						$values = GeneralUtility::trimExplode (',', $piVars [$key], 1);
 					}
 					foreach ($values as $entry) {
 						preg_match ('/(^[a-z])_([0-9]+)/', $entry, $idname);

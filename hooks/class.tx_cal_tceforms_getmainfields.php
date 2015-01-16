@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
 /**
  * This hook extends the tcemain class.
  * It catches changes on tx_cal_event
@@ -57,11 +59,11 @@ class tx_cal_tceforms_getmainfields {
 				/* Set the category if there's not already a value set (from TSConfig) */
 				/*
 				if(!$row['category_id']) {
-					$categoriesArray = t3lib_div::trimExplode(',', $eventPostData['category_id'], 1);
+					$categoriesArray = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $eventPostData['category_id'], 1);
 					$categoryItemArray = array();					
 					foreach($categoriesArray as $category) {
-						$categoryRow = t3lib_befunc::getRecord('tx_cal_category', $category);
-						$categoryItemArray[] = $categoryRow['uid'].'|'.t3lib_befunc::getRecordTitle('tx_cal_category', $categoryRow, 1);
+						$categoryRow = BackendUtility::getRecord('tx_cal_category', $category);
+						$categoryItemArray[] = $categoryRow['uid'].'|'.BackendUtility::getRecordTitle('tx_cal_category', $categoryRow, 1);
 					}
 
 					$row['category_id'] = implode(',', $categoryItemArray);
@@ -103,20 +105,20 @@ class tx_cal_tceforms_getmainfields {
 		}
 		
 		if ($table == 'tx_cal_fe_user_event_monitor_mm') {
-			$rec = t3lib_BEfunc::getRecord ($table, $row ['uid']);
+			$rec = BackendUtility::getRecord ($table, $row ['uid']);
 			
 			$label = '';
 			switch ($row ['tablenames']) {
 				case 'fe_users' :
-					$feUserRec = t3lib_BEfunc::getRecord ('fe_users', $rec ['uid_foreign']);
+					$feUserRec = BackendUtility::getRecord ('fe_users', $rec ['uid_foreign']);
 					$row ['uid_foreign'] = $row ['tablenames'] . '_' . $feUserRec ['uid'] . '|' . $feUserRec ['username'];
 					break;
 				case 'fe_groups' :
-					$feUserRec = t3lib_BEfunc::getRecord ('fe_groups', $rec ['uid_foreign']);
+					$feUserRec = BackendUtility::getRecord ('fe_groups', $rec ['uid_foreign']);
 					$row ['uid_foreign'] = $row ['tablenames'] . '_' . $feUserRec ['uid'] . '|' . $feUserRec ['title'];
 					break;
 				case 'tx_cal_unknown_users' :
-					$feUserRec = t3lib_BEfunc::getRecord ('tx_cal_unknown_users', $rec ['uid_foreign']);
+					$feUserRec = BackendUtility::getRecord ('tx_cal_unknown_users', $rec ['uid_foreign']);
 					$row ['uid_foreign'] = $row ['tablenames'] . '_' . $feUserRec ['uid'] . '|' . $feUserRec ['email'];
 					break;
 			}

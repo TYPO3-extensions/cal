@@ -34,7 +34,7 @@ if (! class_exists ('Date', FALSE)) {
 		define ('PATH_SEPARATOR', OS_WINDOWS ? ';' : ':');
 	}
 	
-	$path = t3lib_extMgm::extPath ('cal') . 'res/PEAR/';
+	$path = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/PEAR/';
 	
 	// set_include_path(get_include_path(). PATH_SEPARATOR . $path);
 	require_once ($path . 'Date.php');

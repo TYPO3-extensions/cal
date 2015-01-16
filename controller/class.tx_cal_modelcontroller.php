@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Back controller for the calendar base.
  * Takes requests from the main
@@ -191,7 +193,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 			$calendarFromService = array ();
 			
 			/* Iterate over all classes providing the cal_model service */
-			while (is_object ($service = &t3lib_div::makeInstanceService ($serviceName, 'calendar', $serviceChain))) {
+			while (is_object ($service = &GeneralUtility::makeInstanceService ($serviceName, 'calendar', $serviceChain))) {
 				$calendar [$service->getServiceKey ()] = $service->findAll ($pidList);
 				$serviceChain .= ',' . $service->getServiceKey ();
 			}
@@ -412,7 +414,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 			$eventsFromService = array ();
 			
 			/* Iterate over all classes providing the cal_model service */
-			while (is_object ($service = t3lib_div::makeInstanceService ($serviceName, $subtype, $serviceChain))) {
+			while (is_object ($service = GeneralUtility::makeInstanceService ($serviceName, $subtype, $serviceChain))) {
 				$serviceChain .= ',' . $service->getServiceKey ();
 				/* Gets all events from the current model as an array */
 				$eventsFromService = $service->findAllWithin ($startDateObject, $endDateObject, $pidList, $eventType, $additionalWhere);
@@ -479,7 +481,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 			$eventsFromService = array ();
 			
 			/* Iterate over all classes providing the cal_model service */
-			while (is_object ($service = t3lib_div::makeInstanceService ($serviceName, $subtype, $serviceChain))) {
+			while (is_object ($service = GeneralUtility::makeInstanceService ($serviceName, $subtype, $serviceChain))) {
 				$serviceChain .= ',' . $service->getServiceKey ();
 				/* Gets all events from the current model as an array */
 				$eventsFromService = $service->findAll ($pidList, $eventTypes);
@@ -547,7 +549,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 			$categoriesFromService = array ();
 			
 			/* Iterate over all classes providing the cal_model service */
-			while (is_object ($service = &t3lib_div::makeInstanceService ($serviceName, 'category', $serviceChain))) {
+			while (is_object ($service = &GeneralUtility::makeInstanceService ($serviceName, 'category', $serviceChain))) {
 				$service->findAll ($pidList, $categoryArrayToBeFilled);
 				$categories [$service->getServiceKey ()] = $categoryArrayToBeFilled;
 				$categoryArrayToBeFilled = array ();
@@ -573,7 +575,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 			$eventsFromService = array ();
 			
 			/* Iterate over all classes providing the cal_model service */
-			while (is_object ($service = t3lib_div::makeInstanceService ($serviceName, 'event', $serviceChain))) {
+			while (is_object ($service = GeneralUtility::makeInstanceService ($serviceName, 'event', $serviceChain))) {
 				$serviceChain .= ',' . $service->getServiceKey ();
 				/* Gets all events from the current model as an array */
 				$eventsFromService = $service->search ($pidList, $startDateObject, $endDateObject, $searchword, $locationIds, $organizerIds, $eventType);
@@ -626,7 +628,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 			$serviceChain = '';
 			$addressFromService = array ();
 			/* Iterate over all classes providing the cal_model service */
-			while (is_object ($service = t3lib_div::makeInstanceService ($serviceName, $subtype, $serviceChain))) {
+			while (is_object ($service = GeneralUtility::makeInstanceService ($serviceName, $subtype, $serviceChain))) {
 				
 				$serviceChain .= ',' . $service->getServiceKey ();
 				/* Gets all events from the current model as an array */
@@ -701,7 +703,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 	function &getServiceObjByKey($type, $subtype, $key) {
 		$serviceChain = '';
 		/* Loop over all services providign the specified service type and subtype */
-		while (is_object ($obj = &t3lib_div::makeInstanceService ($type, $subtype, $serviceChain))) {
+		while (is_object ($obj = &GeneralUtility::makeInstanceService ($type, $subtype, $serviceChain))) {
 			$serviceChain .= ',' . $obj->getServiceKey ();
 			/* If the key of the current service matches what we're looking for, return the object */
 			if ($key == $obj->getServiceKey ()) {
@@ -723,7 +725,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 		$serviceChain = '';
 		$returnArray = array ();
 		/* Loop over all services providign the specified service type and subtype */
-		while (is_object ($obj = t3lib_div::makeInstanceService ($type, $subtype, $serviceChain))) {
+		while (is_object ($obj = GeneralUtility::makeInstanceService ($type, $subtype, $serviceChain))) {
 			$serviceChain .= ',' . $obj->getServiceKey ();
 			/* If the key of the current service matches what we're looking for, return the object */
 			$returnArray [] = $obj->getServiceKey ();
@@ -738,7 +740,7 @@ class tx_cal_modelcontroller extends tx_cal_base_controller {
 			
 			$serviceChain = '';
 			/* Iterate over all classes providing the cal_X_model service */
-			while (is_object ($service = &t3lib_div::makeInstanceService ($serviceName, $key, $serviceChain))) {
+			while (is_object ($service = &GeneralUtility::makeInstanceService ($serviceName, $key, $serviceChain))) {
 				if ($functionTobeCalled) {
 					if (method_exists ($service, $functionTobeCalled)) {
 						$objects [$service->getServiceKey ()] = $service->$functionTobeCalled ($paramsToBePassedOn);

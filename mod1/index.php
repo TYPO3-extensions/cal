@@ -23,6 +23,9 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  * *************************************************************
  */
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Module 'cal_recurrence_generator' for the 'cal' extension.
  *
@@ -40,7 +43,7 @@
 $GLOBALS ['LANG']->includeLLFile ('EXT:cal/mod1/locallang.xml');
 $BE_USER->modAccess ($MCONF, 1); // This checks permissions and exits if the users has no permission for entry.
                                // DEFAULT initialization of a module [END]
-class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
+class tx_cal_recurrence_generator_module1 extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 	var $pageinfo;
 	
 	/**
@@ -49,10 +52,6 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 		global $BE_USER, $BACK_PATH, $TCA_DESCR, $TCA, $CLIENT, $TYPO3_CONF_VARS;
 		
 		parent::init ();
-		
-		/*
-		 * if (t3lib_div::_GP('clear_all_cache'))	{ $this->include_once[]=PATH_t3lib.'class.t3lib_tcemain.php'; }
-		 */
 	}
 	
 	/**
@@ -79,13 +78,13 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 		
 		// Access check!
 		// The page will show only if there is a valid page and if this page may be viewed by the user
-		$this->pageinfo = t3lib_BEfunc::readPageAccess ($this->id, $this->perms_clause);
+		$this->pageinfo = \TYPO3\CMS\Backend\Utility\BackendUtility::readPageAccess ($this->id, $this->perms_clause);
 		$access = is_array ($this->pageinfo) ? 1 : 0;
 		
 		if (($this->id && $access) || ($BE_USER->user ['admin'] && ! $this->id)) {
 			
 			// Draw the header.
-			$this->doc = new mediumDoc();
+			$this->doc = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Template\\DocumentTemplate');
 			$this->doc->backPath = $BACK_PATH;
 			$this->doc->form = '<form action="" method="POST">';
 			
@@ -105,12 +104,12 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 				</script>
 			';
 			
-			$headerSection = $this->doc->getHeader ('pages', $this->pageinfo, $this->pageinfo ['_thePath']) . '<br>' . $GLOBALS ['LANG']->sL ('LLL:EXT:lang/locallang_core.php:labels.path') . ': ' . t3lib_div::fixed_lgd_cs ($this->pageinfo ['_thePath'], - 50);
+			$headerSection = $this->doc->getHeader ('pages', $this->pageinfo, $this->pageinfo ['_thePath']) . '<br>' . $GLOBALS ['LANG']->sL ('LLL:EXT:lang/locallang_core.php:labels.path') . ': ' . GeneralUtility::fixed_lgd_cs ($this->pageinfo ['_thePath'], - 50);
 			
 			$this->content .= $this->doc->startPage ($GLOBALS ['LANG']->getLL ('title'));
 			$this->content .= $this->doc->header ($GLOBALS ['LANG']->getLL ('title'));
 			$this->content .= $this->doc->spacer (5);
-			$this->content .= $this->doc->section ('', $this->doc->funcMenu ($headerSection, t3lib_BEfunc::getFuncMenu ($this->id, 'SET[function]', $this->MOD_SETTINGS ['function'], $this->MOD_MENU ['function'])));
+			$this->content .= $this->doc->section ('', $this->doc->funcMenu ($headerSection, \TYPO3\CMS\Backend\Utility\BackendUtility::getFuncMenu ($this->id, 'SET[function]', $this->MOD_SETTINGS ['function'], $this->MOD_MENU ['function'])));
 			$this->content .= $this->doc->divider (5);
 			
 			// Render content:
@@ -125,7 +124,7 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 		} else {
 			// If no access or if ID == zero
 			
-			$this->doc = new mediumDoc();
+			$this->doc = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Template\\DocumentTemplate');
 			$this->doc->backPath = $BACK_PATH;
 			
 			$this->content .= $this->doc->startPage ($GLOBALS ['LANG']->getLL ('title'));
@@ -149,7 +148,7 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 	function moduleContent() {
 		switch (intval ($this->MOD_SETTINGS ['function'])) {
 			case 2 :
-				$postVarArray = t3lib_div::_POST ();
+				$postVarArray = GeneralUtility::_POST ();
 				$pageIds = Array ();
 				if(isset($postVarArray['pageIds']) && isset($postVarArray['tsPage'])){
 					$tsPage = intval($postVarArray['tsPage']);
@@ -165,11 +164,11 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 // 					}
 // 				}
 				
-				$starttime = t3lib_div::_POST ('starttime');
+				$starttime = GeneralUtility::_POST ('starttime');
 				if ($starttime) {
 					$starttime = intval ($starttime);
 				}
-				$endtime = t3lib_div::_POST ('endtime');
+				$endtime = GeneralUtility::_POST ('endtime');
 				if ($endtime) {
 					$endtime = intval ($endtime);
 				}
@@ -186,7 +185,7 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 				} else {
 					$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 					$this->content .= '<script type="text/javascript">' . $this->getJScode () . '</script>';
-// 					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) > 4004999) {
+// 					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) > 4004999) {
 // 						$this->content .= '<script type="text/javascript" src="jsfunc.tbe_editor.js"></script>';
 // 					}
 					
@@ -223,9 +222,9 @@ class tx_cal_recurrence_generator_module1 extends t3lib_SCbase {
 		}
 	}
 	private function getJScode() {
-		$t3lib_TCEforms = new t3lib_TCEforms();
-		$t3lib_TCEforms->backPath = $GLOBALS ["BACK_PATH"];
-		return $t3lib_TCEforms->dbFileCon ();
+		$forms = new \TYPO3\CMS\Backend\Form\FormEngine();
+		$forms->backPath = $GLOBALS['BACK_PATH'];
+		return $forms->dbFileCon ();
 	}
 }
 

@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * A concrete model for the calendar.
  *
@@ -157,14 +159,14 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$select = 'tx_cal_calendar.uid AS calendar_uid, ' . 'tx_cal_calendar.owner AS calendar_owner, ' . 'tx_cal_calendar.headerstyle AS calendar_headerstyle, ' . 'tx_cal_calendar.bodystyle AS calendar_bodystyle, ' . 'tx_cal_event.*';
 		$table = 'tx_cal_event LEFT JOIN tx_cal_calendar ON tx_cal_calendar.uid = tx_cal_event.calendar_id ';
 		if (0 === strpos ($this->conf ['view'], 'search') && $GLOBALS ['TSFE']->sys_language_content > 0) {
-			$select .= implode (',tx_cal_event_l18n.', t3lib_div::trimExplode (',', $this->conf ['view.'] ['search.'] ['searchEventFieldList'], 1));
+			$select .= implode (',tx_cal_event_l18n.', GeneralUtility::trimExplode (',', $this->conf ['view.'] ['search.'] ['searchEventFieldList'], 1));
 			$table .= 'LEFT JOIN tx_cal_event as tx_cal_event_l18n ON tx_cal_event.uid = tx_cal_event_l18n.l18n_parent ';
 		}
 		$where = '1=1 ' . $additionalWhere;
 		$orderBy = ' tx_cal_event.start_date ASC, tx_cal_event.start_time ASC';
 		$groupBy = 'tx_cal_event.uid';
 		
-		$allowedEventTypes = t3lib_div::trimExplode (',', $eventType, 1);
+		$allowedEventTypes = GeneralUtility::trimExplode (',', $eventType, 1);
 		if (! empty ($allowedEventTypes)) {
 			$where .= ' AND tx_cal_event.type IN (' . implode (',', $allowedEventTypes) . ')';
 		}
@@ -179,7 +181,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$where .= $categoryWhere;
 			$groupBy = 'tx_cal_event.uid';
 			if ($this->conf ['view.'] ['joinCategoryByAnd']) {
-				$categoryArray = t3lib_div::trimExplode (',', $this->conf ['category'], 1);
+				$categoryArray = GeneralUtility::trimExplode (',', $this->conf ['category'], 1);
 				$groupBy .= ', tx_cal_event_category_mm.uid_local HAVING count(*) =' . count ($categoryArray);
 			}
 			$orderBy .= ', tx_cal_event.uid,tx_cal_event_category_mm.sorting';
@@ -287,7 +289,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			}
 			
 			if ($row ['category_uid'] != '') {
-				$categoryIdArray = t3lib_div::trimExplode (',', $row ['category_uid'], true);
+				$categoryIdArray = GeneralUtility::trimExplode (',', $row ['category_uid'], true);
 				foreach ($categoryIdArray as $categoryId) {
 					$event->addCategory ($categories [$categoryId]);
 				}
@@ -438,7 +440,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 						$events_tmp [$eventStart->format ('%Y%m%d')] [$event->isAllday () ? '-1' : ($eventStart->format ('%H%M'))] [$event->getUid ()] = $event;
 					}
 				} else {
-					t3lib_div::deprecationLog ('Usage of old recurrence model is deprecated since cal 1.5.' . LF . 'Please use new recurrence model instead, support will be removed after cal 1.6.');
+					GeneralUtility::deprecationLog ('Usage of old recurrence model is deprecated since cal 1.5.' . LF . 'Please use new recurrence model instead, support will be removed after cal 1.6.');
 					$events_tmp = $this->recurringEvent ($event);
 					foreach ($ex_events_group as $ex_events) {
 						$this->removeEvents ($events_tmp, $ex_events);
@@ -453,7 +455,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			}
 		}
 		
-		$categoryArray = t3lib_div::trimExplode (',', implode (',', (array) $this->controller->piVars ['category']), 1);
+		$categoryArray = GeneralUtility::trimExplode (',', implode (',', (array) $this->controller->piVars ['category']), 1);
 		
 		// TODO: checking the piVar is not a very good thing
 		if ($this->conf ['view.'] ['categoryMode'] != 1 && $this->conf ['view.'] ['categoryMode'] != 3 && $categoryWhere != '' && ! (($this->conf ['view'] == 'ics' || $this->conf ['view'] == 'search_event') && ! empty ($categoryArray))) {
@@ -722,7 +724,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 				$group = Array ();
 				$this->splitUserAndGroupIds (explode (',', strip_tags ($tempValues ['notify_ids'])), $user, $group);
 				foreach ($user as $u) {
-					$userOffsetArray = t3lib_div::trimExplode ('_', $u, 1);
+					$userOffsetArray = GeneralUtility::trimExplode ('_', $u, 1);
 					$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', array (
 							$userOffsetArray [0] 
 					), $uid, 'fe_users', array (
@@ -730,9 +732,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 							'pid' => $eventData ['pid'] 
 					));
 				}
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToNotify.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToNotify.'] ['ignore'], 1);
 				foreach ($group as $g) {
-					$groupOffsetArray = t3lib_div::trimExplode ('_', $g, 1);
+					$groupOffsetArray = GeneralUtility::trimExplode ('_', $g, 1);
 					if (! in_array ($groupOffsetArray [0], $ignore)) {
 						$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', array (
 								$groupOffsetArray [0] 
@@ -744,7 +746,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 				}
 			}
 		} else if ($this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'] || $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultGroup']) {
-			$idArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
+			$idArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['create.'] ['event.'] ['addFeUserToNotify']) {
 				$idArray [] = $this->rightsObj->getUserId ();
 			}
@@ -752,7 +754,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 					'offset' => $this->conf ['view.'] ['event.'] ['remind.'] ['time'],
 					'pid' => $eventData ['pid'] 
 			));
-			$idArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
+			$idArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToNotify']) {
 				$idArray = array_merge ($idArray, $this->rightsObj->getUserGroups ());
 			}
@@ -769,7 +771,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			));
 		}
 		if ($this->conf ['rights.'] ['create.'] ['event.'] ['public']) {
-			$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['notifyUsersOnPublicCreate'], 1), $uid, 'fe_users', array (
+			$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['notifyUsersOnPublicCreate'], 1), $uid, 'fe_users', array (
 					'offset' => $this->conf ['view.'] ['event.'] ['remind.'] ['time'],
 					'pid' => $eventData ['pid'] 
 			));
@@ -789,7 +791,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 				$user [] = $this->rightsObj->getUserId ();
 			}
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($user), $uid, 'fe_users');
-			$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToShared.'] ['ignore'], 1);
+			$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToShared.'] ['ignore'], 1);
 			$groupArray = array_diff ($group, $ignore);
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');
 		} else {
@@ -799,10 +801,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 			}
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($idArray), $uid, 'fe_users');
 			
-			$groupArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+			$groupArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToShared']) {
 				$idArray = $this->rightsObj->getUserGroups ();
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToShared.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToShared.'] ['ignore'], 1);
 				$groupArray = array_diff ($idArray, $ignore);
 			}
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');
@@ -914,7 +916,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		
 		// Hook: updateEvent
 		$hookObjectsArr = tx_cal_functions::getHookObjectsArray ('tx_cal_event_service', 'eventServiceClass');
@@ -973,15 +975,15 @@ class tx_cal_event_service extends tx_cal_base_service {
 				));
 			}
 		} else {
-			$userIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
+			$userIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['event.'] ['addFeUserToNotify']) {
 				$userIdArray [] = $this->rightsObj->getUserId ();
 			}
 			
-			$groupIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
+			$groupIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['event.'] ['addFeGroupToNotify']) {
 				$groupIdArray = $this->rightsObj->getUserGroups ();
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['addFeGroupToNotify.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['addFeGroupToNotify.'] ['ignore'], 1);
 				$groupIdArray = array_diff ($groupIdArray, $ignore);
 			}
 			if (! empty ($userIdArray) || ! empty ($groupIdArray)) {
@@ -1015,15 +1017,15 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($object->getSharedUsers ()), $uid, 'fe_users');
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($object->getSharedGroups ()), $uid, 'fe_groups');
 		} else {
-			$userIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
+			$userIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['event.'] ['addFeUserToShared']) {
 				$userIdArray [] = $this->rightsObj->getUserId ();
 			}
 			
-			$groupIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+			$groupIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['event.'] ['addFeGroupToShared']) {
 				$groupIdArray = $this->rightsObj->getUserGroups ();
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['addFeGroupToShared.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['addFeGroupToShared.'] ['ignore'], 1);
 				$groupIdArray = array_diff ($groupIdArray, $ignore);
 			}
 			if (! empty ($userIdArray) || ! empty ($groupIdArray)) {
@@ -1106,7 +1108,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$where = 'uid = ' . $uid;
 			$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $updateFields);
 			
-			require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 			$fields = $event->getValuesAsArray ();
 			$fields ['deleted'] = 1;
 			$fields ['tstamp'] = $updateFields ['tstamp'];
@@ -1224,7 +1226,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$hookObjectsArr = array ();
 		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'])) {
 			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'] as $classRef) {
-				$hookObjectsArr [] = & t3lib_div::getUserObj ($classRef);
+				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}
 		
@@ -1335,7 +1337,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$hookObjectsArr = array ();
 		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'])) {
 			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'] as $classRef) {
-				$hookObjectsArr [] = & t3lib_div::getUserObj ($classRef);
+				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}
 		
@@ -1853,7 +1855,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 				$uid 
 		), intval ($this->controller->piVars ['event_uid']), 'tx_cal_exception_event');
 		$this->unsetPiVars ();
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		tx_cal_functions::clearCache ();
 	}
 	function unsetPiVars() {

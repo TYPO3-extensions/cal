@@ -159,7 +159,7 @@ class tx_cal_searchviews extends tx_cal_listview {
 		
 		$organizerIdArray = Array ();
 		if ($organizerIds != '') {
-			$organizerIdArray = t3lib_div::intExplode (',', $organizerIds);
+			$organizerIdArray = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode (',', $organizerIds);
 		}
 		
 		if (is_array ($organizerArray)) {
@@ -174,8 +174,8 @@ class tx_cal_searchviews extends tx_cal_listview {
 	}
 	function getSelector(&$page, &$sims, &$rems, $view) {
 		$useDateSelector = false;
-		if (t3lib_extMgm::isLoaded ('rlmp_dateselectlib')) {
-			require_once (t3lib_extMgm::extPath ('rlmp_dateselectlib') . 'class.tx_rlmpdateselectlib.php');
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('rlmp_dateselectlib')) {
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('rlmp_dateselectlib') . 'class.tx_rlmpdateselectlib.php');
 			tx_rlmpdateselectlib::includeLib ();
 			
 			/* Only read date selector option if rlmp_dateselectlib is installed */

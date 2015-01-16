@@ -29,8 +29,11 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_organizer.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_base_service.php');
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_cal_organizer.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'service/class.tx_cal_base_service.php');
 
 /**
  * Base model for the calendar organizer.
@@ -186,7 +189,7 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 		$sharedUsers = Array ();
 		$values = $this->controller->piVars ['shared_ids'];
 		if (! is_array ($this->controller->piVars ['shared_ids'])) {
-			$values = t3lib_div::trimExplode (',', $this->controller->piVars ['shared_ids'], 1);
+			$values = GeneralUtility::trimExplode (',', $this->controller->piVars ['shared_ids'], 1);
 		}
 		foreach ($values as $entry) {
 			preg_match ('/(^[a-z])_([0-9]+)/', $entry, $idname);
@@ -206,15 +209,15 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 				$insertFields ['shared_user_cnt'] = 0;
 			}
 		} else {
-			$userIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['organizer.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
+			$userIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['organizer.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['organizer.'] ['addFeUserToShared']) {
 				$userIdArray [] = $this->rightsObj->getUserId ();
 			}
 			
-			$groupIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['organizer.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+			$groupIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['organizer.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['organizer.'] ['addFeGroupToShared']) {
 				$groupIdArray = $this->rightsObj->getUserGroups ();
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['organizer.'] ['addFeGroupToShared.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['organizer.'] ['addFeGroupToShared.'] ['ignore'], 1);
 				$groupIdArray = array_diff ($groupIdArray, $ignore);
 			}
 			if (! empty ($userIdArray) || ! empty ($groupIdArray)) {
@@ -339,7 +342,7 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 		$sharedUsers = Array ();
 		$values = $this->controller->piVars ['shared_ids'];
 		if (! is_array ($this->controller->piVars ['shared_ids'])) {
-			$values = t3lib_div::trimExplode (',', $this->controller->piVars ['shared_ids'], 1);
+			$values = GeneralUtility::trimExplode (',', $this->controller->piVars ['shared_ids'], 1);
 		}
 		foreach ($values as $entry) {
 			preg_match ('/(^[a-z])_([0-9]+)/', $entry, $idname);
@@ -357,7 +360,7 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 			if (count ($sharedUsers) > 0 && $sharedUsers [0] != 0) {
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_organizer_shared_user_mm', array_unique ($sharedUsers), $uid, 'fe_users');
 			}
-			$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['organizer.'] ['addFeGroupToShared.'] ['ignore'], 1);
+			$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['organizer.'] ['addFeGroupToShared.'] ['ignore'], 1);
 			$groupArray = array_diff ($sharedGroups, $ignore);
 			if (count ($groupArray) > 0 && $groupArray [0] != 0) {
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_organizer_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');
@@ -382,10 +385,10 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 			
 			$groupArray = Array ();
 			if ($this->conf ['rights.'] ['create.'] ['organizer.'] ['fields.'] ['shared.'] ['defaultGroup'] != '') {
-				$groupArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['organizer.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+				$groupArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['organizer.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 				if ($this->conf ['rights.'] ['create.'] ['organizer.'] ['addFeGroupToShared']) {
 					$idArray = $this->rightsObj->getUserGroups ();
-					$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['organizer.'] ['addFeGroupToShared.'] ['ignore'], 1);
+					$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['organizer.'] ['addFeGroupToShared.'] ['ignore'], 1);
 					$groupArray = array_diff ($idArray, $ignore);
 				}
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_organizer_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');

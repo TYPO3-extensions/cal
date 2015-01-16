@@ -30,9 +30,9 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-// equire_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_calendar.php');
-// equire_once(t3lib_extMgm::extPath('cal').'controller/class.tx_cal_functions.php');
-// equire_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_base_model.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'controller/class.tx_cal_calendar.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'controller/class.tx_cal_functions.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'model/class.tx_cal_base_model.php');
 
 /**
  * Base model for the calendar.
@@ -653,7 +653,7 @@ class tx_cal_model extends tx_cal_base_model {
 	}
 	function setByMonthday($bymonthday) {
 		if ($bymonthday != '') {
-			$this->bymonthday = t3lib_div::trimExplode (',', $bymonthday, 1);
+			$this->bymonthday = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $bymonthday, 1);
 		}
 		if (strtoupper ($bymonthday) == 'ALL' || in_array ('all', $this->bymonthday)) {
 			$this->bymonthday = array (
@@ -856,7 +856,7 @@ class tx_cal_model extends tx_cal_base_model {
 	 * @return String rdate value as array split by comma.
 	 */
 	function getRdateValues() {
-		return t3lib_div::trimExplode (',', $this->rdate, 1);
+		return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->rdate, 1);
 	}
 	
 	/**

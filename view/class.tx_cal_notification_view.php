@@ -29,8 +29,11 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_base_service.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'service/class.tx_cal_base_service.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 
 /**
  *
@@ -43,7 +46,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 	var $baseUrl;
 	function tx_cal_notification_view() {
 		$this->tx_cal_base_service ();
-		$this->baseUrl = ''; // t3lib_div::getIndpEnv('TYPO3_SITE_URL');
+		$this->baseUrl = ''; // GeneralUtility::getIndpEnv('TYPO3_SITE_URL');
 	}
 	function notifyOfChanges($oldEventDataArray, $newEventDataArray) {
 		unset ($oldEventDataArray ['starttime']);
@@ -51,9 +54,9 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		unset ($newEventDataArray ['starttime']);
 		unset ($newEventDataArray ['endtime']);
 		
-		$pidArray = t3lib_div::trimExplode (',', $this->conf ['pidList'], 1);
+		$pidArray = GeneralUtility::trimExplode (',', $this->conf ['pidList'], 1);
 		if (! in_array ($oldEventDataArray ['pid'], $pidArray)) {
-			t3lib_div::sysLog ('Event PID (' . $oldEventDataArray ['pid'] . ') is outside the configured pidList (' . $this->conf ['pidList'] . ') so notifications cannot be sent.', 'cal', 2);
+			GeneralUtility::sysLog ('Event PID (' . $oldEventDataArray ['pid'] . ') is outside the configured pidList (' . $this->conf ['pidList'] . ') so notifications cannot be sent.', 'cal', 2);
 			return;
 		}
 		$eventDataArray = array_merge ($oldEventDataArray, $newEventDataArray);
@@ -72,7 +75,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$where = 'fe_users.uid = tx_cal_fe_user_event_monitor_mm.uid_foreign AND tx_cal_fe_user_event_monitor_mm.tablenames = "fe_users" AND tx_cal_fe_user_event_monitor_mm.uid_local = tx_cal_event.uid AND tx_cal_event.uid = ' . $oldEventDataArray ['uid'];
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 			while ($row1 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				if ($row1 ['email'] != '' && t3lib_div::validEmail ($row1 ['email'])) {
+				if ($row1 ['email'] != '' && GeneralUtility::validEmail ($row1 ['email'])) {
 					$template = $this->conf ['view.'] ['event.'] ['notify.'] [$row1 ['uid'] . '.'] ['onChangeTemplate'];
 					if (! $template) {
 						$template = $this->conf ['view.'] ['event.'] ['notify.'] ['all.'] ['onChangeTemplate'];
@@ -99,7 +102,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$where = 'tx_cal_unknown_users.uid = tx_cal_fe_user_event_monitor_mm.uid_foreign AND tx_cal_fe_user_event_monitor_mm.tablenames = "tx_cal_unknown_users" AND tx_cal_fe_user_event_monitor_mm.uid_local = tx_cal_event.uid AND tx_cal_event.uid = ' . $oldEventDataArray ['uid'];
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 			while ($row1 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				if ($row1 ['email'] != '' && t3lib_div::validEmail ($row1 ['email'])) {
+				if ($row1 ['email'] != '' && GeneralUtility::validEmail ($row1 ['email'])) {
 					$template = $this->conf ['view.'] ['event.'] ['notify.'] ['all.'] ['onChangeTemplate'];
 					$titleText = $this->conf ['view.'] ['event.'] ['notify.'] ['all.'] ['onChangeEmailTitle'];
 					$unsubscribeLink = $this->baseUrl . $this->controller->pi_getPageLink ($this->conf ['view.'] ['event.'] ['notify.'] ['subscriptionViewPid'], '', array (
@@ -117,7 +120,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			foreach ($event_new->getCategories () as $category) {
 				if (is_object ($category)) {
 					foreach ($category->getNotificationEmails () as $emailAddress) {
-						if ($emailAddress != '' && t3lib_div::validEmail ($emailAddress)) {
+						if ($emailAddress != '' && GeneralUtility::validEmail ($emailAddress)) {
 							$template = $this->conf ['view.'] ['category.'] ['notify.'] [$category->getUid () . '.'] ['onChangeTemplate'];
 							if (! $template) {
 								$template = $this->conf ['view.'] ['category.'] ['notify.'] ['all.'] ['onChangeTemplate'];
@@ -136,7 +139,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$subType = 'getGroupsFE';
 			$groups = array ();
 			$serviceObj = null;
-			$serviceObj = t3lib_div::makeInstanceService ('auth', $subType);
+			$serviceObj = GeneralUtility::makeInstanceService ('auth', $subType);
 			if ($serviceObj == null) {
 				return;
 			}
@@ -160,7 +163,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 				$result2 = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 				while ($row2 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result2)) {
 					
-					if ($row2 ['email'] != '' && t3lib_div::validEmail ($row2 ['email'])) {
+					if ($row2 ['email'] != '' && GeneralUtility::validEmail ($row2 ['email'])) {
 						$template = $this->conf ['view.'] ['event.'] ['notify.'] [$row2 ['uid'] . '.'] ['onChangeTemplate'];
 						if (! $template) {
 							$template = $this->conf ['view.'] ['event.'] ['notify.'] ['all.'] ['onChangeTemplate'];
@@ -186,8 +189,8 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		}
 	}
 	function sendNotificationOfChanges(&$event_old, &$event_new, $email, $templatePath, $titleText, $unsubscribeLink, $acceptLink = '', $declineLink = '') {
-		$absFile = t3lib_div::getFileAbsFileName ($templatePath);
-		$template = t3lib_div::getURL ($absFile);
+		$absFile = GeneralUtility::getFileAbsFileName ($templatePath);
+		$template = GeneralUtility::getURL ($absFile);
 		$htmlTemplate = $this->cObj->getSubpart ($template, '###HTML###');
 		$oldEventHTMLSubpart = $this->cObj->getSubpart ($htmlTemplate, '###OLD_EVENT###');
 		$newEventHTMLSubpart = $this->cObj->getSubpart ($htmlTemplate, '###NEW_EVENT###');
@@ -220,7 +223,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		$rems = array ();
 		$wrapped = array ();
 		$event_new->getMarker ($titleText, $switch, $rems, $wrapped, 'title');
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
 			$this->mailer->subject = tx_cal_functions::substituteMarkerArrayNotCached ($titleText, $switch, $rems, $wrapped);
 		} else {
 			$this->mailer->setSubject (tx_cal_functions::substituteMarkerArrayNotCached ($titleText, $switch, $rems, $wrapped));
@@ -251,7 +254,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 			
 			while ($row1 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				if ($row1 ['email'] != '' && t3lib_div::validEmail ($row1 ['email'])) {
+				if ($row1 ['email'] != '' && GeneralUtility::validEmail ($row1 ['email'])) {
 					if (($newEventDataArray ['deleted'] + $forceDeletionMode) > 0) {
 						$template = $this->conf ['view.'] ['event.'] ['notify.'] ['fe_users_' . $row1 ['uid'] . '.'] ['onDeleteTemplate'];
 						if (! $template) {
@@ -289,14 +292,14 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$where = 'tx_cal_unknown_users.uid = tx_cal_fe_user_event_monitor_mm.uid_foreign AND  tx_cal_fe_user_event_monitor_mm.uid_local = tx_cal_event.uid AND tx_cal_event.uid = ' . $event->getUid ();
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 			while ($row1 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				if ($row1 ['email'] != '' && t3lib_div::validEmail ($row1 ['email'])) {
+				if ($row1 ['email'] != '' && GeneralUtility::validEmail ($row1 ['email'])) {
 					$template = $this->conf ['view.'] ['event.'] ['notify.'] ['all.'] ['onCreateTemplate'];
 					$titleText = $this->conf ['view.'] ['event.'] ['notify.'] ['all.'] ['onCreateEmailTitle'];
 					if (($newEventDataArray ['deleted'] + $forceDeletionMode) > 0) {
 						$template = $this->conf ['view.'] ['event.'] ['notify.'] ['all.'] ['onDeleteTemplate'];
 						$titleText = $this->conf ['view.'] ['event.'] ['notify.'] ['all.'] ['onDeleteEmailTitle'];
 					}
-					$unsubscribeLink = t3lib_div::getIndpEnv ('TYPO3_SITE_URL') . $this->controller->pi_getPageLink ($this->conf ['view.'] ['event.'] ['notify.'] ['subscriptionViewPid'], '', array (
+					$unsubscribeLink = GeneralUtility::getIndpEnv ('TYPO3_SITE_URL') . $this->controller->pi_getPageLink ($this->conf ['view.'] ['event.'] ['notify.'] ['subscriptionViewPid'], '', array (
 							'tx_cal_controller[view]' => 'subscription',
 							'tx_cal_controller[email]' => $row1 ['email'],
 							'tx_cal_controller[uid]' => $event->getUid (),
@@ -310,7 +313,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			
 			foreach ($event->getCategories () as $category) {
 				foreach ($category->getNotificationEmails () as $emailAddress) {
-					if ($emailAddress != '' && t3lib_div::validEmail ($emailAddress)) {
+					if ($emailAddress != '' && GeneralUtility::validEmail ($emailAddress)) {
 						if (($newEventDataArray ['deleted'] + $forceDeletionMode) > 0) {
 							$template = $this->conf ['view.'] ['event.'] ['notify.'] [$category->getUid () . '.'] ['onDeleteTemplate'];
 							if (! $template) {
@@ -339,7 +342,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			$subType = 'getGroupsFE';
 			$groups = array ();
 			$serviceObj = null;
-			$serviceObj = t3lib_div::makeInstanceService ('auth', $subType);
+			$serviceObj = GeneralUtility::makeInstanceService ('auth', $subType);
 			if ($serviceObj == null) {
 				return;
 			}
@@ -363,7 +366,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 				$result2 = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 				while ($row2 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result2)) {
 					
-					if ($row2 ['email'] != '' && t3lib_div::validEmail ($row2 ['email'])) {
+					if ($row2 ['email'] != '' && GeneralUtility::validEmail ($row2 ['email'])) {
 						
 						if (($newEventDataArray ['deleted'] + $forceDeletionMode) > 0) {
 							$template = $this->conf ['view.'] ['event.'] ['notify.'] ['fe_groups_' . $row2 ['uid'] . '.'] ['onDeleteTemplate'];
@@ -401,8 +404,8 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		}
 	}
 	function sendNotification(&$event, $email, $templatePath, $titleText, $unsubscribeLink, $acceptLink = '', $declineLink = '', $ics = '') {
-		$absFile = t3lib_div::getFileAbsFileName ($templatePath);
-		$template = t3lib_div::getURL ($absFile);
+		$absFile = GeneralUtility::getFileAbsFileName ($templatePath);
+		$template = GeneralUtility::getURL ($absFile);
 		$htmlTemplate = $this->cObj->getSubpart ($template, '###HTML###');
 		$plainTemplate = $this->cObj->getSubpart ($template, '###PLAIN###');
 		
@@ -433,7 +436,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		$wrapped = array ();
 		$event->getMarker ($titleText, $switch, $rems, $wrapped, 'title');
 		
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
 			$this->mailer->subject = tx_cal_functions::substituteMarkerArrayNotCached ($titleText, $switch, $rems, $wrapped);
 		} else {
 			$this->mailer->setSubject (tx_cal_functions::substituteMarkerArrayNotCached ($titleText, $switch, $rems, $wrapped));
@@ -485,7 +488,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 							'tx_cal_controller[status]' => 'accept',
 							'tx_cal_controller[sid]' => md5 ($event_old->getUid () . $attendee->getEmail () . $attendee->row ['crdate']) 
 					);
-					$conf ['additionalParams'] .= t3lib_div::implodeArrayForUrl ('', $urlParameters);
+					$conf ['additionalParams'] .= GeneralUtility::implodeArrayForUrl ('', $urlParameters);
 					$this->controller->cObj->typolink ('', $conf);
 					$acceptLink = $this->controller->cObj->lastTypoLinkUrl;
 					
@@ -496,7 +499,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 							'tx_cal_controller[status]' => 'decline',
 							'tx_cal_controller[sid]' => md5 ($event_old->getUid () . $attendee->getEmail () . $attendee->row ['crdate']) 
 					);
-					$conf ['additionalParams'] .= t3lib_div::implodeArrayForUrl ('', $urlParameters);
+					$conf ['additionalParams'] .= GeneralUtility::implodeArrayForUrl ('', $urlParameters);
 					$this->controller->cObj->typolink ('', $conf);
 					$declineLink = $this->controller->cObj->lastTypoLinkUrl;
 					
@@ -508,7 +511,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 							',' => '_' 
 					));
 					$icsAttachmentFile = $this->createTempIcsFile ($ics, $title);
-					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
+					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
 						$this->mailer->addAttachment ($icsAttachmentFile);
 					} else {
 						$attachment = Swift_Attachment::fromPath ($icsAttachmentFile, 'text/calendar');
@@ -521,7 +524,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 						$this->sendNotification ($event_old, $attendee->getEmail (), $template, '###TITLE###', '', $acceptLink, $declineLink);
 					}
 					unlink ($icsAttachmentFile);
-					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
+					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
 						$this->mailer->theParts ['attach'] = array ();
 					}
 				}
@@ -533,7 +536,7 @@ class tx_cal_notification_view extends tx_cal_base_service {
 			foreach (array_keys ($globalAttendeeArray [$serviceType]) as $uid) {
 				$attendee = &$globalAttendeeArray [$serviceType] [$uid];
 				if ($attendee->getAttendance () == 'CHAIR') {
-					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
+					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
 						$this->mailer->from_email = $attendee->getEmail ();
 						$this->mailer->from_name = $attendee->getName ();
 						$this->mailer->replyto_email = $attendee->getEmail ();
@@ -555,37 +558,27 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		}
 	}
 	function startMailer() {
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
-			$this->mailer = new t3lib_htmlmail();
-			$this->mailer->start ();
-			$this->mailer->from_email = $this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'];
-			$this->mailer->from_name = $this->conf ['view.'] ['event.'] ['notify.'] ['fromName'];
-			$this->mailer->replyto_email = $this->conf ['view.'] ['event.'] ['notify.'] ['emailReplyAddress'];
-			$this->mailer->replyto_name = $this->conf ['view.'] ['event.'] ['notify.'] ['replyToName'];
-			$this->mailer->organisation = $this->conf ['view.'] ['event.'] ['notify.'] ['organisation'];
-		} else {
-			$this->mailer = $mail = new t3lib_mail_Message();
-			
-			if (t3lib_div::validEmail ($this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'])) {
-				$this->mailer->setFrom (array (
-						$this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'] => $this->conf ['view.'] ['event.'] ['notify.'] ['fromName'] 
-				));
-			}
-			
-			if (t3lib_div::validEmail ($this->conf ['view.'] ['event.'] ['notify.'] ['emailReplyAddress'])) {
-				$this->mailer->setReplyTo (array (
-						$this->conf ['view.'] ['event.'] ['notify.'] ['emailReplyAddress'] => $this->conf ['view.'] ['event.'] ['notify.'] ['replyToName'] 
-				));
-			}
-			$this->mailer->getHeaders ()->addTextHeader ('Organization', $this->conf ['view.'] ['event.'] ['notify.'] ['organisation']);
+		$this->mailer = $mail = new \TYPO3\CMS\Core\Mail\MailMessage();
+		
+		if (GeneralUtility::validEmail ($this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'])) {
+			$this->mailer->setFrom (array (
+					$this->conf ['view.'] ['event.'] ['notify.'] ['emailAddress'] => $this->conf ['view.'] ['event.'] ['notify.'] ['fromName'] 
+			));
 		}
+		
+		if (GeneralUtility::validEmail ($this->conf ['view.'] ['event.'] ['notify.'] ['emailReplyAddress'])) {
+			$this->mailer->setReplyTo (array (
+					$this->conf ['view.'] ['event.'] ['notify.'] ['emailReplyAddress'] => $this->conf ['view.'] ['event.'] ['notify.'] ['replyToName'] 
+			));
+		}
+		$this->mailer->getHeaders ()->addTextHeader ('Organization', $this->conf ['view.'] ['event.'] ['notify.'] ['organisation']);
 	}
 	function sendEmail($email, $htmlTemplate, $plainTemplate) {
 		$this->controller->finish ($htmlTemplate);
 		$this->controller->finish ($plainTemplate);
 		$plainTemplate = str_replace ('&nbsp;', ' ', strip_tags ($plainTemplate));
 		
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
 			$this->mailer->theParts ['html'] ['content'] = $htmlTemplate;
 			$this->mailer->theParts ['html'] ['path'] = '';
 			$this->mailer->extractMediaLinks ();
@@ -613,12 +606,12 @@ class tx_cal_notification_view extends tx_cal_base_service {
 		}
 	}
 	function createTempIcsFile($content, $filename) {
-		$fileFunc = new t3lib_basicFileFunctions();
+		$fileFunc = new \TYPO3\CMS\Core\Utility\File\BasicFileUtility();
 		$all_files = Array ();
 		$all_files ['webspace'] ['allow'] = '*';
 		$all_files ['webspace'] ['deny'] = '';
 		$fileFunc->init ('', $all_files);
-		$theDestFile = t3lib_div::getFileAbsFileName ('uploads/tx_cal/' . $filename);
+		$theDestFile = GeneralUtility::getFileAbsFileName ('uploads/tx_cal/' . $filename);
 		// $theDestFile = $fileFunc->getUniqueName($filename, 'uploads/tx_cal');
 		$fh = fopen ($theDestFile, 'w');
 		fwrite ($fh, $content);

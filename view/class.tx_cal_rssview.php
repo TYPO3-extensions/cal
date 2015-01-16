@@ -81,7 +81,7 @@ class tx_cal_rssview extends tx_cal_base_view {
 		
 		// get siteUrl for links in rss feeds. the 'dontInsert' option seems to be needed in some configurations depending on the baseUrl setting
 		if (! $this->conf ['view.'] ['rss.'] ['dontInsertSiteUrl']) {
-			$this->config ['siteUrl'] = t3lib_div::getIndpEnv ('TYPO3_SITE_URL');
+			$this->config ['siteUrl'] = \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv ('TYPO3_SITE_URL');
 		}
 		
 		// fill at least the template header
@@ -263,13 +263,13 @@ class tx_cal_rssview extends tx_cal_base_view {
 		if (substr ($icon, 0, 4) == 'EXT:') { // extension
 			list ($extKey, $local) = explode ('/', substr ($icon, 4), 2);
 			$filename = '';
-			if (strcmp ($extKey, '') && t3lib_extMgm::isLoaded ($extKey) && strcmp ($local, '')) {
-				$icon = t3lib_extMgm::siteRelPath ($extKey) . $local;
+			if (strcmp ($extKey, '') && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ($extKey) && strcmp ($local, '')) {
+				$icon = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath ($extKey) . $local;
 			}
 		}
 		
-		$markerArray ['###IMG###'] = t3lib_div::getIndpEnv ('TYPO3_REQUEST_DIR') . $icon;
-		$imgFile = t3lib_div::getIndpEnv ('TYPO3_DOCUMENT_ROOT') . '/' . $icon;
+		$markerArray ['###IMG###'] = \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv ('TYPO3_REQUEST_DIR') . $icon;
+		$imgFile = \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv ('TYPO3_DOCUMENT_ROOT') . '/' . $icon;
 		$imgSize = is_file ($imgFile) ? getimagesize ($imgFile) : '';
 		
 		$markerArray ['###IMG_W###'] = $imgSize [0];

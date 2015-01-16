@@ -33,6 +33,11 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
+
+
 /**
  * This function displays a selector with nested categories.
  * The original code is borrowed from the extension "Digital Asset Management" (tx_dam) author: Rene© Fritz <r.fritz@colorcube.de>
@@ -76,11 +81,11 @@ class tx_cal_treeview {
 		$table = $PA ['table'];
 		$field = $PA ['field'];
 		$config = $PA ['fieldConf'] ['config'];
-		$cfgArr = t3lib_div::xml2array ($PA ['row'] ['pi_flexform']);
+		$cfgArr = GeneralUtility::xml2array ($PA ['row'] ['pi_flexform']);
 		$selectedCalendars = array ();
 		
 		if (is_array ($cfgArr) && is_array ($cfgArr ['data'] ['s_Cat'] ['lDEF']) && is_array ($cfgArr ['data'] ['s_Cat'] ['lDEF'] ['calendarSelection'])) {
-			$selectedCalendars = t3lib_div::trimExplode (',', $cfgArr ['data'] ['s_Cat'] ['lDEF'] ['calendarSelection'] ['vDEF'], 1);
+			$selectedCalendars = GeneralUtility::trimExplode (',', $cfgArr ['data'] ['s_Cat'] ['lDEF'] ['calendarSelection'] ['vDEF'], 1);
 		}
 		
 		// it seems TCE has a bug and do not work correctly with '1'
@@ -118,7 +123,7 @@ class tx_cal_treeview {
 			$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['tx_cal']);
 		}
 		if ($confArr ['useStoragePid']) {
-			$TSconfig = t3lib_BEfunc::getTCEFORM_TSconfig ($table, $row);
+			$TSconfig = BackendUtility::getTCEFORM_TSconfig ($table, $row);
 			$storagePid = $TSconfig ['_STORAGE_PID'] ? $TSconfig ['_STORAGE_PID'] : 0;
 			$SPaddWhere = ' AND tx_cal_calendar.pid IN (' . $storagePid . ')';
 		}
@@ -165,7 +170,7 @@ class tx_cal_treeview {
 			if ($GLOBALS ['BE_USER']->user ['tx_cal_enable_accesscontroll']) {
 				$allowAllCalendars = false;
 				if ($GLOBALS ['BE_USER']->user ['tx_cal_calendar']) {
-					$be_userCalendars = array_merge ($be_userCalendars, t3lib_div::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1));
+					$be_userCalendars = array_merge ($be_userCalendars, GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1));
 				}
 			}
 			
@@ -176,7 +181,7 @@ class tx_cal_treeview {
 		}
 		
 		if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {
-			$enableFields = t3lib_befunc::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
+			$enableFields = BackendUtility::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
 		} else {
 			$enableFields = $this->cObj->enableFields ('tx_cal_calendar');
 		}
@@ -193,7 +198,7 @@ class tx_cal_treeview {
 		if ($calres) {
 			while ($calrow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($calres)) {
 				if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {
-					$tempRow = t3lib_befunc::getRecordLocalization ('tx_cal_calendar', $calrow ['uid'], $PA ['row'] ['sys_language_uid'], '');
+					$tempRow = BackendUtility::getRecordLocalization ('tx_cal_calendar', $calrow ['uid'], $PA ['row'] ['sys_language_uid'], '');
 					if (is_array ($tempRow)) {
 						$calrow = $tempRow [0];
 					}
@@ -207,7 +212,7 @@ class tx_cal_treeview {
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($calres);
 		}
 		
-		$test = new t3lib_TCEforms ();
+		$test = new \TYPO3\CMS\Backend\Form\FormEngine ();
 		$test->initDefaultBEmode ();
 		
 		$disabled = '';
@@ -221,16 +226,16 @@ class tx_cal_treeview {
 		}
 		
 		// Set max and min items:
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-			$maxitems = t3lib_utility_Math::forceIntegerInRange ($config ['maxitems'], 0);
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+			$maxitems = MathUtility::forceIntegerInRange ($config ['maxitems'], 0);
 			if (! $maxitems)
 				$maxitems = 100000;
-			$minitems = t3lib_utility_Math::forceIntegerInRange ($config ['minitems'], 0);
+			$minitems = MathUtility::forceIntegerInRange ($config ['minitems'], 0);
 		} else {
-			$maxitems = t3lib_div::forceIntegerInRange ($config ['maxitems'], 0);
+			$maxitems = GeneralUtility::forceIntegerInRange ($config ['maxitems'], 0);
 			if (! $maxitems)
 				$maxitems = 100000;
-			$minitems = t3lib_div::forceIntegerInRange ($config ['minitems'], 0);
+			$minitems = GeneralUtility::forceIntegerInRange ($config ['minitems'], 0);
 		}
 		// Register the required number of elements:
 		$test->requiredElements [$PA ['itemFormElName']] = array (
@@ -240,7 +245,7 @@ class tx_cal_treeview {
 		);
 		
 		// Get "removeItems":
-		$removeItems = t3lib_div::trimExplode (',', $PA ['fieldTSConfig'] ['removeItems'], 1);
+		$removeItems = GeneralUtility::trimExplode (',', $PA ['fieldTSConfig'] ['removeItems'], 1);
 		if (! $disabled) {
 			// Create option tags:
 			$opt = array ();
@@ -255,10 +260,10 @@ class tx_cal_treeview {
 			// Put together the selector box:
 			$selector_itemListStyle = isset ($config ['itemListStyle']) ? ' style="' . htmlspecialchars ($config ['itemListStyle']) . '"' : ' style="' . $this->defaultMultipleSelectorStyle . '"';
 			$size = intval ($config ['size']);
-			if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-				$size = $config ['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange (count ($itemArray) + 1, t3lib_utility_Math::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
+			if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+				$size = $config ['autoSizeMax'] ? MathUtility::forceIntegerInRange (count ($itemArray) + 1, MathUtility::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 			} else {
-				$size = $config ['autoSizeMax'] ? t3lib_div::forceIntegerInRange (count ($itemArray) + 1, t3lib_div::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
+				$size = $config ['autoSizeMax'] ? GeneralUtility::forceIntegerInRange (count ($itemArray) + 1, GeneralUtility::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 			}
 			if ($config ['exclusiveKeys']) {
 				$sOnChange = 'setFormValueFromBrowseWin(\'' . $PA ['itemFormElName'] . '\',this.options[this.selectedIndex].value,this.options[this.selectedIndex].text,\'' . $config ['exclusiveKeys'] . '\'); ';
@@ -273,10 +278,10 @@ class tx_cal_treeview {
 				</select>';
 		}
 		
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
 			$params = array (
 					'size' => $config ['size'],
-					'autoSizeMax' => t3lib_utility_Math::forceIntegerInRange ($config ['autoSizeMax'], 0),
+					'autoSizeMax' => MathUtility::forceIntegerInRange ($config ['autoSizeMax'], 0),
 					'style' => isset ($config ['selectedListStyle']) ? ' style="' . htmlspecialchars ($config ['selectedListStyle']) . '"' : ' style="' . $this->defaultMultipleSelectorStyle . '"',
 					'dontShowMoveIcons' => ($config ['maxitems'] <= 1),
 					'maxitems' => $config ['maxitems'],
@@ -292,7 +297,7 @@ class tx_cal_treeview {
 		} else {
 			$params = array (
 					'size' => $config ['size'],
-					'autoSizeMax' => t3lib_div::forceIntegerInRange ($config ['autoSizeMax'], 0),
+					'autoSizeMax' => GeneralUtility::forceIntegerInRange ($config ['autoSizeMax'], 0),
 					'style' => isset ($config ['selectedListStyle']) ? ' style="' . htmlspecialchars ($config ['selectedListStyle']) . '"' : ' style="' . $this->defaultMultipleSelectorStyle . '"',
 					'dontShowMoveIcons' => ($config ['maxitems'] <= 1),
 					'maxitems' => $config ['maxitems'],
@@ -338,13 +343,13 @@ class tx_cal_treeview {
 			$isPluginFlexform = true;
 			
 			if ($PA ['row'] ['pi_flexform']) {
-				$cfgArr = t3lib_div::xml2array ($PA ['row'] ['pi_flexform']);
+				$cfgArr = GeneralUtility::xml2array ($PA ['row'] ['pi_flexform']);
 			} else {
 				$cfgArr = array ();
 			}
 			
 			if (is_array ($cfgArr) && is_array ($cfgArr ['data'] ['s_Cat'] ['lDEF']) && is_array ($cfgArr ['data'] ['s_Cat'] ['lDEF'] ['calendarSelection'])) {
-				$selectedCalendars = t3lib_div::intExplode (',', $cfgArr ['data'] ['s_Cat'] ['lDEF'] ['calendarSelection'] ['vDEF']);
+				$selectedCalendars = GeneralUtility::intExplode (',', $cfgArr ['data'] ['s_Cat'] ['lDEF'] ['calendarSelection'] ['vDEF']);
 			}
 			$calendarMode = $cfgArr ['data'] ['s_Cat'] ['lDEF'] ['calendarMode'] ['vDEF'];
 		}
@@ -363,7 +368,7 @@ class tx_cal_treeview {
 		if ($row ['calendar_id'] == 0 && ! $isCategoryForm && ! $isPluginFlexform && ! $isBeUserForm && ! $isBeGroupsForm) {
 			
 			/* Get the records, with access restrictions and all that good stuff applied. */
-			require_once (t3lib_extMgm::extPath ('cal') . 'res/class.tx_cal_itemsProcFunc.php');
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/class.tx_cal_itemsProcFunc.php');
 			$tempCalRes = tx_cal_itemsProcFunc::getSQLResource ('tx_cal_calendar', '', '', '', '1');
 			if ($tempCalRes) {
 				while ($calendarRow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($tempCalRes)) {
@@ -407,7 +412,7 @@ class tx_cal_treeview {
 		// f ($config['itemsProcFunc']) $selItems = $this->pObj->procItems($selItems,$PA['fieldTSConfig']['itemsProcFunc.'],$config,$table,$row,$field);
 		
 		// Possibly remove some items:
-		$removeItems = t3lib_div::trimExplode (',', $PA ['fieldTSConfig'] ['removeItems'], 1);
+		$removeItems = GeneralUtility::trimExplode (',', $PA ['fieldTSConfig'] ['removeItems'], 1);
 		
 		foreach ($selItems as $tk => $p) {
 			if (in_array ($p [1], $removeItems)) {
@@ -418,7 +423,7 @@ class tx_cal_treeview {
 			
 			// Removing doktypes with no access:
 			if ($table . '.' . $field == 'pages.doktype') {
-				if (! ($GLOBALS ['BE_USER']->isAdmin () || t3lib_div::inList ($GLOBALS ['BE_USER']->groupData ['pagetypes_select'], $p [1]))) {
+				if (! ($GLOBALS ['BE_USER']->isAdmin () || GeneralUtility::inList ($GLOBALS ['BE_USER']->groupData ['pagetypes_select'], $p [1]))) {
 					unset ($selItems [$tk]);
 				}
 			}
@@ -440,7 +445,7 @@ class tx_cal_treeview {
 					$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['tx_cal']);
 				}
 				if ($confArr ['useStoragePid']) {
-					$TSconfig = t3lib_BEfunc::getTCEFORM_TSconfig ($table, $row);
+					$TSconfig = BackendUtility::getTCEFORM_TSconfig ($table, $row);
 					$storagePid = $TSconfig ['_STORAGE_PID'] ? $TSconfig ['_STORAGE_PID'] : 0;
 					$SPaddWhere = ' AND tx_cal_category.pid IN (' . $storagePid . ')';
 				}
@@ -463,7 +468,7 @@ class tx_cal_treeview {
 				if ($catres) {
 					while ($catrow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($catres)) {
 						if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {
-							$tempRow = t3lib_befunc::getRecordLocalization ('tx_cal_category', $catrow ['uid'], $PA ['row'] ['sys_language_uid'], '');
+							$tempRow = BackendUtility::getRecordLocalization ('tx_cal_category', $catrow ['uid'], $PA ['row'] ['sys_language_uid'], '');
 							if (is_array ($tempRow)) {
 								$catrow = $tempRow [0];
 							}
@@ -493,16 +498,16 @@ class tx_cal_treeview {
 				$item .= '<input type="hidden" name="' . $PA ['itemFormElName'] . '_mul" value="' . ($config ['multiple'] ? 1 : 0) . '" />';
 				
 				// Set max and min items:
-				if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-					$maxitems = t3lib_utility_Math::forceIntegerInRange ($config ['maxitems'], 0);
+				if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+					$maxitems = MathUtility::forceIntegerInRange ($config ['maxitems'], 0);
 					if (! $maxitems)
 						$maxitems = 100000;
-					$minitems = t3lib_utility_Math::forceIntegerInRange ($config ['minitems'], 0);
+					$minitems = MathUtility::forceIntegerInRange ($config ['minitems'], 0);
 				} else {
-					$maxitems = t3lib_div::forceIntegerInRange ($config ['maxitems'], 0);
+					$maxitems = GeneralUtility::forceIntegerInRange ($config ['maxitems'], 0);
 					if (! $maxitems)
 						$maxitems = 100000;
-					$minitems = t3lib_div::forceIntegerInRange ($config ['minitems'], 0);
+					$minitems = GeneralUtility::forceIntegerInRange ($config ['minitems'], 0);
 				}
 				// Register the required number of elements:
 				$this->pObj->requiredElements [$PA ['itemFormElName']] = array (
@@ -533,7 +538,7 @@ class tx_cal_treeview {
 						$be_userCalendars = array ();
 						
 						if ($row ['tx_cal_enable_accesscontroll'] && $row ['tx_cal_calendar']) {
-							$allowedCalendarIds = t3lib_div::intExplode (',', $row ['tx_cal_calendar']);
+							$allowedCalendarIds = GeneralUtility::intExplode (',', $row ['tx_cal_calendar']);
 							$allowedCalendarIds [] = 0;
 							$catWhere = ' AND tx_cal_category.calendar_id in (' . implode (',', $allowedCalendarIds) . ')';
 							$calWhere = ' AND tx_cal_calendar.uid in (' . implode (',', $allowedCalendarIds) . ')';
@@ -571,18 +576,18 @@ class tx_cal_treeview {
 							
 							if (! $GLOBALS ['BE_USER']->user ['admin']) {
 								if ($GLOBALS ['BE_USER']->user ['tx_cal_enable_accesscontroll']) {
-									$be_userCategories = t3lib_div::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_category'], 1);
-									$be_userCalendars = t3lib_div::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1);
+									$be_userCategories = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_category'], 1);
+									$be_userCalendars = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1);
 								}
 								if (is_array ($BE_USER->userGroups)) {
 									foreach ($BE_USER->userGroups as $gid => $group) {
 										if ($group ['tx_cal_enable_accesscontroll']) {
 											if ($group ['tx_cal_category']) {
-												$groupCategories = t3lib_div::trimExplode (',', $group ['tx_cal_category'], 1);
+												$groupCategories = GeneralUtility::trimExplode (',', $group ['tx_cal_category'], 1);
 												$be_userCategories = array_merge ($be_userCategories, $groupCategories);
 											}
 											if ($group ['tx_cal_calendar']) {
-												$groupCalendars = t3lib_div::trimExplode (',', $group ['tx_cal_calendar'], 1);
+												$groupCalendars = GeneralUtility::trimExplode (',', $group ['tx_cal_calendar'], 1);
 												$be_userCalendars = array_merge ($be_userCalendars, $groupCalendars);
 											}
 										}
@@ -604,23 +609,23 @@ class tx_cal_treeview {
 									0 
 							);
 							if ($GLOBALS ['BE_USER']->user ['tx_cal_category']) {
-								$be_userCategories = t3lib_div::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_category'], 1);
+								$be_userCategories = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_category'], 1);
 							}
 							$be_userCalendars = array (
 									0 
 							);
 							if ($GLOBALS ['BE_USER']->user ['tx_cal_calendar']) {
-								$be_userCalendars = t3lib_div::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1);
+								$be_userCalendars = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1);
 							}
 							if (is_array ($BE_USER->userGroups)) {
 								foreach ($BE_USER->userGroups as $gid => $group) {
 									if ($group ['tx_cal_enable_accesscontroll']) {
 										if ($group ['tx_cal_category']) {
-											$groupCategories = t3lib_div::trimExplode (',', $group ['tx_cal_category'], 1);
+											$groupCategories = GeneralUtility::trimExplode (',', $group ['tx_cal_category'], 1);
 											$be_userCategories = array_merge ($be_userCategories, $groupCategories);
 										}
 										if ($group ['tx_cal_calendar']) {
-											$groupCalendars = t3lib_div::trimExplode (',', $group ['tx_cal_calendar'], 1);
+											$groupCalendars = GeneralUtility::trimExplode (',', $group ['tx_cal_calendar'], 1);
 											$be_userCalendars = array_merge ($be_userCalendars, $groupCalendars);
 										}
 									}
@@ -647,13 +652,13 @@ class tx_cal_treeview {
 					}
 					$calWhere .= ' AND tx_cal_calendar.sys_language_uid IN (-1,0)';
 					$catWhere .= ' AND tx_cal_category.sys_language_uid IN (-1,0)';
-					if ($config ['treeViewClass'] and is_object ($treeViewObj = &t3lib_div::getUserObj ($config ['treeViewClass'], 'user_', false))) {
+					if ($config ['treeViewClass'] and is_object ($treeViewObj = &GeneralUtility::getUserObj ($config ['treeViewClass'], 'user_', false))) {
 					} else {
 						$treeViewObj = new tx_cal_tceFunc_selectTreeView();
 					}
 					
 					if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {
-						$enableFields = t3lib_befunc::BEenableFields ('tx_cal_category') . ' AND tx_cal_category.deleted = 0';
+						$enableFields = BackendUtility::BEenableFields ('tx_cal_category') . ' AND tx_cal_category.deleted = 0';
 					} else {
 						$enableFields = $this->cObj->enableFields ('tx_cal_category');
 					}
@@ -675,7 +680,7 @@ class tx_cal_treeview {
 					if ($catres) {
 						while ($catrow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($catres)) {
 							if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {
-								$tempRow = t3lib_befunc::getRecordLocalization ('tx_cal_category', $catrow ['uid'], $PA ['row'] ['sys_language_uid'], '');
+								$tempRow = BackendUtility::getRecordLocalization ('tx_cal_category', $catrow ['uid'], $PA ['row'] ['sys_language_uid'], '');
 								if (is_array ($tempRow)) {
 									$catrow = $tempRow [0];
 								}
@@ -710,7 +715,7 @@ class tx_cal_treeview {
 						$calWhere .= ' AND uid IN (' . implode (',', $be_userCalendars) . ')';
 					}
 					if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {
-						$enableFields = t3lib_befunc::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
+						$enableFields = BackendUtility::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
 					} else {
 						$enableFields = $this->cObj->enableFields ('tx_cal_calendar');
 					}
@@ -819,21 +824,21 @@ class tx_cal_treeview {
 					
 					$width = 280; // default width for the field with the category tree
 					if (intval ($confArr ['categoryTreeWidth'])) { // if a value is set in extConf take this one.
-						if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-							$width = t3lib_utility_Math::forceIntegerInRange ($confArr ['categoryTreeWidth'], 1, 600);
+						if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+							$width = MathUtility::forceIntegerInRange ($confArr ['categoryTreeWidth'], 1, 600);
 						} else {
-							$width = t3lib_div::forceIntegerInRange ($confArr ['categoryTreeWidth'], 1, 600);
+							$width = GeneralUtility::forceIntegerInRange ($confArr ['categoryTreeWidth'], 1, 600);
 						}
 					} elseif ($GLOBALS ['CLIENT'] ['BROWSER'] == 'msie') { // to suppress the unneeded horizontal scrollbar IE needs a width of at least 320px
 						$width = 320;
 					}
 					
-					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-						$config ['autoSizeMax'] = t3lib_utility_Math::forceIntegerInRange ($config ['autoSizeMax'], 0);
-						$height = $config ['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange ($treeItemC + 2, t3lib_utility_Math::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
+					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+						$config ['autoSizeMax'] = MathUtility::forceIntegerInRange ($config ['autoSizeMax'], 0);
+						$height = $config ['autoSizeMax'] ? MathUtility::forceIntegerInRange ($treeItemC + 2, MathUtility::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 					} else {
-						$config ['autoSizeMax'] = t3lib_div::forceIntegerInRange ($config ['autoSizeMax'], 0);
-						$height = $config ['autoSizeMax'] ? t3lib_div::forceIntegerInRange ($treeItemC + 2, t3lib_div::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
+						$config ['autoSizeMax'] = GeneralUtility::forceIntegerInRange ($config ['autoSizeMax'], 0);
+						$height = $config ['autoSizeMax'] ? GeneralUtility::forceIntegerInRange ($treeItemC + 2, GeneralUtility::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 					}
 					// hardcoded: 16 is the height of the icons
 					$height = $height * 16;
@@ -848,10 +853,10 @@ class tx_cal_treeview {
 					
 					// Put together the select form with selected elements:
 					$selector_itemListStyle = isset ($config ['itemListStyle']) ? ' style="' . htmlspecialchars ($config ['itemListStyle']) . '"' : ' style="' . $this->pObj->defaultMultipleSelectorStyle . '"';
-					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-						$size = $config ['autoSizeMax'] ? t3lib_utility_Math::forceIntegerInRange (count ($itemArray) + 1, t3lib_utility_Math::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
+					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+						$size = $config ['autoSizeMax'] ? MathUtility::forceIntegerInRange (count ($itemArray) + 1, MathUtility::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 					} else {
-						$size = $config ['autoSizeMax'] ? t3lib_div::forceIntegerInRange (count ($itemArray) + 1, t3lib_div::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
+						$size = $config ['autoSizeMax'] ? GeneralUtility::forceIntegerInRange (count ($itemArray) + 1, GeneralUtility::forceIntegerInRange ($size, 1), $config ['autoSizeMax']) : $size;
 					}
 					
 					$thumbnails = '<select style="width:150px;" name="' . $PA ['itemFormElName'] . '_sel"' . $this->pObj->insertDefStyle ('select') . ($size ? ' size="' . $size . '"' : '') . ' onchange="' . htmlspecialchars ($sOnChange) . '"' . $PA ['onFocus'] . $selector_itemListStyle . '>';
@@ -863,7 +868,7 @@ class tx_cal_treeview {
 				}
 				
 				// Perform modification of the selected items array:
-				$itemArray = t3lib_div::trimExplode (',', $PA ['itemFormElValue'], 1);
+				$itemArray = GeneralUtility::trimExplode (',', $PA ['itemFormElValue'], 1);
 				
 				foreach ($itemArray as $tk => $tv) {
 					$tvP = explode ('|', $tv, 2);
@@ -878,16 +883,16 @@ class tx_cal_treeview {
 				}
 				$sWidth = 150; // default width for the left field of the category select
 				if (intval ($confArr ['categorySelectedWidth'])) {
-					if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-						$sWidth = t3lib_utility_Math::forceIntegerInRange ($confArr ['categorySelectedWidth'], 1, 600);
+					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+						$sWidth = MathUtility::forceIntegerInRange ($confArr ['categorySelectedWidth'], 1, 600);
 					} else {
-						$sWidth = t3lib_div::forceIntegerInRange ($confArr ['categorySelectedWidth'], 1, 600);
+						$sWidth = GeneralUtility::forceIntegerInRange ($confArr ['categorySelectedWidth'], 1, 600);
 					}
 				}
-				if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+				if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
 					$params = array (
 							'size' => $size,
-							'autoSizeMax' => t3lib_utility_Math::forceIntegerInRange ($config ['autoSizeMax'], 0),
+							'autoSizeMax' => MathUtility::forceIntegerInRange ($config ['autoSizeMax'], 0),
 							// style' => isset($config['selectedListStyle']) ? ' style="'.htmlspecialchars($config['selectedListStyle']).'"' : ' style="'.$this->pObj->defaultMultipleSelectorStyle.'"',
 							'style' => ' style="width:' . $sWidth . 'px;"',
 							'dontShowMoveIcons' => ($maxitems <= 1),
@@ -903,7 +908,7 @@ class tx_cal_treeview {
 				} else {
 					$params = array (
 							'size' => $size,
-							'autoSizeMax' => t3lib_div::forceIntegerInRange ($config ['autoSizeMax'], 0),
+							'autoSizeMax' => GeneralUtility::forceIntegerInRange ($config ['autoSizeMax'], 0),
 							// style' => isset($config['selectedListStyle']) ? ' style="'.htmlspecialchars($config['selectedListStyle']).'"' : ' style="'.$this->pObj->defaultMultipleSelectorStyle.'"',
 							'style' => ' style="width:' . $sWidth . 'px;"',
 							'dontShowMoveIcons' => ($maxitems <= 1),
@@ -977,7 +982,7 @@ class tx_cal_treeview {
 			$res = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('uid', $fTable, '1=1' . $SPaddWhere . ' AND NOT deleted');
 			if ($res) {
 				while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($res)) {
-					if (! t3lib_div::inList ($allowedItemsList, $row ['uid'])) { // remove all allowed categories from the category result
+					if (! GeneralUtility::inList ($allowedItemsList, $row ['uid'])) { // remove all allowed categories from the category result
 						$itemArr [] = $row ['uid'];
 					}
 				}
@@ -989,7 +994,7 @@ class tx_cal_treeview {
 				$notAllowedCats = array ();
 				foreach ($catvals as $k) {
 					$c = explode ('|', $k);
-					if ($c [0] && ! t3lib_div::inList ($allowedItemsList, $c [0])) {
+					if ($c [0] && ! GeneralUtility::inList ($allowedItemsList, $c [0])) {
 						$notAllowedCats [] = '<p style="padding:0px;color:red;font-weight:bold;">- ' . $c [1] . ' <span class="typo3-dimmed"><em>[' . $c [0] . ']</em></span></p>';
 					}
 				}
@@ -1020,7 +1025,7 @@ class tx_cal_treeview {
 	function findRecursiveCategories($PA, $row, $table, $storagePid, $treeIds) {
 		$errorMsg = array ();
 		if ($table == 'tt_content' && $row ['CType'] == 'list' && $row ['list_type'] == 9) { // = tt_content element which inserts plugin tt_news
-			$cfgArr = t3lib_div::xml2array ($row ['pi_flexform']);
+			$cfgArr = GeneralUtility::xml2array ($row ['pi_flexform']);
 			if (is_array ($cfgArr) && is_array ($cfgArr ['data'] ['sDEF'] ['lDEF']) && $cfgArr ['data'] ['sDEF'] ['lDEF'] ['categorySelection']) {
 				$rcList = $this->compareCategoryVals ($treeIds, $cfgArr ['data'] ['sDEF'] ['lDEF'] ['categorySelection'] ['vDEF']);
 			}
@@ -1067,7 +1072,7 @@ class tx_cal_treeview {
 		$catvals = explode (',', $catString); // categories of the current record (left field)
 		foreach ($catvals as $k) {
 			$c = explode ('|', $k);
-			if (! t3lib_div::inList ($showncats, $c [0])) {
+			if (! GeneralUtility::inList ($showncats, $c [0])) {
 				$recursiveCategories [] = $c;
 			}
 		}
@@ -1103,7 +1108,7 @@ class tx_cal_treeview {
 				$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['tt_news']);
 			}
 			if ($confArr ['useStoragePid']) {
-				$TSconfig = t3lib_BEfunc::getTCEFORM_TSconfig ($table, $row);
+				$TSconfig = BackendUtility::getTCEFORM_TSconfig ($table, $row);
 				$storagePid = $TSconfig ['_STORAGE_PID'] ? $TSconfig ['_STORAGE_PID'] : 0;
 				$SPaddWhere = ' AND tt_news_cat.pid IN (' . $storagePid . ')';
 			}

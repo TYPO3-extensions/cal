@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Base model for the calendar organizer.
  * Provides basic model functionality that other
@@ -205,7 +207,7 @@ class tx_cal_location_service extends tx_cal_base_service {
 		$sharedUsers = Array ();
 		$values = $this->controller->piVars ['shared_ids'];
 		if (! is_array ($this->controller->piVars ['shared_ids'])) {
-			$values = t3lib_div::trimExplode (',', $this->controller->piVars ['shared_ids'], 1);
+			$values = GeneralUtility::trimExplode (',', $this->controller->piVars ['shared_ids'], 1);
 		}
 		foreach ($values as $entry) {
 			preg_match ('/(^[a-z])_([0-9]+)/', $entry, $idname);
@@ -225,15 +227,15 @@ class tx_cal_location_service extends tx_cal_base_service {
 				$insertFields ['shared_user_cnt'] = 0;
 			}
 		} else {
-			$userIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['location.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
+			$userIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['location.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['location.'] ['addFeUserToShared']) {
 				$userIdArray [] = $this->rightsObj->getUserId ();
 			}
 			
-			$groupIdArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['location.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+			$groupIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['location.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['location.'] ['addFeGroupToShared']) {
 				$groupIdArray = $this->rightsObj->getUserGroups ();
-				$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['location.'] ['addFeGroupToShared.'] ['ignore'], 1);
+				$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['location.'] ['addFeGroupToShared.'] ['ignore'], 1);
 				$groupIdArray = array_diff ($groupIdArray, $ignore);
 			}
 			if (! empty ($userIdArray) || ! empty ($groupIdArray)) {
@@ -332,7 +334,7 @@ class tx_cal_location_service extends tx_cal_base_service {
 			$insertFields ['link'] = strip_tags ($this->controller->piVars ['link']);
 		}
 		
-		if (t3lib_extMgm::isLoaded ('wec_map') && ($insertFields ['street'] != '' || $insertFields ['city'] != '' || $insertFields ['country_zone'] != '' || $insertFields ['zip'] != '' || $insertFields ['country'])) {
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map') && ($insertFields ['street'] != '' || $insertFields ['city'] != '' || $insertFields ['country_zone'] != '' || $insertFields ['zip'] != '' || $insertFields ['country'])) {
 			/* Geocode the address */
 			$lookupTable = new tx_wecmap_cache();
 			$latlong = $lookupTable->lookup ($insertFields ['street'], $insertFields ['city'], $insertFields ['country_zone'], $insertFields ['zip'], $insertFields ['country']);
@@ -368,7 +370,7 @@ class tx_cal_location_service extends tx_cal_base_service {
 		$sharedUsers = Array ();
 		$values = $this->controller->piVars ['shared_ids'];
 		if (! is_array ($this->controller->piVars ['shared_ids'])) {
-			$values = t3lib_div::trimExplode (',', $this->controller->piVars ['shared_ids'], 1);
+			$values = GeneralUtility::trimExplode (',', $this->controller->piVars ['shared_ids'], 1);
 		}
 		foreach ($values as $entry) {
 			preg_match ('/(^[a-z])_([0-9]+)/', $entry, $idname);
@@ -386,7 +388,7 @@ class tx_cal_location_service extends tx_cal_base_service {
 			if (count ($sharedUsers) > 0 && $sharedUsers [0] != 0) {
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_location_shared_user_mm', array_unique ($sharedUsers), $uid, 'fe_users');
 			}
-			$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['location.'] ['addFeGroupToShared.'] ['ignore'], 1);
+			$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['location.'] ['addFeGroupToShared.'] ['ignore'], 1);
 			$groupArray = array_diff ($sharedGroups, $ignore);
 			if (count ($groupArray) > 0 && $groupArray [0] != 0) {
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_location_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');
@@ -411,10 +413,10 @@ class tx_cal_location_service extends tx_cal_base_service {
 			
 			$groupArray = Array ();
 			if ($this->conf ['rights.'] ['create.'] ['location.'] ['fields.'] ['shared.'] ['defaultGroup'] != '') {
-				$groupArray = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['location.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+				$groupArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['location.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 				if ($this->conf ['rights.'] ['create.'] ['location.'] ['addFeGroupToShared']) {
 					$idArray = $this->rightsObj->getUserGroups ();
-					$ignore = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['location.'] ['addFeGroupToShared.'] ['ignore'], 1);
+					$ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['location.'] ['addFeGroupToShared.'] ['ignore'], 1);
 					$groupArray = array_diff ($idArray, $ignore);
 				}
 				$this->insertIdsIntoTableWithMMRelation ('tx_cal_location_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');

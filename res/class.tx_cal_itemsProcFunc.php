@@ -29,6 +29,11 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
+
 class tx_cal_itemsProcFunc {
 	var $pid;
 	
@@ -77,11 +82,11 @@ class tx_cal_itemsProcFunc {
 	function getUsersAndGroups($config) {
 		/* Add frontend groups */
 		$table = 'fe_groups';
-		$where = '1=1 ' . t3lib_BEfunc::BEenableFields ($table) . t3lib_BEfunc::deleteClause ($table);
+		$where = '1=1 ' . BackendUtility::BEenableFields ($table) . BackendUtility::deleteClause ($table);
 		$res = $GLOBALS ['TYPO3_DB']->exec_selectQuery ('*', $table, $where, '', 'title');
 		if ($res) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($res)) {
-				$label = t3lib_BEfunc::getRecordTitle ($table, $row);
+				$label = BackendUtility::getRecordTitle ($table, $row);
 				$value = - 1 * intval ($row ['uid']);
 				$config ['items'] [] = Array (
 						$label,
@@ -99,11 +104,11 @@ class tx_cal_itemsProcFunc {
 		
 		/* Add frontend users */
 		$table = 'fe_users';
-		$where = '1=1 ' . t3lib_BEfunc::BEenableFields ($table) . t3lib_BEfunc::deleteClause ($table);
+		$where = '1=1 ' . BackendUtility::BEenableFields ($table) . BackendUtility::deleteClause ($table);
 		$res = $GLOBALS ['TYPO3_DB']->exec_selectQuery ('*', $table, $where, '', 'name');
 		if ($res) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($res)) {
-				$label = t3lib_BEfunc::getRecordTitle ($table, $row);
+				$label = BackendUtility::getRecordTitle ($table, $row);
 				$value = $row ['uid'];
 				$config ['items'] [] = Array (
 						$label,
@@ -137,7 +142,7 @@ class tx_cal_itemsProcFunc {
 		
 		/* Loop over all records, adding them to the items array */
 		while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($res)) {
-			$label = t3lib_BEfunc::getRecordTitle ($table, $row);
+			$label = BackendUtility::getRecordTitle ($table, $row);
 			$value = $row ['uid'];
 			$params ['items'] [] = array (
 					$label,
@@ -186,8 +191,8 @@ class tx_cal_itemsProcFunc {
 				/* Get access control settings for the user */
 				if ($GLOBALS ['BE_USER']->user ['tx_cal_enable_accesscontroll']) {
 					$enableAccessControl = true;
-					$be_userCategories = t3lib_div::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_category'], 1);
-					$be_userCalendars = t3lib_div::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1);
+					$be_userCategories = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_category'], 1);
+					$be_userCalendars = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1);
 				}
 				
 				/* Get access control settings for all groups */
@@ -196,11 +201,11 @@ class tx_cal_itemsProcFunc {
 						if ($group ['tx_cal_enable_accesscontroll']) {
 							$enableAccessControl = true;
 							if ($group ['tx_cal_category']) {
-								$groupCategories = t3lib_div::trimExplode (',', $group ['tx_cal_category'], 1);
+								$groupCategories = GeneralUtility::trimExplode (',', $group ['tx_cal_category'], 1);
 								$be_userCategories = array_merge ($be_userCategories, $groupCategories);
 							}
 							if ($group ['tx_cal_calendar']) {
-								$groupCalendars = t3lib_div::trimExplode (',', $group ['tx_cal_calendar'], 1);
+								$groupCalendars = GeneralUtility::trimExplode (',', $group ['tx_cal_calendar'], 1);
 								$be_userCalendars = array_merge ($be_userCalendars, $groupCalendars);
 							}
 						}
@@ -226,7 +231,7 @@ class tx_cal_itemsProcFunc {
 				$pidlist = $cache [$GLOBALS ['BE_USER']->user ['uid']] ['pidlist'];
 			} else {
 				$mounts = $GLOBALS ['WEBMOUNTS'];
-				$qG = new t3lib_queryGenerator();
+				$qG = new \TYPO3\CMS\Core\Database\QueryGenerator();
 				$pidlist = '';
 				foreach ($mounts as $idx => $uid) {
 					$list = $qG->getTreeList ($uid, 99, 0, $GLOBALS ['BE_USER']->getPagePermsClause (1));
@@ -253,7 +258,7 @@ class tx_cal_itemsProcFunc {
 		}
 		
 		/* Construct the query */
-		$where = '1=1 ' . t3lib_BEfunc::BEenableFields ($table) . t3lib_BEfunc::deleteClause ($table) . $limitViewOnlyToPidsWhere . $accessControlWhere . $languageWhere . $where;
+		$where = '1=1 ' . BackendUtility::BEenableFields ($table) . BackendUtility::deleteClause ($table) . $limitViewOnlyToPidsWhere . $accessControlWhere . $languageWhere . $where;
 		$res = $GLOBALS ['TYPO3_DB']->exec_selectQuery ('*', $table, $where, $groupBy, $orderBy, $limit);
 		
 		return $res;

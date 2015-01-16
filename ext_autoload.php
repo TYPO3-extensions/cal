@@ -3,7 +3,7 @@
  * Register necessary class names with autoloader
  */
 // TODO: document necessity of providing autoloader information
-$extensionPath = t3lib_extMgm::extPath ('cal');
+$extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal');
 
 return array (
 		'tx_cal_controller' => $extensionPath . 'controller/class.tx_cal_controller.php',

@@ -221,7 +221,7 @@ class tx_cal_category_service extends tx_cal_base_service {
 				break;
 			case 1 : // how selected
 			case 3 :
-				$allowedCategories = t3lib_div::trimExplode (',', $this->cObj->stdWrap ($this->conf ['view.'] ['category'], $this->conf ['view.'] ['category.']), 1);
+				$allowedCategories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->cObj->stdWrap ($this->conf ['view.'] ['category'], $this->conf ['view.'] ['category.']), 1);
 				if (! empty ($allowedCategories)) {
 					$implodedAllowedCategories = implode (',', $allowedCategories);
 					$filterWhere = ' AND tx_cal_category.uid IN (' . $implodedAllowedCategories . ')';
@@ -245,7 +245,7 @@ class tx_cal_category_service extends tx_cal_base_service {
 				}
 				break;
 			case 2 : // xclude selected
-				$allowedCategories = t3lib_div::trimExplode (',', $this->cObj->stdWrap ($this->conf ['view.'] ['category'], $this->conf ['view.'] ['category.']), 1);
+				$allowedCategories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->cObj->stdWrap ($this->conf ['view.'] ['category'], $this->conf ['view.'] ['category.']), 1);
 				if (! empty ($allowedCategories)) {
 					$implodedAllowedCategories = implode (',', $allowedCategories);
 					$filterWhere = ' AND tx_cal_category.uid NOT IN (' . $implodedAllowedCategories . ')';
@@ -300,7 +300,7 @@ class tx_cal_category_service extends tx_cal_base_service {
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 		}
 		
-		$calendarsWithoutCategory = array_diff (t3lib_div::intExplode (',', $this->conf ['view.'] ['calendar']), array_unique ($calendarUids));
+		$calendarsWithoutCategory = array_diff (\TYPO3\CMS\Core\Utility\GeneralUtility::intExplode (',', $this->conf ['view.'] ['calendar']), array_unique ($calendarUids));
 		if (! empty ($calendarsWithoutCategory)) {
 			$select = 'tx_cal_calendar.*';
 			$table = 'tx_cal_calendar';
@@ -434,7 +434,7 @@ class tx_cal_category_service extends tx_cal_base_service {
 		$categoryArrayToBeFilled [] = $categoryMultiArray;
 	}
 	function addChildCategories(&$categoryArray) {
-		require_once (t3lib_extMgm::extPath ('cal') . 'res/class.tx_cal_treeview.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/class.tx_cal_treeview.php');
 		$tx_cal_treeview = new tx_cal_treeview ();
 		
 		$ids = array ();

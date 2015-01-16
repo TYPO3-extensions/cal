@@ -31,6 +31,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
 /**
  * This hook extends the tcemain class.
  * It catches changes on tx_cal_event
@@ -47,20 +49,20 @@ class tx_cal_tcemain_processcmdmap {
 				$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 				if ($result) {
 					while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-						require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-						require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
+						require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+						require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 						
 						/* If we're in a workspace, don't notify anyone about the event */
 						if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 							/* Check Page TSConfig for a preview page that we should use */
-							$pageTSConf = t3lib_befunc::getPagesTSconfig ($row ['pid']);
+							$pageTSConf = BackendUtility::getPagesTSconfig ($row ['pid']);
 							if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 								$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 							} else {
 								$pageIDForPlugin = $row ['pid'];
 							}
 							
-							$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+							$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 							if ($page ['doktype'] != 254) {
 								$tx_cal_api = new tx_cal_api();
 								$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
@@ -99,7 +101,7 @@ class tx_cal_tcemain_processcmdmap {
 
 				if ($command == 'delete') {
 					/* Using getRecordRaw rather than getRecord since the record has already been deleted. */
-					$calendarRow = t3lib_BEfunc::getRecordRaw ('tx_cal_calendar', 'uid=' . $id);
+					$calendarRow = BackendUtility::getRecordRaw ('tx_cal_calendar', 'uid=' . $id);
 					/* If the calendar is an External URL or ICS file, then we need to clean up */
 					if (($calendarRow ['type'] == 1) or ($calendarRow ['type'] == 2)) {
 						$service = new tx_cal_icalendar_service();
@@ -114,9 +116,9 @@ class tx_cal_tcemain_processcmdmap {
 					$newCalendarIds = $tce->copyMappingArray ['tx_cal_calendar'];
 					
 					// check if source of copy has a scheduler task attached
-					$calendarRow = t3lib_BEfunc::getRecord ('tx_cal_calendar', $id);
+					$calendarRow = BackendUtility::getRecord ('tx_cal_calendar', $id);
 					if ($calendarRow ['schedulerId'] > 0) {
-						$scheduler = new tx_scheduler ();
+						$scheduler = new \TYPO3\CMS\Scheduler\Scheduler ();
 						$service = new tx_cal_icalendar_service();
 						foreach ($newCalendarIds as $newCalendarId) {
 							$service->createSchedulerTask ($scheduler, 0, $newCalendarId);
@@ -133,20 +135,20 @@ class tx_cal_tcemain_processcmdmap {
 				$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 				if ($result) {
 					while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-						require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-						require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
+						require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+						require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 						
 						/* If we're in a workspace, don't notify anyone about the event */
 						if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 							/* Check Page TSConfig for a preview page that we should use */
-							$pageTSConf = t3lib_befunc::getPagesTSconfig ($row ['pid']);
+							$pageTSConf = BackendUtility::getPagesTSconfig ($row ['pid']);
 							if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 								$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 							} else {
 								$pageIDForPlugin = $row ['pid'];
 							}
 							
-							$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+							$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 							if ($page ['doktype'] != 254) {
 								$tx_cal_api = new tx_cal_api();
 								$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
@@ -176,20 +178,20 @@ class tx_cal_tcemain_processcmdmap {
 					$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 					if ($result) {
 						while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-							require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-							require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
+							require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+							require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 							
 							/* If we're in a workspace, don't notify anyone about the event */
 							if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 								/* Check Page TSConfig for a preview page that we should use */
-								$pageTSConf = t3lib_befunc::getPagesTSconfig ($row ['pid']);
+								$pageTSConf = BackendUtility::getPagesTSconfig ($row ['pid']);
 								if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 									$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 								} else {
 									$pageIDForPlugin = $row ['pid'];
 								}
 								
-								$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+								$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 								if ($page ['doktype'] != 254) {
 									
 									$tx_cal_api = new tx_cal_api();
@@ -215,10 +217,10 @@ class tx_cal_tcemain_processcmdmap {
 				break;
 			case 'tx_cal_fe_user_event_monitor_mm' :
 				if ($command == 'delete') {
-					$relationRecord = t3lib_BEfunc::getRecord ('tx_cal_fe_user_event_monitor_mm', $id);
+					$relationRecord = BackendUtility::getRecord ('tx_cal_fe_user_event_monitor_mm', $id);
 					// We have to delete the gabriel events BEFORE the tx_cal_events and
 					// its related tx_cal_fe_user_event_monitor_mm records are gone
-					require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+					require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 					/* Clean up any pending reminders for this event */
 					$reminderService = &tx_cal_functions::getReminderService ();
 					try {

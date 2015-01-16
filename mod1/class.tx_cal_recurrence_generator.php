@@ -203,7 +203,7 @@ class tx_cal_recurrence_generator {
 		$this->info = 'Done.';
 	}
 	function getEventService() {
-		require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_registry.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_registry.php');
 		$modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
 		if (! $modelObj) {
 			$tx_cal_api = new tx_cal_api();

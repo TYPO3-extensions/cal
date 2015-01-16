@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * A service which renders a form to create / edit a phpicalendar event.
  *
@@ -191,8 +193,8 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 		return tx_cal_functions::substituteMarkerArrayNotCached ($page, $sims, array (), array ());
 	}
 	function initTemplate() {
-		if (t3lib_extMgm::isLoaded ('rlmp_dateselectlib')) {
-			require_once (t3lib_extMgm::extPath ('rlmp_dateselectlib') . 'class.tx_rlmpdateselectlib.php');
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('rlmp_dateselectlib')) {
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('rlmp_dateselectlib') . 'class.tx_rlmpdateselectlib.php');
 			tx_rlmpdateselectlib::includeLib ();
 			
 			/* Only read date selector option if rlmp_dateselectlib is installed */
@@ -408,7 +410,7 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 	function getCalOrganizerMarker(& $template, & $sims, & $rems) {
 		$sims ['###CAL_ORGANIZER###'] = '';
 		if ($this->isAllowed ('cal_organizer')) {
-			$uidList = t3lib_div::trimExplode (',', $this->conf ['rights.'] [$this->isEditMode ? 'edit.' : 'create.'] ['event.'] ['fields.'] ['cal_organizer.'] ['allowedUids'], 1);
+			$uidList = GeneralUtility::trimExplode (',', $this->conf ['rights.'] [$this->isEditMode ? 'edit.' : 'create.'] ['event.'] ['fields.'] ['cal_organizer.'] ['allowedUids'], 1);
 			$default = $this->conf ['rights.'] [$this->isEditMode ? 'edit.' : 'create.'] ['event.'] ['fields.'] ['cal_organizer.'] ['default'];
 			// creating options for organizer
 			if ($this->object->getOrganizerId ()) {
@@ -468,7 +470,7 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 	function getCalLocationMarker(& $template, & $sims, & $rems) {
 		$sims ['###CAL_LOCATION###'] = '';
 		if ($this->isAllowed ('cal_location')) {
-			$uidList = t3lib_div::trimExplode (',', $this->conf ['rights.'] [$this->isEditMode ? 'edit.' : 'create.'] ['event.'] ['fields.'] ['cal_location.'] ['allowedUids'], 1);
+			$uidList = GeneralUtility::trimExplode (',', $this->conf ['rights.'] [$this->isEditMode ? 'edit.' : 'create.'] ['event.'] ['fields.'] ['cal_location.'] ['allowedUids'], 1);
 			$default = $this->conf ['rights.'] [$this->isEditMode ? 'edit.' : 'create.'] ['event.'] ['fields.'] ['cal_location.'] ['default'];
 			if ($this->object->getLocationId ()) {
 				$default = $this->object->getLocationId ();
@@ -528,14 +530,12 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 			$sims ['###DESCRIPTION###'] = $this->cObj->stdWrap ('<textarea name="tx_cal_controller[description]" id="cal_event_description">' . $this->object->getDescription () . '</textarea>', $this->conf ['view.'] [$this->conf ['view'] . '.'] ['description_stdWrap.']);
 			
 			/* Start setting the RTE markers */
-			if (t3lib_extMgm::isLoaded ('rtehtmlarea')) {
-				require_once (t3lib_extMgm::extPath ('rtehtmlarea') . 'pi2/class.tx_rtehtmlarea_pi2.php'); // RTE
-			} else if (t3lib_extMgm::isLoaded ('tinymce_rte')) {
-				require_once (t3lib_extMgm::extPath ('tinymce_rte') . 'pi1/class.tx_tinymce_rte_pi1.php'); // alternative RTE
+			if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('tinymce_rte')) {
+				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('tinymce_rte') . 'pi1/class.tx_tinymce_rte_pi1.php'); // alternative RTE
 			}
-			if (! $this->RTEObj && t3lib_extMgm::isLoaded ('rtehtmlarea')) {
-				$this->RTEObj = new tx_rtehtmlarea_pi2();
-			} else if (! $this->RTEObj && t3lib_extMgm::isLoaded ('tinymce_rte')) {
+			if (! $this->RTEObj && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('rtehtmlarea')) {
+				$this->RTEObj = new \TYPO3\CMS\Rtehtmlarea\Controller\FrontendRteController();
+			} else if (! $this->RTEObj && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('tinymce_rte')) {
 				$this->RTEObj = new tx_tinymce_rte_pi1(); // load alternative RTE
 			}
 			if (is_object ($this->RTEObj) && $this->RTEObj->isAvailable () && $this->conf ['rights.'] [$this->isEditMode ? 'edit.' : 'create.'] ['event.'] ['enableRTE']) {
@@ -690,29 +690,29 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 		$sims ['###NOTIFY###'] = '';
 		if ($this->isAllowed ('notify')) {
 			$cal_notify_user = '';
-			$allowedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
+			$allowedUsers = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
 			$selectedUsersPlusOffset = $this->object->getNotifyUserIds ();
 			$selectedUsers = Array ();
 			$userOffsetIndex = Array ();
 			foreach ($selectedUsersPlusOffset as $userPlusOffset) {
-				$userOffsetArray = t3lib_div::trimExplode ('|', $userPlusOffset, 1);
+				$userOffsetArray = GeneralUtility::trimExplode ('|', $userPlusOffset, 1);
 				$selectedUsers [] = $userOffsetArray [0];
 				$userOffsetIndex [$userOffsetArray [0]] = $userOffsetArray [1] == '' ? $this->conf ['view.'] ['event.'] ['remind.'] ['time'] : $userOffsetArray [1];
 			}
 			if (empty ($selectedUsers) && ! $this->isEditMode) {
-				$selectedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
+				$selectedUsers = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
 			}
 			$selectedUsersList = implode (',', $selectedUsers);
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_users', 'pid in (' . $this->conf ['pidList'] . ')' . $this->cObj->enableFields ('fe_users'));
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				if (! empty ($allowedUsers) && t3lib_div::inList ($this->conf ['rights.'] ['allowedUsers'], $row ['uid'])) {
-					if (t3lib_div::inList ($selectedUsersList, $row ['uid'])) {
+				if (! empty ($allowedUsers) && GeneralUtility::inList ($this->conf ['rights.'] ['allowedUsers'], $row ['uid'])) {
+					if (GeneralUtility::inList ($selectedUsersList, $row ['uid'])) {
 						$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '" checked="checked" name="tx_cal_controller[notify][]" />' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $userOffsetIndex [$row ['uid']] ? $userOffsetIndex [$row ['uid']] : $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
 					} else {
 						$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '"  name="tx_cal_controller[notify][]"/>' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
 					}
 				} else if (empty ($allowedUsers)) {
-					if (t3lib_div::inList ($selectedUsersList, $row ['uid'])) {
+					if (GeneralUtility::inList ($selectedUsersList, $row ['uid'])) {
 						$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '" checked="checked" name="tx_cal_controller[notify][]" />' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $userOffsetIndex [$row ['uid']] ? $userOffsetIndex [$row ['uid']] : $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
 					} else {
 						$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '"  name="tx_cal_controller[notify][]"/>' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
@@ -720,17 +720,17 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 				}
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
-			$allowedGroups = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedGroups'], 1);
+			$allowedGroups = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedGroups'], 1);
 			$selectedGroupsPlusOffset = $this->object->getNotifyGroupIds ();
 			$selectedGroups = Array ();
 			$groupOffsetIndex = Array ();
 			foreach ($selectedGroupsPlusOffset as $groupPlusOffset) {
-				$groupOffsetArray = t3lib_div::trimExplode ('|', $groupPlusOffset, 1);
+				$groupOffsetArray = GeneralUtility::trimExplode ('|', $groupPlusOffset, 1);
 				$selectedGroups [] = $groupOffsetArray [0];
 				$groupOffsetIndex [$groupOffsetArray [0]] = $groupOffsetArray [1] == '' ? $this->conf ['view.'] ['event.'] ['remind.'] ['time'] : $groupOffsetArray [1];
 			}
 			if (empty ($selectedGroups) && ! $this->isEditMode) {
-				$selectedGroups = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
+				$selectedGroups = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
 			}
 			$selectedGroupsList = implode (',', $selectedGroups);
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_groups', 'pid in (' . $this->conf ['pidList'] . ')' . $this->cObj->enableFields ('fe_groups'));
@@ -859,7 +859,7 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 		$sims ['###ATTENDEE###'] = '';
 		if ($this->isAllowed ('attendee')) {
 			$attendee = '';
-			$allowedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
+			$allowedUsers = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
 			$selectedUsers = Array (
 					0 
 			);
@@ -881,15 +881,15 @@ class tx_cal_create_event_view extends tx_cal_fe_editing_base_view {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
 				$name = $this->getFeUserDisplayName ($row);
 				$attendee .= '<span>';
-				if (! empty ($allowedUsers) && t3lib_div::inList ($this->conf ['rights.'] ['allowedUsers'], $row ['uid'])) {
+				if (! empty ($allowedUsers) && GeneralUtility::inList ($this->conf ['rights.'] ['allowedUsers'], $row ['uid'])) {
 					
-					if (t3lib_div::inList ($selectedUsersList, $row ['uid'])) {
+					if (GeneralUtility::inList ($selectedUsersList, $row ['uid'])) {
 						$attendee .= '<input type="checkbox" value="u_' . $row ['uid'] . '" checked="checked" name="tx_cal_controller[attendee][]" />' . $name;
 					} else {
 						$attendee .= '<input type="checkbox" value="u_' . $row ['uid'] . '"  name="tx_cal_controller[attendee][]"/>' . $name;
 					}
 				} else if (empty ($allowedUsers)) {
-					if (t3lib_div::inList ($selectedUsersList, $row ['uid'])) {
+					if (GeneralUtility::inList ($selectedUsersList, $row ['uid'])) {
 						$attendee .= '<input type="checkbox" value="u_' . $row ['uid'] . '" checked="checked" name="tx_cal_controller[attendee][]" />' . $name . $this->getAttendeeOptions ('u_' . $row ['uid'], $attendeeAttendance [$row ['uid']]);
 					} else {
 						$attendee .= '<input type="checkbox" value="u_' . $row ['uid'] . '"  name="tx_cal_controller[attendee][]"/>' . $name . $this->getAttendeeOptions ('u_' . $row ['uid'], $attendeeAttendance [$row ['uid']]);

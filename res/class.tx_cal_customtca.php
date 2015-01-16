@@ -51,7 +51,7 @@ class tx_cal_customtca {
 	var $rdateValues;
 	function init($PA, $fobj) {
 		global $LANG;
-		$LANG->includeLLFile (t3lib_extMgm::extPath ('cal') . 'locallang_db.xml');
+		$LANG->includeLLFile (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'locallang_db.xml');
 		
 		$this->frequency = $PA ['row'] ['freq'];
 		$this->uid = $PA ['row'] ['uid'];
@@ -59,13 +59,13 @@ class tx_cal_customtca {
 		$this->table = $PA ['table'];
 		$this->rdateType = $this->row ['rdate_type'];
 		$this->rdate = $this->row ['rdate'];
-		$this->rdateValues = t3lib_div::trimExplode (',', $this->row ['rdate'], 1);
+		$this->rdateValues = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->row ['rdate'], 1);
 		
-		$this->garbageIcon = '<img' . t3lib_iconWorks::skinImg ($GLOBALS ['BACK_PATH'], 'gfx/garbage.gif') . ' title="' . $LANG->getLL ('tx_cal_event.remove_recurrence') . '" alt="' . $LANG->getLL ('tx_cal_event.delete_recurrence') . '" />';
-		$this->newIcon = '<img' . t3lib_iconWorks::skinImg ($GLOBALS ['BACK_PATH'], 'gfx/new_el.gif') . ' title="' . $LANG->getLL ('tx_cal_event.add_recurrence') . '" alt="' . $LANG->getLL ('tx_cal_event.add_recurrence') . '" />';
+		$this->garbageIcon = '<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg ($GLOBALS ['BACK_PATH'], 'gfx/garbage.gif') . ' title="' . $LANG->getLL ('tx_cal_event.remove_recurrence') . '" alt="' . $LANG->getLL ('tx_cal_event.delete_recurrence') . '" />';
+		$this->newIcon = '<img' . \TYPO3\CMS\Backend\Utility\IconUtility::skinImg ($GLOBALS ['BACK_PATH'], 'gfx/new_el.gif') . ' title="' . $LANG->getLL ('tx_cal_event.add_recurrence') . '" alt="' . $LANG->getLL ('tx_cal_event.add_recurrence') . '" />';
 		
 		$this->commonJS = '';
-		$this->commonJS .= '<script src="' . t3lib_extMgm::extRelPath ('cal') . 'res/recurui.js" type="text/javascript"></script>' . chr (10) . '<script src="' . t3lib_extMgm::extRelPath ('cal') . 'res/url.js" type="text/javascript"></script>';
+		$this->commonJS .= '<script src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'res/recurui.js" type="text/javascript"></script>' . chr (10) . '<script src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'res/url.js" type="text/javascript"></script>';
 		
 		$this->everyMonthText = $LANG->getLL ('tx_cal_event.recurs_every_month');
 		$this->selectedMonthText = $LANG->getLL ('tx_cal_event.recurs_selected_months');
@@ -79,7 +79,7 @@ class tx_cal_customtca {
 	}
 	function getWeekStartDay($PA) {
 		$pageID = $PA ['row'] ['pid'];
-		$tsConfig = t3lib_BEfunc::getModTSconfig ($pageID, 'options.tx_cal_controller.weekStartDay');
+		$tsConfig = \TYPO3\CMS\Backend\Utility\BackendUtility::getModTSconfig ($pageID, 'options.tx_cal_controller.weekStartDay');
 		$weekStartDay = strtolower ($tsConfig ['value']);
 		
 		switch ($weekStartDay) {
@@ -468,15 +468,15 @@ class tx_cal_customtca {
 		$value = $PA ['row'] [$part . 'style'];
 		$html = '<div class="row">';
 		
-		$pageTSConf = t3lib_befunc::getPagesTSconfig ($pid);
+		$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($pid);
 		if ($pageTSConf ['options.'] ['tx_cal_controller.'] [$part . 'Styles']) {
 			$html .= '<select class="select" name="data[' . $table . '][' . $PA ['row'] ['uid'] . '][' . $part . 'style]">';
 			$html .= '<option value=""></option>';
 			
-			$options = t3lib_div::trimExplode (',', $pageTSConf ['options.'] ['tx_cal_controller.'] [$part . 'Styles'], 1);
+			$options = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $pageTSConf ['options.'] ['tx_cal_controller.'] [$part . 'Styles'], 1);
 			
 			foreach ($options as $option) {
-				$nameAndColor = t3lib_div::trimExplode ('=', $option, 1);
+				$nameAndColor = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode ('=', $option, 1);
 				$selected = '';
 				if ($value == $nameAndColor [0]) {
 					$selected = ' selected="selected"';

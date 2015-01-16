@@ -2,11 +2,11 @@
 if (! defined ('TYPO3_MODE'))
 	die ('Access denied.');
 
-t3lib_extMgm::addPItoST43 ($_EXTKEY, 'controller/class.tx_cal_controller.php', '_controller', 'list_type', 1);
-t3lib_extMgm::addUserTSConfig ('options.saveDocNew.tx_cal_event=1');
-t3lib_extMgm::addUserTSConfig ('options.saveDocNew.tx_cal_exception_event=1');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43 ($_EXTKEY, 'controller/class.tx_cal_controller.php', '_controller', 'list_type', 1);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig ('options.saveDocNew.tx_cal_event=1');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig ('options.saveDocNew.tx_cal_exception_event=1');
 
-t3lib_extMgm::addTypoScript ($_EXTKEY, 'setup', '
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript ($_EXTKEY, 'setup', '
 	tt_content.shortcut.20.conf.tx_cal_event = < plugin.tx_cal_controller
 	tt_content.shortcut.20.conf.tx_cal_event {
 		displayCurrentRecord = 1
@@ -17,7 +17,7 @@ t3lib_extMgm::addTypoScript ($_EXTKEY, 'setup', '
 	}
 ', 43);
 
-t3lib_extMgm::addPageTSConfig ('options.tx_cal_controller.headerStyles = default_catheader=#557CA3,green_catheader=#53A062,orange_catheader=#E84F25,pink_catheader=#B257A2,red_catheader=#D42020,yellow_catheader=#B88F0B,grey_catheader=#73738C
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig ('options.tx_cal_controller.headerStyles = default_catheader=#557CA3,green_catheader=#53A062,orange_catheader=#E84F25,pink_catheader=#B257A2,red_catheader=#D42020,yellow_catheader=#B88F0B,grey_catheader=#73738C
 	 options.tx_cal_controller.bodyStyles = default_catbody=#6699CC,green_catbody=#4FC464,orange_catbody=#FF6D3B,pink_catbody=#EA62D4,red_catbody=#FF5E56,yellow_catbody=#CCB21F,grey_catbody=#9292A1');
 
 $TYPO3_CONF_VARS ['FE'] ['eID_include'] ['cal_ajax'] = 'EXT:cal/service/ajax.php';
@@ -37,7 +37,7 @@ $TYPO3_CONF_VARS ['FE'] ['eID_include'] ['cal_ajax'] = 'EXT:cal/service/ajax.php
  */
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_fnb' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_fnb' /* sv key */,
 	array (
 		'title' => 'Cal Free and Busy Model',
 		'description' => '',
@@ -50,7 +50,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_fn
 		'className' => 'tx_cal_fnbevent_service' 
 ));
 
-t3lib_extMgm::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_phpicalendar' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_phpicalendar' /* sv key */,
 	array (
 		'title' => 'Cal PHPiCalendar Model',
 		'description' => '',
@@ -67,7 +67,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_ph
 $confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 
 /* Cal Todo Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_todo' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_todo' /* sv key */,
 	array (
 		'title' => 'Cal Todo Model',
 		'description' => '',
@@ -80,7 +80,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_to
 		'className' => 'tx_cal_todo_service' 
 ));
 
-t3lib_extMgm::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_nearby' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_nearby' /* sv key */,
 	array (
 		'title' => 'Cal Nearby Model',
 		'description' => '',
@@ -94,7 +94,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_event_model' /* sv type */,  'tx_cal_ne
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_partner_main' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_partner_main' /* sv key */,
 	array (
 		'title' => 'Cal Organizer Model',
 		'description' => '',
@@ -108,7 +108,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_pa
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_cal_organizer' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_cal_organizer' /* sv key */,
 	array (
 		'title' => 'Cal Organizer Model',
 		'description' => '',
@@ -122,7 +122,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_ca
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_tt_address' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_tt_address' /* sv key */,
 	array (
 		'title' => 'Cal Organizer Model',
 		'description' => '',
@@ -136,7 +136,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_tt
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_feuser' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_feuser' /* sv key */,
 	array (
 		'title' => 'Frontend User Organizer Model',
 		'description' => '',
@@ -150,7 +150,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_organizer_model' /* sv type */,  'tx_fe
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_partner_main' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_partner_main' /* sv key */,
 	array (
 		'title' => 'Cal Location Model',
 		'description' => '',
@@ -164,7 +164,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_par
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_tt_address' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_tt_address' /* sv key */,
 	array (
 		'title' => 'Cal Location Model',
 		'description' => '',
@@ -178,7 +178,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_tt_
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_cal_location' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_cal_location' /* sv key */,
 	array (
 		'title' => 'Cal Location Model',
 		'description' => '',
@@ -192,7 +192,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_location_model' /* sv type */,  'tx_cal
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_attendee_model' /* sv type */,  'tx_cal_attendee' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_attendee_model' /* sv type */,  'tx_cal_attendee' /* sv key */,
 	array (
 		'title' => 'Cal Attendee Model',
 		'description' => '',
@@ -206,7 +206,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_attendee_model' /* sv type */,  'tx_cal
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_calendar_model' /* sv type */,  'tx_cal_calendar' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_calendar_model' /* sv type */,  'tx_cal_calendar' /* sv key */,
 	array (
 		'title' => 'Cal Calendar Model',
 		'description' => '',
@@ -220,7 +220,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_calendar_model' /* sv type */,  'tx_cal
 ));
 
 /* Cal Example Concrete Model */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_category_model' /* sv type */,  'tx_cal_category' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_category_model' /* sv type */,  'tx_cal_category' /* sv key */,
 	array (
 		'title' => 'Cal Category Model',
 		'description' => '',
@@ -234,7 +234,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_category_model' /* sv type */,  'tx_cal
 ));
 
 /* Default day View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_event' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_event' /* sv key */,
 	array (
 		'title' => 'Default Event View',
 		'description' => '',
@@ -248,7 +248,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_event
 ));
 
 /* Default day View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_day' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_day' /* sv key */,
 	array (
 		'title' => 'Default Day View',
 		'description' => '',
@@ -262,7 +262,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_day' 
 ));
 
 /* Default week View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_week' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_week' /* sv key */,
 	array (
 		'title' => 'Default Week View',
 		'description' => '',
@@ -276,7 +276,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_week'
 ));
 
 /* Default month View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_month' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_month' /* sv key */,
 	array (
 		'title' => 'Default Month View',
 		'description' => '',
@@ -290,7 +290,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_month
 ));
 
 /* Default year View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_year' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_year' /* sv key */,
 	array (
 		'title' => 'Default Year View',
 		'description' => '',
@@ -304,7 +304,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_year'
 ));
 
 /* Default list View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_list' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_list' /* sv key */,
 	array (
 		'title' => 'Default List View',
 		'description' => '',
@@ -318,7 +318,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_list'
 ));
 
 /* Default ics View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_ics' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_ics' /* sv key */,
 	array (
 		'title' => 'Default Ics View',
 		'description' => '',
@@ -332,7 +332,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_ics' 
 ));
 
 /* Default icslist View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_icslist' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_icslist' /* sv key */,
 	array (
 		'title' => 'Default Ics List View',
 		'description' => '',
@@ -346,7 +346,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_icsli
 ));
 
 /* Default rss View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_rss' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_rss' /* sv key */,
 	array (
 		'title' => 'Default Rss View',
 		'description' => '',
@@ -360,7 +360,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_rss' 
 ));
 
 /* Default admin View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_admin' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_admin' /* sv key */,
 	array (
 		'title' => 'Default Admin View',
 		'description' => '',
@@ -374,7 +374,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_admin
 ));
 
 /* Default location View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_location' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_location' /* sv key */,
 	array (
 		'title' => 'Default Location View',
 		'description' => '',
@@ -388,7 +388,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_locat
 ));
 
 /* Default organizer View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_organizer' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_organizer' /* sv key */,
 	array (
 		'title' => 'Default Organizer View',
 		'description' => '',
@@ -402,7 +402,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_organ
 ));
 
 /* Default create event View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_event' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_event' /* sv key */,
 	array (
 		'title' => 'Default Create Event View',
 		'description' => '',
@@ -416,7 +416,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_creat
 ));
 
 /* Default confirm event View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_event' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_event' /* sv key */,
 	array (
 		'title' => 'Default Confirm Event View',
 		'description' => '',
@@ -430,7 +430,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confi
 ));
 
 /* Default delete event View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_event' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_event' /* sv key */,
 	array (
 		'title' => 'Default Delete Event View',
 		'description' => '',
@@ -444,7 +444,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delet
 ));
 
 /* Default remove event service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_event' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_event' /* sv key */,
 	array (
 		'title' => 'Default Remove Event View',
 		'description' => '',
@@ -458,7 +458,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remov
 ));
 
 /* Default create location View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_location' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_location' /* sv key */,
 	array (
 		'title' => 'Default Create Location View',
 		'description' => '',
@@ -472,7 +472,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_creat
 ));
 
 /* Default confirm location View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_location' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_location' /* sv key */,
 	array (
 		'title' => 'Default Confirm Location View',
 		'description' => '',
@@ -486,7 +486,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confi
 ));
 
 /* Default delete location View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_location' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_location' /* sv key */,
 	array (
 		'title' => 'Default Delete Location View',
 		'description' => '',
@@ -500,7 +500,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delet
 ));
 
 /* Default remove location service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_location' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_location' /* sv key */,
 	array (
 		'title' => 'Default Remove Location View',
 		'description' => '',
@@ -514,7 +514,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remov
 ));
 
 /* Default create organizer View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_organizer' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_organizer' /* sv key */,
 	array (
 		'title' => 'Default Create Organizer View',
 		'description' => '',
@@ -528,7 +528,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_creat
 ));
 
 /* Default confirm organizer View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_organizer' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_organizer' /* sv key */,
 	array (
 		'title' => 'Default Confirm Organizer View',
 		'description' => '',
@@ -542,7 +542,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confi
 ));
 
 /* Default delete organizer View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_organizer' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_organizer' /* sv key */,
 	array (
 		'title' => 'Default Delete Organizer View',
 		'description' => '',
@@ -556,7 +556,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delet
 ));
 
 /* Default remove organizer service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_organizer' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_organizer' /* sv key */,
 	array (
 		'title' => 'Default Remove Organizer View',
 		'description' => '',
@@ -570,7 +570,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remov
 ));
 
 /* Default create calendar View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_calendar' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_calendar' /* sv key */,
 	array (
 		'title' => 'Default Create Location View',
 		'description' => '',
@@ -584,7 +584,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_creat
 ));
 
 /* Default confirm calendar View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_calendar' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_calendar' /* sv key */,
 	array (
 		'title' => 'Default Confirm Location View',
 		'description' => '',
@@ -598,7 +598,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confi
 ));
 
 /* Default delete calendar View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_calendar' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_calendar' /* sv key */,
 	array (
 		'title' => 'Default Delete Location View',
 		'description' => '',
@@ -612,7 +612,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delet
 ));
 
 /* Default remove calendar service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_calendar' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_calendar' /* sv key */,
 	array (
 		'title' => 'Default Remove Location View',
 		'description' => '',
@@ -626,7 +626,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remov
 ));
 
 /* Default create category View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_category' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_create_category' /* sv key */,
 	array (
 		'title' => 'Default Create Location View',
 		'description' => '',
@@ -640,7 +640,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_creat
 ));
 
 /* Default confirm category View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_category' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confirm_category' /* sv key */,
 	array (
 		'title' => 'Default Confirm Location View',
 		'description' => '',
@@ -654,7 +654,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_confi
 ));
 
 /* Default delete category View */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_category' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delete_category' /* sv key */,
 	array (
 		'title' => 'Default Delete Location View',
 		'description' => '',
@@ -668,7 +668,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_delet
 ));
 
 /* Default remove category service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_category' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remove_category' /* sv key */,
 	array (
 		'title' => 'Default Remove Location View',
 		'description' => '',
@@ -682,7 +682,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remov
 ));
 
 /* Default search service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searchall' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searchall' /* sv key */,
 	array (
 		'title' => 'Default Search View',
 		'description' => '',
@@ -696,7 +696,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searc
 ));
 
 /* Default search service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searchevent' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searchevent' /* sv key */,
 	array (
 		'title' => 'Default Search View',
 		'description' => '',
@@ -710,7 +710,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searc
 ));
 
 /* Default search service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searchlocation' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searchlocation' /* sv key */,
 	array (
 		'title' => 'Default Search View',
 		'description' => '',
@@ -724,7 +724,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searc
 ));
 
 /* Default search service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searchorganizer' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searchorganizer' /* sv key */,
 	array (
 		'title' => 'Default Search View',
 		'description' => '',
@@ -738,7 +738,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_searc
 ));
 
 /* Default notification service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_notification' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_notification' /* sv key */,
 	array (
 		'title' => 'Default notification service',
 		'description' => '',
@@ -752,7 +752,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_notif
 ));
 
 /* Default reminder service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_reminder' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_reminder' /* sv key */,
 	array (
 		'title' => 'Default reminder service',
 		'description' => '',
@@ -766,7 +766,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_remin
 ));
 
 /* Default rights service */
-t3lib_extMgm::addService ($_EXTKEY, 'cal_rights_model' /* sv type */,  'tx_cal_rights' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_rights_model' /* sv type */,  'tx_cal_rights' /* sv key */,
 	array (
 		'title' => 'Default rights service',
 		'description' => '',
@@ -779,7 +779,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_rights_model' /* sv type */,  'tx_cal_r
 		'className' => 'tx_cal_rights_service' 
 ));
 // Example for a module
-t3lib_extMgm::addService ($_EXTKEY, 'TEST' /* sv type */,  'tx_cal_module' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'TEST' /* sv type */,  'tx_cal_module' /* sv key */,
 	array (
 		'title' => 'Test module',
 		'description' => '',
@@ -793,7 +793,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'TEST' /* sv type */,  'tx_cal_module' /* sv
 ));
 
 // Example for a module
-t3lib_extMgm::addService ($_EXTKEY, 'LOCATIONLOADER' /* sv type */,  'tx_cal_module' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'LOCATIONLOADER' /* sv type */,  'tx_cal_module' /* sv key */,
 	array (
 		'title' => 'Location loader module',
 		'description' => '',
@@ -806,7 +806,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'LOCATIONLOADER' /* sv type */,  'tx_cal_mod
 		'className' => 'module_locationloader' 
 ));
 
-t3lib_extMgm::addService ($_EXTKEY, 'ORGANIZERLOADER' /* sv type */,  'tx_cal_module' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'ORGANIZERLOADER' /* sv type */,  'tx_cal_module' /* sv key */,
 	array (
 		'title' => 'Organizer loader module',
 		'description' => '',
@@ -819,7 +819,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'ORGANIZERLOADER' /* sv type */,  'tx_cal_mo
 		'className' => 'module_organizerloader' 
 ));
 
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_cal_subscription' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_cal_subscription' /* sv key */,
 	array (
 		'title' => 'Subscription Manager',
 		'description' => '',
@@ -832,7 +832,7 @@ t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_cal_subscript
 		'className' => 'tx_cal_subscription_manager_view' 
 ));
 
-t3lib_extMgm::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_cal_meeting' /* sv key */,
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_cal_meeting' /* sv key */,
 	array (
 		'title' => 'Meeting Manager',
 		'description' => '',
@@ -868,7 +868,7 @@ if (! isset ($confArr ['enableRealURLAutoConfiguration']) || $confArr ['enableRe
 	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['ext/realurl/class.tx_realurl_autoconfgen.php'] ['extensionConfiguration'] ['cal'] = 'EXT:cal/hooks/class.tx_cal_realurl.php:&tx_cal_realurl->addRealURLConfig';
 }
 
-if (t3lib_extMgm::isLoaded ('gabriel')) {
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('gabriel')) {
 	$GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['gabriel'] ['include'] [$_EXTKEY] = array (
 			'cron/class.tx_cal_calendar_cron.php',
 			'cron/class.tx_cal_reminder_cron.php' 
@@ -876,7 +876,7 @@ if (t3lib_extMgm::isLoaded ('gabriel')) {
 }
 
 /* defining stuff for scheduler */
-if (t3lib_div::inList ($TYPO3_CONF_VARS ['EXT'] ['extList'], 'scheduler')) {
+if (\TYPO3\CMS\Core\Utility\GeneralUtility::inList ($TYPO3_CONF_VARS ['EXT'] ['extList'], 'scheduler')) {
 	// find type of ext and determine paths
 	// add these to the global TYPO3_LOADED_EXT
 	$temp_extKey = 'scheduler';
@@ -915,21 +915,10 @@ if (t3lib_div::inList ($TYPO3_CONF_VARS ['EXT'] ['extList'], 'scheduler')) {
 			'description' => 'cal reminder scheduler integration',
 			'additionalFields' => '' 
 	);
-	if (TYPO3_MODE == 'FE') {
-		$extensionPath = t3lib_extMgm::extPath ('scheduler');
-		$requiredClasses = array (
-				'tx_scheduler' => $extensionPath . 'class.tx_scheduler.php',
-				'tx_scheduler_execution' => $extensionPath . 'class.tx_scheduler_execution.php',
-				'tx_scheduler_task' => $extensionPath . 'class.tx_scheduler_task.php' 
-		);
-		foreach ($requiredClasses as $key => $value) {
-			require_once ($value);
-		}
-	}
 }
 
 /* Include a custom userFunc for checking whether we're in frontend editing mode */
-require_once (t3lib_extMgm::extPath ($_EXTKEY) . 'res/class.tx_cal_isCalNotAllowedToBeCached.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'res/class.tx_cal_isCalNotAllowedToBeCached.php');
 
 // caching framework configuration
 // Register cache 'tx_cal_cache'
@@ -939,12 +928,12 @@ if (! is_array ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['t
 // Define string frontend as default frontend, this must be set with TYPO3 4.5 and below
 // and overrides the default variable frontend of 4.6
 if (! isset ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['frontend'])) {
-	$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['frontend'] = 't3lib_cache_frontend_StringFrontend';
+	$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['frontend'] = 'TYPO3\\CMS\\Core\\Cache\\Frontend\\StringFrontend';
 }
-if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) < '4006000') {
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < '4006000') {
 	// Define database backend as backend for 4.5 and below (default in 4.6)
 	if (! isset ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'])) {
-		$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'] = 't3lib_cache_backend_DbBackend';
+		$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'] = 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend';
 	}
 	// Define data and tags table for 4.5 and below (obsolete in 4.6)
 	if (! isset ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'])) {

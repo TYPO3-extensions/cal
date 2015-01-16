@@ -28,6 +28,8 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * TODO
  *
@@ -49,7 +51,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 
 	function _init(&$master_array){
 		#store cs_convert-object
-		$this->cs_convert=new t3lib_cs();
+		$this->cs_convert=new \TYPO3\CMS\Core\Charset\CharsetConverter();
 		$this->master_array = &$master_array;
 		$this->initLocalCObject();
 		$this->pointerName = $this->controller->getPointerName();
@@ -197,7 +199,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 		$rems['###CALENDAR_SELECTOR###'] = '';
 		if ($this->conf['view.']['other.']['showCalendarSelection']) {
 			$temp_sims = array();
-			$selectedCalendars = t3lib_div::trimExplode(',',$this->conf['calendar'],1);
+			$selectedCalendars = GeneralUtility::trimExplode(',',$this->conf['calendar'],1);
 			$calendarService = $this->modelObj->getServiceObjByKey('cal_calendar_model', 'calendar', 'tx_cal_calendar');
 			$calendarArray = $calendarService->getCalendarFromTable($this->conf['pidList'], $calendarService->getCalendarSearchString($this->conf['pidList'], true,false));
 			if(is_array($calendarArray)){
@@ -244,7 +246,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 		$rems['###LIST###'] = '';
 		$starttime = new tx_cal_date($this->conf['getdate'].'000000');
 		$starttime->setTZbyId('UTC');
-		$tx_cal_listview = t3lib_div::makeInstanceService('cal_view', 'list', 'list');
+		$tx_cal_listview = GeneralUtility::makeInstanceService('cal_view', 'list', 'list');
 		// set alternate rendering view, so that the rendering of the attached listView can be customized
 		$tempAlternateRenderingView = $tx_cal_listview->conf['alternateRenderingView'];
 		$renderingView = $this->conf['view.'][$this->conf['view'].'.']['useListEventRenderSettingsView'];
@@ -274,7 +276,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 	
 	function getRelatedListMarker(&$page, &$sims, &$rems, &$wrapped){
 		$rems['###RELATED_LIST###'] = '';
-		$tx_cal_listview = t3lib_div::makeInstanceService('cal_view', 'list', 'list');
+		$tx_cal_listview = GeneralUtility::makeInstanceService('cal_view', 'list', 'list');
 		$listSubpart =  $this->cObj->getSubpart($page, '###RELATED_LIST###');
 		if($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'.']['includeEventsInResult']){
 			$starttime = $this->controller->getListViewTime($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'.']['includeEventsInResult.']['starttime']);
@@ -389,12 +391,12 @@ class tx_cal_base_view extends tx_cal_base_service {
 	}
 	
 	function getAjax2UrlMarker(&$page, &$sims, &$rems, $view){
-		$sims['###AJAX2_URL###'] = t3lib_div::getIndpEnv('TYPO3_SITE_URL');
+		$sims['###AJAX2_URL###'] = GeneralUtility::getIndpEnv('TYPO3_SITE_URL');
 	}
 
 	function getAvailableCalendarMarker(&$page, &$sims, &$rems, $view){
 		$ajaxString = '';
-		$deselectedCalendarIds = t3lib_div::trimExplode(',',$this->conf['view.']['calendar.']['subscription'],1);
+		$deselectedCalendarIds = GeneralUtility::trimExplode(',',$this->conf['view.']['calendar.']['subscription'],1);
 		$calendarIds = Array();
 		foreach($deselectedCalendarIds as $calendarUid){
 			$calendarIds[] = $calendarUid;
@@ -462,7 +464,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 			switch ($marker) {
 				default :
 					if (preg_match('/MODULE__([A-Z0-9_-])*/', $marker)) {
-						$module = t3lib_div :: makeInstanceService(substr($marker, 8), 'module');
+						$module = GeneralUtility :: makeInstanceService(substr($marker, 8), 'module');
 						if (is_object($module)) {
 							$rems['###' . $marker . '###'] = $module->start($this);
 						}
@@ -502,7 +504,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 					}
 					$funcFromMarker = 'get'.str_replace(' ','',ucwords(str_replace('_',' ',strtolower($marker)))).'Marker';
 					if (preg_match('/MODULE__([A-Z0-9_-])*/', $marker)) {
-						$module = t3lib_div :: makeInstanceService(substr($marker, 8), 'module');
+						$module = GeneralUtility :: makeInstanceService(substr($marker, 8), 'module');
 						if (is_object($module)) {
 							$sims['###' . $marker . '###'] = $module->start($this);
 						}
@@ -534,7 +536,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 
 		if(is_array($modules)) {  #MODULE-MARKER FOUND
 			foreach($modules as $themodule=>$markerArray) {
-				$module = t3lib_div :: makeInstanceService($themodule, 'module');
+				$module = GeneralUtility :: makeInstanceService($themodule, 'module');
 				if (is_object($module)) {
 					if($markerArray[0]=='') {
 						$sims['###MODULE__'.$themodule.'###'] = $module->start($this); #old way
@@ -811,7 +813,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 		} else {
 			$link = $this->controller->pi_linkTP_keepPIvars_url(array ('getdate' => $today, 'view' => $viewTarget, $this->pointerName => NULL), $this->conf['cache'], $this->conf['clear_anyway']);
 		}
-		return sprintf($this->conf['view.']['other.']['optionString'],t3lib_div::getIndpEnv('TYPO3_SITE_URL').$link,$this->controller->pi_getLL('l_go'.$viewTarget));
+		return sprintf($this->conf['view.']['other.']['optionString'],GeneralUtility::getIndpEnv('TYPO3_SITE_URL').$link,$this->controller->pi_getLL('l_go'.$viewTarget));
 	}
 
 	function list_legend(&$return) {
@@ -956,7 +958,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 				$treeHtml .= $this->cObj->stdWrap(((in_array($parentCategory->getUid(),$selectedCategories) || empty($selectedCategories))?' checked="checked"':''), $treeConf['selector.']);
 			} else {
 				$catValues = $parentCategory->getValuesAsArray();
-				$allowedCategoryArray = t3lib_div::trimExplode(',',$this->conf['view.']['category'],1);
+				$allowedCategoryArray = GeneralUtility::trimExplode(',',$this->conf['view.']['category'],1);
 				$notSelectedCategories = array_diff($allowedCategoryArray,$selectedCategories);
 				if(in_array($parentCategory->getUid(),$selectedCategories) && !empty($notSelectedCategories)){
 					$catValues['cur'] = 1;
@@ -1051,7 +1053,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 			} else {
 				$link = $this->controller->pi_linkTP_keepPIvars_url(array ('getdate' => $monthdate, 'view' => $viewTarget, $this->pointerName => NULL), $this->conf['cache'], $this->conf['clear_anyway']);
 			}
-			$link = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$link;
+			$link = GeneralUtility::getIndpEnv('TYPO3_SITE_URL').$link;
 			
 			if ($month_month == $this_month) {
 				$tmp = $this->cObj->stdWrap($link, $this->conf['view.']['other.']['listMonthSelected_stdWrap.']);
@@ -1094,7 +1096,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 			} else {
 				$link = $this->controller->pi_linkTP_keepPIvars_url(array ('getdate' => $date, 'view' => $viewTarget, $this->pointerName => NULL), $this->conf['cache'], $this->conf['clear_anyway']);
 			}
-			$link = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$link;
+			$link = GeneralUtility::getIndpEnv('TYPO3_SITE_URL').$link;
 			if($currentYear == $this_year) {
 				$tmp = $this->cObj->stdWrap($link, $this->conf['view.']['other.']['listYearSelected_stdWrap.']);
 			} else {
@@ -1142,7 +1144,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 			} else {
 				$link = $this->controller->pi_linkTP_keepPIvars_url(array ('getdate' => $weekdate, 'view' => $viewTarget, $this->pointerName => NULL), $this->conf['cache'], $this->conf['clear_anyway']);
 			}
-			$link = t3lib_div::getIndpEnv('TYPO3_SITE_URL').$link;
+			$link = GeneralUtility::getIndpEnv('TYPO3_SITE_URL').$link;
 			$formattedStart = $start_week_time->format('%Y%m%d');
 			$formattedEnd = $end_week_time->format('%Y%m%d');
 			if (($formattedGetdate >= $formattedStart) && ($formattedGetdate <= $formattedEnd)) {
@@ -1533,7 +1535,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 				// Adds hook for processing of extra month day style markers
 				if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_cal_controller']['extraMonthDayStyleMarkerHook'])) {
 					foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_cal_controller']['extraMonthDayStyleMarkerHook'] as $_classRef) {
-						$_procObj = & t3lib_div::getUserObj($_classRef);
+						$_procObj = & GeneralUtility::getUserObj($_classRef);
 						if(is_object($_procObj) && method_exists($_procObj,'extraMonthDayStyleMarkerProcessor')) {
 							$_procObj->extraMonthDayStyleMarkerProcessor($this,$daylink,$switch,$type,$style);
 						}
@@ -1578,7 +1580,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 	            // Adds hook for processing of extra month day markers
 				if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_cal_controller']['extraMonthDayMarkerHook'])) {
 					foreach($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['tx_cal_controller']['extraMonthDayMarkerHook'] as $_classRef) {
-						$_procObj = & t3lib_div::getUserObj($_classRef);
+						$_procObj = & GeneralUtility::getUserObj($_classRef);
 						if(is_object($_procObj) && method_exists($_procObj,'extraMonthDayMarkerProcessor')) {
 							$switch = $_procObj->extraMonthDayMarkerProcessor($this,$daylink,$switch,$type);
 						}
@@ -1611,7 +1613,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 		
 		$listTemplate = $this->cObj->getSubpart($page, '###LIST###');
 		if($listTemplate!=''){
-			$tx_cal_listview = &t3lib_div::makeInstanceService('cal_view', 'list', 'list');
+			$tx_cal_listview = &GeneralUtility::makeInstanceService('cal_view', 'list', 'list');
 			$starttime = gmmktime(0,0,0,$this_month,1,$this_year);
 			$endtime = gmmktime(0,0,0,$this_month+1,1,$this_year);
 			$rems['###LIST###'] = $tx_cal_listview->drawList($this->master_array,$listTemplate,$starttime,$endtime);
@@ -1704,7 +1706,7 @@ class tx_cal_base_view extends tx_cal_base_service {
 	}
 	
 	function renderWithFluid(){
-		$templateFile = t3lib_div::getFileAbsFileName($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'TemplateFluid']);
+		$templateFile = GeneralUtility::getFileAbsFileName($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'TemplateFluid']);
 
         /** @var $view Tx_Fluid_View_StandaloneView */
 		$view = new Tx_Fluid_View_StandaloneView();

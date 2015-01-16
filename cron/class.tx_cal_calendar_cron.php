@@ -29,7 +29,7 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-include_once (t3lib_extMgm::extPath ('gabriel', 'class.tx_gabriel_event.php'));
+include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('gabriel', 'class.tx_gabriel_event.php'));
 class tx_cal_calendar_cron extends tx_gabriel_event {
 	var $uid;
 	

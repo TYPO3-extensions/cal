@@ -29,14 +29,17 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_base_controller.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_registry.php');
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_base_controller.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_registry.php');
 /**
  * A concrete model for the calendar.
  *
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
-class tx_cal_base_service extends t3lib_svbase {
+class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 	var $cObj; // The backReference to the mother cObj object set at call time
 	/**
 	 * The rights service object
@@ -154,7 +157,7 @@ class tx_cal_base_service extends t3lib_svbase {
 		}
 	}
 	function _notifyOfChanges(&$event, &$insertFields) {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		$notificationService = & tx_cal_functions::getNotificationService ();
 		$valueArray = $event->getValuesAsArray ();
 		$notificationService->notifyOfChanges ($valueArray, $insertFields);
@@ -162,12 +165,12 @@ class tx_cal_base_service extends t3lib_svbase {
 		$this->scheduleReminder ($event->getUid ());
 	}
 	function _notify(&$insertFields) {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		$notificationService = & tx_cal_functions::getNotificationService ();
 		$notificationService->notify ($insertFields);
 	}
 	function _invite(&$event) {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		$notificationService = & tx_cal_functions::getNotificationService ();
 		$oldView = $this->conf ['view'];
 		$this->conf ['view'] = 'ics';
@@ -177,12 +180,12 @@ class tx_cal_base_service extends t3lib_svbase {
 		$this->conf ['view'] = $oldView;
 	}
 	function scheduleReminder($eventUid) {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		$reminderService = &tx_cal_functions::getReminderService ();
 		$reminderService->scheduleReminder ($eventUid);
 	}
 	function stopReminder($uid) {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		$reminderService = &tx_cal_functions::getReminderService ();
 		$reminderService->deleteReminderForEvent ($uid);
 	}
@@ -190,7 +193,7 @@ class tx_cal_base_service extends t3lib_svbase {
 		return 'Overwrite this: start() funktion of base_service';
 	}
 	function searchForAdditionalFieldsToAddFromPostData(&$insertFields, $object, $isSave = true) {
-		$fields = t3lib_div::trimExplode (',', $this->conf ['rights.'] [$isSave ? 'create.' : 'edit.'] [$object . '.'] ['additionalFields'], 1);
+		$fields = GeneralUtility::trimExplode (',', $this->conf ['rights.'] [$isSave ? 'create.' : 'edit.'] [$object . '.'] ['additionalFields'], 1);
 		foreach ($fields as $field) {
 			if (($isSave && $this->rightsObj->isAllowedTo ('create', $object, $field)) || (! $isSave && $this->rightsObj->isAllowedTo ('edit', $object, $field))) {
 				if ($this->conf ['view.'] [$this->conf ['view'] . '.'] ['additional_fields.'] [$field . '_stdWrap.']) {
@@ -214,7 +217,7 @@ class tx_cal_base_service extends t3lib_svbase {
 				}
 				
 				if (! $this->fileFunc) {
-					$this->fileFunc = new t3lib_basicFileFunctions();
+					$this->fileFunc = new \TYPO3\CMS\Core\Utility\File\BasicFileUtility();
 					$all_files = Array ();
 					$all_files ['webspace'] ['allow'] = '*';
 					$all_files ['webspace'] ['deny'] = '';
@@ -235,15 +238,15 @@ class tx_cal_base_service extends t3lib_svbase {
 					if ($_FILES [$this->prefixId] ['error'] [$type] [$id]) {
 						continue;
 					} else {
-						$theFile = t3lib_div::upload_to_tempfile ($_FILES [$this->prefixId] ['tmp_name'] [$type] [$id]);
-						$fI = t3lib_div::split_fileref ($filename);
+						$theFile = GeneralUtility::upload_to_tempfile ($_FILES [$this->prefixId] ['tmp_name'] [$type] [$id]);
+						$fI = GeneralUtility::split_fileref ($filename);
 						if (in_array ($fI ['fileext'], $denyExt)) {
 							continue;
 						} else if ($type == 'image' && ! empty ($allowedExt) && ! in_array ($fI ['fileext'], $allowedExt)) {
 							continue;
 						}
 						$theDestFile = $this->fileFunc->getUniqueName ($this->fileFunc->cleanFileName ($fI ['file']), $uploadPath);
-						t3lib_div::upload_copy_move ($theFile, $theDestFile);
+						GeneralUtility::upload_copy_move ($theFile, $theDestFile);
 						$insertFields [$type] [] = basename ($theDestFile);
 					}
 				}
@@ -276,7 +279,7 @@ class tx_cal_base_service extends t3lib_svbase {
 	}
 	function _checkOnTempFile($file, $uploadPath) {
 		if (! $this->fileFunc) {
-			$this->fileFunc = new t3lib_basicFileFunctions();
+			$this->fileFunc = new \TYPO3\CMS\Core\Utility\File\BasicFileUtility();
 			$all_files = Array ();
 			$all_files ['webspace'] ['allow'] = '*';
 			$all_files ['webspace'] ['deny'] = '';

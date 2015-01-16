@@ -30,7 +30,7 @@
  * *************************************************************
  */
 
-// equire_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_location.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'model/class.tx_cal_location.php');
 
 /**
  * Base model for the calendar location.
@@ -69,7 +69,7 @@ class tx_cal_location_address extends tx_cal_location {
 		$this->setCountry ($row ['country']);
 		$this->setPhone ($row ['phone']);
 		$this->setEmail ($row ['email']);
-		$this->setImage (t3lib_div::trimExplode (',', $row ['image'], 1));
+		$this->setImage (\TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $row ['image'], 1));
 		$this->setLink ($row ['www']);
 		$this->row = $row;
 	}

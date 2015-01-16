@@ -29,7 +29,12 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-define ('ICALENDAR_PATH', t3lib_extMgm::extPath ('cal') . 'model/class.tx_model_iCalendar.php');
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
+
+define ('ICALENDAR_PATH', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_model_iCalendar.php');
 
 /**
  *
@@ -54,7 +59,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 	function find($uid, $pidList = '') {
 		$enableFields = '';
 		if (TYPO3_MODE == 'BE') {
-			$enableFields = t3lib_befunc::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
+			$enableFields = BackendUtility::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
 		} else {
 			$enableFields = $this->cObj->enableFields ('tx_cal_calendar');
 		}
@@ -82,7 +87,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		$enableFields = '';
 		$orderBy = tx_cal_functions::getOrderBy ('tx_cal_calendar');
 		if (TYPO3_MODE == 'BE') {
-			$enableFields = t3lib_befunc::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
+			$enableFields = BackendUtility::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
 		} else {
 			$enableFields = $this->cObj->enableFields ('tx_cal_calendar');
 		}
@@ -103,7 +108,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 	}
 	function saveEvents($url) {
 		/* Get the contents of the URL and calculate a checksum of those contents */
-		$contents = t3lib_div::getURL ($url);
+		$contents = GeneralUtility::getURL ($url);
 		$md5 = md5 ($contents);
 		
 		/* Parse the contents into ICS data structure. */
@@ -113,14 +118,14 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		/* @todo	Where do other arguments come from? */
 		$this->insertCalEventsIntoDB ($iCalendar, $calendar_id, $pid, $cruser_id);
 		
-		//require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		//require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		tx_cal_functions::clearCache ();
 	}
 	function update($uid) {
 		$calendar = $this->find ($uid);
 		
 		if ($calendar ['type'] == 2) {
-			$url = t3lib_div::getFileAbsFileName ('uploads/tx_cal/ics/' . $calendar ['ics_file']);
+			$url = GeneralUtility::getFileAbsFileName ('uploads/tx_cal/ics/' . $calendar ['ics_file']);
 		} else {
 			$url = $calendar ['ext_url'];
 		}
@@ -144,14 +149,14 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 	 * Updates an existing calendar
 	 */
 	function updateEvents($uid, $pid, $urlString, $md5, $cruser_id) {
-		$urls = t3lib_div::trimExplode ("\n", $urlString, 1);
+		$urls = GeneralUtility::trimExplode ("\n", $urlString, 1);
 		$mD5Array = Array ();
 		$contentArray = Array ();
 		
 		foreach ($urls as $key => $url) {
 			/* If the calendar has a URL, get a checksum on the contents */
 			if ($url != '') {
-				$contents = t3lib_div::getURL ($url);
+				$contents = GeneralUtility::getURL ($url);
 				
 				$hookObjectsArr = tx_cal_functions::getHookObjectsArray ('tx_cal_icalendar_service', 'importIcsContent', 'service');
 				
@@ -187,7 +192,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 			/* Delete old events, that have not been updated */
 			$this->deleteTemporaryEvents ($uid, $notInUids);
 			
-			//require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+			//require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 			tx_cal_functions::clearCache ();
 			
 			return $newMD5;
@@ -202,19 +207,19 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 	function scheduleUpdates($refreshInterval, $uid) {
 		global $TYPO3_CONF_VARS;
 		
-		if (t3lib_extMgm::isLoaded ('scheduler')) {
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('scheduler')) {
 			$recurring = $refreshInterval * 60;
 			/* If calendar has a refresh time, schedule recurring gabriel event for refresh */
 			if ($recurring) {
-				$calendarRow = t3lib_BEfunc::getRecordRaw ('tx_cal_calendar', 'uid=' . $uid);
+				$calendarRow = BackendUtility::getRecordRaw ('tx_cal_calendar', 'uid=' . $uid);
 				$taskId = $calendarRow ['schedulerId'];
 				
-				$scheduler = new TYPO3\CMS\Scheduler\Scheduler();
+				$scheduler = new \TYPO3\CMS\Scheduler\Scheduler();
 				
 				if ($taskId > 0) {
 					try {
 						$task = $scheduler->fetchTask ($taskId);
-						$execution = new TYPO3\CMS\Scheduler\Execution();
+						$execution = new \TYPO3\CMS\Scheduler\Execution();
 						$execution->setStart (time () + $recurring);
 						$execution->setIsNewSingleExecution (true);
 						$execution->setMultiple (true);
@@ -227,7 +232,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					$this->createSchedulerTask ($scheduler, $recurring, $uid);
 				}
 			}
-		} else if (t3lib_extMgm::isLoaded ('gabriel')) {
+		} else if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('gabriel')) {
 			$eventUID = 'tx_cal_calendar:' . $uid;
 			
 			/* Check for existing gabriel events and remove them */
@@ -237,21 +242,21 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 			$recurring = $refreshInterval * 60;
 			if ($recurring) {
 				/* Set up the gabriel event */
-				$cron = t3lib_div::getUserObj ('EXT:cal/cron/class.tx_cal_calendar_cron.php:tx_cal_calendar_cron');
+				$cron = GeneralUtility::getUserObj ('EXT:cal/cron/class.tx_cal_calendar_cron.php:tx_cal_calendar_cron');
 				$cron->setUID ($uid);
 				
 				/* Schedule the gabriel event */
 				$cron->registerRecurringExecution (time () + $recurring, $recurring, strtotime ('+10 years'));
-				$gabriel = t3lib_div::getUserObj ('EXT:gabriel/class.tx_gabriel.php:&tx_gabriel');
+				$gabriel = GeneralUtility::getUserObj ('EXT:gabriel/class.tx_gabriel.php:&tx_gabriel');
 				$gabriel->addEvent ($cron, $eventUID);
 			}
 		}
 	}
 	function createSchedulerTask(&$scheduler, $offset, $calendarUid) {
 		/* Set up the scheduler event */
-		$task = t3lib_div::getUserObj ('EXT:cal/cron/class.tx_cal_calendar_scheduler.php:tx_cal_calendar_scheduler');
+		$task = GeneralUtility::getUserObj ('EXT:cal/cron/class.tx_cal_calendar_scheduler.php:tx_cal_calendar_scheduler');
 		$task->setUID ($calendarUid);
-		$taskGroup = t3lib_BEfunc::getRecordRaw ('tx_scheduler_task_group', 'groupName="cal"');
+		$taskGroup = BackendUtility::getRecordRaw ('tx_scheduler_task_group', 'groupName="cal"');
 		if($taskGroup['uid']){
 			$task->setTaskGroup($taskGroup['uid']);
 		} else {
@@ -270,7 +275,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		}
 		$task->setDescription('Import of external calendar (calendar_id='.$calendarUid.')');
 		/* Schedule the event */
-		$execution = new TYPO3\CMS\Scheduler\Execution();
+		$execution = new \TYPO3\CMS\Scheduler\Execution();
 		$execution->setStart (time () + ($offset));
 		$execution->setIsNewSingleExecution (true);
 		$execution->setMultiple (true);
@@ -281,11 +286,11 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		));
 	}
 	function deleteSchedulerTask($calendarUid) {
-		if (t3lib_extMgm::isLoaded ('scheduler')) {
-			$calendarRow = t3lib_BEfunc::getRecordRaw ('tx_cal_calendar', 'uid=' . $calendarUid);
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('scheduler')) {
+			$calendarRow = BackendUtility::getRecordRaw ('tx_cal_calendar', 'uid=' . $calendarUid);
 			$taskId = $calendarRow ['schedulerId'];
 			if ($taskId > 0) {
-				$scheduler = new TYPO3\CMS\Scheduler\Scheduler();
+				$scheduler = new \TYPO3\CMS\Scheduler\Scheduler();
 				
 				$task = $scheduler->fetchTask ($taskId);
 				
@@ -296,7 +301,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		}
 	}
 	function deleteScheduledUpdates($uid) {
-		if (t3lib_extMgm::isLoaded ('gabriel')) {
+		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('gabriel')) {
 			$eventUID = 'tx_cal_calendar:' . $uid;
 			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_gabriel', ' crid="' . $eventUID . '"');
 			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_gabriel', ' nextexecution=0');
@@ -487,7 +492,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 				$categoryString = $component->getAttribute ('CATEGORY');
 				if ($categoryString == "")
 					$categoryString = $component->getAttribute ('CATEGORIES');
-				$categories = t3lib_div::trimExplode (',', $categoryString, 1);
+				$categories = GeneralUtility::trimExplode (',', $categoryString, 1);
 				
 				$categoryUids = array ();
 				foreach ($categories as $category) {
@@ -546,7 +551,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					$date->subtractSeconds (86400);
 					$insertFields ['end_date'] = $date->format ('%Y%m%d');
 				}
-				$eventRow = t3lib_BEfunc::getRecordRaw ('tx_cal_event', 'icsUid="' . $insertFields ['icsUid'] . '"');
+				$eventRow = BackendUtility::getRecordRaw ('tx_cal_event', 'icsUid="' . $insertFields ['icsUid'] . '"');
 				
 				if ($eventRow ['uid']) {
 					$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, 'uid=' . $eventRow ['uid'], $insertFields);
@@ -566,7 +571,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 						$recurrenceIdStart->convertTZbyID ($timezone);
 					}
 					
-					$indexEntry = t3lib_BEfunc::getRecordRaw ('tx_cal_index', 'event_uid="' . $eventUid . '" AND start_datetime="' . $recurrenceIdStart->format ('%Y%m%d%H%M%S') . '"');
+					$indexEntry = BackendUtility::getRecordRaw ('tx_cal_index', 'event_uid="' . $eventUid . '" AND start_datetime="' . $recurrenceIdStart->format ('%Y%m%d%H%M%S') . '"');
 					
 					if ($indexEntry) {
 						$origStartDate = new tx_cal_date ();
@@ -643,7 +648,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					}
 					
 					if ($extConf ['useNewRecurringModel']) {
-						$pageTSConf = t3lib_befunc::getPagesTSconfig ($pid);
+						$pageTSConf = BackendUtility::getPagesTSconfig ($pid);
 						if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 							$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 						} else {
@@ -655,8 +660,8 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 					
 					if ($this->conf ['view.'] ['event.'] ['remind']) {
 						/* Schedule reminders for new and changed events */
-						//require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-						$pageTSConf = t3lib_befunc::getPagesTSconfig ($pid);
+						//require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+						$pageTSConf = BackendUtility::getPagesTSconfig ($pid);
 						$offset = is_numeric ($pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time']) ? $pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time'] * 60 : 0;
 						$date = new tx_cal_date ($insertFields ['start_date'] . '000000');
 						$date->setTZbyId ('UTC');
@@ -811,7 +816,7 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		));
 	}
 	function createExceptionRule($pid, $cruserId, $eventUid, $exceptionRuleDescription) {
-		$event = t3lib_BEfunc::getRecordRaw ('tx_cal_event', 'uid=' . $eventUid);
+		$event = BackendUtility::getRecordRaw ('tx_cal_event', 'uid=' . $eventUid);
 		
 		$insertFields = Array ();
 		$insertFields ['tstamp'] = time ();

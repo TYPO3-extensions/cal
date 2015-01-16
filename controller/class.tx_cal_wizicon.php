@@ -41,7 +41,7 @@ class tx_cal_wizicon {
 		$LL = $this->includeLocalLang ();
 		
 		$wizardItems ['plugins_tx_cal'] = array (
-				'icon' => t3lib_extMgm::extRelPath ('cal') . 'controller/ce_wiz.gif',
+				'icon' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'controller/ce_wiz.gif',
 				'title' => $LANG->getLLL ('pi1_title', $LL),
 				'description' => $LANG->getLLL ('pi1_plus_wiz_description', $LL),
 				'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=cal_controller' 
@@ -50,12 +50,12 @@ class tx_cal_wizicon {
 		return $wizardItems;
 	}
 	function includeLocalLang() {
-		$llFile = t3lib_extMgm::extPath ('cal') . 'locallang.xml';
-		if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
-			$localizationParser = new t3lib_l10n_parser_Llxml();
+		$llFile = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'locallang.xml';
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
+			$localizationParser = new \TYPO3\CMS\Core\Localization\Parser\LocallangXmlParser();
 			$LOCAL_LANG = $localizationParser->getParsedData ($llFile, $GLOBALS ['LANG']->lang);
 		} else {
-			$LOCAL_LANG = t3lib_div::readLLfile ($llFile, $GLOBALS ['LANG']->lang);
+			$LOCAL_LANG = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile ($llFile, $GLOBALS ['LANG']->lang);
 		}
 		
 		return $LOCAL_LANG;

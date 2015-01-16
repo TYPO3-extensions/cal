@@ -2,11 +2,11 @@
 if (! defined ('TYPO3_MODE'))
 	die ('Access denied.');
 
-require_once (t3lib_extMgm::extPath ('cal') . 'res/class.tx_cal_itemsProcFunc.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'res/class.tx_cal_customtca.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/class.tx_cal_itemsProcFunc.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/class.tx_cal_customtca.php');
 
-if (t3lib_extMgm::isLoaded ('static_info_tables')) {
-	require_once (t3lib_extMgm::extPath ('cal') . 'res/class.user_staticinfotables_div.php');
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
+	require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/class.user_staticinfotables_div.php');
 }
 
 // get extension confArr
@@ -18,9 +18,9 @@ $limitViewOnlyToPidsWhere = '';
 $wizzardSuggestDefaults = Array ();
 if (TYPO3_MODE == "BE") {
 	if ($_GET ['id'] > 0) {
-		$pageTSConf = t3lib_befunc::getPagesTSconfig ($_GET ['id']);
+		$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($_GET ['id']);
 	} else if ($_POST ['popViewId'] > 0) {
-		$pageTSConf = t3lib_befunc::getPagesTSconfig ($_POST ['popViewId']);
+		$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($_POST ['popViewId']);
 	}
 
 	if (is_object ($GLOBALS ['BE_USER'])) {
@@ -289,7 +289,7 @@ $TCA ['tx_cal_event'] = Array (
 										'add' => Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_organizer.createNew',
-												'icon' => 'new_el.gif', // t3lib_iconWorks::getIcon($useOrganizerStructure),
+												'icon' => 'new_el.gif', // \TYPO3\CMS\Backend\Utility\IconUtility::getIcon($useOrganizerStructure),
 												'params' => Array (
 														'table' => $useOrganizerStructure,
 														'pid' => $sPid,
@@ -380,7 +380,7 @@ $TCA ['tx_cal_event'] = Array (
 										'add' => Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_location.createNew',
-												'icon' => 'new_el.gif', // t3lib_iconWorks::getIcon($useLocationStructure),
+												'icon' => 'new_el.gif', // \TYPO3\CMS\Backend\Utility\IconUtility::getIcon($useLocationStructure),
 												'params' => Array (
 														'table' => $useLocationStructure,
 														'pid' => $sPid,
@@ -2815,7 +2815,7 @@ $TCA ['tx_cal_event_deviation'] = Array (
 										'add' => Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_organizer.createNew',
-												'icon' => 'new_el.gif', // t3lib_iconWorks::getIcon($useOrganizerStructure),
+												'icon' => 'new_el.gif', // \TYPO3\CMS\Backend\Utility\IconUtility::getIcon($useOrganizerStructure),
 												'params' => Array (
 														'table' => $useOrganizerStructure,
 														'pid' => $sPid,
@@ -2906,7 +2906,7 @@ $TCA ['tx_cal_event_deviation'] = Array (
 										'add' => Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_location.createNew',
-												'icon' => 'new_el.gif', // t3lib_iconWorks::getIcon($useLocationStructure),
+												'icon' => 'new_el.gif', // \TYPO3\CMS\Backend\Utility\IconUtility::getIcon($useLocationStructure),
 												'params' => Array (
 														'table' => $useLocationStructure,
 														'pid' => $sPid,
@@ -3137,7 +3137,7 @@ $TCA ['tx_cal_event_deviation'] = Array (
 );
 
 /* If wec_map is present, define the address fields */
-if (t3lib_extMgm::isLoaded ('wec_map')) {
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map')) {
 
 	$TCA ['tx_cal_location'] ['ctrl'] ['EXT'] ['wec_map'] = array (
 			'isMappable' => 1,
@@ -3162,9 +3162,9 @@ if (t3lib_extMgm::isLoaded ('wec_map')) {
 			)
 	);
 
-	t3lib_extMgm::addTCAcolumns ('tx_cal_location', $geocodeTCA);
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns ('tx_cal_location', $geocodeTCA);
 	$TCA ['tx_cal_location'] ['interface'] ['showRecordFieldList'] .= ',tx_wecmap_geocode';
-	t3lib_extMgm::addToAllTCAtypes ('tx_cal_location', 'tx_wecmap_geocode');
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ('tx_cal_location', 'tx_wecmap_geocode');
 
 	$mapTCA = array (
 			'tx_wecmap_map' => array (
@@ -3178,21 +3178,21 @@ if (t3lib_extMgm::isLoaded ('wec_map')) {
 			)
 	);
 
-	t3lib_extMgm::addTCAcolumns ('tx_cal_location', $mapTCA);
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns ('tx_cal_location', $mapTCA);
 	$TCA ['tx_cal_location'] ['interface'] ['showRecordFieldList'] .= ',tx_wecmap_map';
-	t3lib_extMgm::addToAllTCAtypes ('tx_cal_location', 'tx_wecmap_map');
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ('tx_cal_location', 'tx_wecmap_map');
 }
 
-if (t3lib_extMgm::isLoaded ('scheduler')) {
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('scheduler')) {
 	$TCA ['tx_cal_calendar'] ['columns'] ['refresh'] ['displayCond'] = 'EXT:scheduler:LOADED:true';
 }
 
-if (t3lib_utility_VersionNumber::convertVersionNumberToInteger (TYPO3_version) >= 4003000) {
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4003000) {
 	$GLOBALS ['TCA'] ['tt_content'] ['columns'] ['tx_cal_media'] ['config'] ['uploadfolder'] = 'uploads/tx_cal/media';
 }
 
 // Append backend search configuration for tt_address:
-if (t3lib_extMgm::isLoaded ('tt_address')) {
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('tt_address')) {
 	if (isset ($TCA ['tt_address'] ['ctrl'] ['searchFields'])) {
 		$TCA ['tt_address'] ['ctrl'] ['searchFields'] .= ',';
 	}

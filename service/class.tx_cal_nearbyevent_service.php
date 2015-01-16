@@ -29,9 +29,9 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_todo_model.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_todo_rec_model.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'service/class.tx_cal_event_service.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_cal_todo_model.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_cal_todo_rec_model.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'service/class.tx_cal_event_service.php');
 
 /**
  * A concrete model for the calendar.
@@ -43,8 +43,8 @@ class tx_cal_nearbyevent_service extends tx_cal_event_service {
 		$this->tx_cal_event_service ();
 		
 		// Lets see if the user is logged in
-		if ($this->rightsObj->isLoggedIn () && ! $this->rightsObj->isCalAdmin () && t3lib_extMgm::isLoaded ('wec_map') && $this->conf ['view.'] ['calendar.'] ['nearbyDistance'] > 0) {
-			include_once (t3lib_extMgm::extPath ('wec_map') . 'class.tx_wecmap_cache.php');
+		if ($this->rightsObj->isLoggedIn () && ! $this->rightsObj->isCalAdmin () && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map') && $this->conf ['view.'] ['calendar.'] ['nearbyDistance'] > 0) {
+			include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('wec_map') . 'class.tx_wecmap_cache.php');
 			$user = $GLOBALS ['TSFE']->fe_user->user;
 			
 			/* Geocode the address */

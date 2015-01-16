@@ -11,7 +11,7 @@
  *       Current method isn't very maintainable.
  */
 function user_isCalNotAllowedToBeCached() {
-	$postVars = t3lib_div::_GP ('tx_cal_controller');
+	$postVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP ('tx_cal_controller');
 	$view = $postVars ['view'];
 	
 	/* FRONTEND EDITING */

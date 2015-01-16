@@ -25,6 +25,9 @@
  * This copyright notice MUST APPEAR in all copies of the script!
  * *************************************************************
  */
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * URI Handling class based on TYPO3s original t3lib::htmlmail class
  *
@@ -321,7 +324,7 @@ class tx_cal_uriHandler {
 		if (is_array ($this->theParts ['html'] ['media'])) {
 			foreach ($this->theParts ['html'] ['media'] as $key => $val) {
 				if ($val ['use_jumpurl'] && $this->jumperURL_prefix) {
-					$subst = $this->jumperURL_prefix . t3lib_div::rawUrlEncodeFP ($val ['absRef']);
+					$subst = $this->jumperURL_prefix . GeneralUtility::rawUrlEncodeFP ($val ['absRef']);
 				} else {
 					$subst = ($absolute) ? $val ['absRef'] : 'cid:part' . $key . '.' . $this->messageid;
 				}
@@ -348,7 +351,7 @@ class tx_cal_uriHandler {
 				if ($this->jumperURL_useId) {
 					$substVal = $this->jumperURL_prefix . $key;
 				} else {
-					$substVal = $this->jumperURL_prefix . t3lib_div::rawUrlEncodeFP ($val ['absRef']);
+					$substVal = $this->jumperURL_prefix . GeneralUtility::rawUrlEncodeFP ($val ['absRef']);
 				}
 			} else {
 				$substVal = $val ['absRef'];
@@ -442,7 +445,7 @@ class tx_cal_uriHandler {
 	 * @return string content of the URL
 	 */
 	public function getUrl($url) {
-		return t3lib_div::getUrl ($url);
+		return GeneralUtility::getUrl ($url);
 	}
 	
 	/**
@@ -477,7 +480,7 @@ class tx_cal_uriHandler {
 	 */
 	public function getMimeType($url) {
 		$mimeType = '';
-		$headers = trim (t3lib_div::getUrl ($url, 2));
+		$headers = trim (GeneralUtility::getUrl ($url, 2));
 		if ($headers) {
 			$matches = array ();
 			if (preg_match ('/(Content-Type:[\s]*)([a-zA-Z_0-9\/\-\.\+]*)([\s]|$)/', $headers, $matches)) {

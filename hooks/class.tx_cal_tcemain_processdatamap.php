@@ -29,8 +29,13 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-define ('ICALENDAR_PATH', t3lib_extMgm::extPath ('cal') . 'model/class.tx_model_iCalendar.php');
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+
+
+define ('ICALENDAR_PATH', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_model_iCalendar.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 
 /**
  * This hook extends the tcemain class.
@@ -61,9 +66,9 @@ class tx_cal_tcemain_processdatamap {
 			}
 			
 			if ($status != 'new') {
-				require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-				require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
-				$event = t3lib_BEfunc::getRecord ('tx_cal_event', $id);
+				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
+				$event = BackendUtility::getRecord ('tx_cal_event', $id);
 				
 				// Do to our JS, these values get recalculated each time, but they may not have changed!
 				if ($event ['start_date'] == $fieldArray ['start_date']) {
@@ -82,7 +87,7 @@ class tx_cal_tcemain_processdatamap {
 					}
 					
 					/* Check Page TSConfig for a preview page that we should use */
-					$pageTSConf = t3lib_befunc::getPagesTSconfig ($event ['pid']);
+					$pageTSConf = BackendUtility::getPagesTSconfig ($event ['pid']);
 					if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 						$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 					} else {
@@ -90,7 +95,7 @@ class tx_cal_tcemain_processdatamap {
 					}
 					
 					// @todo Should we have an else case for notifying when the doktype is 254?
-					$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
+					$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
 					if ($page ['doktype'] != 254) {
 						/* Notify of changes to existing event */
 						$tx_cal_api = new tx_cal_api();
@@ -103,7 +108,7 @@ class tx_cal_tcemain_processdatamap {
 						} else {
 							$oldPath = &$notificationService->conf ['view.'] ['event.'] ['eventModelTemplate'];
 						}
-						$extPath = t3lib_extMgm::extPath ('cal');
+						$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal');
 						
 						$oldPath = str_replace ('EXT:cal/', $extPath, $oldPath);
 						// $oldPath = str_replace(PATH_site, '', $oldPath);
@@ -111,7 +116,7 @@ class tx_cal_tcemain_processdatamap {
 						$tx_cal_api->conf ['view.'] ['event.'] ['eventModelTemplate'] = $oldPath;
 						$oldBackPath = $GLOBALS ['TSFE']->tmpl->getFileName_backPath;
 						$GLOBALS ['TSFE']->tmpl->getFileName_backPath = '';
-						$fileInfo = t3lib_div::split_fileref ($oldPath);
+						$fileInfo = GeneralUtility::split_fileref ($oldPath);
 						$GLOBALS ['TSFE']->tmpl->allowedPaths [] = $fileInfo ['path'];
 						
 						$notificationService->controller->getDateTimeObject = new tx_cal_date ($event ['start_date'] . '000000');
@@ -149,7 +154,7 @@ class tx_cal_tcemain_processdatamap {
 		
 		/* If we're working with a calendar and an ICS file or URL has been posted, try to import it */
 		if ($table == 'tx_cal_calendar') {
-			$calendar = t3lib_BEfunc::getRecord ('tx_cal_calendar', $id);
+			$calendar = BackendUtility::getRecord ('tx_cal_calendar', $id);
 			
 			$service = new tx_cal_icalendar_service();
 			
@@ -164,8 +169,8 @@ class tx_cal_tcemain_processdatamap {
 			$fieldArray ['tablenames'] = implode ('_', $values);
 		}
 		
-		if ($table == 'tx_cal_location' && count ($fieldArray) > 0 && t3lib_extMgm::isLoaded ('wec_map')) {
-			$location = t3lib_BEfunc::getRecord ('tx_cal_location', $id);
+		if ($table == 'tx_cal_location' && count ($fieldArray) > 0 && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map')) {
+			$location = BackendUtility::getRecord ('tx_cal_location', $id);
 			if (is_array ($location)) {
 				$location = array_merge ($location, $fieldArray);
 			} else {
@@ -183,21 +188,21 @@ class tx_cal_tcemain_processdatamap {
 		
 		/* If we have a new calendar event */
 		if (($table == 'tx_cal_event' || $table == 'tx_cal_exception_event') && count ($fieldArray) > 1) {
-			require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-			require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
-			$event = t3lib_BEfunc::getRecord ($table, $status == 'new' ? $tcemain->substNEWwithIDs [$id] : $id);
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
+			$event = BackendUtility::getRecord ($table, $status == 'new' ? $tcemain->substNEWwithIDs [$id] : $id);
 			
 			/* If we're in a workspace, don't notify anyone about the event */
 			if ($event ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 				/* Check Page TSConfig for a preview page that we should use */
-				$pageTSConf = t3lib_befunc::getPagesTSconfig ($event ['pid']);
+				$pageTSConf = BackendUtility::getPagesTSconfig ($event ['pid']);
 				if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 					$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 				} else {
 					$pageIDForPlugin = $event ['pid'];
 				}
 				
-				$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
+				$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
 				
 				if ($page ['doktype'] != 254) {
 					$tx_cal_api = new tx_cal_api();
@@ -217,7 +222,7 @@ class tx_cal_tcemain_processdatamap {
 						} else {
 							$oldPath = &$notificationService->conf ['view.'] ['event.'] ['eventModelTemplate'];
 						}
-						$extPath = t3lib_extMgm::extPath ('cal');
+						$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal');
 						
 						$oldPath = str_replace ('EXT:cal/', $extPath, $oldPath);
 						// $oldPath = str_replace(PATH_site, '', $oldPath);
@@ -225,7 +230,7 @@ class tx_cal_tcemain_processdatamap {
 						$tx_cal_api->conf ['view.'] ['event.'] ['eventModelTemplate'] = $oldPath;
 						$oldBackPath = $GLOBALS ['TSFE']->tmpl->getFileName_backPath;
 						$GLOBALS ['TSFE']->tmpl->getFileName_backPath = '';
-						$fileInfo = t3lib_div::split_fileref ($oldPath);
+						$fileInfo = GeneralUtility::split_fileref ($oldPath);
 						$GLOBALS ['TSFE']->tmpl->allowedPaths [] = $fileInfo ['path'];
 						
 						$notificationService->controller->getDateTimeObject = new tx_cal_date ($event ['start_date'] . '000000');
@@ -267,12 +272,12 @@ class tx_cal_tcemain_processdatamap {
 		 * saved but a bad combination of start date and end date will generate an error message.
 		 */
 		/*
-		 * if($table == 'tx_cal_event') { $startTimestamp = $incomingFieldArray['start_date'] + $incomingFieldArray['start_time']; $endTimestamp = $incomingFieldArray['end_date'] + $incomingFieldArray['end_time']; if ($startTimestamp > $endTimestamp) { $tce->log('tx_cal_event', 2, $id, 0, 1, "Event end (".t3lib_BEfunc::datetime($endTimestamp).") is earlier than event start (".t3lib_BEfunc::datetime($startTimestamp).").", 1); } }
+		 * if($table == 'tx_cal_event') { $startTimestamp = $incomingFieldArray['start_date'] + $incomingFieldArray['start_time']; $endTimestamp = $incomingFieldArray['end_date'] + $incomingFieldArray['end_time']; if ($startTimestamp > $endTimestamp) { $tce->log('tx_cal_event', 2, $id, 0, 1, "Event end (".BackendUtility::datetime($endTimestamp).") is earlier than event start (".BackendUtility::datetime($startTimestamp).").", 1); } }
 		 */
 
 		/* preview events on eventViewPid on "save and preview" calls. but only if it's a regular event and the user is in live workspace */
 		if ($table == 'tx_cal_event' && isset ($GLOBALS ['_POST'] ['_savedokview_x']) && ! $fieldArray ['type'] && ! $GLOBALS ['BE_USER']->workspace) {
-			$pagesTSConfig = t3lib_BEfunc::getPagesTSconfig ($GLOBALS ['_POST'] ['popViewId']);
+			$pagesTSConfig = BackendUtility::getPagesTSconfig ($GLOBALS ['_POST'] ['popViewId']);
 			if ($pagesTSConfig ['options.'] ['tx_cal_controller.'] ['eventViewPid']) {
 				$GLOBALS ['_POST'] ['popViewId_addParams'] = ($fieldArray ['sys_language_uid'] > 0 ? '&L=' . $fieldArray ['sys_language_uid'] : '') . '&no_cache=1&tx_cal_controller[view]=event&tx_cal_controller[type]=tx_cal_phpicalendar&tx_cal_controller[uid]=' . $id;
 				$GLOBALS ['_POST'] ['popViewId'] = $pagesTSConfig ['options.'] ['tx_cal_controller.'] ['eventViewPid'];
@@ -281,7 +286,7 @@ class tx_cal_tcemain_processdatamap {
 		
 		if ($table == 'tx_cal_event' || $table == "tx_cal_exeption_event") {
 			
-			$event = t3lib_BEfunc::getRecord ($table, $id);
+			$event = BackendUtility::getRecord ($table, $id);
 			if (intval ($event ['start_date']) == 0) {
 				return;
 			}
@@ -336,7 +341,7 @@ class tx_cal_tcemain_processdatamap {
 		}
 		
 		if ($table == 'tx_cal_category' && array_key_exists ('calendar_id', $incomingFieldArray) && ! strstr ($id, 'NEW')) {
-			$category = t3lib_BEfunc::getRecord ('tx_cal_category', $id);
+			$category = BackendUtility::getRecord ('tx_cal_category', $id);
 			if ($incomingFieldArray ['calendar_id'] != $category ['calendar_id']) {
 				$incomingFieldArray ['parent_category'] = 0;
 			}
@@ -345,7 +350,7 @@ class tx_cal_tcemain_processdatamap {
 		/* If an existing calendar is updated */
 		if ($table == 'tx_cal_calendar' && array_key_exists ('type', $incomingFieldArray) && ! strstr ($id, 'NEW')) {
 			/* Get the calendar info from the db */
-			$calendar = t3lib_BEfunc::getRecord ('tx_cal_calendar', $id);
+			$calendar = BackendUtility::getRecord ('tx_cal_calendar', $id);
 			
 			$service = new tx_cal_icalendar_service();
 			
@@ -375,21 +380,21 @@ class tx_cal_tcemain_processdatamap {
 		if ($table == 'tx_cal_exception_event_group' && ! strstr ($id, 'NEW')) {
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-				require_once (t3lib_extMgm::extPath ('cal') . '/controller/class.tx_cal_api.php');
-				$exceptionEvent = t3lib_BEfunc::getRecord ('tx_cal_exception_event_group', $id);
+				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
+				$exceptionEvent = BackendUtility::getRecord ('tx_cal_exception_event_group', $id);
 				
 				/* If we're in a workspace, don't notify anyone about the event */
 				if ($exceptionEvent ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 					/* Check Page TSConfig for a preview page that we should use */
-					$pageTSConf = t3lib_befunc::getPagesTSconfig ($exceptionEvent ['pid']);
+					$pageTSConf = BackendUtility::getPagesTSconfig ($exceptionEvent ['pid']);
 					if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 						$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 					} else {
 						$pageIDForPlugin = $exceptionEvent ['pid'];
 					}
 					
-					$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+					$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 					
 					if ($page ['doktype'] != 254) {
 						$tx_cal_api = new tx_cal_api();
@@ -421,7 +426,7 @@ class tx_cal_tcemain_processdatamap {
 						0 
 				);
 				$serviceObj = null;
-				$serviceObj = t3lib_div::makeInstanceService ('auth', $subType);
+				$serviceObj = GeneralUtility::makeInstanceService ('auth', $subType);
 				if ($serviceObj == null) {
 					return;
 				}
@@ -449,7 +454,7 @@ class tx_cal_tcemain_processdatamap {
 				// $GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_cal_event', $incomingFieldArray);
 				
 				foreach ($tce->datamap ['tx_cal_event'] as $eventUid => $eventArray) {
-					$eventArray ['attendee'] = array_unique (array_merge (t3lib_div::trimExplode (',', $eventArray ['attendee'], 1), $attendeeUids));
+					$eventArray ['attendee'] = array_unique (array_merge (GeneralUtility::trimExplode (',', $eventArray ['attendee'], 1), $attendeeUids));
 				}
 			}
 			unset ($incomingFieldArray ['fe_group_id']);
@@ -458,7 +463,7 @@ class tx_cal_tcemain_processdatamap {
 	function processICS($calendar, &$fieldArray, &$service) {
 		if ($fieldArray ['ics_file'] or $fieldArray ['ext_url']) {
 			if ($fieldArray ['ics_file']) {
-				$url = t3lib_div::getFileAbsFileName ('uploads/tx_cal/ics/' . $fieldArray ['ics_file']);
+				$url = GeneralUtility::getFileAbsFileName ('uploads/tx_cal/ics/' . $fieldArray ['ics_file']);
 			} elseif ($fieldArray ['ext_url']) {
 				$fieldArray ['ext_url'] = trim ($fieldArray ['ext_url']);
 				$url = $fieldArray ['ext_url'];
@@ -468,14 +473,14 @@ class tx_cal_tcemain_processdatamap {
 			
 			if ($newMD5) {
 				$fieldArray ['md5'] = $newMD5;
-				$pageTSConf = t3lib_befunc::getPagesTSconfig ($calendar ['pid']);
+				$pageTSConf = BackendUtility::getPagesTSconfig ($calendar ['pid']);
 				if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 					$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 				} else {
 					$pageIDForPlugin = $calendar ['pid'];
 				}
 				
-				$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+				$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 				$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 				if ($extConf ['useNewRecurringModel'] && $page ['doktype'] != 254) {
 					$rgc = new tx_cal_recurrence_generator($pageIDForPlugin);

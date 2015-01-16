@@ -30,7 +30,7 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 class tx_cal_logoff_post_processing {
 	function clearSessionApiAfterLogin($params, &$pObj) {
 		if ($_COOKIE ['fe_typo_user']) {
@@ -49,7 +49,7 @@ class tx_cal_logoff_post_processing {
 		}
 	}
 	function clearSessionApiAfterLogoff($_params, &$pObj) {
-		if (t3lib_div::_GP ('logintype') === 'logout' && $_COOKIE ['fe_typo_user']) {
+		if (\TYPO3\CMS\Core\Utility\GeneralUtility::_GP ('logintype') === 'logout' && $_COOKIE ['fe_typo_user']) {
 			session_id ($_COOKIE ['fe_typo_user']);
 			session_start ();
 			

@@ -389,7 +389,7 @@ class tx_cal_confirm_event_view extends tx_cal_fe_editing_base_view {
 		$sims ['###ATTENDEE###'] = '';
 		if ($this->isAllowed ('attendee') && $this->object->getEventType () == tx_cal_model::EVENT_TYPE_MEETING) {
 			$attendee = '';
-			$allowedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
+			$allowedUsers = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
 			$globalAttendeeArray = $this->object->getAttendees ();
 			$attendeeAttendance = Array ();
 			$attendeeDisplayList = Array ();

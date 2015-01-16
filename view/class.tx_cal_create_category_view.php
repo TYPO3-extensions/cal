@@ -137,7 +137,7 @@ class tx_cal_create_category_view extends tx_cal_fe_editing_base_view {
 		$sims ['###HEADERSTYLE###'] = '';
 		if ($this->isAllowed ('headerstyle')) {
 			$selectedStyle = $this->object->getHeaderStyle ();
-			$allowedStyles = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['category.'] ['fields.'] ['headerstyle.'] ['available'], 1);
+			$allowedStyles = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['category.'] ['fields.'] ['headerstyle.'] ['available'], 1);
 			$headerStyle = '';
 			
 			/* If there are allowed styles, draw the selector */
@@ -158,7 +158,7 @@ class tx_cal_create_category_view extends tx_cal_fe_editing_base_view {
 		$sims ['###BODYSTYLE###'] = '';
 		if ($this->isAllowed ('bodystyle')) {
 			$selectedStyle = $this->object->getBodyStyle ();
-			$allowedStyles = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['category.'] ['fields.'] ['bodystyle.'] ['available'], 1);
+			$allowedStyles = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['category.'] ['fields.'] ['bodystyle.'] ['available'], 1);
 			$bodyStyle = '';
 			
 			/* If there are allowed styles, draw the selector */

@@ -29,7 +29,7 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('cal') . 'res/pearLoader.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/pearLoader.php');
 /**
  * Extends the PEAR date class and adds a compareTo method.
  *

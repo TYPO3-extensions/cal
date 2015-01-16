@@ -39,11 +39,11 @@ if ($_COOKIE ['fe_typo_user']) {
 	session_start ();
 }
 // Initialize FE user object:
-$feUserObj = tslib_eidtools::initFeUser ();
+$feUserObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser ();
 // Connect to database:
-tslib_eidtools::connectDB ();
-$controllerPiVarsGET = t3lib_div::_GET ('tx_cal_controller');
-$controllerPiVarsPOST = t3lib_div::_POST ('tx_cal_controller');
+\TYPO3\CMS\Frontend\Utility\EidUtility::connectDB ();
+$controllerPiVarsGET = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET ('tx_cal_controller');
+$controllerPiVarsPOST = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST ('tx_cal_controller');
 $controllerPiVars = array ();
 if (is_array ($controllerPiVarsPOST) && is_array ($controllerPiVarsGET)) {
 	$controllerPiVars = array_merge ($controllerPiVarsPOST, $controllerPiVarsGET);
@@ -62,7 +62,7 @@ $type = $controllerPiVars ['type'];
 
 if (is_array ($_SESSION ['cal_api_' . $pid . '_conf'])) {
 	$tx_cal_api = new tx_cal_api();
-	$cObj = new tslib_cObj();
+	$cObj = new \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer();
 	$GLOBALS ['TSFE'] = &$_SESSION ['cal_api_' . $pid . '_tsfe'];
 	$GLOBALS ['TCA'] = &$_SESSION ['cal_api_' . $pid . '_tca'];
 	$tx_cal_api = $tx_cal_api->tx_cal_api_with ($cObj, $_SESSION ['cal_api_' . $pid . '_conf']);
@@ -126,7 +126,7 @@ if ($controllerPiVars ['translations']) {
 		$res = 'You do not have the proper rights!' . $checkedView . '=' . $view;
 	}
 	
-	$ajax_return_data = t3lib_div::array2xml (array (
+	$ajax_return_data = \TYPO3\CMS\Core\Utility\GeneralUtility::array2xml (array (
 			'error' => $error,
 			'response' => $res 
 	));

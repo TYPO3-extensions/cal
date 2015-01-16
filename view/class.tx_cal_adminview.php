@@ -334,7 +334,7 @@ class tx_cal_adminview extends tx_cal_base_view {
 			$editCalendarOptions = '<option value="">' . $this->controller->pi_getLL ('l_select') . '</option>';
 			$calendarIds = Array ();
 			
-			$deselectedCalendarIds = t3lib_div::trimExplode (',', $this->conf ['view.'] ['calendar.'] ['subscription'], 1);
+			$deselectedCalendarIds = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->conf ['view.'] ['calendar.'] ['subscription'], 1);
 			foreach ($deselectedCalendarIds as $calendarUid) {
 				$calendarIds [] = $calendarUid;
 				$calendar = $this->modelObj->findCalendar ($calendarUid, 'tx_cal_calendar', $this->conf ['pidList']);
@@ -366,11 +366,11 @@ class tx_cal_adminview extends tx_cal_base_view {
 			case 'editCalendarSubscription' :
 				$table = 'fe_users';
 				$where = 'uid = ' . $this->rightsObj->getUserId ();
-				$ids = is_array ($this->controller->piVars ['calendarSubscription']) ? $this->controller->piVars ['calendarSubscription'] : ($this->controller->piVars ['calendarSubscription'] != '' ? t3lib_div::trimExplode (',', $this->controller->piVars ['calendarSubscription'], 1) : Array ());
+				$ids = is_array ($this->controller->piVars ['calendarSubscription']) ? $this->controller->piVars ['calendarSubscription'] : ($this->controller->piVars ['calendarSubscription'] != '' ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->controller->piVars ['calendarSubscription'], 1) : Array ());
 				$fields = Array (
 						'tx_cal_calendar_subscription' => '' 
 				);
-				$allIds = $this->controller->piVars ['calendarSubscriptionIds'] ? t3lib_div::trimExplode (',', $this->controller->piVars ['calendarSubscriptionIds'], 1) : Array ();
+				$allIds = $this->controller->piVars ['calendarSubscriptionIds'] ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->controller->piVars ['calendarSubscriptionIds'], 1) : Array ();
 				$fields = Array (
 						'tx_cal_calendar_subscription' => implode (',', array_diff ($allIds, $ids)) 
 				);

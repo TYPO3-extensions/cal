@@ -31,6 +31,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Main controller for the calendar base.
  * All requests come through this class
@@ -40,7 +42,7 @@
  * @package TYPO3
  * @subpackage cal
  */
-class tx_cal_controller extends tslib_pibase {
+class tx_cal_controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	var $prefixId = 'tx_cal_controller'; // Same as class name
 	var $scriptRelPath = 'controller/class.tx_cal_controller.php'; // Path to this script relative to the extension dir.
 	var $extKey = 'cal'; // The extension key.
@@ -84,8 +86,8 @@ class tx_cal_controller extends tslib_pibase {
 		
 		// Set the week start day, and then include tx_cal_date so that the week start day is already defined.
 		$this->setWeekStartDay ();
-		require_once (t3lib_extMgm::extPath ('cal') . 'model/class.tx_cal_date.php');
-		require_once (t3lib_extMgm::extPath ('cal') . 'res/pearLoader.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_cal_date.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/pearLoader.php');
 		
 		$this->cleanPiVarParam ($this->piVars);
 		$this->clearPiVarParams ();
@@ -167,8 +169,8 @@ class tx_cal_controller extends tslib_pibase {
 		$count = 0;
 		do {
 			// category check:
-			$catArray = t3lib_div::trimExplode (',', $this->conf ['category'], 1);
-			$allowedCatArray = t3lib_div::trimExplode (',', $this->conf ['view.'] ['allowedCategory'], 1);
+			$catArray = GeneralUtility::trimExplode (',', $this->conf ['category'], 1);
+			$allowedCatArray = GeneralUtility::trimExplode (',', $this->conf ['view.'] ['allowedCategory'], 1);
 			$compareResult = array_diff ($allowedCatArray, $catArray);
 			if (empty ($compareResult) && $this->conf ['view'] != 'create_event' && $this->conf ['view'] != 'edit_event') {
 				unset ($this->piVars ['category']);
@@ -186,7 +188,7 @@ class tx_cal_controller extends tslib_pibase {
 				/* Call appropriate view function */
 				$return .= $this->$viewFunction ();
 			} else {
-				$customModel = t3lib_div::makeInstanceService ('cal_view', $this->conf ['view']);
+				$customModel = GeneralUtility::makeInstanceService ('cal_view', $this->conf ['view']);
 				if (! is_object ($customModel)) {
 					$return .= $this->conf ['view.'] ['noViewFoundHelpText'] . ' ' . $viewFunction;
 				} else {
@@ -204,7 +206,7 @@ class tx_cal_controller extends tslib_pibase {
 			header ('Content-Type: text/xml');
 		}
 		
-		$additionalWrapperClasses = t3lib_div::trimExplode (',', $this->conf ['additionalWrapperClasses'], 1);
+		$additionalWrapperClasses = GeneralUtility::trimExplode (',', $this->conf ['additionalWrapperClasses'], 1);
 		
 		if ($this->conf ['noWrapInBaseClass'] || $this->conf ['view.'] ['enableAjax']) {
 			return $return;
@@ -273,7 +275,7 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		
 		if ($this->piVars ['jumpto']) {
-			require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_dateParser.php');
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_dateParser.php');
 			$dp = new tx_cal_dateParser ();
 			$dp->parse ($this->piVars ['jumpto'], $this->conf ['dateParserConf.']);
 			$newGetdate = $dp->getDateObjectFromStack ();
@@ -307,12 +309,12 @@ class tx_cal_controller extends tslib_pibase {
 		}
 		
 		if (! is_array ($this->conf ['view.'] ['allowedViews'])) {
-			$this->conf ['view.'] ['allowedViews'] = array_unique (t3lib_div::trimExplode (',', str_replace ('~', ',', $this->conf ['view.'] ['allowedViews'])));
+			$this->conf ['view.'] ['allowedViews'] = array_unique (GeneralUtility::trimExplode (',', str_replace ('~', ',', $this->conf ['view.'] ['allowedViews'])));
 		}
 		
 		// only merge customViews if not empty. Otherwhise the array with allowedViews will have empty entries which will end up in wrong behavior in the rightsServies, which is checking for the number of allowed views.
 		if (! empty ($this->conf ['view.'] ['customViews'])) {
-			$this->conf ['view.'] ['allowedViews'] = array_unique (array_merge ($this->conf ['view.'] ['allowedViews'], t3lib_div::trimExplode (',', $this->conf ['view.'] ['customViews'], 1)));
+			$this->conf ['view.'] ['allowedViews'] = array_unique (array_merge ($this->conf ['view.'] ['allowedViews'], GeneralUtility::trimExplode (',', $this->conf ['view.'] ['customViews'], 1)));
 		}
 		
 		$allowedViewsByViewPid = $this->getAllowedViewsByViewPid ();
@@ -345,7 +347,7 @@ class tx_cal_controller extends tslib_pibase {
 		
 		tx_cal_controller::initRegistry ($this);
 		$rightsObj = &tx_cal_registry::Registry ('basic', 'rightscontroller');
-		$rightsObj = t3lib_div::makeInstanceService ('cal_rights_model', 'rights');
+		$rightsObj = GeneralUtility::makeInstanceService ('cal_rights_model', 'rights');
 		$rightsObj->setDefaultSaveToPage ();
 		
 		$modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
@@ -366,7 +368,7 @@ class tx_cal_controller extends tslib_pibase {
 				'rss',
 				'singl_ics' 
 		))) {
-			$GLOBALS ['TSFE']->absRefPrefix = t3lib_div::getIndpEnv ('TYPO3_SITE_URL');
+			$GLOBALS ['TSFE']->absRefPrefix = GeneralUtility::getIndpEnv ('TYPO3_SITE_URL');
 		}
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('controllerClass');
@@ -405,7 +407,7 @@ class tx_cal_controller extends tslib_pibase {
 			}
 			
 			if ($this->conf ['writeCachingInfoToDevlog']) {
-				$tmp = t3lib_div::trimExplode ('|', $this->conf ['writeCachingInfoToDevlog'], 0);
+				$tmp = GeneralUtility::trimExplode ('|', $this->conf ['writeCachingInfoToDevlog'], 0);
 				if ($tmp [1]) {
 					$this->writeCachingInfoToDevlog = $tmp [1];
 				}
@@ -1322,7 +1324,7 @@ class tx_cal_controller extends tslib_pibase {
 	 * @return integer for list view start or end time.
 	 */
 	function getListViewTime($timeString, $timeObj = '') {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_dateParser.php');
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_dateParser.php');
 		$dp = new tx_cal_dateParser ();
 		$dp->parse ($timeString, $this->conf ['dateParserConf.'], $timeObj);
 		$newTime = $dp->getDateObjectFromStack ();
@@ -1452,7 +1454,7 @@ class tx_cal_controller extends tslib_pibase {
 		$searchword = preg_replace('/["\']/', '', strip_tags ($this->piVars ['query']));
 		$this->piVars ['query'] = $searchword;
 		
-		include_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 		
 		if (! $start_day) {
 			$start_day = $this->getListViewTime ($this->conf ['view.'] ['search.'] ['defaultValues.'] ['start_day']);
@@ -2234,7 +2236,7 @@ class tx_cal_controller extends tslib_pibase {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawSearchUserAndGroupClass');
 		
 		$searchword = strip_tags ($this->piVars ['query']);
-		$allowedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
+		$allowedUsers = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
 		
 		$additionalWhere = '';
 		if (count ($allowedUsers) > 0) {
@@ -2273,7 +2275,7 @@ class tx_cal_controller extends tslib_pibase {
 		
 		$additionalWhere = '';
 		
-		$allowedGroups = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedGroups'], 1);
+		$allowedGroups = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedGroups'], 1);
 		if (count ($allowedUsers) > 0) {
 			$additionalWhere = ' AND uid in (' . implode (',', $allowedGroups) . ')';
 		}
@@ -2680,7 +2682,7 @@ class tx_cal_controller extends tslib_pibase {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadCalendarsClass');
 		$modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
 		$ajaxStringArray = Array ();
-		$deselectedCalendarIds = t3lib_div::trimExplode (',', $this->conf ['view.'] ['calendar.'] ['subscription'], 1);
+		$deselectedCalendarIds = GeneralUtility::trimExplode (',', $this->conf ['view.'] ['calendar.'] ['subscription'], 1);
 		$calendarIds = Array ();
 		foreach ($deselectedCalendarIds as $calendarUid) {
 			$calendarIds [] = $calendarUid;
@@ -2948,8 +2950,7 @@ class tx_cal_controller extends tslib_pibase {
 		
 		$flexformTyposcript = $this->pi_getFFvalue ($piFlexForm, 'myTS', 's_TS_View');
 		if ($flexformTyposcript) {
-			#require_once(PATH_t3lib.'class.t3lib_tsparser.php'); 
-			$tsparser = new t3lib_tsparser();
+			$tsparser = new \TYPO3\CMS\Core\TypoScript\Parser\TypoScriptParser();
 			// Copy conf into existing setup 
 			$tsparser->setup = $this->conf;
 			// Parse the new Typoscript 
@@ -2982,7 +2983,7 @@ class tx_cal_controller extends tslib_pibase {
 			}
 			return $new;
 		} else {
-			return implode (',', t3lib_div::intExplode (',', $linkVar));
+			return implode (',', GeneralUtility::intExplode (',', $linkVar));
 		}
 	}
 	function replace_tags($tags = array(), $page) {
@@ -3123,7 +3124,7 @@ class tx_cal_controller extends tslib_pibase {
 		$controller = &$myController;
 		// besides of the regular cObj we provide a localCobj, whos data can be overridden with custom data for a more flexible rendering of TSObjects
 		$local_cObj = &tx_cal_registry::Registry ('basic', 'local_cobj');
-		$local_cObj = new tslib_cObj();
+		$local_cObj = new \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer();
 		$local_cObj->start (array ());
 		$cache = &tx_cal_registry::Registry ('basic', 'cache');
 		$cache = Array ();
@@ -3156,7 +3157,7 @@ class tx_cal_controller extends tslib_pibase {
 		if (empty ($params)) {
 			$params = $this->piVars;
 		}
-		$sessionPiVars = t3lib_div::trimExplode (',', $this->conf ['sessionPiVars'], 1);
+		$sessionPiVars = GeneralUtility::trimExplode (',', $this->conf ['sessionPiVars'], 1);
 		
 		foreach ((array) $params [$this->prefixId] as $key => $value) {
 			if (in_array ($key, $sessionPiVars)) {
@@ -3235,7 +3236,7 @@ class tx_cal_controller extends tslib_pibase {
 		if ($this->conf ['dontListenToPiVars'] || $this->conf ['clearPiVars'] == 'all') {
 			$this->piVars = array ();
 		} else {
-			$clearPiVars = t3lib_div::trimExplode (',', $this->conf ['clearPiVars'], 1);
+			$clearPiVars = GeneralUtility::trimExplode (',', $this->conf ['clearPiVars'], 1);
 			foreach ((array) $this->piVars as $key => $value) {
 				if (in_array ($key, $clearPiVars)) {
 					unset ($this->piVars [$key]);
@@ -3246,7 +3247,7 @@ class tx_cal_controller extends tslib_pibase {
 	
 	/**
 	 * Returns a array with fields/parameters that can be used for link rendering in typoscript.
-	 * It's based on the link functions from tslib_pibase.
+	 * It's based on the link functions from \TYPO3\CMS\Frontend\Plugin\AbstractPlugin.
 	 *
 	 * @param
 	 *        	array			Referenced array in which the parameters get merged into
@@ -3334,7 +3335,7 @@ class tx_cal_controller extends tslib_pibase {
 		#$parameterArray['link_useCacheHash'] = $this->pi_USER_INT_obj ? 0 : $cache;
 		$parameterArray ['link_no_cache'] = $this->pi_USER_INT_obj ? 0 : ! $cache;
 		$parameterArray ['link_parameter'] = $altPageId ? $altPageId : ($this->pi_tmpPageId ? $this->pi_tmpPageId : $GLOBALS ['TSFE']->id);
-		$parameterArray ['link_additionalParams'] = $this->conf ['parent.'] ['addParams'] . t3lib_div::implodeArrayForUrl ('', $piVars, '', true) . $this->pi_moreParams;
+		$parameterArray ['link_additionalParams'] = $this->conf ['parent.'] ['addParams'] . GeneralUtility::implodeArrayForUrl ('', $piVars, '', true) . $this->pi_moreParams;
 		$parameterArray ['link_ATagParams'] = 'class="url"';
 		
 		# add time/date related parameters to all link objects, so that they can use them e.g. to display the monthname etc.
@@ -3359,7 +3360,7 @@ class tx_cal_controller extends tslib_pibase {
 	 * @param
 	 *        	integer		Alternative page ID for the link. (By default this function links to the SAME page!)
 	 * @return string input string wrapped in <a> tags
-	 * @see pi_linkTP_keepPIvars(), tslib_cObj::typoLink()
+	 * @see pi_linkTP_keepPIvars(), \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::typoLink()
 	 */
 	function pi_linkTP($str, $urlParameters = array(), $cache = 0, $altPageId = 0) {
 		$this->cleanupUrlParameter ($urlParameters);
@@ -3388,7 +3389,7 @@ class tx_cal_controller extends tslib_pibase {
 				$useLastView = false;
 				break;
 			default :
-				if ($params ['type'] || t3lib_div::inList ('week,day,year', trim ($params ['view']))) {
+				if ($params ['type'] || GeneralUtility::inList ('week,day,year', trim ($params ['view']))) {
 					$removeParams = array (
 							$this->getPointerName (),
 							'submit',
@@ -3430,7 +3431,7 @@ class tx_cal_controller extends tslib_pibase {
 			}
 			$this->pi_linkTP ('|', $linkParams, $this->conf ['cache'], $this->conf ['view.'] [$action . '_' . $object . '.'] ['redirectAfter' . ucwords ($action) . 'ToPid']);
 			$rURL = $this->cObj->lastTypoLinkUrl;
-			Header ('Location: ' . t3lib_div::locationHeaderUrl ($rURL));
+			Header ('Location: ' . GeneralUtility::locationHeaderUrl ($rURL));
 			exit;
 		}
 	}

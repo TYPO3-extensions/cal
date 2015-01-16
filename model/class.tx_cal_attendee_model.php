@@ -30,7 +30,7 @@
  * *************************************************************
  */
 
-// equire_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_base_model.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'model/class.tx_cal_base_model.php');
 
 /**
  *

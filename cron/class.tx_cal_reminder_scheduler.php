@@ -29,7 +29,7 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-class tx_cal_reminder_scheduler extends tx_scheduler_Task {
+class tx_cal_reminder_scheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	var $uid;
 	
 	/**
@@ -41,8 +41,8 @@ class tx_cal_reminder_scheduler extends tx_scheduler_Task {
 		$this->__construct ();
 	}
 	function execute() {
-		require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-		$event = t3lib_BEfunc::getRecord ('tx_cal_event', $this->uid);
+		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+		$event = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecord ('tx_cal_event', $this->uid);
 		
 		$select = '*';
 		$table = 'tx_cal_fe_user_event_monitor_mm';
@@ -85,14 +85,14 @@ class tx_cal_reminder_scheduler extends tx_scheduler_Task {
 		chdir (PATH_site);
 		
 		/* Check Page TSConfig for a preview page that we should use */
-		$pageTSConf = t3lib_befunc::getPagesTSconfig ($event ['pid']);
+		$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($event ['pid']);
 		if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 			$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 		} else {
 			$pageIDForPlugin = $event ['pid'];
 		}
 		
-		$page = t3lib_BEfunc::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+		$page = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 		
 		if ($page ['doktype'] != 254) {
 			$tx_cal_api = new tx_cal_api();
@@ -107,7 +107,7 @@ class tx_cal_reminder_scheduler extends tx_scheduler_Task {
 		}
 		
 		$message = 'Cal was not able to send a reminder notice. You have to point to a page containing the cal Plugin. Configure in pageTSConf of page ' . $event ['pid'] . ': options.tx_cal_controller.pageIDForPlugin';
-		throw new tx_scheduler_FailedExecutionException ($message, 1250596541);
+		throw new \TYPO3\CMS\Scheduler\FailedExecutionException ($message, 1250596541);
 	}
 	function getUID() {
 		return $this->uid;

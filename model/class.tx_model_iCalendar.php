@@ -103,7 +103,7 @@ class tx_model_iCalendar {
 	function newComponent($type, &$container) {
 		$type = strtolower ($type);
 		$class = 'tx_iCalendar_' . $type;
-		require_once t3lib_extMgm::extPath ('cal') . 'model/iCalendar/class.' . $class . '.php';
+		require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/iCalendar/class.' . $class . '.php';
 		if (class_exists ($class)) {
 			$component = new $class ();
 			if ($container !== false) {
@@ -654,7 +654,7 @@ class tx_model_iCalendar {
 		} elseif (is_object ($GLOBALS ['TSFE'])) {
 			$csConvObj = &$GLOBALS ['TSFE']->csConvObj;
 		} else {
-			require_once (t3lib_extMgm::extPath ('lang') . 'lang.php');
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('lang') . 'lang.php');
 			$LANG = new language();
 			if (TYPO3_MODE == 'BE') {
 				$LANG->init ($BE_USER->uc ['lang']);

@@ -29,7 +29,7 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-class tx_cal_calendar_scheduler extends tx_scheduler_Task {
+class tx_cal_calendar_scheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	var $uid;
 	
 	/**

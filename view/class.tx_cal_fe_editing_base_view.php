@@ -30,6 +30,8 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * A service which serves as base for all fe-editing clases.
  *
@@ -62,7 +64,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 					}
 					$funcFromMarker = 'get' . str_replace (' ', '', ucwords (str_replace ('_', ' ', strtolower ($marker)))) . 'Marker';
 					if (preg_match ('/MODULE__([A-Z0-9_-])*/', $marker)) {
-						$module = t3lib_div::makeInstanceService (substr ($marker, 8), 'module');
+						$module = GeneralUtility::makeInstanceService (substr ($marker, 8), 'module');
 						if (is_object ($module)) {
 							$sims ['###' . $marker . '###'] = $module->start ($this);
 						}
@@ -140,7 +142,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 					break;
 				default :
 					if (preg_match ('/MODULE__([A-Z0-9_-])*/', $marker)) {
-						$module = t3lib_div::makeInstanceService (substr ($marker, 8), 'module');
+						$module = GeneralUtility::makeInstanceService (substr ($marker, 8), 'module');
 						if (is_object ($module)) {
 							$rems ['###' . $marker . '###'] = $module->start ($this);
 						}
@@ -334,7 +336,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		if ($this->isConfirm) {
 			$sims ['###' . strtoupper ($marker) . '###'] = '';
 			
-			$fileFunc = new t3lib_basicFileFunctions();
+			$fileFunc = new \TYPO3\CMS\Core\Utility\File\BasicFileUtility();
 			$all_files = Array ();
 			$all_files ['webspace'] ['allow'] = '*';
 			$all_files ['webspace'] ['deny'] = '';
@@ -355,15 +357,15 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 					if ($_FILES [$this->prefixId] ['error'] [$marker] [$id]) {
 						continue;
 					} else {
-						$theFile = t3lib_div::upload_to_tempfile ($_FILES [$this->prefixId] ['tmp_name'] [$marker] [$id]);
-						$fI = t3lib_div::split_fileref ($filename);
+						$theFile = GeneralUtility::upload_to_tempfile ($_FILES [$this->prefixId] ['tmp_name'] [$marker] [$id]);
+						$fI = GeneralUtility::split_fileref ($filename);
 						if (in_array ($fI ['fileext'], $denyExt)) {
 							continue;
 						} else if ($marker == 'image' && ! in_array ($fI ['fileext'], $allowedExt)) {
 							continue;
 						}
 						$theDestFile = $fileFunc->getUniqueName ($fileFunc->cleanFileName ($fI ['file']), 'typo3temp');
-						t3lib_div::upload_copy_move ($theFile, $theDestFile);
+						GeneralUtility::upload_copy_move ($theFile, $theDestFile);
 						$iConf ['file'] = $theDestFile;
 						$return = '__NEW__' . basename ($theDestFile);
 					}
@@ -391,7 +393,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 							$this->object->getIcsFile () 
 					);
 				} else {
-					$files = t3lib_div::trimExplode (',', $this->object->row [$marker]);
+					$files = GeneralUtility::trimExplode (',', $this->object->row [$marker]);
 				}
 			}
 			
@@ -456,7 +458,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 						}
 					default :
 						{
-							$files = t3lib_div::trimExplode (',', $this->object->row [$marker], 1);
+							$files = GeneralUtility::trimExplode (',', $this->object->row [$marker], 1);
 							break;
 						}
 				}
@@ -620,7 +622,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 	}
 	function ruleParser($field, $rule) {
 		$passedAny = Array ();
-		$rules = t3lib_div::trimExplode ('|', $rule ['rule'], 1);
+		$rules = GeneralUtility::trimExplode ('|', $rule ['rule'], 1);
 		foreach ($rules as $rulePart) {
 			if ($rule ['conditionField']) {
 				$field = $rule ['conditionField'];
@@ -839,7 +841,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		$tabbedMenuConf = $this->conf ['view.'] [$view . '.'] ['tabbedMenu.'];
 		foreach ((array) $tabbedMenuConf as $id => $tab) {
 			if (tx_cal_functions::endsWith ($id, '.') && $tab ['requiredFields'] != '') {
-				$requiredFields = t3lib_div::trimExplode (',', $tab ['requiredFields'], 1);
+				$requiredFields = GeneralUtility::trimExplode (',', $tab ['requiredFields'], 1);
 				$isAllowed = false;
 				foreach ($requiredFields as $field) {
 					if ($this->isAllowed ($field)) {
@@ -860,23 +862,23 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 		$sims ['###SHARED###'] = '';
 		if ($this->isAllowed ('shared')) {
 			$cal_shared_user = '';
-			$allowedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
+			$allowedUsers = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedUsers'], 1);
 			$selectedUsers = $this->object->getSharedUsers ();
 			if (empty ($selectedUsers) && ! $this->isEditMode) {
-				$selectedUsers = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
+				$selectedUsers = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['shared.'] ['defaultUser'], 1);
 			}
 			$selectedUsersList = implode (',', $selectedUsers);
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_users', 'pid in (' . $this->conf ['pidList'] . ')' . $this->cObj->enableFields ('fe_users'));
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
 				$name = $this->getFeUserDisplayName ($row);
-				if (! empty ($allowedUsers) && t3lib_div::inList ($this->conf ['rights.'] ['allowedUsers'], $row ['uid'])) {
-					if (t3lib_div::inList ($selectedUsersList, $row ['uid'])) {
+				if (! empty ($allowedUsers) && GeneralUtility::inList ($this->conf ['rights.'] ['allowedUsers'], $row ['uid'])) {
+					if (GeneralUtility::inList ($selectedUsersList, $row ['uid'])) {
 						$cal_shared_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '" checked="checked" name="tx_cal_controller[shared][]" />' . $name . '<br />';
 					} else {
 						$cal_shared_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '"  name="tx_cal_controller[shared][]"/>' . $name . '<br />';
 					}
 				} else if (empty ($allowedUsers)) {
-					if (t3lib_div::inList ($selectedUsersList, $row ['uid'])) {
+					if (GeneralUtility::inList ($selectedUsersList, $row ['uid'])) {
 						$cal_shared_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '" checked="checked" name="tx_cal_controller[shared][]" />' . $name . '<br />';
 					} else {
 						$cal_shared_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '"  name="tx_cal_controller[shared][]"/>' . $name . '<br />';
@@ -884,23 +886,23 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 				}
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
-			$allowedGroups = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['allowedGroups'], 1);
+			$allowedGroups = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['allowedGroups'], 1);
 			$selectedGroups = $this->object->getSharedGroups ();
 			if (empty ($selectedGroups) && ! $this->isEditMode) {
-				$selectedGroups = t3lib_div::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
+				$selectedGroups = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['shared.'] ['defaultGroup'], 1);
 			}
 			$selectedGroupsList = implode (',', $selectedGroups);
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_groups', 'pid in (' . $this->conf ['pidList'] . ')' . $this->cObj->enableFields ('fe_groups'));
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
 				$name = $this->getFeGroupDisplayName ($row);
-				if (! empty ($allowedGroups) && t3lib_div::inList ($this->conf ['rights.'] ['allowedGroups'], $row ['uid'])) {
-					if (t3lib_div::inList ($selectedGroupsList, $row ['uid'])) {
+				if (! empty ($allowedGroups) && GeneralUtility::inList ($this->conf ['rights.'] ['allowedGroups'], $row ['uid'])) {
+					if (GeneralUtility::inList ($selectedGroupsList, $row ['uid'])) {
 						$cal_shared_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '" checked="checked" name="tx_cal_controller[shared][]" />' . $name . '<br />';
 					} else {
 						$cal_shared_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '"  name="tx_cal_controller[shared][]"/>' . $name . '<br />';
 					}
 				} else if (empty ($allowedGroups)) {
-					if (t3lib_div::inList ($selectedGroupsList, $row ['uid'])) {
+					if (GeneralUtility::inList ($selectedGroupsList, $row ['uid'])) {
 						$cal_shared_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '" checked="checked" name="tx_cal_controller[shared][]" />' . $name . '<br />';
 					} else {
 						$cal_shared_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '"  name="tx_cal_controller[shared][]"/>' . $name . '<br />';

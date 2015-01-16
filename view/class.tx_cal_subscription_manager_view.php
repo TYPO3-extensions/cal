@@ -247,8 +247,8 @@ class tx_cal_subscription_manager_view extends tx_cal_base_view {
 			/* Insert the user ID into the monitor table */
 			$this->insertMMRow ('tx_cal_fe_user_event_monitor_mm', $eventUID, $user_uid, $user_table, 1, $offset, $eventPID);
 			
-			require_once (t3lib_extMgm::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-			$pageTSConf = t3lib_befunc::getPagesTSconfig ($eventPID);
+			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+			$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($eventPID);
 			$offset = is_numeric ($pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time']) ? $pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time'] * 60 : 0;
 			$date = new tx_cal_date ($insertFields ['start_date'] . '000000');
 			$date->setTZbyId ('UTC');

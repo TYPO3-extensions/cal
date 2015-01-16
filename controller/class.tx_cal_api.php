@@ -82,7 +82,7 @@ class tx_cal_api {
 		
 		tx_cal_controller::initRegistry ($this->controller);
 		$this->rightsObj = &tx_cal_registry::Registry ('basic', 'rightscontroller');
-		$this->rightsObj = t3lib_div::makeInstanceService ('cal_rights_model', 'rights');
+		$this->rightsObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstanceService ('cal_rights_model', 'rights');
 		$this->rightsObj->setDefaultSaveToPage ();
 		
 		$this->modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
@@ -97,9 +97,9 @@ class tx_cal_api {
 		return $this;
 	}
 	function tx_cal_api_without($pid, $feUserObj = '') {
-		$cObj = new tslib_cObj();
+		$cObj = new \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer();
 		
-		$GLOBALS ['TT'] = new t3lib_timeTrack ();
+		$GLOBALS ['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker ();
 		
 		// ***********************************
 		// Creating a fake $TSFE object
@@ -122,11 +122,11 @@ class tx_cal_api {
 		$GLOBALS ['TSFE']->settingLocale ();
 		
 		// we need to get the plugin setup to create correct source URLs
-		$template = new t3lib_tsparser_ext(); // Defined global here!
+		$template = new \TYPO3\CMS\Core\TypoScript\ExtendedTemplateService(); // Defined global here!
 		$template->tt_track = 0;
 		// Do not log time-performance information
 		$template->init ();
-		$sys_page = new t3lib_pageSelect();
+		$sys_page = new \TYPO3\CMS\Frontend\Page\PageRepository();
 		$rootLine = $sys_page->getRootLine ($pid);
 		$template->runThroughTemplates ($rootLine); // This generates the constants/config + hierarchy info for the template.
 		$template->generateConfig (); //
@@ -292,8 +292,8 @@ class tx_cal_api {
 			}
 			
 			// DEBUG ONLY - Show TS object
-			// t3lib_div::debug($cType, 'CONTENT TYPE');
-			// t3lib_div::debug($tsObj, 'TS CONFIGURATION');
+			// \TYPO3\CMS\Core\Utility\GeneralUtility::debug($cType, 'CONTENT TYPE');
+			// \TYPO3\CMS\Core\Utility\GeneralUtility::debug($tsObj, 'TS CONFIGURATION');
 			
 			// Check object and content type
 			if ($error) {

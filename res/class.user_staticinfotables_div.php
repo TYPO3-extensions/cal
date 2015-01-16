@@ -29,7 +29,7 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (t3lib_extMgm::extPath ('static_info_tables') . 'class.tx_staticinfotables_div.php');
+require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('static_info_tables') . 'class.tx_staticinfotables_div.php');
 class user_staticinfotables_div extends tx_staticinfotables_div {
 	
 	/**
@@ -112,7 +112,7 @@ class user_staticinfotables_div extends tx_staticinfotables_div {
 			$orderBy = $titleFields [0];
 			
 			if (! $params ['config'] ['itemsProcFunc_config'] ['hotlistOnly']) {
-				$res = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($fields, $table, '1' . t3lib_BEfunc::deleteClause ($table) . $where, '', $orderBy);
+				$res = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($fields, $table, '1' . \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause ($table) . $where, '', $orderBy);
 				if ($res) {
 					while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($res)) {
 						foreach ($titleFields as $titleField) {
@@ -136,7 +136,7 @@ class user_staticinfotables_div extends tx_staticinfotables_div {
 	 * Replaces any dynamic markers in a SQL statement. @param	string		The SQL statement with dynamic markers. @param	string		Name of the table. @param	array		Database row. @return	string		SQL query with dynamic markers subsituted.
 	 */
 	function replaceMarkersInSQL($sql, $table, $row) {
-		$TSconfig = t3lib_BEfunc::getTCEFORM_TSconfig ($table, $row);
+		$TSconfig = \TYPO3\CMS\Backend\Utility\BackendUtility::getTCEFORM_TSconfig ($table, $row);
 		
 		/* Replace references to specific fields with value of that field */
 		if (strstr ($sql, '###REC_FIELD_')) {

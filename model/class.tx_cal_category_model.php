@@ -30,7 +30,7 @@
  * *************************************************************
  */
 
-// equire_once(t3lib_extMgm::extPath('cal').'model/class.tx_cal_base_model.php');
+// equire_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('cal').'model/class.tx_cal_base_model.php');
 
 /**
  *
@@ -77,7 +77,7 @@ class tx_cal_category_model extends tx_cal_base_model {
 		$this->setSharedUserAllowed ($row ['shared_user_allowed']);
 		$this->setCalendarUid ($row ['calendar_id']);
 		$this->setSinglePid ($row ['single_pid']);
-		$this->setNotificationEmails (t3lib_div::trimExplode (',', $row ['notification_emails'], 1));
+		$this->setNotificationEmails (\TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $row ['notification_emails'], 1));
 		$this->setIcon ($row ['icon']);
 	}
 	function setParentUid($uid) {

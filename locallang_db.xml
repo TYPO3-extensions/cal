@@ -409,11 +409,14 @@
 			<label index="tx_cal_event.calendar">Kalender</label>
 			<label index="tx_cal_event.title">Titel</label>
 			<label index="tx_cal_event.start">Start</label>
+			<label index="tx_cal_event.orig_start">Start (ursprüngliche Wiederholung)</label>
 			<label index="tx_cal_event.starttime">Startzeit</label>
 			<label index="tx_cal_event.endtime">Endzeit</label>
 			<label index="tx_cal_event.end">Ende</label>
 			<label index="tx_cal_event.start_date">Event Start Tag</label>
+			<label index="tx_cal_event.orig_start_date">Start Tag der ursprüngliche Wiederholung</label>
 			<label index="tx_cal_event.start_time">Event Start Zeit</label>
+			<label index="tx_cal_event.orig_start_time">Start Zeit der ursprüngliche Wiederholung (für ganztägig leer lassen)</label>
 			<label index="tx_cal_event.end_date">Event Ende Tag</label>
 			<label index="tx_cal_event.end_time">Event Ende Zeit</label>
 			<label index="tx_cal_event.allday">ganztägiges Ereignis</label>
@@ -474,7 +477,7 @@
 			<label index="tx_cal_event.teaser">Vorschau</label>
 			<label index="tx_cal_event.description">Beschreibung</label>
 			<label index="tx_cal_event.exception">Ausnahme</label>
-			<label index="tx_cal_event.deviation">Abweichender Event</label>
+			<label index="tx_cal_event.deviation">Abweichender Termin</label>
 			<label index="tx_cal_event.fe_cruser_id">Ersteller</label>
 			<label index="tx_cal_event.shared_user">Dieses Ereignis für andere freigeben. Achtung!
 				Beinhaltet Rechte!</label>

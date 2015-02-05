@@ -356,6 +356,8 @@ class tx_cal_tcemain_processdatamap {
 					/* Delete any temporary events previously associated with this calendar */
 					if ($calendar ['type'] != 0) {
 						$service->deleteTemporaryEvents ($id);
+						$service->deleteSchedulerTask($id);
+						$calendar['schedulerId'] = 0;
 						
 						$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 						if ($extConf ['useNewRecurringModel']) {

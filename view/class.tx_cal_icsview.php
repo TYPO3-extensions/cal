@@ -185,33 +185,20 @@ END:VCALENDAR
 		
 		$rems = array ();
 		$rems ['###EVENT###'] = strip_tags ($ics_events);
-		$title = $getdate;
+		$title = '';
 		if (! empty ($this->master_array)) {
-			if (! is_a ($this->master_array [0], 'tx_cal_model')) {
-				if ($this->controller->piVars ['calendar']) {
-					$calendar = $this->modelObj->findCalendar ($this->controller->piVars ['calendar'], 'tx_cal_calendar', $this->conf ['pidList']);
-					if (is_object ($calendar)) {
-						$title = $calendar->getTitle ();
-					}
-				} else if ($this->controller->piVars ['category']) {
-					$category = $this->modelObj->findCategory ($this->controller->piVars ['category'], 'tx_cal_category', $this->conf ['pidList']);
-					if (is_object ($category)) {
-						$title = $category->getTitle ();
-					}
-				}
+			if (is_a ($this->master_array [0], 'tx_cal_model')) {
+				$title = $this->master_array [0]->getTitle ();				
 			} else {
-				$title = $this->master_array [0]->getTitle ();
+				$title = $this->appendCalendarTitle($title);
+				$title = $this->appendCategoryTitle($title);
 			}
-		} else if ($this->controller->piVars ['category']) {
-			$category = $this->modelObj->findCategory ($this->conf ['category'], 'tx_cal_category', $this->conf ['pidList']);
-			if (is_object ($category)) {
-				$title = $category->getTitle ();
-			}
-		} else if ($this->controller->piVars ['calendar']) {
-			$calendar = $this->modelObj->findCalendar ($this->conf ['calendar'], 'tx_cal_calendar', $this->conf ['pidList']);
-			if (is_object ($calendar)) {
-				$title = $calendar->getTitle ();
-			}
+		} else {
+			$title = $this->appendCalendarTitle($title);
+			$title = $this->appendCategoryTitle($title);
+		}
+		if($title == ''){
+			$title = $getdate;
 		}
 		$title .= '.ics';
 		$title = strtr ($title, array (
@@ -240,6 +227,36 @@ END:VCALENDAR
 				'###TIMEZONE###' => $this->cObj->cObjGetSingle ($this->conf ['view.'] ['ics.'] ['timezone'], $this->conf ['view.'] ['ics.'] ['timezone.']) 
 		), $rems, array ());
 		return tx_cal_functions::removeEmptyLines ($return);
+	}
+	
+	private function appendCalendarTitle($title){
+		if ($this->controller->piVars ['calendar']) {
+			foreach (explode (',', $this->controller->piVars ['calendar']) as $calendarId) {
+				$calendar = $this->modelObj->findCalendar ($calendarId, 'tx_cal_calendar', $this->conf ['pidList']);
+				if (is_object ($calendar)) {
+					if($title != ''){
+						$title .= '_';
+					}
+					$title .= $calendar->getTitle ();
+				}
+			}
+		}
+		return $title;
+	}
+	
+	private function appendCategoryTitle($title){
+		if ($this->controller->piVars ['category']) {
+			foreach (explode (',', $this->controller->piVars ['category']) as $categoryId) {
+				$category = $this->modelObj->findCategory ($categoryId, 'tx_cal_category', $this->conf ['pidList']);
+				if (is_object ($category)) {
+					if($title != ''){
+						$title .= '_';
+					}
+					$title .= $category->getTitle ();
+				}
+			}
+		}
+		return $title;
 	}
 }
 

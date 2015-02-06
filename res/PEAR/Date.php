@@ -450,6 +450,9 @@ class Date {
 					case "n" :
 						$output .= "\n";
 						break;
+					case "N" :
+							$output .= $this->month;
+							break;
 					case "O" :
 						$offms = $this->tz->getOffset ($this);
 						$direction = $offms >= 0 ? "+" : "-";

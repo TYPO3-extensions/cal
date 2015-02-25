@@ -310,6 +310,9 @@ class tx_cal_date extends Date {
 					case "n" :
 						$output .= "\n";
 						break;
+					case "N" :
+						$output .= $this->month;
+						break;
 					case "O" :
 						if ($this->ob_invalidtime)
 							return $this->_getErrorInvalidTime ();

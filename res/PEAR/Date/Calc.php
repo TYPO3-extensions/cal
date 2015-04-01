@@ -135,7 +135,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function dateFormat($day, $month, $year, $format) {
+	static function dateFormat($day, $month, $year, $format) {
 		if (! Date_Calc::isValidDate ($day, $month, $year)) {
 			$year = Date_Calc::dateNow ('%Y');
 			$month = Date_Calc::dateNow ('%m');
@@ -225,7 +225,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function defaultCentury($year) {
+	static function defaultCentury($year) {
 		if (strlen ($year) == 1) {
 			$year = '0' . $year;
 		}
@@ -257,7 +257,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function dateToDays($day, $month, $year) {
+	static function dateToDays($day, $month, $year) {
 		$century = (int) substr ($year, 0, 2);
 		$year = (int) substr ($year, 2, 2);
 		if ($month > 2) {
@@ -292,7 +292,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function daysToDate($days, $format = DATE_CALC_FORMAT) {
+	static function daysToDate($days, $format = DATE_CALC_FORMAT) {
 		$days -= 1721119;
 		$century = floor ((4 * $days - 1) / 146097);
 		$days = floor (4 * $days - 1 - 146097 * $century);
@@ -348,7 +348,7 @@ class Date_Calc {
 	 *
 	 * @since Method available since Release 1.5.0
 	 */
-	function isoWeekDate($pn_day = 0, $pn_month = 0, $pn_year = null) {
+	static function isoWeekDate($pn_day = 0, $pn_month = 0, $pn_year = null) {
 		if (is_null ($pn_year)) {
 			$pn_year = Date_Calc::dateNow ('%Y');
 		}
@@ -433,7 +433,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function gregorianToISO($day, $month, $year) {
+	static function gregorianToISO($day, $month, $year) {
 		$mnth = array (
 				0,
 				31,
@@ -524,7 +524,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function dateSeason($season, $year = 0) {
+	static function dateSeason($season, $year = 0) {
 		if ($year == '') {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -582,7 +582,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function dateNow($format = DATE_CALC_FORMAT) {
+	static function dateNow($format = DATE_CALC_FORMAT) {
 		return strftime ($format, time ());
 	}
 	
@@ -598,7 +598,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getYear() {
+	static function getYear() {
 		return Date_Calc::dateNow ('%Y');
 	}
 	
@@ -614,7 +614,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getMonth() {
+	static function getMonth() {
 		return Date_Calc::dateNow ('%m');
 	}
 	
@@ -630,7 +630,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getDay() {
+	static function getDay() {
 		return Date_Calc::dateNow ('%d');
 	}
 	
@@ -653,7 +653,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function julianDate($day = 0, $month = 0, $year = 0) {
+	static function julianDate($day = 0, $month = 0, $year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -703,7 +703,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getWeekdayFullname($day = 0, $month = 0, $year = 0) {
+	static function getWeekdayFullname($day = 0, $month = 0, $year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -740,7 +740,7 @@ class Date_Calc {
 	 *
 	 * @see Date_Calc::getWeekdayFullname()
 	 */
-	function getWeekdayAbbrname($day = 0, $month = 0, $year = 0, $length = 3) {
+	static function getWeekdayAbbrname($day = 0, $month = 0, $year = 0, $length = 3) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -768,7 +768,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getMonthFullname($month) {
+	static function getMonthFullname($month) {
 		$month = (int) $month;
 		if (empty ($month)) {
 			$month = (int) Date_Calc::dateNow ('%m');
@@ -795,7 +795,7 @@ class Date_Calc {
 	 *
 	 * @see Date_Calc::getMonthFullname
 	 */
-	function getMonthAbbrname($month, $length = 3) {
+	static function getMonthAbbrname($month, $length = 3) {
 		$month = (int) $month;
 		if (empty ($month)) {
 			$month = Date_Calc::dateNow ('%m');
@@ -821,7 +821,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getMonthFromFullName($month) {
+	static function getMonthFromFullName($month) {
 		$month = strtolower ($month);
 		$months = Date_Calc::getMonthNames ();
 		while (list ($id, $name) = each ($months)) {
@@ -850,7 +850,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getMonthNames() {
+	static function getMonthNames() {
 		$months = array ();
 		for ($i = 1; $i < 13; $i ++) {
 			$months [$i] = strftime ('%B', mktime (0, 0, 0, $i, 1, 2001));
@@ -876,7 +876,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getWeekDays() {
+	static function getWeekDays() {
 		$weekdays = array ();
 		for ($i = 0; $i < 7; $i ++) {
 			$weekdays [$i] = strftime ('%A', mktime (0, 0, 0, 1, $i, 2001));
@@ -903,7 +903,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function dayOfWeek($day = 0, $month = 0, $year = 0) {
+	static function dayOfWeek($day = 0, $month = 0, $year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -945,7 +945,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function weekOfYear($day = 0, $month = 0, $year = 0) {
+	static function weekOfYear($day = 0, $month = 0, $year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -980,7 +980,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function quarterOfYear($day = 0, $month = 0, $year = 0) {
+	static function quarterOfYear($day = 0, $month = 0, $year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1011,7 +1011,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function daysInMonth($month = 0, $year = 0) {
+	static function daysInMonth($month = 0, $year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1056,7 +1056,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function weeksInMonth($month = 0, $year = 0) {
+	static function weeksInMonth($month = 0, $year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1099,7 +1099,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getCalendarWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function getCalendarWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1142,7 +1142,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getCalendarMonth($month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function getCalendarMonth($month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1194,7 +1194,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function getCalendarYear($year = 0, $format = DATE_CALC_FORMAT) {
+	static function getCalendarYear($year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1229,7 +1229,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function prevDay($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function prevDay($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1264,7 +1264,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function nextDay($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function nextDay($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1299,7 +1299,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function prevWeekday($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function prevWeekday($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1342,7 +1342,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function nextWeekday($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function nextWeekday($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1389,7 +1389,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function prevDayOfWeek($dow, $day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT, $onOrBefore = false) {
+	static function prevDayOfWeek($dow, $day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT, $onOrBefore = false) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1439,7 +1439,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function nextDayOfWeek($dow, $day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT, $onOrAfter = false) {
+	static function nextDayOfWeek($dow, $day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT, $onOrAfter = false) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1490,7 +1490,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function prevDayOfWeekOnOrBefore($dow, $day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function prevDayOfWeekOnOrBefore($dow, $day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		return Date_Calc::prevDayOfWeek ($dow, $day, $month, $year, $format, true);
 	}
 	
@@ -1518,7 +1518,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function nextDayOfWeekOnOrAfter($dow, $day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function nextDayOfWeekOnOrAfter($dow, $day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		return Date_Calc::nextDayOfWeek ($dow, $day, $month, $year, $format, true);
 	}
 	
@@ -1546,7 +1546,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function beginOfWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function beginOfWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1585,7 +1585,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function endOfWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function endOfWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1624,7 +1624,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function beginOfPrevWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function beginOfPrevWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1668,7 +1668,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function beginOfNextWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function beginOfNextWeek($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1709,7 +1709,7 @@ class Date_Calc {
 	 * @see Date_Calc::beginOfMonthBySpan()
 	 * @deprecated Method deprecated in Release 1.4.4
 	 */
-	function beginOfMonth($month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function beginOfMonth($month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1742,7 +1742,7 @@ class Date_Calc {
 	 * @see Date_Calc::beginOfMonthBySpan()
 	 * @deprecated Method deprecated in Release 1.4.4
 	 */
-	function beginOfPrevMonth($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function beginOfPrevMonth($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1786,7 +1786,7 @@ class Date_Calc {
 	 * @see Date_Calc::endOfMonthBySpan()
 	 * @deprecated Method deprecated in Release 1.4.4
 	 */
-	function endOfPrevMonth($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function endOfPrevMonth($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1829,7 +1829,7 @@ class Date_Calc {
 	 * @see Date_Calc::beginOfMonthBySpan()
 	 * @deprecated Method deprecated in Release 1.4.4
 	 */
-	function beginOfNextMonth($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function beginOfNextMonth($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1873,7 +1873,7 @@ class Date_Calc {
 	 * @see Date_Calc::endOfMonthBySpan()
 	 * @deprecated Method deprecated in Release 1.4.4
 	 */
-	function endOfNextMonth($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function endOfNextMonth($day = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1920,7 +1920,7 @@ class Date_Calc {
 	 *
 	 * @since Method available since Release 1.4.4
 	 */
-	function beginOfMonthBySpan($months = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function beginOfMonthBySpan($months = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -1983,7 +1983,7 @@ class Date_Calc {
 	 *
 	 * @since Method available since Release 1.4.4
 	 */
-	function endOfMonthBySpan($months = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
+	static function endOfMonthBySpan($months = 0, $month = 0, $year = 0, $format = DATE_CALC_FORMAT) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -2036,7 +2036,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function firstOfMonthWeekday($month = 0, $year = 0) {
+	static function firstOfMonthWeekday($month = 0, $year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -2073,7 +2073,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function NWeekdayOfMonth($week, $dow, $month, $year, $format = DATE_CALC_FORMAT) {
+	static function NWeekdayOfMonth($week, $dow, $month, $year, $format = DATE_CALC_FORMAT) {
 		if (is_numeric ($week)) {
 			$DOW1day = ($week - 1) * 7 + 1;
 			$DOW1 = Date_Calc::dayOfWeek ($DOW1day, $month, $year);
@@ -2118,7 +2118,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function isValidDate($day, $month, $year) {
+	static function isValidDate($day, $month, $year) {
 		if ($year < 0 || $year > 9999) {
 			return false;
 		}
@@ -2145,7 +2145,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function isLeapYear($year = 0) {
+	static function isLeapYear($year = 0) {
 		if (empty ($year)) {
 			$year = Date_Calc::dateNow ('%Y');
 		}
@@ -2185,7 +2185,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function isFutureDate($day, $month, $year) {
+	static function isFutureDate($day, $month, $year) {
 		$this_year = Date_Calc::dateNow ('%Y');
 		$this_month = Date_Calc::dateNow ('%m');
 		$this_day = Date_Calc::dateNow ('%d');
@@ -2225,7 +2225,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function isPastDate($day, $month, $year) {
+	static function isPastDate($day, $month, $year) {
 		$this_year = Date_Calc::dateNow ('%Y');
 		$this_month = Date_Calc::dateNow ('%m');
 		$this_day = Date_Calc::dateNow ('%d');
@@ -2274,7 +2274,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function dateDiff($day1, $month1, $year1, $day2, $month2, $year2) {
+	static function dateDiff($day1, $month1, $year1, $day2, $month2, $year2) {
 		if (! Date_Calc::isValidDate ($day1, $month1, $year1)) {
 			return - 1;
 		}
@@ -2314,7 +2314,7 @@ class Date_Calc {
 	 * @static
 	 *
 	 */
-	function compareDates($day1, $month1, $year1, $day2, $month2, $year2) {
+	static function compareDates($day1, $month1, $year1, $day2, $month2, $year2) {
 		$ndays1 = Date_Calc::dateToDays ($day1, $month1, $year1);
 		$ndays2 = Date_Calc::dateToDays ($day2, $month2, $year2);
 		if ($ndays1 == $ndays2) {

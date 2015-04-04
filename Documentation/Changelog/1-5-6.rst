@@ -1,0 +1,9 @@
+
+
+1.5.6
+---------------------
+
+::
+
+	* Fixed #57727 Fatal error: Class 'tx\_cal\_organizer' not found
+

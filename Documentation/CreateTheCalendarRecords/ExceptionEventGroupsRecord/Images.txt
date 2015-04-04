@@ -1,0 +1,7 @@
+﻿.. |img-35|     image:: ../../Images/manual_html_m33b16d43.jpg
+   :height: 320
+   :width: 428
+.. :align: left
+.. :border: 0
+.. :name: graphics23
+

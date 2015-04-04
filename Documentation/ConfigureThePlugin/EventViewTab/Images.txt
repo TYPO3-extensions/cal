@@ -1,0 +1,6 @@
+﻿.. |img-21|     image:: ../../Images/manual_html_4a6469d6.jpg
+.. :align: left
+.. :border: 0
+.. :name: Event Tab
+.. :width: 100%
+

@@ -1,0 +1,16 @@
+
+
+1.4.2
+---------------------
+
+::
+
+	* Fixed compatibility issues with TYPO3 Scheduler.
+	* Fixed bugs with Organizer/Location views and tt\_address.
+	* Fixed several bugs related to reminder e-mails and frontend editing.
+	* Fixed several view errors (related to 2012; special recurring events; monthOff; formatting).
+	* Added function to add events in day view.
+	* Removed obsolete configurations.
+	* Adjusted code for TYPO3 core compatibility.
+	* Changed manual to point to new project home at forge.typo3.org
+

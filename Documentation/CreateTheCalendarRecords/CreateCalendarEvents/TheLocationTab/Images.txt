@@ -1,0 +1,6 @@
+﻿.. |img-30|     image:: ../../../Images/manual_html_32796b3d.jpg
+.. :align: left
+.. :border: 0
+.. :name: Event Record Location Tab
+.. :width: 100%
+

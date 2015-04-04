@@ -1,0 +1,22 @@
+
+
+1.7.0
+---------------------
+
+::
+
+	* TYPO3 LTS 6.2 support version
+	* New Feature: use of FAL. Please read chapter „Updating to version 1.7.0“
+	* Bug #57344: TYPO3 6.2 migration result
+	* Bug #58209: category selection allocation no more possible for normal editors
+	* Bug #58406: Problem with FE-Edit/Categories
+	* Bug #58629: Fix invalid SQL in icalender service
+	* Bug #58722: Random images with typo3 6.2
+	* Bug #60178: External calendars and TYPO3 6.2
+	* Bug #60759: PHP Catchable Fatal Error: Argument 3 passed to ...
+	* Bug #60862: import .ics-file
+	* Bug #61922: Minical view leads to Exception in dev environment
+	* Bug #61935: Event View show images from an other element
+	* Bug #62045: No workspace preview on any page (including tx\_cal data/plugin or not) tx\_cal\_event\_service.php
+	* Suggestion #62304: New function validateDateRanges() is not a good idea
+

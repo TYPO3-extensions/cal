@@ -1,0 +1,40 @@
+﻿.. |img-3|      image:: ../../Images/manual_html_1a64d8ff.png
+   :height: 14
+   :width: 16
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: graphics62
+
+.. |img-4|      image:: ../../Images/manual_html_m40041d6.png
+   :height: 15
+   :width: 15
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Note
+
+.. |img-5|      image:: ../../Images/manual_html_618b87d5.png
+   :height: 16
+   :width: 16
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Caution
+
+.. |img-6|      image:: ../../Images/manual_html_26b3715f.png
+   :height: 15
+   :width: 18
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Technical Stuff
+
+.. |img-7|      image:: ../../Images/manual_html_6ff0a3fd.jpg
+   :height: 15
+   :width: 18
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Internet Link
+

@@ -1,0 +1,6 @@
+﻿.. |img-29|     image:: ../../../Images/manual_html_53877177.jpg
+.. :align: left
+.. :border: 0
+.. :name: Event Record Recurrence Tab
+.. :width: 100%
+

@@ -1,0 +1,22 @@
+
+
+1.5.3
+---------------------
+
+::
+
+	* Add additonalWhere clause for any event selection in views
+	* Add new category selection option to support “show all events that are assigned to any of the selected categories” use case
+	* Support other map types than Google Maps
+	* Fix for search form issues
+	* Fix for RSS view not showing some events
+	* Fixes for ICS view not including the last recurring event/non-standard-compliant RDATE formatting
+	* Fix for wrong parameter date handlings
+	* Fix for swift email errors
+	* Fix for SQL error when deleting events with notifications
+	* Fixes for Frontend editing (incl. creation problem in case of allday events)
+	* Fix for depreciation log entries
+	* Fix translation bugs
+	* Fix for week view bugs in case of switching from one year to another
+	* Fix for complex monthMiniTemplates
+

@@ -1,0 +1,6 @@
+﻿.. |img-28|     image:: ../../Images/manual_html_m41428b74.jpg
+.. :align: left
+.. :border: 0
+.. :name: Event Record General Tab
+.. :width: 100%
+

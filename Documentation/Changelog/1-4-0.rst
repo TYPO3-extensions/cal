@@ -1,0 +1,30 @@
+
+
+1.4.0
+---------------------
+
+::
+
+	* Added a completely new set of default templates (old templates are available for compatibility).
+	* Added feature to allow hiding old events on a per-view basis.
+	* Added optional message when no events are found for a calendar view.
+	* Added feature to hide multi-day events from list view as soon as they have begun.
+	* Changed backend calendar access control to follow TYPO3 conventions.
+	* Added feature to limit calendar, location, and organizer records to those in the same sysfolder.
+	* Fixed several bugs with iCal handling, including timezone support.
+	* Enhanced category handling, including support for category icons.
+	* Added option to sort the categories in the tree by title or uid.
+	* Added perfectLightbox2 integration.
+	* Added feature to include entire frontend groups as event attendee.
+	* Introduced caching and several performance improvements
+	* Fixed issues with month and weekday abbreviations on multibyte charsets
+	* Fixed several bugs in handling of recurring events, including RDATE and exceptions.
+	* Switched from “Gabriel” to “Scheduler” extension.
+	* Added option to show related events in event view.
+	* Fixed JavaScript errors due to duplicate prototype.js includes.
+	* Added new options and bugfixes for better layout and usability in Frontend Editing.
+	* Added support for alternate RTEs in Frontend Editing.
+	* Improved RealURL autoconfiguration.
+	* Updated manual with more information about templating.
+	* Fixed many other small issues (nearly 100 issues total)
+

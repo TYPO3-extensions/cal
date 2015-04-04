@@ -1,0 +1,7 @@
+﻿.. |img-45|     image:: ../../Images/manual_html_m193a3c0.jpg
+.. :align: left
+.. :border: 0
+.. :name: WEC Map Screenshot
+.. :width: 100%
+
+

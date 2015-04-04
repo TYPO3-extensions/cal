@@ -1,0 +1,15 @@
+﻿.. |img-7|      image:: ../../Images/manual_html_6ff0a3fd.jpg
+   :height: 15
+   :width: 18
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Internet Link
+
+.. |img-14|     image:: ../../Images/manual_html_m4762216f.jpg
+   :height: 277
+   :width: 188
+.. :align: left
+.. :border: 0
+.. :name: graphics6
+

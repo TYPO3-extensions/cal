@@ -1,0 +1,6 @@
+﻿.. |img-47|     image:: ../../Images/manual_html_m1ed040d0.jpg
+   :height: 544
+   :width: 284
+.. :align: left
+.. :border: 0
+.. :name: graphics28

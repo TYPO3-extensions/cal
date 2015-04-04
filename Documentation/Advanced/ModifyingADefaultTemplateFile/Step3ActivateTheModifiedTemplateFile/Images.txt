@@ -1,0 +1,12 @@
+﻿.. |img-62|     image:: ../../../Images/manual_html_30a36e40.jpg
+   :height: 188
+   :width: 378
+.. :align: left
+.. :border: 0
+.. :name: graphics39
+
+.. |img-63|     image:: ../../../Images/manual_html_7a1de772.jpg
+.. :align: left
+.. :border: 0
+.. :name: Template Modification 04
+.. :width: 100%

@@ -1,0 +1,8 @@
+﻿.. |img-3|      image:: ../Images/manual_html_1a64d8ff.png
+   :height: 14
+   :width: 16
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: graphics62
+

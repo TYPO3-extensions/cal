@@ -1,0 +1,18 @@
+
+
+1.5.2
+---------------------
+
+::
+
+	* Fixes for multi-language environments: weekday labels, links to single view
+	* Multiple fixes for newer TYPO3 core versions (caching, old XCLASS, BE\_USER object conflicts)
+	* Correct link handling for week view and mini month calendar
+	* Improved Italian translation
+	* Several template fixes (event\_model.tmpl, newLargeMonth.tmpl, newSmallMonth.tmpl, standard CSS)
+	* Dropped support for TYPO3 core versions < 4.5 in several functions
+	* Fix for fatal error on deviation creation
+	* Fix for RealURL autoconf
+	* Fix for event exception rendering with maxRecurringEvents
+	* Better support for multiple calendars with different category configurations
+

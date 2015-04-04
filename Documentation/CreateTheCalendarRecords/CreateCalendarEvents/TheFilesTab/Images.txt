@@ -1,0 +1,6 @@
+﻿.. |img-32|     image:: ../../../Images/manual_html_2c97e8d1.jpg
+.. :align: left
+.. :border: 0
+.. :name: Event Record Files Tab
+.. :width: 100%
+

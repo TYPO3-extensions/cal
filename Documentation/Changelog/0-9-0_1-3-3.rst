@@ -1,0 +1,656 @@
+.. include:: ../Includes.txt
+
+
+0.9.0 - 1.3.3
+---------------------
+
+.. ### BEGIN~OF~TABLE ###
+
+.. container:: table-row
+
+   Version
+         1.3.3
+   
+   Changes
+         Fixed several bugs with recurring events.
+         
+         Added translations for some labels where they were missing.
+         
+         Fixed several issues with frontend editing.
+
+
+.. container:: table-row
+
+   Version
+         1.3.2
+   
+   Changes
+         !!! Security fix. Please upgrade immediately !!!
+
+
+.. container:: table-row
+
+   Version
+         1.3.1
+   
+   Changes
+         Fixed fatal error with felogin on TYPO3 4.3.1 and greater.
+         
+         Fixed incompatibility with saltedpasswords in TYPO3 4.3.0 and greater.
+         
+         Fixed linking issues with dayview and backlinks.
+         
+         Fixed issue with category filtering in frontend output.
+         
+         Several other small bugfixes. See ChangeLog within the extension for
+         full details.
+
+
+.. container:: table-row
+
+   Version
+         1.3.0
+   
+   Changes
+         Improved getdate and view parameter handling to more intelligently
+         select the view based on date parameters.  ***NOTE: RealURL
+         configuration must be updated!***
+         
+         Improved recurring events by adding rdate recurrence support and
+         recurrence indexing.
+         
+         Improved recurring event indexer so that it is now stable. Indexing
+         recurring events decreases memory consumption.  ***NOTE: If you use
+         the Scheduler in TYPO3 4.3 with Calendar Base, you must enable the new
+         Recurring Event Model and Indexer.***
+         
+         Added regional event feature to show nearby events.
+         
+         Added support for experimental calajax extension with vastly improved
+         frontend editing.
+         
+         Added support for TYPO3 4.3 caching framework.
+         
+         Added support for TYPO3 4.3 Scheduler as a replacement for Gabriel
+         extension.
+         
+         Added support for TYPO3 4.3 date picker and removed date2cal
+         requirement.
+         
+         Removed deprecated functional calls for better PHP 5.3 compatibility.
+         
+         Many more bugfixes. See ChangeLog within the extension for full
+         details.
+
+
+.. container:: table-row
+
+   Version
+         1.2.1
+   
+   Changes
+         !!! Security Fix. Please upgrade immediately !!!
+
+
+.. container:: table-row
+
+   Version
+         1.2.0
+   
+   Changes
+         The date2cal extension is now required.
+         
+         Major caching improvements.
+         
+         Added additional checks for valid event objects, fixing several bugs
+         in 1.1.0
+         
+         Added rdate support, allowing arbitrary dates, times, and durations
+         for each recurrence.
+         
+         Added compatibility with TYPO3 4.3 caching framework.
+         
+         Overriding locallang strings through Typoscript now works as in other
+         extensions.
+         
+         Bugfixes for event notifications.
+         
+         Bugfixes for iCal import, especially in the area of timezone support.
+         
+         Small XHTML cleanups.
+         
+         Fixed bug with update script needed when upgrading from a version
+         earlier than 0.16.0.
+
+
+.. container:: table-row
+
+   Version
+         1.1.0
+   
+   Changes
+         Added ability to configure frontend editing views of locations and
+         organizers.
+         
+         Added category-specific event notifications.
+         
+         Added organizer loader, in addition to location loader.
+         
+         Reduced cache size by adding non-cached verison of
+         substituteMarkerArray.
+         
+         Fixed Firefox 3 and Safari 3 problems with recurring event user
+         interface.
+         
+         Fixed problems with Typoscript locallang overrides when locallang
+         labels were also used within Typoscript.
+         
+         Merged Flexform subscription options into a single field. Please
+         double check your existing settings!
+         
+         Many more minor bugfixes. See ChangeLog within the extension for full
+         details.
+
+
+.. container:: table-row
+
+   Version
+         1.0.0
+   
+   Changes
+         First stable release, functionally identical to 0.17.3.
+         
+         PHP 5 is required from 1.0.0 onward.
+
+
+.. container:: table-row
+
+   Version
+         0.17.3
+   
+   Changes
+         !!! 0.17.x branch is the end of the PHP 4 roadmap !!!
+         
+         Bugfixes for notification and reminder services.
+         
+         Bugfixes for location and organizer service when using partner.
+         
+         Fixed bug with all day events in RSS feeds.
+
+
+.. container:: table-row
+
+   Version
+         0.17.2
+   
+   Changes
+         Fixed several inconsistencies with Flexform, Typoscript settings, and
+         Typoscript reference.
+         
+         Fixed several bugs when only one view was allowed on a page.
+         
+         Backend bugfixes for treeview and recurring event fields.
+
+
+.. container:: table-row
+
+   Version
+         0.17.1
+   
+   Changes
+         Fixed several small frontend editing bugs for non-admin users.
+         
+         Fixed week view bugs when starting the week with Sunday.
+         
+         Cleaned up XHTML output in week view.
+         
+         Added many new Typoscript configuration options for list view.
+         
+         Added general stdWrap processing to transform all dates.
+
+
+.. container:: table-row
+
+   Version
+         0.17.0
+   
+   Changes
+         Major improvements to Typoscript configuration and rendering.
+         Integration with default content elements and DAM is now possible.
+         
+         Improved XHTML compliance in templates.
+         
+         Added several list view configuration options for more flexible page
+         browser and event filters.
+         
+         Fixed several bugs with backend data entry when the format used
+         periods or slashes.
+         
+         Added support for event records within the Insert Records content
+         element.
+         
+         Updated Context Sensitive Help for all database tables and added new
+         help text for Flexform fields (requires TYPO3 4.2 and greater).
+
+
+.. container:: table-row
+
+   Version
+         0.16.6
+   
+   Changes
+         Identical to 0.16.5 release.
+
+
+.. container:: table-row
+
+   Version
+         0.16.5
+   
+   Changes
+         Fixed bug when copying events
+         
+         Fixed bug with adding exceptions to events that link to internal TYPO3
+         pages.
+         
+         Fixed bug with recurring events on the 5th mo/tu/we/etc of each month.
+         
+         Fixed bugs with all day events in week view.
+         
+         Fixed ICS bug when recurrence frequency is blank.
+         
+         Added support for date2cal version 7.
+         
+         Improved Typoscript options for formatting dates.
+
+
+.. container:: table-row
+
+   Version
+         0.16.4
+   
+   Changes
+         Fix for long events in list view, day view, and week view.
+         
+         Further ICS cleanups for all day events and special characters.
+         
+         Minor bugfixes in frontend editing.
+         
+         Added new styling for free and busy views.
+         
+         Added missing Typoscript configuration for phone number.
+
+
+.. container:: table-row
+
+   Version
+         0.16.3
+   
+   Changes
+         Fixed rare crashes during install or Indexed Search crawling.
+         
+         XHTML cleanups in several templates.
+         
+         Improved caching support in Frontend Editing.
+         
+         ICS output bugfixes.
+         
+         Frontend editing bugfixes.
+         
+         Recurring event bugfixes.
+
+
+.. container:: table-row
+
+   Version
+         0.16.2
+   
+   Changes
+         Lots of small bugfixes, mainly on Typoscript configuration and the
+         various frontend views.
+
+
+.. container:: table-row
+
+   Version
+         0.16.1
+   
+   Changes
+         Fixed FlexForm field for adding custom Typoscript.
+         
+         Fixed some list view rendering bugs.
+         
+         Fixed weekStartDay configuration.
+         
+         Fixed PHP error when creating an ICS file.
+         
+         Fixed several PHP errors in frontend editing.
+
+
+.. container:: table-row
+
+   Version
+         0.16.0
+   
+   Changes
+         Full localization of records.
+         
+         Added event attendees and basic scheduling.
+         
+         Converted all internal date handling to PEAR date.
+         
+         Converted date storage from UNIX timestamp to yyyymmdd.
+         
+         Added support for dates prior to 1970 and after 2030 with the two date
+         changes described above.
+         
+         Updated naming conventions for many Typoscript objects.
+         
+         Added configuration options and improved output of RSS feeds.
+         
+         Added frontend users as event organizer source.
+         
+         Totally refactored frontend editing.
+         
+         Moved frontend editing and ICS export to individual static templates.
+         
+         Added support for attaching images and files to events.
+         
+         Added full Typoscript reference to the manual.
+
+
+.. container:: table-row
+
+   Version
+         0.15.5
+   
+   Changes
+         Improved display of all day events.
+         
+         Bugfix for workspace support.
+         
+         Bugfix for RTE support when non-admins edit events in the frontend.
+         
+         Bugfix for start and end time when searching.
+         
+         Added constant for setting UID prefix in ICS exports.
+
+
+.. container:: table-row
+
+   Version
+         0.15.4
+   
+   Changes
+         Bugfixes for category handling and frontend editing.
+
+
+.. container:: table-row
+
+   Version
+         0.15.3
+   
+   Changes
+         Removed option for nested or flat categories since the nested
+         interface also supports flat categories.
+         
+         Recurring event interface is enabled by default.
+         
+         Several bugfixes for category handling.
+         
+         Smaller bugfixes for RSS view, ICS view, and recurring events.
+
+
+.. container:: table-row
+
+   Version
+         0.15.2
+   
+   Changes
+         Added completely new icon set. Thanks to Ingo Renner!
+         
+         Added filtering to RSS view so that scheduled events are only shown a
+         few days in advance.
+         
+         Lots of cleanup to frontend editing.
+         
+         Improved formatting and default search ranges in each search view.
+         
+         Enabled support for workspaces.
+         
+         Internal update to use Singleton pattern for global variables.
+         
+         Added completely rewritten manual. Thanks to Bill Tenny-Brittian and
+         Web-Empowered Church!
+
+
+.. container:: table-row
+
+   Version
+         0.15.1
+   
+   Changes
+         Fixes for various timezone bugs, both backend and frontend.
+         
+         Backend usability enhancements, including major update to exception
+         events.
+         
+         Improved custom marker functionality.
+         
+         Lots of minor bugfixes throughout the extension.
+
+
+.. container:: table-row
+
+   Version
+         0.15.0
+   
+   Changes
+         Complete rewrite of recurring event processing.
+         
+         Rewrite of search functionality.
+         
+         Unneeded recurring event options are now hidden based on frequency of
+         recurrence.
+         
+         Added simplified user interface for creating recurring events.
+         
+         Grouped start date and time and end date and time.
+         
+         Added ability to filter calendars and categories through Typoscript or
+         FlexForm treeview.
+         
+         Improved backend labels for events to include start time.
+         
+         Added a pagebrowser to list view and added options to group list view
+         events by day, week, or month.
+         
+         Cleaned up spec compatibility with iCal and RSS exports.
+         
+         Changed upload paths to be cal-specific (uploads/tx\_cal/).
+         
+         Improved Typoscript support by adding stdWrap in many places.
+         
+         Fixed bug with one week months.
+
+
+.. container:: table-row
+
+   Version
+         0.14.1
+   
+   Changes
+         Fixed bug:
+         
+         \- creating event from month-view
+         
+         \- location & organizer view
+         
+         \- extended backlink functionality to work with different page\_ids
+         
+         \- in strtotimeOffset
+
+
+.. container:: table-row
+
+   Version
+         0.14.0
+   
+   Changes
+         Many many bugfixes
+         
+         Added link range controll
+         
+         Added custom marker functionalit: e.g. ###UID###
+         
+         Added functionality for custom language marker, e.g.
+         ###WHATEVER\_LABEL### in phpicalendar.tmpl will look for
+         l\_event\_whatever
+         
+         Added support for modules -> ###MODULE\_\_TEST###
+         
+         Changed categories to be also global (without a calendar)
+         
+         List view marker are now same as event marker
+         
+         Events can be created without being logged in
+         
+         Backlinks are generated dynamically – multistage possible
+         
+         Added attachments to events
+         
+         Suppressed link -generation of week and day if they don't have an
+         event
+         
+         Changed all date functions to GMT base. SERVER\_TIME\_OFFSET has to be
+         configured right in the install tool
+         
+         Changed all double quotes to single quotes
+         
+         Added option for custom view
+         
+         Cron functionality for notification and ICS update
+
+
+.. container:: table-row
+
+   Version
+         0.13.1
+   
+   Changes
+         Fixed bug that prevented events from showing.
+         
+         Added security checks for piVars.
+
+
+.. container:: table-row
+
+   Version
+         0.13.0
+   
+   Changes
+         Lots of bugfixes!
+         
+         Added ability to define multiple views in the plugin's FlexForm?.
+         
+         Added Free/Busy views and shared events. Private events can show up
+         only as busy, or can be shared with certain users.
+         
+         Integrated latitude/longitude into location and Google Maps into
+         location view.
+         
+         Static elements from various views are now configurable through
+         Typoscript.
+         
+         Date and time formats are now configurable through Typoscript and
+         strftime(), rather than embedded in locallang files.
+         
+         Categories are now optional
+         
+         End times are now option. If no end time is given, the start time is
+         used.
+         
+         Templates for notification emails.
+         
+         Extensible services for notifications and reminders.
+
+
+.. container:: table-row
+
+   Version
+         0.12.1
+   
+   Changes
+         Bugfixes for all day events, listview and typos in static TS.
+         
+         Added category requirement in frontend editing.
+         
+         Raised maximum TYPO3 version and updated required extensions in
+         ext\_emconf.php
+
+
+.. container:: table-row
+
+   Version
+         0.12.0
+   
+   Changes
+         Added support for multiple calendars.
+         
+         Improved Calendar->Category->Event relationships.
+         
+         Added support for caching (and Indexed Search).
+         
+         Removed requirement for anonymousUserID.
+         
+         Added flexible location and organizer models through services.
+         
+         Completed icon set.
+         
+         Lots of bugfixes
+
+
+.. container:: table-row
+
+   Version
+         0.11.0
+   
+   Changes
+         Bugfixes
+         
+         Events as link
+         
+         Search
+         
+         Login
+
+
+.. container:: table-row
+
+   Version
+         0.10.0
+   
+   Changes
+         Changed location and organizer fields to use tt\_address.
+         
+         Added manual.
+         
+         Added FlexForm for frontend plugin configuration.
+         
+         Enhanced Typoscript-based permissions system.
+
+
+.. container:: table-row
+
+   Version
+         0.9.0
+   
+   Changes
+         Added support for category colors
+         
+         Configuration of the different page ids is possible
+         
+         Added French translation
+
+
+.. ###### END~OF~TABLE ######

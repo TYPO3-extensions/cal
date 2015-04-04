@@ -1,0 +1,15 @@
+
+
+1.4.3
+---------------------
+
+::
+
+	* Support to change the start month for displaying the Year view
+	* Adjusted own PEAR-inclusion methods to support more server configurations
+	* Corrected several typos in German localization
+	* Fixed date handling of recurring event dates
+	* Fixed cal indexer BE module for newer TYPO3 core versions
+	* Fixed bugs with search view
+	* Changed manual for FE-editing and some TS references
+

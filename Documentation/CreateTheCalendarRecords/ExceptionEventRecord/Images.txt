@@ -1,0 +1,7 @@
+﻿.. |img-34|     image:: ../../Images/manual_html_46ee903a.png
+   :height: 295
+   :width: 428
+.. :align: left
+.. :border: 0
+.. :name: graphics22
+

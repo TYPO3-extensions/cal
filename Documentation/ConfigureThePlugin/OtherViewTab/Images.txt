@@ -1,0 +1,6 @@
+﻿.. |img-23|     image:: ../../Images/manual_html_m294512d.jpg
+.. :align: left
+.. :border: 0
+.. :name: Other View Tab
+.. :width: 100%
+

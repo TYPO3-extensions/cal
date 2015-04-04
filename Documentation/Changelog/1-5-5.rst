@@ -1,0 +1,10 @@
+
+
+1.5.5
+---------------------
+
+::
+
+	* more fixes of require\_once statements
+	* lowering TYPO3 version to 6.1.0
+

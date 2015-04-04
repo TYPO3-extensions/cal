@@ -1,0 +1,6 @@
+﻿.. |img-61|     image:: ../../../Images/manual_html_m48c417a1.jpg
+.. :align: left
+.. :border: 0
+.. :name: Template Syntax Example
+.. :width: 100%
+

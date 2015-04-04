@@ -1,0 +1,10 @@
+
+
+1.6.0
+---------------------
+
+::
+
+	* TYPO3 LTS 6.2 support version
+	* Fixed typoscript of image rendering
+

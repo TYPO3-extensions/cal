@@ -1,0 +1,42 @@
+﻿.. |month-view|      image:: ../../Images/month_view.png
+   :height: 533
+   :width: 732
+.. :align: left
+.. :border: 0
+.. :name: graphics37
+
+.. |week-view|      image:: ../../Images/week-view.png
+   :height: 564
+   :width: 738
+.. :align: left
+.. :border: 0
+.. :name: graphics47
+
+.. |day-view|     image:: ../../Images/day-view.png
+   :height: 556
+   :width: 737
+.. :align: left
+.. :border: 0
+.. :name: graphics49
+
+.. |event-view|     image:: ../../Images/event-view.png
+.. :align: left
+.. :border: 0
+.. :name: Screenshot: Event
+.. :width: 252
+   :height: 537
+
+.. |year-view|     image:: ../../Images/year-view.png
+   :height: 685
+   :width: 594
+.. :align: left
+.. :border: 0
+.. :name: graphics50
+
+.. |list-view|     image:: ../../Images/list-view.png
+   :height: 437
+   :width: 737
+.. :align: left
+.. :border: 0
+.. :name: graphics41
+

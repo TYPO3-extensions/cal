@@ -1,0 +1,10 @@
+
+
+1.6.1 TYPO3 LTS 6.2
+---------------------
+
+::
+
+	* TYPO3 LTS 6.2 support version
+	* Security fix
+

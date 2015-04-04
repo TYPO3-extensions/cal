@@ -1,0 +1,7 @@
+﻿.. |img-46|     image:: ../../Images/manual_html_7e62df69.jpg
+   :height: 292
+   :width: 665
+.. :align: left
+.. :border: 0
+.. :name: graphics27
+

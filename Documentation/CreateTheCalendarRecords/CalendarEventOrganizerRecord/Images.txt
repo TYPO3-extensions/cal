@@ -1,0 +1,7 @@
+﻿.. |img-37|     image:: ../../Images/manual_html_56171137.jpg
+   :height: 772
+   :width: 428
+.. :align: left
+.. :border: 0
+.. :name: graphics45
+

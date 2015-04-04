@@ -1,0 +1,13 @@
+
+
+1.4.1
+---------------------
+
+::
+
+	* Fixed bug with events that span multiple weeks.
+	* Fixed an error with scheduler integration during Frontend Editing.
+	* Added support for timezones and improved exception handling in iCal export.
+	* Added instructions for custom fields in Frontend Editing.
+	* Fixed several small bugs in the templates.
+

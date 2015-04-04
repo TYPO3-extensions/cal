@@ -1,0 +1,17 @@
+
+
+1.5.4
+---------------------
+
+::
+
+	* Ready for TYPO3 6.2.0
+	* #57344 TYPO3 6.2 migration result
+	* #55408 1st of month skipped with weekStartDay=Sunday and useNewTemplatesAndRendering=1
+	* #49146 Event in Listview breaks if title contains "\|"
+	* #49466 CalendarSelection
+	* #47261 "External calendar" won't show deviations
+	* #48611 FE: Ignores some dates if copied from another event /w Patch
+	* #49069 Syntax error in documentation part "15.15. TypoScript Reference: setup"
+	* #48908 The option "classFile" of "..." in T3\_SERVICES has been deprecated, ...
+

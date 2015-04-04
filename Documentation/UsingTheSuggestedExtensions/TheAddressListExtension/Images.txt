@@ -1,0 +1,19 @@
+﻿.. |img-41|     image:: ../../Images/manual_html_23ef9516.jpg
+.. :align: left
+.. :border: 0
+.. :name: Address List Extension 01
+.. :width: 100%
+
+.. |img-42|     image:: ../../Images/manual_html_42537e58.jpg
+.. :align: left
+.. :border: 0
+.. :name: Address List Record Form
+.. :width: 100%
+
+.. |img-4|      image:: ../../Images/manual_html_m40041d6.png
+   :height: 15
+   :width: 15
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Note

@@ -1,0 +1,10 @@
+
+
+1.5.1
+---------------------
+
+::
+
+	* Fix HTML code typo in template
+	* Restore compatibility with TYPO3 4.5 LTS
+

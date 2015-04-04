@@ -1,0 +1,18 @@
+
+
+1.5.0
+---------------------
+
+::
+
+	* Change category handling to follow plugin configuration more strictly
+	* Support file template for mini month view
+	* Change manual format to a more recent template
+	* Fix a larger number of deprecated function calls
+	* Fix some date/time display issues in BE list view
+	* Fix/add several configuration items in standard templates
+	* Clean up several notification issues
+	* Fix problem with event deviation index
+	* Fix ics related problems (import, escaping)
+	* Adjust misc. enabledField-settings
+

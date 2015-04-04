@@ -1,0 +1,7 @@
+﻿.. |img-38|     image:: ../../Images/manual_html_5d509741.jpg
+   :height: 839
+   :width: 428
+.. :align: left
+.. :border: 0
+.. :name: graphics46
+

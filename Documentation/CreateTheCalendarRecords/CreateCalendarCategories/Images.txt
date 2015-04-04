@@ -1,0 +1,14 @@
+﻿.. |img-27|     image:: ../../Images/manual_html_m6fadf75e.jpg
+   :height: 360
+   :width: 428
+.. :align: left
+.. :border: 0
+.. :name: graphics43
+
+.. |img-4|      image:: ../../Images/manual_html_m40041d6.png
+   :height: 15
+   :width: 15
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Note

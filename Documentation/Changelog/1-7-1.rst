@@ -1,0 +1,31 @@
+
+
+1.7.1 - TYPO3 LTS 6.2 & TYPO3 7
+---------------------
+
+::
+
+	* Task #65747: Official support Typo3 7.x
+	* Bug #62350: PHP Warning: Illegal offset type class.tx\_cal\_base\_view.php line 1748
+	* Bug #62413: cal indexer popup page ID issue
+	* Bug #62816: 1.7.0 File Attachment html error
+	* Bug #62849: Replacement of links for notifications generate error in class.tx\_cal\_functions.php (Version 1.7.0)
+	* Bug #63008: Insert record not working
+	* Bug #63053: Modify Templates
+	* Bug #63068: Upgrade script form 1.6.0 to 1.7.0 fails
+	* Bug #63331: Remove deprecated ::loadTCA()
+	* Bug #63336: Remove Deprecated feInterface
+	* Bug #63338: Deprecated 'classFile'
+	* Bug #64065: Deprecated array\_merge\_recursive\_overrule in T3 6.2
+	* Bug #64100: Invalid form/module token detected. Access Denied!
+	* Bug #64451: location and organizer links don't work with config.absRefPrefix
+	* Bug #64518: Missing fields for description and files in events of type Shortcut to page
+	* Bug #64553: Image cropping gone
+	* Bug #64913: dateFormat mit %N (Month without leading Zero) not working
+	* Bug #65155: doNotUseGetdateTheFirstTime not working with useGetdate = 1
+	* Bug #65891: monitoring-link missing cHash
+	* Bug #66024: Log errors
+	* Feature #63564: Use TypoScript configuration in new weekview
+	* Support #63543: cal 1.7.0 images and attachments
+	* Task #64461: Switch core classes to namespaces
+

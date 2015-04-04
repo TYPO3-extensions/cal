@@ -1,0 +1,5 @@
+﻿.. |img-48|     image:: ../../Images/manual_html_mf06fb92.jpg
+.. :align: left
+.. :border: 0
+.. :name: Frontend Admin
+.. :width: 100%

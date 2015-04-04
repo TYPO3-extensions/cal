@@ -49,8 +49,6 @@ class tx_cal_tcemain_processcmdmap {
 				$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 				if ($result) {
 					while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-						require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-						require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 						
 						/* If we're in a workspace, don't notify anyone about the event */
 						if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
@@ -135,8 +133,6 @@ class tx_cal_tcemain_processcmdmap {
 				$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 				if ($result) {
 					while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-						require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-						require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 						
 						/* If we're in a workspace, don't notify anyone about the event */
 						if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
@@ -178,8 +174,6 @@ class tx_cal_tcemain_processcmdmap {
 					$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 					if ($result) {
 						while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-							require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-							require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 							
 							/* If we're in a workspace, don't notify anyone about the event */
 							if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
@@ -220,7 +214,7 @@ class tx_cal_tcemain_processcmdmap {
 					$relationRecord = BackendUtility::getRecord ('tx_cal_fe_user_event_monitor_mm', $id);
 					// We have to delete the gabriel events BEFORE the tx_cal_events and
 					// its related tx_cal_fe_user_event_monitor_mm records are gone
-					require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
+
 					/* Clean up any pending reminders for this event */
 					$reminderService = &tx_cal_functions::getReminderService ();
 					try {
@@ -229,12 +223,8 @@ class tx_cal_tcemain_processcmdmap {
 					}
 				}
 				break;
-				break;
 		}
 	}
 }
 
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_tcemain_processcmdmap.php']) {
-	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_tcemain_processcmdmap.php']);
-}
 ?>

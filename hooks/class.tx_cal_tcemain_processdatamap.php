@@ -66,8 +66,6 @@ class tx_cal_tcemain_processdatamap {
 			}
 			
 			if ($status != 'new') {
-				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 				$event = BackendUtility::getRecord ('tx_cal_event', $id);
 				
 				// Do to our JS, these values get recalculated each time, but they may not have changed!
@@ -188,8 +186,6 @@ class tx_cal_tcemain_processdatamap {
 		
 		/* If we have a new calendar event */
 		if (($table == 'tx_cal_event' || $table == 'tx_cal_exception_event') && count ($fieldArray) > 1) {
-			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 			$event = BackendUtility::getRecord ($table, $status == 'new' ? $tcemain->substNEWwithIDs [$id] : $id);
 			
 			/* If we're in a workspace, don't notify anyone about the event */
@@ -380,8 +376,6 @@ class tx_cal_tcemain_processdatamap {
 		if ($table == 'tx_cal_exception_event_group' && ! strstr ($id, 'NEW')) {
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . '/controller/class.tx_cal_api.php');
 				$exceptionEvent = BackendUtility::getRecord ('tx_cal_exception_event_group', $id);
 				
 				/* If we're in a workspace, don't notify anyone about the event */
@@ -524,7 +518,4 @@ class tx_cal_tcemain_processdatamap {
 	}
 }
 
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_tcemain_processdatamap.php']) {
-	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_tcemain_processdatamap.php']);
-}
 ?>

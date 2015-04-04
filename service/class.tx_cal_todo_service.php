@@ -92,18 +92,12 @@ class tx_cal_todo_service extends tx_cal_event_service {
 			$calendarSearchString = $calendarService->getCalendarSearchString ($this->conf ['pidList'], true, $this->conf ['calendar'] ? $this->conf ['calendar'] : '');
 		}
 		
-		// categories specified? show only those categories
-		$categorySearchString = '';
-		if ($disableCategorySearchString) {
-			$categorySearchString = $categoryService->getCategorySearchString ($this->conf ['pidList'], true);
-		}
-		
 		// putting everything together
 		$additionalWhere = $calendarSearchString . ' AND tx_cal_event.completed < 100 AND tx_cal_event.pid IN (' . $this->conf ['pidList'] . ') ' . $this->cObj->enableFields ('tx_cal_event');
 		$getAllInstances = true;
 		$eventType = tx_cal_model::EVENT_TYPE_TODO;
 		
-		return $this->getEventsFromTable ($categories [0] [0], $getAllInstances, $additionalWhere, $this->getServiceKey (), $categorySearchString, false, $eventType);
+		return $this->getEventsFromTable ($categories [0] [0], $getAllInstances, $additionalWhere, $this->getServiceKey (), ! $disableCategorySearchString, false, $eventType);
 	}
 	function saveEvent($pid) {
 		$object = $this->modelObj->createEvent ('tx_cal_todo');

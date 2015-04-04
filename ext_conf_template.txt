@@ -14,7 +14,7 @@ todoSubtype = event
 # cat=basic/enable/220; type=text; label= Select the default height of category treeview:treeview is used in TCEForms and Flexform.
 categoryTVHeight = 280
 
-# cat=basic/enable/225; type=options[title,uid]; label=LLL:EXT:cal/locallang.xml:extmng.treeOrderBy
+# cat=basic/enable/225; type=options[title,uid]; label=LLL:EXT:cal/Resources/Private/Language/locallang_plugin.xml:extmng.treeOrderBy
 treeOrderBy = uid
 
 # cat=basic/enable/227; type=boolean; label= Show time values in BE lists
@@ -32,22 +32,25 @@ useNewRecurringModel = 1
 # cat=basic/enable/295; type=boolean; label= Hide Event Deviation records: Event deviation records should be changed only through IRRE editing; the records themselfs can be hidden.  
 hideDeviationRecords = 1
 
+# cat=basic/enable/300; type=options[tx_cal_category,sys_category]; label= Use tx_cal_category or sys_category records
+categoryService = tx_cal_category
+
 # cat=basic/enable/310; type=text; label= Recurring Event Start Date:  If using the new recurring event model, this is the earliest date recurring events will occur. The date format is YYYYMMDD.
 recurrenceStart = 20140101
 
 # cat=basic/enable/320; type=text; label= Value for useNewRecurringModel:  If using the new recurring event model, this is the latest date recurring events will occur. The date format is YYYYMMDD.
 recurrenceEnd = 20201231
 
-# cat=basic/enable/150; type=boolean; label=LLL:EXT:cal/locallang.xml:extmng.useInternalCaching
+# cat=basic/enable/150; type=boolean; label=LLL:EXT:cal/Resources/Private/Language/locallang_plugin.xml:extmng.useInternalCaching
 useInternalCaching = 1
 
-# cat=basic/enable/155; type=options[normal,lifetime,static]; label=LLL:EXT:cal/locallang.xml:extmng.cachingMode
+# cat=basic/enable/155; type=options[normal,lifetime,static]; label=LLL:EXT:cal/Resources/Private/Language/locallang_plugin.xml:extmng.cachingMode
 cachingMode = normal
 
-# cat=basic/enable/157; type=int; label=LLL:EXT:cal/locallang.xml:extmng.cacheLifetime
+# cat=basic/enable/157; type=int; label=LLL:EXT:cal/Resources/Private/Language/locallang_plugin.xml:extmng.cacheLifetime
 cacheLifetime = 0
 
-# cat=basic/enable/170; type=options[internal,cachingFramework]; label=LLL:EXT:cal/locallang.xml:extmng.cachingEngine
+# cat=basic/enable/170; type=options[internal,cachingFramework]; label=LLL:EXT:cal/Resources/Private/Language/locallang_plugin.xml:extmng.cachingEngine
 cachingEngine = internal
 
 # cat=basic/enable/180; type=boolean; label=Enable RealURL autoconfiguration

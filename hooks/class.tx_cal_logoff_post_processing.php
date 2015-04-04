@@ -30,7 +30,6 @@
  * This copyright notice MUST APPEAR in all copies of the file!
  * *************************************************************
  */
-require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 class tx_cal_logoff_post_processing {
 	function clearSessionApiAfterLogin($params, &$pObj) {
 		if ($_COOKIE ['fe_typo_user']) {
@@ -69,7 +68,4 @@ class tx_cal_logoff_post_processing {
 	}
 }
 
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_logoff_post_processing.php']) {
-	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_logoff_post_processing.php']);
-}
 ?>

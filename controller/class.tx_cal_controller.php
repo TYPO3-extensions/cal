@@ -448,9 +448,9 @@ class tx_cal_controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$rightsObj = &tx_cal_registry::Registry ('basic', 'rightscontroller');
 		
 		// et all categories
-		$categoryArray = $modelObj->findAllCategories ('tx_cal_category', '', $this->conf ['pidList']);
+		$categoryArray = $modelObj->findAllCategories ($this->confArr ['categoryService'], '', $this->conf ['pidList']);
 		
-		foreach ((array) $categoryArray ['tx_cal_category'] [0] [0] as $category) {
+		foreach ((array) $categoryArray [$this->confArr ['categoryService']] [0] [0] as $category) {
 			$row = $category->row;
 			$allCategoryByParentId [$row ['parent_category']] [] = $row;
 			$allCategoryById [$row ['uid']] = $row;
@@ -2716,7 +2716,7 @@ class tx_cal_controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadCategoriesClass');
 		$modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
 		$ajaxStringArray = Array ();
-		$categoryArray = $modelObj->findAllCategories ('cal_category_model', 'tx_cal_category', $this->conf ['pidList']);
+		$categoryArray = $modelObj->findAllCategories ('cal_category_model', $this->confArr ['categoryService'], $this->conf ['pidList']);
 		
 		// Hook: preLoadCategoriesRendering
 		foreach ($hookObjectsArr as $hookObj) {

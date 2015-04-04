@@ -54,8 +54,8 @@ class tx_cal_category_model extends tx_cal_base_model {
 	/**
 	 * Constructor.
 	 */
-	function tx_cal_category_model($row, $serviceKey) {
-		$this->setType ('tx_cal_category');
+	public function tx_cal_category_model($row, $serviceKey) {
+		$this->setType ('sys_category');
 		$this->setObjectType ('category');
 		$this->tx_cal_base_model ($serviceKey);
 		if (is_array ($row) && ! empty ($row)) {

@@ -73,6 +73,8 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 		$this->controller = &tx_cal_registry::Registry ('basic', 'controller');
 		$this->conf = &tx_cal_registry::Registry ('basic', 'conf');
 		$this->serviceKey = &$serviceKey;
+		
+		$this->images = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 	
 	/**
@@ -269,6 +271,11 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 		return $this->image;
 	}
 	
+	public function getImages() {
+		$fileRepository = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		return $fileRepository->findByRelation('tx_cal_'.$this->getObjectType(), 'image', $this->getUid());
+	}
+	
 	/**
 	 * Adds an image
 	 * 
@@ -310,6 +317,11 @@ class tx_cal_base_model extends tx_cal_abstract_model {
 	 */
 	function getAttachment() {
 		return $this->attachment;
+	}
+	
+	public function getAttachments() {
+		$fileRepository = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		return $fileRepository->findByRelation('tx_cal_'.$this->getObjectType(), 'attachment', $this->getUid());
 	}
 	
 	/**

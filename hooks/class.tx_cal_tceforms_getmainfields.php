@@ -41,11 +41,10 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 class tx_cal_tceforms_getmainfields {
 	function getMainFields_preProcess($table, &$row, $tceform) {
 		if ($table == 'tx_cal_event') {
-			global $TCA;
 			
 			/* If the event is temporary, make it read only. */
 			if ($row ['isTemp']) {
-				$TCA ['tx_cal_event'] ['ctrl'] ['readOnly'] = 1;
+				$GLOBALS ['TCA'] ['tx_cal_event'] ['ctrl'] ['readOnly'] = 1;
 			}
 			/* If we have posted data and a new record, preset values to what they were on the previous record */
 			if (is_array ($GLOBALS ['HTTP_POST_VARS'] ['data'] ['tx_cal_event']) && strstr ($row ['uid'], 'NEW')) {
@@ -84,12 +83,14 @@ class tx_cal_tceforms_getmainfields {
 			
 			/* If we have a calendar, set the category query to take this calendar into account */
 			if ($row ['calendar_id']) {
-				$TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config'] ['foreign_table_where'] = 'AND tx_cal_category.calendar_id IN (' . $row ['calendar_id'] . ',0) ORDER BY tx_cal_category.title';
+				$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
+				if($confArr ['categoryService'] == 'tx_cal_category') {
+					$GLOBALS ['TCA'] ['tx_cal_event'] ['columns'] ['category_id'] ['config'] ['foreign_table_where'] = 'AND tx_cal_category.calendar_id IN (' . $row ['calendar_id'] . ',0) ORDER BY tx_cal_category.title';
+				}
 			}
 		}
 		
 		if ($table == 'tx_cal_exception_event') {
-			global $TCA;
 			
 			if (! strstr ($row ['uid'], 'NEW')) {
 				if ($GLOBALS ['TYPO3_CONF_VARS'] ['SYS'] ['USdateFormat'] == '1') {
@@ -141,7 +142,4 @@ class tx_cal_tceforms_getmainfields {
 	}
 }
 
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_tceforms_getmainfields.php']) {
-	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/hooks/class.tx_cal_tceforms_getmainfields.php']);
-}
 ?>

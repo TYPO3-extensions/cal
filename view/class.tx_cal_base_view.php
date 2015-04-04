@@ -1705,14 +1705,16 @@ class tx_cal_base_view extends tx_cal_base_service {
 		$sims['###ALLOWED_TO_CREATE_EVENTS###'] = $this->rightsObj->isAllowedToCreateEvent();
 	}
 	
-	function renderWithFluid(){
+	function renderWithFluid($object = null){
 		$templateFile = GeneralUtility::getFileAbsFileName($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'TemplateFluid']);
 
         /** @var $view Tx_Fluid_View_StandaloneView */
-		$view = new Tx_Fluid_View_StandaloneView();
+		$view = new \TYPO3\CMS\Fluid\View\StandaloneView();
 		$view->setTemplatePathAndFilename($templateFile);
 		$view->assign($this->conf['view'].'View', $this);
-
+		if(is_object($object)){
+			$view->assign($this->conf['view'], $object);
+		}
 		$view->assign('settings', tx_cal_functions::getTsSetupAsPlainArray($this->conf));
 		return $view->render();
 	}

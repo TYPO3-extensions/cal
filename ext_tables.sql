@@ -147,6 +147,21 @@ CREATE TABLE tx_cal_calendar_fnb_user_group_mm (
   KEY uid_foreign (uid_foreign)
 );
 
+#
+# Extend table structure of table 'sys_category'
+#
+CREATE TABLE sys_category (
+	images int(11) unsigned DEFAULT '0',
+	single_pid int(11) unsigned DEFAULT '0' NOT NULL,
+	shortcut int(11) DEFAULT '0' NOT NULL,
+
+	headerstyle varchar(30) DEFAULT '' NOT NULL,
+	bodystyle varchar(30) DEFAULT '' NOT NULL,
+	calendar_id int(11) unsigned DEFAULT '0' NOT NULL,
+	shared_user_allowed tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	notification_emails text NOT NULL,
+);
+
 CREATE TABLE tx_cal_category (
 	uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,

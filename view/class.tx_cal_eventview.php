@@ -37,7 +37,7 @@
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
 class tx_cal_eventview extends tx_cal_base_view {
-	function tx_cal_eventview() {
+	public function tx_cal_eventview() {
 		$this->tx_cal_base_view ();
 	}
 	
@@ -50,8 +50,12 @@ class tx_cal_eventview extends tx_cal_base_view {
 	 *        	of the event
 	 * @return string HTML output.
 	 */
-	function drawEvent(&$event, $getdate, $relatedEvents = Array()) {
+	public function drawEvent(&$event, $getdate, $relatedEvents = Array()) {
 		$this->_init ($relatedEvents);
+		
+		if ($this->conf ['activateFluid'] == 1) {
+			return $this->renderWithFluid ($event);
+		}
 		
 		$page = $this->cObj->fileResource ($this->conf ['view.'] ['event.'] ['eventTemplate']);
 		if ($page == '') {

@@ -233,6 +233,19 @@ $confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']
 		'className' => 'tx_cal_category_service' 
 ));
 
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_category_model' /* sv type */,  'sys_category' /* sv key */,
+	array (
+		'title' => 'System Category Model',
+		'description' => '',
+		'subtype' => 'category',
+		'available' => TRUE,
+		'priority' => 50,
+		'quality' => 50,
+		'os' => '',
+		'exec' => '',
+		'className' => 'tx_cal_syscategory_service'
+));
+
 /* Default day View */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_default_event' /* sv key */,
 	array (

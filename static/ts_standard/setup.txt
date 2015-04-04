@@ -194,6 +194,11 @@ plugin.tx_cal_controller {
 			#				structure can be used with this template.
 			# @also			Constants
 			eventTemplate = {$plugin.tx_cal_controller.view.event.eventTemplate}
+			
+			# @description	Template for the standard event view - Rendered with fluid. Any events following the standard event
+			#				structure can be used with this template.
+			# @also			Constants
+			eventTemplateFluid = {$plugin.tx_cal_controller.view.event.eventTemplateFluid}
 
 			# @description	Template for the phpicalendar event view.  This option is deprecated since version
 			#				1.3.0 and will be removed completely by 1.5.0.
@@ -2517,6 +2522,9 @@ plugin.tx_cal_controller {
 			# @description	Turns on ICS/iCal links in the frontend.
 			# @also			FlexForm
 			showIcsLinks = {$plugin.tx_cal_controller.view.ics.showIcsLinks}
+			
+			# only for reference
+			typeNum = {$plugin.tx_cal_controller.view.ics.typeNum}
 
 			# @description	Wraps the ics link
 			link_wrap = <div class="ics_link">%s</div>

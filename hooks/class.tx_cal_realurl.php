@@ -226,6 +226,7 @@ class tx_cal_realurl {
 						'tx_cal_location' => 'tx_cal_location',
 						'tx_cal_calendar' => 'tx_cal_calendar',
 						'tx_cal_category' => 'tx_cal_category',
+						'sys_category' => 'sys_category',
 						'tx_cal_attendee' => 'tx_cal_attendee',
 						'tx_tt_address' => 'tx_tt_address',
 						'tx_feuser' => 'tx_feuser',

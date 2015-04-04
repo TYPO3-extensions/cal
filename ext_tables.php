@@ -27,7 +27,7 @@ $confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']
 $TCA ['tx_cal_event'] = Array (
 		'ctrl' => Array (
 				'requestUpdate' => 'calendar_id,freq,rdate_type,allday',
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_event',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event',
 				'label' => 'title',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -66,7 +66,7 @@ $TCA ['tx_cal_event'] = Array (
 $TCA ['tx_cal_category'] = Array (
 		'ctrl' => Array (
 				'requestUpdate' => 'calendar_id',
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_category',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category',
 				'label' => 'title',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -97,7 +97,7 @@ $TCA ['tx_cal_category'] = Array (
 $TCA ['tx_cal_calendar'] = Array (
 		'ctrl' => Array (
 				'requestUpdate' => 'activate_fnb',
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_calendar',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar',
 				'label' => 'title',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -133,7 +133,7 @@ $TCA ['tx_cal_calendar'] = Array (
 $TCA ['tx_cal_exception_event'] = Array (
 		'ctrl' => Array (
 				'requestUpdate' => 'calendar_id,freq,rdate_type,allday',
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_exception_event',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_exception_event',
 				'label' => 'title',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -157,7 +157,7 @@ $TCA ['tx_cal_exception_event'] = Array (
 
 $TCA ['tx_cal_exception_event_group'] = Array (
 		'ctrl' => Array (
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_exception_event_group',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_exception_event_group',
 				'label' => 'title',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -180,7 +180,7 @@ $TCA ['tx_cal_exception_event_group'] = Array (
 
 $TCA ['tx_cal_location'] = Array (
 		'ctrl' => Array (
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_location',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location',
 				'label' => 'name',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -208,7 +208,7 @@ $TCA ['tx_cal_location'] = Array (
 
 $TCA ['tx_cal_organizer'] = Array (
 		'ctrl' => Array (
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_organizer',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer',
 				'label' => 'name',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -236,7 +236,7 @@ $TCA ['tx_cal_organizer'] = Array (
 
 $TCA ['tx_cal_unknown_users'] = Array (
 		'ctrl' => Array (
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_unknown_users',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_unknown_users',
 				'label' => 'email',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -256,7 +256,7 @@ $TCA ['tx_cal_unknown_users'] = Array (
 
 $TCA ['tx_cal_attendee'] = Array (
 		'ctrl' => Array (
-				'title' => 'LLL:EXT:cal/locallang_db.xml:tx_cal_attendee',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_attendee',
 				'label' => 'uid',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -277,7 +277,7 @@ $TCA ['tx_cal_attendee'] = Array (
 $TCA ['tx_cal_fe_user_event_monitor_mm'] = Array (
 		'ctrl' => Array (
 				'requestUpdate' => '',
-				'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_fe_user_event.monitor',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_fe_user_event.monitor',
 				'label' => 'tablenames',
 				'label_alt' => 'tablenames,offset',
 				'label_alt_force' => 1,
@@ -291,7 +291,7 @@ $TCA ['tx_cal_fe_user_event_monitor_mm'] = Array (
 
 $TCA ['tx_cal_event_deviation'] = Array (
 		'ctrl' => Array (
-				'title' => 'LLL:EXT:cal/locallang_db.xml:tx_cal_event.deviation',
+				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.deviation',
 				'label' => 'title',
 				'tstamp' => 'tstamp',
 				'crdate' => 'crdate',
@@ -326,7 +326,7 @@ if ($useLocationStructure == 'tx_tt_address') {
 	$tempColumns = Array (
 			'tx_cal_controller_islocation' => Array (
 					'exclude' => 1,
-					'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_location.islocation',
+					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.islocation',
 					'config' => Array (
 							'type' => 'check',
 							'default' => 1 
@@ -342,7 +342,7 @@ if ($useOrganizerStructure == 'tx_tt_address') {
 	$tempColumns = Array (
 			'tx_cal_controller_isorganizer' => Array (
 					'exclude' => 1,
-					'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_organizer.isorganizer',
+					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.isorganizer',
 					'config' => Array (
 							'type' => 'check',
 							'default' => 0 
@@ -358,7 +358,7 @@ if ($useOrganizerStructure == 'tx_tt_address') {
 $tempColumns = Array (
 		'tx_cal_enable_accesscontroll' => Array (
 				'exclude' => 1,
-				'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_enable_accesscontroll',
+				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_enable_accesscontroll',
 				'config' => Array (
 						'type' => 'check',
 						'default' => 0 
@@ -380,7 +380,7 @@ $TCA ['be_groups'] ['ctrl'] ['requestUpdate'] = $TCA ['be_groups'] ['ctrl'] ['re
 $tempColumns = Array (
 		'tx_cal_calendar' => Array (
 				'exclude' => 1,
-				'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_calendar_accesscontroll',
+				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar_accesscontroll',
 				'displayCond' => 'FIELD:tx_cal_enable_accesscontroll:REQ:true',
 				'config' => Array (
 						'type' => 'select',
@@ -408,7 +408,7 @@ require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal'
 $tempColumns = Array (
 		'tx_cal_category' => Array (
 				'exclude' => 1,
-				'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_category_accesscontroll',
+				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category_accesscontroll',
 				'displayCond' => 'FIELD:tx_cal_enable_accesscontroll:REQ:true',
 				'config' => Array (
 						'type' => 'select',
@@ -437,7 +437,7 @@ $tempColumns = Array (
 $tempColumns = Array (
 		'tx_cal_calendar' => Array (
 				'exclude' => 1,
-				'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_calendar_private',
+				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar_private',
 				'config' => Array (
 						'type' => 'group',
 						'internal_type' => 'db',
@@ -449,7 +449,7 @@ $tempColumns = Array (
 								'_VERTICAL' => 1,
 								'add' => Array (
 										'type' => 'script',
-										'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_calendar.createNew',
+										'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
 										'icon' => 'EXT:cal/res/icons/icon_tx_cal_calendar.gif',
 										'params' => Array (
 												'table' => 'tx_cal_calendar',
@@ -463,7 +463,7 @@ $tempColumns = Array (
 		),
 		'tx_cal_calendar_subscription' => Array (
 				'exclude' => 1,
-				'label' => 'LLL:EXT:cal/locallang_db.php:tx_cal_calendar_subscription',
+				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar_subscription',
 				'config' => Array (
 						'type' => 'group',
 						'internal_type' => 'db',
@@ -475,7 +475,7 @@ $tempColumns = Array (
 								'_VERTICAL' => 1,
 								'add' => Array (
 										'type' => 'script',
-										'title' => 'LLL:EXT:cal/locallang_db.php:tx_cal_calendar.createNew',
+										'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
 										'icon' => 'EXT:cal/res/icons/icon_tx_cal_calendar.gif',
 										'params' => Array (
 												'table' => 'tx_cal_calendar',
@@ -493,18 +493,18 @@ $tempColumns = Array (
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns ('fe_users', $tempColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ('fe_users', 'tx_cal_calendar,tx_cal_calendar_subscription;;;;1-1-1');
 
-include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'res/class.tx_cal_treeview.php');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue ($_EXTKEY . '_controller', 'FILE:EXT:cal/res/flexform1_ds.xml');
+//include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'res/class.tx_cal_treeview.php');
+//\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue ($_EXTKEY . '_controller', 'FILE:EXT:cal/res/flexform1_ds.xml');
 
 // Set up the tt_content table to hide layout and select key, but show pi_flexform.
-$TCA ['tt_content'] ['types'] ['list'] ['subtypes_excludelist'] [$_EXTKEY . '_controller'] = 'layout,select_key';
-$TCA ['tt_content'] ['types'] ['list'] ['subtypes_addlist'] [$_EXTKEY . '_controller'] = 'pi_flexform';
+//$TCA ['tt_content'] ['types'] ['list'] ['subtypes_excludelist'] [$_EXTKEY . '_controller'] = 'layout,select_key';
+//$TCA ['tt_content'] ['types'] ['list'] ['subtypes_addlist'] [$_EXTKEY . '_controller'] = 'pi_flexform';
 
 // Add the plugin.
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin (Array (
-		'LLL:EXT:cal/locallang_db.php:tt_content.list_type',
-		$_EXTKEY . '_controller' 
-), 'list_type');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin (Array (
+// 		'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tt_content.list_type',
+// 		$_EXTKEY . '_controller' 
+// ), 'list_type');
 
 // Add Calendar Events to the "Insert Records" content element
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords ('tx_cal_event');
@@ -519,14 +519,14 @@ $TCA ['tt_content'] ['types'] ['list'] ['subtypes_addlist'] [$_EXTKEY . '_contro
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_organizer', 'EXT:cal/res/help/locallang_csh_txcalorganizer.php');
 
 // Add the static templates.
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ts/', 'Classic CSS-based template');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ts_standard/', 'Standard CSS-based template');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ajax/', 'AJAX-based template (Experimental!)');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/css/', 'Classic CSS styles');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/css_standard/', 'Standard CSS styles');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/rss_feed/', 'News-feed (RSS,RDF,ATOM)');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ics/', 'ICS Export');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/fe-editing/', 'Fe-Editing');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ts/', 'Classic CSS-based template');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ts_standard/', 'Standard CSS-based template');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ajax/', 'AJAX-based template (Experimental!)');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/css/', 'Classic CSS styles');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/css_standard/', 'Standard CSS styles');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/rss_feed/', 'News-feed (RSS,RDF,ATOM)');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ics/', 'ICS Export');
+// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/fe-editing/', 'Fe-Editing');
 if (TYPO3_MODE == "BE") {
 	$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 	if ($extConf ['useNewRecurringModel']) {

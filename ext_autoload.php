@@ -60,6 +60,7 @@ return array (
 		'tx_cal_attendee_service' => $extensionPath . 'service/class.tx_cal_attendee_service.php',
 		'tx_cal_calendar_service' => $extensionPath . 'service/class.tx_cal_calendar_service.php',
 		'tx_cal_category_service' => $extensionPath . 'service/class.tx_cal_category_service.php',
+		'tx_cal_syscategory_service' => $extensionPath . 'service/class.tx_cal_syscategory_service.php',
 		'tx_cal_rights_service' => $extensionPath . 'service/class.tx_cal_rights_service.php',
 		'tx_cal_icalendar_service' => $extensionPath . 'service/class.tx_cal_icalendar_service.php',
 		'tx_cal_base_service' => $extensionPath . 'service/class.tx_cal_base_service.php',

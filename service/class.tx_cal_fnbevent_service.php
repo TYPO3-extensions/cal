@@ -78,10 +78,9 @@ class tx_cal_fnbevent_service extends tx_cal_event_service {
 		$formattedStarttime = $this->starttime->format ('%Y%m%d');
 		$formattedEndtime = $this->endtime->format ('%Y%m%d');
 		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
-		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', 'tx_cal_category');
+		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
 		
 		$calendarSearchString = $this->getFreeAndBusyCalendarSearchString ($pidList, true, $this->conf ['calendar'] ? $this->conf ['calendar'] : '');
-		$categorySearchString = $categoryService->getCategorySearchString ($pidList, true);
 		
 		$recurringClause = '';
 		// only include the recurring clause if we don't use the new recurring model or a view not needing recurring events.
@@ -119,7 +118,7 @@ class tx_cal_fnbevent_service extends tx_cal_event_service {
 		$categoryService->getCategoryArray ($pidList, $categories);
 		
 		// creating events
-		return $this->getEventsFromTable ($categories [0] [0], $includeRecurring, $additionalWhere, $this->getServiceKey (), $categorySearchString, false, $eventType);
+		return $this->getEventsFromTable ($categories [0] [0], $includeRecurring, $additionalWhere, $this->getServiceKey (), true, false, $eventType);
 	}
 	function getFreeAndBusyCalendarSearchString($pidList, $includePublic, $linkIds) {
 		$hash = md5 ($pidList . ' ' . $includePublic . ' ' . $linkIds);

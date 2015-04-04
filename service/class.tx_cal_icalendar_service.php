@@ -380,7 +380,8 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 	function deleteTemporaryCategories($uid) {
 		/* Delete the calendar categories */
 		$where = ' calendar_id=' . $uid;
-		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_category', $where);
+		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
+		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($extConf ['categoryService'], $where);
 	}
 	function deleteScheduledUpdatesFromCalendar($uid) {
 		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('uid', 'tx_cal_event', 'calendar_id=' . $uid);
@@ -702,7 +703,8 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 				array_unique ($insertedOrUpdatedCategoryUids);
 				$where .= ' AND uid NOT IN (' . implode (',', $insertedOrUpdatedCategoryUids) . ')';
 			}
-			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_category', $where);
+			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
+			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($extConf ['categoryService'], $where);
 		}
 		return $insertedOrUpdatedEventUids;
 	}

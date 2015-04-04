@@ -95,10 +95,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 		}
 		$formattedStarttime = $this->starttime->format ('%Y%m%d');
 		$formattedEndtime = $this->endtime->format ('%Y%m%d');
-		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
-		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', 'tx_cal_category');
-		$calendarSearchString = $calendarService->getCalendarSearchString ($pidList, true, $this->conf ['calendar'] ? $this->conf ['calendar'] : '');
-		$categorySearchString = $categoryService->getCategorySearchString ($pidList, true);
 		
 		$recurringClause = '';
 		// only include the recurring clause if we don't use the new recurring model or a view not needing recurring events.
@@ -123,12 +119,18 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$recurringClause = ' OR (tx_cal_event.start_date<=' . $formattedEndtime . ' AND (tx_cal_event.freq IN ("day", "week", "month", "year") AND (tx_cal_event.until>=' . $formattedStarttime . ' OR tx_cal_event.until=0))) OR (tx_cal_event.rdate AND tx_cal_event.rdate_type IN ("date_time", "date", "period")) ';
 		}
 		
+		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
+		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
+		$calendarSearchString = $calendarService->getCalendarSearchString ($pidList, true, $this->conf ['calendar'] ? $this->conf ['calendar'] : '');
+		
 		// putting everything together
 		// Franz: added simple check/include for rdate events at the end of this where clause.
 		// But we need to find a way to only include rdate events within the searched timerange
 		// - otherwise we'll flood the results after some time. I think we need a mm-table for that!
-		$additionalWhere = $calendarSearchString . ' AND tx_cal_event.pid IN (' . $pidList . ') ' . $this->cObj->enableFields ('tx_cal_event') . ' AND ((tx_cal_event.start_date>=' . $formattedStarttime . ' AND tx_cal_event.start_date<=' . $formattedEndtime . ') OR (tx_cal_event.end_date<=' . $formattedEndtime . ' AND tx_cal_event.end_date>=' . $formattedStarttime . ') OR (tx_cal_event.end_date>=' . $formattedEndtime . ' AND tx_cal_event.start_date<=' . $formattedStarttime . ')' . $recurringClause . ')' . $additionalWhere;
+		$additionalWhere = ' AND tx_cal_event.pid IN (' . $pidList . ') ' . $this->cObj->enableFields ('tx_cal_event') . ' AND ((tx_cal_event.start_date>=' . $formattedStarttime . ' AND tx_cal_event.start_date<=' . $formattedEndtime . ') OR (tx_cal_event.end_date<=' . $formattedEndtime . ' AND tx_cal_event.end_date>=' . $formattedStarttime . ') OR (tx_cal_event.end_date>=' . $formattedEndtime . ' AND tx_cal_event.start_date<=' . $formattedStarttime . ')' . $recurringClause . ')' . $additionalWhere;
 		// $additionalWhere = $calendarSearchString.' AND tx_cal_event.pid IN ('.$pidList.') '.$this->cObj->enableFields('tx_cal_event').' AND ((tx_cal_event.start_date>='.$formattedEndtime.' OR tx_cal_event.end_date>='.$formattedStarttime.')' . $recurringClause . ')'.$additionalWhere;
+		
+		$additionalWhere = $calendarSearchString . $additionalWhere;
 		
 		// creating the arrays the user is allowed to see
 		$categories = array ();
@@ -136,7 +138,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$categoryService->getCategoryArray ($pidList, $categories);
 		
 		// creating events
-		return $this->getEventsFromTable ($categories [0] [0], $includeRecurring, $additionalWhere, $this->getServiceKey (), $categorySearchString, false, $eventType);
+		return $this->getEventsFromTable ($categories [0] [0], $includeRecurring, $additionalWhere, $this->getServiceKey (), true, false, $eventType);
 	}
 	
 	/**
@@ -153,7 +155,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 	 *        	
 	 * @return array array of tx_cal_phpcalendar_model events
 	 */
-	function getEventsFromTable(&$categories, $includeRecurring = false, $additionalWhere = '', $serviceKey = '', $categoryWhere = '', $onlyMeetingsWithoutStatus = false, $eventType = '0,1,2,3') {
+	function getEventsFromTable(&$categories, $includeRecurring = false, $additionalWhere = '', $serviceKey = '', $addCategoryWhere = false, $onlyMeetingsWithoutStatus = false, $eventType = '0,1,2,3') {
+		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
+		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
+		
 		$events = array ();
 		
 		$select = 'tx_cal_calendar.uid AS calendar_uid, ' . 'tx_cal_calendar.owner AS calendar_owner, ' . 'tx_cal_calendar.headerstyle AS calendar_headerstyle, ' . 'tx_cal_calendar.bodystyle AS calendar_bodystyle, ' . 'tx_cal_event.*';
@@ -175,20 +180,8 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$where .= ' ' . $this->cObj->cObjGetSingle ($this->conf ['view.'] [$this->conf ['view'] . '.'] ['event.'] ['additionalWhere'], $this->conf ['view.'] [$this->conf ['view'] . '.'] ['event.'] ['additionalWhere.']);
 		}
 		
-		if ($categoryWhere != '') {
-			$select .= ', tx_cal_event_category_mm.uid_foreign AS category_uid ';
-			$table .= ' LEFT JOIN tx_cal_event_category_mm ON tx_cal_event_category_mm.uid_local = tx_cal_event.uid';
-			$where .= $categoryWhere;
-			$groupBy = 'tx_cal_event.uid';
-			if ($this->conf ['view.'] ['joinCategoryByAnd']) {
-				$categoryArray = GeneralUtility::trimExplode (',', $this->conf ['category'], 1);
-				$groupBy .= ', tx_cal_event_category_mm.uid_local HAVING count(*) =' . count ($categoryArray);
-			}
-			$orderBy .= ', tx_cal_event.uid,tx_cal_event_category_mm.sorting';
-			
-			if ($this->conf ['view.'] [$this->conf ['view'] . '.'] ['event.'] ['additionalCategoryWhere']) {
-				$where .= ' ' . $this->cObj->cObjGetSingle ($this->conf ['view.'] [$this->conf ['view'] . '.'] ['event.'] ['additionalCategoryWhere'], $this->conf ['view.'] [$this->conf ['view'] . '.'] ['event.'] ['additionalCategoryWhere.']);
-			}
+		if ($addCategoryWhere) {
+			$categoryService->enhanceEventQuery($select, $table, $where, $groupBy, $orderBy);
 		}
 		
 		if ($onlyMeetingsWithoutStatus) {
@@ -213,34 +206,31 @@ class tx_cal_event_service extends tx_cal_base_service {
 			}
 		}
 		
+		//TYPO3\CMS\Core\Utility\DebugUtility::debug('SELECT '.$select.' FROM '.$table.' WHERE '.$where);
+		
 		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where, $groupBy, $orderBy, $limit);
 		
 		$lastday = '';
 		$currentday = ' ';
 		$first = true;
 		$lastUid = '';
-		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
-		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', 'tx_cal_category');
+		
 		$eventOwnerArray = $calendarService->getCalendarOwner ();
 		
 		$resultRows = Array ();
 		$lastUid = '';
-		/*
-		 * while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($result)) { $uid = $row['uid']; if(array_key_exists($row['uid'], $resultRows)){ $resultRows[$uid]['category_uid'] .= ','.$row['category_uid']; }else { $resultRows[$uid] = $row; } }
-		 */
+		
 		// fetching all categories attached to all events in the current view
 		$categoriesArray = array ();
 		// allow all categories, so unset 'allowedCategory' in the 'conf' array
 		$categoryService->conf ['view.'] ['allowedCategory'] = false;
 		$categoryService->getCategoryArray ($this->conf ['pidList'], $categoriesArray);
 		$eventCategories = &$categoriesArray [0] [1];
-		
 		$selectFields = $GLOBALS ['TYPO3_DB']->admin_get_fields ('tx_cal_event');
 		
 		$eventUids = array ();
 		if ($result) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				
 				if ($GLOBALS ['TSFE']->sys_page->versioningPreview) {
 					$interRow = array_intersect_key ($row, $selectFields);
 					$GLOBALS ['TSFE']->sys_page->versionOL ('tx_cal_event', $interRow);
@@ -274,10 +264,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 				continue;
 			}
 			
-			if (! $row ['uid']) {
-				continue;
-			}
-			
 			$row ['event_owner'] = &$eventOwnerArray [$row ['calendar_uid']];
 			if ($row ['end_date'] == 0) {
 				$row ['end_date'] = $row ['start_date'];
@@ -287,7 +273,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 			if ($this->conf ['view.'] ['showEditableEventsOnly'] == 1 && (! $event->isUserAllowedToEdit () && ! $event->isUserAllowedToDelete ())) {
 				continue;
 			}
-			
 			if ($row ['category_uid'] != '') {
 				$categoryIdArray = GeneralUtility::trimExplode (',', $row ['category_uid'], true);
 				foreach ($categoryIdArray as $categoryId) {
@@ -396,9 +381,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			if (! $includeRecurring) {
 				$this->starttime->copy ($tmp_starttime);
 				$this->endtime->copy ($tmp_endtime);
-			}
-			
-			if (! $includeRecurring) {
+				
 				$eventStart = $event->getStart ();
 				$events_tmp [$eventStart->format ('%Y%m%d')] [$event->isAllday () ? '-1' : ($eventStart->format ('%H%M'))] [$event->getUid ()] = $event;
 				
@@ -413,38 +396,22 @@ class tx_cal_event_service extends tx_cal_base_service {
 					}
 				}
 			} else if (is_object ($event)) {
-				if ($this->extConf ['useNewRecurringModel']) {
-					if (in_array ($event->getFreq (), Array (
-							'year',
-							'month',
-							'week',
-							'day' 
-					)) || ($event->getRdate () && in_array ($event->getRdateType (), Array (
-							'date',
-							'date_time',
-							'period' 
-					)))) {
-						$ex_events_dates = Array ();
-						foreach ($ex_events_group as $ex_events) {
-							foreach ($ex_events as $ex_event_day) {
-								foreach ($ex_event_day as $ex_event_array) {
-									foreach ($ex_event_array as $ex_event) {
-										$ex_events_dates [$ex_event->getStart ()->format ('%Y%m%d')] = 1;
-									}
+				if (in_array ($event->getFreq (), Array ('year', 'month', 'week', 'day')) || 
+						($event->getRdate () && in_array ($event->getRdateType (), Array ('date', 'date_time', 'period' )))) {
+					$ex_events_dates = Array ();
+					foreach ($ex_events_group as $ex_events) {
+						foreach ($ex_events as $ex_event_day) {
+							foreach ($ex_event_day as $ex_event_array) {
+								foreach ($ex_event_array as $ex_event) {
+									$ex_events_dates [$ex_event->getStart ()->format ('%Y%m%d')] = 1;
 								}
 							}
 						}
-						$events_tmp = $this->getRecurringEventsFromIndex ($event, $ex_events_dates);
-					} else {
-						$eventStart = $event->getStart ();
-						$events_tmp [$eventStart->format ('%Y%m%d')] [$event->isAllday () ? '-1' : ($eventStart->format ('%H%M'))] [$event->getUid ()] = $event;
 					}
+					$events_tmp = $this->getRecurringEventsFromIndex ($event, $ex_events_dates);
 				} else {
-					GeneralUtility::deprecationLog ('Usage of old recurrence model is deprecated since cal 1.5.' . LF . 'Please use new recurrence model instead, support will be removed after cal 1.6.');
-					$events_tmp = $this->recurringEvent ($event);
-					foreach ($ex_events_group as $ex_events) {
-						$this->removeEvents ($events_tmp, $ex_events);
-					}
+					$eventStart = $event->getStart ();
+					$events_tmp [$eventStart->format ('%Y%m%d')] [$event->isAllday () ? '-1' : ($eventStart->format ('%H%M'))] [$event->getUid ()] = $event;
 				}
 			}
 			
@@ -455,30 +422,15 @@ class tx_cal_event_service extends tx_cal_base_service {
 			}
 		}
 		
-		$categoryArray = GeneralUtility::trimExplode (',', implode (',', (array) $this->controller->piVars ['category']), 1);
+		$categoryIdArray = GeneralUtility::trimExplode (',', implode (',', (array) $this->controller->piVars ['category']), 1);
 		
-		// TODO: checking the piVar is not a very good thing
-		if ($this->conf ['view.'] ['categoryMode'] != 1 && $this->conf ['view.'] ['categoryMode'] != 3 && $categoryWhere != '' && ! (($this->conf ['view'] == 'ics' || $this->conf ['view'] == 'search_event') && ! empty ($categoryArray))) {
-			$uidCollector = array ();
-			
-			$select = 'tx_cal_event_category_mm.*, tx_cal_event.pid, tx_cal_event.uid';
-			$table = 'tx_cal_event_category_mm LEFT JOIN tx_cal_event ON tx_cal_event.uid = tx_cal_event_category_mm.uid_local';
-			$groupby = 'tx_cal_event_category_mm.uid_local';
-			$orderby = '';
-			$where = 'tx_cal_event.pid IN (' . $this->conf ['pidList'] . ')';
-			
-			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where, $groupby, $orderby);
-			if ($result) {
-				while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-					$uidCollector [] = $row ['uid_local'];
-				}
-				$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
-			}
+		if ($this->conf ['view.'] ['categoryMode'] != 1 && $this->conf ['view.'] ['categoryMode'] != 3 && $addCategoryWhere && ! (($this->conf ['view'] == 'ics' || $this->conf ['view'] == 'search_event') && ! empty ($categoryIdArray))) {
+			$uidCollector = $categoryService->getUidsOfEventsWithCategories();
 			
 			if (! empty ($uidCollector)) {
 				$additionalWhere .= ' AND tx_cal_event.uid NOT IN (' . implode (',', $uidCollector) . ')';
 			}
-			$eventsWithoutCategory = $this->getEventsFromTable ($categories, $includeRecurring, $additionalWhere, $serviceKey, '', $onlyMeetingsWithoutStatus, $eventType);
+			$eventsWithoutCategory = $this->getEventsFromTable ($categories, $includeRecurring, $additionalWhere, $serviceKey, false, $onlyMeetingsWithoutStatus, $eventType);
 			if (! empty ($eventsWithoutCategory)) {
 				$this->mergeEvents ($events, $eventsWithoutCategory);
 			}
@@ -508,10 +460,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$this->endtime->setMinute (0);
 		
 		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
-		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', 'tx_cal_category');
+		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
 		
 		$calendarSearchString = $calendarService->getCalendarSearchString ($pidList, true, $this->conf ['calendar'] ? $this->conf ['calendar'] : '');
-		$categorySearchString = $categoryService->getCategorySearchString ($pidList, true);
 		
 		// putting everything together
 		$additionalWhere = $calendarSearchString . ' AND tx_cal_event.pid IN (' . $pidList . ') ' . $this->cObj->enableFields ('tx_cal_event') . ' AND (tx_cal_event.freq!="none" OR tx_cal_event.freq!="")';
@@ -530,14 +481,14 @@ class tx_cal_event_service extends tx_cal_base_service {
 		}
 		
 		// creating events
-		if ($pidList)
-			return $this->getEventsFromTable ($categories [0] [0], $includeRecurring, $additionalWhere, $this->getServiceKey (), $categorySearchString, false, $eventType);
-		else
-			return array ();
+		if ($pidList) {
+			return $this->getEventsFromTable ($categories [0] [0], $includeRecurring, $additionalWhere, $this->getServiceKey (), true, false, $eventType);
+		} else {
+			return Array ();
+		}
 	}
 	function createEvent($row, $isException) {
-		$event = new tx_cal_phpicalendar_model( $row, $isException, $this->getServiceKey ());
-		return $event;
+		return new tx_cal_phpicalendar_model( $row, $isException, $this->getServiceKey ());
 	}
 	
 	/**
@@ -568,10 +519,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$this->endtime->addSeconds (86400);
 		}
 		
-		$categories = &$this->modelObj->findAllCategories ('cal_category_model', '', $pidList);
 		$categories = array ();
 		
-		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', 'tx_cal_category');
+		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
 		$categoryService->getCategoryArray ($pidList, $categories);
 		
 		$calendarSearchString = '';
@@ -580,17 +530,11 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$calendarSearchString = $calendarService->getCalendarSearchString ($pidList, true, $this->conf ['calendar'] ? $this->conf ['calendar'] : '');
 		}
 		
-		// categories specified? show only those categories
-		$categorySearchString = '';
-		if (! $disableCategorySearchString) {
-			$categorySearchString = $categoryService->getCategorySearchString ($pidList, true);
-		}
-		
 		// putting everything together
+		
+		$additionalWhere = $calendarSearchString . ' AND tx_cal_event.uid=' . $uid;
 		if ($showHiddenEvents) {
-			$additionalWhere = $calendarSearchString . ' AND tx_cal_event.uid=' . $uid;
-		} else {
-			$additionalWhere = $calendarSearchString . ' AND tx_cal_event.uid=' . $uid . ' AND tx_cal_event.hidden = 0';
+			$additionalWhere .= ' AND tx_cal_event.hidden = 0';
 		}
 		if (! $showDeletedEvents) {
 			$additionalWhere .= ' AND tx_cal_event.deleted = 0';
@@ -605,7 +549,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$getAllInstances = true;
 		}
 		
-		$events = $this->getEventsFromTable ($categories [0] [0], $getAllInstances, $additionalWhere, $this->getServiceKey (), $categorySearchString, false, $eventType);
+		$events = $this->getEventsFromTable ($categories [0] [0], $getAllInstances, $additionalWhere, $this->getServiceKey (), !$disableCategorySearchString, false, $eventType);
 		
 		// It is still the single view and we need to get the right instance and not all of them
 		if ($this->conf ['view'] == 'event') {
@@ -810,6 +754,12 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_shared_user_mm', array_unique ($groupArray), $uid, 'fe_groups');
 		}
 		
+		$category_mm_relation_table = 'tx_cal_event_category_mm';
+		$switchUidLocalForeign = false;
+		if ($this->extConf ['categoryService'] == 'sys_cateogry'){
+			$category_mm_relation_table = 'sys_category_record_mm';
+			$switchUidLocalForeign = true;
+		}
 		if ($this->rightsObj->isAllowedToCreateEventCategory ()) {
 			$categoryIds = Array ();
 			foreach ((array) $object->getCategories () as $category) {
@@ -817,11 +767,11 @@ class tx_cal_event_service extends tx_cal_base_service {
 					$categoryIds [] = $category->getUid ();
 				}
 			}
-			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_category_mm', $categoryIds, $uid, '');
+			$this->insertIdsIntoTableWithMMRelation ($category_mm_relation_table, $categoryIds, $uid, '', $switchUidLocalForeign);
 		} else {
-			$this->insertIdsIntoTableWithMMRelation ('tx_cal_event_category_mm', array (
+			$this->insertIdsIntoTableWithMMRelation ($category_mm_relation_table, array (
 					$this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['category.'] ['default'] 
-			), $uid, '');
+			), $uid, '', $switchUidLocalForeign);
 		}
 		
 		if ($this->rightsObj->isAllowedTo ('create', 'event', 'attendee') && $object->getEventType () == tx_cal_model::EVENT_TYPE_MEETING) {
@@ -916,8 +866,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
-		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-		
 		// Hook: updateEvent
 		$hookObjectsArr = tx_cal_functions::getHookObjectsArray ('tx_cal_event_service', 'eventServiceClass');
 		tx_cal_functions::executeHookObjectsFunction ($hookObjectsArr, 'updateEvent', $this, $event);
@@ -953,7 +901,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 					$categoryIds [] = $category->getUid ();
 				}
 			}
-			$table = 'tx_cal_event_category_mm';
+			$table = 'sys_category_record_mm';
 			$where = 'uid_local = ' . $uid;
 			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($table, $where);
 			$this->insertIdsIntoTableWithMMRelation ($table, $categoryIds, $uid, '');
@@ -1108,7 +1056,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$where = 'uid = ' . $uid;
 			$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $updateFields);
 			
-			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 			$fields = $event->getValuesAsArray ();
 			$fields ['deleted'] = 1;
 			$fields ['tstamp'] = $updateFields ['tstamp'];
@@ -1222,10 +1169,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 		}
 		
 		// Hook initialization:
-		global $TYPO3_CONF_VARS;
 		$hookObjectsArr = array ();
-		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'])) {
-			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'] as $classRef) {
+		if (is_array ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'])) {
+			foreach ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'] as $classRef) {
 				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}
@@ -1333,10 +1279,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 		}
 		
 		// Hook initialization:
-		global $TYPO3_CONF_VARS;
 		$hookObjectsArr = array ();
-		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'])) {
-			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'] as $classRef) {
+		if (is_array ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'])) {
+			foreach ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_event_service.php'] ['addAdditionalField'] as $classRef) {
 				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}
@@ -1380,9 +1325,8 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$includePublic = 1;
 		
 		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
-		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', 'tx_cal_category');
+		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
 		
-		$categorySearchString = $categoryService->getCategorySearchString ($pidList, $includePublic);
 		$calendarSearchString = $calendarService->getCalendarSearchString ($pidList, $includePublic, $linkIds, $this->conf ['view.'] ['calendar'] ? $this->conf ['view.'] ['calendar'] : '');
 		
 		$timeSearchString = ' AND tx_cal_event.pid IN (' . $pidList . ') ' . $this->cObj->enableFields ('tx_cal_event') . ' AND (((tx_cal_event.start_date>=' . $formattedStarttime . ' AND tx_cal_event.start_date<=' . $formattedEndtime . ') OR (tx_cal_event.end_date<=' . $formattedEndtime . ' AND tx_cal_event.end_date>=' . $formattedStarttime . ') OR (tx_cal_event.end_date>=' . $formattedEndtime . ' AND tx_cal_event.start_date<=' . $formattedStarttime . ') OR (tx_cal_event.start_date<=' . $formattedEndtime . ' AND (tx_cal_event.freq IN ("day","week","month","year") AND (tx_cal_event.until>=' . $formattedStarttime . ' OR tx_cal_event.until=0)))) OR (tx_cal_event.rdate AND tx_cal_event.rdate_type IN ("date_time","date","period"))) ';
@@ -1399,7 +1343,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$additionalWhere = $calendarSearchString . $timeSearchString . $locationSearchString . $organizerSearchString . $additionalSearch;
 		$categories = array ();
 		$categoryService->getCategoryArray ($pidList, $categories);
-		return $this->getEventsFromTable ($categories [0] [0], true, $additionalWhere, '', $categorySearchString, false, $eventType);
+		return $this->getEventsFromTable ($categories [0] [0], true, $additionalWhere, '', true, false, $eventType);
 	}
 	
 	/**
@@ -2330,10 +2274,8 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$formattedEndtime = $this->endtime->format ('%Y%m%d');
 			
 			$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
-			$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', 'tx_cal_category');
+			$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
 			$calendarSearchString = $calendarService->getCalendarSearchString ($pidList, true, $this->conf ['calendar'] ? $this->conf ['calendar'] : '');
-			
-			$categorySearchString = $categoryService->getCategorySearchString ($pidList, true);
 			
 			// putting everything together
 			$additionalWhere = $calendarSearchString . ' AND tx_cal_event.pid IN (' . $pidList . ') ' . $this->cObj->enableFields ('tx_cal_event') . ' AND ((tx_cal_event.start_date>=' . $formattedStarttime . ' AND tx_cal_event.start_date<=' . $formattedEndtime . ') OR (tx_cal_event.end_date<=' . $formattedEndtime . ' AND tx_cal_event.end_date>=' . $formattedStarttime . ') OR (tx_cal_event.end_date>=' . $formattedEndtime . ' AND tx_cal_event.start_date<=' . $formattedStarttime . ') OR (tx_cal_event.start_date<=' . $formattedEndtime . ' AND (tx_cal_event.freq IN ("day","week","month","year") AND tx_cal_event.until>=' . $formattedStarttime . ')))';
@@ -2348,7 +2290,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 				$includeRecurring = false;
 			}
 			// creating events
-			return $this->getEventsFromTable ($categories [0] [0], $includeRecurring, $additionalWhere, $this->getServiceKey (), $categorySearchString, true, '3');
+			return $this->getEventsFromTable ($categories [0] [0], $includeRecurring, $additionalWhere, $this->getServiceKey (), true, true, '3');
 		}
 	}
 	function updateAttendees($eventUid) {
@@ -2472,8 +2414,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		unset ($eventData ['event_owner']);
 	}
 	function findAllWithAdditionalWhere($where = '') {
-		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', 'tx_cal_category');
-		$categorySearchString = $categoryService->getCategorySearchString ($this->conf ['pidList'], true);
+		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
 		// putting everything together
 		//
 		// Franz: added simple check/include for rdate events at the end of this where clause.
@@ -2486,7 +2427,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		
 		$categoryService->getCategoryArray ($this->conf ['pidList'], $categories);
 		// creating events
-		return $this->getEventsFromTable ($categories [0] [0], false, $additionalWhere, $this->getServiceKey (), $categorySearchString, $false, '');
+		return $this->getEventsFromTable ($categories [0] [0], false, $additionalWhere, $this->getServiceKey (), true, $false, '');
 	}
 }
 function getInbetweenMonthValues($value) {

@@ -73,7 +73,7 @@ class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 	/**
 	 * The category service object
 	 * 
-	 * @var tx_cal_category_service
+	 * @var tx_cal_syscategory_service
 	 */
 	var $categoryService;
 	
@@ -126,19 +126,26 @@ class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 	 */
 	var $organizerPartnerService;
 	var $fileFunc;
-	function tx_cal_base_service() {
+	public function tx_cal_base_service() {
 		$this->controller = &tx_cal_registry::Registry ('basic', 'controller');
 		$this->conf = &tx_cal_registry::Registry ('basic', 'conf');
 		$this->rightsObj = &tx_cal_registry::Registry ('basic', 'rightscontroller');
 		$this->cObj = &tx_cal_registry::Registry ('basic', 'cobj');
 		$this->modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
 	}
-	function insertIdsIntoTableWithMMRelation($mm_table, $idArray, $uid, $tablename, $additionalParams = array()) {
+	
+	function insertIdsIntoTableWithMMRelation($mm_table, $idArray, $uid, $tablename, $additionalParams = array(), $switchUidLocalForeign = false) {
+		$uid_local = 'uid_local';
+		$uid_foreign = 'uid_foreign';
+		if($switchUidLocalForeign){
+			$uid_local = 'uid_foreign';
+			$uid_foreign = 'uid_local';
+		}
 		foreach ($idArray as $key => $foreignid) {
 			if (is_numeric ($foreignid)) {
 				$insertFields = array_merge (array (
-						'uid_local' => $uid,
-						'uid_foreign' => $foreignid,
+						$uid_local => $uid,
+						$uid_foreign => $foreignid,
 						'tablenames' => $tablename,
 						'sorting' => $key + 1 
 				), $additionalParams);

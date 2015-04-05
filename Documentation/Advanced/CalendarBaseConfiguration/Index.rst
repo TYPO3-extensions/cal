@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _CalendarBaseConfiguration:
 
-=============
+============================
 Calendar Base Configuration
-=============
+============================
 
 .. include:: ../../Includes.txt
 
@@ -60,7 +60,7 @@ the Information option appears in the drop-down box ( **1** ).
   use an index table for recurring events, reducing memory consumption
   and improving performance. Please see chapter “Using New Recurring
   Event Model / Cal Indexer” for more details.
-  
+
 |img-4| **Note:** The old recurring event model will become deprecated in the
   next release of the extension
 

@@ -5,7 +5,7 @@
 .. :border: 0
 .. :name: graphics44
 
-.. |img-4|      image:: ../../Images/manual_html_m40041d6.png
+.. |img-4|      image:: ../../../Images/manual_html_m40041d6.png
    :height: 15
    :width: 15
 .. :align: left

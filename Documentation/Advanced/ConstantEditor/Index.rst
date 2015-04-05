@@ -1,8 +1,8 @@
 .. _ConstantEditor:
 
-=============
+================
 Constant Editor
-=============
+================
 
 .. include:: ../../Includes.txt
 

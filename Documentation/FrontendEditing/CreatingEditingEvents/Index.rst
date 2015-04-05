@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _CreatingEditingEvents:
 
-=============
+========================
 Creating/Editing Events
-=============
+========================
 
 .. include:: ../../Includes.txt
 

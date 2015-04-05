@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _AddingAnRssFeed:
 
-=============
+===================
 Adding an RSS Feed
-=============
+===================
 
 .. include:: ../Includes.txt
 
@@ -14,12 +14,12 @@ There are three steps to this process.
 
 #. **Add the News-Feed Static Template.** Refer to Illustration 42. Add the
    **News-Feed (RSS, RDF, ATOM) (cal)** Static Template to either your root template or the Calendar Page template.
-   
+
    |img-49|
-   
+
    **Illustration 42: Adding the RSS Feed (News-Feed)**
-   
-   
+
+
 #. **Edit the Related Constants in the Constant Editor.** Refer to Illustration 43. Select the
    Calendar Base (RSS) constants from the Category drop-down menu. Then
    scroll down the Constant Editor to change the following three
@@ -28,9 +28,9 @@ There are three steps to this process.
    Change this to your homepage URL. ( **3** )  **News-Feed XML-
    Description.** Change this to a brief description of your feed. Click
    the update button to save your changes.
-   
+
    |img-50|
-   
+
    **Illustration 43: Changing RSS Constants in the Constant Editor**
 
 #. **Set the Storage Location for Events.** After setting the Calendar
@@ -49,11 +49,11 @@ There are three steps to this process.
    your mouse over the Calendar page in the Page Tree. The number that
    appears will be the PID. With this information, your link will be as
    follows:
-   
+
    |img-51|
-   
+
    **Illustration 44: Finding a Page's PID**
-   
+
    http://www.YOUR-SITE-URL.com/index.php?id=PID&type=151
 
 There are three parts to this link. (1) The link to the index page ( `

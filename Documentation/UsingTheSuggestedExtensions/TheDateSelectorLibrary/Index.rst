@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _TheDateSelectorLibrary:
 
-=============
+==========================
 The Date Selector Library
-=============
+==========================
 
 .. include:: ../../Includes.txt
 

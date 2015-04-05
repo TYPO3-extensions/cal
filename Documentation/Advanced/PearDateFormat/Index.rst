@@ -1,8 +1,8 @@
 .. _PearDateFormat:
 
-=============
+=================
 Pear Date format
-=============
+=================
 
 .. include:: ../../Includes.txt
 
@@ -12,7 +12,7 @@ Pear Date format
 
    Property
          Property:
-   
+
    Description
          Description:
 
@@ -21,7 +21,7 @@ Pear Date format
 
    Property
          %a
-   
+
    Description
          abbreviated weekday name (Sun, Mon, Tue)
 
@@ -30,7 +30,7 @@ Pear Date format
 
    Property
          %A
-   
+
    Description
          full weekday name (Sunday, Monday, Tuesday)
 
@@ -39,7 +39,7 @@ Pear Date format
 
    Property
          %b
-   
+
    Description
          abbreviated month name (Jan, Feb, Mar)
 
@@ -48,7 +48,7 @@ Pear Date format
 
    Property
          %B
-   
+
    Description
          full month name (January, February, March)
 
@@ -57,7 +57,7 @@ Pear Date format
 
    Property
          %C
-   
+
    Description
          century number (the year divided by 100 and truncated to an integer,
          range 00 to 99)
@@ -67,7 +67,7 @@ Pear Date format
 
    Property
          %d
-   
+
    Description
          day of month (range 00 to 31)
 
@@ -76,7 +76,7 @@ Pear Date format
 
    Property
          %D
-   
+
    Description
          same as "%m/%d/%y"
 
@@ -85,7 +85,7 @@ Pear Date format
 
    Property
          %e
-   
+
    Description
          day of month, single digit (range 0 to 31)
 
@@ -94,7 +94,7 @@ Pear Date format
 
    Property
          %E
-   
+
    Description
          number of days since unspecified epoch (integer,
          Date\_Calc::dateToDays())
@@ -104,7 +104,7 @@ Pear Date format
 
    Property
          %H
-   
+
    Description
          hour as decimal number (00 to 23)
 
@@ -113,7 +113,7 @@ Pear Date format
 
    Property
          %I
-   
+
    Description
          hour as decimal number on 12-hour clock (01 to 12)
 
@@ -122,7 +122,7 @@ Pear Date format
 
    Property
          %j
-   
+
    Description
          day of year (range 001 to 366)
 
@@ -131,7 +131,7 @@ Pear Date format
 
    Property
          %m
-   
+
    Description
          month as decimal number (range 01 to 12)
 
@@ -140,7 +140,7 @@ Pear Date format
 
    Property
          %M
-   
+
    Description
          minute as a decimal number (00 to 59)
 
@@ -149,7 +149,7 @@ Pear Date format
 
    Property
          %n
-   
+
    Description
          newline character (\n)
 
@@ -158,7 +158,7 @@ Pear Date format
 
    Property
          %N
-   
+
    Description
          month (1 to 12)
 
@@ -167,7 +167,7 @@ Pear Date format
 
    Property
          %O
-   
+
    Description
          dst-corrected timezone offset expressed as "+/-HH:MM"
 
@@ -176,7 +176,7 @@ Pear Date format
 
    Property
          %o
-   
+
    Description
          raw timezone offset expressed as "+/-HH:MM"
 
@@ -185,7 +185,7 @@ Pear Date format
 
    Property
          %p
-   
+
    Description
          either 'am' or 'pm' depending on the time
 
@@ -194,7 +194,7 @@ Pear Date format
 
    Property
          %P
-   
+
    Description
          either 'AM' or 'PM' depending on the time
 
@@ -203,7 +203,7 @@ Pear Date format
 
    Property
          %r
-   
+
    Description
          time in am/pm notation, same as "%I:%M:%S %p"
 
@@ -212,7 +212,7 @@ Pear Date format
 
    Property
          %R
-   
+
    Description
          time in 24-hour notation, same as "%H:%M"
 
@@ -221,7 +221,7 @@ Pear Date format
 
    Property
          %s
-   
+
    Description
          seconds including the decimal representation smaller than one second
 
@@ -230,7 +230,7 @@ Pear Date format
 
    Property
          %S
-   
+
    Description
          seconds as a decimal number (00 to 59)
 
@@ -239,7 +239,7 @@ Pear Date format
 
    Property
          %t
-   
+
    Description
          tab character (\t)
 
@@ -248,7 +248,7 @@ Pear Date format
 
    Property
          %T
-   
+
    Description
          current time, same as "%H:%M:%S"
 
@@ -257,7 +257,7 @@ Pear Date format
 
    Property
          %w
-   
+
    Description
          weekday as decimal (0 = Sunday)
 
@@ -266,7 +266,7 @@ Pear Date format
 
    Property
          %U
-   
+
    Description
          week number of current year, first sunday as first week
 
@@ -275,7 +275,7 @@ Pear Date format
 
    Property
          %y
-   
+
    Description
          year as decimal (range 00 to 99)
 
@@ -284,7 +284,7 @@ Pear Date format
 
    Property
          %Y
-   
+
    Description
          year as decimal including century (range 0000 to 9999)
 
@@ -293,7 +293,7 @@ Pear Date format
 
    Property
          %%
-   
+
    Description
          literal '%'
 

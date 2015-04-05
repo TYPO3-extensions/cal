@@ -1,8 +1,8 @@
 .. _FePluginCategoryHandling:
 
-=============
+=============================
 FE Plugin: Category handling
-=============
+=============================
 
 .. include:: ../../Includes.txt
 

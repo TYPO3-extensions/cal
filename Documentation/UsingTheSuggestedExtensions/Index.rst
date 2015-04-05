@@ -1,8 +1,8 @@
 .. _UsingTheSuggestedExtensions:
 
-=============
+===============================
 Using the Suggested Extensions
-=============
+===============================
 
 .. include:: ../Includes.txt
 

@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _Step1DownloadACalendarBaseTemplate:
 
-=============
+==========================================
 Step 1: Download a Calendar Base Template
-=============
+==========================================
 
 .. include:: ../../../Includes.txt
 

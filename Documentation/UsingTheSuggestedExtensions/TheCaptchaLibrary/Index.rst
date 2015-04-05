@@ -1,15 +1,13 @@
 ﻿.. include:: Images.txt
 .. _TheCaptchaLibrary:
 
-=============
+====================
 The Captcha Library
-=============
+====================
 
 .. include:: ../../Includes.txt
 
-The Captcha Library extension allows you to safely allow anonymous
-Frontend users to subscribe to events. Install the extension like any
-typical extension. When you do, the Calendar Base Flexform will add the  ***Force captcha to subscribe*** field (see Illustration 32).
+The Captcha Library extension allows you to safely allow anonymous Frontend users to subscribe to events. Install the extension like any typical extension. When you do, the Calendar Base Flexform will add the  ***Force captcha to subscribe*** field (see Illustration 32).
 
 |img-39|
 **Illustration 32: The Captcha Field in the Calendar Base Flexform**

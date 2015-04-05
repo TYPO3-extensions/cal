@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _TemplateFilesAndMarkers:
 
-=============
+===========================
 Template Files and Markers
-=============
+===========================
 
 .. include:: ../../Includes.txt
 

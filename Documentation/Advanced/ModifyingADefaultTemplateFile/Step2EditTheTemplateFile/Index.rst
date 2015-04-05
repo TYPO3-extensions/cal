@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _Step2EditTheTemplateFile:
 
-=============
+===============================
 Step 2: Edit the Template File
-=============
+===============================
 
 .. include:: ../../../Includes.txt
 
@@ -32,11 +32,11 @@ like a pair of HTML comments:
 
 ::
 
-   <!-- ###SUBPART_MARKER### --> 
-           Your <HTML TAGS> and 
-           ###CalBase_Markers### 
+   <!-- ###SUBPART_MARKER### -->
+           Your <HTML TAGS> and
+           ###CalBase_Markers###
            are nested between Subpart Markers
-   <!-- ###SUBPART_MARKER### --> 
+   <!-- ###SUBPART_MARKER### -->
 
 In addition, the Calendar Base Subpart Markers are appended with Begin
 and End comments within the  **Subpart Markers** for clarification:

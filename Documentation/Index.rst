@@ -10,7 +10,7 @@ Cal: Calendar Base
       cal
 
 :Version:
-      1.7.1
+      |release|
 
 :Language:
       en

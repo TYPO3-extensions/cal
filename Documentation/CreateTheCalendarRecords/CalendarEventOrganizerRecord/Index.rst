@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _CalendarEventOrganizerRecord:
 
-=============
+================================
 Calendar Event Organizer Record
-=============
+================================
 
 .. include:: ../../Includes.txt
 

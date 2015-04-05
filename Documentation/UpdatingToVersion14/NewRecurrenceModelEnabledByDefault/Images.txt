@@ -1,0 +1,7 @@
+.. |img-5|      image:: ../../Images/manual_html_618b87d5.png
+   :height: 16
+   :width: 16
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Caution

@@ -1,0 +1,18 @@
+conf.py:
+  copyright: 2005-2015
+  project: Calendar Base
+  version: 1.7
+  release: 1.7.2
+  latex_documents:
+  - - Index
+    - cal.tex
+    - Calendar Base
+    - Mario Matzulla
+    - manual
+  latex_elements:
+    papersize: a4paper
+    pointsize: 10pt
+    preamble: \usepackage{typo3}
+  html_theme_options:
+    github_repository: TYPO3-extensions/cal
+    github_branch: master

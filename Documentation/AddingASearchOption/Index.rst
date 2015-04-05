@@ -1,8 +1,8 @@
 .. _AddingASearchOption:
 
-=============
+=======================
 Adding a Search Option
-=============
+=======================
 
 .. include:: ../Includes.txt
 

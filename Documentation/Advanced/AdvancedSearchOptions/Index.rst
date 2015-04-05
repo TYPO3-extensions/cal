@@ -1,8 +1,8 @@
 .. _AdvancedSearchOptions:
 
-=============
+========================
 Advanced Search Options
-=============
+========================
 
 .. include:: ../../Includes.txt
 

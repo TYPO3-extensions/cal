@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _ConfigureThePlugin:
 
-=============
+=====================
 Configure the Plugin
-=============
+=====================
 
 .. include:: ../Includes.txt
 
@@ -13,10 +13,10 @@ are displayed in the Frontend as well as offering some additional
 options.
 
 #. Refer to Illustration 8. If you haven't done so already, give the plugin a  **Header** title ( **1** ).
-   
+
    |img-15|
    **Illustration 8: The Calendar Base Plugin's Flexform**
-   
+
 #. If you don't want the Header to be displayed in the Frontend, select
    **Hidden** from the  **Type** drop-down list ( **2** ).
 

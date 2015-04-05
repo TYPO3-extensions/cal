@@ -1,8 +1,8 @@
 .. _AddingOwnMarkers:
 
-=============
+===================
 Adding own markers
-=============
+===================
 
 .. include:: ../../../Includes.txt
 
@@ -22,8 +22,8 @@ Then, add the following snippet to your TS:
 
 ::
 
-   plugin.tx_cal_controller.view.list.event.mystatictext = TEXT 
-   plugin.tx_cal_controller.view.list.event.mystatictext.value = test123 
+   plugin.tx_cal_controller.view.list.event.mystatictext = TEXT
+   plugin.tx_cal_controller.view.list.event.mystatictext.value = test123
 
 Please notice that this TypoScript will override any existing value
 (e.g., coming from the database itself). To avoid this, use the
@@ -31,12 +31,12 @@ Please notice that this TypoScript will override any existing value
 
 ::
 
-   plugin.tx_cal_controller.view.list.event.mystatictext = TEXT 
-   plugin.tx_cal_controller.view.list.event.mystatictext { 
-         # inject the value from the DB 
-        current = 1 
-           # or use a special field from the DB 
-          #field = agenda 
-       wrap = The content is here &gt;&gt;|&lt;&lt; 
-   } 
+   plugin.tx_cal_controller.view.list.event.mystatictext = TEXT
+   plugin.tx_cal_controller.view.list.event.mystatictext {
+         # inject the value from the DB
+        current = 1
+           # or use a special field from the DB
+          #field = agenda
+       wrap = The content is here &gt;&gt;|&lt;&lt;
+   }
 

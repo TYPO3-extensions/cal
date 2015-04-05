@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _calIndexer:
 
-=============
+==============================================
 Using New Recurring Event Model / Cal Indexer
-=============
+==============================================
 
 .. include:: ../../Includes.txt
 

@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _Step3ActivateTheModifiedTemplateFile:
 
-=============
+============================================
 Step 3: Activate the Modified Template File
-=============
+============================================
 
 .. include:: ../../../Includes.txt
 
@@ -14,17 +14,17 @@ activate the file by:
 
   |img-62|
    **Illustration 54: Choosing Your Upload Location**
-   
+
 #. Follow the directions and upload the file into the ext-templates sub-
    directory. Your modified template should now be uploaded to the
    location you chose. In our example here, the path to that location is:
    **fileadmin/ext-templates/TemplateName.tmpl**
 
 #. Refer to Illustration 55. Click the  **Template** module ( **4** ), and click the page where your Calendar Base plugin is configured ( **5** ).
-   
+
    |img-63|
    **Illustration 55: Pointing TYPO3 to the Modified Template File**
-   
+
 #. Choose the  **Constant Editor** from the drop down list in the upper
    right corner of the page ( **6** ), and chose Calendar Base
    (Templates) from the  **Category:** drop down list ( **7** ).

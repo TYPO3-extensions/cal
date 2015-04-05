@@ -1,11 +1,11 @@
 ﻿.. include:: Images.txt
 .. _CalendarBaseTemplateConstantEditorForm:
 
-=============
+==============================================
 Calendar Base (Template) Constant Editor Form
-=============
+==============================================
 
-.. include:: ../../Includes.txt
+.. include:: ../../../Includes.txt
 
 |img-53|
 **Illustration 46: Cal Base (Templates) Constant Editor**

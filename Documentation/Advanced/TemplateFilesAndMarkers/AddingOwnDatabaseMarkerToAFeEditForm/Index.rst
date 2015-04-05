@@ -1,8 +1,8 @@
 .. _AddingOwnDatabaseMarkerToAFeEditForm:
 
-=============
+=============================================
 Adding own database marker to a FE-Edit form
-=============
+=============================================
 
 .. include:: ../../../Includes.txt
 
@@ -35,7 +35,7 @@ need to follow these steps:
 
    plugin.tx_cal_controller.rights {
     create.event {
-     additionalFields = tx_myext_newfield 
+     additionalFields = tx_myext_newfield
      fields {
       tx_myext_newfield.public= 1
      }

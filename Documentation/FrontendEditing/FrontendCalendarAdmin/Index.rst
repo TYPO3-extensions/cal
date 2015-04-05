@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _FrontendCalendarAdmin:
 
-=============
+========================
 Frontend Calendar Admin
-=============
+========================
 
 .. include:: ../../Includes.txt
 

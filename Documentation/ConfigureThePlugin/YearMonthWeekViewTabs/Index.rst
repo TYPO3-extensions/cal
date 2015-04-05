@@ -1,9 +1,9 @@
 ﻿.. include:: Images.txt
 .. _YearMonthWeekViewTabs:
 
-=============
+==========================
 Year/Month/Week View Tabs
-=============
+==========================
 
 .. include:: ../../Includes.txt
 

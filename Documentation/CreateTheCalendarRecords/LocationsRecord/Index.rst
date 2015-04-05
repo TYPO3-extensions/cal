@@ -1,20 +1,16 @@
 ﻿.. include:: Images.txt
 .. _LocationsRecord:
 
-=============
+=================
 Locations Record
-=============
+=================
 
 .. include:: ../../Includes.txt
 
 |img-38|
 **Illustration 31: Location Record**
 
-The Location record facilitates the easy addition of repetitious
-locations, addresses, and even maps for your events. One of the
-exceptional extensions available from the Web-Empowered Church is the
-:ref:`WecMap` extension. By installing this suggested extension, Location
-records with addresses will generate a link in the Event View.
+The Location record facilitates the easy addition of repetitious locations, addresses, and even maps for your events. One of the exceptional extensions available from the Web-Empowered Church is the :ref:`WecMaps` extension. By installing this suggested extension, Location records with addresses will generate a link in the Event View.
 
 Refer to Illustration 31.
 

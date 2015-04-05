@@ -1,8 +1,8 @@
 .. _RenderingNewDatabaseFields:
 
-=============
+==============================
 Rendering new database fields
-=============
+==============================
 
 .. include:: ../../../Includes.txt
 

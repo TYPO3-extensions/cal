@@ -532,6 +532,6 @@ if (TYPO3_MODE == "BE") {
 	if ($extConf ['useNewRecurringModel']) {
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule ("tools", "calrecurrencegenerator", "", \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . "mod1/");
 	}
-	$TBE_MODULES_EXT ['xMOD_db_new_content_el'] ['addElClasses'] ['tx_cal_wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'controller/class.tx_cal_wizicon.php';
+	$GLOBALS['TBE_MODULES_EXT'] ['xMOD_db_new_content_el'] ['addElClasses'] ['tx_cal_wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'controller/class.tx_cal_wizicon.php';
 }
 ?>

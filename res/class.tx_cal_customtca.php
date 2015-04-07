@@ -51,7 +51,7 @@ class tx_cal_customtca {
 	var $rdateValues;
 	function init($PA, $fobj) {
 		global $LANG;
-		$LANG->includeLLFile (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'locallang_db.xml');
+		$LANG->includeLLFile (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'Resources/Private/Language/locallang_db.xml');
 		
 		$this->frequency = $PA ['row'] ['freq'];
 		$this->uid = $PA ['row'] ['uid'];

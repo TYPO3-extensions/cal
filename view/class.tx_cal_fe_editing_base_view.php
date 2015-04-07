@@ -524,7 +524,7 @@ class tx_cal_fe_editing_base_view extends tx_cal_base_view {
 								'uid' => $this->object->getUid (),
 								'type' => $this->object->getType () 
 						);
-						$piVars = $this->piVars;
+						$piVars = (Array)$this->piVars;
 						unset ($piVars ['DATA']);
 						\TYPO3\Cal\Utility\CompatibilityUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
 						$overrulePIvars = $piVars;

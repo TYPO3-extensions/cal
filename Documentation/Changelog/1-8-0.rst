@@ -1,0 +1,11 @@
+
+1.8.0 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* Fixed backend category tree rendering in TYPO3 7
+	* Updated manual - removed old swx, added new sphinx manual; updated screens & text 
+	* Moved language files into Resources/Private/Language
+	* Updated indexer to show available sys-folders containing recurring events; added flashmessages for better reading
+

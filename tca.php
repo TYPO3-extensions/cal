@@ -1052,10 +1052,7 @@ $TCA ['tx_cal_event'] = Array (
 );
 
 if ($confArr ['categoryService'] == 'sys_category') {
-}
-if (! empty ( $limitViewOnlyToPidsWhere )) {
-	$TCA ['tx_cal_event'] ['columns'] ['calendar_id'] ['config'] ['itemsProcFunc_config'] ['where'] = 'AND tx_cal_calendar' . $limitViewOnlyToPidsWhere;
-	unset ( $TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config'] );
+	unset ($TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config']);
 	$TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config'] = Array (
 			'type' => 'select',
 			'renderMode' => 'tree',
@@ -1066,13 +1063,13 @@ if (! empty ( $limitViewOnlyToPidsWhere )) {
 							'showHeader' => TRUE,
 							'allowRecursiveMode' => TRUE,
 							'expandAll' => TRUE,
-							'maxLevels' => 99 
-					) 
+							'maxLevels' => 99
+					)
 			),
 			'MM' => 'sys_category_record_mm',
 			'MM_match_fields' => Array (
 					'fieldname' => 'category_id',
-					'tablenames' => 'tx_cal_event' 
+					'tablenames' => 'tx_cal_event'
 			),
 			'MM_opposite_field' => 'items',
 			'foreign_table' => 'sys_category',
@@ -1080,8 +1077,12 @@ if (! empty ( $limitViewOnlyToPidsWhere )) {
 			'size' => 10,
 			'autoSizeMax' => 20,
 			'minitems' => 0,
-			'maxitems' => 20 
+			'maxitems' => 20
 	);
+}
+if (! empty ( $limitViewOnlyToPidsWhere )) {
+	$TCA ['tx_cal_event'] ['columns'] ['calendar_id'] ['config'] ['itemsProcFunc_config'] ['where'] = 'AND tx_cal_calendar' . $limitViewOnlyToPidsWhere;
+	unset ( $TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config'] );
 	if ($confArr ['categoryService'] == 'sys_category') {
 		$TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config'] ['foreign_table_where'] = ' AND sys_category' . $limitViewOnlyToPidsWhere . $TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config'] ['foreign_table_where'];
 	}

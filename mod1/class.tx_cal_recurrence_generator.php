@@ -1,7 +1,10 @@
 <?php
-/*
+/**
  * @author: Mario Matzulla
  */
+
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+
 class tx_cal_recurrence_generator {
 	var $info = '';
 	var $pageIDForPlugin;
@@ -86,12 +89,53 @@ class tx_cal_recurrence_generator {
 		}
 		return $count;
 	}
+	public static function getRecurringEventPages() {
+		
+		$pages = Array();
+		$table = 'tx_cal_event';
+		self::getPageTitleAndUidFromPagesContaining($table, $pages);
+		
+		$table = 'tx_cal_exception_event';
+		self::getPageTitleAndUidFromPagesContaining($table, $pages);
+	
+		return $pages;
+	}
+	
+	private static function getPageTitleAndUidFromPagesContaining($table, &$pages) {
+		$select = 'pid';
+		$where = 'deleted = 0 AND (freq IN ("day","week","month","year") OR (rdate AND rdate_type IN ("date_time","date","period")))';
+		$pids = Array();
+		$groupBy = 'pid';
+		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where, $groupBy);
+		if ($results) {
+			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+				$pids[] = $row ['pid'];
+			}
+			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+		}
+		if(!empty($pids)) {
+			$select = 'title,uid';
+			$where = 'deleted = 0 and uid in ('.implode (',', $pids).')';
+			$pids = Array();
+			$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, 'pages', $where);
+			if ($results) {
+				while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+					$pages[$row ['uid']] = $row ['title'];
+				}
+				$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			}
+		}
+	}
 	function generateIndex($eventPage = 0) {
 		if (!is_object($this->eventService)){
+			try {
 			$this->eventService = $this->getEventService ();
+			} catch (Exception $e) {
+				$this->info = tx_cal_recurrence_generator_module1::getMessage($e, FlashMessage::ERROR);
+			}
 		}
 		if (! is_object ($this->eventService)) {
-			$this->info = 'Could not fetch the event service! Please make sure the page id is correct!';
+			$this->info = tx_cal_recurrence_generator_module1::getMessage('Could not fetch the event service! Please make sure the page id is correct!', FlashMessage::ERROR);
 			return;
 		}
 		$this->eventService->starttime = new tx_cal_date ($this->starttime);
@@ -135,7 +179,7 @@ class tx_cal_recurrence_generator {
 	function generateIndexForUid($uid, $table) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
-			$this->info = 'Could not fetch the event service! Please make sure the page id is correct!';
+			$this->info = tx_cal_recurrence_generator_module1::getMessage('Could not fetch the event service! Please make sure the page id is correct!', $type);
 			return;
 		}
 		$this->eventService->starttime = new tx_cal_date ($this->starttime);
@@ -158,7 +202,7 @@ class tx_cal_recurrence_generator {
 	function generateIndexForCalendarUid($uid) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
-			$this->info = 'Could not fetch the event service! Please make sure the page id is correct!';
+			$this->info = tx_cal_recurrence_generator_module1::getMessage('Could not fetch the event service! Please make sure the page id is correct!', $type);
 			return;
 		}
 		$this->eventService->starttime = new tx_cal_date ($this->starttime);
@@ -182,7 +226,7 @@ class tx_cal_recurrence_generator {
 	function generateIndexForExceptionGroupUid($uid) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
-			$this->info = 'Could not fetch the event service! Please make sure the page id is correct!';
+			$this->info = tx_cal_recurrence_generator_module1::getMessage('Could not fetch the event service! Please make sure the page id is correct!', $type);
 			return;
 		}
 		$this->eventService->starttime = new tx_cal_date ($this->starttime);
@@ -212,10 +256,6 @@ class tx_cal_recurrence_generator {
 		}
 		return $modelObj->getServiceObjByKey ('cal_event_model', 'event', 'tx_cal_phpicalendar');
 	}
-}
-
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/mod1/class.tx_cal_recurrence_generator.php']) {
-	require_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/mod1/class.tx_cal_recurrence_generator.php']);
 }
 
 ?>

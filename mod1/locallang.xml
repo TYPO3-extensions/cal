@@ -16,14 +16,16 @@
 			<label index="notice">&lt;div align=center&gt;&lt;strong&gt;Notice header&lt;/strong&gt;&lt;/div&gt;&lt;BR&gt;Before you proceed, please read carefully:</label>
 			<label index="capabilities_header">Capabilities of this tool</label>
 			<label index="capabilities">This tool will create an index for all recurring tx_cal_event and tx_cal_exception_event instances.</label>
-			<label index="tableHeader1">Page/Folder (comma separated) containing events/exception events</label>
+			<label index="tableHeader1">Page/Folder</label>
 			<label index="tableHeader2">Frontend Page with calendar plugin</label>
+			<label index="nothingToDo">No event / exception event records found</label>
 			<label index="browse">Browse for records</label>
 			<label index="submit">Submit</label>
 			<label index="selectPage">Select the page where the typoscript of calendar base can be found. This should be a normal frontend page.</label>
 			<label index="indexStart">Enter the start time the index should start generating (YYYYMMDD)</label>
 			<label index="indexEnd">Enter the index ending time (YYYYMMDD)</label>
-			<label index="startIndexing">Click on submit to start indexing</label>
+			<label index="startIndexing">Start indexing</label>
+			<label index="atLeastOne">You need to assign at least one frontend page to a found storage places in order to start indexing!</label>
 			<label index="notAllPagesAssigned">You need to assign a frontend page to all found storage places in order to start indexing!</label>
 			<label index="result">Result: </label>
 			<label index="toBeIndexed"> -&gt; Events to be indexed: </label>

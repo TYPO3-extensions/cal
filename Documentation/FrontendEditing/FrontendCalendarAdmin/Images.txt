@@ -1,4 +1,4 @@
-﻿.. |img-48|     image:: ../../Images/manual_html_mf06fb92.jpg
+﻿.. |img-48|     image:: ../../Images/calendar_administration.png
 .. :align: left
 .. :border: 0
 .. :name: Frontend Admin

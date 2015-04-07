@@ -1,4 +1,4 @@
-﻿.. |img-3|      image:: ../../Images/manual_html_1a64d8ff.png
+﻿.. |img-3|      image:: ../../Images/info.png
    :height: 14
    :width: 16
 .. :align: left
@@ -6,9 +6,8 @@
 .. :hspace: 12
 .. :name: graphics62
 
-.. |img-19|     image:: ../../Images/manual_html_6319e1ba.jpg
-   :height: 246
-   :width: 476
+.. |img-19|     image:: ../../Images/day_tab.png
+   :width: 100%
 .. :align: left
 .. :border: 0
 .. :name: graphics16

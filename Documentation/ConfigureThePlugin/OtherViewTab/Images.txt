@@ -1,6 +1,13 @@
-﻿.. |img-23|     image:: ../../Images/manual_html_m294512d.jpg
+﻿.. |img-23|     image:: ../../Images/other_tab.png
 .. :align: left
 .. :border: 0
 .. :name: Other View Tab
 .. :width: 100%
 
+.. |img-5|      image:: ../../Images/warn.png
+   :height: 16
+   :width: 16
+.. :align: left
+.. :border: 0
+.. :hspace: 12
+.. :name: Caution

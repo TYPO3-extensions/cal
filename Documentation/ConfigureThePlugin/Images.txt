@@ -1,4 +1,4 @@
-﻿.. |img-4|      image:: ../Images/manual_html_m40041d6.png
+﻿.. |img-4|      image:: ../Images/note.png
    :height: 15
    :width: 15
 .. :align: left
@@ -6,9 +6,16 @@
 .. :hspace: 12
 .. :name: Note
 
-.. |img-15|     image:: ../Images/manual_html_m577a3d49.jpg
-   :height: 585
-   :width: 476
+.. |img-15|     image:: ../Images/insert_plugin.png
+   :height: 392
+   :width: 760
+.. :align: left
+.. :border: 0
+.. :name: graphics42
+
+.. |img-15b|     image:: ../Images/insert_plugin2.png
+   :height: 847
+   :width: 880
 .. :align: left
 .. :border: 0
 .. :name: graphics42

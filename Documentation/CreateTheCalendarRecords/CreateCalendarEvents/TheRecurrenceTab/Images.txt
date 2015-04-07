@@ -1,10 +1,10 @@
-﻿.. |img-29|     image:: ../../../Images/manual_html_53877177.jpg
+﻿.. |img-29|     image:: ../../../Images/event_recurrence_tab.png
 .. :align: left
 .. :border: 0
 .. :name: Event Record Recurrence Tab
 .. :width: 100%
 
-.. |img-4|      image:: ../../../Images/manual_html_m40041d6.png
+.. |img-4|      image:: ../../../Images/note.png
    :height: 15
    :width: 15
 .. :align: left

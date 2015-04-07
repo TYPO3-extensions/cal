@@ -23,3 +23,9 @@ Refer to Illustration 22.
 
 - **By Month:** Sets the recurring event to the specific month/s you choose.
 
+- **Recurrence by:** Instead of a rule, define a specific "Date", "Date and Time" or "Period" as a recurrence.
+
+- **Deviation:** Define exceptions to the rule. Each deviation events can overrule any recurrence instance.
+
+- **Exceptions:** Exception Events are generally used in conjunction with Recurring Events. Exception Events are days on which you don't want a recurring event scheduled. For instance, skipping the Quilting Group's event on Christmas day. If you have created Exception Event records or Exception Event Groups, you can select those here.
+

@@ -1,4 +1,4 @@
-﻿.. |img-45|     image:: ../../Images/manual_html_m193a3c0.jpg
+﻿.. |img-45|     image:: ../../Images/wec_map.png
 .. :align: left
 .. :border: 0
 .. :name: WEC Map Screenshot

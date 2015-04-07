@@ -1,4 +1,4 @@
-﻿.. |img-30|     image:: ../../../Images/manual_html_32796b3d.jpg
+﻿.. |img-30|     image:: ../../../Images/event_location_tab.png
 .. :align: left
 .. :border: 0
 .. :name: Event Record Location Tab

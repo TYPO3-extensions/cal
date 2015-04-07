@@ -1,4 +1,4 @@
-﻿.. |img-7|      image:: ../../Images/manual_html_6ff0a3fd.jpg
+﻿.. |img-7|      image:: ../../Images/link.jpg
    :height: 15
    :width: 18
 .. :align: left
@@ -6,7 +6,7 @@
 .. :hspace: 12
 .. :name: Internet Link
 
-.. |img-14|     image:: ../../Images/manual_html_m4762216f.jpg
+.. |img-14|     image:: ../../Images/page_structure.jpg
    :height: 277
    :width: 188
 .. :align: left

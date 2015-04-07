@@ -1,7 +1,7 @@
-﻿.. |img-16|     image:: ../../Images/manual_html_mf0c1ff3.jpg
-   :height: 242
-   :width: 476
+﻿.. |img-16|     image:: ../../Images/general_settings_tab.png
+   :height: 485
+   :width: 880
 .. :align: left
 .. :border: 0
-.. :name: graphics14
+.. :name: graphics42
 

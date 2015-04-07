@@ -1,18 +1,18 @@
-﻿.. |img-55|     image:: ../../Images/manual_html_2eebe1ed.png
+﻿.. |img-55|     image:: ../../Images/cal_extension_options.png
    :height: 572
    :width: 428
 .. :align: left
 .. :border: 0
 .. :name: graphics30
 
-.. |img-56|     image:: ../../Images/manual_html_7b3b18df.png
+.. |img-56|     image:: ../../Images/cal_extension_options_recurrence.png
    :height: 245
    :width: 428
 .. :align: left
 .. :border: 0
 .. :name: graphics48
 
-.. |img-4|      image:: ../../Images/manual_html_m40041d6.png
+.. |img-4|      image:: ../../Images/note.png
    :height: 15
    :width: 15
 .. :align: left

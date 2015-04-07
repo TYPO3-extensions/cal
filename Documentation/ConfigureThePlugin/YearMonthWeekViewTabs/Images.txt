@@ -1,6 +1,5 @@
-﻿.. |img-18|     image:: ../../Images/manual_html_fc8900d.jpg
-   :height: 164
-   :width: 476
+﻿.. |img-18|     image:: ../../Images/year_tab.png
+   :width: 100%
 .. :align: left
 .. :border: 0
 .. :name: graphics15

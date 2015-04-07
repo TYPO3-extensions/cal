@@ -1,4 +1,4 @@
-﻿.. |img-52|     image:: ../../../Images/manual_html_m6d0bc22.jpg
+﻿.. |img-52|     image:: ../../../Images/editing_constants_general.jpg
    :height: 878
    :width: 428
 .. :align: left

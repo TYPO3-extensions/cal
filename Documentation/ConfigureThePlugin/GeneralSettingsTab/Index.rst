@@ -21,4 +21,4 @@ The General Settings tab sets the available views and a variety of general optio
 
 - **Week start day:** Choose which day of the week you want to start with in your calendar display. Choices include a traditional Sunday start day or a business Monday start day.
 
-
+- **Distance (Km) for events in a nearby calendar:** Option when :ref:`WecMaps` is loaded. Defines the distance of an event and a frontend user. 

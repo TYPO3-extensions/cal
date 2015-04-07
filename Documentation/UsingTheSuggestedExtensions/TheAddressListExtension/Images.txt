@@ -1,16 +1,16 @@
-﻿.. |img-41|     image:: ../../Images/manual_html_23ef9516.jpg
+﻿.. |img-41|     image:: ../../Images/select_tt_address.png
 .. :align: left
 .. :border: 0
 .. :name: Address List Extension 01
 .. :width: 100%
 
-.. |img-42|     image:: ../../Images/manual_html_42537e58.jpg
+.. |img-42|     image:: ../../Images/isCalOrganizer.jpg
 .. :align: left
 .. :border: 0
 .. :name: Address List Record Form
 .. :width: 100%
 
-.. |img-4|      image:: ../../Images/manual_html_m40041d6.png
+.. |img-4|      image:: ../../Images/note.png
    :height: 15
    :width: 15
 .. :align: left

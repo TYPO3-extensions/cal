@@ -10,6 +10,8 @@ Other View Tab
 |img-23|
 **Illustration 16: Plugin Configuration: Other View Tab**
 
+|img-5| These options are only available with the "classic" typoscript template (see :ref:`Step5AddTheStaticTemplates`).
+
 Refer to Illustration 16. The Other View tab is similar to the General Settings tab in that it sets options that are shared across multiple views.
 - **Show login:** Shows an instance of the Frontend User Login in the default Week and Day Views.
 

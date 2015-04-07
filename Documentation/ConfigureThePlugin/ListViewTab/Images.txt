@@ -1,6 +1,5 @@
-﻿.. |img-20|     image:: ../../Images/manual_html_m1b3be127.jpg
-   :height: 219
-   :width: 476
+﻿.. |img-20|     image:: ../../Images/list_tab.png
+   :width: 100%
 .. :align: left
 .. :border: 0
 .. :name: graphics18

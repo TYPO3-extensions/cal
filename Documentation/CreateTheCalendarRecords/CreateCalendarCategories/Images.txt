@@ -1,11 +1,10 @@
-﻿.. |img-27|     image:: ../../Images/manual_html_m6fadf75e.jpg
-   :height: 360
-   :width: 428
+﻿.. |img-27|     image:: ../../Images/category.png
+   :width: 100%
 .. :align: left
 .. :border: 0
 .. :name: graphics43
 
-.. |img-4|      image:: ../../Images/manual_html_m40041d6.png
+.. |img-4|      image:: ../../Images/note.png
    :height: 15
    :width: 15
 .. :align: left

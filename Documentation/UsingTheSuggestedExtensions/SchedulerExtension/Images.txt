@@ -1,4 +1,4 @@
-﻿.. |img-6|      image:: ../../Images/manual_html_26b3715f.png
+﻿.. |img-6|      image:: ../../Images/rtfm.png
    :height: 15
    :width: 18
 .. :align: left
@@ -6,7 +6,7 @@
 .. :hspace: 12
 .. :name: Technical Stuff
 
-.. |img-44|     image:: ../../Images/manual_html_7c64d681.jpg
+.. |img-44|     image:: ../../Images/configure_email.jpg
 .. :align: left
 .. :border: 0
 .. :name: Gabriel Constants

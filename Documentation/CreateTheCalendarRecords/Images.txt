@@ -1,4 +1,4 @@
-﻿.. |img-3|      image:: ../Images/manual_html_1a64d8ff.png
+﻿.. |img-3|      image:: ../Images/info.png
    :height: 14
    :width: 16
 .. :align: left

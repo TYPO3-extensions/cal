@@ -1,11 +1,11 @@
-﻿.. |img-53|     image:: ../../../Images/manual_html_m5ebabd74.jpg
+﻿.. |img-53|     image:: ../../../Images/editing_constants_template.jpg
    :height: 386
    :width: 380
 .. :align: left
 .. :border: 0
 .. :name: graphics32
 
-.. |img-54|     image:: ../../../Images/manual_html_m11afc4f4.jpg
+.. |img-54|     image:: ../../../Images/editing_constants_rss.jpg
 .. :align: left
 .. :border: 0
 .. :name: Constant Editor RSS

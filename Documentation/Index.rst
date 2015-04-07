@@ -22,10 +22,10 @@ Cal: Calendar Base
       2005-2015
 
 :Author:
-      Mario Matzulla
+      Mario Matzulla, Jeff Segars, Franz Koch, Thomas Kowtsch
 
 :Email:
-      mario@matzullas.de
+      mario@matzullas.de, jeff@webempoweredchurch.org, franz.koch@elements-net.de, typo3@thomas-kowtsch.de
 
 :License:
       This document is published under the Open Content License available from http://www.opencontent.org/opl.shtml

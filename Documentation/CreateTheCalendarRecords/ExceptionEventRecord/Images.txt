@@ -1,6 +1,5 @@
-﻿.. |img-34|     image:: ../../Images/manual_html_46ee903a.png
-   :height: 295
-   :width: 428
+﻿.. |img-34|     image:: ../../Images/exception_event.png
+   :width: 100%
 .. :align: left
 .. :border: 0
 .. :name: graphics22

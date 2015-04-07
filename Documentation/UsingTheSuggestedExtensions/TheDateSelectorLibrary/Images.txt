@@ -1,6 +1,0 @@
-﻿.. |img-43|     image:: ../../Images/manual_html_20b17e65.jpg
-.. :align: left
-.. :border: 0
-.. :name: Date Selector
-.. :width: 100%
-

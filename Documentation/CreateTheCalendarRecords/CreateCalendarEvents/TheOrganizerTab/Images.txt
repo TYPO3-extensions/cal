@@ -1,4 +1,4 @@
-﻿.. |img-31|     image:: ../../../Images/manual_html_m6576d580.jpg
+﻿.. |img-31|     image:: ../../../Images/event_organizer_tab.png
 .. :align: left
 .. :border: 0
 .. :name: Calendar Entry Organizer Tab

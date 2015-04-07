@@ -1,4 +1,4 @@
-﻿.. |img-28|     image:: ../../Images/manual_html_m41428b74.jpg
+﻿.. |img-28|     image:: ../../Images/event_general_tab.png
 .. :align: left
 .. :border: 0
 .. :name: Event Record General Tab

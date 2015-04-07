@@ -1,4 +1,4 @@
-﻿.. |img-32|     image:: ../../../Images/manual_html_2c97e8d1.jpg
+﻿.. |img-32|     image:: ../../../Images/event_files_tab.png
 .. :align: left
 .. :border: 0
 .. :name: Event Record Files Tab

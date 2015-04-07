@@ -1,6 +1,5 @@
-﻿.. |img-57|     image:: ../../Images/manual_html_m53aabd0c.png
-   :height: 329
-   :width: 467
+﻿.. |img-57|     image:: ../../Images/cal_indexer.png
+   :width: 100%
 .. :align: left
 .. :border: 0
 .. :name: graphics54

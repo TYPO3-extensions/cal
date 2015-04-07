@@ -1,16 +1,16 @@
-﻿.. |img-49|     image:: ../Images/manual_html_m7e1740eb.jpg
+﻿.. |img-49|     image:: ../Images/adding_rss_template.png
 .. :align: left
 .. :border: 0
 .. :name: RSS Static Template
 .. :width: 100%
 
-.. |img-50|     image:: ../Images/manual_html_ba99159.jpg
+.. |img-50|     image:: ../Images/configure_rss_template.jpg
 .. :align: left
 .. :border: 0
 .. :name: RSS Constant Editor
 .. :width: 100%
 
-.. |img-51|     image:: ../Images/manual_html_m551d261d.jpg
+.. |img-51|     image:: ../Images/select_page.jpg
 .. :align: left
 .. :border: 0
 .. :name: PID Location

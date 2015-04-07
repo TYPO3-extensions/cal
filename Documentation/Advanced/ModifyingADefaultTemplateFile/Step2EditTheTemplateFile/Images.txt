@@ -1,4 +1,4 @@
-﻿.. |img-61|     image:: ../../../Images/manual_html_m48c417a1.jpg
+﻿.. |img-61|     image:: ../../../Images/list_marker.jpg
 .. :align: left
 .. :border: 0
 .. :name: Template Syntax Example

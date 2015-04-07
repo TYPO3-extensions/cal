@@ -14,7 +14,6 @@ Using the Suggested Extensions
    TheCaptchaLibrary/Index
    TheAddressListExtension/Index
    ThePartnerManagementExtension/Index
-   TheDateSelectorLibrary/Index
    Notification/Index
    SchedulerExtension/Index
    WecMaps/Index

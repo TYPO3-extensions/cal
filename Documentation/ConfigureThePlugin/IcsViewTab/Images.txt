@@ -1,4 +1,4 @@
-﻿.. |img-22|     image:: ../../Images/manual_html_54244d76.jpg
+﻿.. |img-22|     image:: ../../Images/ics_tab.png
 .. :align: left
 .. :border: 0
 .. :name: ICS View Tab

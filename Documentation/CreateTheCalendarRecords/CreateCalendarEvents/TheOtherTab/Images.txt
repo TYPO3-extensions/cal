@@ -1,11 +1,10 @@
-﻿.. |img-33|     image:: ../../../Images/manual_html_m3181110a.jpg
-   :height: 499
-   :width: 428
+﻿.. |img-33|     image:: ../../../Images/event_other_tab.png
+   :width: 100%
 .. :align: left
 .. :border: 0
 .. :name: graphics44
 
-.. |img-4|      image:: ../../../Images/manual_html_m40041d6.png
+.. |img-4|      image:: ../../../Images/note.png
    :height: 15
    :width: 15
 .. :align: left

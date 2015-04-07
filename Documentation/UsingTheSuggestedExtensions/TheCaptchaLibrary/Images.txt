@@ -1,10 +1,10 @@
-﻿.. |img-39|     image:: ../../Images/manual_html_m63133a0c.jpg
+﻿.. |img-39|     image:: ../../Images/captcha.png
 .. :align: left
 .. :border: 0
 .. :name: Captcha Flexform
 .. :width: 100%
 
-.. |img-40|     image:: ../../Images/manual_html_m28094194.jpg
+.. |img-40|     image:: ../../Images/event_with_captcha.png
 .. :align: left
 .. :border: 0
 .. :name: Captcha Frontend

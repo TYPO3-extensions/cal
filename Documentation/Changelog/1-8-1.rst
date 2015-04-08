@@ -1,0 +1,8 @@
+
+1.8.1 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* fixed ::class reference to be compatible with php5.4 and TYPO3 LTS 6.2
+

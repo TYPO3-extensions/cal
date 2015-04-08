@@ -636,7 +636,7 @@ class tx_cal_functions {
 	public static function getTsSetupAsPlainArray(&$conf) {
 		
 		/** @var TypoScriptService $typoScriptService */
-		$typoScriptService = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Service\TypoScriptService::class);
+		$typoScriptService = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\TypoScriptService');
 		return $typoScriptService->convertTypoScriptArrayToPlainArray ($conf);
 	}
 }

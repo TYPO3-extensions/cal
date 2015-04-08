@@ -255,14 +255,14 @@ class tx_cal_recurrence_generator_module1 extends \TYPO3\CMS\Backend\Module\Base
 	public static function getMessage($message, $type) {
 		/** @var $flashMessage FlashMessage */
 		$flashMessage = GeneralUtility::makeInstance(
-				FlashMessage::class,
+				'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
 				htmlspecialchars($message),
 				'',
 				$type,
 				TRUE
 		);
 		/** @var $flashMessageService \TYPO3\CMS\Core\Messaging\FlashMessageService */
-		$flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
+		$flashMessageService = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessageService');
 		$defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
 		$defaultFlashMessageQueue->enqueue($flashMessage);
 		return $defaultFlashMessageQueue->renderFlashMessages();

@@ -2,11 +2,14 @@
 if (! defined ('TYPO3_MODE'))
 	die ('Access denied.');
 
+$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY);
+$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY);
+
 	// Include the class for getting custom labels.
-if (TYPO3_MODE == 'BE') {
-	include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/class.tx_cal_labels.php');
-	include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/class.tx_cal_itemsProcFunc.php');
-}
+// if (TYPO3_MODE == 'BE') {
+// 	include_once ($extRelPath . 'Classes/Backend/TCA/Labels.php');
+// 	include_once ($extRelPath . 'Classes/Backend/TCA/ItemsProcFunc.php');
+// }
 
 // Allow all calendar records on standard pages, in addition to SysFolders.
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages ('tx_cal_event');
@@ -43,10 +46,10 @@ $TCA ['tx_cal_event'] = Array (
 				'type' => 'type',
 				'typeicon_column' => 'type',
 				'typeicons' => Array (
-						'1' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_events_intlnk.gif',
-						'2' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_events_exturl.gif',
-						'3' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_events_meeting.gif',
-						'4' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_events_todo.gif' 
+						'1' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_events_intlnk.gif',
+						'2' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_events_exturl.gif',
+						'3' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_events_meeting.gif',
+						'4' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_events_todo.gif' 
 				),
 				'dividers2tabs' => $confArr ['noTabDividers'] ? FALSE : TRUE,
 				'enablecolumns' => Array (
@@ -54,8 +57,8 @@ $TCA ['tx_cal_event'] = Array (
 						'starttime' => 'starttime',
 						'endtime' => 'endtime' 
 				),
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_events.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_events.gif',
 				'searchFields' => 'title,organizer,organizer_link,location,location_link,teaser,description,ext_url,image,imagecaption,imagealttext,imagetitletext,attachment,attachmentcaption' 
 		),
 		'feInterface' => Array (
@@ -84,8 +87,8 @@ $TCA ['tx_cal_category'] = Array (
 				'transOrigPointerField' => 'l18n_parent',
 				'transOrigDiffSourceField' => 'l18n_diffsource',
 				'languageField' => 'sys_language_uid',
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_category.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_category.gif',
 				// 'treeParentField' => 'calendar_id',
 				'searchFields' => 'title,notification_emails' 
 		),
@@ -112,8 +115,8 @@ $TCA ['tx_cal_calendar'] = Array (
 				'type' => 'type',
 				'typeicon_column' => 'type',
 				'typeicons' => Array (
-						'1' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_calendar_exturl.gif',
-						'2' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_calendar_ics.gif' 
+						'1' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_calendar_exturl.gif',
+						'2' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_calendar_ics.gif' 
 				),
 				'versioningWS' => TRUE,
 				'origUid' => 't3_origuid',
@@ -121,8 +124,8 @@ $TCA ['tx_cal_calendar'] = Array (
 				'transOrigPointerField' => 'l18n_parent',
 				'transOrigDiffSourceField' => 'l18n_diffsource',
 				'languageField' => 'sys_language_uid',
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_calendar.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_calendar.gif',
 				'searchFields' => 'title,ext_url,ext_url_notes,ics_file' 
 		),
 		'feInterface' => Array (
@@ -146,8 +149,8 @@ $TCA ['tx_cal_exception_event'] = Array (
 						'endtime' => 'endtime' 
 				),
 				'versioningWS' => TRUE,
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_exception_event.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_exception_event.gif',
 				'searchFields' => 'title' 
 		),
 		'feInterface' => Array (
@@ -165,8 +168,8 @@ $TCA ['tx_cal_exception_event_group'] = Array (
 				'default_sortby' => 'ORDER BY title',
 				'delete' => 'deleted',
 				
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_exception_event_group.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_exception_event_group.gif',
 				'enablecolumns' => Array (
 						'disabled' => 'hidden' 
 				),
@@ -188,8 +191,8 @@ $TCA ['tx_cal_location'] = Array (
 				'default_sortby' => 'ORDER BY name',
 				'delete' => 'deleted',
 				
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_location.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_location.gif',
 				'enablecolumns' => Array (
 						'disabled' => 'hidden' 
 				),
@@ -216,8 +219,8 @@ $TCA ['tx_cal_organizer'] = Array (
 				'default_sortby' => 'ORDER BY name',
 				'delete' => 'deleted',
 				
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_organizer.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_organizer.gif',
 				'enablecolumns' => Array (
 						'disabled' => 'hidden' 
 				),
@@ -245,8 +248,8 @@ $TCA ['tx_cal_unknown_users'] = Array (
 				'delete' => 'deleted',
 				'enablecolumns' => Array (),
 				'versioningWS' => TRUE,
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_unknown_users.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_unknown_users.gif',
 				'searchFields' => 'email' 
 		),
 		'feInterface' => Array (
@@ -264,8 +267,8 @@ $TCA ['tx_cal_attendee'] = Array (
 				'default_sortby' => 'uid',
 				'delete' => 'deleted',
 				
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_attendee.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_attendee.gif',
 				'enablecolumns' => Array (
 						'disabled' => 'hidden' 
 				),
@@ -281,8 +284,8 @@ $TCA ['tx_cal_fe_user_event_monitor_mm'] = Array (
 				'label' => 'tablenames',
 				'label_alt' => 'tablenames,offset',
 				'label_alt_force' => 1,
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_fe_user_event_monitor_mm.gif' 
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_fe_user_event_monitor_mm.gif' 
 		),
 		'feInterface' => Array (
 				'fe_admin_fieldList' => '' 
@@ -299,8 +302,8 @@ $TCA ['tx_cal_event_deviation'] = Array (
 				'default_sortby' => 'start_date',
 				'delete' => 'deleted',
 				
-				'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'tca.php',
-				'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ($_EXTKEY) . 'res/icons/icon_tx_cal_event_deviation.gif',
+				'dynamicConfigFile' => $extPath . 'tca.php',
+				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_event_deviation.gif',
 				'enablecolumns' => Array (
 						'disabled' => 'hidden' 
 				),
@@ -312,10 +315,10 @@ $TCA ['tx_cal_event_deviation'] = Array (
 
 // enable label_userFunc only for TYPO3 v 4.1 and higher
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4001000) {
-	$TCA ['tx_cal_attendee'] ['ctrl'] ['label_userFunc'] = "tx_cal_labels->getAttendeeRecordLabel";
-	$TCA ['tx_cal_fe_user_event_monitor_mm'] ['ctrl'] ['label_userFunc'] = "tx_cal_labels->getMonitoringRecordLabel";
-	$TCA ['tx_cal_event_deviation'] ['ctrl'] ['label_userFunc'] = "tx_cal_labels->getDeviationRecordLabel";
-	$TCA ['tx_cal_event'] ['ctrl'] ['label_userFunc'] = "tx_cal_labels->getEventRecordLabel";
+	$TCA ['tx_cal_attendee'] ['ctrl'] ['label_userFunc'] = "TYPO3\\CMS\\Cal\\Backend\\TCA\\Labels->getAttendeeRecordLabel";
+	$TCA ['tx_cal_fe_user_event_monitor_mm'] ['ctrl'] ['label_userFunc'] = "TYPO3\\CMS\\Cal\\Backend\\TCA\\Labels->getMonitoringRecordLabel";
+	$TCA ['tx_cal_event_deviation'] ['ctrl'] ['label_userFunc'] = "TYPO3\\CMS\\Cal\\Backend\\TCA\\Labels->getDeviationRecordLabel";
+	$TCA ['tx_cal_event'] ['ctrl'] ['label_userFunc'] = "TYPO3\\CMS\\Cal\\Backend\\TCA\\Labels->getEventRecordLabel";
 }
 
 // Get the location and organizer structures.
@@ -402,7 +405,6 @@ $tempColumns = Array (
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns ('be_groups', $tempColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ('be_groups', 'tx_cal_calendar;;;;1-1-1');
 
-require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'res/class.tx_cal_treeview.php');
 
 // Define the TCA for the access control category selector.
 $tempColumns = Array (
@@ -413,7 +415,7 @@ $tempColumns = Array (
 				'config' => Array (
 						'type' => 'select',
 						'form_type' => 'user',
-						'userFunc' => 'tx_cal_treeview->displayCategoryTree',
+						'userFunc' => 'TYPO3\CMS\Cal\TreeProvider\TreeView->displayCategoryTree',
 						'treeView' => 1,
 						'size' => 20,
 						'minitems' => 0,
@@ -450,7 +452,7 @@ $tempColumns = Array (
 								'add' => Array (
 										'type' => 'script',
 										'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
-										'icon' => 'EXT:cal/res/icons/icon_tx_cal_calendar.gif',
+										'icon' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_calendar.gif',
 										'params' => Array (
 												'table' => 'tx_cal_calendar',
 												'pid' => $sPid,
@@ -476,7 +478,7 @@ $tempColumns = Array (
 								'add' => Array (
 										'type' => 'script',
 										'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
-										'icon' => 'EXT:cal/res/icons/icon_tx_cal_calendar.gif',
+										'icon' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_calendar.gif',
 										'params' => Array (
 												'table' => 'tx_cal_calendar',
 												'pid' => $sPid,
@@ -493,45 +495,23 @@ $tempColumns = Array (
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns ('fe_users', $tempColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ('fe_users', 'tx_cal_calendar,tx_cal_calendar_subscription;;;;1-1-1');
 
-//include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'res/class.tx_cal_treeview.php');
-//\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue ($_EXTKEY . '_controller', 'FILE:EXT:cal/res/flexform1_ds.xml');
-
-// Set up the tt_content table to hide layout and select key, but show pi_flexform.
-//$TCA ['tt_content'] ['types'] ['list'] ['subtypes_excludelist'] [$_EXTKEY . '_controller'] = 'layout,select_key';
-//$TCA ['tt_content'] ['types'] ['list'] ['subtypes_addlist'] [$_EXTKEY . '_controller'] = 'pi_flexform';
-
-// Add the plugin.
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin (Array (
-// 		'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tt_content.list_type',
-// 		$_EXTKEY . '_controller' 
-// ), 'list_type');
-
 // Add Calendar Events to the "Insert Records" content element
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords ('tx_cal_event');
 
 // initalize 'context sensitive help' (csh)
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_event', 'EXT:cal/res/help/locallang_csh_txcalevent.php');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_calendar', 'EXT:cal/res/help/locallang_csh_txcalcal.php');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_category', 'EXT:cal/res/help/locallang_csh_txcalcat.php');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_exception_event', 'EXT:cal/res/help/locallang_csh_txcalexceptionevent.php');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_exception_event_group', 'EXT:cal/res/help/locallang_csh_txcalexceptioneventgroup.php');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_location', 'EXT:cal/res/help/locallang_csh_txcallocation.php');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_organizer', 'EXT:cal/res/help/locallang_csh_txcalorganizer.php');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_event', 'EXT:cal/Resources/Private/Help/locallang_csh_txcalevent.php');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_calendar', 'EXT:cal/Resources/Private/Help/locallang_csh_txcalcal.php');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_category', 'EXT:cal/Resources/Private/Help/locallang_csh_txcalcat.php');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_exception_event', 'EXT:cal/Resources/Private/Help/locallang_csh_txcalexceptionevent.php');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_exception_event_group', 'EXT:cal/Resources/Private/Help/locallang_csh_txcalexceptioneventgroup.php');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_location', 'EXT:cal/Resources/Private/Help/locallang_csh_txcallocation.php');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_organizer', 'EXT:cal/Resources/Private/Help/locallang_csh_txcalorganizer.php');
 
-// Add the static templates.
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ts/', 'Classic CSS-based template');
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ts_standard/', 'Standard CSS-based template');
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ajax/', 'AJAX-based template (Experimental!)');
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/css/', 'Classic CSS styles');
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/css_standard/', 'Standard CSS styles');
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/rss_feed/', 'News-feed (RSS,RDF,ATOM)');
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ics/', 'ICS Export');
-// \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/fe-editing/', 'Fe-Editing');
 if (TYPO3_MODE == "BE") {
 	$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 	if ($extConf ['useNewRecurringModel']) {
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule ("tools", "calrecurrencegenerator", "", \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . "mod1/");
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule ("tools", "calrecurrencegenerator", "", $extPath . "Classes/Backend/Modul/");
 	}
-	$GLOBALS['TBE_MODULES_EXT'] ['xMOD_db_new_content_el'] ['addElClasses'] ['tx_cal_wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY) . 'controller/class.tx_cal_wizicon.php';
+	$GLOBALS['TBE_MODULES_EXT'] ['xMOD_db_new_content_el'] ['addElClasses'] ['TYPO3\CMS\Cal\Backend\CalWizIcon'] = $extPath . 'Classes/Backend/CalWizIcon.php';
 }
 ?>

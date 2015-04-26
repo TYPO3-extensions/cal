@@ -2,13 +2,6 @@
 if (! defined ( 'TYPO3_MODE' ))
 	die ( 'Access denied.' );
 
-require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ( 'cal' ) . 'res/class.tx_cal_itemsProcFunc.php');
-require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ( 'cal' ) . 'res/class.tx_cal_customtca.php');
-
-if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ( 'static_info_tables' )) {
-	require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ( 'cal' ) . 'res/class.user_staticinfotables_div.php');
-}
-
 // get extension confArr
 $confArr = unserialize ( $GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal'] );
 // page where records will be stored in that have been created with a wizard
@@ -128,7 +121,7 @@ $TCA ['tx_cal_event'] = Array (
 								'size' => 1,
 								'minitems' => 1,
 								'maxitems' => 1,
-								'itemsProcFunc' => 'tx_cal_itemsProcFunc->getRecords',
+								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\ItemsProcFunc->getRecords',
 								'itemsProcFunc_config' => array (
 										'table' => 'tx_cal_calendar',
 										'orderBy' => 'tx_cal_calendar.title' 
@@ -139,7 +132,7 @@ $TCA ['tx_cal_event'] = Array (
 										'add' => Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
-												'icon' => 'EXT:cal/res/icons/icon_tx_cal_calendar.gif',
+												'icon' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_calendar.gif',
 												'params' => Array (
 														'table' => 'tx_cal_calendar',
 														'pid' => $sPid,
@@ -167,19 +160,14 @@ $TCA ['tx_cal_event'] = Array (
 						'config' => Array (
 								'type' => 'select',
 								'form_type' => 'user',
-								'userFunc' => 'tx_cal_treeview->displayCategoryTree',
+								'userFunc' => 'TYPO3\CMS\Cal\TreeProvider\TreeView->displayCategoryTree',
 								'treeView' => 1,
 								'size' => 12,
 								'autoSizeMax' => 20,
 								'itemListStyle' => 'height:300px;',
 								'minitems' => 0,
 								'maxitems' => 20,
-								// 'itemsProcFunc' => 'tx_cal_itemsProcFunc->getRecords',
-								// 'itemsProcFunc_config' => array(
-								// 'table' => 'tx_cal_category',
-								// ),
 								'foreign_table' => 'tx_cal_category',
-								// 'foreign_table_where' => $limitViewOnlyToPidsWhere?' AND tx_cal_category'.$limitViewOnlyToPidsWhere:' AND tx_cal_category.sys_language_uid IN (-1,0)',
 								'MM' => 'tx_cal_event_category_mm',
 
 								'wizards' => Array (
@@ -188,7 +176,7 @@ $TCA ['tx_cal_event'] = Array (
 										'add' => Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.createNew',
-												'icon' => 'EXT:cal/res/icons/icon_tx_cal_category.gif',
+												'icon' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_category.gif',
 												'params' => Array (
 														'table' => 'tx_cal_category',
 														'pid' => $sPid,
@@ -522,7 +510,7 @@ $TCA ['tx_cal_event'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.byday_short',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->byDay' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->byDay' 
 						) 
 				),
 				'bymonthday' => Array (
@@ -531,7 +519,7 @@ $TCA ['tx_cal_event'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.bymonthday_short',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->byMonthDay' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->byMonthDay' 
 						) 
 				),
 				'bymonth' => Array (
@@ -540,7 +528,7 @@ $TCA ['tx_cal_event'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.bymonth_short',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->byMonth' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->byMonth' 
 						) 
 				),
 				'until' => Array (
@@ -609,7 +597,7 @@ $TCA ['tx_cal_event'] = Array (
 						'displayCond' => 'FIELD:rdate_type:IN:date_time,date,period',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->rdate' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->rdate' 
 						) 
 				),
 				'deviation' => Array (
@@ -1203,7 +1191,7 @@ $TCA ['tx_cal_calendar'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.ext_url',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->extUrl' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->extUrl' 
 						) 
 				),
 				
@@ -1267,7 +1255,7 @@ $TCA ['tx_cal_calendar'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.headerstyle',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->getHeaderStyles' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->getHeaderStyles' 
 						) 
 				),
 				'bodystyle' => Array (
@@ -1275,7 +1263,7 @@ $TCA ['tx_cal_calendar'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.bodystyle',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->getBodyStyles' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->getBodyStyles' 
 						) 
 				),
 				'sys_language_uid' => Array (
@@ -1461,7 +1449,7 @@ $TCA ['tx_cal_category'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.headerstyle',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->getHeaderStyles' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->getHeaderStyles' 
 						) 
 				),
 				'bodystyle' => Array (
@@ -1469,7 +1457,7 @@ $TCA ['tx_cal_category'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.bodystyle',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->getBodyStyles' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->getBodyStyles' 
 						) 
 				),
 				'calendar_id' => Array (
@@ -1477,7 +1465,7 @@ $TCA ['tx_cal_category'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.calendar',
 						'config' => Array (
 								'type' => 'select',
-								'itemsProcFunc' => 'tx_cal_itemsProcFunc->getRecords',
+								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\ItemsProcFunc->getRecords',
 								'itemsProcFunc_config' => array (
 										'table' => 'tx_cal_calendar',
 										'orderBy' => 'tx_cal_calendar.title' 
@@ -1506,7 +1494,7 @@ $TCA ['tx_cal_category'] = Array (
 						'config' => Array (
 								'type' => 'select',
 								'form_type' => 'user',
-								'userFunc' => 'tx_cal_treeview->displayCategoryTree',
+								'userFunc' => 'TYPO3\CMS\Cal\TreeProvider\TreeView->displayCategoryTree',
 								'treeView' => 1,
 								'size' => 1,
 								'autoSizeMax' => 20,
@@ -1723,7 +1711,7 @@ $TCA ['tx_cal_exception_event'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.byday_short',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->byDay' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->byDay' 
 						) 
 				),
 				
@@ -1733,7 +1721,7 @@ $TCA ['tx_cal_exception_event'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.bymonthday_short',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->byMonthDay' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->byMonthDay' 
 						) 
 				),
 				
@@ -1743,7 +1731,7 @@ $TCA ['tx_cal_exception_event'] = Array (
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.bymonth_short',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->byMonth' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->byMonth' 
 						) 
 				),
 				
@@ -1781,7 +1769,7 @@ $TCA ['tx_cal_exception_event'] = Array (
 						'displayCond' => 'FIELD:rdate_type:IN:date_time,date,period',
 						'config' => Array (
 								'type' => 'user',
-								'userFunc' => 'tx_cal_customtca->rdate' 
+								'userFunc' => 'TYPO3\CMS\Cal\Backend\TCA\CustomTca->rdate' 
 						) 
 				),
 				
@@ -1934,7 +1922,7 @@ $TCA ['tx_cal_organizer'] = Array (
 												0 
 										) 
 								),
-								'itemsProcFunc' => 'user_staticinfotables_div->selectItemsTCA',
+								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\StaticInfoTablesDiv->selectItemsTCA',
 								'itemsProcFunc_config' => array (
 										'table' => 'static_country_zones',
 										'where' => '1 AND zn_country_iso_3="###REC_FIELD_country###"',
@@ -1960,7 +1948,7 @@ $TCA ['tx_cal_organizer'] = Array (
 												0 
 										) 
 								),
-								'itemsProcFunc' => 'user_staticinfotables_div->selectItemsTCA',
+								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\StaticInfoTablesDiv->selectItemsTCA',
 								'itemsProcFunc_config' => array (
 										'table' => 'static_countries',
 										'indexField' => 'cn_iso_3',
@@ -2208,7 +2196,7 @@ $TCA ['tx_cal_location'] = Array (
 												0 
 										) 
 								),
-								'itemsProcFunc' => 'user_staticinfotables_div->selectItemsTCA',
+								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\StaticInfoTablesDiv->selectItemsTCA',
 								'itemsProcFunc_config' => Array (
 										'table' => 'static_country_zones',
 										'where' => '1 AND zn_country_iso_3="###REC_FIELD_country###"',
@@ -2234,7 +2222,7 @@ $TCA ['tx_cal_location'] = Array (
 												0 
 										) 
 								),
-								'itemsProcFunc' => 'user_staticinfotables_div->selectItemsTCA',
+								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\StaticInfoTablesDiv->selectItemsTCA',
 								'itemsProcFunc_config' => Array (
 										'table' => 'static_countries',
 										'indexField' => 'cn_iso_3',

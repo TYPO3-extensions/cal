@@ -27,12 +27,12 @@ if($extConf ['categoryService'] == 'sys_category') {
 /***************
  * Default TypoScript
  */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ts/', 'Classic CSS-based template');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ts_standard/', 'Standard CSS-based template');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ajax/', 'AJAX-based template (Experimental!)');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/css/', 'Classic CSS styles');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/css_standard/', 'Standard CSS styles');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/rss_feed/', 'News-feed (RSS,RDF,ATOM)');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/ics/', 'ICS Export');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'static/fe-editing/', 'Fe-Editing');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'Configuration/TypoScript/ts/', 'Classic CSS-based template');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'Configuration/TypoScript/ts_standard/', 'Standard CSS-based template');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'Configuration/TypoScript/ajax/', 'AJAX-based template (Experimental!)');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'Configuration/TypoScript/css/', 'Classic CSS styles');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'Configuration/TypoScript/css_standard/', 'Standard CSS styles');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'Configuration/TypoScript/rss_feed/', 'News-feed (RSS,RDF,ATOM)');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'Configuration/TypoScript/ics/', 'ICS Export');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile ($_EXTKEY, 'Configuration/TypoScript/fe-editing/', 'Fe-Editing');
 

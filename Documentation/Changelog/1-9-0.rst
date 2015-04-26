@@ -1,0 +1,10 @@
+
+1.9.0 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* refactoring - Adopted extbase structure and moved all php files into Classes folder 
+	              -  Icons, help-files and templates are now inside the Resources folder
+	              -  TypoScript, Flexforms & TCA stuff is inside the Configuration folder
+

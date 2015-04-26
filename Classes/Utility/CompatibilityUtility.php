@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\Cal\Utility;
+namespace TYPO3\CMS\Cal\Utility;
 
 /**
  * This file is part of the TYPO3 CMS project.
@@ -28,7 +28,7 @@ class CompatibilityUtility {
 	 * WARNING: The new method changed its signature and does not return the first parameter anymore, but it is more performant.
 	 *
 	 * Can be removed if TYPO3 6.2 or higher is minimum requirement for cal
-	 * and replace \TYPO3\Cal\Utility\CompatibilityUtility::mergeRecursiveWithOverrule
+	 * and replace \TYPO3\CMS\Cal\Utility\CompatibilityUtility::mergeRecursiveWithOverrule
 	 * with \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule
 	 *
 	 * @param array $original Original array. It will be *modified* by this method and contains the result afterwards!

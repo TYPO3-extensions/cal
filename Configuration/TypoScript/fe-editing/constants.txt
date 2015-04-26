@@ -1,0 +1,46 @@
+###
+# This are the default TS-constants for cal
+##
+
+plugin.tx_cal_controller {
+	# cat=Calendar Base (General)/general/pidlist/2; type=integer; label=Page ID that frontend-created records should be saved on.
+	rights.defaultSavePid =
+	
+	# cat=Calendar Base (General)/general/10; type=boolean; label=Enable Frontend Editing:  This setting turns frontend editing on. Without it, the other Typoscript options for frontend editing are ignored.
+	rights.edit = 0
+	# cat=Calendar Base (General)/general/11; type=string; label=Frontend Calendar Admin Users: Comma seperated list of frontend user IDs (UID).
+	rights.admin.user = 
+	# cat=Calendar Base (General)/general/12; type=string; label=Frontend Calendar Admin Groups: Comma separated list of frontend group IDs (UID).
+	rights.admin.group = 
+	
+	# cat=Calendar Base (General)/general/13; type=string; label=Free and busy view Page: Page ID where the freeAndBusy view is allowed.
+	view.create_event.freeAndBusyViewPid =
+	
+	# cat=Calendar Base (Templates)/file/calendar/1; type=string; label=Calendar Create Template: Marker-based template for calendar creation.
+	view.calendar.createCalendarTemplate = EXT:cal/Resources/Private/Templates/v1/create_calendar.tmpl
+	# cat=Calendar Base (Templates)/file/calendar/2; type=string; label=Calendar Confirm Template: Marker-based template for calendar confirmation.
+	view.calendar.confirmCalendarTemplate = EXT:cal/Resources/Private/Templates/v1/confirm_calendar.tmpl
+	# cat=Calendar Base (Templates)/file/calendar/3; type=string; label=Calendar Delete Template: Marker-based template for calendar deletion.
+	view.calendar.deleteCalendarTemplate = EXT:cal/Resources/Private/Templates/v1/delete_calendar.tmpl
+
+	# cat=Calendar Base (Templates)/file/category/1; type=string; label=Category Create Template: Marker-based template for category creation.
+	view.category.createCategoryTemplate = EXT:cal/Resources/Private/Templates/v1/create_category.tmpl
+	# cat=Calendar Base (Templates)/file/category/2; type=string; label=Category Confirm Template: Marker-based template for category confirmation.
+	view.category.confirmCategoryTemplate = EXT:cal/Resources/Private/Templates/v1/confirm_category.tmpl
+	# cat=Calendar Base (Templates)/file/category/3; type=string; label=Category Delete Template: Marker-based template for category deletion.
+	view.category.deleteCategoryTemplate = EXT:cal/Resources/Private/Templates/v1/delete_category.tmpl
+	
+	# cat=Calendar Base (Templates)/file/event/3; type=string; label=Event (Create) Template: Marker-based template for event creation view.
+	view.event.createEventTemplate = EXT:cal/Resources/Private/Templates/v1/create_event.tmpl
+	# cat=Calendar Base (Templates)/file/event/4; type=string; label=Event (Confirm) Template: Marker-based template for event confirmation view.
+	view.event.confirmEventTemplate = EXT:cal/Resources/Private/Templates/v1/confirm_event.tmpl
+	# cat=Calendar Base (Templates)/file/event/5; type=string; label=Event (Delete) Template: Marker-based template for event deletion view.
+	view.event.deleteEventTemplate = EXT:cal/Resources/Private/Templates/v1/delete_event.tmpl
+	
+	# cat=Calendar Base (Templates)/file/location/4; type=string; label=Location (Create) Template: Marker-based template for location creation view.
+	view.location.createLocationTemplate = EXT:cal/Resources/Private/Templates/v1/create_location.tmpl
+	# cat=Calendar Base (Templates)/file/location/5; type=string; label=Location (Confirm) Template: Marker-based template for location confirmation view.
+	view.location.confirmLocationTemplate = EXT:cal/Resources/Private/Templates/v1/confirm_location.tmpl
+	# cat=Calendar Base (Templates)/file/location/6; type=string; label=Location (Delete) Template: Marker-based template for location deletion view.
+	view.location.deleteLocationTemplate = EXT:cal/Resources/Private/Templates/v1/delete_location.tmpl
+}

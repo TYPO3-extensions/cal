@@ -99,7 +99,8 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 				case 'category_ids' :
 					$this->setCategories (Array ());
 					$categories = array ();
-					$categoryService = &$modelObj->getServiceObjByKey ('cal_category_model', 'category', 'sys_category');
+					$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
+					$categoryService = &$modelObj->getServiceObjByKey ('cal_category_model', 'category', $confArr ['categoryService']);
 					$categoryService->getCategoryArray ($this->conf ['pidList'], $categories);
 					$piVarsCaregoryArray = explode (',', $this->controller->convertLinkVarArrayToList ($piVars [$key]));
 					if (! empty ($piVarsCaregoryArray)) {

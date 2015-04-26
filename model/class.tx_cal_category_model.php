@@ -55,7 +55,8 @@ class tx_cal_category_model extends tx_cal_base_model {
 	 * Constructor.
 	 */
 	public function tx_cal_category_model($row, $serviceKey) {
-		$this->setType ('sys_category');
+		$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
+		$this->setType ($confArr ['categoryService']);
 		$this->setObjectType ('category');
 		$this->tx_cal_base_model ($serviceKey);
 		if (is_array ($row) && ! empty ($row)) {

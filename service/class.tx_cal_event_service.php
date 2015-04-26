@@ -895,16 +895,24 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$limit = '';
 		
 		if ($this->rightsObj->isAllowedToEditEventCategory ()) {
+			$where = 'uid_local = ' . $uid;
+			$category_mm_relation_table = 'tx_cal_event_cateogry_record_mm';
+			$switchUidLocalForeign = false;
+			if ($this->extConf ['categoryService'] == 'sys_cateogry'){
+				$category_mm_relation_table = 'sys_category_record_mm';
+				$switchUidLocalForeign = true;
+				$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($category_mm_relation_table, $where);
+			} else {
+				$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($category_mm_relation_table, $where);
+			}
+			
 			$categoryIds = Array ();
 			foreach ($object->getCategories () as $category) {
 				if (is_object ($category)) {
 					$categoryIds [] = $category->getUid ();
 				}
 			}
-			$table = 'sys_category_record_mm';
-			$where = 'uid_local = ' . $uid;
-			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($table, $where);
-			$this->insertIdsIntoTableWithMMRelation ($table, $categoryIds, $uid, '');
+			$this->insertIdsIntoTableWithMMRelation ($table, $categoryIds, $uid, '', Array(), $switchUidLocalForeign);
 		}
 		
 		if ($this->rightsObj->isAllowedToEditEventNotify () && ! is_null ($tempValues ['notify_ids'])) {

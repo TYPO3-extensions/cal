@@ -98,7 +98,8 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 				case 'category_ids' :
 					$this->setCategories (Array ());
 					$categories = Array ();
-					$categoryService = &$modelObj->getServiceObjByKey ('cal_category_model', 'category', 'sys_category');
+					$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
+					$categoryService = &$modelObj->getServiceObjByKey ('cal_category_model', 'category', $confArr ['categoryService']);
 					$categoryService->getCategoryArray ($this->conf ['pidList'], $categories);
 					$piVarsCaregoryArray = explode (',', $this->controller->convertLinkVarArrayToList ($piVars [$key]));
 					if (! empty ($piVarsCaregoryArray)) {

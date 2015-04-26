@@ -54,7 +54,8 @@ class CategoryModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 	 * Constructor.
 	 */
 	public function __construct($row, $serviceKey) {
-		$this->setType ('sys_category');
+		$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
+		$this->setType ($confArr ['categoryService']);
 		$this->setObjectType ('category');
 		parent::__construct ($serviceKey);
 		if (is_array ($row) && ! empty ($row)) {

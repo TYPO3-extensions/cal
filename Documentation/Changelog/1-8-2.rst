@@ -1,0 +1,8 @@
+
+1.8.2 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* fixed ::references to sys_category, which should respect the extension configuration
+

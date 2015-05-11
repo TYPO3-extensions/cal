@@ -515,9 +515,8 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 	}
 	
-	public function getCalendarsWithoutCategory($calendarSearchString, $calendarUids) {
+	public function getCalendarsWithoutCategory($calendarSearchString, $calendarUids, &$categoryArrayByCalendarUid) {
 		$calendarsWithoutCategory = array_diff (\TYPO3\CMS\Core\Utility\GeneralUtility::intExplode (',', $this->conf ['view.'] ['calendar']), array_unique ($calendarUids));
-		$categoryArrayByCalendarUid = Array();
 		if (! empty ($calendarsWithoutCategory)) {
 			$select = 'tx_cal_calendar.*';
 			$table = 'tx_cal_calendar';
@@ -551,7 +550,6 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 				$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 			}
 		}
-		return $categoryArrayByCalendarUid;
 	}
 }
 

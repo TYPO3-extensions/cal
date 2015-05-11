@@ -305,7 +305,7 @@ class CategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 		}
 		
-		$this->categoryArrayByCalendarUid = $calendarService->getCalendarsWithoutCategory($calendarSearchString, $calendarUids);
+		$calendarService->getCalendarsWithoutCategory($calendarSearchString, $calendarUids, $this->categoryArrayByCalendarUid);
 		
 		$additionalWhere = $filterWhere;
 		// Select all global categories

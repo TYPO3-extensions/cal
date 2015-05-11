@@ -896,7 +896,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		if ($this->rightsObj->isAllowedToEditEventCategory ()) {
 			
 			$where = 'uid_local = ' . $uid;
-			$category_mm_relation_table = 'tx_cal_event_cateogry_record_mm';
+			$category_mm_relation_table = 'tx_cal_event_category_mm';
 			$switchUidLocalForeign = false;
 			if ($this->extConf ['categoryService'] == 'sys_cateogry'){
 				$category_mm_relation_table = 'sys_category_record_mm';

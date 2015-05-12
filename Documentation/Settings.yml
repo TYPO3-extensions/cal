@@ -2,7 +2,7 @@ conf.py:
   copyright: 2005-2015
   project: Calendar Base
   version: 1.8
-  release: 1.8.2
+  release: 1.8.3
   latex_documents:
   - - Index
     - cal.tex

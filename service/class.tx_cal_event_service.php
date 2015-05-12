@@ -659,6 +659,11 @@ class tx_cal_event_service extends tx_cal_base_service {
 		// Creating DB records
 		$table = 'tx_cal_event';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+		if (FALSE === $result){
+			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+			throw new \RuntimeException('Could not write event record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458130);
+		}
+		
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 		
 		// creating relation records
@@ -896,7 +901,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 		
 		if ($this->rightsObj->isAllowedToEditEventCategory ()) {
 			$where = 'uid_local = ' . $uid;
-			$category_mm_relation_table = 'tx_cal_event_cateogry_record_mm';
+			$category_mm_relation_table = 'tx_cal_event_category_mm';
 			$switchUidLocalForeign = false;
 			if ($this->extConf ['categoryService'] == 'sys_cateogry'){
 				$category_mm_relation_table = 'sys_category_record_mm';
@@ -912,7 +917,7 @@ class tx_cal_event_service extends tx_cal_base_service {
 					$categoryIds [] = $category->getUid ();
 				}
 			}
-			$this->insertIdsIntoTableWithMMRelation ($table, $categoryIds, $uid, '', Array(), $switchUidLocalForeign);
+			$this->insertIdsIntoTableWithMMRelation ($category_mm_relation_table, $categoryIds, $uid, '', Array(), $switchUidLocalForeign);
 		}
 		
 		if ($this->rightsObj->isAllowedToEditEventNotify () && ! is_null ($tempValues ['notify_ids'])) {
@@ -1585,6 +1590,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 									'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
 							);
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+							if (FALSE === $result){
+								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458131);
+							}
 						} else {
 							if ($new_event->isAllday ()) {
 								$master_array [$start->format ('%Y%m%d')] ['-1'] [$new_event->getUid ()] = $new_event;
@@ -1655,6 +1664,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 									'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
 							);
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+							if (FALSE === $result){
+								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458132);
+							}
 						} else {
 							if ($new_event->isAllday ()) {
 								$master_array [$start->format ('%Y%m%d')] ['-1'] [$new_event->getUid ()] = $new_event;
@@ -1694,6 +1707,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 									'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
 							);
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+							if (FALSE === $result){
+								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458133);
+							}
 						} else {
 							if ($new_event->isAllday ()) {
 								$master_array [$start->format ('%Y%m%d')] ['-1'] [$new_event->getUid ()] = $new_event;
@@ -1801,6 +1818,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$table = 'tx_cal_exception_event';
 		
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
+		if (FALSE === $result){
+			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+			throw new \RuntimeException('Could not write exception event record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458134);
+		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 		
 		$this->insertIdsIntoTableWithMMRelation ('tx_cal_exception_event_mm', array (
@@ -2132,6 +2153,10 @@ class tx_cal_event_service extends tx_cal_base_service {
 								$eventData ['end_datetime'] = $endDate->format ('%Y%m%d') . $endDate->format ('%H%M%S');
 							}
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+							if (FALSE === $result){
+								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458135);
+							}
 						} else {
 							$new_event = $event->cloneEvent ();
 							$new_event->setStart ($nextOccuranceTime);

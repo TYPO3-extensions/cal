@@ -167,6 +167,10 @@ class tx_cal_syscategory_service extends tx_cal_base_service {
 	private function _saveCategory(&$insertFields) {
 		$table = 'sys_category';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
+		if (FALSE === $result){
+			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+			throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458158);
+		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 		return $uid;
 	}

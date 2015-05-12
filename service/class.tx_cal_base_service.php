@@ -149,7 +149,11 @@ class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 						'tablenames' => $tablename,
 						'sorting' => $key + 1 
 				), $additionalParams);
-				$GLOBALS ['TYPO3_DB']->exec_INSERTquery ($mm_table, $insertFields);
+				$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($mm_table, $insertFields);
+				if (FALSE === $result){
+					\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+					throw new \RuntimeException('Could not write '.$mm_table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458138);
+				}
 			}
 		}
 	}

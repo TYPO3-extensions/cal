@@ -918,7 +918,11 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 										'pid' => $this->conf ['rights.'] ['create.'] ['event.'] ['saveEventToPid'],
 										'offset' => $this->conf ['view.'] ['event.'] ['remind.'] ['time'] 
 								);
-								$GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
+								$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
+								if (FALSE === $result){
+									\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+									throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458137);
+								}
 								
 								require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 								$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($this->conf ['rights.'] ['create.'] ['event.'] ['saveEventToPid']);

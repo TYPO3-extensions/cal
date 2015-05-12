@@ -441,7 +441,11 @@ class tx_cal_tcemain_processdatamap {
 				$attendeeUids = Array ();
 				while ($row2 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result2)) {
 					$incomingFieldArray ['fe_user_id'] = $row2 ['fe_users.uid'];
-					$GLOBALS ['TYPO3_DB']->exec_INSERTquery ('tx_cal_attendee', $incomingFieldArray);
+					$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ('tx_cal_attendee', $incomingFieldArray);
+					if (FALSE === $result){
+						\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
+						throw new \RuntimeException('Could not write attendee record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458136);
+					}
 					$attendeeUids [] = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 				}
 				$GLOBALS ['TYPO3_DB']->sql_free_result ($result2);

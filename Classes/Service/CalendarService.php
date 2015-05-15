@@ -112,6 +112,11 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$this->searchForAdditionalFieldsToAddFromPostData ($insertFields, 'calendar', false);
 		$this->retrievePostData ($insertFields);
 		$uid = $this->checkUidForLanguageOverlay ($uid, 'tx_cal_calendar');
+		
+		if ($this->rightsObj->isAllowedToEditCalendarType ()) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_calendar', 'ics_file', $insertFields, $uid);
+		}
+		
 		// Creating DB records
 		$table = 'tx_cal_calendar';
 		$where = 'uid = ' . $uid;
@@ -202,10 +207,6 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		
 		if ($this->rightsObj->isAllowedToEditCalendarType () || $this->rightsObj->isAllowedToCreateCalendarType ()) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_calendar', 'ics_file', $insertFields);
-		}
-		
-		if ($this->rightsObj->isAllowedToEditCalendarType () || $this->rightsObj->isAllowedToCreateCalendarType ()) {
 			$insertFields ['refresh'] = strip_tags ($this->controller->piVars ['refresh']);
 		}
 		
@@ -238,6 +239,11 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$insertFields ['freeAndBusyUser_ids'] = strip_tags ($this->controller->piVars ['freeAndBusyUser_ids']);
 		
 		$uid = $this->_saveCalendar ($insertFields);
+
+		if ($this->rightsObj->isAllowedToCreateCalendarType ()) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_calendar', 'ics_file', $insertFields, $uid);
+		}
+		
 		$this->unsetPiVars ();
 		\TYPO3\CMS\Cal\Utility\Functions::clearCache ();
 		return $this->find ($uid, $this->conf ['pidList']);
@@ -251,6 +257,9 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$table = 'tx_cal_calendar';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
+		if (FALSE === $result){
+			throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458139);
+		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 		
 		if ($insertFields ['type'] == 1 or $insertFields ['type'] == 2) {

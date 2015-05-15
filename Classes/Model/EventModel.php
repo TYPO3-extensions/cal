@@ -212,18 +212,6 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 						}
 					}
 					break;
-				case 'image_caption' :
-					$this->setImageCaption (explode (chr (10), $cObj->removeBadHTML ($piVars ['image_caption'], $this->conf)));
-					unset ($piVars ['image_caption']);
-					break;
-				case 'image_alt' :
-					$this->setImageAltText (explode (chr (10), $cObj->removeBadHTML ($piVars ['image_alt'], $this->conf)));
-					unset ($piVars ['image_alt']);
-					break;
-				case 'image_title' :
-					$this->setImageTitleText (explode (chr (10), $cObj->removeBadHTML ($piVars ['image_title'], $this->conf)));
-					unset ($piVars ['image_title']);
-					break;
 				case 'attachment' :
 					$this->setAttachment (array ());
 					if (is_array ($piVars ['attachment'])) {
@@ -231,10 +219,6 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 							$this->addAttachment (strip_tags ($attachment));
 						}
 					}
-					break;
-				case 'attachment_caption' :
-					$this->setAttachmentCaption (explode (chr (10), $cObj->removeBadHTML ($piVars ['attachment_caption'], $this->conf)));
-					unset ($piVars ['attachment_caption']);
 					break;
 				case 'frequency_id' :
 					$valueArray = array (
@@ -517,9 +501,6 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 		/* new */
 		
 		$this->setImage (GeneralUtility::trimExplode (',', $row ['image'], 1));
-		$this->setImageTitleText (GeneralUtility::trimExplode (chr (10), $row ['imagetitletext']));
-		$this->setImageAltText (GeneralUtility::trimExplode (chr (10), $row ['imagealttext']));
-		$this->setImageCaption (GeneralUtility::trimExplode (chr (10), $row ['imagecaption']));
 		
 		if ($row ['attachment']) {
 			$fileArr = explode (',', $row ['attachment']);
@@ -914,7 +895,10 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 										'pid' => $this->conf ['rights.'] ['create.'] ['event.'] ['saveEventToPid'],
 										'offset' => $this->conf ['view.'] ['event.'] ['remind.'] ['time'] 
 								);
-								$GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
+								$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
+								if (FALSE === $result){
+									throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458137);
+								}
 								
 								$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($this->conf ['rights.'] ['create.'] ['event.'] ['saveEventToPid']);
 								$offset = is_numeric ($pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time']) ? $pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time'] * 60 : 0;

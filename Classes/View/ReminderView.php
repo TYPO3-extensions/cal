@@ -227,6 +227,9 @@ class ReminderView extends \TYPO3\CMS\Cal\View\NotificationView {
 				$insertFields ['description'] = 'Calendar Base';
 				$table = 'tx_scheduler_task_group';
 				$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
+				if (FALSE === $result){
+					throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458160);
+				}
 				$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 				$task->setTaskGroup($uid);
 			}

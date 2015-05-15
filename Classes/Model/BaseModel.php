@@ -55,11 +55,7 @@ class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 	var $uid = 0;
 	var $pid = 0;
 	var $image = Array ();
-	var $imageCaption = Array ();
-	var $imageTitleText = Array ();
-	var $imageAltText = Array ();
 	var $attachment = Array ();
-	var $attachmentCaption = Array ();
 	var $cachedValueArray = Array ();
 	var $initializingCacheValues = false;
 	var $templatePath;
@@ -209,58 +205,13 @@ class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 	}
 	
 	/**
-	 * Returns the image alt text(s)
-	 */
-	function getImageAltText() {
-		return $this->imageAltText;
-	}
-	
-	/**
-	 * Sets the image title text
-	 * 
-	 * @param $text Array
-	 *        	title text(s)
-	 */
-	function setImageTitleText($text) {
-		if (is_array ($text)) {
-			$this->imageTitleText = $text;
-		}
-	}
-	
-	/**
-	 * Returns the image title text(s)
-	 */
-	function getImageTitleText() {
-		return $this->imageTitleText;
-	}
-	
-	/**
-	 * Sets the image caption
-	 * 
-	 * @param $caption Array
-	 *        	caption
-	 */
-	function setImageCaption($caption) {
-		if (is_array ($caption)) {
-			$this->imageCaption = $caption;
-		}
-	}
-	
-	/**
-	 * Returns the image caption
-	 */
-	function getImageCaption() {
-		return $this->imageCaption;
-	}
-	
-	/**
 	 * Sets the images
 	 * 
 	 * @param $images blob
 	 *        	more images
 	 */
 	function setImage($image) {
-		if ($image != '') {
+		if (is_array($image)) {
 			$this->image = $image;
 		}
 	}
@@ -299,18 +250,6 @@ class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 			}
 		}
 		return false;
-	}
-	
-	/**
-	 * Sets the image alt text
-	 * 
-	 * @param $alt Array
-	 *        	alt text(s)
-	 */
-	function setImageAltText($alt) {
-		if (is_array ($alt)) {
-			$this->imageAltText = $alt;
-		}
 	}
 	
 	/**
@@ -359,22 +298,10 @@ class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 		return false;
 	}
 	
-	/**
-	 * Returns the attachment caption
-	 */
-	function getAttachmentCaption() {
-		return $this->attachmentCaption;
-	}
-	
-	/**
-	 * Sets the attachment caption
-	 */
-	function setAttachmentCaption(&$caption) {
-		return $this->attachmentCaption = $caption;
-	}
 	function isUserAllowedToEdit($feUserUid = '', $feGroupsArray = array ()) {
 		return false;
 	}
+	
 	function isUserAllowedToDelete($feUserUid = '', $feGroupsArray = array ()) {
 		return false;
 	}

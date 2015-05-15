@@ -273,6 +273,9 @@ class LocationAddressService extends \TYPO3\CMS\Cal\Service\BaseService {
 	function _saveLocation(&$insertFields) {
 		$table = 'tt_address';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
+		if (FALSE === $result){
+			throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458151);
+		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 		return $uid;
 	}

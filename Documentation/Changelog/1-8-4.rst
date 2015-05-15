@@ -1,0 +1,10 @@
+
+1.8.4 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* fixed :: reactivated image and attachment handling on frontend editing
+	* new   :: maxitems for images and attachments in tca
+	* fixed :: removed debug output on RuntimeExceptions
+

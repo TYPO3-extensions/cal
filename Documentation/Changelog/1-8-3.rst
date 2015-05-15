@@ -1,0 +1,10 @@
+
+1.8.3 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* fixed :: category handling of fe-editing
+	* fixed :: Changelog reference to 1.8.2
+	* added :: Exception handling for insert statements
+

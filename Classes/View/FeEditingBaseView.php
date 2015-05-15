@@ -51,7 +51,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 	public function __construct() {
 		parent::__construct ();
 	}
-	function getTemplateSingleMarker(& $template, & $sims, & $rems, $view) {
+	
+	protected function getTemplateSingleMarker(& $template, & $sims, & $rems, $view) {
 		preg_match_all ('!\###([A-Z0-9_-|]*)\###!is', $template, $match);
 		$allSingleMarkers = array_unique ($match [1]);
 		foreach ($allSingleMarkers as $marker) {
@@ -128,7 +129,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			}
 		}
 	}
-	function getTemplateSubpartMarker(& $template, & $sims, & $rems, & $wrapped) {
+	
+	protected function getTemplateSubpartMarker(& $template, & $sims, & $rems, & $wrapped) {
 		preg_match_all ('!\<\!--[a-zA-Z0-9 ]*###([A-Z0-9_-|]*)\###[a-zA-Z0-9 ]*-->!is', $template, $match);
 		
 		$allMarkers = array_unique ($match [1]);
@@ -154,10 +156,12 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			}
 		}
 	}
-	function getFormStartMarker(& $template, & $sims, & $rems, & $wrapped) {
+	
+	public function getFormStartMarker(& $template, & $sims, & $rems, & $wrapped) {
 		$rems ['###FORM_START###'] = $this->cObj->getSubpart ($template, '###FORM_START###');
 	}
-	function getFormEndMarker(& $template, & $sims, & $rems, & $wrapped) {
+	
+	public function getFormEndMarker(& $template, & $sims, & $rems, & $wrapped) {
 		$temp = $this->cObj->getSubpart ($template, '###FORM_END###');
 		$temp_sims = array ();
 		$linkParams = $this->controller->shortenLastViewAndGetTargetViewParameters ();
@@ -174,7 +178,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		$temp_sims ['###L_DELETE###'] = $this->controller->pi_getLL ('l_delete');
 		$rems ['###FORM_END###'] = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
 	}
-	function getHiddenMarker(& $template, & $sims, & $rems, $view) {
+	
+	public function getHiddenMarker(& $template, & $sims, & $rems, $view) {
 		$sims ['###HIDDEN###'] = '';
 		if ($this->isConfirm) {
 			$sims ['###HIDDEN_VALUE###'] = '';
@@ -206,7 +211,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			}
 		}
 	}
-	function getTitleMarker(& $template, & $sims, & $rems) {
+	
+	public function getTitleMarker(& $template, & $sims, & $rems) {
 		$sims ['###TITLE###'] = '';
 		$sims ['###TITLE_VALUE###'] = '';
 		if ($this->isAllowed ('title')) {
@@ -215,14 +221,16 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			$sims ['###TITLE_VALUE###'] = $title;
 		}
 	}
-	function getDescriptionMarker(& $template, & $sims, & $rems) {
+	
+	public function getDescriptionMarker(& $template, & $sims, & $rems) {
 		$sims ['###DESCRIPTION###'] = '';
 		if ($this->isAllowed ('description')) {
 			$sims ['###DESCRIPTION###'] = $this->applyStdWrap ($this->object->getDescription (), 'description_stdWrap');
 			$sims ['###DESCRIPTION_VALUE###'] = htmlspecialchars ($this->object->getDescription ());
 		}
 	}
-	function getCalendarIdMarker(& $template, & $sims, & $rems) {
+	
+	public function getCalendarIdMarker(& $template, & $sims, & $rems) {
 		$sims ['###CALENDAR_ID###'] = '';
 		if ($this->isAllowed ('calendar_id')) {
 			$calendarID = $this->object->getCalendarUid ();
@@ -281,60 +289,29 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			$sims ['###CALENDAR_ID###'] = $this->applyStdWrap ($calendarSelect, 'calendar_id_stdWrap');
 		}
 	}
-	function getImageMarker(& $template, & $sims, & $rems) {
+	
+	public function getImageMarker(& $template, & $sims, & $rems) {
 		$this->getFileMarker ('image', $template, $sims, $rems);
 	}
-	function getImageCaptionMarker(& $template, & $sims, & $rems) {
-		$sims ['###IMAGE_CAPTION###'] = '';
-		$sims ['###IMAGE_CAPTION_VALUE###'] = '';
-		if ($this->isAllowed ('image_caption')) {
-			$caption = implode (chr (10), (array) $this->object->getImageCaption ());
-			$sims ['###IMAGE_CAPTION###'] = $this->applyStdWrap ($caption, 'image_caption_stdWrap');
-			$sims ['###IMAGE_CAPTION_VALUE###'] = $caption;
-		}
-	}
-	function getImageTitleMarker(& $template, & $sims, & $rems) {
-		$sims ['###IMAGE_TITLE###'] = '';
-		$sims ['###IMAGE_TITLE_VALUE###'] = '';
-		if ($this->isAllowed ('image_title')) {
-			$imageTitleText = implode (chr (10), (array) $this->object->getImageTitleText ());
-			$sims ['###IMAGE_TITLE###'] = $this->applyStdWrap ($imageTitleText, 'image_title_stdWrap');
-			$sims ['###IMAGE_TITLE_VALUE###'] = $imageTitleText;
-		}
-	}
-	function getImageAltMarker(& $template, & $sims, & $rems) {
-		$sims ['###IMAGE_ALT###'] = '';
-		$sims ['###IMAGE_ALT_VALUE###'] = '';
-		if ($this->isAllowed ('image_title')) {
-			$imageTitleText = implode (chr (10), (array) $this->object->getImageAltText ());
-			$sims ['###IMAGE_ALT###'] = $this->applyStdWrap ($imageTitleText, 'image_alt_stdWrap');
-			$sims ['###IMAGE_ALT_VALUE###'] = $imageTitleText;
-		}
-	}
-	function getAttachmentMarker(& $template, & $sims, & $rems) {
+	
+	public function getAttachmentMarker(& $template, & $sims, & $rems) {
 		$this->getFileMarker ('attachment', $template, $sims, $rems);
 	}
-	function getAttachmentCaptionMarker(& $template, & $sims, & $rems) {
-		$sims ['###ATTACHMENT_CAPTION###'] = '';
-		$sims ['###ATTACHMENT_CAPTION_VALUE###'] = '';
-		if ($this->isAllowed ('attachment_caption')) {
-			$caption = implode (chr (10), (array) $this->object->getAttachmentCaption ());
-			$sims ['###ATTACHMENT_CAPTION###'] = $this->applyStdWrap ($caption, 'attachment_caption_stdWrap');
-			$sims ['###ATTACHMENT_CAPTION_VALUE###'] = $caption;
-		}
-	}
-	function getIcsFileMarker(& $template, & $sims, & $rems) {
+	
+	public function getIcsFileMarker(& $template, & $sims, & $rems) {
 		$this->getFileMarker ('ics_file', $template, $sims, $rems);
 	}
-	function getFileMarker($marker, & $template, & $sims, & $rems) {
-		global $TYPO3_CONF_VARS, $TCA;
-		
-		$max = $TCA ['tx_cal_' . $this->objectString] ['columns'] [$marker] ['config'] ['size'];
-		$sims ['###' . strtoupper ($marker) . '###'] = '';
-		$sims ['###' . strtoupper ($marker) . '_VALUE###'] = '';
+	
+	protected function getFileMarker($marker, & $template, & $sims, & $rems) {
 		if (! $this->isAllowed ($marker)) {
 			return;
 		}
+		
+		$max =  $GLOBALS ['TCA'] ['tx_cal_' . $this->objectString] ['columns'] [$marker] ['config'] ['maxitems'];
+		$sims ['###' . strtoupper ($marker) . '###'] = '';
+		$sims ['###' . strtoupper ($marker) . '_VALUE###'] = '';
+		$sims ['###' . strtoupper ($marker) . '_CAPTION###'] = '';
+		$sims ['###' . strtoupper ($marker) . '_CAPTION_VALUE###'] = '';
 		
 		if ($this->isConfirm) {
 			$sims ['###' . strtoupper ($marker) . '###'] = '';
@@ -347,13 +324,15 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			$allowedExt = array ();
 			$denyExt = array ();
 			if ($marker == 'image') {
-				$allowedExt = explode (',', $TYPO3_CONF_VARS ['GFX'] ['imagefile_ext']);
+				$allowedExt = explode (',', $GLOBALS ['TYPO3_CONF_VARS'] ['GFX'] ['imagefile_ext']);
 			} else if ($marker == 'attachment') {
-				$allowedExt = explode (',', $TYPO3_CONF_VARS ['BE'] ['fileExtensions'] ['webspace'] ['allow']);
-				$denyExt = explode (',', $TYPO3_CONF_VARS ['BE'] ['fileExtensions'] ['webspace'] ['deny']);
+				$allowedExt = explode (',', $GLOBALS ['TYPO3_CONF_VARS'] ['BE'] ['fileExtensions'] ['webspace'] ['allow']);
+				$denyExt = explode (',', $GLOBALS ['TYPO3_CONF_VARS'] ['BE'] ['fileExtensions'] ['webspace'] ['deny']);
 			}
+			$i = 0;
 			
-			if (is_array ($_FILES [$this->prefixId] ['name'] [$marker])) {
+			//new files
+			if (is_array ($_FILES [$this->prefixId] ['name'])) {
 				foreach ($_FILES [$this->prefixId] ['name'] [$marker] as $id => $filename) {
 					$theDestFile = '';
 					$iConf = $this->conf ['view.'] [$this->conf ['view'] . '.'] [strtolower ($marker) . '_stdWrap.'];
@@ -374,130 +353,133 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 					}
 					
 					$temp_sims = Array ();
+					$temp_sims ['###INDEX###'] = $id;
 					$temp_sims ['###' . strtoupper ($marker) . '_VALUE###'] = $return;
 					$temp = '';
 					if ($marker == 'image') {
-						$temp = $this->renderImage ($iConf ['file'], '', '', '', $marker, true);
+						$temp = $this->renderImage ($iConf ['file'], $this->controller->piVars[$marker.'_caption'][$id], $this->controller->piVars[$marker.'_title'][$id], $marker, true);
 					} else if ($marker == 'attachment' || $marker == 'ics_file') {
-						$temp = $this->renderFile ($iConf ['file'], '', $marker, true);
+						$temp = $this->renderFile ($iConf ['file'], $this->controller->piVars[$marker.'_caption'][$id], $this->controller->piVars[$marker.'_title'][$id], $marker, true);
 					}
-					$sims ['###' . strtoupper ($marker) . '###'] .= \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
-				}
-			}
-			
-			$files = Array ();
-			if ($this->isEditMode) {
-				if ($marker == 'image') {
-					$files = $this->object->getImage ();
-				} else if ($marker == 'attachment') {
-					$files = $this->object->getAttachment ();
-				} else if ($marker == 'ics_file') {
-					$files = Array (
-							$this->object->getIcsFile () 
-					);
-				} else {
-					$files = GeneralUtility::trimExplode (',', $this->object->row [$marker]);
+					if ($this->isAllowed ($marker.'_caption')) {
+						$temp .= $this->applyStdWrap ($this->controller->piVars[$marker.'_caption'][$id], $marker.'_caption_stdWrap');
+					}
+					if ($this->isAllowed ($marker.'_title')) {
+						$temp .= $this->applyStdWrap ($this->controller->piVars[$marker.'_title'][$id], $marker.'_title_stdWrap');
+					}
+					$sims ['###' . strtoupper ($marker) . '###'] .= tx_cal_functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+					
+					$i++;
 				}
 			}
 			
 			$removeFiles = $this->controller->piVars ['remove_' . $marker] ? $this->controller->piVars ['remove_' . $marker] : Array ();
-			$files = array_diff ($files, $removeFiles);
-			
-			$caption = Array ();
-			$title = Array ();
-			$alt = Array ();
-			
-			switch ($marker) {
-				case 'image' :
-					{
-						$caption = $this->object->getImageCaption ();
-						$title = $this->object->getImageTitleText ();
-						$alt = $this->object->getImageAltText ();
-						break;
-					}
-				case 'attachment' :
-					{
-						$caption = $this->object->getAttachmentCaption ();
-						break;
-					}
+			$where = 'uid_foreign = ' . $this->conf ['uid'] . ' AND  tablenames=\'tx_cal_'.$this->objectString.'\' AND fieldname=\''.$marker.'\'';
+			if(!empty($removeFiles)){
+				$where .= ' AND uid not in ('.implode(',', array_values($removeFiles)).')';
 			}
-			$i = 0;
-			foreach ($files as $file) {
-				$i ++;
-				if ($i <= $max) {
-					$temp = '';
-					if ($marker == 'image') {
-						$temp = $this->renderImage ($file, $caption [$key], $title [$i], $alt [$i], $marker, false);
-					} else if ($marker == 'attachment' || $marker == 'ics_file') {
-						$temp = $this->renderFile ($file, $caption [$i], $marker, false);
-					}
-					$temp_sims = Array ();
-					$temp_sims ['###' . strtoupper ($marker) . '_VALUE###'] = $file;
-					$sims ['###' . strtoupper ($marker) . '###'] .= \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+			$titleFunc = 'get'.ucfirst($marker).'TitleText';
+			$captionFunc = 'get'.ucfirst($marker).'Caption';
+			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'sys_file_reference', $where);
+			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
+				
+				if ($marker == 'image') {
+					$temp = $this->renderImage ($row, $row['description'], $row['title'], $marker, false);
+				} else if ($marker == 'attachment' || $marker == 'ics_file') {
+					$temp = $this->renderFile ($row, $row['description'], $row['title'], $marker, false);
 				}
+				$temp_sims = Array ();
+				$temp_sims ['###' . strtoupper ($marker) . '_VALUE###'] = $row['uid'];
+				
+				foreach($this->controller->piVars[$marker] as $index => $image){
+					if($image == $row['uid']){
+						if (isset($this->controller->piVars[$marker.'_caption'][$index])) {
+							$row['description'] = $this->controller->piVars[$marker.'_caption'][$index];
+						}
+						if (isset($this->controller->piVars[$marker.'_title'][$index])) {
+							$row['title'] = $this->controller->piVars[$marker.'_title'][$index];
+						}
+						$temp_sims ['###INDEX###'] = $index;
+						break;
+					}
+				}
+				if ($this->isAllowed ($marker.'_caption')) {
+					$temp  .= $this->applyStdWrap ($row['description'], $marker.'_caption_stdWrap');
+				}
+				if ($this->isAllowed ($marker.'_title')) {
+					$temp  .= $this->applyStdWrap ($row['title'], $marker.'_title_stdWrap');
+				}
+				$sims ['###' . strtoupper ($marker) . '###'] .= tx_cal_functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
 			}
+			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
+			
+
+			foreach($removeFiles as $removeFile){
+				$sims ['###' . strtoupper ($marker) . '###'] .= '<input type="hidden" name="tx_cal_controller[remove_'.$marker.'][]" value="'.$removeFile.'">';
+			}
+			
 		} else {
 			if ($this->isEditMode && $this->rightsObj->isAllowedTo ('edit', $this->objectString, $marker)) {
 				$sims ['###' . strtoupper ($marker) . '###'] = '';
-				
-				$files = Array ();
-				$caption = Array ();
-				$title = Array ();
-				$alt = Array ();
-				switch ($marker) {
-					case 'image' :
-						{
-							$files = $this->object->getImage ();
-							$caption = $this->object->getImageCaption ();
-							$title = $this->object->getImageTitleText ();
-							$alt = $this->object->getImageAltText ();
-							break;
-						}
-					case 'attachment' :
-						{
-							$files = $this->object->getAttachment ();
-							$caption = $this->object->getAttachmentCaption ();
-							break;
-						}
-					default :
-						{
-							$files = GeneralUtility::trimExplode (',', $this->object->row [$marker], 1);
-							break;
-						}
-				}
 				$i = 0;
-				for ($i; $i < count ($files) && $i < $max; $i ++) {
-					$temp = $this->cObj->stdWrap ('', $this->conf ['view.'] [$this->conf ['view'] . '.'] [strtolower ($marker) . '_stdWrap.']);
+				$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'sys_file_reference', 'uid_foreign = ' . $this->conf ['uid'] . ' AND  tablenames=\'tx_cal_'.$this->objectString.'\' AND fieldname=\''.$marker.'\'');
+				while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
+					
 					$temp_sims = Array ();
-					$temp_sims ['###' . strtoupper ($marker) . '_VALUE###'] = $files [$i];
+					$temp_sims ['###' . strtoupper ($marker) . '_VALUE###'] = $row ['uid'];
+					$temp = $this->cObj->stdWrap ('', $this->conf ['view.'] [$this->conf ['view'] . '.'] [strtolower ($marker) . '_stdWrap.']);
 					if ($marker == 'image') {
-						$temp_sims ['###' . strtoupper ($marker) . '_PREVIEW###'] = $this->renderImage ($files [$i], $caption [$i], $title [$i], $alt [$i], $marker, false);
+						$temp_sims ['###' . strtoupper ($marker) . '_PREVIEW###'] = $this->renderImage ($row, $row['description'], $row['title'], $marker, false);
 					} else if ($marker == 'attachment' || $marker == 'ics_file') {
-						$temp_sims ['###' . strtoupper ($marker) . '_PREVIEW###'] = $this->renderFile ($files [$i], $caption [$i], $marker, false);
+						$temp_sims ['###' . strtoupper ($marker) . '_PREVIEW###'] = $this->renderFile ($row, $row['description'], $row['title'], $marker, false);
 					}
 					
-					$temp = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
-					$sims ['###' . strtoupper ($marker) . '###'] .= \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+					$temp = tx_cal_functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+					if ($this->isAllowed ($marker.'_caption')) {
+						$temp .= $this->applyStdWrap ($row['description'], $marker.'_caption_stdWrap');
+					}
+					if ($this->isAllowed ($marker.'_title')) {
+						$temp .= $this->applyStdWrap ($row['title'], $marker.'_title_stdWrap');
+					}
+					$temp_sims ['###INDEX###'] = $i;
+					$sims ['###' . strtoupper ($marker) . '###'] .= tx_cal_functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+					$i++;
+					
 				}
+				$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 				$upload = '';
 				for ($i; $i < $max; $i ++) {
+					$temp_sims = Array ();
 					$upload .= $this->cObj->stdWrap ('', $this->conf ['view.'] [$this->conf ['view'] . '.'] [$marker . 'Upload_stdWrap.']);
+					if ($this->isAllowed ($marker.'_caption')) {
+						$upload .= $this->applyStdWrap ('', $marker.'_caption_stdWrap');
+					}
+					if ($this->isAllowed ($marker.'_title')) {
+						$upload .= $this->applyStdWrap ('', $marker.'_title_stdWrap');
+					}
+					$temp_sims ['###INDEX###'] = $i;
+					$upload = tx_cal_functions::substituteMarkerArrayNotCached ($upload, $temp_sims, array (), array ());
 				}
 				$sims ['###' . strtoupper ($marker) . '###'] .= $upload;
 			} else if (! $this->isEditMode && $this->rightsObj->isAllowedTo ('create', $this->objectString, $marker)) {
 				for ($i = 0; $i < $max; $i ++) {
 					$value = '';
-					$upload = '';
-					for ($i; $i < $max; $i ++) {
-						$upload .= $this->cObj->stdWrap ($value, $this->conf ['view.'] [$this->conf ['view'] . '.'] [$marker . 'Upload_stdWrap.']);
-						$value = '';
+					$upload = $this->cObj->stdWrap ($value, $this->conf ['view.'] [$this->conf ['view'] . '.'] [$marker . 'Upload_stdWrap.']);
+					$value = '';
+					if ($this->isAllowed ($marker.'_caption')) {
+						$upload .= $this->applyStdWrap ('', $marker.'_caption_stdWrap');
 					}
-					$sims ['###' . strtoupper ($marker) . '###'] .= $upload;
+					if ($this->isAllowed ($marker.'_title')) {
+						$upload .= $this->applyStdWrap ('', $marker.'_title_stdWrap');
+					}
+					$temp_sims ['###INDEX###'] = $i;
+					$sims ['###' . strtoupper ($marker) . '###'] .= tx_cal_functions::substituteMarkerArrayNotCached ($upload, $temp_sims, array (), array ());
 				}
 			}
 		}
 	}
-	function getTranslationOptionsMarker(& $template, & $sims, & $rems) {
+	
+	protected function getTranslationOptionsMarker(& $template, & $sims, & $rems) {
 		if ($this->isEditMode && $this->rightsObj->isViewEnabled ('translation') && $this->rightsObj->isAllowedTo ('create', 'translation')) {
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('sys_language_uid', 'pages_language_overlay', 'pid = ' . $this->object->row ['pid'] . $this->cObj->enableFields ('pages_language_overlay'), '', 'sys_language_uid ASC');
 			$langIds = array ();
@@ -546,7 +528,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			$sims ['###TRANSLATION_OPTIONS###'] = '';
 		}
 	}
-	function getCurrentTranslationMarker(& $template, & $sims, & $rems) {
+	
+	protected function getCurrentTranslationMarker(& $template, & $sims, & $rems) {
 		if ($this->rightsObj->isViewEnabled ('translation') && $this->isEditMode) {
 			if ($this->object->row ['sys_language_uid'] != 0) {
 				$sims ['###CURRENT_TRANSLATION###'] = 'Current translation: ' . $this->cObj->cObjGetSingle ($this->conf ['view.'] ['translation.'] ['languageMenu.'] [$this->object->row ['sys_language_uid']], $this->conf ['view.'] ['translation.'] ['languageMenu.'] [$this->object->row ['sys_language_uid'] . '.']) . '<br/>';
@@ -557,7 +540,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			$sims ['###CURRENT_TRANSLATION###'] = '';
 		}
 	}
-	function checkRequiredFields(&$requiredFieldsSims) {
+	
+	protected function checkRequiredFields(&$requiredFieldsSims) {
 		$allRequiredFieldsAreFilled = true;
 		$viewParts = explode ('_', $this->conf ['view']);
 		if (count ($viewParts) == 2 && is_array ($this->conf ['rights.'] [$viewParts [0] . '.'] [$viewParts [1] . '.'] ['fields.']) > 0) {
@@ -576,7 +560,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		}
 		return $allRequiredFieldsAreFilled;
 	}
-	function getDefaultValues() {
+	
+	protected function getDefaultValues() {
 		$defaultValues = Array ();
 		$viewParts = explode ('_', $this->conf ['view']);
 		if (count ($viewParts) == 2 && is_array ($this->conf ['rights.'] [$viewParts [0] . '.'] [$viewParts [1] . '.'] ['fields.']) > 0) {
@@ -589,7 +574,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		}
 		return $defaultValues;
 	}
-	function checkContrains(&$constrainSims) {
+	
+	protected function checkContrains(&$constrainSims) {
 		$defaultValues = Array ();
 		$noComplains = true;
 		$viewParts = explode ('_', $this->conf ['view']);
@@ -606,7 +592,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		}
 		return $noComplains;
 	}
-	function constrainParser($field, $constrainConfig) {
+	
+	protected function constrainParser($field, $constrainConfig) {
 		$result = Array ();
 		$rightsObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'rightscontroller');
 		foreach ($constrainConfig as $rule) {
@@ -622,7 +609,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		}
 		return implode ('<br/>', $result);
 	}
-	function ruleParser($field, $rule) {
+	
+	protected function ruleParser($field, $rule) {
 		$passedAny = Array ();
 		$rules = GeneralUtility::trimExplode ('|', $rule ['rule'], 1);
 		foreach ($rules as $rulePart) {
@@ -753,18 +741,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		}
 		return '';
 	}
-	function formCheck() {
-		foreach ($this->conf ['rights.'] [($this->isEditMode ? 'edit' : 'create') . '.'] [$this->objectString . '.'] ['fields.'] as $name => $field) {
-			
-			if ($field ['required'] && $this->controller->piVars [str_replace ('.', '', $name)] == '') {
-				// debug('pflichtfeld nicht bef&uuml;llt: '.str_replace('.','',$name));
-			}
-		}
-		// if([strtolower($marker).'.']['required']){
-		// $required = $this->conf['view.']['required'];
-		// }
-	}
-	function isAllowed($field) {
+	
+	public function isAllowed($field) {
 		if ($this->isEditMode) {
 			$action = 'edit';
 		} else {
@@ -783,63 +761,37 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		
 		return $this->rightsObj->isAllowedTo ($action, $this->objectString, $field);
 	}
-	function applyStdWrap($value, $key) {
+	
+	protected function applyStdWrap($value, $key) {
 		$this->object->initLocalCObject ();
 		return $this->object->local_cObj->stdWrap ($value, $this->conf ['view.'] [$this->conf ['view'] . '.'] [$key . '.']);
 	}
-	function renderFile($file, $caption, $marker, $isTemp = false) {
-		$remMedia = $this->cObj->data ['media'];
-		$this->cObj->data ['media'] = basename ($file);
-		$remCaption = $this->cObj->data ['imagecaption'];
-		$this->cObj->data ['imagecaption'] = $caption;
-		$remLayout = $this->cObj->data ['layout'];
-		$this->cObj->data ['layout'] = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker . '.'] ['layout'];
-		$remPath = $this->cObj->data ['select_key'];
-		$remUploadFolder = $GLOBALS ['TCA'] ['tt_content'] ['columns'] ['media'] ['config'] ['uploadfolder'];
-		if ($isTemp) {
-			$this->cObj->data ['select_key'] = 'typo3temp/';
-			$GLOBALS ['TCA'] ['tt_content'] ['columns'] ['media'] ['config'] ['uploadfolder'] = 'typo3temp';
+	
+	protected function renderFile($file, $caption, $title, $marker, $isTemp = false) {
+		if ($isTemp){
+			$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker.'.'] ['value'] = $file;
 		} else {
-			global $TCA;
-			$this->cObj->data ['select_key'] = $TCA ['tx_cal_' . $this->objectString] ['columns'] [$marker] ['config'] ['uploadfolder'] . '/';
-			$GLOBALS ['TCA'] ['tt_content'] ['columns'] ['media'] ['config'] ['uploadfolder'] = $TCA ['tx_cal_' . $this->objectString] ['columns'] [$marker] ['config'] ['uploadfolder'];
+			// Render existing image -> $file is a sys_file_reference record
+			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTgetSingleRow ('identifier', 'sys_file', 'uid = ' . $file ['uid_local']);
+			$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker . '.'] ['value'] = 'fileadmin'.$result['identifier'];
 		}
-		$temp = $this->cObj->cObjGetSingle ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker], $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker . '.']);
-		
-		$this->cObj->data ['media'] = $remMedia;
-		$this->cObj->data ['layout'] = $remLayout;
-		$this->cObj->data ['imagecaption'] = $remCaption;
-		$this->cObj->data ['select_key'] = $remPath;
-		$GLOBALS ['TCA'] ['tt_content'] ['columns'] ['media'] ['config'] ['uploadfolder'] = $remUploadFolder;
-		return $temp;
+		return $this->cObj->cObjGetSingle ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker], $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker . '.']);
 	}
-	function renderImage($file, $caption, $title, $alt, $marker, $isTemp = false) {
-		unset ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['imgList.']);
-		$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['imgList'] = basename ($file);
-		
-		if ($isTemp) {
-			$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['imgPath'] = 'typo3temp/';
+	
+	protected function renderImage($file, $caption, $title, $marker, $isTemp = false) {
+		if ($isTemp){
+			$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker.'.'] ['file'] = $file;
 		} else {
-			global $TCA;
-			$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['imgPath'] = $TCA ['tx_cal_' . $this->objectString] ['columns'] [$marker] ['config'] ['uploadfolder'] . '/';
+			// Render existing image -> $file is a sys_file_reference record
+			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTgetSingleRow ('identifier', 'sys_file', 'uid = ' . $file ['uid_local']);
+			$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker . '.'] ['file'] = 'fileadmin'.$result['identifier'];
 		}
-		
-		$this->cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
-		$remLayout = $this->cObj->data ['layout'];
-		$this->cObj->data ['layout'] = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['layout'];
-		
-		$remCaption = $this->cObj->data ['imagecaption'];
-		$this->cObj->data ['imagecaption'] = $caption;
-		$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['1.'] ['altText'] = $alt;
-		$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.'] ['1.'] ['titleText'] = $title;
-		
-		$temp = $this->cObj->cObjGetSingle ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image'], $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] ['image.']);
-		
-		$this->cObj->data ['layout'] = $remLayout;
-		$this->cObj->data ['imagecaption'] = $remCaption;
-		return $temp;
+		$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker.'.'] ['titleText'] = $title;
+		$this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker.'.'] ['wrap'] = '|<figcaption>'.$caption.'</figcaption>';
+		return $this->cObj->cObjGetSingle ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker], $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->objectString . '.'] [$marker . '.']);
 	}
-	function getTabbedMenuMarker($template, &$sims, &$rems, $view) {
+	
+	public function getTabbedMenuMarker($template, &$sims, &$rems, $view) {
 		$tabbedMenuConf = $this->conf ['view.'] [$view . '.'] ['tabbedMenu.'];
 		foreach ((array) $tabbedMenuConf as $id => $tab) {
 			if (\TYPO3\CMS\Cal\Utility\Functions::endsWith ($id, '.') && $tab ['requiredFields'] != '') {
@@ -860,7 +812,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		
 		$sims ['###TABBED_MENU###'] = $this->cObj->cObjGetSingle ($this->conf ['view.'] [$view . '.'] ['tabbedMenu'], $tabbedMenuConf);
 	}
-	function getSharedMarker(& $template, & $sims, & $rems) {
+	
+	public function getSharedMarker(& $template, & $sims, & $rems) {
 		$sims ['###SHARED###'] = '';
 		if ($this->isAllowed ('shared')) {
 			$cal_shared_user = '';
@@ -915,11 +868,13 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			$sims ['###SHARED###'] = $this->applyStdWrap ($cal_shared_user, 'shared_stdWrap');
 		}
 	}
-	function getFeUserDisplayName(&$row, $tsName = 'defaultFeUserDisplayName') {
+	
+	public function getFeUserDisplayName(&$row, $tsName = 'defaultFeUserDisplayName') {
 		$this->initLocalCObject ($row);
 		return $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['event.'] ['event.'] [$tsName], $this->conf ['view.'] ['event.'] ['event.'] [$tsName . '.']);
 	}
-	function getFeGroupDisplayName(&$row, $tsName = 'defaultFeGroupDisplayName') {
+	
+	public function getFeGroupDisplayName(&$row, $tsName = 'defaultFeGroupDisplayName') {
 		return $this->getFeUserDisplayName ($row, $tsName);
 	}
 }

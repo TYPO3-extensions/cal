@@ -1039,6 +1039,27 @@ plugin.tx_cal_controller {
 .tx-cal-controller .reminderOffset {
 	width: 2em !important;
 }
+
+.tx-cal-controller .tabcontent table {
+	margin: 2em 0;
+}
+
+.tx-cal-controller .tabcontent table > tbody > tr > td {
+	vertical-align:top;
+	padding-right: 1em;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #999999;
+}
+
+.tx-cal-controller .tabcontent table > tbody > tr > td label {
+	width: 6em;
+	margin-bottom: 1em;
+}
+
+.tx-cal-controller .tabcontent table > tbody > tr > td label > input[type='text'] {
+	width: 20em;
+	margin-bottom: 1em;
+}
 		
 	)
 }

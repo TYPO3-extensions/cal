@@ -206,6 +206,10 @@ class LocationService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$this->searchForAdditionalFieldsToAddFromPostData ($insertFields, 'location', false);
 		$this->retrievePostData ($insertFields);
 		
+		if ($this->rightsObj->isAllowedTo ('edit', 'location', 'image')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_location', 'image', $insertFields, $uid);
+		}
+		
 		$sharedGroups = Array ();
 		$sharedUsers = Array ();
 		$values = $this->controller->piVars ['shared_ids'];
@@ -326,13 +330,6 @@ class LocationService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$insertFields ['email'] = strip_tags ($this->controller->piVars ['email']);
 		}
 		
-		if ($this->rightsObj->isAllowedTo ('edit', 'event', 'image') || $this->rightsObj->isAllowedTo ('create', 'event', 'image')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_location', 'image', $insertFields);
-			$insertFields ['imagecaption'] = $this->cObj->removeBadHTML ($this->controller->piVars ['image_caption'], $this->conf);
-			$insertFields ['imagealttext'] = $this->cObj->removeBadHTML ($this->controller->piVars ['image_alt'], $this->conf);
-			$insertFields ['imagetitletext'] = $this->cObj->removeBadHTML ($this->controller->piVars ['image_title'], $this->conf);
-		}
-		
 		if ($this->rightsObj->isAllowedTo ('edit', 'location', 'link') || $this->rightsObj->isAllowedTo ('create', 'location', 'link')) {
 			$insertFields ['link'] = strip_tags ($this->controller->piVars ['link']);
 		}
@@ -367,7 +364,14 @@ class LocationService extends \TYPO3\CMS\Cal\Service\BaseService {
 	function _saveLocation(&$insertFields) {
 		$table = 'tx_cal_location';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
+		if (FALSE === $result){
+			throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458153);
+		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
+		
+		if ($this->rightsObj->isAllowedTo ('create', 'location', 'image')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_location', 'image', $insertFields, $uid);
+		}
 		
 		$sharedGroups = Array ();
 		$sharedUsers = Array ();

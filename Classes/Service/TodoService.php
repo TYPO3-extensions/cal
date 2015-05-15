@@ -172,7 +172,18 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		// Creating DB records
 		$table = 'tx_cal_event';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+		if (FALSE === $result){
+			throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458159);
+		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
+
+		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'image')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $insertFields);
+		}
+		
+		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'attachment')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $insertFields);
+		}
 		
 		// creating relation records
 		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'notify')) {
@@ -315,6 +326,16 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		$table = 'tx_cal_event';
 		$where = 'uid = ' . $uid;
 		$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $eventData);
+
+		$eventData['pid'] = $object->row ['pid'];
+		
+		if ($this->rightsObj->isAllowedTo ('edit', 'todo', 'image')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $insertFields);
+		}
+		
+		if ($this->rightsObj->isAllowedTo ('edit', 'todo', 'attachment')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $insertFields);
+		}
 		
 		$cal_user_ids = array ();
 		$where = ' AND tx_cal_event.uid=' . $uid . ' AND tx_cal_fe_user_category_mm.tablenames="fe_users" ' . $this->cObj->enableFields ('tx_cal_event');
@@ -493,17 +514,6 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 			$insertFields ['cnt'] = $object->getCount ();
 			$insertFields ['intrval'] = $object->getInterval ();
 		}
-		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'image')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $insertFields);
-			$insertFields ['imagecaption'] = implode (chr (10), $object->getImageCaption ());
-			$insertFields ['imagealttext'] = implode (chr (10), $object->getImageAltText ());
-			$insertFields ['imagetitletext'] = implode (chr (10), $object->getImageTitleText ());
-		}
-		
-		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'attachment')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $insertFields);
-			$insertFields ['attachmentcaption'] = implode (chr (10), $object->getAttachmentCaption ());
-		}
 		
 		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'status')) {
 			$insertFields ['status'] = $object->getStatus ();
@@ -606,17 +616,6 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 			$insertFields ['intrval'] = $object->getInterval ();
 			$insertFields ['rdate_type'] = $object->getRdateType ();
 			$insertFields ['rdate'] = $object->getRdate ();
-		}
-		if ($this->rightsObj->isAllowedTo ('edit', 'todo', 'image')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $insertFields);
-			$insertFields ['imagecaption'] = implode (chr (10), $object->getImageCaption ());
-			$insertFields ['imagealttext'] = implode (chr (10), $object->getImageAltText ());
-			$insertFields ['imagetitletext'] = implode (chr (10), $object->getImageTitleText ());
-		}
-		
-		if ($this->rightsObj->isAllowedTo ('edit', 'todo', 'attachment')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $insertFields);
-			$insertFields ['attachmentcaption'] = implode (chr (10), $object->getAttachmentCaption ());
 		}
 		
 		if ($this->rightsObj->isAllowedTo ('edit', 'todo', 'status')) {

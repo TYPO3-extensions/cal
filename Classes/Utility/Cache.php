@@ -98,7 +98,10 @@ class Cache {
 					'lifetime' => $lifetime 
 			);
 			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($table, 'identifier=' . $GLOBALS ['TYPO3_DB']->fullQuoteStr ($hash, $table));
-			$GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
+			$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
+			if (FALSE === $result){
+				throw new \RuntimeException('Could not write cache record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458130);
+			}
 		}
 	}
 	function get($hash) {

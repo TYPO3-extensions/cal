@@ -299,7 +299,10 @@ class SubscriptionManagerView extends \TYPO3\CMS\Cal\View\BaseView {
 					'offset' => $offset,
 					'pid' => $eventPid 
 			);
-			$GLOBALS ['TYPO3_DB']->exec_INSERTquery ($mmTable, $fields_values);
+			$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($mmTable, $fields_values);
+			if (FALSE === $result){
+				throw new \RuntimeException('Could not write '.$mmTable.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458161);
+			}
 			$insertedRow = true;
 		} else {
 			/* Row exists so do nothing */
@@ -334,7 +337,10 @@ class SubscriptionManagerView extends \TYPO3\CMS\Cal\View\BaseView {
 					'email' => $email,
 					'pid' => $this->conf ['rights.'] ['create.'] ['event.'] ['saveEventToPid'] 
 			);
-			$GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
+			$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
+			if (FALSE === $result){
+				throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458162);
+			}
 			$user_uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 		}
 		

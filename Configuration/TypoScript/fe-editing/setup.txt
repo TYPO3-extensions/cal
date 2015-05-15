@@ -186,46 +186,38 @@ plugin.tx_cal_controller {
 				imageCount=2
 				file.maxW = 150
 				file.maxH = 150
-				dataWrap = <p><label>%%%EVENT_IMAGE%%%:</label><input type="file" value="|" name="tx_cal_controller[image][]" id="image" />###IMAGE_PREVIEW###</p>
+				dataWrap = <table><tr><td><label>%%%EVENT_IMAGE%%%:</label><input type="file" value="|" name="tx_cal_controller[image][###INDEX###]" id="image" />###IMAGE_PREVIEW###</td>
 			}
 			
 			# @description	Content object for event image
-			event.image < tt_content.image.20
+			event.image = IMAGE
 			event.image {
-				textPos >
-				1.altText.field >
-				1.titleText.field >
-				//17 = in text right
-				textPos = 18
-				maxW = 150
-				stdWrap.dataWrap = |<input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/>
+				file =
+				file.width = 150
+				params = style="margin: 0px 20px;"
+				stdWrap.dataWrap = |<input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][###INDEX###]"/>
 			}
 			
 			image_caption_stdWrap {
-				dataWrap = <p><label for="image_caption">%%%EVENT_IMAGE_CAPTION%%%###IMAGE_CAPTION_REQUIRED###:</label><textarea name="tx_cal_controller[image_caption]" id="image_caption">|</textarea></p>
+				dataWrap = <td><label for="image_caption">%%%EVENT_IMAGE_CAPTION%%%###IMAGE_CAPTION_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[image_caption][###INDEX###]" id="image_caption"/><br />
 				htmlSpecialChars = 1
 			}
 			
 			image_title_stdWrap {
-				dataWrap = <p><label for="image_title">%%%EVENT_IMAGE_TITLE%%%###IMAGE_TITLE_REQUIRED###:</label><textarea name="tx_cal_controller[image_title]" id="image_title">|</textarea></p>
-				htmlSpecialChars = 1
-			}
-			
-			image_alt_stdWrap {
-				dataWrap = <p><label for="image_alt">%%%EVENT_IMAGE_ALT%%%###IMAGE_ALT_REQUIRED###:</label><textarea name="tx_cal_controller[image_alt]" id="image_alt">|</textarea></p>
+				dataWrap = <label for="image_title">%%%EVENT_IMAGE_TITLE%%%###IMAGE_TITLE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[image_title][###INDEX###]" id="image_title"/></td></tr></table>
 				htmlSpecialChars = 1
 			}
 			
 			# @description	Standard wrap for the imageUpload field
 			imageUpload_stdWrap {
-				dataWrap = <p><label>%%%IMAGE_UPLOAD%%%:</label><input type="file" value="|" name="tx_cal_controller[image][]" /></p>
+				dataWrap = <table><tr><td><label>%%%IMAGE_UPLOAD%%%:</label><input type="file" value="|" name="tx_cal_controller[image][###INDEX###]" /></td>
 			}
 			
 			# @description	Content object for event attachment
-			event.attachment < tt_content.uploads
+			event.attachment = TEXT
 			event.attachment {
-				layout = 1
-				20.stdWrap.dataWrap = |<input type="hidden" value="###ATTACHMENT_VALUE###" name="tx_cal_controller[attachment][]" id="attachment" />
+				value =
+				stdWrap.dataWrap = |<input type="hidden" value="###ATTACHMENT_VALUE###" name="tx_cal_controller[attachment][###INDEX###]" id="attachment" />
 			}
 			
 			# @description	Standard wrap for the attachment field
@@ -233,16 +225,21 @@ plugin.tx_cal_controller {
 				imageCount=2
 				file.maxW = 150
 				file.maxH = 150
-				dataWrap = <p><label for="attachment">%%%EVENT_ATTACHMENT%%%:</label><input type="file" value="|" name="tx_cal_controller[attachment][]" id="attachment" />###ATTACHMENT_PREVIEW###</p>
+				dataWrap = <table><tr><td><label for="attachment">%%%EVENT_ATTACHMENT%%%:</label><input type="file" value="|" name="tx_cal_controller[attachment][###INDEX###]" id="attachment" />###ATTACHMENT_PREVIEW###</td>
 			}
 			
 			# @description	Standard wrap for the attachmentUpload field
 			attachmentUpload_stdWrap {
-				dataWrap = <p><label for="attachment">%%%ATTACHMENT_UPLOAD%%%:</label><input type="file" value="|" name="tx_cal_controller[attachment][]" id="attachment" /></p>
+				dataWrap = <table><tr><td><label for="attachment">%%%ATTACHMENT_UPLOAD%%%:</label><input type="file" value="|" name="tx_cal_controller[attachment][###INDEX###]" id="attachment" /></td>
 			}
 			
 			attachment_caption_stdWrap {
-				dataWrap = <p><label for="attachment_caption">%%%EVENT_IMAGE_CAPTION%%%###ATTACHMENT_CAPTION_REQUIRED###:</label><textarea name="tx_cal_controller[attachment_caption]" id="attachment_caption">|</textarea></p>
+				dataWrap = <td><label for="attachment_caption">%%%EVENT_IMAGE_CAPTION%%%###ATTACHMENT_CAPTION_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[attachment_caption][###INDEX###]" id="attachment_caption" /><br />
+				htmlSpecialChars = 1
+			}
+			
+			attachment_title_stdWrap {
+				dataWrap = <label for="attachment_title">%%%EVENT_IMAGE_TITLE%%%###ATTACHMENT_TITLE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[attachment_title][###INDEX###]" id="attachment_title"/></td></tr></table>
 				htmlSpecialChars = 1
 			}
 			
@@ -385,12 +382,29 @@ plugin.tx_cal_controller {
 			redirectAfterEditToView =
 			
 			image_stdWrap {
-				dataWrap = <div><label for="image">%%%LOCATION_IMAGE%%%:</label>###IMAGE_PREVIEW###<br/>%%%DELETE_IMAGE%%%:<input type="checkbox" name="tx_cal_controller[remove_image][]" value="###IMAGE_VALUE###"></div>
+				dataWrap = <table><tr><td><label for="image">%%%LOCATION_IMAGE%%%:</label>###IMAGE_PREVIEW###</div></td><td>%%%DELETE_IMAGE%%%:<input type="checkbox" name="tx_cal_controller[remove_image][]" value="###IMAGE_VALUE###"></td>
+			}
+			
+			image_caption_stdWrap {
+				dataWrap = <td><label for="image_caption">%%%EVENT_IMAGE_CAPTION%%%###IMAGE_CAPTION_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[image_caption][###INDEX###]" id="image_caption"/><br />
+			}
+			
+			image_title_stdWrap {
+				dataWrap = <label for="image_title">%%%EVENT_IMAGE_TITLE%%%###IMAGE_TITLE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[image_title][###INDEX###]" id="image_title"/></td></tr></table>
 			}
 			
 			attachment_stdWrap {
-				dataWrap = <div><label for="attachment">%%%EVENT_ATTACHMENT%%%:</label>###ATTACHMENT_PREVIEW###<br/>%%%DELETE_ATTACHMENT%%%:<input type="checkbox" name="tx_cal_controller[remove_attachment][]" value="###ATTACHMENT_VALUE###"></div>
+				dataWrap = <table><tr><td><label for="attachment">%%%EVENT_ATTACHMENT%%%:</label>###ATTACHMENT_PREVIEW###</td><td>%%%DELETE_ATTACHMENT%%%:<input type="checkbox" name="tx_cal_controller[remove_attachment][]" value="###ATTACHMENT_VALUE###"></td>
 			}
+			
+			attachment_caption_stdWrap {
+				dataWrap = <td><label for="attachment_caption">%%%EVENT_IMAGE_CAPTION%%%###ATTACHMENT_CAPTION_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[attachment_caption][###INDEX###]" id="attachment_caption" /><br />
+			}
+			
+			attachment_title_stdWrap {
+				dataWrap = <label for="attachment_title">%%%EVENT_IMAGE_TITLE%%%###ATTACHMENT_TITLE_REQUIRED###:</label><input type="text" value="|" name="tx_cal_controller[attachment_title][###INDEX###]" id="attachment_title"/></td></tr></table>
+			}
+			
 		}
 
 		confirm_event {
@@ -491,42 +505,38 @@ plugin.tx_cal_controller {
 			}
 			
 			# @description	Content object for event image
-			event.image < tt_content.image.20
+			event.image = IMAGE
 			event.image {
-				textPos >
-				1.altText.field >
-				1.titleText.field >
-				//17 = in text right
-				textPos = 17
-				maxW = 150
-				stdWrap.dataWrap = <div><label for="image">%%%EVENT_IMAGE%%%: |</label><input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][]"/></div>
+				file =
+				file.width = 150
+				params = style="margin: 0px 20px;"
+				stdWrap.dataWrap = <div><label for="image">%%%EVENT_IMAGE%%%:</label><figure>|</figure><input type="hidden" value="###IMAGE_VALUE###" name="tx_cal_controller[image][###INDEX###]"/></div>
 			}
 			
 			image_caption_stdWrap {
-				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_caption]"/>
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_caption][###INDEX###]"/>
 				htmlSpecialChars = 1
 			}
 			
 			image_title_stdWrap {
-				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_title]"/>
-				htmlSpecialChars = 1
-			}
-			
-			image_alt_stdWrap {
-				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_alt]"/>
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[image_title][###INDEX###]"/>
 				htmlSpecialChars = 1
 			}
 			
 			# @description	Content object for the attachment field
-			event.attachment < tt_content.uploads
+			event.attachment = TEXT
 			event.attachment {
-				layout = 1
-				20.filePath >
-				20.stdWrap.dataWrap = <div><label for="attachment">%%%EVENT_ATTACHMENT%%%:|</label><input type="hidden" value="###ATTACHMENT_VALUE###" name="tx_cal_controller[attachment][]"/></div>
+				value =
+				stdWrap.dataWrap = <div><label for="attachment">%%%EVENT_ATTACHMENT%%%:|</label><input type="hidden" value="###ATTACHMENT_VALUE###" name="tx_cal_controller[attachment][###INDEX###]"/></div>
 			}
 			
 			attachment_caption_stdWrap {
-				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[attachment_caption]"/>
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[attachment_caption][###INDEX###]"/>
+				htmlSpecialChars = 1
+			}
+			
+			attachment_title_stdWrap {
+				dataWrap = <input type="hidden" value="|" name="tx_cal_controller[attachment_title][###INDEX###]"/>
 				htmlSpecialChars = 1
 			}
 			

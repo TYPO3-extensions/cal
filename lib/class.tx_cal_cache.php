@@ -99,7 +99,6 @@ class tx_cal_cache {
 			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($table, 'identifier=' . $GLOBALS ['TYPO3_DB']->fullQuoteStr ($hash, $table));
 			$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
 			if (FALSE === $result){
-				\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 				throw new \RuntimeException('Could not write cache record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458130);
 			}
 		}

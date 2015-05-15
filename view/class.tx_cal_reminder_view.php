@@ -226,7 +226,6 @@ class tx_cal_reminder_view extends tx_cal_notification_view {
 				$table = 'tx_scheduler_task_group';
 				$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
 				if (FALSE === $result){
-					\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 					throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458160);
 				}
 				$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();

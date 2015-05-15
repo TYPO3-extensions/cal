@@ -185,6 +185,10 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 		$this->searchForAdditionalFieldsToAddFromPostData ($insertFields, 'organizer', false);
 		$this->retrievePostData ($insertFields);
 		
+		if ($this->rightsObj->isAllowedTo ('edit', 'organizer', 'image')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_organizer', 'image', $insertFields, $uid);
+		}
+		
 		$sharedGroups = Array ();
 		$sharedUsers = Array ();
 		$values = $this->controller->piVars ['shared_ids'];
@@ -294,13 +298,6 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 			$insertFields ['email'] = strip_tags ($this->controller->piVars ['email']);
 		}
 		
-		if ($this->rightsObj->isAllowedTo ('edit', 'event', 'image') || $this->rightsObj->isAllowedTo ('create', 'event', 'image')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_organizer', 'image', $insertFields);
-			$insertFields ['imagecaption'] = $this->cObj->removeBadHTML ($this->controller->piVars ['image_caption'], $this->conf);
-			$insertFields ['imagealttext'] = $this->cObj->removeBadHTML ($this->controller->piVars ['image_alt'], $this->conf);
-			$insertFields ['imagetitletext'] = $this->cObj->removeBadHTML ($this->controller->piVars ['image_title'], $this->conf);
-		}
-		
 		if ($this->rightsObj->isAllowedTo ('edit', 'organizer', 'link') || $this->rightsObj->isAllowedTo ('create', 'organizer', 'link')) {
 			$insertFields ['link'] = strip_tags ($this->controller->piVars ['link']);
 		}
@@ -313,6 +310,7 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 			$insertFields ['country'] = strip_tags ($this->controller->piVars ['country']);
 		}
 	}
+	
 	function saveOrganizer($pid) {
 		if (! $this->isAllowedService ())
 			return;
@@ -330,14 +328,19 @@ class tx_cal_organizer_service extends tx_cal_base_service {
 		// Creating DB records
 		$insertFields ['cruser_id'] = $this->rightsObj->getUserId ();
 		$uid = $this->_saveOrganizer ($insertFields);
+		
+		if ($this->rightsObj->isAllowedTo ('create', 'organizer', 'image')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_organizer', 'image', $insertFields, $uid);
+		}
+		
 		$this->unsetPiVars ();
 		return $this->find ($uid, $this->conf ['pidList']);
 	}
+	
 	function _saveOrganizer(&$insertFields) {
 		$table = 'tx_cal_organizer';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
 		if (FALSE === $result){
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 			throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458157);
 		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();

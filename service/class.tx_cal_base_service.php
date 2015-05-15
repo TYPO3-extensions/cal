@@ -151,7 +151,6 @@ class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 				), $additionalParams);
 				$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($mm_table, $insertFields);
 				if (FALSE === $result){
-					\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 					throw new \RuntimeException('Could not write '.$mm_table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458138);
 				}
 			}
@@ -215,10 +214,7 @@ class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 			}
 		}
 	}
-	function checkOnNewOrDeletableFiles($object, $type, &$insertFields) {
-		global $TYPO3_CONF_VARS, $TCA;
-		$uploadPath = $TCA [$object] ['columns'] [$type] ['config'] ['uploadfolder'];
-		
+	function checkOnNewOrDeletableFiles($objectType, $type, &$insertFields, $uid) {
 		if ($this->conf ['view.'] ['enableAjax'] || $this->conf ['view.'] ['dontShowConfirmView'] == 1) {
 			$insertFields [$type] = array ();
 			if (is_array ($_FILES [$this->prefixId] ['name'] [$type])) {
@@ -237,12 +233,11 @@ class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 				$allowedExt = array ();
 				$denyExt = array ();
 				if ($type == 'file') {
-					$allowedExt = explode (',', $TYPO3_CONF_VARS ['GFX'] ['imagefile_ext']);
+					$allowedExt = explode (',', $GLOBALS ['TYPO3_CONF_VARS'] ['GFX'] ['imagefile_ext']);
 				} else if ($type == 'attachment') {
-					$allowedExt = explode (',', $TYPO3_CONF_VARS ['BE'] ['fileExtensions'] ['webspace'] ['allow']);
-					$denyExt = explode (',', $TYPO3_CONF_VARS ['BE'] ['fileExtensions'] ['webspace'] ['deny']);
+					$allowedExt = explode (',', $GLOBALS ['TYPO3_CONF_VARS'] ['BE'] ['fileExtensions'] ['webspace'] ['allow']);
+					$denyExt = explode (',', $GLOBALS ['TYPO3_CONF_VARS'] ['BE'] ['fileExtensions'] ['webspace'] ['deny']);
 				}
-				$removeFiles = $this->controller->piVars ['remove_' . $type] ? $this->controller->piVars ['remove_' . $type] : Array ();
 				
 				foreach ($_FILES [$this->prefixId] ['name'] [$type] as $id => $filename) {
 					
@@ -261,55 +256,119 @@ class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 						$insertFields [$type] [] = basename ($theDestFile);
 					}
 				}
-				
-				foreach ($files as $file) {
-					if (in_array ($file, $removeFiles)) {
-						unlink ($uploadPath . '/' . $file);
-					}
-				}
 			}
 			$insertFields [$type] = implode (',', $insertFields [$type]);
 		} else {
 			$insertFields [$type] = $this->controller->piVars [$type];
-			$this->checkOnTempFile ($type, $insertFields, $uploadPath);
-		}
-	}
-	function checkOnTempFile($type, &$insertFields, $uploadPath) {
-		if (is_array ($insertFields [$type])) {
-			$return = Array ();
-			foreach ($insertFields [$type] as $file) {
-				$value = $this->_checkOnTempFile ($file, $uploadPath);
-				if ($value) {
-					$return [] = $value;
-				}
-			}
-			$insertFields [$type] = implode (',', $return);
-		} else {
-			$insertFields [$type] = $this->_checkOnTempFile ($insertFields [$type], $uploadPath);
-		}
-	}
-	function _checkOnTempFile($file, $uploadPath) {
-		if (! $this->fileFunc) {
-			$this->fileFunc = new \TYPO3\CMS\Core\Utility\File\BasicFileUtility();
-			$all_files = Array ();
-			$all_files ['webspace'] ['allow'] = '*';
-			$all_files ['webspace'] ['deny'] = '';
-			$this->fileFunc->init ('', $all_files);
+			$this->checkOnTempFile ($type, $insertFields, $objectType, $uid);
 		}
 		
-		if (substr ($file, 0, 7) == '__NEW__') {
-			$file = substr ($file, 7);
-			$theDestFile = $this->fileFunc->getUniqueName ($this->fileFunc->cleanFileName ($file), $uploadPath);
-			rename ('typo3temp/' . $file, $theDestFile);
-			return basename ($theDestFile);
-		} else if (substr ($file, 0, 10) == '__DELETE__') {
-			$file = substr ($file, 10);
-			unlink ($uploadPath . '/' . $file);
-			return false;
-		} else {
-			return $file;
+		$removeFiles = $this->controller->piVars ['remove_' . $type] ? $this->controller->piVars ['remove_' . $type] : Array ();
+		if(!empty($removeFiles)){
+			$where = 'uid_foreign = ' . $uid . ' AND  tablenames=\''.$objectType.'\' AND fieldname=\''.$type.'\' AND uid in ('.implode(',', array_values($removeFiles)).')';
+			$result = $GLOBALS ['TYPO3_DB']->exec_DELETEquery ('sys_file_reference', $where);
+			if (FALSE === $result){
+				throw new \RuntimeException('Could not write sys_file_reference record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458138);
+			}
 		}
 	}
+	function checkOnTempFile($type, &$insertFields, $objectType, $uid) {
+		$fileadminDirectory = rtrim($GLOBALS['TYPO3_CONF_VARS']['BE']['fileadminDir'], '/') . '/';
+		/** @var $storageRepository \TYPO3\CMS\Core\Resource\StorageRepository */
+		$storageRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\StorageRepository');
+		$storages = $storageRepository->findAll();
+		foreach ($storages as $tmpStorage) {
+			$storageRecord = $tmpStorage->getStorageRecord();
+			$configuration = $tmpStorage->getConfiguration();
+			$isLocalDriver = $storageRecord['driver'] === 'Local';
+			$isOnFileadmin = !empty($configuration['basePath']) && \TYPO3\CMS\Core\Utility\GeneralUtility::isFirstPartOfStr($configuration['basePath'], $fileadminDirectory);
+			if ($isLocalDriver && $isOnFileadmin) {
+				$storage = $tmpStorage;
+				break;
+			}
+		}
+		if (!isset($storage)) {
+			throw new \RuntimeException('Local default storage could not be initialized - might be due to missing sys_file* tables.');
+		}
+		$fileFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\ResourceFactory');
+		$fileIndexRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\Index\\FileIndexRepository');
+		$targetDirectory = PATH_site . $fileadminDirectory . 'user_upload/';
+		if (is_array ($insertFields [$type])) {
+			foreach ($insertFields [$type] as $file) {
+				$this->_checkOnTempFile($storage, $fileIndexRepository, $targetDirectory, $type, $insertFields, $objectType, $file, $uid);
+			}
+		} else {
+			$this->_checkOnTempFile($storage, $fileIndexRepository, $targetDirectory, $type, $insertFields, $objectType, $insertFields [$type], $uid);
+		}
+		$count = $GLOBALS ['TYPO3_DB']->exec_SELECTcountRows ('uid', 'sys_file_reference', 'uid_foreign = ' . $uid . ' AND tablenames = \''.$objectType.'\' AND fieldname = \''.$type.'\'');
+		$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($objectType, 'uid = '.$uid, Array($type => $count));
+		if (FALSE === $result){
+			throw new \RuntimeException('Could not write sys_file_reference record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458138);
+		}
+		unset($insertFields [$type]);
+	}
+	function _checkOnTempFile(&$storage, &$fileIndexRepository, $targetDirectory, $type, &$insertFields, $objectType, $fileOrig, $uid) {
+		if(strlen($fileOrig)==0){
+			return;
+		}
+		$fileObject = null;
+		if (substr ($fileOrig, 0, 7) == '__NEW__') {
+			$file = substr ($fileOrig, 7);
+			if (file_exists(PATH_site .'typo3temp/' .$file)) {
+				\TYPO3\CMS\Core\Utility\GeneralUtility::upload_copy_move(PATH_site .'typo3temp/'. $file, $targetDirectory . $file);
+				$fileObject = $storage->getFile('user_upload/' . $file);
+		
+				$fileIndexRepository->add($fileObject);
+				$dataArray = array(
+						'uid_local' => $fileObject->getUid(),
+						'tablenames' => $objectType,
+						'uid_foreign' => $uid,
+						// the sys_file_reference record should always placed on the same page
+						// as the record to link to, see issue #46497
+						'pid' => $insertFields['pid'],
+						'fieldname' => $type,
+						'sorting_foreign' => 0
+				);
+				foreach($this->controller->piVars[$type] as $id => $image){
+					if($image == $fileOrig){
+						if (isset($this->controller->piVars[$type.'_caption'][$id])) {
+							$dataArray['description'] = $this->controller->piVars[$type.'_caption'][$id];
+						}
+						if (isset($this->controller->piVars[$type.'_title'][$id])) {
+							$dataArray['title'] = $this->controller->piVars[$type.'_title'][$id];
+						}
+						break;
+					}
+				}
+				
+				$result = $GLOBALS['TYPO3_DB']->exec_INSERTquery('sys_file_reference', $dataArray);
+				if (FALSE === $result){
+					throw new \RuntimeException('Could not write sys_file_reference record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458138);
+				}
+				unlink(PATH_site .'typo3temp/'. $file);
+			}
+		} else {
+			$dataArray = Array();
+			foreach($this->controller->piVars[$type] as $id => $image){
+				if($image == $fileOrig){
+					if (isset($this->controller->piVars[$type.'_caption'][$id])) {
+						$dataArray['description'] = $this->controller->piVars[$type.'_caption'][$id];
+					}
+					if (isset($this->controller->piVars[$type.'_title'][$id])) {
+						$dataArray['title'] = $this->controller->piVars[$type.'_title'][$id];
+					}
+					break;
+				}
+			}
+			if(!empty($dataArray)){
+				$result = $GLOBALS['TYPO3_DB']->exec_UPDATEquery('sys_file_reference','uid='.$fileOrig, $dataArray);
+				if (FALSE === $result){
+					throw new \RuntimeException('Could not write sys_file_reference record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458138);
+				}
+			}
+		}
+	}
+	
 	function getAdditionalWhereForLocalizationAndVersioning($table) {
 		if ($GLOBALS ['TSFE']->sys_language_mode == 'strict' && $GLOBALS ['TSFE']->sys_language_content) {
 			// sys_language_mode == 'strict': If a certain language is requested, select only news-records from the default language which have a translation. The translated articles will be overlayed later in the list or single function.
@@ -397,7 +456,7 @@ class tx_cal_base_service extends \TYPO3\CMS\Core\Service\AbstractService {
 	}
 }
 
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/service/class.tx_cal_base_service.php']) {
-	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/service/class.tx_cal_base_service.php']);
+if (defined ('TYPO3_MODE') && $GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['XCLASS'] ['ext/cal/service/class.tx_cal_base_service.php']) {
+	include_once ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['XCLASS'] ['ext/cal/service/class.tx_cal_base_service.php']);
 }
 ?>

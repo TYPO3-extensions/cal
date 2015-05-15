@@ -271,7 +271,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 			$table = 'tx_scheduler_task_group';
 			$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
 			if (FALSE === $result){
-				\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 				throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458142);
 			}
 			$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
@@ -524,7 +523,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 								'calendar_id' => $calId 
 						));
 						if (FALSE === $result){
-							\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 							throw new \RuntimeException('Could not write '.$categoryTable.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458143);
 						}
 						$categoryUids [] = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
@@ -568,7 +566,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 				} else {
 					$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
 					if (FALSE === $result){
-						\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 						throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458144);
 					}
 					$eventUid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
@@ -604,7 +601,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 						} else {
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
 							if (FALSE === $result){
-								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 								throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458145);
 							}
 							$eventDeviationUid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
@@ -697,7 +693,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 								'uid_foreign' => $uid 
 						));
 						if (FALSE === $result){
-							\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 							throw new \RuntimeException('Could not write tx_cal_event_category_mm record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458146);
 						}
 					}
@@ -832,7 +827,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ('tx_cal_exception_event', $insertFields);
 		if (FALSE === $result){
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 			throw new \RuntimeException('Could not write tx_cal_exception_event record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458147);
 		}
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ('tx_cal_exception_event_mm', array (
@@ -841,7 +835,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 				'uid_foreign' => $GLOBALS ['TYPO3_DB']->sql_insert_id () 
 		));
 		if (FALSE === $result){
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 			throw new \RuntimeException('Could not write tx_cal_exception_event_mm record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458148);
 		}
 	}
@@ -859,7 +852,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 		
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ('tx_cal_exception_event', $insertFields);
 		if (FALSE === $result){
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 			throw new \RuntimeException('Could not write tx_cal_exception_event_mm record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458149);
 		}
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ('tx_cal_exception_event_mm', array (
@@ -868,7 +860,6 @@ class tx_cal_icalendar_service extends tx_cal_base_service {
 				'uid_foreign' => $GLOBALS ['TYPO3_DB']->sql_insert_id () 
 		));
 		if (FALSE === $result){
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 			throw new \RuntimeException('Could not write tx_cal_exception_event_mm record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458150);
 		}
 	}

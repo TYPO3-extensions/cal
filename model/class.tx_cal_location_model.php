@@ -164,9 +164,6 @@ class tx_cal_location_model extends tx_cal_base_model {
 		$this->setPhone ($row ['phone']);
 		$this->setEmail ($row ['email']);
 		$this->setImage (GeneralUtility::trimExplode (',', $row ['image'], 1));
-		$this->setImageTitleText (GeneralUtility::trimExplode (chr (10), $row ['imagetitletext']));
-		$this->setImageAltText (GeneralUtility::trimExplode (chr (10), $row ['imagealttext']));
-		$this->setImageCaption (GeneralUtility::trimExplode (chr (10), $row ['imagecaption']));
 		$this->setLink ($row ['link']);
 		$this->setLatitude ($row ['latitude']);
 		$this->setLongitude ($row ['longitude']);
@@ -380,15 +377,23 @@ class tx_cal_location_model extends tx_cal_base_model {
 					unset ($piVars ['image']);
 					break;
 				case 'image_caption' :
-					$this->setImageCaption (explode (chr (10), strip_tags ($piVars ['image_caption'])));
+					$captions = Array();
+					if (is_array ($piVars ['image_caption'])) {
+						foreach($piVars ['image_caption'] as $caption){
+							$captions[] = $cObj->removeBadHTML($caption, $this->conf);
+						}
+					}
+					$this->setImageCaption ($captions);
 					unset ($piVars ['image_caption']);
 					break;
-				case 'image_alt' :
-					$this->setImageAltText (explode (chr (10), strip_tags ($piVars ['image_alt'])));
-					unset ($piVars ['image_alt']);
-					break;
 				case 'image_title' :
-					$this->setImageTitleText (explode (chr (10), strip_tags ($piVars ['image_title'])));
+					$titles = Array();
+					if (is_array ($piVars ['image_title'])) {
+						foreach($piVars ['image_title'] as $title){
+							$titles[] = $cObj->removeBadHTML($title, $this->conf);
+						}
+					}
+					$this->setImageTitleText($titles);
 					unset ($piVars ['image_title']);
 					break;
 				case 'country' :

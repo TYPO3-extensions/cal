@@ -109,6 +109,11 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 		$this->searchForAdditionalFieldsToAddFromPostData ($insertFields, 'calendar', false);
 		$this->retrievePostData ($insertFields);
 		$uid = $this->checkUidForLanguageOverlay ($uid, 'tx_cal_calendar');
+		
+		if ($this->rightsObj->isAllowedToEditCalendarType ()) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_calendar', 'ics_file', $insertFields, $uid);
+		}
+		
 		// Creating DB records
 		$table = 'tx_cal_calendar';
 		$where = 'uid = ' . $uid;
@@ -199,10 +204,6 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 		}
 		
 		if ($this->rightsObj->isAllowedToEditCalendarType () || $this->rightsObj->isAllowedToCreateCalendarType ()) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_calendar', 'ics_file', $insertFields);
-		}
-		
-		if ($this->rightsObj->isAllowedToEditCalendarType () || $this->rightsObj->isAllowedToCreateCalendarType ()) {
 			$insertFields ['refresh'] = strip_tags ($this->controller->piVars ['refresh']);
 		}
 		
@@ -235,6 +236,11 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 		$insertFields ['freeAndBusyUser_ids'] = strip_tags ($this->controller->piVars ['freeAndBusyUser_ids']);
 		
 		$uid = $this->_saveCalendar ($insertFields);
+		
+		if ($this->rightsObj->isAllowedToCreateCalendarType ()) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_calendar', 'ics_file', $insertFields, $uid);
+		}
+		
 		$this->unsetPiVars ();
 		tx_cal_functions::clearCache ();
 		return $this->find ($uid, $this->conf ['pidList']);
@@ -249,7 +255,6 @@ class tx_cal_calendar_service extends tx_cal_base_service {
 		$table = 'tx_cal_calendar';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
 		if (FALSE === $result){
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 			throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458139);
 		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();

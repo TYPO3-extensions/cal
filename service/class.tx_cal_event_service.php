@@ -660,11 +660,18 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$table = 'tx_cal_event';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 		if (FALSE === $result){
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 			throw new \RuntimeException('Could not write event record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458130);
 		}
 		
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
+		
+		if ($this->rightsObj->isAllowedTo ('create', 'event', 'image')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $eventData, $uid);
+		}
+		
+		if ($this->rightsObj->isAllowedTo ('create', 'event', 'attachment')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $eventData, $uid);
+		}
 		
 		// creating relation records
 		if ($this->rightsObj->isAllowedToCreateEventNotify ()) {
@@ -772,11 +779,11 @@ class tx_cal_event_service extends tx_cal_base_service {
 					$categoryIds [] = $category->getUid ();
 				}
 			}
-			$this->insertIdsIntoTableWithMMRelation ($category_mm_relation_table, $categoryIds, $uid, '', $switchUidLocalForeign);
+			$this->insertIdsIntoTableWithMMRelation ($category_mm_relation_table, $categoryIds, $uid, '', array(), $switchUidLocalForeign);
 		} else {
 			$this->insertIdsIntoTableWithMMRelation ($category_mm_relation_table, array (
 					$this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['category.'] ['default'] 
-			), $uid, '', $switchUidLocalForeign);
+			), $uid, '', array(), $switchUidLocalForeign);
 		}
 		
 		if ($this->rightsObj->isAllowedTo ('create', 'event', 'attendee') && $object->getEventType () == tx_cal_model::EVENT_TYPE_MEETING) {
@@ -892,6 +899,18 @@ class tx_cal_event_service extends tx_cal_base_service {
 		$table = 'tx_cal_event';
 		$where = 'uid = ' . $uid;
 		$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $eventData);
+		if (FALSE === $result){
+			throw new \RuntimeException('Could not write event record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458130);
+		}
+		$eventData['pid'] = $object->row ['pid'];
+		
+		if ($this->rightsObj->isAllowedTo ('edit', 'event', 'image')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $eventData, $uid);
+		}
+		
+		if ($this->rightsObj->isAllowedTo ('edit', 'event', 'attachment')) {
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $eventData, $uid);
+		}
 		
 		$cal_user_ids = array ();
 		$where = ' AND tx_cal_event.uid=' . $uid . ' AND tx_cal_fe_user_category_mm.tablenames="fe_users" ' . $this->cObj->enableFields ('tx_cal_event');
@@ -1068,6 +1087,9 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$table = 'tx_cal_event';
 			$where = 'uid = ' . $uid;
 			$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $updateFields);
+			if (FALSE === $result){
+				throw new \RuntimeException('Could not delete event record from database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458133);
+			}
 			
 			$fields = $event->getValuesAsArray ();
 			$fields ['deleted'] = 1;
@@ -1130,7 +1152,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 		}
 		if ($this->rightsObj->isAllowedToCreateEventTitle ()) {
 			$insertFields ['title'] = $object->getTitle ();
-			;
 		}
 		
 		if ($this->rightsObj->isAllowedToCreateEventOrganizer ()) {
@@ -1162,23 +1183,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 			}
 			$insertFields ['cnt'] = $object->getCount ();
 			$insertFields ['intrval'] = $object->getInterval ();
-		}
-		if ($this->rightsObj->isAllowedTo ('create', 'event', 'image')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $insertFields);
-			if ($insertFields ['image'] == null) {
-				$insertFields ['image'] = '';
-			}
-			$insertFields ['imagecaption'] = implode (chr (10), $object->getImageCaption ());
-			$insertFields ['imagealttext'] = implode (chr (10), $object->getImageAltText ());
-			$insertFields ['imagetitletext'] = implode (chr (10), $object->getImageTitleText ());
-		}
-		
-		if ($this->rightsObj->isAllowedTo ('create', 'event', 'attachment')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $insertFields);
-			if ($insertFields ['attachment'] == null) {
-				$insertFields ['attachment'] = '';
-			}
-			$insertFields ['attachmentcaption'] = implode (chr (10), $object->getAttachmentCaption ());
 		}
 		
 		// Hook initialization:
@@ -1272,23 +1276,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 			$insertFields ['intrval'] = $object->getInterval ();
 			$insertFields ['rdate_type'] = $object->getRdateType ();
 			$insertFields ['rdate'] = $object->getRdate ();
-		}
-		if ($this->rightsObj->isAllowedTo ('edit', 'event', 'image')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $insertFields);
-			if ($insertFields ['image'] == null) {
-				$insertFields ['image'] = '';
-			}
-			$insertFields ['imagecaption'] = implode (chr (10), $object->getImageCaption ());
-			$insertFields ['imagealttext'] = implode (chr (10), $object->getImageAltText ());
-			$insertFields ['imagetitletext'] = implode (chr (10), $object->getImageTitleText ());
-		}
-		
-		if ($this->rightsObj->isAllowedTo ('edit', 'event', 'attachment')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $insertFields);
-			if ($insertFields ['attachment'] == null) {
-				$insertFields ['attachment'] = '';
-			}
-			$insertFields ['attachmentcaption'] = implode (chr (10), $object->getAttachmentCaption ());
 		}
 		
 		// Hook initialization:
@@ -1591,7 +1578,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 							);
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 							if (FALSE === $result){
-								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458131);
 							}
 						} else {
@@ -1665,7 +1651,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 							);
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 							if (FALSE === $result){
-								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458132);
 							}
 						} else {
@@ -1708,7 +1693,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 							);
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 							if (FALSE === $result){
-								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458133);
 							}
 						} else {
@@ -1819,7 +1803,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 		
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
 		if (FALSE === $result){
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 			throw new \RuntimeException('Could not write exception event record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458134);
 		}
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
@@ -2154,7 +2137,6 @@ class tx_cal_event_service extends tx_cal_base_service {
 							}
 							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 							if (FALSE === $result){
-								\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458135);
 							}
 						} else {

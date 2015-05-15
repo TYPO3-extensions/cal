@@ -790,6 +790,7 @@ $TCA ['tx_cal_event'] = Array (
 						'exclude' => 1,
 						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.images',
 						'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig ( 'image', array (
+								'maxitems' => 5,
 								// Use the imageoverlayPalette instead of the basicoverlayPalette
 								'foreign_types' => array (
 										'0' => array (
@@ -809,6 +810,7 @@ $TCA ['tx_cal_event'] = Array (
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cms/locallang_ttc.php:media',
 						'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig ( 'attachment', array (
+								'maxitems' => 5,
 								// Use the imageoverlayPalette instead of the basicoverlayPalette
 								'foreign_types' => array (
 										'0' => array (
@@ -2005,6 +2007,7 @@ $TCA ['tx_cal_organizer'] = Array (
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.image',
 						'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig ( 'image', array (
+								'maxitems' => 5,
 								// Use the imageoverlayPalette instead of the basicoverlayPalette
 								'foreign_types' => array (
 										'0' => array (
@@ -2279,6 +2282,7 @@ $TCA ['tx_cal_location'] = Array (
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.image',
 						'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig ( 'image', array (
+								'maxitems' => 5,
 								// Use the imageoverlayPalette instead of the basicoverlayPalette
 								'foreign_types' => array (
 										'0' => array (
@@ -3017,6 +3021,7 @@ $TCA ['tx_cal_event_deviation'] = Array (
 						'exclude' => 1,
 						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.images',
 						'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig ( 'image', array (
+								'maxitems' => 5,
 								// Use the imageoverlayPalette instead of the basicoverlayPalette
 								'foreign_types' => array (
 										'0' => array (
@@ -3036,6 +3041,7 @@ $TCA ['tx_cal_event_deviation'] = Array (
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cms/locallang_ttc.php:media',
 						'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig ( 'attachment', array (
+								'maxitems' => 5,
 								// Use the imageoverlayPalette instead of the basicoverlayPalette
 								'foreign_types' => array (
 										'0' => array (

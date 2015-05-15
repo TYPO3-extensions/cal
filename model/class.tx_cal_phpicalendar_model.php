@@ -213,18 +213,6 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 						}
 					}
 					break;
-				case 'image_caption' :
-					$this->setImageCaption (explode (chr (10), $cObj->removeBadHTML ($piVars ['image_caption'], $this->conf)));
-					unset ($piVars ['image_caption']);
-					break;
-				case 'image_alt' :
-					$this->setImageAltText (explode (chr (10), $cObj->removeBadHTML ($piVars ['image_alt'], $this->conf)));
-					unset ($piVars ['image_alt']);
-					break;
-				case 'image_title' :
-					$this->setImageTitleText (explode (chr (10), $cObj->removeBadHTML ($piVars ['image_title'], $this->conf)));
-					unset ($piVars ['image_title']);
-					break;
 				case 'attachment' :
 					$this->setAttachment (array ());
 					if (is_array ($piVars ['attachment'])) {
@@ -232,10 +220,6 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 							$this->addAttachment (strip_tags ($attachment));
 						}
 					}
-					break;
-				case 'attachment_caption' :
-					$this->setAttachmentCaption (explode (chr (10), $cObj->removeBadHTML ($piVars ['attachment_caption'], $this->conf)));
-					unset ($piVars ['attachment_caption']);
 					break;
 				case 'frequency_id' :
 					$valueArray = array (
@@ -516,22 +500,8 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 		$this->setExtUrl ($row ['ext_url']);
 		/* new */
 		
-		$this->setImage (GeneralUtility::trimExplode (',', $row ['image'], 1));
-		$this->setImageTitleText (GeneralUtility::trimExplode (chr (10), $row ['imagetitletext']));
-		$this->setImageAltText (GeneralUtility::trimExplode (chr (10), $row ['imagealttext']));
-		$this->setImageCaption (GeneralUtility::trimExplode (chr (10), $row ['imagecaption']));
-		
-		if ($row ['attachment']) {
-			$fileArr = explode (',', $row ['attachment']);
-			while (list (, $val) = each ($fileArr)) {
-				// fills the marker ###FILE_LINK### with the links to the attached files
-				$this->addAttachment ($val);
-			}
-		}
-		if ($row ['attachmentcaption']) {
-			$captionArray = GeneralUtility::trimExplode (chr (10), $row ['attachmentcaption']);
-			$this->setAttachmentCaption ($captionArray);
-		}
+		$this->setImage ($row ['image']);
+		$this->setAttachment ($row ['attachment']);
 		
 		if ($row ['exception_single_ids']) {
 			$ids = explode (',', $row ['exception_single_ids']);
@@ -920,7 +890,6 @@ class tx_cal_phpicalendar_model extends tx_cal_model {
 								);
 								$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $fields_values);
 								if (FALSE === $result){
-									\TYPO3\CMS\Core\Utility\DebugUtility::debug($result);
 									throw new \RuntimeException('Could not write '.$table.' record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458137);
 								}
 								

@@ -335,7 +335,12 @@ class TreeView {
 					'readOnly' => $disabled 
 			);
 		}
-		$item .= $test->dbFileIcons ($PA ['itemFormElName'], '', '', $selectedCalendars, '', $params, $PA ['onFocus']);
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7000000) {
+			$treeHelperElement = new TreeHelperElement($test);
+			$item .= $treeHelperElement->getDbFileIcon($PA ['itemFormElName'], '', '', $selectedCalendars, '', $params, $PA ['onFocus']);
+		} else {
+			$item .= $test->dbFileIcons ($PA ['itemFormElName'], '', '', $selectedCalendars, '', $params, $PA ['onFocus']);
+		}
 		
 		return $item;
 	}
@@ -925,7 +930,18 @@ class TreeView {
 									'items' => $this->pObj->getLL ('l_items') . ':<br />'
 							),
 							'noBrowser' => 1,
-							'rightbox' => $thumbnails
+							'rightbox' => $thumbnails,
+							'foreign_table' => 'tx_cal_category',
+							'treeConfig' => Array (
+									'dataProvider' => 'TYPO3\\CMS\\Cal\\TreeProvider\\MixedTreeDataProvider',
+									'parentField' => 'calendar_id',
+									'appearance' => Array (
+											'showHeader' => TRUE,
+											'allowRecursiveMode' => TRUE,
+											'expandAll' => TRUE,
+											'maxLevels' => 99
+									)
+							),
 					);
 				} else if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 4006000) {
 					$params = array (
@@ -960,13 +976,28 @@ class TreeView {
 							'thumbnails' => $thumbnails 
 					);
 				}
-				$item .= $this->pObj->dbFileIcons ($PA ['itemFormElName'], '', '', $itemArray, '', $params, $PA ['onFocus']);
+				if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7000000) {
+					$treeHelperElement = new TreeHelperElement($this->pObj);
+					$item .= $treeHelperElement->getDbFileIcon($PA ['itemFormElName'], '', '', $itemArray, '', $params, $PA ['onFocus']);
+				} else {
+					$item .= $this->pObj->dbFileIcons ($PA ['itemFormElName'], '', '', $itemArray, '', $params, $PA ['onFocus']);
+				}
 				// Wizards:
 				$altItem = '<input type="hidden" name="' . $PA ['itemFormElName'] . '" value="' . htmlspecialchars ($PA ['itemFormElValue']) . '" />';
-				$item = $this->pObj->renderWizards (array (
-						$item,
-						$altItem 
-				), $config ['wizards'], $table, $row, $field, $PA, $PA ['itemFormElName'], $specConf);
+				
+				if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7000000) {
+					$treeHelperElement = new TreeHelperElement($this->pObj);
+					$item = $treeHelperElement->getRenderWizards(array (
+							$item,
+							$altItem 
+					), $config ['wizards'], $table, $row, $field, $PA, $PA ['itemFormElName'], $specConf);
+					$item .= '<style>.t3-icon-blank {width: 18px;height: 30px;}</style>';
+				} else {
+					$item = $this->pObj->renderWizards (array (
+							$item,
+							$altItem 
+					), $config ['wizards'], $table, $row, $field, $PA, $PA ['itemFormElName'], $specConf);
+				}
 			}
 		}
 		return $this->NA_Items . implode ($errorMsg, chr (10)) . $item;

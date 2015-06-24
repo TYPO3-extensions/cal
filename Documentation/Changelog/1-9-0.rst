@@ -8,6 +8,8 @@
 	              - Icons, help-files and templates are now inside the Resources folder
 	              - TypoScript, Flexforms & TCA stuff is inside the Configuration folder
 
+	* Bug #67575  - dbFileIcons() can not be called directly (More information)
+
 	* new         - DateParser can parse YYYYMMDD values
 
 	* new         - Cal indexer starttime and endtime are parsed through our dateParser

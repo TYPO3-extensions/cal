@@ -164,11 +164,11 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 				
 				$starttime = GeneralUtility::_POST ('starttime');
 				if ($starttime) {
-					$starttime = intval ($starttime);
+					$starttime = $this->getTimeParsed($starttime)->format('%Y%m%d');
 				}
 				$endtime = GeneralUtility::_POST ('endtime');
 				if ($endtime) {
-					$endtime = intval ($endtime);
+					$endtime = $this->getTimeParsed($endtime)->format('%Y%m%d');
 				}
 
 				if (count($pageIds) > 0 && is_int ($starttime) && is_int ($endtime)) {
@@ -240,6 +240,12 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 	private function getJScode() {
 		$forms = new \TYPO3\CMS\Backend\Form\FormEngine();
 		$forms->backPath = $GLOBALS['BACK_PATH'];
+	}
+	
+	private function getTimeParsed($timeString) {
+		$dp = new \TYPO3\CMS\Cal\Controller\DateParser ();
+		$dp->parse ($timeString, 0, '');
+		return $dp->getDateObjectFromStack ();
 	}
 	
 	public static function getMessage($message, $type) {

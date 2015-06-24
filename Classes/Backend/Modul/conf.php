@@ -9,6 +9,6 @@ $MCONF ["access"] = "admin";
 // MCONF["script"]="index.php";
 $MCONF ["script"] = "_DISPATCH";
 
-$MLANG ["default"] ["tabs_images"] ["tab"] = "moduleicon.gif";
-$MLANG ["default"] ["ll_ref"] = "LLL:EXT:cal/Classes/Backend/Modul/locallang_mod.xml";
+$MLANG ["default"] ["tabs_images"] ["tab"] = "icon_tx_cal_indexer.gif";
+$MLANG ["default"] ["ll_ref"] = "LLL:EXT:cal/Resources/Private/Language/locallang_indexer_mod.xml";
 ?>

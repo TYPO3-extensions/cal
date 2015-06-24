@@ -36,7 +36,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
  */
 
 
-$GLOBALS ['LANG']->includeLLFile ('EXT:cal/Classes/Backend/Modul/locallang.xml');
+$GLOBALS ['LANG']->includeLLFile ('EXT:cal/Resources/Private/Language/locallang_indexer.xml');
 $BE_USER->modAccess ($MCONF, 1); // This checks permissions and exits if the users has no permission for entry.
                                // DEFAULT initialization of a module [END]
 

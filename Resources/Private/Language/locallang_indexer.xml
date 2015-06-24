@@ -22,8 +22,8 @@
 			<label index="browse">Browse for records</label>
 			<label index="submit">Submit</label>
 			<label index="selectPage">Select the page where the typoscript of calendar base can be found. This should be a normal frontend page.</label>
-			<label index="indexStart">Enter the start time the index should start generating (YYYYMMDD)</label>
-			<label index="indexEnd">Enter the index ending time (YYYYMMDD)</label>
+			<label index="indexStart">Index start (YYYYMMDD or a dynamic value like: -3 month, -2 years)</label>
+			<label index="indexEnd">Index end (YYYYMMDD or a dynamic value like: +5 month, +4 years)</label>
 			<label index="startIndexing">Start indexing</label>
 			<label index="atLeastOne">You need to assign at least one frontend page to a found storage places in order to start indexing!</label>
 			<label index="notAllPagesAssigned">You need to assign a frontend page to all found storage places in order to start indexing!</label>

@@ -862,16 +862,6 @@ $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['tx_wecmap_pi3'] ['markerHook'] ['cal'
 $GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['tce'] ['formevals'] ['tx_cal_dateeval'] = 'TYPO3\\CMS\\Cal\\Hooks\\DateEval';
 $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['felogin'] ['loginFormOnSubmitFuncs'] [] = 'TYPO3\\CMS\\Cal\\Hooks\\LogoffPostProcessing:LogoffPostProcessing->clearSessionApiAfterLogoff';
 $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['felogin'] ['login_confirmed'] [] = 'TYPO3\\CMS\\Cal\\Hooks\\LogoffPostProcessing:LogoffPostProcessing->clearSessionApiAfterLogin';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_cal_calendar_scheduler']  = array(
-		'extension' => $_EXTKEY,
-		'title' => 'Calendar importer',
-		'description' => 'Importing ICS information from URL',
-);
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks']['tx_cal_reminder_scheduler']  = array(
-		'extension' => $_EXTKEY,
-		'title' => 'Sending reminders',
-		'description' => '',
-);
 
 if (! isset ($confArr ['enableRealURLAutoConfiguration']) || $confArr ['enableRealURLAutoConfiguration']) {
 	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['ext/realurl/class.tx_realurl_autoconfgen.php'] ['extensionConfiguration'] ['cal'] = 'TYPO3\\CMS\\Cal\\Hooks\\RealUrl->addRealURLConfig';
@@ -883,6 +873,25 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('gabriel')) {
 			'TYPO3\\CMS\\Cal\\Cron\\ReminderCron' 
 	);
 }
+
+$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['TYPO3\\CMS\\Cal\\Cron\\CalendarScheduler'] = Array (
+		'extension' => $_EXTKEY,
+		'title' => 'Updating external calendars (created by saving the calendar record)',
+		'description' => 'cal calendar scheduler integration',
+		'additionalFields' => ''
+);
+$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['TYPO3\\CMS\\Cal\\Cron\\ReminderScheduler'] = Array (
+		'extension' => $_EXTKEY,
+		'title' => 'Sending reminder for events (created by saving the event record)',
+		'description' => 'cal reminder scheduler integration',
+		'additionalFields' => ''
+);
+$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['TYPO3\\CMS\\Cal\\Cron\\IndexerScheduler'] = Array (
+		'extension' => $_EXTKEY,
+		'title' => 'Indexer for recurring events',
+		'description' => 'Indexing recurring events',
+		'additionalFields' => 'TYPO3\\CMS\\Cal\\Cron\\IndexerSchedulerAdditionalFieldProvider'
+);
 
 /* defining stuff for scheduler */
 if (\TYPO3\CMS\Core\Utility\GeneralUtility::inList ($TYPO3_CONF_VARS ['EXT'] ['extList'], 'scheduler')) {
@@ -912,17 +921,23 @@ if (\TYPO3\CMS\Core\Utility\GeneralUtility::inList ($TYPO3_CONF_VARS ['EXT'] ['e
 	}
 	
 	$GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extList_FE'] .= ',scheduler';
-	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['tx_cal_calendar_scheduler'] = Array (
-			'extension' => $_EXTKEY,
-			'title' => 'cal calendar scheduler cron',
-			'description' => 'cal calendar scheduler integration',
-			'additionalFields' => '' 
+	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['TYPO3\\CMS\\Cal\\Cron\\CalendarScheduler'] = Array (
+		'extension' => $_EXTKEY,
+		'title' => 'Updating external calendars (created by saving the calendar record)',
+		'description' => 'cal calendar scheduler integration',
+		'additionalFields' => ''
 	);
-	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['tx_cal_reminder_scheduler'] = Array (
+	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['TYPO3\\CMS\\Cal\\Cron\\ReminderScheduler'] = Array (
 			'extension' => $_EXTKEY,
-			'title' => 'cal reminder scheduler cron',
+			'title' => 'Sending reminder for events (created by saving the event record)',
 			'description' => 'cal reminder scheduler integration',
-			'additionalFields' => '' 
+			'additionalFields' => ''
+	);
+	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['TYPO3\\CMS\\Cal\\Cron\\IndexerScheduler'] = Array (
+			'extension' => $_EXTKEY,
+			'title' => 'Indexer for recurring events',
+			'description' => 'Indexing recurring events',
+			'additionalFields' => 'TYPO3\\CMS\\Cal\\Cron\\IndexerSchedulerAdditionalFieldProvider'
 	);
 }
 

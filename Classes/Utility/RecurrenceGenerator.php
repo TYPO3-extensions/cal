@@ -17,23 +17,27 @@ class RecurrenceGenerator {
 		$this->extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		$this->pageIDForPlugin = $pageIDForPlugin;
 		if ($starttime == null) {
-			$starttime = $this->extConf ['recurrenceStart'];
+			$starttime = $this->getTimeParsed($this->extConf ['recurrenceStart'])->format('%Y%m%d');
 		}
 		$this->starttime = $starttime;
 		if ($endtime == null) {
-			$endtime = $this->extConf ['recurrenceEnd'];
+			$endtime = $this->getTimeParsed($this->extConf ['recurrenceEnd'])->format('%Y%m%d');
 		}
 		$this->endtime = $endtime;
 	}
+	
 	function getInfo() {
 		return $this->info;
 	}
+	
 	function cleanIndexTable($pageId) {
 		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid in (select uid from tx_cal_event where pid = '. intval($pageId).')');
 	}
+	
 	function cleanIndexTableOfUid($uid, $table) {
 		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid = ' . $uid . ' AND tablename = "' . $table . '"');
 	}
+	
 	function cleanIndexTableOfCalendarUid($uid) {
 		$uids = Array (
 				0 
@@ -50,6 +54,7 @@ class RecurrenceGenerator {
 		}
 		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid IN (' . implode ($uids) . ')' . ' AND tablename = "' . $table . '"');
 	}
+	
 	function cleanIndexTableOfExceptionGroupUid($uid) {
 		$cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
 		$uids = Array (
@@ -65,6 +70,7 @@ class RecurrenceGenerator {
 		}
 		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid IN (' . implode ($uids) . ')' . ' AND tablename = "tx_cal_exception_event"');
 	}
+	
 	function countRecurringEvents($eventPage = 0) {
 		$count = 0;
 		$select = 'count(*)';
@@ -91,6 +97,7 @@ class RecurrenceGenerator {
 		}
 		return $count;
 	}
+	
 	public static function getRecurringEventPages() {
 		
 		$pages = Array();
@@ -128,6 +135,7 @@ class RecurrenceGenerator {
 			}
 		}
 	}
+	
 	function generateIndex($eventPage = 0) {
 		if (!is_object($this->eventService)){
 			try {
@@ -178,6 +186,7 @@ class RecurrenceGenerator {
 		$this->info .= 'Done.';
 		$this->info .= '<br/><br/><a href="javascript:history.back();">'.$GLOBALS ['LANG']->getLL ('back').'</a>';
 	}
+	
 	function generateIndexForUid($uid, $table) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
@@ -201,6 +210,7 @@ class RecurrenceGenerator {
 		}
 		$this->info = 'Done.';
 	}
+	
 	function generateIndexForCalendarUid($uid) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
@@ -225,6 +235,7 @@ class RecurrenceGenerator {
 		}
 		$this->info = 'Done.';
 	}
+	
 	function generateIndexForExceptionGroupUid($uid) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
@@ -248,6 +259,7 @@ class RecurrenceGenerator {
 		}
 		$this->info = 'Done.';
 	}
+	
 	function getEventService() {
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		if (! $modelObj) {
@@ -256,6 +268,12 @@ class RecurrenceGenerator {
 			$modelObj = $calAPI->modelObj;
 		}
 		return $modelObj->getServiceObjByKey ('cal_event_model', 'event', 'tx_cal_phpicalendar');
+	}
+	
+	private function getTimeParsed($timeString) {
+		$dp = new \TYPO3\CMS\Cal\Controller\DateParser ();
+		$dp->parse ($timeString, 0, '');
+		return $dp->getDateObjectFromStack ();
 	}
 }
 

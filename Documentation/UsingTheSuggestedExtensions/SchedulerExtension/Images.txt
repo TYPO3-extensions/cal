@@ -12,3 +12,8 @@
 .. :name: Gabriel Constants
 .. :width: 100%
 
+.. |img-45|     image:: ../../Images/configure_scheduler_indexer.png
+.. :align: left
+.. :border: 0
+.. :name: Gabriel Constants
+.. :width: 100%

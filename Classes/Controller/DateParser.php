@@ -513,7 +513,13 @@ class DateParser {
 			foreach ($valueArray as $key => $value) {
 				switch ($key) {
 					case 'year' :
-						$date->setYear ($value);
+						if( strlen($value) == 8 ){
+							$date->setYear (intval(substr($value, 0,4)));
+							$date->setMonth (intval(substr($value, 4,2)));
+							$date->setDay (intval(substr($value, 6,2)));
+						} else {
+							$date->setYear ($value);
+						}
 						$date->setMinute (0);
 						$date->setSecond (0);
 						$date->setHour (0);

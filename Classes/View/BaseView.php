@@ -1134,7 +1134,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$start_week_time = \TYPO3\CMS\Cal\Controller\Calendar::calculateStartWeekTime($start_week_time);
 		$end_week_time = \TYPO3\CMS\Cal\Controller\Calendar::calculateEndWeekTime($start_week_time);
-		$formattedGetdate = $this->controller->getDateTimeObject->format('%Y%m%d');
+		$formattedGetdate = intval($this->conf['getdate']);
 		for ($i=0; $i < $weekSize; $i++) {
 			$weekdate = $start_week_time->format('%Y%m%d');
 			$select_week1 = $start_week_time->format($dateFormat_week_jump);

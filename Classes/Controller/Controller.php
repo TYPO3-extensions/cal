@@ -80,7 +80,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			// this->pi_USER_INT_obj=1;
 		} else {
 			$this->pi_checkCHash = TRUE;
-			if (count ($this->piVars)) {
+			$requestedNoCache = GeneralUtility::_GP('no_cache');
+			if ($requestedNoCache) {
+				$this->pi_checkCHash = FALSE;
+				$GLOBALS ['TSFE']->set_no_cache();
+			}
+			if (count ($this->piVars) && !$requestedNoCache) {
 				$GLOBALS ['TSFE']->reqCHash ();
 			}
 			$this->pi_USER_INT_obj = 0;

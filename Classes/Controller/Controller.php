@@ -1455,8 +1455,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$searchword = preg_replace('/["\']/', '', strip_tags ($this->piVars ['query']));
 		$this->piVars ['query'] = $searchword;
 		
-		include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.\TYPO3\CMS\Cal\Utility\Functions.php');
-		
 		if (! $start_day) {
 			$start_day = $this->getListViewTime ($this->conf ['view.'] ['search.'] ['defaultValues.'] ['start_day']);
 			$start_day = \TYPO3\CMS\Cal\Controller\Calendar::calculateStartDayTime ($start_day);

@@ -945,20 +945,8 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 									$local_rems = Array ();
 									$local_wrapped = Array ();
 									$this->getMarker ($htmlTemplate, $local_switch, $local_rems, $local_wrapped, 'event');
-									
-									$local_switch ['###CONFIRM_LINK###'] = GeneralUtility::getIndpEnv ('TYPO3_SITE_URL') . $this->controller->pi_getPageLink ($this->conf ['view.'] ['event.'] ['notify.'] ['subscriptionViewPid'], '', array (
-											'tx_cal_controller[view]' => 'subscription',
-											'tx_cal_controller[monitor]' => 'start',
-											'tx_cal_controller[email]' => $email,
-											'tx_cal_controller[uid]' => $this->getUid (),
-											'tx_cal_controller[sid]' => md5 ($this->getUid () . $email . $this->getCreationDate ()) 
-									));
-									$htmlTemplate = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
-									
-									$local_switch = Array ();
-									$local_rems = Array ();
-									$local_wrapped = Array ();
 									$this->getMarker ($plainTemplate, $local_switch, $local_rems, $local_wrapped, 'event');
+									
 									$local_switch ['###CONFIRM_LINK###'] = GeneralUtility::getIndpEnv ('TYPO3_SITE_URL') . $this->controller->pi_getPageLink ($this->conf ['view.'] ['event.'] ['notify.'] ['subscriptionViewPid'], '', array (
 											'tx_cal_controller[view]' => 'subscription',
 											'tx_cal_controller[monitor]' => 'start',
@@ -966,6 +954,15 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 											'tx_cal_controller[uid]' => $this->getUid (),
 											'tx_cal_controller[sid]' => md5 ($this->getUid () . $email . $this->getCreationDate ()) 
 									));
+									
+									$local_switch ['###EVENT_LINK###'] = GeneralUtility::getIndpEnv ('TYPO3_SITE_URL') . $this->controller->pi_getPageLink ($this->conf ['view.'] ['event.'] ['eventViewPid'], '', array (
+											'tx_cal_controller[view]' => 'event',
+											'tx_cal_controller[uid]' => $this->getUid(),
+											'tx_cal_controller[type]' => $this->getType(),
+											'tx_cal_controller[getdate]' => $this->getStart->format('%Y%m%d')));
+									$htmlTemplate = tx_cal_functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
+									
+									$htmlTemplate = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
 									$plainTemplate = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($plainTemplate, $local_switch, $local_rems, $local_wrapped);
 									
 									$mailer->setSubject ($this->conf ['view.'] ['event.'] ['notify.'] ['confirmTitle']);
@@ -973,9 +970,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 									$rems ['###SUBSCRIPTION###'] = $this->controller->pi_getLL ('l_monitor_start_thanks');
 									$this->controller->finish ($htmlTemplate);
 									$this->controller->finish ($plainTemplate);
-									$mailer->setTo (array (
-											$email 
-									));
+									$mailer->setTo (array (	$email ));
 									$mailer->setBody (strip_tags ($plainTemplate), 'text/plain');
 									$mailer->addPart (\TYPO3\CMS\Cal\Utility\Functions::fixURI ($htmlTemplate), 'text/html');
 									$mailer->send ();

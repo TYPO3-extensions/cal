@@ -328,6 +328,9 @@ class ListView extends \TYPO3\CMS\Cal\View\BaseView {
 								$sectionMenu .= $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['list.'] ['sectionMenuItem'], $this->conf ['view.'] ['list.'] ['sectionMenuItem.']);
 							}
 							$this->local_cObj->setCurrentVal ($calTimeObject->format ($this->conf ['view.'] ['list.'] ['weekWrapperFormat']));
+							if (! $firstTime) {
+								$middle .= $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['list.'] ['weekWrapperEnd'], $this->conf ['view.'] ['list.'] ['weekWrapperEnd.']);
+							}
 							$middle .= $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['list.'] ['weekWrapper'], $this->conf ['view.'] ['list.'] ['weekWrapper.']);
 							$lastEventWeek->copy ($calTimeObject);
 							if ($this->conf ['view.'] ['list.'] ['restartAlternationAfterWeekWrapper'])
@@ -344,6 +347,9 @@ class ListView extends \TYPO3\CMS\Cal\View\BaseView {
 								$sectionMenu .= $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['list.'] ['sectionMenuItem'], $this->conf ['view.'] ['list.'] ['sectionMenuItem.']);
 							}
 							$this->local_cObj->setCurrentVal ($calTimeObject->format ($this->conf ['view.'] ['list.'] ['dayWrapperFormat']));
+							if (! $firstTime) {
+								$middle .= $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['list.'] ['dayWrapperEnd'], $this->conf ['view.'] ['list.'] ['dayWrapperEnd.']);
+							}
 							$middle .= $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['list.'] ['dayWrapper'], $this->conf ['view.'] ['list.'] ['dayWrapper.']);
 							$lastEventDay->copy ($calTimeObject);
 							if ($this->conf ['view.'] ['list.'] ['restartAlternationAfterDayWrapper'])

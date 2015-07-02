@@ -44,13 +44,11 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 	var $calnumber = 1;
 	var $starttime;
 	var $endtime;
-	var $extConf;
 	var $internalAdditionWhere = ' AND tx_cal_calendar.nearby = 0';
 	var $internalAdditionTable = '';
 	
 	public function __construct() {
 		parent::__construct ();
-		$this->extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 	}
 	
 	public function getCalNumber() {

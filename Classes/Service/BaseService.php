@@ -127,6 +127,7 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 	 */
 	var $organizerPartnerService;
 	var $fileFunc;
+	var $extConf;
 	
 	public function __construct() {
 		$this->controller = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'controller');
@@ -134,6 +135,7 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 		$this->rightsObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'rightscontroller');
 		$this->cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
 		$this->modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
+		$this->extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 	}
 	
 	protected static function insertIdsIntoTableWithMMRelation($mm_table, $idArray, $uid, $tablename, $additionalParams = array(), $switchUidLocalForeign = false) {
@@ -380,23 +382,27 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 	}
 	
 	protected function getAdditionalWhereForLocalizationAndVersioning($table) {
+		$localizationPrefix = 'l18n';
+		if($this->extConf ['categoryService'] == 'sys_cateogry') {
+			$localizationPrefix = 'l10n';
+		}
 		if ($GLOBALS ['TSFE']->sys_language_mode == 'strict' && $GLOBALS ['TSFE']->sys_language_content) {
 			// sys_language_mode == 'strict': If a certain language is requested, select only news-records from the default language which have a translation. The translated articles will be overlayed later in the list or single function.
 			
 			$querryArray = $this->cObj->getQuery ($table, array (
-					'selectFields' => $table . '.l18n_parent',
+					'selectFields' => $table . '.'.$localizationPrefix.'_parent',
 					'where' => $table . '.sys_language_uid = ' . $GLOBALS ['TSFE']->sys_language_content,
 					'pidInList' => $this->conf ['pidList'] 
 			), true);
 			
-			exec_SELECTquery($queryParts['SELECT'], $queryParts['FROM'], $queryParts['WHERE'], $queryParts['GROUPBY'], $queryParts['ORDERBY'], $queryParts['LIMIT']);;
+			exec_SELECTquery($queryParts['SELECT'], $queryParts['FROM'], $queryParts['WHERE'], $queryParts['GROUPBY'], $queryParts['ORDERBY'], $queryParts['LIMIT']);
 			
 			$tmpres = $GLOBALS ['TYPO3_DB']->exec_SELECT_queryArray ($querryArray);
 			
 			$strictUids = Array ();
 			
 			while ($tmprow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($tmpres)) {
-				$strictUids [] = $tmprow ['l18n_parent'];
+				$strictUids [] = $tmprow [$localizationPrefix.'_parent'];
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($tmpres);
 			
@@ -408,7 +414,7 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 		}
 		
 		if ($this->conf ['showRecordsWithoutDefaultTranslation']) {
-			$selectConf ['where'] = ' (' . $selectConf ['where'] . ' OR (' . $table . '.sys_language_uid=' . $GLOBALS ['TSFE']->sys_language_content . ' AND NOT ' . $table . '.l18n_parent))';
+			$selectConf ['where'] = ' (' . $selectConf ['where'] . ' OR (' . $table . '.sys_language_uid=' . $GLOBALS ['TSFE']->sys_language_content . ' AND NOT ' . $table . '.'.$localizationPrefix.'_parent))';
 		}
 		
 		// filter Workspaces preview.
@@ -416,7 +422,7 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 		if ($GLOBALS ['TSFE']->sys_page->versioningPreview) {
 			// execute the complete query
 			$wsSelectconf = $selectConf;
-			$wsSelectconf ['selectFields'] = 'uid,pid,tstamp,crdate,deleted,hidden,sys_language_uid,l18n_parent,l18n_diffsource,t3ver_oid,t3ver_id,t3ver_label,t3ver_wsid,t3ver_state,t3ver_stage,t3ver_count,t3ver_tstamp,t3_origuid';
+			$wsSelectconf ['selectFields'] = 'uid,pid,tstamp,crdate,deleted,hidden,sys_language_uid,'.$localizationPrefix.'_parent,'.$localizationPrefix.'_diffsource,t3ver_oid,t3ver_id,t3ver_label,t3ver_wsid,t3ver_state,t3ver_stage,t3ver_count,t3ver_tstamp,t3_origuid';
 			$wsRes = $this->cObj->exec_getQuery ($table, $wsSelectconf);
 			$removeUids = Array ();
 			while ($wsRow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($wsRes)) {

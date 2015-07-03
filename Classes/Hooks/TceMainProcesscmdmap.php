@@ -78,7 +78,7 @@ class TceMainProcesscmdmap {
 									
 									$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 									if ($extConf ['useNewRecurringModel']) {
-										tx_cal_recurrence_generator::cleanIndexTableOfUid ($id, $table);
+										\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfUid ($id, $table);
 									}
 									
 									/* Delete all deviations of the event */
@@ -152,7 +152,7 @@ class TceMainProcesscmdmap {
 								if ($command == 'delete') {
 									$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 									if ($extConf ['useNewRecurringModel']) {
-										tx_cal_recurrence_generator::cleanIndexTableOfUid ($id, $table);
+										\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfUid ($id, $table);
 									}
 								}
 							}

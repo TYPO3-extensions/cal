@@ -305,7 +305,7 @@ class TceMainProcessdatamap {
 			if ($incomingFieldArray ['freq'] != $event ['freq']) {
 				$date = $this->convertBackendDateToPear ($incomingFieldArray ['start_date']);
 				$date->addSeconds ($incomingFieldArray ['start_time']);
-				$dayArray = tx_cal_tcemain_processdatamap::getWeekdayOccurrence ($date);
+				$dayArray = TceMainProcessdatamap::getWeekdayOccurrence ($date);
 				
 				/* If we're on the 4th occurrence or later, let's assume we want the last occurrence */
 				if ($dayArray [0] >= 4) {
@@ -348,7 +348,7 @@ class TceMainProcessdatamap {
 			/* Get the calendar info from the db */
 			$calendar = BackendUtility::getRecord ('tx_cal_calendar', $id);
 			
-			$service = new tx_cal_icalendar_service();
+			$service = new \TYPO3\CMS\Cal\Service\ICalendarService();
 			
 			// Here we have to check if the calendar belongs to the type
 			// problem with case 2 & 3 -> what to do with events of type database? delete them without warning? keep them and assign them to a default category?
@@ -368,7 +368,7 @@ class TceMainProcessdatamap {
 					break;
 				case 1 : /* External URL or ICS file */
 				case 2: /* ICS File */
-					tx_cal_tcemain_processdatamap::processICS ($calendar, $incomingFieldArray, $service);
+					TceMainProcessdatamap::processICS ($calendar, $incomingFieldArray, $service);
 					break;
 			}
 		}
@@ -504,7 +504,7 @@ class TceMainProcessdatamap {
 	 */
 	function convertBackendDateToPear($dateString) {
 		$ymdString = $this->convertBackendDateToYMD ($dateString);
-		return new tx_cal_date ($ymdString . '000000');
+		return new \TYPO3\CMS\Cal\Model\CalDate ($ymdString . '000000');
 	}
 	
 	/**
@@ -516,7 +516,7 @@ class TceMainProcessdatamap {
 	 * @return string date in Ymd format.
 	 */
 	function convertBackendDateToYMD($dateString) {
-		$date = new tx_cal_date ($dateString);
+		$date = new \TYPO3\CMS\Cal\Model\CalDate ($dateString);
 		return $date->format ('%Y%m%d');
 	}
 }

@@ -773,7 +773,7 @@ class TreeView {
 										'title' => $globalCat ['title'],
 										'uid' => $globalCat ['uid'] 
 								);
-								$this->addChildren ($globalCat ['uid'], $childArray, $categoryById, $categoryByParentId, $treeViewObj->subLevelID);
+								$this->addChildren ($globalCat ['uid'], $childArray, $categoryById, $categoryByParentId, $treeViewObj->subLevelID, $notAllowedItems);
 								$calArray [$treeViewObj->subLevelID] [$globalCat ['uid']] = $childArray;
 							}
 						}
@@ -794,7 +794,7 @@ class TreeView {
 											'title' => $category ['title'],
 											'uid' => $category ['uid'] 
 									);
-									$this->addChildren ($category ['uid'], $childArray, $categoryById, $categoryByParentId, $treeViewObj->subLevelID);
+									$this->addChildren ($category ['uid'], $childArray, $categoryById, $categoryByParentId, $treeViewObj->subLevelID, $notAllowedItems);
 									$calArray [$treeViewObj->subLevelID] [$category ['uid']] = $childArray;
 								}
 							}
@@ -1002,14 +1002,17 @@ class TreeView {
 		}
 		return $this->NA_Items . implode ($errorMsg, chr (10)) . $item;
 	}
-	function addChildren($uid, &$childArray, &$categoryById, &$categoryByParentId, $subLevelID) {
+	function addChildren($uid, &$childArray, &$categoryById, &$categoryByParentId, $subLevelID, &$notAllowedItems) {
 		if ($categoryByParentId [$uid]) {
 			foreach ($categoryByParentId [$uid] as $category) {
 				$childArray2 = array (
 						'title' => $category ['title'],
 						'uid' => $category ['uid'] 
 				);
-				$this->addChildren ($category ['uid'], $childArray2, $categoryById, $categoryByParentId, $subLevelID);
+				if (in_array($uid, $notAllowedItems)) {
+					$notAllowedItems [] = $category ['uid'];
+				}
+				$this->addChildren ($category ['uid'], $childArray2, $categoryById, $categoryByParentId, $subLevelID, $notAllowedItems);
 				$childArray [$subLevelID] [$category ['uid']] = $childArray2;
 			}
 		}

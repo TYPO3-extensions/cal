@@ -22,6 +22,8 @@
 	
 	* Bug #67807  - cHash is required although no_cache is set
 	
+	* Bug #67907  - unixtimeformat
+	
 	* Fixed Bug   - Added missing day- and weekWrapperEnds
 	
 	* Fixed Bug   - Selected item in week jump menu

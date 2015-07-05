@@ -232,7 +232,8 @@ class RealUrl {
 						'tx_cal_attendee' => 'tx_cal_attendee',
 						'tx_tt_address' => 'tx_tt_address',
 						'tx_feuser' => 'tx_feuser',
-						'tx_partner_main' => 'tx_feuser' 
+						'tx_partner_main' => 'tx_feuser',
+						'tx_cal_ts_service' => 'tx_cal_ts_service'
 				) ),
 				$this->addTable ( 'tx_cal_controller[uid]', 'tx_cal_event', 'title', 'tx_cal_phpicalendar' ),
 				$this->addTable ( 'tx_cal_controller[uid]', 'tx_cal_organizer', 'name', 'tx_cal_organizer' ),

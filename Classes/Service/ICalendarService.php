@@ -35,7 +35,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 
-define ('ICALENDAR_PATH', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/class.tx_model_iCalendar.php');
+define ('ICALENDAR_PATH', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'Classes/Model/ICalendar.php');
 
 /**
  *
@@ -410,7 +410,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 	 */
 	function getiCalendarFromIcsFile($text) {
 		require_once (ICALENDAR_PATH);
-		$iCalendar = new tx_model_iCalendar ();
+		$iCalendar = new \TYPO3\CMS\Cal\Model\ICalendar ();
 		$boolean = $iCalendar->parsevCalendar ($text);
 		return $iCalendar;
 	}
@@ -437,7 +437,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$insertFields ['tstamp'] = time ();
 			$insertFields ['crdate'] = time ();
 			$insertFields ['pid'] = $pid;
-			if (is_a ($component, 'tx_iCalendar_vevent')) {
+			if (is_a ($component, '\TYPO3\CMS\Cal\Model\ICalendar\vevent')) {
 				$insertFields ['cruser_id'] = $cruserId;
 				$insertFields ['calendar_id'] = $calId;
 				if ($component->getAttribute ('DTSTART')) {

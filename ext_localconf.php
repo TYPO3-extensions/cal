@@ -860,8 +860,8 @@ $GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['t3lib/class.t3lib_tceforms.php'] [
 $GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['tslib/class.tslib_content.php'] ['typolinkLinkHandler'] ['calendar'] = 'TYPO3\\CMS\\Cal\\Hooks\\EventLinkHandler';
 $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['tx_wecmap_pi3'] ['markerHook'] ['cal'] = 'TYPO3\\CMS\\Cal\\Hooks\\WecMap:&WecMap->getMarkerContent';
 $GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['tce'] ['formevals'] ['tx_cal_dateeval'] = 'TYPO3\\CMS\\Cal\\Hooks\\DateEval';
-$GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['felogin'] ['loginFormOnSubmitFuncs'] [] = 'TYPO3\\CMS\\Cal\\Hooks\\LogoffPostProcessing:LogoffPostProcessing->clearSessionApiAfterLogoff';
-$GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['felogin'] ['login_confirmed'] [] = 'TYPO3\\CMS\\Cal\\Hooks\\LogoffPostProcessing:LogoffPostProcessing->clearSessionApiAfterLogin';
+// $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['felogin'] ['loginFormOnSubmitFuncs'] [] = 'TYPO3\\CMS\\Cal\\Hooks\\LogoffPostProcessing:LogoffPostProcessing->clearSessionApiAfterLogoff';
+// $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['felogin'] ['login_confirmed'] [] = 'TYPO3\\CMS\\Cal\\Hooks\\LogoffPostProcessing:LogoffPostProcessing->clearSessionApiAfterLogin';
 
 if (! isset ($confArr ['enableRealURLAutoConfiguration']) || $confArr ['enableRealURLAutoConfiguration']) {
 	$GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['ext/realurl/class.tx_realurl_autoconfgen.php'] ['extensionConfiguration'] ['cal'] = 'TYPO3\\CMS\\Cal\\Hooks\\RealUrl->addRealURLConfig';

@@ -156,7 +156,7 @@ END:VCALENDAR
 		$this->conf ['view'] = 'single_ics';
 		
 		foreach ($this->master_array as $eventDate => $eventTimeArray) {
-			if (is_a ($eventTimeArray, 'tx_cal_model')) {
+			if (is_subclass_of ($eventTimeArray, 'TYPO3\CMS\Cal\Model\Model')) {
 				$ics_events .= $eventTimeArray->renderEventFor ('ics');
 			} else {
 				foreach ($eventTimeArray as $key => $eventArray) {
@@ -192,7 +192,7 @@ END:VCALENDAR
 		$rems ['###EVENT###'] = strip_tags ($ics_events);
 		$title = '';
 		if (! empty ($this->master_array)) {
-			if (is_a ($this->master_array [0], 'tx_cal_model')) {
+			if (is_subclass_of ($this->master_array [0], 'TYPO3\CMS\Cal\Model\Model')) {
 				$title = $this->master_array [0]->getTitle ();				
 			} else {
 				$title = $this->appendCalendarTitle($title);

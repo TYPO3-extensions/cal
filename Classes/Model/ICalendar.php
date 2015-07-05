@@ -104,8 +104,7 @@ class ICalendar {
 	 */
 	function newComponent($type, &$container) {
 		$type = strtolower ($type);
-		$class = 'tx_iCalendar_' . $type;
-		require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'model/iCalendar/class.' . $class . '.php';
+		$class = '\\TYPO3\\CMS\\Cal\\Model\\ICalendar\\'.$type;
 		if (class_exists ($class)) {
 			$component = new $class ();
 			if ($container !== false) {
@@ -365,7 +364,7 @@ class ICalendar {
 	 *        	Component (subclass) to add.
 	 */
 	function addComponent($component) {
-		if (is_a ($component, 'tx_model_iCalendar')) {
+		if (is_a ($component, 'TYPO3\CMS\Cal\Model\ICalendar')) {
 			$component->_container = &$this;
 			$this->_components [] = &$component;
 		}
@@ -441,7 +440,7 @@ class ICalendar {
 	 *         (Horde_iCalendar_*) A reference to the requested component.
 	 */
 	function &findComponent($childclass) {
-		$childclass = 'tx_model_iCalendar_' . strtolower ($childclass);
+		$childclass = strtolower ($childclass);
 		$keys = array_keys ($this->_components);
 		foreach ($keys as $key) {
 			if (is_a ($this->_components [$key], $childclass)) {
@@ -464,13 +463,13 @@ class ICalendar {
 	 * @param string $value
 	 *        	Optional value that $attribute must match.
 	 *        	
-	 * @return boolean tx_model_iCalendar_* if no matching subcomponent of
+	 * @return boolean * if no matching subcomponent of
 	 *         the specified class exists, or a
 	 *         reference to the requested component.
 	 */
 	function &findComponentByAttribute($childclass, $attribute, $value = null) {
-		$childclassB = 'tx_iCalendar_' . strtolower ($childclass);
-		$childclass = 'tx_model_iCalendar_' . strtolower ($childclass);
+		$childclassB = $childclass;
+		$childclass = strtolower ($childclass);
 		$keys = array_keys ($this->_components);
 		foreach ($keys as $key) {
 			if (is_a ($this->_components [$key], $childclass) || is_a ($this->_components [$key], $childclassB)) {
@@ -606,7 +605,7 @@ class ICalendar {
 				if ($type != 'VTIMEZONE') {
 					continue;
 				}
-				$component = &tx_model_iCalendar::newComponent ($type, $this);
+				$component = &ICalendar::newComponent ($type, $this);
 				if ($component === false) {
 					// return PEAR::raiseError("Unable to create object for type $type");
 				}
@@ -624,7 +623,7 @@ class ICalendar {
 				if ($type == 'VTIMEZONE') {
 					continue;
 				}
-				$component = &tx_model_iCalendar::newComponent ($type, $this);
+				$component = &ICalendar::newComponent ($type, $this);
 				if ($component === false) {
 					// return PEAR::raiseError("Unable to create object for type $type");
 				}
@@ -1280,11 +1279,11 @@ class ICalendar {
 			$temp ['minute'] = date ('i', $value);
 			$temp ['second'] = date ('s', $value);
 		} else {
-			$dateOb = new tx_model_date ($value);
-			return tx_model_iCalendar::_exportDateTime ($dateOb->timestamp ());
+			$dateOb = new \TYPO3\CMS\Cal\Model\CalDate ($value);
+			return ICalendar::_exportDateTime ($dateOb->timestamp ());
 		}
 		
-		return tx_model_iCalendar::_exportDate ($temp) . 'T' . tx_model_iCalendar::_exportTime ($temp);
+		return ICalendar::_exportDate ($temp) . 'T' . ICalendar::_exportTime ($temp);
 	}
 	
 	/**

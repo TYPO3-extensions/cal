@@ -1517,7 +1517,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$select = '*';
 		$table = 'tx_cal_index';
-		$where = 'event_uid = ' . $event->getUid () . ' AND start_datetime >= ' . $this->starttime->format ('%Y%m%d%H%M%S') . ' AND start_datetime <= ' . $this->endtime->format ('%Y%m%d%H%M%S') . ' AND tablename = "' . ($event->isException ? 'tx_cal_exception_event' : 'tx_cal_event') . '"';
+		$where = 'event_uid = ' . $event->getUid () . ' AND start_datetime >= ' . $this->starttime->format ('%Y%m%d%H%M%S') . ' AND start_datetime <= ' . $this->endtime->format ('%Y%m%d%H%M%S') . ' AND tablename = "' . ($event->getType() == 'tx_cal_phpicalendar' ? ($event->isException ? 'tx_cal_exception_event' : 'tx_cal_event') : $event->getType()) . '"';
 		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where, '', 'start_datetime');
 		if ($result) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
@@ -2130,7 +2130,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 									'start_datetime' => $nextOccuranceTime->format ('%Y%m%d') . $nextOccuranceTime->format ('%H%M%S'),
 									'end_datetime' => $nextOccuranceEndTime->format ('%Y%m%d') . $nextOccuranceEndTime->format ('%H%M%S'),
 									'event_uid' => $event->getUid (),
-									'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
+									'tablename' => $event->getType() == 'tx_cal_phpicalendar' ? ($event->isException ? 'tx_cal_exception_event' : 'tx_cal_event') : $event->getType() 
 							);
 							$deviationDates = $event->getDeviationDates ();
 							if (array_key_exists ($eventData ['start_datetime'], $deviationDates)) {

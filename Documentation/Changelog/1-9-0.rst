@@ -7,28 +7,19 @@
 	* refactoring - Adopted extbase structure and moved all php files into Classes folder 
 	              - Icons, help-files and templates are now inside the Resources folder
 	              - TypoScript, Flexforms & TCA stuff is inside the Configuration folder
-
+	              - moved css info inside its own file under Resources/Public/css/cal.css
+	              - removed day and time info from events in day and week view
+	              - switched event header background color in day and week from top to the left side
 	* new         - DateParser can parse YYYYMMDD values
-
-	* new         - Cal indexer starttime and endtime are parsed through our dateParser
-
-	* new         - Created new scheduler task to index events dynamically
-	
+	              - Cal indexer starttime and endtime are parsed through our dateParser
+	              - Created new scheduler task to index events dynamically
 	* Bug #67575  - dbFileIcons() can not be called directly (More information)
-	
 	* Bug #67865  - Creation of recursive categories possible
-	
 	* Bug #67832  - Error in tx_cal_base_service->getAdditionalWhereForLocalizationAndVersioning
-	
 	* Bug #67807  - cHash is required although no_cache is set
-	
 	* Bug #67907  - unixtimeformat
-	
 	* Fixed Bug   - Added missing day- and weekWrapperEnds
-	
-	* Fixed Bug   - Selected item in week jump menu
-	
-	* Fixed Bug   - Removed unnecessary require_once statement in seach_event function
-	
+	              - Selected item in week jump menu
+	              - Removed unnecessary require_once statement in seach_event function
 	* Suggestion #48350 - Link to event as a marker in confirmation mails
 

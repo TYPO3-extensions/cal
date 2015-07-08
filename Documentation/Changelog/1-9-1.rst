@@ -1,0 +1,8 @@
+
+1.9.1 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* Bug #67976  - No more events are displayed in list view
+

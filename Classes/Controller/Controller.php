@@ -470,7 +470,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		} else {
 			unset ($this->piVars ['categorySelection']);
 		}
-		$this->conf ['view.'] ['category'] = implode(',', array_map(function ($v, $k) { return $k; }, $catIDs, array_keys($catIDs)));
+		$this->conf ['view.'] ['category'] = implode(',', array_map(function ($v, $k) { return $v; }, $catIDs, array_keys($catIDs)));
 // 		$this->conf ['view.'] ['category'] = implode (',', $catIDs);
 		if (! $this->conf ['view.'] ['category']) {
 			$this->conf ['view.'] ['category'] = '0';

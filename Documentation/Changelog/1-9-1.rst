@@ -5,4 +5,7 @@
 ::
 
 	* Bug #67976  - No more events are displayed in list view
+	* Bug #66444  - DB Error: Table 'databasename.tx_staticinfotables_hotlist' doesn't exist
+	* Bug         _ Fixed old classnames and instantiation of classes
+	* Refactoring - Moved module into view/module
 

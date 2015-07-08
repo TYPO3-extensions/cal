@@ -169,7 +169,7 @@ $TCA ['tx_cal_event'] = Array (
 								'maxitems' => 20,
 								'foreign_table' => 'tx_cal_category',
 								'MM' => 'tx_cal_event_category_mm',
-
+								
 								'wizards' => Array (
 										'_PADDING' => 2,
 										'_VERTICAL' => 1,
@@ -180,9 +180,9 @@ $TCA ['tx_cal_event'] = Array (
 												'params' => Array (
 														'table' => 'tx_cal_category',
 														'pid' => $sPid,
-														'setValue' => 'append'
+														'setValue' => 'append' 
 												),
-												'script' => 'wizard_add.php'
+												'script' => 'wizard_add.php' 
 										),
 										'edit' => Array (
 												'type' => 'popup',
@@ -192,11 +192,11 @@ $TCA ['tx_cal_event'] = Array (
 												'icon' => 'edit2.gif',
 												'JSopenParams' => 'height=500,width=660,status=0,menubar=0,scrollbars=1',
 												'params' => Array (
-														'table' => 'tx_cal_category'
-												)
-										)
-								)
-						)
+														'table' => 'tx_cal_category' 
+												) 
+										) 
+								) 
+						) 
 				),
 				'start_date' => Array (
 						'exclude' => 1,
@@ -1042,7 +1042,7 @@ $TCA ['tx_cal_event'] = Array (
 );
 
 if ($confArr ['categoryService'] == 'sys_category') {
-	unset ($TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config']);
+	unset ( $TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config'] );
 	$TCA ['tx_cal_event'] ['columns'] ['category_id'] ['config'] = Array (
 			'type' => 'select',
 			'renderMode' => 'tree',
@@ -1053,13 +1053,13 @@ if ($confArr ['categoryService'] == 'sys_category') {
 							'showHeader' => TRUE,
 							'allowRecursiveMode' => TRUE,
 							'expandAll' => TRUE,
-							'maxLevels' => 99
-					)
+							'maxLevels' => 99 
+					) 
 			),
 			'MM' => 'sys_category_record_mm',
 			'MM_match_fields' => Array (
 					'fieldname' => 'category_id',
-					'tablenames' => 'tx_cal_event'
+					'tablenames' => 'tx_cal_event' 
 			),
 			'MM_opposite_field' => 'items',
 			'foreign_table' => 'sys_category',
@@ -1067,7 +1067,7 @@ if ($confArr ['categoryService'] == 'sys_category') {
 			'size' => 10,
 			'autoSizeMax' => 20,
 			'minitems' => 0,
-			'maxitems' => 20
+			'maxitems' => 20 
 	);
 }
 if (! empty ( $limitViewOnlyToPidsWhere )) {
@@ -1915,54 +1915,15 @@ $TCA ['tx_cal_organizer'] = Array (
 				'country_zone' => Array (
 						'exclude' => 1,
 						'displayCond' => 'EXT:static_info_tables:LOADED:true',
-						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.countryzone',
-						'config' => Array (
-								'type' => 'select',
-								'items' => Array (
-										Array (
-												'',
-												0 
-										) 
+						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.countryzone' 
+				// Configuration is done depending on the version @see end of this file
 								),
-								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\StaticInfoTablesDiv->selectItemsTCA',
-								'itemsProcFunc_config' => array (
-										'table' => 'static_country_zones',
-										'where' => '1 AND zn_country_iso_3="###REC_FIELD_country###"',
-										'indexField' => 'zn_code',
-										'prependHotlist' => 1,
-										'hotlistLimit' => 5,
-										'hotlistApp' => 'tx_cal' 
-								),
-								'size' => 1,
-								'minitems' => 0,
-								'maxitems' => 1 
-						) 
-				),
 				'country' => Array (
 						'exclude' => 1,
 						'displayCond' => 'EXT:static_info_tables:LOADED:true',
-						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.country',
-						'config' => Array (
-								'type' => 'select',
-								'items' => Array (
-										Array (
-												'',
-												0 
-										) 
+						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.country' 
+				// Configuration is done depending on the version @see end of this file
 								),
-								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\StaticInfoTablesDiv->selectItemsTCA',
-								'itemsProcFunc_config' => array (
-										'table' => 'static_countries',
-										'indexField' => 'cn_iso_3',
-										'prependHotlist' => 1,
-										'hotlistLimit' => 5,
-										'hotlistApp' => 'tx_cal' 
-								),
-								'size' => 1,
-								'minitems' => 0,
-								'maxitems' => 1 
-						) 
-				),
 				'phone' => Array (
 						'exclude' => 0,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.phone',
@@ -2190,54 +2151,15 @@ $TCA ['tx_cal_location'] = Array (
 				'country_zone' => Array (
 						'exclude' => 1,
 						'displayCond' => 'EXT:static_info_tables:LOADED:true',
-						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.countryzone',
-						'config' => Array (
-								'type' => 'select',
-								'items' => Array (
-										Array (
-												'',
-												0 
-										) 
+						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.countryzone' 
+				// Configuration is done depending on the version @see end of this file
 								),
-								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\StaticInfoTablesDiv->selectItemsTCA',
-								'itemsProcFunc_config' => Array (
-										'table' => 'static_country_zones',
-										'where' => '1 AND zn_country_iso_3="###REC_FIELD_country###"',
-										'indexField' => 'zn_code',
-										'prependHotlist' => 1,
-										'hotlistLimit' => 5,
-										'hotlistApp' => 'tx_cal' 
-								),
-								'size' => 1,
-								'minitems' => 0,
-								'maxitems' => 1 
-						) 
-				),
 				'country' => Array (
 						'exclude' => 1,
 						'displayCond' => 'EXT:static_info_tables:LOADED:true',
-						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.country',
-						'config' => Array (
-								'type' => 'select',
-								'items' => Array (
-										Array (
-												'',
-												0 
-										) 
+						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.country' 
+				// Configuration is done depending on the version @see end of this file
 								),
-								'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\StaticInfoTablesDiv->selectItemsTCA',
-								'itemsProcFunc_config' => Array (
-										'table' => 'static_countries',
-										'indexField' => 'cn_iso_3',
-										'prependHotlist' => 1,
-										'hotlistLimit' => 5,
-										'hotlistApp' => 'tx_cal' 
-								),
-								'size' => 1,
-								'minitems' => 0,
-								'maxitems' => 1 
-						) 
-				),
 				'phone' => Array (
 						'exclude' => 0,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.phone',
@@ -2270,7 +2192,7 @@ $TCA ['tx_cal_location'] = Array (
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.image',
 						'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig ( 'image', array (
-							'maxitems' => 5,
+								'maxitems' => 5,
 								// Use the imageoverlayPalette instead of the basicoverlayPalette
 								'foreign_types' => array (
 										'0' => array (
@@ -3180,6 +3102,98 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ( 'tt_address' 
 		$TCA ['tt_address'] ['ctrl'] ['searchFields'] .= ',';
 	}
 	$TCA ['tt_address'] ['ctrl'] ['searchFields'] .= 'tx_cal_controller_latitude,tx_cal_controller_longitude';
+}
+
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ( 'static_info_tables' )) {
+	if (class_exists ( 'TYPO3\\CMS\\Core\\Utility\\VersionNumberUtility' ) && \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger ( $GLOBALS ['TYPO3_CONF_VARS'] ['EXTCONF'] ['static_info_tables'] ['version'] ) >= 6000000) {
+		$TCA ['tx_cal_location'] ['columns'] ['country_zone'] ['config'] = array (
+				'type' => 'select',
+				'items' => array (
+						array (
+								'',
+								0 
+						) 
+				),
+				'foreign_table' => 'static_country_zones',
+				'foreign_table_where' => 'ORDER BY static_country_zones.zn_name_en',
+				'itemsProcFunc' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\ElementRenderingHelper->translateCountryZonesSelector',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'wizards' => array (
+						'suggest' => array (
+								'type' => 'suggest',
+								'default' => array (
+										'receiverClass' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\SuggestReceiver' 
+								) 
+						) 
+				) 
+		);
+		$TCA ['tx_cal_location'] ['columns'] ['country'] ['config'] = array (
+				'type' => 'select',
+				'items' => array (
+						array (
+								'',
+								0 
+						) 
+				),
+				'foreign_table' => 'static_countries',
+				'foreign_table_where' => 'ORDER BY static_countries.cn_short_en',
+				'itemsProcFunc' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\ElementRenderingHelper->translateCountriesSelector',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'wizards' => array (
+						'suggest' => array (
+								'type' => 'suggest',
+								'default' => array (
+										'receiverClass' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\SuggestReceiver' 
+								) 
+						) 
+				) 
+		);
+	} else {
+		$TCA ['tx_cal_location'] ['columns'] ['country_zone'] ['config'] = array (
+				'type' => 'select',
+				'items' => array (
+						array (
+								'',
+								0 
+						) 
+				),
+				'itemsProcFunc' => 'tx_staticinfotables_div->selectItemsTCA',
+				'itemsProcFunc_config' => array (
+						'table' => 'static_countries_zones',
+						'indexField' => 'uid',
+						'prependHotlist' => 1,
+						'hotlistLimit' => 5,
+						'hotlistApp' => 'hotlist' 
+				),
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1 
+		);
+		$TCA ['tx_cal_location'] ['columns'] ['country'] ['config'] = array (
+				'type' => 'select',
+				'items' => array (
+						array (
+								'',
+								0 
+						) 
+				),
+				'itemsProcFunc' => 'tx_staticinfotables_div->selectItemsTCA',
+				'itemsProcFunc_config' => array (
+						'table' => 'static_countries',
+						'indexField' => 'uid',
+						'prependHotlist' => 1,
+						'hotlistLimit' => 5,
+						'hotlistApp' => 'hotlist' 
+				),
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1 
+		);
+	}
 }
 
 ?>

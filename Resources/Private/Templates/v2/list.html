@@ -7,7 +7,6 @@
 		<f:format.date format="F d Y">{listView.endtime.time}</f:format.date>
 	</h1>
 	<f:if condition="{listView.master_array}">
-		<p class="found">{listView.count} entries found</p>
 		<dl>
 			<f:for each="{listView.master_array}" as="entriesOfADay" key="day">
 				<f:if

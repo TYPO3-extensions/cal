@@ -30,11 +30,11 @@ class RecurrenceGenerator {
 		return $this->info;
 	}
 	
-	function cleanIndexTable($pageId) {
+	public static function cleanIndexTable($pageId) {
 		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid in (select uid from tx_cal_event where pid = '. intval($pageId).')');
 	}
 	
-	function cleanIndexTableOfUid($uid, $table) {
+	public static function cleanIndexTableOfUid($uid, $table) {
 		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid = ' . $uid . ' AND tablename = "' . $table . '"');
 	}
 	

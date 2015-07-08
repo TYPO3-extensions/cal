@@ -336,7 +336,7 @@ class LocationService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map') && ($insertFields ['street'] != '' || $insertFields ['city'] != '' || $insertFields ['country_zone'] != '' || $insertFields ['zip'] != '' || $insertFields ['country'])) {
 			/* Geocode the address */
-			$lookupTable = new tx_wecmap_cache();
+			$lookupTable = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_wecmap_cache');
 			$latlong = $lookupTable->lookup ($insertFields ['street'], $insertFields ['city'], $insertFields ['country_zone'], $insertFields ['zip'], $insertFields ['country']);
 			$insertFields ['latitude'] = $latlong ['lat'];
 			$insertFields ['longitude'] = $latlong ['long'];

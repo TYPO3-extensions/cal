@@ -154,10 +154,10 @@ class TceMainProcessdatamap {
 		if ($table == 'tx_cal_calendar') {
 			$calendar = BackendUtility::getRecord ('tx_cal_calendar', $id);
 			
-			$service = new tx_cal_icalendar_service();
+			$service = new \TYPO3\CMS\Cal\Service\ICalendarService();
 			
 			if ($calendar ['type'] == 1 or $calendar ['type'] == 2) {
-				tx_cal_tcemain_processdatamap::processICS ($calendar, $fieldArray, $service);
+				TceMainProcessdatamap::processICS ($calendar, $fieldArray, $service);
 			}
 		}
 		
@@ -176,7 +176,7 @@ class TceMainProcessdatamap {
 			}
 			
 			/* Geocode the address */
-			$lookupTable = new tx_wecmap_cache();
+			$lookupTable = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_wecmap_cache');
 			$latlong = $lookupTable->lookup ($location ['street'], $location ['city'], $location ['state'], $location ['zip'], $location ['country']);
 			$fieldArray ['latitude'] = $latlong ['lat'];
 			$fieldArray ['longitude'] = $latlong ['long'];

@@ -124,7 +124,7 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$service = new \TYPO3\CMS\Cal\Service\ICalendarService();
 		
 		if (($insertFields ['type'] == 1 && $insertFields ['ext_url']) or ($insertFields ['type'] == 2 && $insertFields ['ics_file'])) {
-			tx_cal_tcemain_processdatamap::processICS (\TYPO3\CMS\Backend\Utility\BackendUtility::getRecord ('tx_cal_calendar', $uid), $insertFields, $service);
+			\TYPO3\CMS\Cal\Hooks\TceMainProcessdatamap::processICS (\TYPO3\CMS\Backend\Utility\BackendUtility::getRecord ('tx_cal_calendar', $uid), $insertFields, $service);
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {

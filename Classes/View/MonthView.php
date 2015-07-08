@@ -38,8 +38,9 @@ namespace TYPO3\CMS\Cal\View;
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
 class MonthView extends \TYPO3\CMS\Cal\View\BaseView {
-	function tx_cal_monthview() {
-		$this->tx_cal_base_view ();
+	
+	public function __construct () {
+		parent::__construct ();
 	}
 	
 	/**
@@ -80,7 +81,4 @@ class MonthView extends \TYPO3\CMS\Cal\View\BaseView {
 	}
 }
 
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/view/class.tx_cal_monthview.php']) {
-	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/view/class.tx_cal_monthview.php']);
-}
 ?>

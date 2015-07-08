@@ -1099,7 +1099,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				tx_cal_recurrence_generator::cleanIndexTableOfUid ($uid, $table);
+				\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfUid ($uid, $table);
 			}
 			
 			// Hook: removeEvent

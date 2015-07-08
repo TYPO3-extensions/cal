@@ -434,7 +434,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$temp_sims ['###' . strtoupper ($marker) . '_PREVIEW###'] = $this->renderFile ($row, $row['description'], $row['title'], $marker, false);
 					}
 					
-					$temp = tx_cal_functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+					$temp = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
 					if ($this->isAllowed ($marker.'_caption')) {
 						$temp .= $this->applyStdWrap ($row['description'], $marker.'_caption_stdWrap');
 					}
@@ -458,7 +458,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$upload .= $this->applyStdWrap ('', $marker.'_title_stdWrap');
 					}
 					$temp_sims ['###INDEX###'] = $i;
-					$upload = tx_cal_functions::substituteMarkerArrayNotCached ($upload, $temp_sims, array (), array ());
+					$upload = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($upload, $temp_sims, array (), array ());
 				}
 				$sims ['###' . strtoupper ($marker) . '###'] .= $upload;
 			} else if (! $this->isEditMode && $this->rightsObj->isAllowedTo ('create', $this->objectString, $marker)) {

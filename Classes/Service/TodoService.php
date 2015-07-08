@@ -92,7 +92,7 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		// putting everything together
 		$additionalWhere = $calendarSearchString . ' AND tx_cal_event.completed < 100 AND tx_cal_event.pid IN (' . $this->conf ['pidList'] . ') ' . $this->cObj->enableFields ('tx_cal_event');
 		$getAllInstances = true;
-		$eventType = tx_cal_model::EVENT_TYPE_TODO;
+		$eventType = \TYPO3\CMS\Cal\Model\Model::EVENT_TYPE_TODO;
 		
 		return $this->getEventsFromTable ($categories [0] [0], $getAllInstances, $additionalWhere, $this->getServiceKey (), ! $disableCategorySearchString, false, $eventType);
 	}
@@ -149,15 +149,15 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			$rgc = new tx_cal_recurrence_generator($GLOBALS ['TSFE']->id);
+			$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator( $GLOBALS ['TSFE']->id );
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
 		// Hook: saveEvent
-		$hookObjectsArr = tx_cal_functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
-		tx_cal_functions::executeHookObjectsFunction ($hookObjectsArr, 'saveTodo', $this, $object);
+		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
+		\TYPO3\CMS\Cal\Utility\Functions::executeHookObjectsFunction ($hookObjectsArr, 'saveTodo', $this, $object);
 		
-		tx_cal_functions::clearCache ();
+		\TYPO3\CMS\Cal\Utility\Functions::clearCache ();
 		return $this->find ($uid, $pid);
 	}
 	function _saveEvent(&$eventData, $object) {
@@ -300,17 +300,15 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			$rgc = new tx_cal_recurrence_generator($GLOBALS ['TSFE']->id);
+			$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator($GLOBALS ['TSFE']->id);
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
-		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
-		
 		// Hook: updateEvent
-		$hookObjectsArr = tx_cal_functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
-		tx_cal_functions::executeHookObjectsFunction ($hookObjectsArr, 'updateTodo', $this, $event);
+		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
+		\TYPO3\CMS\Cal\Utility\Functions::executeHookObjectsFunction ($hookObjectsArr, 'updateTodo', $this, $event);
 		
-		tx_cal_functions::clearCache ();
+		\TYPO3\CMS\Cal\Utility\Functions::clearCache ();
 		return $event;
 	}
 	function _updateEvent($uid, $eventData, $object) {
@@ -432,13 +430,13 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				tx_cal_recurrence_generator::cleanIndexTableOfUid ($uid, $table);
+				\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfUid ($uid, $table);
 			}
 			
 			// Hook: removeEvent
-			$hookObjectsArr = tx_cal_functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
-			tx_cal_functions::executeHookObjectsFunction ($hookObjectsArr, 'removeTodo', $this, $event);
-			tx_cal_functions::clearCache ();
+			$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
+			\TYPO3\CMS\Cal\Utility\Functions::executeHookObjectsFunction ($hookObjectsArr, 'removeTodo', $this, $event);
+			\TYPO3\CMS\Cal\Utility\Functions::clearCache ();
 			$this->unsetPiVars ();
 		}
 	}

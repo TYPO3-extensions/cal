@@ -380,7 +380,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 				$alternationCount = 0;
 				$pageItemCount = $this->recordsPerPage * $this->offset;
 				
-				// don't assign these dates in one line like "$date1 = $date2 = $date3 = new tx_cal_date()", as this will make all dates references to each other!!!
+				// don't assign these dates in one line like "$date1 = $date2 = $date3 = new CalDate()", as this will make all dates references to each other!!!
 				$lastEventDay = new  \TYPO3\CMS\Cal\Model\CalDate ('000000001000000');
 				$lastEventWeek = new  \TYPO3\CMS\Cal\Model\CalDate ('000000001000000');
 				$lastEventMonth = new  \TYPO3\CMS\Cal\Model\CalDate ('000000001000000');

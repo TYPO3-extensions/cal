@@ -798,7 +798,7 @@ $confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'className' => 'TYPO3\\CMS\\Cal\\Module\\ModuleExample' 
+		'className' => 'TYPO3\\CMS\\Cal\\View\\Module\\Example' 
 ));
 
 // Example for a module
@@ -812,7 +812,7 @@ $confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'className' => 'TYPO3\\CMS\\Cal\\Module\\ModuleLocationLoader' 
+		'className' => 'TYPO3\\CMS\\Cal\\View\\Module\\LocationLoader' 
 ));
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'ORGANIZERLOADER' /* sv type */,  'tx_cal_module' /* sv key */,
@@ -825,7 +825,7 @@ $confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'className' => 'TYPO3\\CMS\\Cal\\Module\\ModuleOrganizerLoader' 
+		'className' => 'TYPO3\\CMS\\Cal\\View\\Module\\OrganizerLoader' 
 ));
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addService ($_EXTKEY, 'cal_view' /* sv type */,  'tx_cal_subscription' /* sv key */,

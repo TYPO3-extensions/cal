@@ -1055,14 +1055,14 @@ class Model extends \TYPO3\CMS\Cal\Model\BaseModel {
 	/**
 	 * Returns the location object.
 	 */
-	function getLocationObject() {
+	public function getLocationObject() {
 		if (! $this->locationObject) {
 			$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			$useLocationStructure = ($confArr ['useLocationStructure'] ? $confArr ['useLocationStructure'] : 'tx_cal_location');
 			$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 			$this->locationObject = $modelObj->findLocation ($this->getLocationId (), $useLocationStructure, $this->conf ['pidList']);
 		}
-		
+		\TYPO3\CMS\Core\Utility\DebugUtility::debug($this->getLocationId ());
 		return $this->locationObject;
 	}
 	

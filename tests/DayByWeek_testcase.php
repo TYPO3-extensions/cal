@@ -34,7 +34,7 @@
  *
  * WARNING: Never ever run a unit test like this on a live site!
  */
-class tx_cal_DayByWeek_testcase extends tx_phpunit_testcase {
+class DayByWeek_testcase extends tx_phpunit_testcase {
 	public function testFirstDayOfWeek1OfYear2013_is_20121231() {
 		$this->assertEquals ('20121231', \TYPO3\CMS\Cal\Utility\Functions::getDayByWeek (2013, 1, 1));
 	}

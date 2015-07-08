@@ -552,7 +552,7 @@ class Functions {
 	public static function &makeInstance($className) {
 		$constructorArguments = func_get_args ();
 		return call_user_func_array (array (
-				'GeneralUtility',
+				'TYPO3\\CMS\\Core\\Utility\\GeneralUtility',
 				'makeInstance' 
 		), $constructorArguments);
 	}

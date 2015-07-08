@@ -187,7 +187,7 @@ class AttendeeService extends \TYPO3\CMS\Cal\Service\BaseService {
 		return ' AND tx_cal_attendee.event_id = ' . $eventUid;
 	}
 	function createAttendee($row) {
-		$attendee = new tx_cal_attendee_model( $row, $this->getServiceKey ());
+		$attendee = new \TYPO3\CMS\Cal\Model\AttendeeModel ( $row, $this->getServiceKey ());
 		return $attendee;
 	}
 	function findEventAttendees($eventUid) {

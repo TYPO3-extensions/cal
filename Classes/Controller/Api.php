@@ -52,7 +52,7 @@ class Api {
 	/**
 	 * Example:
 	 * require_once ('class.tx_cal_api.php');
-	 * $calAPI = new tx_cal_api($this->cObj, &$conf);
+	 * $calAPI = new Api($this->cObj, &$conf);
 	 * $event = $calAPI->findEvent('2','tx_cal_phpicalendar');
 	 */
 	function tx_cal_api_with(&$cObj, &$conf) {

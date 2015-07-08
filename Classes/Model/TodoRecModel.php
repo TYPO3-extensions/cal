@@ -40,7 +40,7 @@ class TodoRecModel extends \TYPO3\CMS\Cal\Model\EventRecModel {
 	
 	public function __construct($todo, $start, $end) {
 		parent::__construct($todo, $start, $end);
-		$this->setEventType ($this->EVENT_TYPE_TODO);
+		$this->setEventType (\TYPO3\CMS\Cal\Model\Model::EVENT_TYPE_TODO);
 	}
 	
 	public function renderEvent() {

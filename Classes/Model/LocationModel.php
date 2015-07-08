@@ -237,7 +237,7 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 	function getCountryMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-			$staticInfo = new tx_staticinfotables_pi1();
+			$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
 			$staticInfo->init ();
 			$current = $staticInfo->getStaticInfoName ('COUNTRIES', $this->getCountry ());
 			$this->local_cObj->setCurrentVal ($current);
@@ -251,7 +251,7 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 	function getCountryZoneMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-			$staticInfo = new tx_staticinfotables_pi1();
+			$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
 			$staticInfo->init ();
 			$current = $staticInfo->getStaticInfoName ('SUBDIVISIONS', $this->getCountryzone (), $this->getCountry ());
 			$this->local_cObj->setCurrentVal ($current);

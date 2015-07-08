@@ -1,4 +1,7 @@
 <?php
+
+namespace TYPO3\CMS\Cal\View\Module;
+
 /**
  * *************************************************************
  * Copyright notice
@@ -34,12 +37,9 @@
  *
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
-class module_example extends tx_cal_base_view {
-	function start(&$moduleCaller) {
+class Example extends \TYPO3\CMS\Cal\View\BaseView {
+	public function start(&$moduleCaller) {
 		return 'text from another module';
 	}
-}
-if (defined ('TYPO3_MODE') && $TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/misc/class.module_example.php']) {
-	include_once ($TYPO3_CONF_VARS [TYPO3_MODE] ['XCLASS'] ['ext/cal/misc/class.module_example.php']);
 }
 ?>

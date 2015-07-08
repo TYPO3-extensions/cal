@@ -61,7 +61,7 @@ class ConfirmCategoryView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		}
 		
 		$a = Array ();
-		$this->object = new tx_cal_category_model ($a, '');
+		$this->object = new \TYPO3\CMS\Cal\Model\CategoryModel ( $a, '' );
 		$this->object->updateWithPIVars ($this->controller->piVars);
 		
 		$lastViewParams = $this->controller->shortenLastViewAndGetTargetViewParameters ();

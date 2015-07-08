@@ -1,4 +1,7 @@
 <?php
+
+namespace TYPO3\CMS\Cal\View\Module;
+
 /**
  * *************************************************************
  * Copyright notice
@@ -30,37 +33,39 @@
  * *************************************************************
  */
 
+use TYPO3\CMS\Cal\Service\AbstractModul;
+
 /**
  *
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
-class module_locationloader extends tx_cal_abstract_modul {
+class OrganizerLoader extends AbstractModul {
 	
 	/**
-	 * The function adds location markers into the event template
-	 * 
+	 * The function adds organizer markers into the event template
+	 *
 	 * @param Object $moduleCaller
 	 *        	Instance of the event model (phpicalendar_model)
 	 */
 	public function start(&$moduleCaller) {
-		if ($moduleCaller->getLocationId () > 0) {
-			$this->modelObj = &tx_cal_registry::Registry ('basic', 'modelcontroller');
-			$this->cObj = &tx_cal_registry::Registry ('basic', 'cobj');
+		if ($moduleCaller->getOrganizerId () > 0) {
+			$this->modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ( 'basic', 'modelcontroller' );
+			$this->cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ( 'basic', 'cobj' );
 			
-			$moduleCaller->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			$useLocationStructure = ($moduleCaller->confArr ['useLocationStructure'] ? $moduleCaller->confArr ['useLocationStructure'] : 'tx_cal_location');
-			$location = $this->modelObj->findLocation ($moduleCaller->getLocationId (), $useLocationStructure);
+			$moduleCaller->confArr = unserialize ( $GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal'] );
+			$useOrganizerStructure = ($moduleCaller->confArr ['useOrganizerStructure'] ? $moduleCaller->confArr ['useOrganizerStructure'] : 'tx_cal_organizer');
+			$organizer = $this->modelObj->findOrganizer ( $moduleCaller->getOrganizerId (), $useOrganizerStructure );
 			
-			if (is_object ($location)) {
-				$page = $this->cObj->fileResource ($moduleCaller->conf ['module.'] ['locationloader.'] ['template']);
+			if (is_object ( $organizer )) {
+				$page = $this->cObj->fileResource ( $moduleCaller->conf ['module.'] ['organizerloader.'] ['template'] );
 				if ($page == '') {
-					return '<h3>module locationloader: no template file found:</h3>' . $moduleCaller->conf ['module.'] ['locationloader.'] ['template'];
+					return '<h3>module organizerloader: no template file found:</h3>' . $moduleCaller->conf ['module.'] ['organizerloader.'] ['template'];
 				}
-				$sims = array ();
-				$rems = array ();
-				$wrapped = array ();
-				$location->getMarker ($page, $sims, $rems, $wrapped);
-				return tx_cal_functions::substituteMarkerArrayNotCached ($page, $sims, $rems, array ());
+				$sims = Array ();
+				$rems = Array ();
+				$wrapped = Array ();
+				$organizer->getMarker ( $page, $sims, $rems, $wrapped );
+				return \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ( $page, $sims, $rems, Array () );
 			}
 		}
 		return '';

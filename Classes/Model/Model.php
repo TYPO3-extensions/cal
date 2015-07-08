@@ -1062,7 +1062,6 @@ class Model extends \TYPO3\CMS\Cal\Model\BaseModel {
 			$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 			$this->locationObject = $modelObj->findLocation ($this->getLocationId (), $useLocationStructure, $this->conf ['pidList']);
 		}
-		\TYPO3\CMS\Core\Utility\DebugUtility::debug($this->getLocationId ());
 		return $this->locationObject;
 	}
 	

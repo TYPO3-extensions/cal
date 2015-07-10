@@ -115,10 +115,10 @@ class ConfirmLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView
 		$sims ['###COUNTRY_VALUE###'] = '';
 		if ($this->isAllowed ('country')) {
 			if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-				$this->staticInfo = new \tx_staticinfotables_pi1();
-				$this->staticInfo->init ();
-				$sims ['###COUNTRY###'] = $this->applyStdWrap ($this->staticInfo->getStaticInfoName ('COUNTRIES', $this->object->getCountry ()), 'country_static_info_stdWrap');
+				$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
+				$staticInfo->init ();
+				$current = \SJBR\StaticInfoTables\Utility\LocalizationUtility::translate(array('uid' => $this->object->getCountry () ), 'static_countries', FALSE);
+				$sims ['###COUNTRY###'] = $this->applyStdWrap ( $current, 'country_static_info_stdWrap' );
 				$sims ['###COUNTRY_VALUE###'] = strip_tags ($this->object->getCountry ());
 			} else {
 				$sims ['###COUNTRY###'] = $this->applyStdWrap ($this->object->getCountry (), 'country_stdWrap');
@@ -133,10 +133,10 @@ class ConfirmLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView
 		$sims ['###COUNTRYZONE_VALUE###'] = '';
 		if ($this->isAllowed ('countryzone')) {
 			if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-				$this->staticInfo = new \tx_staticinfotables_pi1();
-				$this->staticInfo->init ();
-				$sims ['###COUNTRYZONE###'] = $this->applyStdWrap ($this->staticInfo->getStaticInfoName ('SUBDIVISIONS', $this->object->getCountryZone (), $this->object->getCountry ()), 'countryzone_static_info_stdWrap');
+				$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
+				$staticInfo->init ();
+				$current = \SJBR\StaticInfoTables\Utility\LocalizationUtility::translate(array('uid' => $this->object->getCountryzone () ), 'static_country_zones', FALSE);
+				$sims ['###COUNTRYZONE###'] = $this->applyStdWrap ( $current, 'countryzone_static_info_stdWrap' );
 				$sims ['###COUNTRYZONE_VALUE###'] = $this->object->getCountryZone ();
 			} else {
 				$sims ['###COUNTRYZONE###'] = $this->applyStdWrap ($this->object->getCountryZone (), 'countryzone_stdWrap');

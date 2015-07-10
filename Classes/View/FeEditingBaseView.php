@@ -473,7 +473,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$upload .= $this->applyStdWrap ('', $marker.'_title_stdWrap');
 					}
 					$temp_sims ['###INDEX###'] = $i;
-					$sims ['###' . strtoupper ($marker) . '###'] .= tx_cal_functions::substituteMarkerArrayNotCached ($upload, $temp_sims, array (), array ());
+					$sims ['###' . strtoupper ($marker) . '###'] .= \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($upload, $temp_sims, array (), array ());
 				}
 			}
 		}

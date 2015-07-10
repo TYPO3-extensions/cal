@@ -37,7 +37,7 @@ namespace TYPO3\CMS\Cal\View;
  *
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
-class AdminView extends TYPO3\CMS\Cal\View\BaseView {
+class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 	function AdminView() {
 		$this->BaseView ();
 	}
@@ -199,7 +199,7 @@ class AdminView extends TYPO3\CMS\Cal\View\BaseView {
 		}
 		
 		// CALENDAR
-		$calendarArray = $this->modelObj->findAllCalendar ('tx_cal_calendar');
+		$calendarArray = $this->modelObj->findAllCalendar ('tx_cal_calendar', $this->conf ['pidList']);
 		$editCalendarOptions = '<option value="">' . $this->controller->pi_getLL ('l_select') . '</option>';
 		foreach ($calendarArray ['tx_cal_calendar'] as $calendar) {
 			if ($calendar->isUserAllowedToEdit () || $calendar->isUserAllowedToDelete ()) {

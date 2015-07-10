@@ -141,10 +141,9 @@ class CreateLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView 
 		$sims ['###COUNTRY###'] = '';
 		if ($this->isAllowed ('country')) {
 			if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-				$this->staticInfo = new \tx_staticinfotables_pi1();
-				$this->staticInfo->init ();
-				$sims ['###COUNTRY###'] = $this->applyStdWrap ($this->staticInfo->buildStaticInfoSelector ('COUNTRIES', 'tx_cal_controller[country]', '', $this->object->getCountry ()), 'country_static_info_stdWrap');
+				$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
+				$staticInfo->init ();
+				$sims ['###COUNTRY###'] = $this->applyStdWrap ($staticInfo->buildStaticInfoSelector ('COUNTRIES', 'tx_cal_controller[country]', '', $this->object->getCountry ()), 'country_static_info_stdWrap');
 			} else {
 				$sims ['###COUNTRY###'] = $this->applyStdWrap ($this->object->getCountry (), 'country_stdWrap');
 				$sims ['###COUNTRY_VALUE###'] = $this->object->getCountry ();
@@ -157,10 +156,9 @@ class CreateLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView 
 		$sims ['###COUNTRYZONE###'] = '';
 		if ($this->isAllowed ('countryzone')) {
 			if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-				require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('static_info_tables') . 'pi1/class.tx_staticinfotables_pi1.php');
-				$this->staticInfo = new \tx_staticinfotables_pi1();
-				$this->staticInfo->init ();
-				$sims ['###COUNTRYZONE###'] = $this->applyStdWrap ($this->staticInfo->buildStaticInfoSelector ('SUBDIVISIONS', 'tx_cal_controller[countryzone]', '', $this->object->getCountryZone (), $this->object->getCountry ()), 'countryzone_static_info_stdWrap');
+				$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
+				$staticInfo->init ();
+				$sims ['###COUNTRYZONE###'] = $this->applyStdWrap ($staticInfo->buildStaticInfoSelector ('SUBDIVISIONS', 'tx_cal_controller[countryzone]', '', $this->object->getCountryZone (), $this->object->getCountry ()), 'countryzone_static_info_stdWrap');
 			} else {
 				$sims ['###COUNTRYZONE###'] = $this->applyStdWrap ($this->object->getCountryZone (), 'countryzone_stdWrap');
 				$sims ['###COUNTRYZONE_VALUE###'] = $this->object->getCountryZone ();

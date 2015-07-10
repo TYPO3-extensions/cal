@@ -239,7 +239,7 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
 			$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
 			$staticInfo->init ();
-			$current = $staticInfo->getStaticInfoName ('COUNTRIES', $this->getCountry ());
+			$current = \SJBR\StaticInfoTables\Utility\LocalizationUtility::translate(array('uid' => $this->getCountry () ), 'static_countries', FALSE);
 			$this->local_cObj->setCurrentVal ($current);
 			$sims ['###COUNTRY###'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['countryStaticInfo'], $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['countryStaticInfo.']);
 		} else {
@@ -253,7 +253,7 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
 			$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
 			$staticInfo->init ();
-			$current = $staticInfo->getStaticInfoName ('SUBDIVISIONS', $this->getCountryzone (), $this->getCountry ());
+			$current = \SJBR\StaticInfoTables\Utility\LocalizationUtility::translate(array('uid' => $this->getCountryzone () ), 'static_country_zones', FALSE);
 			$this->local_cObj->setCurrentVal ($current);
 			$sims ['###COUNTRYZONE###'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['countryzoneStaticInfo'], $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['countryzoneStaticInfo.']);
 		} else {

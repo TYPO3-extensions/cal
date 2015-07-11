@@ -35,7 +35,7 @@ namespace TYPO3\CMS\Cal\Service;
  *
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
-class AbstractModul extends \TYPO3\CMS\Cal\Service\BaseService {
+abstract class AbstractModul extends \TYPO3\CMS\Cal\Service\BaseService {
 	
 	/**
 	 * @param Object $moduleCaller 	Instance of the caller

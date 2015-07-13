@@ -3272,7 +3272,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		if (is_array ($this->piVars) && is_array ($overrulePIvars) && ! $clearAnyway) {
 			$piVars = $this->piVars;
 			unset ($piVars ['DATA']);
-			\TYPO3\CMS\Cal\Utility\CompatibilityUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
+			\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
 			$overrulePIvars = $piVars;
 			if ($this->pi_autoCacheEn) {
 				$cache = $this->pi_autoCache ($overrulePIvars);

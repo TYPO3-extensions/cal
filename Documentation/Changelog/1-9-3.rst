@@ -1,0 +1,9 @@
+
+1.9.3 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* Bug #68363  - Fatal Error while saving External Calendar
+	* Bug #68145  - PHP Runtime Deprecation Notice: Non-static method TYPO3\CMS\Cal\Controller\Calendar::calculateStartMonthTime()
+

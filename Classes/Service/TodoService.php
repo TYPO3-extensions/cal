@@ -421,7 +421,6 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 			$where = 'uid = ' . $uid;
 			$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $updateFields);
 			
-			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.tx_cal_functions.php');
 			$fields = $event->getValuesAsArray ();
 			$fields ['deleted'] = 1;
 			$fields ['tstamp'] = $updateFields ['tstamp'];

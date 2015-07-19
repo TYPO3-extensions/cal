@@ -6,4 +6,5 @@
 
 	* Bug #68363  - Fatal Error while saving External Calendar
 	* Bug #68145  - PHP Runtime Deprecation Notice: Non-static method TYPO3\CMS\Cal\Controller\Calendar::calculateStartMonthTime()
+	* Bug #68164  - Attachment of image leads to fatal error
 

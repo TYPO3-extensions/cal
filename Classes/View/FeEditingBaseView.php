@@ -367,7 +367,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 					if ($this->isAllowed ($marker.'_title')) {
 						$temp .= $this->applyStdWrap ($this->controller->piVars[$marker.'_title'][$id], $marker.'_title_stdWrap');
 					}
-					$sims ['###' . strtoupper ($marker) . '###'] .= tx_cal_functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+					$sims ['###' . strtoupper ($marker) . '###'] .= \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
 					
 					$i++;
 				}
@@ -409,7 +409,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 				if ($this->isAllowed ($marker.'_title')) {
 					$temp  .= $this->applyStdWrap ($row['title'], $marker.'_title_stdWrap');
 				}
-				$sims ['###' . strtoupper ($marker) . '###'] .= tx_cal_functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+				$sims ['###' . strtoupper ($marker) . '###'] .= \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 			
@@ -442,7 +442,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$temp .= $this->applyStdWrap ($row['title'], $marker.'_title_stdWrap');
 					}
 					$temp_sims ['###INDEX###'] = $i;
-					$sims ['###' . strtoupper ($marker) . '###'] .= tx_cal_functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
+					$sims ['###' . strtoupper ($marker) . '###'] .= \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($temp, $temp_sims, array (), array ());
 					$i++;
 					
 				}

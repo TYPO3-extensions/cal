@@ -39,10 +39,15 @@ use TYPO3\CMS\Cal\Model\Pear\Date\Calc;
  */
 class Calendar {
 	
-	// takes iCalendar 2 day format and makes it into 3 characters
-	// if $txt is true, it returns the 3 letters, otherwise it returns the
-	// integer of that day; 0=Sun, 1=Mon, etc.
-	function two2threeCharDays($day, $txt = true) {
+	/**
+	 * Takes iCalendar 2 day format and makes it into 3 characters
+	 * if $txt is true, it returns the 3 letters, otherwise it returns the
+	 * integer of that day; 0=Sun, 1=Mon, etc.
+	 * @param unknown $day
+	 * @param string $txt
+	 * @return string
+	 */
+	public static function two2threeCharDays($day, $txt = true) {
 		switch ($day) {
 			case 'SU' :
 				return ($txt ? 'sun' : '0');
@@ -60,22 +65,46 @@ class Calendar {
 				return ($txt ? 'sat' : '6');
 		}
 	}
-	function getYear($date) {
+	
+	/**
+	 * 
+	 * @param unknown $date
+	 * @return The year
+	 */
+	public static function getYear($date) {
 		$day_array2 = array ();
 		preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $date, $day_array2);
 		return $day_array2 [1];
 	}
-	function getMonth($date) {
+	
+	/**
+	 * 
+	 * @param unknown $date
+	 * @return The month
+	 */
+	public static function getMonth($date) {
 		$day_array2 = array ();
 		preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $date, $day_array2);
 		return $day_array2 [2];
 	}
-	function getDay($date) {
+	
+	/**
+	 * 
+	 * @param unknown $date
+	 * @return The day
+	 */
+	public static function getDay($date) {
 		$day_array2 = array ();
 		preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $date, $day_array2);
 		return $day_array2 [3];
 	}
-	function calculateStartDayTime($dateObject = '') {
+	
+	/**
+	 * 
+	 * @param string $dateObject
+	 * @return \TYPO3\CMS\Cal\Model\CalDate
+	 */
+	public static function calculateStartDayTime($dateObject = '') {
 		$timeObj = new \TYPO3\CMS\Cal\Model\CalDate ();
 		$timeObj->setTZbyId ('UTC');
 		if ($dateObject) {
@@ -86,7 +115,13 @@ class Calendar {
 		$timeObj->setSecond (0);
 		return $timeObj;
 	}
-	function calculateEndDayTime($dateObject = '') {
+	
+	/**
+	 * 
+	 * @param string $dateObject
+	 * @return \TYPO3\CMS\Cal\Model\CalDate
+	 */
+	public static function calculateEndDayTime($dateObject = '') {
 		$timeObj = new \TYPO3\CMS\Cal\Model\CalDate ();
 		$timeObj->setTZbyId ('UTC');
 		if ($dateObject) {
@@ -97,23 +132,47 @@ class Calendar {
 		$timeObj->setSecond (59);
 		return $timeObj;
 	}
-	function calculateStartWeekTime($dateObject = '') {
+	
+	/**
+	 * 
+	 * @param string $dateObject
+	 * @return \TYPO3\CMS\Cal\Model\CalDate
+	 */
+	public static function calculateStartWeekTime($dateObject = '') {
 		$timeObj = Calendar::calculateStartDayTime ($dateObject);
 		$timeObj = new \TYPO3\CMS\Cal\Model\CalDate (Calc::beginOfWeek ($timeObj->getDay (), $timeObj->getMonth (), $timeObj->getYear ()));
 		$timeObj->setTZbyId ('UTC');
 		return $timeObj;
 	}
-	function calculateEndWeekTime($dateObject = '') {
+	
+	/**
+	 * 
+	 * @param string $dateObject
+	 * @return \TYPO3\CMS\Cal\Model\CalDate
+	 */
+	public static function calculateEndWeekTime($dateObject = '') {
 		$timeObj = Calendar::calculateStartWeekTime ($dateObject);
 		$timeObj->addSeconds (604799);
 		return $timeObj;
 	}
-	function calculateStartMonthTime($dateObject = '') {
+	
+	/**
+	 * 
+	 * @param string $dateObject
+	 * @return \TYPO3\CMS\Cal\Model\CalDate
+	 */
+	public static function calculateStartMonthTime($dateObject = '') {
 		$timeObj = Calendar::calculateStartDayTime ($dateObject);
 		$timeObj->setDay (1);
 		return $timeObj;
 	}
-	function calculateEndMonthTime($dateObject = '') {
+	
+	/**
+	 * 
+	 * @param string $dateObject
+	 * @return \TYPO3\CMS\Cal\Model\CalDate
+	 */
+	public static function calculateEndMonthTime($dateObject = '') {
 		$timeObj = Calendar::calculateStartDayTime ($dateObject);
 		$timeObj = new \TYPO3\CMS\Cal\Model\CalDate (Calc::endOfNextMonth ($timeObj->getDay (), $timeObj->getMonth (), $timeObj->getYear ()));
 		$timeObj->setDay (1);
@@ -121,18 +180,36 @@ class Calendar {
 		$timeObj->setTZbyId ('UTC');
 		return $timeObj;
 	}
-	function calculateStartYearTime($dateObject = '') {
+	
+	/**
+	 * 
+	 * @param string $dateObject
+	 * @return \TYPO3\CMS\Cal\Model\CalDate
+	 */
+	public static function calculateStartYearTime($dateObject = '') {
 		$timeObj = Calendar::calculateStartMonthTime ($dateObject);
 		$timeObj->setMonth (1);
 		return $timeObj;
 	}
-	function calculateEndYearTime($dateObject = '') {
+	
+	/**
+	 * 
+	 * @param string $dateObject
+	 * @return \TYPO3\CMS\Cal\Model\CalDate
+	 */
+	public static function calculateEndYearTime($dateObject = '') {
 		$timeObj = Calendar::calculateStartYearTime ($dateObject);
 		$timeObj->setYear ($timeObj->getYear () + 1);
 		$timeObj->subtractSeconds (1);
 		return $timeObj;
 	}
-	function getHourFromTime($time) {
+	
+	/**
+	 * 
+	 * @param unknown $time
+	 * @return string
+	 */
+	public static function getHourFromTime($time) {
 		$time = str_replace (':', '', $time);
 		
 		if ($time) {
@@ -140,14 +217,26 @@ class Calendar {
 		}
 		return $retVal;
 	}
-	function getMinutesFromTime($time) {
+	
+	/**
+	 * 
+	 * @param unknown $time
+	 * @return string
+	 */
+	public static function getMinutesFromTime($time) {
 		$time = str_replace (':', '', $time);
 		if ($time) {
 			$retVal = substr ($time, - 2);
 		}
 		return $retVal;
 	}
-	function getTimeFromTimestamp($timestamp = 0) {
+	
+	/**
+	 * 
+	 * @param number $timestamp
+	 * @return number
+	 */
+	public static function getTimeFromTimestamp($timestamp = 0) {
 		if ($timestamp > 0) {
 			// gmdate and gmmktime are ok, as long as the timestamp just holds information about 24h.
 			return gmmktime (gmdate ('H', $timestamp), gmdate ('i', $timestamp), 0, 0, 0, 1) - gmmktime (0, 0, 0, 0, 0, 1);

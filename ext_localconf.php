@@ -142,7 +142,7 @@ $confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']
 		'quality' => 50,
 		'os' => '',
 		'exec' => '',
-		'className' => 'TYPO3\\CMS\\Cal\\Service\\OrganizerFeuserService' 
+		'className' => 'TYPO3\\CMS\\Cal\\Service\\OrganizerFeUserService' 
 ));
 
 /* Cal Example Concrete Model */

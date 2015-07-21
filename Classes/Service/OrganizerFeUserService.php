@@ -40,7 +40,7 @@ namespace TYPO3\CMS\Cal\Service;
  * @package TYPO3
  * @subpackage cal
  */
-class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
+class OrganizerFeUserService extends \TYPO3\CMS\Cal\Service\BaseService {
 	
 	var $keyId = 'tx_feuser';
 	var $tableId = 'fe_users';
@@ -51,16 +51,11 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 	
 	/**
 	 * Looks for an organizer with a given uid on a certain pid-list
-	 * 
-	 * @param array $conf
-	 *        	array
 	 * @param integer $uid
-	 *        	to search for
 	 * @param string $pidList
-	 *        	to search in
-	 * @return object tx_cal_organizer_feuser object
+	 * @return void|\TYPO3\CMS\Cal\Model\OrganizerFeUser
 	 */
-	function find($uid, $pidList) {
+	public function find($uid, $pidList) {
 		if (! $this->isAllowedService ())
 			return;
 		if ($pidList == '') {
@@ -71,7 +66,7 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 		if ($result) {
 			$row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result);
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
-			return new \TYPO3\CMS\Cal\Model\OrganizerFeuser( $row, $pidList);
+			return new \TYPO3\CMS\Cal\Model\OrganizerFeUser($row, $pidList);
 		}
 	}
 	
@@ -80,9 +75,9 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 	 * 
 	 * @param string $pidList
 	 *        	to search in
-	 * @return array tx_cal_organizer_feuser object array
+	 * @return array \TYPO3\CMS\Cal\Model\OrganizerFeUser
 	 */
-	function findAll($pidList) {
+	public function findAll($pidList) {
 		if (! $this->isAllowedService ())
 			return;
 		$organizer = array ();
@@ -94,7 +89,7 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		if ($result) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				$organizer [] = new \TYPO3\CMS\Cal\Model\OrganizerFeuser( $row, $pidList);
+				$organizer [] = new \TYPO3\CMS\Cal\Model\OrganizerFeUser( $row, $pidList);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 		}
@@ -106,8 +101,9 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 	 * 
 	 * @param string $pidList
 	 *        	to search in
+	 * @return void|array \TYPO3\CMS\Cal\Model\OrganizerFeUser
 	 */
-	function search($pidList = '', $searchword) {
+	public function search($pidList = '', $searchword) {
 		if (! $this->isAllowedService ())
 			return;
 		return $this->getOrganizerFromTable ($pidList, $this->searchWhere ($searchword));
@@ -120,9 +116,9 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 	 *        	to search in
 	 * @param string $additionalWhere
 	 *        	where clause
-	 * @return array containing the organizer objects
+	 * @return array \TYPO3\CMS\Cal\Model\OrganizerFeUser
 	 */
-	function getOrganizerFromTable($pidList = '', $additionalWhere = '') {
+	private function getOrganizerFromTable($pidList = '', $additionalWhere = '') {
 		$organizers = Array ();
 		$orderBy = \TYPO3\CMS\Cal\Utility\Functions::getOrderBy ($this->tableId);
 		if ($pidList != '') {
@@ -147,7 +143,7 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		if ($result) {
 			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				$organizers [] = new \TYPO3\CMS\Cal\Model\OrganizerFeuser($row, $pidList);
+				$organizers [] = new \TYPO3\CMS\Cal\Model\OrganizerFeUser($row, $pidList);
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 		}
@@ -160,12 +156,18 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 	 * @param string $sw:        	
 	 * @return string
 	 */
-	function searchWhere($sw) {
+	public function searchWhere($sw) {
 		if (! $this->isAllowedService ())
 			return;
 		$where = $this->cObj->searchWhere ($sw, $this->conf ['view.'] ['search.'] ['searchOrganizerFieldList'], 'fe_users');
 		return $where;
 	}
+	
+	/**
+	 * Updates the organizer with the given $uid with the post data  
+	 * @param integer $uid
+	 * @return void|\TYPO3\CMS\Cal\Model\OrganizerFeUser
+	 */
 	function updateOrganizer($uid) {
 		$insertFields = Array (
 				'tstamp' => time () 
@@ -180,7 +182,12 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $insertFields);
 		return $this->find ($uid, $this->conf ['pidList']);
 	}
-	function removeOrganizer($uid) {
+	
+	/**
+	 * Removes the organizer with the $uid
+	 * @param integer $uid
+	 */
+	public function removeOrganizer($uid) {
 		if (! $this->isAllowedService ())
 			return;
 		if ($this->rightsObj->isAllowedToDeleteOrganizer ()) {
@@ -193,7 +200,12 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $updateFields);
 		}
 	}
-	function retrievePostData(&$insertFields) {
+	
+	/**
+	 * Adds the attribute and provided post data to the array
+	 * @param array $insertFields
+	 */
+	private function retrievePostData(&$insertFields) {
 		if (! $this->isAllowedService ())
 			return;
 		$hidden = 0;
@@ -237,7 +249,13 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$insertFields ['www'] = strip_tags ($this->controller->piVars ['www']);
 		}
 	}
-	function saveOrganizer($pid) {
+	
+	/**
+	 * Saves an organizer at the page with the id $pid
+	 * @param integer $pid
+	 * @return void|\TYPO3\CMS\Cal\Model\OrganizerFeUser
+	 */
+	public function saveOrganizer($pid) {
 		if (! $this->isAllowedService ())
 			return;
 		$crdate = time ();
@@ -285,7 +303,14 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$uid = $this->_saveOrganizer ($insertFields);
 		return $this->find ($uid, $this->conf ['pidList']);
 	}
-	function _saveOrganizer(&$insertFields) {
+	
+	/**
+	 * Does the database save
+	 * @param array $insertFields
+	 * @throws \RuntimeException
+	 * @return integer the uid of the saved organizer
+	 */
+	private function _saveOrganizer(&$insertFields) {
 		$table = 'fe_users';
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $insertFields);
 		if (FALSE === $result){
@@ -294,7 +319,12 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 		return $uid;
 	}
-	function isAllowedService() {
+	
+	/**
+	 * Checks if this service is allowed to be processed
+	 * @return boolean
+	 */
+	public function isAllowedService() {
 		$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		$useOrganizerStructure = ($this->confArr ['useOrganizerStructure'] ? $this->confArr ['useOrganizerStructure'] : 'tx_cal_location');
 		if ($useOrganizerStructure == $this->keyId) {
@@ -302,7 +332,13 @@ class OrganizerFeuserService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		return false;
 	}
-	function createTranslation($uid, $overlay) {
+	
+	/**
+	 * Creates a translation overlay record for a given organizer with the uid
+	 * @param integer $uid
+	 * @param integer $overlay
+	 */
+	public function createTranslation($uid, $overlay) {
 		$table = 'fe_users';
 		$select = $table . '.*';
 		$where = $table . '.uid = ' . $uid;

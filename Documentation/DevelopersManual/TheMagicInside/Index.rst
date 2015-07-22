@@ -30,8 +30,7 @@ Using this function you will obtain an instance of the service. Looking at the s
              'title' => 'Cal PHPiCalendar Model', 'description' => '', 'subtype' => 'event',
              'available' => TRUE, 'priority' => 50, 'quality' => 50,
              'os' => '', 'exec' => '',
-             'classFile' => t3lib_extMgm::extPath($_EXTKEY).'service/class.tx_cal_event_service.php',
-             'className' => 'tx_cal_event_service',
+             'className' => 'TYPO3\\CMS\\Cal\\Service\\EventService'
            )
    );
 
@@ -41,9 +40,7 @@ The key: tx\_cal\_phpicalendar
 
 A priority: 50
 
-The path: ($\_EXTKEY).'service/class.tx\_cal\_event\_service.php'
-
-The class name: tx\_cal\_event\_service
+The class name: TYPO3\\CMS\\Cal\\Service\\EventService
 
 As described an instance of a service can be obtained through calling the makeInstanceService($key, $type) function. This will return an instance of the class configured as class name at the configured path.
 And if there are multiple services with the same type and key only the one with the highest priority will be returned. This way it is possible to install a service extension and overwrite a service which is already available in the system. Using this method, you don't have to reinstall the overwriting service after updating the original extension. The higher priority takes care of always returning the overwritten service.
@@ -52,11 +49,11 @@ Whats going on inside cal:
 
 The calendar base extension is a normal extension as many other typo3 extension's. It has a main() function and will return the requested content. The extension folder structure has some slight modifications: the standard pi1 folder is called 'controller' and besides the controller there is also a 'model' and 'view' folder.
 
-The main() function is located in the controller/tx\_cal\_controller class. If this class gets called it instantiates two other classes: tx\_cal\_modelcontroller and tx\_cal\_viewcontroller. For security reasons we have a rightscontroller too. But this rightscontroller has been implemented as a service to make it flexible.
+The main() function is located in the Controller/Controller class. If this class gets called it instantiates two other classes: ModelController and ViewController. For security reasons we have a RightsController too. But this RightsController has been implemented as a service to make it flexible.
 
-After the rightscontroller has determined what view should be rendered the according function inside the controller is called. Lets say the 'day' view should be rendered, than the day() function will be called.
+After the RightsController has determined what view should be rendered the according function inside the controller is called. Lets say the 'day' view should be rendered, than the day() function will be called.
 
-First inside the day() function, like most of the other functions too, the modelcontroller object is used to retrieve all events to be rendered. The modelcontroller object has a special wrapper-function for each view. For the day view there is the
+First inside the day() function, like most of the other functions too, the ModelController object is used to retrieve all events to be rendered. The ModelController object has a special wrapper-function for each view. For the day view there is the
 
 ::
 
@@ -190,7 +187,7 @@ After retrieving a service we call the findAllWithin() function on the service. 
 
 All returned arrays from the different services will get merged and sorted ascending by starttime and returned back to the main controller.
 
-Now, the day() function passes this array to the viewcontroller object and calls the according rendering function: drawDay(). The viewcontroller does almost the same as the modelcontroller: it searches for a view-service. But this time it takes the first one it can find and calls the drawDay() function on the view-service. The view-service has now the control about what is being rendered and will return the result back to the viewcontroller which will pass it back to the main-controller, which will wrap the content in base class and finally return the calendar html code.
+Now, the day() function passes this array to the ViewController object and calls the according rendering function: drawDay(). The ViewController does almost the same as the ModelController: it searches for a view-service. But this time it takes the first one it can find and calls the drawDay() function on the view-service. The view-service has now the control about what is being rendered and will return the result back to the ViewController which will pass it back to the main-Controller, which will wrap the content in base class and finally return the calendar html code.
 
 And thats all about the 'magic' inside calendar base :)
 

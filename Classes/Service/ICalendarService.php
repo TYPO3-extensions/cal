@@ -193,7 +193,6 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			/* Delete old events, that have not been updated */
 			$this->deleteTemporaryEvents ($uid, $notInUids);
 			
-			//require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.\TYPO3\CMS\Cal\Utility\Functions.php');
 			\TYPO3\CMS\Cal\Utility\Functions::clearCache ();
 			
 			return $newMD5;
@@ -674,7 +673,6 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 					
 					if ($this->conf ['view.'] ['event.'] ['remind']) {
 						/* Schedule reminders for new and changed events */
-						//require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.\TYPO3\CMS\Cal\Utility\Functions.php');
 						$pageTSConf = BackendUtility::getPagesTSconfig ($pid);
 						$offset = is_numeric ($pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time']) ? $pageTSConf ['options.'] ['tx_cal_controller.'] ['view.'] ['event.'] ['remind.'] ['time'] * 60 : 0;
 						$date = new \TYPO3\CMS\Cal\Model\CalDate ($insertFields ['start_date'] . '000000');

@@ -47,7 +47,6 @@ class ReminderCron extends \tx_gabriel_event {
 		parent::__construct ();
 	}
 	public function execute() {
-		require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'controller/class.\TYPO3\CMS\Cal\Utility\Functions.php');
 		$eventMonitor = BackendUtility::getRecord ('tx_cal_fe_user_event_monitor_mm', $this->uid);
 		
 		$event = BackendUtility::getRecord ('tx_cal_event', $eventMonitor ['uid_local']);

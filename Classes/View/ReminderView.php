@@ -197,7 +197,7 @@ class ReminderView extends \TYPO3\CMS\Cal\View\NotificationView {
 				if ($date->isFuture ()) {
 					
 					/* Set up the gabriel event */
-					$cron = GeneralUtility::getUserObj ('EXT:cal/cron/class.tx_cal_reminder_cron.php:tx_cal_reminder_cron');
+					$cron = new \TYPO3\CMS\Cal\Cron\ReminderCron();
 					$cron->setUID ($calEventUID);
 					
 					/* Schedule the gabriel event */
@@ -211,7 +211,7 @@ class ReminderView extends \TYPO3\CMS\Cal\View\NotificationView {
 	function createSchedulerTask(&$scheduler, $date, $calEventUID, $timestamp, $offset, $uid) {
 		if ($date->isFuture ()) {
 			/* Set up the scheduler event */
-			$task = GeneralUtility::getUserObj ('EXT:cal/cron/class.tx_cal_reminder_scheduler.php:tx_cal_reminder_scheduler');
+			$task = new \TYPO3\CMS\Cal\Cron\ReminderScheduler();
 			$task->setUID ($calEventUID);
 			$taskGroup = BackendUtility::getRecordRaw ('tx_scheduler_task_group', 'groupName="cal"');
 			if($taskGroup['uid']){

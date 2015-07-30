@@ -395,8 +395,6 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 					'pidInList' => $this->conf ['pidList'] 
 			), true);
 			
-			exec_SELECTquery($queryParts['SELECT'], $queryParts['FROM'], $queryParts['WHERE'], $queryParts['GROUPBY'], $queryParts['ORDERBY'], $queryParts['LIMIT']);
-			
 			$tmpres = $GLOBALS ['TYPO3_DB']->exec_SELECT_queryArray ($querryArray);
 			
 			$strictUids = Array ();

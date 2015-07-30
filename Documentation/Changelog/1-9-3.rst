@@ -9,4 +9,6 @@
 	* Bug #68164  - Attachment of image leads to fatal error
 	* Bug #68433  - Error cause of misspelling class OrganizerFeUser vs OrganizerFeuser
 	* Bug #68454  - addFeUserToNotify leads to faulty require_once
+	* Bug #68526  - Non-static method TYPO3\CMS\Cal\Controller\Controller::initRegistry(
+	* Bug #68543  - tx_cal_category/sys_category
 

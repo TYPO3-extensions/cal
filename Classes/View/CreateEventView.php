@@ -305,7 +305,7 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			$this->conf ['view.'] [$this->conf ['view'] . '.'] ['tree.'] ['calendar'] = $selectedCalendars;
 			$this->conf ['view.'] [$this->conf ['view'] . '.'] ['tree.'] ['category'] = $selectedCategories;
 			
-			$categoryArray = $this->modelObj->findAllCategories ('', 'tx_cal_category', $this->conf ['pidList']);
+			$categoryArray = $this->modelObj->findAllCategories ('cal_category_model', $this->confArr ['categoryService'], $this->conf ['pidList']);
 			
 			$tree = $this->getCategorySelectionTree ($this->conf ['view.'] [$this->conf ['view'] . '.'] ['tree.'], $categoryArray, true);
 			$sims ['###CATEGORY###'] = $this->applyStdWrap ($tree, 'category_stdWrap');

@@ -102,7 +102,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 		$this->local_cObj->setCurrentVal ($sims ['SEARCHORGANIZERRESULTS']);
 		$sims ['SEARCHORGANIZERRESULTS'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['search_all.'] ['searchOrganizer'], $this->conf ['view.'] ['search_all.'] ['searchOrganizer.']);
 		
-		$page = $this->controller->replace_tags ($sims, $page);
+		$page = \TYPO3\CMS\Cal\Controller\Controller::replace_tags ($sims, $page);
 		$rems = Array ();
 		return $this->finish ($page, $rems);
 	}

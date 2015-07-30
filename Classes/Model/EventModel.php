@@ -101,7 +101,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 					$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 					$categoryService = &$modelObj->getServiceObjByKey ('cal_category_model', 'category', $confArr ['categoryService']);
 					$categoryService->getCategoryArray ($this->conf ['pidList'], $categories);
-					$piVarsCaregoryArray = explode (',', $this->controller->convertLinkVarArrayToList ($piVars [$key]));
+					$piVarsCaregoryArray = explode (',', \TYPO3\CMS\Cal\Controller\Controller::convertLinkVarArrayToList ($piVars [$key]));
 					if (! empty ($piVarsCaregoryArray)) {
 						foreach ($piVarsCaregoryArray as $categoryId) {
 							$this->addCategory ($categories [0] [0] [$categoryId]);
@@ -1145,7 +1145,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 				$sims_temp ['NOTLOGGEDIN_NOMONITORING_SUBMIT'] = $this->controller->pi_getLL ('l_submit');
 				$sims_temp ['L_ENTER_EMAIL'] = $this->controller->pi_getLL ('l_enter_email');
 				$sims_temp ['ACTIONURL'] = $actionUrl;
-				$monitor = $this->controller->replace_tags ($sims_temp, $notLoggedinNoMonitoring);
+				$monitor = \TYPO3\CMS\Cal\Controller\Controller::replace_tags ($sims_temp, $notLoggedinNoMonitoring);
 				
 				$sims_temp ['ACTIONURL'] = $actionUrl2;
 				$notLoggedinMonitoring = $cObj->getSubpart ($template, '###NOTLOGGEDIN_MONITORING###');
@@ -1153,7 +1153,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 				$sims_temp ['NOTLOGGEDIN_MONITORING_SUBMIT'] = $this->controller->pi_getLL ('l_submit');
 				$sims_temp ['L_ENTER_EMAIL'] = $this->controller->pi_getLL ('l_enter_email');
 				
-				$monitor .= $this->controller->replace_tags ($sims_temp, $notLoggedinMonitoring);
+				$monitor .= \TYPO3\CMS\Cal\Controller\Controller::replace_tags ($sims_temp, $notLoggedinMonitoring);
 				$rems ['###SUBSCRIPTION###'] = $monitor;
 			}
 		} else {

@@ -68,7 +68,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 *        	array		The conf array.
 	 * @return string of calendar data.
 	 */
-	function main($content, $conf) {
+	public function main($content, $conf) {
 		$this->conf = &$conf;
 		
 		$this->conf ['useInternalCaching'] = 1;
@@ -113,9 +113,8 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 *
 	 * @param
 	 *        	mixed	Array of nested piVars or individual piVar value.
-	 * @return none
 	 */
-	function cleanPiVarParam(&$param) {
+	public function cleanPiVarParam(&$param) {
 		if (is_array ($param)) {
 			$arrayKeys = array_keys ($param);
 			foreach ($arrayKeys as $key) {
@@ -130,10 +129,8 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	/**
 	 * Validates that various date piVars are within valid ranges.  Any dates outside a valid range have
 	 * their piVars unset.
-	 *
-	 * @return none
 	 */
-	function validateDateRanges() {
+	public function validateDateRanges() {
 		
 		if (isset($this->piVars['day'])) {
 			$this->piVars['day'] = intval($this->piVars['day']);
@@ -168,7 +165,13 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 	}
 	
-	function getContent($notEmpty = true) {
+	
+	/**
+	 * 
+	 * @param boolean
+	 * @return string
+	 */
+	public function getContent($notEmpty = true) {
 		$return = '';
 		$count = 0;
 		do {
@@ -217,7 +220,11 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return $this->pi_wrapInBaseClass ($return, $additionalWrapperClasses);
 	}
-	function initConfigs() {
+	
+	/**
+	 * 
+	 */
+	public function initConfigs() {
 		// If an event record has been added through Insert Records, set some defaults.
 		if ($this->conf ['displayCurrentRecord']) {
 			$data = &$this->cObj->data;
@@ -244,7 +251,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->conf ['pages'] = $this->cObj->stdWrap ($this->conf ['pages'], $this->conf ['pages.']);
 		$this->conf ['pidList'] = $this->cObj->stdWrap ($this->conf ['pidList'], $this->conf ['pidList.']);
 		
-		$this->updateIfNotEmpty ($this->conf ['pages'], $this->cObj->data ['pages']);
+		Controller::updateIfNotEmpty ($this->conf ['pages'], $this->cObj->data ['pages']);
 		// don't use "updateIfNotEmpty" here, as the default value of "recursive" is 0 and thus not empty and will always override TS settings.
 		if ($this->cObj->data ['recursive']) {
 			$this->conf ['recursive'] = $this->cObj->data ['recursive'];
@@ -270,7 +277,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 				'cal' 
 		));
 		
-		$location = $this->convertLinkVarArrayToList ($this->piVars ['location_ids']);
+		$location = Controller::convertLinkVarArrayToList ($this->piVars ['location_ids']);
 		
 		if ($this->piVars ['view'] == $this->piVars ['lastview']) {
 			unset ($this->piVars ['lastview']);
@@ -388,7 +395,11 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			}
 		}
 	}
-	function initCaching() {
+	
+	/**
+	 * 
+	 */
+	public function initCaching() {
 		$this->SIM_ACCESS_TIME = $GLOBALS ['SIM_ACCESS_TIME'];
 		// fallback for TYPO3 < 4.2
 		if (! $this->SIM_ACCESS_TIME) {
@@ -440,7 +451,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			$this->cache->ACCESS_TIME = $this->SIM_ACCESS_TIME;
 		}
 	}
-	function checkCalendarAndCategory() {
+	
+	
+	/**
+	 * 
+	 */
+	public function checkCalendarAndCategory() {
 		// new Mode - category can be configurred
 		$category = '';
 		$calendar = '';
@@ -478,7 +494,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$category = $this->conf ['view.'] ['category'];
 		$this->conf ['view.'] ['allowedCategory'] = $this->conf ['view.'] ['category'];
 		
-		$piVarCategory = $this->convertLinkVarArrayToList ($this->piVars ['category']);
+		$piVarCategory = Controller::convertLinkVarArrayToList ($this->piVars ['category']);
 		
 		if ($piVarCategory) {
 			if ($this->conf ['view.'] ['category']) {
@@ -488,7 +504,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 				if (empty ($sameValues)) {
 					$category = $this->conf ['view.'] ['category'];
 				} else {
-					$category = $this->convertLinkVarArrayToList ($sameValues);
+					$category = Controller::convertLinkVarArrayToList ($sameValues);
 				}
 			} else {
 				$category = $piVarCategory;
@@ -543,13 +559,13 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			$calendar = $this->conf ['view.'] ['allowedCalendar'] = $this->conf ['view.'] ['calendar'] = implode (',', array_diff (explode (',', $calendar), explode (',', $this->conf ['view.'] ['calendar.'] ['subscription'])));
 		}
 		
-		$piVarCalendar = $this->convertLinkVarArrayToList ($this->piVars ['calendar']);
+		$piVarCalendar = Controller::convertLinkVarArrayToList ($this->piVars ['calendar']);
 		if ($piVarCalendar) {
 			if ($this->conf ['view.'] ['calendar']) {
 				$calendarArray = explode (',', $calendar);
 				$piVarCalendarArray = explode (',', $piVarCalendar);
 				$sameValues = array_intersect ($calendarArray, $piVarCalendarArray);
-				$calendar = $this->convertLinkVarArrayToList ($sameValues);
+				$calendar = Controller::convertLinkVarArrayToList ($sameValues);
 			} else {
 				$calendar = $piVarCalendar;
 			}
@@ -569,17 +585,21 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->conf ['view.'] ['allowedCalendar'] = $calendar;
 	}
 	
-	/*
-	 * Sets up a hook in the controller's PHP file with the specified name. @param	string	The name of the hook. @return	array	The array of objects implementing this hoook.
+	/**
+	 * Sets up a hook in the controller's PHP file with the specified name. 
+	 * @param	string	The name of the hook. 
+	 * @return	array	The array of objects implementing this hoook.
 	 */
-	function getHookObjectsArray($hookName) {
+	public function getHookObjectsArray($hookName) {
 		return \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ($this->prefixId, $hookName);
 	}
 	
-	/*
-	 * Executes the specified function for each item in the array of hook objects. @param	array	The array of hook objects. @param	string	The name of the function to execute. @return	none
+	/**
+	 * Executes the specified function for each item in the array of hook objects. 
+	 * @param	array	The array of hook objects.
+	 * @param	string	The name of the function to execute.
 	 */
-	function executeHookObjectsFunction($hookObjectsArray, $function) {
+	public function executeHookObjectsFunction($hookObjectsArray, $function) {
 		foreach ($hookObjectsArray as $hookObj) {
 			if (method_exists ($hookObj, $function)) {
 				$hookObj->$function ($this);
@@ -587,10 +607,10 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 	}
 	
-	/*
-	 * Clears $this-conf vars related to view and lastview. Useful when calling save and remove functions. @return		none
+	/**
+	 * Clears $this-conf vars related to view and lastview. Useful when calling save and remove functions.
 	 */
-	function clearConfVars() {
+	public function clearConfVars() {
 		$this->initConfigs ();
 		$viewParams = $this->shortenLastViewAndGetTargetViewParameters (true);
 		$this->conf ['view'] = $viewParams ['view'];
@@ -600,7 +620,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->conf ['uid'] = $viewParams ['uid'];
 		$this->conf ['type'] = $viewParams ['type'];
 	}
-	function getAllowedViewsByViewPid() {
+	
+	/**
+	 * 
+	 * @return array
+	 */
+	public function getAllowedViewsByViewPid() {
 		// for now, ownly check basic views.
 		$allowedViews = array ();
 		$regularViews = array (
@@ -642,7 +667,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $allowedViews;
 	}
-	function saveEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function saveEvent() {
 		$hookObjectsArr = $this->getHookObjectsArray ('saveEventClass');
 		// Hook: preSaveEvent
 		$this->executeHookObjectsFunction ($hookObjectsArr, 'preSaveEvent');
@@ -725,7 +755,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		$this->checkRedirect ($uid ? 'edit' : 'create', 'event');
 	}
-	function removeEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function removeEvent() {
 		$eventType = intval ($this->piVars ['event_type']);
 		$hookObjectsArr = $this->getHookObjectsArray ('removeEventClass');
 		// Hook: preRemoveEvent
@@ -747,7 +782,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ('delete', 'event');
 	}
-	function createExceptionEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function createExceptionEvent() {
 		$getdate = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
 		$hookObjectsArr = $this->getHookObjectsArray ('createExceptionEventClass');
@@ -769,7 +809,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnCreateExceptionEvent;
 	}
-	function saveExceptionEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function saveExceptionEvent() {
 		$hookObjectsArr = $this->getHookObjectsArray ('saveExceptionEventClass');
 		
 		// Hook: preSaveExceptionEvent
@@ -788,7 +833,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ($this->piVars ['uid'] ? 'edit' : 'create', 'exceptionEvent');
 	}
-	function removeCalendar() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function removeCalendar() {
 		$hookObjectsArr = $this->getHookObjectsArray ('removeCalendarClass');
 		// Hook: preRemoveCalendar
 		$this->executeHookObjectsFunction ($hookObjectsArr, 'preRemoveCalendar');
@@ -801,7 +851,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ('delete', 'calendar');
 	}
-	function removeCategory() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function removeCategory() {
 		$hookObjectsArr = $this->getHookObjectsArray ('removeCategoryClass');
 		// Hook: preRemoveCategory
 		$this->executeHookObjectsFunction ($hookObjectsArr, 'preRemoveCategory');
@@ -814,7 +869,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ('delete', 'category');
 	}
-	function removeLocation() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function removeLocation() {
 		$hookObjectsArr = $this->getHookObjectsArray ('removeLocationClass');
 		// Hook: preRemoveLocation
 		$this->executeHookObjectsFunction ($hookObjectsArr, 'preRemoveLocation');
@@ -827,7 +887,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ('delete', 'location');
 	}
-	function removeOrganizer() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function removeOrganizer() {
 		$hookObjectsArr = $this->getHookObjectsArray ('removeOrganizerClass');
 		// Hook: preRemoveOrganizer
 		$this->executeHookObjectsFunction ($hookObjectsArr, 'preRemoveOrganizer');
@@ -840,7 +905,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ('delete', 'organizer');
 	}
-	function saveLocation() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function saveLocation() {
 		$hookObjectsArr = $this->getHookObjectsArray ('saveLocationClass');
 		
 		// Hook: preSaveLocation
@@ -863,7 +933,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ($this->piVars ['uid'] ? 'edit' : 'create', 'location');
 	}
-	function saveOrganizer() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function saveOrganizer() {
 		$hookObjectsArr = $this->getHookObjectsArray ('saveOrganizerClass');
 		// Hook: preSaveOrganizer
 		$this->executeHookObjectsFunction ($hookObjectsArr, 'preSaveOrganizer');
@@ -885,7 +960,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ($this->piVars ['uid'] ? 'edit' : 'create', 'organizer');
 	}
-	function saveCalendar() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function saveCalendar() {
 		$hookObjectsArr = $this->getHookObjectsArray ('saveCalendarClass');
 		// Hook: preSaveCalendar
 		$this->executeHookObjectsFunction ($hookObjectsArr, 'preSaveCalendar');
@@ -921,7 +1001,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ($this->piVars ['uid'] ? 'edit' : 'create', 'calendar');
 	}
-	function saveCategory() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function saveCategory() {
 		$hookObjectsArr = $this->getHookObjectsArray ('saveCategoryClass');
 		
 		// Hook: preSaveCategory
@@ -944,7 +1029,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->clearConfVars ();
 		$this->checkRedirect ($this->piVars ['uid'] ? 'edit' : 'create', 'category');
 	}
-	function event() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function event() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1005,7 +1095,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnEvent;
 	}
-	function day() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function day() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
@@ -1037,7 +1132,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnDay;
 	}
-	function week() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function week() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
@@ -1068,7 +1168,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnWeek;
 	}
-	function month() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function month() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
@@ -1105,7 +1210,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return $drawnMonth;
 	}
-	function year() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function year() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
@@ -1137,7 +1247,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnYear;
 	}
-	function ics() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function ics() {
 		$type = $this->conf ['type'];
 		$getdata = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
@@ -1169,7 +1284,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnIcs;
 	}
-	function singleIcs() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function singleIcs() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$getdate = $this->conf ['getdate'];
@@ -1199,7 +1319,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnIcs;
 	}
-	function rss() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function rss() {
 		$type = $this->conf ['type'];
 		$getdate = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
@@ -1238,7 +1363,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnIcs;
 	}
-	function location() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function location() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		
@@ -1283,7 +1413,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnLocation;
 	}
-	function organizer() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function organizer() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1331,13 +1466,17 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 *        	integer		The starting point that timeString is relative to.
 	 * @return integer for list view start or end time.
 	 */
-	function getListViewTime($timeString, $timeObj = '') {
+	public function getListViewTime($timeString, $timeObj = '') {
 		$dp = new \TYPO3\CMS\Cal\Controller\DateParser ();
 		$dp->parse ($timeString, $this->conf ['dateParserConf.'], $timeObj);
 		return $dp->getDateObjectFromStack ();
 	}
 	
-	function listview() {
+	/**
+	 * 
+	 * @return string
+	 */
+	public function listview() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -1407,7 +1546,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnList;
 	}
-	function icslist() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function icslist() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
@@ -1434,7 +1578,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnList;
 	}
-	function admin() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function admin() {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawAdminClass');
 		
 		$viewObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'viewcontroller');
@@ -1449,7 +1598,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnPage;
 	}
-	function searchEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function searchEvent() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -1511,8 +1665,8 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			$end_day->copy ($start_day);
 		}
 		
-		$locationIds = strip_tags ($this->convertLinkVarArrayToList ($this->piVars ['location_ids']));
-		$organizerIds = strip_tags ($this->convertLinkVarArrayToList ($this->piVars ['organizer_ids']));
+		$locationIds = strip_tags (Controller::convertLinkVarArrayToList ($this->piVars ['location_ids']));
+		$organizerIds = strip_tags (Controller::convertLinkVarArrayToList ($this->piVars ['organizer_ids']));
 		
 		$this->getDateTimeObject->copy ($start_day);
 		
@@ -1550,7 +1704,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnList;
 	}
-	function createEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function createEvent() {
 		$getDate = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -1574,7 +1733,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnCreateEvent;
 	}
-	function confirmEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function confirmEvent() {
 		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('confirmEventClass');
@@ -1597,7 +1761,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnConfirmEvent;
 	}
-	function editEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function editEvent() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1624,7 +1793,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnEditEvent;
 	}
-	function deleteEvent() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function deleteEvent() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1651,7 +1825,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnDeleteEvent;
 	}
-	function createLocation() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function createLocation() {
 		$getdate = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -1675,7 +1854,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnCreateLocation;
 	}
-	function confirmLocation() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function confirmLocation() {
 		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('confirmLocationClass');
@@ -1698,7 +1882,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnConfirmLocation;
 	}
-	function editLocation() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function editLocation() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1725,7 +1914,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnEditLocation;
 	}
-	function deleteLocation() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function deleteLocation() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1753,7 +1947,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnDeleteLocation;
 	}
-	function createOrganizer() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function createOrganizer() {
 		$getdate = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -1777,7 +1976,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnCreateOrganizer;
 	}
-	function confirmOrganizer() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function confirmOrganizer() {
 		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('confirmOrganizerClass');
@@ -1800,7 +2004,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnConfirmOrganizer;
 	}
-	function editOrganizer() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function editOrganizer() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1827,7 +2036,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnEditOrganizer;
 	}
-	function deleteOrganizer() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function deleteOrganizer() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1855,7 +2069,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnDeleteOrganizer;
 	}
-	function createCalendar() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function createCalendar() {
 		$getdate = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -1879,7 +2098,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnCreateCalendar;
 	}
-	function confirmCalendar() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function confirmCalendar() {
 		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('confirmCalendarClass');
@@ -1902,7 +2126,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnConfirmCalendar;
 	}
-	function editCalendar() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function editCalendar() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1929,7 +2158,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnEditCalendar;
 	}
-	function deleteCalendar() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function deleteCalendar() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -1957,7 +2191,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnDeleteCalendar;
 	}
-	function createCategory() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function createCategory() {
 		$getdate = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -1981,7 +2220,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnCreateCategory;
 	}
-	function confirmCategory() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function confirmCategory() {
 		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('confirmCategoryClass');
@@ -2004,7 +2248,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnConfirmCategory;
 	}
-	function editCategory() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function editCategory() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -2032,7 +2281,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnEditCategory;
 	}
-	function deleteCategory() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function deleteCategory() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -2060,7 +2314,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnDeleteCategory;
 	}
-	function searchAll() {
+	
+	/**
+	 * 
+	 * @return string|unknown
+	 */
+	public function searchAll() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -2107,8 +2366,8 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			$endtime->copy ($starttime);
 		}
 		
-		$locationIds = strip_tags ($this->convertLinkVarArrayToList ($this->piVars ['location_ids']));
-		$organizerIds = strip_tags ($this->convertLinkVarArrayToList ($this->piVars ['organizer_ids']));
+		$locationIds = strip_tags (Controller::convertLinkVarArrayToList ($this->piVars ['location_ids']));
+		$organizerIds = strip_tags (Controller::convertLinkVarArrayToList ($this->piVars ['organizer_ids']));
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		$list = array ();
 		if ($this->piVars ['query'] && ($this->piVars ['submit'] || ! $this->conf ['view.'] ['search.'] ['startSearchAfterSubmit'])) {
@@ -2147,7 +2406,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return $drawnList;
 	}
-	function searchLocation() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function searchLocation() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -2190,7 +2454,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnList;
 	}
-	function searchOrganizer() {
+	
+	/**
+	 * 
+	 * @return string|unknown
+	 */
+	public function searchOrganizer() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -2233,7 +2502,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnList;
 	}
-	function searchUserAndGroup() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function searchUserAndGroup() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -2322,7 +2596,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return '{"fe_users":[' . implode (',', $ajaxUserStringArray) . '],"fe_groups":[' . implode (',', $ajaxGroupStringArray) . ']}';
 	}
-	function subscription() {
+	
+	/**
+	 * 
+	 * @return unknown
+	 */
+	public function subscription() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -2346,7 +2625,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnSubscriptionManager;
 	}
-	function meeting() {
+	
+	/**
+	 * 
+	 * @return unknown
+	 */
+	public function meeting() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		
@@ -2370,7 +2654,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnMeetingManager;
 	}
-	function translation() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function translation() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$overlay = intval ($this->piVars ['overlay']);
@@ -2408,7 +2697,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->conf ['type'] = $viewParams ['type'];
 		return '';
 	}
-	function todo() {
+	
+	/**
+	 * 
+	 * @return unknown
+	 */
+	public function todo() {
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
@@ -2444,7 +2738,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $drawnTodo;
 	}
-	function loadEvents() {
+	
+	/**
+	 * 
+	 * @return unknown
+	 */
+	public function loadEvents() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
@@ -2523,7 +2822,14 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $page;
 	}
-	function loadEvent($uid, $eventType = '') {
+	
+	/**
+	 * 
+	 * @param unknown $uid
+	 * @param string $eventType
+	 * @return string
+	 */
+	public function loadEvent($uid, $eventType = '') {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
@@ -2574,7 +2880,13 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $ajaxString;
 	}
-	function getEventAjaxString(&$event) {
+	
+	/**
+	 * 
+	 * @param unknown $event
+	 * @return string
+	 */
+	public function getEventAjaxString(&$event) {
 		if (is_object ($event)) {
 			$eventValues = $event->getValuesAsArray ();
 		} else if (is_array ($event)) {
@@ -2622,7 +2934,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return implode (',', $ajaxStringArray);
 	}
-	function loadTodos() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function loadTodos() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
@@ -2682,7 +2999,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $page;
 	}
-	function loadCalendars() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function loadCalendars() {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadCalendarsClass');
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		$ajaxStringArray = Array ();
@@ -2716,7 +3038,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return '[' . implode (',', $ajaxStringArray) . ']';
 	}
-	function loadCategories() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function loadCategories() {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadCategoriesClass');
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		$ajaxStringArray = Array ();
@@ -2741,7 +3068,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return '[' . implode (',', $ajaxStringArray) . ']';
 	}
-	function loadLocations() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function loadLocations() {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadLocationsClass');
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		$ajaxStringArray = Array ();
@@ -2769,7 +3101,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return '[' . implode (',', $ajaxStringArray) . ']';
 	}
-	function loadOrganizers() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function loadOrganizers() {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadOrganizersClass');
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		$ajaxStringArray = Array ();
@@ -2797,7 +3134,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return '[' . implode (',', $ajaxStringArray) . ']';
 	}
-	function loadRights() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function loadRights() {
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadRightsClass');
 		$rightsObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'rightscontroller');
 		$options = Array (
@@ -2826,130 +3168,135 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return '{' . implode (',', $rights) . '}';
 	}
-	function updateConfWithFlexform(&$piFlexForm) {
-		// $this->updateIfNotEmpty($this->conf['pages'], $this->pi_getFFvalue($piFlexForm, 'pages'));
-		// $this->updateIfNotEmpty($this->conf['recursive'], $this->pi_getFFvalue($piFlexForm, 'recursive'));
+	
+	/**
+	 * 
+	 * @param unknown $piFlexForm
+	 */
+	public function updateConfWithFlexform(&$piFlexForm) {
+		// Controller::updateIfNotEmpty($this->conf['pages'], $this->pi_getFFvalue($piFlexForm, 'pages'));
+		// Controller::updateIfNotEmpty($this->conf['recursive'], $this->pi_getFFvalue($piFlexForm, 'recursive'));
 		if ($this->conf ['dontListenToFlexForm'] == 1) {
 			return;
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['general.'] ['calendarName'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['calendarName'], $this->pi_getFFvalue ($piFlexForm, 'calendarName'));
+			Controller::updateIfNotEmpty ($this->conf ['calendarName'], $this->pi_getFFvalue ($piFlexForm, 'calendarName'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['general.'] ['allowSubscribe'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['allowSubscribe'], $this->pi_getFFvalue ($piFlexForm, 'subscription') == 1 ? 1 : - 1);
+			Controller::updateIfNotEmpty ($this->conf ['allowSubscribe'], $this->pi_getFFvalue ($piFlexForm, 'subscription') == 1 ? 1 : - 1);
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['general.'] ['subscribeFeUser'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['subscribeFeUser'], $this->pi_getFFvalue ($piFlexForm, 'subscription') == 2 ? 1 : - 1);
+			Controller::updateIfNotEmpty ($this->conf ['subscribeFeUser'], $this->pi_getFFvalue ($piFlexForm, 'subscription') == 2 ? 1 : - 1);
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['general.'] ['subscribeWithCaptcha'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['subscribeWithCaptcha'], $this->pi_getFFvalue ($piFlexForm, 'subscribeWithCaptcha'));
+			Controller::updateIfNotEmpty ($this->conf ['subscribeWithCaptcha'], $this->pi_getFFvalue ($piFlexForm, 'subscribeWithCaptcha'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['general.'] ['allowedViews'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['allowedViews'], $this->pi_getFFvalue ($piFlexForm, 'allowedViews'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['allowedViews'], $this->pi_getFFvalue ($piFlexForm, 'allowedViews'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['general.'] ['calendarDistance'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['calendar.'] ['nearbyDistance'], intval ($this->pi_getFFvalue ($piFlexForm, 'calendarDistance')));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['calendar.'] ['nearbyDistance'], intval ($this->pi_getFFvalue ($piFlexForm, 'calendarDistance')));
 		}
 		
 		if ($this->conf ['dontListenToFlexForm.'] ['day.'] ['dayViewPid'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['day.'] ['dayViewPid'], $this->pi_getFFvalue ($piFlexForm, 'dayViewPid', 's_Day_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['day.'] ['dayViewPid'], $this->pi_getFFvalue ($piFlexForm, 'dayViewPid', 's_Day_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['day.'] ['dayStart'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['day.'] ['dayStart'], $this->pi_getFFvalue ($piFlexForm, 'dayStart', 's_Day_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['day.'] ['dayStart'], $this->pi_getFFvalue ($piFlexForm, 'dayStart', 's_Day_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['day.'] ['dayEnd'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['day.'] ['dayEnd'], $this->pi_getFFvalue ($piFlexForm, 'dayEnd', 's_Day_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['day.'] ['dayEnd'], $this->pi_getFFvalue ($piFlexForm, 'dayEnd', 's_Day_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['day.'] ['gridLength'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['day.'] ['gridLength'], $this->pi_getFFvalue ($piFlexForm, 'gridLength', 's_Day_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['day.'] ['gridLength'], $this->pi_getFFvalue ($piFlexForm, 'gridLength', 's_Day_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['day.'] ['weekViewPid'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['week.'] ['weekViewPid'], $this->pi_getFFvalue ($piFlexForm, 'weekViewPid', 's_Week_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['week.'] ['weekViewPid'], $this->pi_getFFvalue ($piFlexForm, 'weekViewPid', 's_Week_View'));
 		}
 		
 		if ($this->conf ['dontListenToFlexForm.'] ['month.'] ['monthViewPid'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['month.'] ['monthViewPid'], $this->pi_getFFvalue ($piFlexForm, 'monthViewPid', 's_Month_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['month.'] ['monthViewPid'], $this->pi_getFFvalue ($piFlexForm, 'monthViewPid', 's_Month_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['month.'] ['monthMakeMiniCal'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['month.'] ['monthMakeMiniCal'], $this->pi_getFFvalue ($piFlexForm, 'monthMakeMiniCal', 's_Month_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['month.'] ['monthMakeMiniCal'], $this->pi_getFFvalue ($piFlexForm, 'monthMakeMiniCal', 's_Month_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['month.'] ['monthShowListView'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['month.'] ['showListInMonthView'], $this->pi_getFFvalue ($piFlexForm, 'monthShowListView', 's_Month_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['month.'] ['showListInMonthView'], $this->pi_getFFvalue ($piFlexForm, 'monthShowListView', 's_Month_View'));
 		}
 		
 		if ($this->conf ['dontListenToFlexForm.'] ['year.'] ['yearViewPid'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['year.'] ['yearViewPid'], $this->pi_getFFvalue ($piFlexForm, 'yearViewPid', 's_Year_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['year.'] ['yearViewPid'], $this->pi_getFFvalue ($piFlexForm, 'yearViewPid', 's_Year_View'));
 		}
 		
 		if ($this->conf ['dontListenToFlexForm.'] ['event.'] ['eventViewPid'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['event.'] ['eventViewPid'], $this->pi_getFFvalue ($piFlexForm, 'eventViewPid', 's_Event_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['event.'] ['eventViewPid'], $this->pi_getFFvalue ($piFlexForm, 'eventViewPid', 's_Event_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['event.'] ['isPreview'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['event.'] ['isPreview'], $this->pi_getFFvalue ($piFlexForm, 'isPreview', 's_Event_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['event.'] ['isPreview'], $this->pi_getFFvalue ($piFlexForm, 'isPreview', 's_Event_View'));
 		}
 		
 		if ($this->conf ['dontListenToFlexForm.'] ['list.'] ['listViewPid'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['listViewPid'], $this->pi_getFFvalue ($piFlexForm, 'listViewPid', 's_List_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['listViewPid'], $this->pi_getFFvalue ($piFlexForm, 'listViewPid', 's_List_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['list.'] ['starttime'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['starttime'], $this->pi_getFFvalue ($piFlexForm, 'starttime', 's_List_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['starttime'], $this->pi_getFFvalue ($piFlexForm, 'starttime', 's_List_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['list.'] ['endtime'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['endtime'], $this->pi_getFFvalue ($piFlexForm, 'endtime', 's_List_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['endtime'], $this->pi_getFFvalue ($piFlexForm, 'endtime', 's_List_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['list.'] ['maxEvents'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['maxEvents'], $this->pi_getFFvalue ($piFlexForm, 'maxEvents', 's_List_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['maxEvents'], $this->pi_getFFvalue ($piFlexForm, 'maxEvents', 's_List_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['list.'] ['maxRecurringEvents'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['maxRecurringEvents'], $this->pi_getFFvalue ($piFlexForm, 'maxRecurringEvents', 's_List_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['maxRecurringEvents'], $this->pi_getFFvalue ($piFlexForm, 'maxRecurringEvents', 's_List_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['list.'] ['usePageBrowser'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['pageBrowser.'] ['usePageBrowser'], $this->pi_getFFvalue ($piFlexForm, 'usePageBrowser', 's_List_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['pageBrowser.'] ['usePageBrowser'], $this->pi_getFFvalue ($piFlexForm, 'usePageBrowser', 's_List_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['list.'] ['recordsPerPage'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['pageBrowser.'] ['recordsPerPage'], $this->pi_getFFvalue ($piFlexForm, 'recordsPerPage', 's_List_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['pageBrowser.'] ['recordsPerPage'], $this->pi_getFFvalue ($piFlexForm, 'recordsPerPage', 's_List_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['list.'] ['pagesCount'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['pageBrowser.'] ['pagesCount'], $this->pi_getFFvalue ($piFlexForm, 'pagesCount', 's_List_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['list.'] ['pageBrowser.'] ['pagesCount'], $this->pi_getFFvalue ($piFlexForm, 'pagesCount', 's_List_View'));
 		}
 		
 		if ($this->conf ['dontListenToFlexForm.'] ['ics.'] ['showIcsLinks'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['ics.'] ['showIcsLinks'], $this->pi_getFFvalue ($piFlexForm, 'showIcsLinks', 's_Ics_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['ics.'] ['showIcsLinks'], $this->pi_getFFvalue ($piFlexForm, 'showIcsLinks', 's_Ics_View'));
 		}
 		
 		if ($this->conf ['dontListenToFlexForm.'] ['other.'] ['showLogin'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showLogin'], $this->pi_getFFvalue ($piFlexForm, 'showLogin', 's_Other_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showLogin'], $this->pi_getFFvalue ($piFlexForm, 'showLogin', 's_Other_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['other.'] ['showSearch'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showSearch'], $this->pi_getFFvalue ($piFlexForm, 'showSearch', 's_Other_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showSearch'], $this->pi_getFFvalue ($piFlexForm, 'showSearch', 's_Other_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['other.'] ['showJumps'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showJumps'], $this->pi_getFFvalue ($piFlexForm, 'showJumps', 's_Other_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showJumps'], $this->pi_getFFvalue ($piFlexForm, 'showJumps', 's_Other_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['other.'] ['showGoto'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showGoto'], $this->pi_getFFvalue ($piFlexForm, 'showGoto', 's_Other_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showGoto'], $this->pi_getFFvalue ($piFlexForm, 'showGoto', 's_Other_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['other.'] ['showCalendarSelection'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showCalendarSelection'], $this->pi_getFFvalue ($piFlexForm, 'showCalendarSelection', 's_Other_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showCalendarSelection'], $this->pi_getFFvalue ($piFlexForm, 'showCalendarSelection', 's_Other_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['other.'] ['showCategorySelection'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showCategorySelection'], $this->pi_getFFvalue ($piFlexForm, 'showCategorySelection', 's_Other_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showCategorySelection'], $this->pi_getFFvalue ($piFlexForm, 'showCategorySelection', 's_Other_View'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['other.'] ['showTomorrowEvents'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showTomorrowEvents'], $this->pi_getFFvalue ($piFlexForm, 'showTomorrowEvents', 's_Other_View'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['other.'] ['showTomorrowEvents'], $this->pi_getFFvalue ($piFlexForm, 'showTomorrowEvents', 's_Other_View'));
 		}
 		
 		if ($this->conf ['dontListenToFlexForm.'] ['filters.'] ['categorySelection'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['category'], $this->pi_getFFvalue ($piFlexForm, 'categorySelection', 's_Cat'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['category'], $this->pi_getFFvalue ($piFlexForm, 'categorySelection', 's_Cat'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['filters.'] ['categoryMode'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['categoryMode'], $this->pi_getFFvalue ($piFlexForm, 'categoryMode', 's_Cat'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['categoryMode'], $this->pi_getFFvalue ($piFlexForm, 'categoryMode', 's_Cat'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['filters.'] ['calendarSelection'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['calendar'], $this->pi_getFFvalue ($piFlexForm, 'calendarSelection', 's_Cat'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['calendar'], $this->pi_getFFvalue ($piFlexForm, 'calendarSelection', 's_Cat'));
 		}
 		if ($this->conf ['dontListenToFlexForm.'] ['filters.'] ['calendarMode'] != 1) {
-			$this->updateIfNotEmpty ($this->conf ['view.'] ['calendarMode'], $this->pi_getFFvalue ($piFlexForm, 'calendarMode', 's_Cat'));
+			Controller::updateIfNotEmpty ($this->conf ['view.'] ['calendarMode'], $this->pi_getFFvalue ($piFlexForm, 'calendarMode', 's_Cat'));
 		}
 		
 		$flexformTyposcript = $this->pi_getFFvalue ($piFlexForm, 'myTS', 's_TS_View');
@@ -2963,12 +3310,24 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			$this->conf = $tsparser->setup;
 		}
 	}
-	function updateIfNotEmpty(&$confVar, $newConfVar) {
+	
+	/**
+	 * 
+	 * @param string $confVar
+	 * @param string $newConfVar
+	 */
+	public static function updateIfNotEmpty(&$confVar, $newConfVar) {
 		if ($newConfVar != '') {
 			$confVar = $newConfVar;
 		}
 	}
-	function convertLinkVarArrayToList($linkVar) {
+	
+	/**
+	 * 
+	 * @param array $linkVar
+	 * @return string
+	 */
+	public static function convertLinkVarArrayToList($linkVar) {
 		if (is_array ($linkVar)) {
 			$first = true;
 			foreach ($linkVar as $key => $value) {
@@ -2990,21 +3349,34 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			return implode (',', GeneralUtility::intExplode (',', $linkVar));
 		}
 	}
-	function replace_tags($tags = array(), $page) {
+	
+	/**
+	 * 
+	 * @param array $tags
+	 * @param string $page
+	 * @return string
+	 */
+	public static function replace_tags($tags = Array(), $page) {
 		if (sizeof ($tags) > 0) {
-			$sims = array ();
+			$sims = Array ();
 			foreach ($tags as $tag => $data) {
 				// This replaces any tags
-				$sims ['###' . strtoupper ($tag) . '###'] = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($data, '###' . strtoupper ($tag) . '###', array (), array ());
+				$sims ['###' . strtoupper ($tag) . '###'] = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($data, '###' . strtoupper ($tag) . '###', Array (), Array ());
 			}
 			
-			$page = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($page, $sims, array (), array ());
+			$page = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($page, $sims, Array (), Array ());
 		} else {
 			//die('No tags designated for replacement.');
 		}
 		return $page;
 	}
-	function shortenLastViewAndGetTargetViewParameters($takeFirstInsteadOfLast = false) {
+	
+	/**
+	 * 
+	 * @param string $takeFirstInsteadOfLast
+	 * @return Ambigous <multitype:NULL string Ambigous <NULL, string> , \TYPO3\CMS\Cal\Controller\multitype:>
+	 */
+	public function shortenLastViewAndGetTargetViewParameters($takeFirstInsteadOfLast = false) {
 		$returnParams = array ();
 		if (count ($this->conf ['view.'] ['allowedViews']) == 1 && count ($this->conf ['view.'] ['allowedViewsToLinkTo']) == 1) {
 			$returnParams ['lastview'] = null;
@@ -3019,7 +3391,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			}
 			$lastview = implode ('||', $views);
 			
-			$viewParams = $this->convertLastViewParamsToArray ($target);
+			$viewParams = Controller::convertLastViewParamsToArray ($target);
 			$returnParams = $viewParams [0];
 			
 			switch (trim ($returnParams ['view'])) {
@@ -3062,13 +3434,19 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return $returnParams;
 	}
-	function extendLastView($overrideParams = false) {
+	
+	/**
+	 * 
+	 * @param string $overrideParams
+	 * @return NULL|string
+	 */
+	public function extendLastView($overrideParams = false) {
 		if (count ($this->conf ['view.'] ['allowedViews']) == 1 && count ($this->conf ['view.'] ['allowedViewsToLinkTo']) == 1) {
 			$lastview = NULL;
 			$view = $this->conf ['view.'] ['allowedViews'] [0];
 			return NULL;
 		}
-		$views = $this->convertLastViewParamsToArray ($this->conf ['lastview']);
+		$views = Controller::convertLastViewParamsToArray ($this->conf ['lastview']);
 		
 		/*
 		 * [Franz] what is this code good for? /* Should it prevent that the same view get's added twice? If so - it has to be changed to work propperly /*************************** foreach($views as $view) { if($view['view'] == $this->conf['view'] && $view['page_id'] == $GLOBALS['TSFE']->id) { return 'view-'.$this->conf['view'].'|'.'page_id-'.$GLOBALS['TSFE']->id; } }
@@ -3104,9 +3482,15 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return ($this->conf ['lastview'] != null ? $this->conf ['lastview'] . '||' : '') . implode ('|', $paramsForUrl);
 	}
-	function convertLastViewParamsToArray($config) {
+	
+	/**
+	 * 
+	 * @param unknown $config
+	 * @return multitype:
+	 */
+	public static function convertLastViewParamsToArray($config) {
 		$views = explode ('||', $config);
-		$result = array ();
+		$result = Array ();
 		foreach ($views as $viewNr => $viewConf) {
 			$paramArray = explode ('|', $viewConf);
 			foreach ($paramArray as $paramString) {
@@ -3116,7 +3500,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return $result;
 	}
-	function initRegistry(&$controller) {
+	
+	/**
+	 * 
+	 * @param \TYPO3\CMS\Cal\Controller\Controller $controller
+	 */
+	public static function initRegistry(&$controller) {
 		$myCobj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
 		$myCobj = $controller->cObj;
 		$controller->cObj = &$myCobj;
@@ -3134,10 +3523,22 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$cache = Array ();
 		$controller->local_cObj = &$local_cObj;
 	}
-	function __toString() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function __toString() {
 		return get_class ($this);
 	}
-	function pi_wrapInBaseClass($str, $additionalClasses = array()) {
+	
+	/**
+	 * 
+	 * @param unknown $str
+	 * @param unknown $additionalClasses
+	 * @return string
+	 */
+	public function pi_wrapInBaseClass($str, $additionalClasses = array()) {
 		$content = '<div class="' . str_replace ('_', '-', $this->prefixId) . ' ' . implode (' ', $additionalClasses) . '">
 		' . $str . '</div>';
 		
@@ -3157,7 +3558,12 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		return $content;
 	}
-	function moveParamsIntoSession(&$params) {
+	
+	/**
+	 * 
+	 * @param array $params
+	 */
+	public function moveParamsIntoSession(&$params) {
 		if (empty ($params)) {
 			$params = $this->piVars;
 		}
@@ -3170,7 +3576,11 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			}
 		}
 	}
-	function getParamsFromSession() {
+	
+	/**
+	 * 
+	 */
+	public function getParamsFromSession() {
 		if (! $this->piVars ['view']) {
 			if ($this->piVars ['week']) {
 				$this->piVars ['view'] = 'week';
@@ -3236,7 +3646,11 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		unset ($_SESSION [$this->prefixId]);
 	}
-	function clearPiVarParams() {
+	
+	/**
+	 * 
+	 */
+	public function clearPiVarParams() {
 		if ($this->conf ['dontListenToPiVars'] || $this->conf ['clearPiVars'] == 'all') {
 			$this->piVars = array ();
 		} else {
@@ -3266,7 +3680,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 * @return nothing
 	 *
 	 */
-	function getParametersForTyposcriptLink(&$parameterArray, $overrulePIvars = array(), $cache = false, $clearAnyway = false, $altPageId = 0) {
+	public function getParametersForTyposcriptLink(&$parameterArray, $overrulePIvars = array(), $cache = false, $clearAnyway = false, $altPageId = 0) {
 		
 		// copied from function 'pi_linkTP_keepPIvars'
 		if (is_array ($this->piVars) && is_array ($overrulePIvars) && ! $clearAnyway) {
@@ -3366,13 +3780,18 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 * @return string input string wrapped in <a> tags
 	 * @see pi_linkTP_keepPIvars(), \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::typoLink()
 	 */
-	function pi_linkTP($str, $urlParameters = array(), $cache = 0, $altPageId = 0) {
+	public function pi_linkTP($str, $urlParameters = array(), $cache = 0, $altPageId = 0) {
 		$this->cleanupUrlParameter ($urlParameters);
 		$link = parent::pi_linkTP ($str, $urlParameters, $cache, $altPageId);
 		$this->pi_USER_INT_obj = 0;
 		return $link;
 	}
-	function cleanupUrlParameter(&$urlParameters) {
+	
+	/**
+	 * 
+	 * @param array $urlParameters
+	 */
+	public function cleanupUrlParameter(&$urlParameters) {
 		/*
 		 * [Franz] this little construct should be a first step into a centralized url-parameter handler for intelligent and nice looking urls. /* But it's merely experimental. A better, more flexible solution/concept need's to be found. /* To save some parsing time, I've removed the calls to $controller->extendLastView() on calls to the pi-link functions, /* because all these use internally this function and the lastView parameter is added by this function now.
 		 */
@@ -3421,7 +3840,13 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		
 		$this->moveParamsIntoSession ($urlParameters);
 	}
-	function checkRedirect($action, $object) {
+	
+	/**
+	 * 
+	 * @param unknown $action
+	 * @param unknown $object
+	 */
+	private function checkRedirect($action, $object) {
 		if ($this->conf ['view.'] ['enableAjax']) {
 			die ();
 		}
@@ -3445,7 +3870,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 * 
 	 * @return processed content/output
 	 */
-	function finish(&$content) {
+	public function finish(&$content) {
 		$hookObjectsArr = $this->getHookObjectsArray ('finishViewRendering');
 		// Hook: preFinishViewRendering
 		foreach ($hookObjectsArr as $hookObj) {
@@ -3465,7 +3890,11 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return $content;
 	}
-	function translateLanguageMarker(&$content) {
+	
+	/**
+	 * 
+	 */
+	public function translateLanguageMarker(&$content) {
 		// translate leftover markers
 		
 		preg_match_all ('!(###|%%%)([A-Z0-9_-|]*)\1!is', $content, $match);
@@ -3492,10 +3921,22 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		return $content;
 	}
-	function getPointerName() {
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getPointerName() {
 		return $this->pointerName;
 	}
-	function findRelatedEvents($objectType, $additionalWhere) {
+	
+	/**
+	 * 
+	 * @param unknown $objectType
+	 * @param unknown $additionalWhere
+	 * @return array
+	 */
+	public function findRelatedEvents($objectType, $additionalWhere) {
 		$relatedEvents = Array ();
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		if ($this->conf ['view.'] [$this->conf ['view'] . '.'] [$objectType . '.'] ['includeEventsInResult'] == 1) {
@@ -3513,13 +3954,13 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 *
 	 * @return void
 	 */
-	function setWeekStartDay() {
+	public function setWeekStartDay() {
 		if ($this->cObj->data ['pi_flexform']) {
 			$this->pi_initPIflexForm (); // Init and get the flexform data of the plugin
 			$piFlexForm = $this->cObj->data ['pi_flexform'];
 			
 			if ($this->conf ['dontListenToFlexForm.'] ['day.'] ['weekStartDay'] != 1) {
-				$this->updateIfNotEmpty ($this->conf ['view.'] ['weekStartDay'], $this->pi_getFFvalue ($piFlexForm, 'weekStartDay'));
+				Controller::updateIfNotEmpty ($this->conf ['view.'] ['weekStartDay'], $this->pi_getFFvalue ($piFlexForm, 'weekStartDay'));
 			}
 		}
 		

@@ -164,11 +164,11 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 				
 				$starttime = GeneralUtility::_POST ('starttime');
 				if ($starttime) {
-					$starttime = $this->getTimeParsed($starttime)->format('%Y%m%d');
+					$starttime = intval($this->getTimeParsed($starttime)->format('%Y%m%d'));
 				}
 				$endtime = GeneralUtility::_POST ('endtime');
 				if ($endtime) {
-					$endtime = $this->getTimeParsed($endtime)->format('%Y%m%d');
+					$endtime = intval($this->getTimeParsed($endtime)->format('%Y%m%d'));
 				}
 
 				if (count($pageIds) > 0 && is_int ($starttime) && is_int ($endtime)) {

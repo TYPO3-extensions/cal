@@ -517,11 +517,10 @@ class Functions {
 	 * Sets up a hook in the $className PHP file with the specified name. @param	string	The class name. @param	string	The name of the hook. @return	array	The array of objects implementing this hoook.
 	 */
 	public static function getHookObjectsArray($className, $hookName, $modulePath = 'controller') {
-		global $TYPO3_CONF_VARS;
 		$hookObjectsArr = array ();
-		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName])) {
-			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName] as $classRef) {
-				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
+		if (is_array ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName])) {
+			foreach ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName] as $classRef) {
+				$hookObjectsArr [] = GeneralUtility::getUserObj ($classRef);
 			}
 		}
 		

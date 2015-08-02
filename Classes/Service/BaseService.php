@@ -136,6 +136,9 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 		$this->cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
 		$this->modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		$this->extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
+		if(! isset ($this->extConf ['categoryService'] )){
+			$this->extConf ['categoryService'] = 'tx_cal_category';
+		}
 	}
 	
 	protected static function insertIdsIntoTableWithMMRelation($mm_table, $idArray, $uid, $tablename, $additionalParams = array(), $switchUidLocalForeign = false) {

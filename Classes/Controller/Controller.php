@@ -3015,7 +3015,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			$calendar = $modelObj->findCalendar ($calendarUid, 'tx_cal_calendar', $this->conf ['pidList']);
 			$ajaxStringArray [] = '{' . $this->getEventAjaxString ($calendar) . '}';
 		}
-		$calendarArray = $modelObj->findAllCalendar ('tx_cal_calendar');
+		$calendarArray = $modelObj->findAllCalendar ('tx_cal_calendar', $this->conf ['pidList']);
 		
 		// Hook: preLoadCalendarsRendering
 		foreach ($hookObjectsArr as $hookObj) {
@@ -3154,11 +3154,11 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			$isAllowedToOptionEvent = $rightsObj->isAllowedTo ($option, 'event') ? 'true' : 'false';
 			$isAllowedToOptionLocation = $rightsObj->isAllowedTo ($option, 'location') ? 'true' : 'false';
 			$isAllowedToOptionOrganizer = $rightsObj->isAllowedTo ($option, 'organizer') ? 'true' : 'false';
-			$rights [] = ($option == 'delete' ? 'del' : $option) . ':{calendar:' . $isAllowedToOptionCalendar . ',category:' . $isAllowedToOptionCategory . ',event:' . $isAllowedToOptionEvent . ',location:' . $isAllowedToOptionLocation . ',organizer:' . $isAllowedToOptionOrganizer . '}';
+			$rights [] = '"'.($option == 'delete' ? 'del' : $option) . '":{"calendar":' . $isAllowedToOptionCalendar . ',"category":' . $isAllowedToOptionCategory . ',"event":' . $isAllowedToOptionEvent . ',"location":' . $isAllowedToOptionLocation . ',"organizer":' . $isAllowedToOptionOrganizer . '}';
 		}
-		$rights [] = 'admin:' . ($rightsObj->isCalAdmin () ? 'true' : 'false');
-		$rights [] = 'userId:' . $rightsObj->getUserId ();
-		$rights [] = 'userGroups:[' . implode (',', $rightsObj->getUserGroups ()) . ']';
+		$rights [] = '"admin":' . ($rightsObj->isCalAdmin () ? 'true' : 'false');
+		$rights [] = '"userId":' . $rightsObj->getUserId ();
+		$rights [] = '"userGroups":[' . implode (',', $rightsObj->getUserGroups ()) . ']';
 		
 		// Hook: postLoadRightsRendering
 		foreach ($hookObjectsArr as $hookObj) {

@@ -242,7 +242,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$recurring = $refreshInterval * 60;
 			if ($recurring) {
 				/* Set up the gabriel event */
-				$cron = new \TYPO3\CMS\cal\cron\CalendarCron ();
+				$cron = new \TYPO3\CMS\Cal\Cron\CalendarCron ();
 				$cron->setUID ($uid);
 				
 				/* Schedule the gabriel event */
@@ -254,7 +254,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 	}
 	function createSchedulerTask(&$scheduler, $offset, $calendarUid) {
 		/* Set up the scheduler event */
-		$task = new \TYPO3\CMS\cal\cron\CalendarScheduler ();
+		$task = new \TYPO3\CMS\Cal\Cron\CalendarScheduler ();
 		$task->setUID ($calendarUid);
 		$taskGroup = BackendUtility::getRecordRaw ('tx_scheduler_task_group', 'groupName="cal"');
 		if($taskGroup['uid']){

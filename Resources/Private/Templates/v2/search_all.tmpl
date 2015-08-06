@@ -5,7 +5,8 @@
 <form action="###SEARCH_ACTION_URL###" method="post">
 	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
 	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###" />
-	<input type="image" src="###IMG_PATH###/search.gif" style="border-width:0px; height:19px; width:18px;" name="submit" title="###DOSEARCH_LABEL###" value="Search" />
+	<input type="hidden" size="15" name="tx_cal_controller[view]" value="###VIEW###" />
+	<input type="image" src="###IMG_PATH###/search.gif" style="border-width:0px; height:19px; width:18px;" name="tx_cal_controller[submit]" title="###DOSEARCH_LABEL###" value="Search" />
 </form>
 <!-- ###SEARCHALLFORM### end -->
 

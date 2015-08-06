@@ -1,53 +1,31 @@
 <!-- search_location.tmpl -->
+<!-- ###LIST_TEMPLATE### begin -->
+<!-- ###SEARCHFORM### start -->
 <h1>###HEADING###</h1>
-<!-- ###SEARCHLOCATIONFORM### start -->
 <div class = 'G10BOLD'>###L_SEARCH###:</div>
 <form action="###SEARCH_ACTION_URL###" method="post">
 	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
+	<input type="hidden" name="no_cache" value="1" />
 	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###" />
 	<input type="image" src="###IMG_PATH###/search.gif" style="border-width:0px; height:19px; width:18px;" name="tx_cal_controller[submit]" title="###DOSEARCH_LABEL###" value="Search" />
 </form>
-<!-- ###SEARCHLOCATIONFORM### end -->
+<!-- ###SEARCHFORM### start -->
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
 <ul class="search-result">
-	<!-- ###LOCATION### start -->
-	<!-- ###LOCATION_ODD### start -->
-	<li class="odd">
-		<div class="fn">
-			###NAME_LABEL###: <!-- ###LOCATION_LINK### start -->###NAME###<!-- ###LOCATION_LINK### end -->
-		</div>
-		
-		<div class="adr">
-			<div class="street-address">###STREET###</div>
-			<span class="postal-code">###ZIP###</span>
-			<span class="locality">###CITY###</span>
-			<span class="region">###COUNTRYZONE###</span>
-			<div class="country-name">###COUNTRY###</div>
-			###EVENT_LINK###
-		</div>
-	</li>
-	<!-- ###LOCATION_ODD### end -->
-	
-	<!-- ###LOCATION_EVEN### start -->
-	<li class="even">
-		<div class="fn">
-			###NAME_LABEL###: <!-- ###LOCATION_LINK### start -->###NAME###<!-- ###LOCATION_LINK### end -->
-		</div>
-		
-		<div class="adr">
-			<div class="street-address">###STREET###</div>
-			<span class="postal-code">###ZIP###</span>
-			<span class="locality">###CITY###</span>
-			<span class="region">###COUNTRYZONE###</span>
-			<div class="country-name">###COUNTRY###</div>
-			###EVENT_LINK###
-		</div>
-	</li>
-	
-	<!-- ###LOCATION_EVEN### end -->
-	<!-- ###LOCATION### end -->
+	<!-- ###LIST### start -->
+	<!-- ###LIST### end -->
 </ul>
-<!-- ###LINKS### start -->
-<div>###BACK_LINK###</div>
-<div>###OTHERSEARCH###</div>
-<!-- ###LINKS### end -->
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
+
+###SEARCH_ALL_LINK###
+
+<!-- ###LIST_TEMPLATE### begin -->
 <!-- /search_location.tmpl -->

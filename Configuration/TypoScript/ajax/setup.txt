@@ -1,4 +1,4 @@
-page.includeJS.101 = fileadmin/prototype/prototype.js
+page.includeJS.101 = typo3/contrib/prototype/prototype.js
 page.includeJS.102 = EXT:date2cal/js/jscalendar/calendar.js
 page.includeJS.103 = EXT:date2cal/js/jscalendar/lang/calendar-de.js
 page.includeJS.104 = EXT:cal/Resources/Public/v1/js/calendar.js
@@ -11,7 +11,7 @@ plugin.tx_cal_controller {
 		customViews = load_events
 		enableAjax = 1
 		event {
-			ajaxTemplate = EXT:cal/Resources/Private/Templates/v1/fe_editing.tmpl
+			ajaxTemplate = EXT:cal/Resources/Private/Templates/fe_editing/fe_editing.tmpl
 			event {
 				addLinkOnClick = javascript:EventDialog.showDialog(this);return false;
 				editLinkOnClick = javascript:return false;
@@ -39,7 +39,7 @@ plugin.tx_cal_controller {
 			}
 		}
 		month {
-			monthTemplate = EXT:cal/Resources/Private/Templates/v1/month_ajax.tmpl
+			monthTemplate = EXT:cal/Resources/Private/Templates/fe_editing/month_ajax.tmpl
 			event {
 				addLinkOnClick < plugin.tx_cal_controller.view.event.event.addLinkOnClick
 				editLinkOnClick < plugin.tx_cal_controller.view.event.event.editLinkOnClick
@@ -48,7 +48,7 @@ plugin.tx_cal_controller {
 		}
 		
 		create_event {
-			ajaxTemplate = EXT:cal/Resources/Private/Templates/v1/create_event_ajax.tmpl
+			ajaxTemplate = EXT:cal/Resources/Private/Templates/fe_editing/create_event_ajax.tmpl
 			sendOutWithXMLHeader = 0
 			doNotWrapInBaseClass = 1
 			calendar_id_stdWrap {

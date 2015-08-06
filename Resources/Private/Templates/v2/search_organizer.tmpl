@@ -1,58 +1,30 @@
 <!-- search_organizer.tmpl -->
+<!-- ###LIST_TEMPLATE### begin -->
+<!-- ###SEARCHFORM### start -->
 <h1>###HEADING###</h1>
-<!-- ###SEARCHORGANIZERFORM### start -->
 <div class = 'G10BOLD'>###L_SEARCH###:</div>
 <form action="###SEARCH_ACTION_URL###" method="post">
 	<input type="hidden" name="tx_cal_controller[getdate]" value="###GETDATE###" />
 	<input type="text" size="15" name="tx_cal_controller[query]" value="###QUERY###" />
+	<input type="hidden" name="no_cache" value="1" />
 	<input type="image" src="###IMG_PATH###/search.gif" style="border-width:0px; height:19px; width:18px;" name="tx_cal_controller[submit]" title="###DOSEARCH_LABEL###" value="Search" />
 </form>
-<!-- ###SEARCHORGANIZERFORM### end -->
+<!-- ###SEARCHFORM### start -->
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
 <ul class="search-result">
-	<!-- ###ORGANIZER### start -->
-	<!-- ###ORGANIZER_ODD### start -->
-	<li class="odd">
-		<div class="vcard">
-			<div class="fn">
-				###NAME_LABEL###: <!-- ###ORGANIZER_LINK### start -->###NAME###<!-- ###ORGANIZER_LINK### end -->
-			</div>
-		
-			<div class="adr">
-				<div class="street-address">###STREET###</div>
-				<span class="postal-code">###ZIP###</span>
-				<span class="locality">###CITY###</span>
-				<span class="region">###COUNTRYZONE###</span>
-				<div class="country-name">###COUNTRY###</div>
-				###EVENT_LINK###
-			</div>
-		</div>
-	</li>
-	<!-- ###ORGANIZER_ODD### end -->
-	
-	<!-- ###ORGANIZER_EVEN### start -->
-	<li class="even">
-		<div class="vcard">
-			<div class="fn">
-				###NAME_LABEL###: <!-- ###ORGANIZER_LINK### start -->###NAME###<!-- ###ORGANIZER_LINK### end -->
-			</div>
-			
-			<div class="adr">
-				<div class="street-address">###STREET###</div>
-				<span class="postal-code">###ZIP###</span>
-				<span class="locality">###CITY###</span>
-				<span class="region">###COUNTRYZONE###</span>
-				<div class="country-name">###COUNTRY###</div>
-				###EVENT_LINK###
-			</div>
-		</div>
-	</li>
-	<!-- ###ORGANIZER_EVEN### end -->
-	<!-- ###ORGANIZER### end -->
+	<!-- ###LIST### start -->
+	<!-- ###LIST### end -->
 </ul>
+<!-- ###PAGEBROWSER### begin -->
+<p class="pagebrowser">
+###PAGEOF###  ###PAGES###  ###PREVIOUS### ###NEXT###
+</p>
+<!-- ###PAGEBROWSER### end -->
 
-<!-- ###LINKS### start -->
-<div>###BACK_LINK###</div>
-<div>###OTHERSEARCH###</div>
-<!-- ###LINKS### end -->
-
+###SEARCH_ALL_LINK###
+<!-- ###LIST_TEMPLATE### end -->
 <!-- /search_organizer.tmpl -->

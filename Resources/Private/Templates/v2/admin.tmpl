@@ -2,6 +2,8 @@
 <!--t3boardtest-->
 <h2><img src="###IMG_PATH###/config.png"/> ###L_ADMINISTRATION_VIEW###</h2>
 <script type="text/javascript">
+		/*<![CDATA[*/
+	<!--
 	function calAdminAction(type, prefix){
 		if(type=='create'){
 			document.getElementById(prefix+"_view").value = type+"_"+prefix;
@@ -26,7 +28,8 @@
 		};      
 		return true;
 	};
-	
+	// -->
+		/*]]>*/
 </script>
 <!-- ###CALENDAR_FORM### start -->
 <div id="calendar_message" style="text-align:center;vertical-align:middle;min-width:300px;padding:5px;border:2px solid red;background-color:yellow;margin-bottom:10px;display:none;">Please select a calendar first!</div>
@@ -45,6 +48,28 @@
 	</fieldset>
 </form>
 <!-- ###CALENDAR_FORM### end -->
+<!-- ###CALENDAR_SUBSCRIPTION### start -->
+<script type="text/javascript">
+function invertChecks(form){
+	var checkBoxes = document.getElementsByName("tx_cal_controller[calendarSubscription][]");
+	for(var i=0;i<checkBoxes.length;i++){
+		if(checkBoxes[i].checked == true){
+			checkBoxes[i].checked = false;
+		} else {
+			checkBoxes[i].checked = true;
+		}
+	}
+}
+</script>
+<form action="###CALENDAR_SUBSCRIPTION_URL###" method="post" id="calendarSubscription">
+	<fieldset>
+		<legend><img src="###IMG_PATH###/edit.gif" style="border:0px;" alt="###L_EDIT### ###L_LOCATION_LABEL###"/>%%%L_CALENDAR_SUBSCRIPTION%%%</legend>
+		<input type="hidden" name="tx_cal_controller[adminAction]" value="editCalendarSubscription" />
+		###CALENDAR_SUBSCRIPTION###
+		<input type="image" src="###IMG_PATH###/refresh.gif" onclick="document.getElementById('calendarSubscription').submit();"/>
+	</fieldset>
+</form>
+<!-- ###CALENDAR_SUBSCRIPTION### end -->
 <!-- ###CATEGORY_FORM### start -->
 <div id="category_message" style="text-align:center;vertical-align:middle;min-width:300px;padding:5px;border:2px solid red;background-color:yellow;margin-bottom:10px;display:none;">Please select a category first!</div>
 <form action="###EDIT_CATEGORY_URL###" method="post" id="category_form">

@@ -2882,6 +2882,18 @@ plugin.tx_cal_controller {
             
             # @description	End Range for Search.
 			endRange = 20300101
+			
+			# @description	The search link url
+			searchLinkUrl =< plugin.tx_cal_controller.view.defaultLinkSetup
+			searchLinkUrl {
+				current = 
+				value = |
+				required = 1
+				typolink {
+					useCacheHash = 0
+					returnLast = url
+				}
+			}
 
 			# @description	The search-all view link content object
 			searchAllLink =< plugin.tx_cal_controller.view.defaultLinkSetup

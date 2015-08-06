@@ -639,26 +639,6 @@ plugin.tx\_cal\_controller.view.event
 .. container:: table-row
 
    Property
-         phpicalendarEventTemplate
-   
-   Data type
-         String / Path
-   
-   Description
-         **!!! Deprecated in favor of view.event.eventModelTemplate !!!**
-         
-         Template for the phpicalendar event view. This is an example of how
-         different event types can provide their own views.
-         
-         also: Constants
-   
-   Default
-         {$plugin.tx\_cal\_controller.view.event.phpicalendarEventTemplate}
-
-
-.. container:: table-row
-
-   Property
          eventModelTemplate
    
    Data type

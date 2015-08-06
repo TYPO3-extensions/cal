@@ -101,16 +101,11 @@ class TceMainProcessdatamap {
 						
 						$notificationService = & \TYPO3\CMS\Cal\Utility\Functions::getNotificationService ();
 						
-						if ($notificationService->conf ['view.'] ['event.'] ['phpicalendarEventTemplate']) {
-							$oldPath = &$notificationService->conf ['view.'] ['event.'] ['phpicalendarEventTemplate'];
-						} else {
-							$oldPath = &$notificationService->conf ['view.'] ['event.'] ['eventModelTemplate'];
-						}
+						$oldPath = &$notificationService->conf ['view.'] ['event.'] ['eventModelTemplate'];
 						$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal');
 						
 						$oldPath = str_replace ('EXT:cal/', $extPath, $oldPath);
 						// $oldPath = str_replace(PATH_site, '', $oldPath);
-						$tx_cal_api->conf ['view.'] ['event.'] ['phpicalendarEventTemplate'] = $oldPath;
 						$tx_cal_api->conf ['view.'] ['event.'] ['eventModelTemplate'] = $oldPath;
 						$oldBackPath = $GLOBALS ['TSFE']->tmpl->getFileName_backPath;
 						$GLOBALS ['TSFE']->tmpl->getFileName_backPath = '';
@@ -213,16 +208,12 @@ class TceMainProcessdatamap {
 						/* Notify of new event */
 						$notificationService = & \TYPO3\CMS\Cal\Utility\Functions::getNotificationService ();
 						
-						if ($notificationService->conf ['view.'] ['event.'] ['phpicalendarEventTemplate']) {
-							$oldPath = &$notificationService->conf ['view.'] ['event.'] ['phpicalendarEventTemplate'];
-						} else {
-							$oldPath = &$notificationService->conf ['view.'] ['event.'] ['eventModelTemplate'];
-						}
+						$oldPath = &$notificationService->conf ['view.'] ['event.'] ['eventModelTemplate'];
+						
 						$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal');
 						
 						$oldPath = str_replace ('EXT:cal/', $extPath, $oldPath);
 						// $oldPath = str_replace(PATH_site, '', $oldPath);
-						$tx_cal_api->conf ['view.'] ['event.'] ['phpicalendarEventTemplate'] = $oldPath;
 						$tx_cal_api->conf ['view.'] ['event.'] ['eventModelTemplate'] = $oldPath;
 						$oldBackPath = $GLOBALS ['TSFE']->tmpl->getFileName_backPath;
 						$GLOBALS ['TSFE']->tmpl->getFileName_backPath = '';

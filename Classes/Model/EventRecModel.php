@@ -185,12 +185,8 @@ class EventRecModel extends \TYPO3\CMS\Cal\Model\Model {
 	function fillTemplate($subpartMarker) {
 		$cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
 		
-		// @note phpicalendarEventTemplate path is deprecated as of version 1.3.0 and will be removed by 1.5.0.
-		if ($this->parentEvent->conf ['view.'] ['event.'] ['phpicalendarEventTemplate']) {
-			$templatePath = $this->parentEvent->conf ['view.'] ['event.'] ['phpicalendarEventTemplate'];
-		} else {
-			$templatePath = $this->parentEvent->conf ['view.'] ['event.'] ['eventModelTemplate'];
-		}
+		$templatePath = $this->parentEvent->conf ['view.'] ['event.'] ['eventModelTemplate'];
+		
 		$page = $cObj->fileResource ($templatePath);
 		
 		if ($page == '') {

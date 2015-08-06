@@ -85,9 +85,6 @@ plugin.tx_cal_controller {
 	# cat=Calendar Base (Templates)/file/list/2; type=string; label=Fluid event View Template.
 	view.event.eventTemplateFluid = EXT:cal/Resources/Private/Templates/v2/event.html
 
-	# Deprecated since version 1.3.0 in favor of view.event.eventModelTemplate. Will be removed by version 1.5.0
-	view.event.phpicalendarEventTemplate =
-
 	# cat=Calendar Base (Templates)/file/event/2; type=string; label=Event (phpiCalendar) Template: Marker-based template for phpiCalendar event view.
 	view.event.eventModelTemplate = EXT:cal/Resources/Private/Templates/v2/event_model.tmpl
 	

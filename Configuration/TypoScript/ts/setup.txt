@@ -190,10 +190,6 @@ plugin.tx_cal_controller {
 			# @also			Constants
 			eventTemplate = {$plugin.tx_cal_controller.view.event.eventTemplate}
 
-			# @description	Template for the phpicalendar event view.  This option is deprecated since version
-			#				1.3.0 and will be removed completely by 1.5.0.
-			phpicalendarEventTemplate= {$plugin.tx_cal_controller.view.event.phpicalendarEventTemplate}
-
 			# @description	Template for the phpicalendar event view.  This is an example of how different
 			#				event types can provide their own views.
 			# @also			Constants

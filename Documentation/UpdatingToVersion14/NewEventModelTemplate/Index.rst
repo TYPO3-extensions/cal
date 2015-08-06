@@ -21,6 +21,6 @@ To make it compliant to other model names, it is now defined as
 
            view.event.eventModelTemplate = EXT:cal/template/event_model.tmpl
 
-|img-5| The old definition still works, but please be aware that it won't be supported in future versions.
+|img-5| The old definition got removed with version 1.9.4.
 
 

@@ -74,9 +74,6 @@ plugin.tx_cal_controller {
 	# cat=Calendar Base (Templates)/file/event/1; type=string; label=Event-wrapper-Template: Marker-based template for event view.
 	view.event.eventTemplate = EXT:cal/Resources/Private/Templates/v1/event.tmpl
 
-	# Deprecated since version 1.3.0 in favor of view.event.eventModelTemplate. Will be removed by version 1.5.0
-	view.event.phpicalendarEventTemplate =
-
 	# cat=Calendar Base (Templates)/file/event/2; type=string; label=Event (phpiCalendar) Template: Marker-based template for phpiCalendar event view.
 	view.event.eventModelTemplate = EXT:cal/Resources/Private/Templates/v1/event_model.tmpl
 	

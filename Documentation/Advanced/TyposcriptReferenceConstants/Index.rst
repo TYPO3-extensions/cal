@@ -604,24 +604,6 @@ plugin.tx\_cal\_controller
 .. container:: table-row
 
    Property
-         view.event.phpicalendarEventTemplate
-
-   Data type
-         String / Path
-
-   Description
-         **!!! Deprecated in favor of view.event.eventModelTemplate !!!**
-
-         Event (phpiCalendar) Template: Marker-based template for phpiCalendar
-         event view.
-
-   Default
-         EXT:cal/template/phpicalendar\_event.tmpl
-
-
-.. container:: table-row
-
-   Property
          view.event.eventModelTemplate
 
    Data type

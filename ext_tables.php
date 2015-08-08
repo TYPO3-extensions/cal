@@ -458,10 +458,12 @@ $tempColumns = Array (
 												'pid' => $sPid,
 												'setValue' => 'set' 
 										),
-										'script' => 'wizard_add.php' 
-								) 
-						) 
-				) 
+										'module' => array(
+												'name' => 'wizard_add'
+										)
+								)
+						)
+				)
 		),
 		'tx_cal_calendar_subscription' => Array (
 				'exclude' => 1,
@@ -484,11 +486,13 @@ $tempColumns = Array (
 												'pid' => $sPid,
 												'setValue' => 'set' 
 										),
-										'script' => 'wizard_add.php' 
-								) 
-						) 
-				) 
-		) 
+										'module' => array(
+												'name' => 'wizard_add'
+										)
+								)
+						)
+				)
+		)
 );
 
 // Add the calendar selector for backend users.

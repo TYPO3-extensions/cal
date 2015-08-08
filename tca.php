@@ -138,12 +138,16 @@ $TCA ['tx_cal_event'] = Array (
 														'pid' => $sPid,
 														'setValue' => 'set' 
 												),
-												'script' => 'wizard_add.php' 
+												'module' => array(
+														'name' => 'wizard_add'
+												)
 										),
 										'edit' => Array (
 												'type' => 'popup',
 												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.edit',
-												'script' => 'wizard_edit.php',
+												'module' => array(
+														'name' => 'wizard_edit'
+												),
 												'popup_onlyOpenIfSelected' => 1,
 												'icon' => 'edit2.gif',
 												'JSopenParams' => 'height=500,width=660,status=0,menubar=0,scrollbars=1',
@@ -182,12 +186,16 @@ $TCA ['tx_cal_event'] = Array (
 														'pid' => $sPid,
 														'setValue' => 'append' 
 												),
-												'script' => 'wizard_add.php' 
+												'module' => array(
+														'name' => 'wizard_add'
+												)
 										),
 										'edit' => Array (
 												'type' => 'popup',
 												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.edit',
-												'script' => 'wizard_edit.php',
+												'module' => array(
+														'name' => 'wizard_edit'
+												),
 												'popup_onlyOpenIfSelected' => 1,
 												'icon' => 'edit2.gif',
 												'JSopenParams' => 'height=500,width=660,status=0,menubar=0,scrollbars=1',
@@ -283,12 +291,16 @@ $TCA ['tx_cal_event'] = Array (
 														'pid' => $sPid,
 														'setValue' => 'set' 
 												),
-												'script' => 'wizard_add.php' 
+												'module' => array(
+														'name' => 'wizard_add'
+												)
 										),
 										'edit' => Array (
 												'type' => 'popup',
 												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.edit',
-												'script' => 'wizard_edit.php',
+												'module' => array(
+														'name' => 'wizard_edit'
+												),
 												'popup_onlyOpenIfSelected' => 1,
 												'icon' => 'edit2.gif',
 												'JSopenParams' => 'height=600,width=525,status=0,menubar=0,scrollbars=1',
@@ -337,11 +349,16 @@ $TCA ['tx_cal_event'] = Array (
 												'type' => 'popup',
 												'title' => 'Link',
 												'icon' => 'link_popup.gif',
-												'script' => 'browse_links.php?mode=wizard',
-												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_element_browser',
+														'urlParameters' => array(
+																'mode' => 'wizard'
+														)
+												),
+												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+										)
+								)
+						)
 				),
 				'location' => Array (
 						'exclude' => 1,
@@ -374,12 +391,16 @@ $TCA ['tx_cal_event'] = Array (
 														'pid' => $sPid,
 														'setValue' => 'set' 
 												),
-												'script' => 'wizard_add.php' 
+												'module' => array(
+														'name' => 'wizard_add'
+												)
 										),
 										'edit' => Array (
 												'type' => 'popup',
 												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.edit',
-												'script' => 'wizard_edit.php',
+												'module' => array(
+														'name' => 'wizard_edit'
+												),
 												'popup_onlyOpenIfSelected' => 1,
 												'icon' => 'edit2.gif',
 												'JSopenParams' => 'height=600,width=525,status=0,menubar=0,scrollbars=1',
@@ -428,11 +449,16 @@ $TCA ['tx_cal_event'] = Array (
 												'type' => 'popup',
 												'title' => 'Link',
 												'icon' => 'link_popup.gif',
-												'script' => 'browse_links.php?mode=wizard',
-												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_element_browser',
+														'urlParameters' => array(
+																'mode' => 'wizard'
+														)
+												),
+												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+										)
+								)
+						)
 				),
 				'teaser' => Array (
 						'exclude' => 1,
@@ -449,10 +475,12 @@ $TCA ['tx_cal_event'] = Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cms/locallang_ttc.php:bodytext.W.RTE',
 												'icon' => 'wizard_rte2.gif',
-												'script' => 'wizard_rte.php' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_rte'
+												)
+										)
+								)
+						)
 				),
 				'description' => Array (
 						'exclude' => 1,
@@ -469,10 +497,12 @@ $TCA ['tx_cal_event'] = Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cms/locallang_ttc.php:bodytext.W.RTE',
 												'icon' => 'wizard_rte2.gif',
-												'script' => 'wizard_rte.php' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_rte'
+												)
+										)
+								)
+						)
 				),
 				'freq' => Array (
 						'exclude' => 1,
@@ -746,11 +776,16 @@ $TCA ['tx_cal_event'] = Array (
 												'type' => 'popup',
 												'title' => 'Link',
 												'icon' => 'link_popup.gif',
-												'script' => 'browse_links.php?mode=wizard',
-												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_element_browser',
+														'urlParameters' => array(
+																'mode' => 'wizard'
+														)
+												),
+												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+										)
+								)
+						)
 				),
 				
 				'page' => Array (
@@ -1880,10 +1915,12 @@ $TCA ['tx_cal_organizer'] = Array (
 												'type' => 'script',
 												'title' => 'Full screen Rich Text Editing|Formatteret redigering i hele vinduet',
 												'icon' => 'wizard_rte2.gif',
-												'script' => 'wizard_rte.php' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_rte'
+												)
+										)
+								)
+						)
 				),
 				'street' => Array (
 						'exclude' => 0,
@@ -1987,11 +2024,16 @@ $TCA ['tx_cal_organizer'] = Array (
 												'type' => 'popup',
 												'title' => 'Link',
 												'icon' => 'link_popup.gif',
-												'script' => 'browse_links.php?mode=wizard',
-												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_element_browser',
+														'urlParameters' => array(
+																'mode' => 'wizard'
+														)
+												),
+												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+										)
+								)
+						)
 				),
 				'shared_user_cnt' => Array (
 						'exclude' => 1,
@@ -2116,10 +2158,12 @@ $TCA ['tx_cal_location'] = Array (
 												'type' => 'script',
 												'title' => 'Full screen Rich Text Editing|Formatteret redigering i hele vinduet',
 												'icon' => 'wizard_rte2.gif',
-												'script' => 'wizard_rte.php' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_rte'
+												)
+										)
+								)
+						)
 				),
 				'street' => Array (
 						'exclude' => 0,
@@ -2223,11 +2267,16 @@ $TCA ['tx_cal_location'] = Array (
 												'type' => 'popup',
 												'title' => 'Link',
 												'icon' => 'link_popup.gif',
-												'script' => 'browse_links.php?mode=wizard',
-												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_element_browser',
+														'urlParameters' => array(
+																'mode' => 'wizard'
+														)
+												),
+												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+										)
+								)
+						)
 				),
 				'shared_user_cnt' => Array (
 						'exclude' => 1,
@@ -2736,12 +2785,16 @@ $TCA ['tx_cal_event_deviation'] = Array (
 														'pid' => $sPid,
 														'setValue' => 'set' 
 												),
-												'script' => 'wizard_add.php' 
+												'module' => array(
+														'name' => 'wizard_add'
+												)
 										),
 										'edit' => Array (
 												'type' => 'popup',
 												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.edit',
-												'script' => 'wizard_edit.php',
+												'module' => array(
+														'name' => 'wizard_edit'
+												),
 												'popup_onlyOpenIfSelected' => 1,
 												'icon' => 'edit2.gif',
 												'JSopenParams' => 'height=600,width=525,status=0,menubar=0,scrollbars=1',
@@ -2790,11 +2843,16 @@ $TCA ['tx_cal_event_deviation'] = Array (
 												'type' => 'popup',
 												'title' => 'Link',
 												'icon' => 'link_popup.gif',
-												'script' => 'browse_links.php?mode=wizard',
-												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_element_browser',
+														'urlParameters' => array(
+																'mode' => 'wizard'
+														)
+												),
+												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+										)
+								)
+						)
 				),
 				'location' => Array (
 						'exclude' => 1,
@@ -2827,12 +2885,16 @@ $TCA ['tx_cal_event_deviation'] = Array (
 														'pid' => $sPid,
 														'setValue' => 'set' 
 												),
-												'script' => 'wizard_add.php' 
+												'module' => array(
+														'name' => 'wizard_add'
+												)
 										),
 										'edit' => Array (
 												'type' => 'popup',
 												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.edit',
-												'script' => 'wizard_edit.php',
+												'module' => array(
+														'name' => 'wizard_edit'
+												),
 												'popup_onlyOpenIfSelected' => 1,
 												'icon' => 'edit2.gif',
 												'JSopenParams' => 'height=600,width=525,status=0,menubar=0,scrollbars=1',
@@ -2881,11 +2943,16 @@ $TCA ['tx_cal_event_deviation'] = Array (
 												'type' => 'popup',
 												'title' => 'Link',
 												'icon' => 'link_popup.gif',
-												'script' => 'browse_links.php?mode=wizard',
-												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_element_browser',
+														'urlParameters' => array(
+																'mode' => 'wizard'
+														)
+												),
+												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
+										)
+								)
+						)
 				),
 				'teaser' => Array (
 						'exclude' => 1,
@@ -2902,10 +2969,12 @@ $TCA ['tx_cal_event_deviation'] = Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cms/locallang_ttc.php:bodytext.W.RTE',
 												'icon' => 'wizard_rte2.gif',
-												'script' => 'wizard_rte.php' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_rte'
+												)
+										)
+								)
+						)
 				),
 				'description' => Array (
 						'exclude' => 1,
@@ -2922,10 +2991,12 @@ $TCA ['tx_cal_event_deviation'] = Array (
 												'type' => 'script',
 												'title' => 'LLL:EXT:cms/locallang_ttc.php:bodytext.W.RTE',
 												'icon' => 'wizard_rte2.gif',
-												'script' => 'wizard_rte.php' 
-										) 
-								) 
-						) 
+												'module' => array(
+														'name' => 'wizard_rte'
+												)
+										)
+								)
+						)
 				),
 				'image' => Array (
 						'exclude' => 1,

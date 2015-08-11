@@ -16,6 +16,7 @@ $pluginSignature = strtolower($extensionName) . '_controller';
 
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+$GLOBALS['TCA']['tt_content']['columns']['tx_cal_media']['config']['uploadfolder'] = 'uploads/tx_cal/media';
 
 $extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 if($extConf ['categoryService'] == 'sys_category') {

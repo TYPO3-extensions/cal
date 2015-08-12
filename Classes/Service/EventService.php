@@ -420,7 +420,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		
 		$categoryIdArray = GeneralUtility::trimExplode (',', implode (',', (array) $this->controller->piVars ['category']), 1);
-		
+
 		if ($this->conf ['view.'] ['categoryMode'] != 1 && $this->conf ['view.'] ['categoryMode'] != 3 && $addCategoryWhere && ! (($this->conf ['view'] == 'ics' || $this->conf ['view'] == 'search_event') && ! empty ($categoryIdArray))) {
 			$uidCollector = $categoryService->getUidsOfEventsWithCategories();
 			
@@ -1118,6 +1118,9 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		$insertFields ['hidden'] = $hidden;
 		$insertFields ['type'] = $object->getEventType ();
+		if($insertFields ['type'] == null){
+			$insertFields ['type'] = \TYPO3\CMS\Cal\Model\Model::EVENT_TYPE_DEFAULT;
+		}
 		
 		$insertFields ['allday'] = $object->isAllday () ? '1' : '0';
 		if (! $this->rightsObj->isAllowedTo ('create', 'event', 'allday')) {
@@ -1156,11 +1159,17 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		if ($this->rightsObj->isAllowedToCreateEventOrganizer ()) {
 			$insertFields ['organizer'] = $object->getOrganizer ();
 		}
+		if($insertFields ['organizer'] == null){
+			$insertFields ['organizer'] = '';
+		}
 		if ($this->rightsObj->isAllowedTo ('create', 'event', 'cal_organizer')) {
 			$insertFields ['organizer_id'] = $object->getOrganizerId ();
 		}
 		if ($this->rightsObj->isAllowedToCreateEventLocation ()) {
 			$insertFields ['location'] = $object->getLocation ();
+		}
+		if($insertFields ['location'] == null){
+			$insertFields ['location'] = '';
 		}
 		if ($this->rightsObj->isAllowedTo ('create', 'event', 'cal_location')) {
 			$insertFields ['location_id'] = $object->getLocationId ();

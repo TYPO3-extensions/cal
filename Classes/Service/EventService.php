@@ -421,7 +421,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$categoryIdArray = GeneralUtility::trimExplode (',', implode (',', (array) $this->controller->piVars ['category']), 1);
 
-		if ($this->conf ['view.'] ['categoryMode'] != 1 && $this->conf ['view.'] ['categoryMode'] != 3 && $addCategoryWhere && ! (($this->conf ['view'] == 'ics' || $this->conf ['view'] == 'search_event') && ! empty ($categoryIdArray))) {
+		if ($this->conf ['view.'] ['categoryMode'] != 1 && $this->conf ['view.'] ['categoryMode'] != 3 && $this->conf ['view.'] ['categoryMode'] != 4 && $addCategoryWhere && ! (($this->conf ['view'] == 'ics' || $this->conf ['view'] == 'search_event') && ! empty ($categoryIdArray))) {
 			$uidCollector = $categoryService->getUidsOfEventsWithCategories();
 			
 			if (! empty ($uidCollector)) {

@@ -70,6 +70,7 @@
 			<label index="cal.pi_flexform.categoryMode.showSelected">Show only selected categories (exact match)</label>
 			<label index="cal.pi_flexform.categoryMode.excludeSelected">Don't show selected categories</label>
 			<label index="cal.pi_flexform.categoryMode.showSelectedOr">Show only selected categories (any)</label>
+			<label index="cal.pi_flexform.categoryMode.showMinSelected">Show selected categories (minimum match)</label>
 			<label index="cal.pi_flexform.sheetYearView">Year View</label>
 			<label index="cal.pi_flexform.yearViewPid">Year view page</label>
 			<label index="cal.pi_flexform.yearTemplate">Year template</label>
@@ -212,6 +213,7 @@
 			<label index="cal.pi_flexform.categoryMode.showSelected">Zeige exakt die ausgewählte Kategorien</label>
 			<label index="cal.pi_flexform.categoryMode.excludeSelected">Zeige ausgewählte Kategorien nicht</label>
 			<label index="cal.pi_flexform.categoryMode.showSelectedOr">Zeige irgend eine der ausgewählten Kategorien</label>
+			<label index="cal.pi_flexform.categoryMode.showMinSelected">Zeige minimum die ausgewählten Kategorien</label>
 			<label index="cal.pi_flexform.sheetYearView">Jahres-Ansicht</label>
 			<label index="cal.pi_flexform.yearViewPid">Jahres-Ansicht Seite</label>
 			<label index="cal.pi_flexform.yearTemplate">Jahres-Ansicht Template</label>

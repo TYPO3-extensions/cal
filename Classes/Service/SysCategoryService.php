@@ -197,7 +197,32 @@ class SysCategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 			// Add search substring with tx_cal_event.uid NOT IN
 			$categorySearchString .= ' AND tx_cal_event.uid NOT IN (' . $sql . ')';
 		}
-		
+
+		// Minimum match
+		if ($this->conf ['view.'] ['categoryMode'] == 4 && self::$categoryToFilter) {
+			$categorySearchString = '';
+			$categories = explode(',',self::$categoryToFilter);
+			for ($i = 0; $i < count($categories); $i++) {
+				if ($i == 0) {
+					$categorySearchString .= ' AND sys_category_record_mm.uid_local = "'.$categories[$i].'" ';
+				} else {
+					$categorySearchString .= ' AND (';
+
+					$categorySearchString .= '	SELECT
+													tx_cal_event'.$i.'.uid
+												FROM
+													sys_category_record_mm sys_category_record_mm'.$i.'
+													JOIN tx_cal_event tx_cal_event'.$i.' ON sys_category_record_mm'.$i.'.uid_foreign = tx_cal_event'.$i.'.uid
+												WHERE
+													tx_cal_event'.$i.'.uid = tx_cal_event.uid
+													AND sys_category_record_mm'.$i.'.uid_local = "'.$categories[$i].'"
+												GROUP BY
+													sys_category_record_mm'.$i.'.uid_local)';
+
+				}
+			}
+		}
+
 		return $categorySearchString;
 	}
 	
@@ -225,12 +250,12 @@ class SysCategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$extUrlIds = array ();
 		$additionalWhere = ' AND sys_category.pid IN (' . $pidList . ')';
 		
-		// ompile category array
+		// compile category array
 		$filterWhere = '';
 		switch ($this->conf ['view.'] ['categoryMode']) {
 			case 0 : // show all
 				break;
-			case 1 : // how selected
+			case 1 : // show selected
 			case 3 :
 				$allowedCategories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->cObj->stdWrap ($this->conf ['view.'] ['category'], $this->conf ['view.'] ['category.']), 1);
 				if (! empty ($allowedCategories)) {
@@ -255,11 +280,18 @@ class SysCategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 					}
 				}
 				break;
-			case 2 : // xclude selected
+			case 2 : // exclude selected
 				$allowedCategories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->cObj->stdWrap ($this->conf ['view.'] ['category'], $this->conf ['view.'] ['category.']), 1);
 				if (! empty ($allowedCategories)) {
 					$implodedAllowedCategories = implode (',', $allowedCategories);
 					$filterWhere = ' AND sys_category.uid NOT IN (' . $implodedAllowedCategories . ')';
+					self::$categoryToFilter = $implodedAllowedCategories;
+				}
+				break;
+			case 4 : // minimum match
+				$allowedCategories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->cObj->stdWrap ($this->conf ['view.'] ['category'], $this->conf ['view.'] ['category.']), 1);
+				if (! empty ($allowedCategories)) {
+					$implodedAllowedCategories = implode (',', $allowedCategories);
 					self::$categoryToFilter = $implodedAllowedCategories;
 				}
 				break;

@@ -195,6 +195,31 @@ class CategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$categorySearchString .= ' AND tx_cal_event.uid NOT IN (' . $sql . ')';
 		}
 		
+		// Minimum match
+		if ($this->conf ['view.'] ['categoryMode'] == 4 && self::$categoryToFilter) {
+			$categorySearchString = '';
+			$categories = explode(',',self::$categoryToFilter);
+			for ($i = 0; $i < count($categories); $i++) {
+				if ($i == 0) {
+					$categorySearchString .= ' AND tx_cal_event_category_mm.uid_foreign = "'.$categories[$i].'" ';
+				} else {
+					$categorySearchString .= ' AND (';
+		
+					$categorySearchString .= '	SELECT
+													tx_cal_event'.$i.'.uid
+												FROM
+													tx_cal_event_category_mm tx_cal_event_category_mm'.$i.'
+													JOIN tx_cal_event tx_cal_event'.$i.' ON tx_cal_event_category_mm'.$i.'.uid_local = tx_cal_event'.$i.'.uid
+												WHERE
+													tx_cal_event'.$i.'.uid = tx_cal_event.uid
+													AND tx_cal_event_category_mm'.$i.'.uid_foreign = "'.$categories[$i].'"
+												GROUP BY
+													tx_cal_event_category_mm'.$i.'.uid_foreign)';
+		
+				}
+			}
+		}
+		
 		return $categorySearchString;
 	}
 	
@@ -260,6 +285,14 @@ class CategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 					self::$categoryToFilter = $implodedAllowedCategories;
 				}
 				break;
+			case 4 : // minimum match
+					$allowedCategories = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->cObj->stdWrap ($this->conf ['view.'] ['category'], $this->conf ['view.'] ['category.']), 1);
+					if (! empty ($allowedCategories)) {
+						$implodedAllowedCategories = implode (',', $allowedCategories);
+						self::$categoryToFilter = $implodedAllowedCategories;
+					}
+					break;
+			
 		}
 		
 		if (! $this->rightsObj->isCalAdmin () && $this->conf ['rights.'] [$this->conf ['view'] == 'create_event' ? 'create.' : 'edit.'] ['event.'] ['fields.'] ['category.'] ['allowedUids'] != '') {

@@ -49,18 +49,35 @@ The intention is to make sure that
 Previous version were not that strict: Events were shown if an event
 had at least one allowed category assigned.
 
-*Example:* Your event E1 has categories “C1” and “C2” assigned, event
-E2 has “C1”
+*Example:* Your 
+event E1 has categories “C1”, 
+event E2 has “C1” and “C2” assigned and 
+event E3 has “C1”, “C2” and “C3” assigned
 
 ================================    ===============    =====================
 Category filter mode                Category filter    Result
 ================================    ===============    =====================
-Show only selected (exact match)    C1                 E1 is not shown.
-                                                       E2 is shown.
+Show only selected (exact match)    C1                 E1 is shown.
 Show only selected (exact match)    C1, C2             E1 and E2 are shown.
-Show only selected (exact match)    C2                 E1 is shown.
-                                                       E2 is not shown.
-Don't show selected...              C2                 E1 is not shown.
-                                                       E2 is shown.
+Show only selected (exact match)    C1, C2, C3         E1, E2 and E3 are shown.
+
+Show only selected (exact match)    C2                 none is shown.
+Show only selected (exact match)    C3                 none is shown.
+Show only selected (exact match)    C1, C3             E1 is shown.
+
+Show only selected (any)            C1                 E1, E2 and E3 are shown.
+Show only selected (any)            C1, C2             E1, E2 and E3 are shown.
+Show only selected (any)            C1, C2, C3         E1, E2 and E3 are shown.
+
+Show only selected (any)            C2                 E2 and E3 are shown.
+Show only selected (any)            C3                 E3 is shown.
+
+Show only selected (minimum match)  C1                 E1, E2 and E3 are shown.
+Show only selected (minimum match)  C1, C2             E2 and E3 are shown.
+Show only selected (minimum match)  C1, C2, C3         E3 is shown.
+
 Don't show selected...              C1                 Nothing is shown.
+Don't show selected...              C2                 E1 is shown.
+Don't show selected...              C3                 E1 and E2 are shown.
+
 ================================    ===============    =====================

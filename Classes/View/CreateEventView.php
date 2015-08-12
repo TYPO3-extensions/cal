@@ -143,16 +143,18 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		
 		$page = '';
 		if ($this->conf ['view.'] ['enableAjax'] && $this->controller->piVars ['pid']) {
-			$page = $this->cObj->fileResource ($this->conf ['view.'] ['create_event.'] ['ajaxTemplate']);
+			$path = $this->conf ['view.'] ['create_event.'] ['ajaxTemplate'];
+			$page = $this->cObj->fileResource ($path);
 			$this->conf ['noWrapInBaseClass'] = 1;
 			header ("Content-Type: application/xml");
 			header ("Accept-Charset: UTF-8");
 		} else {
-			$page = $this->cObj->fileResource ($this->conf ['view.'] ['create_event.'] ['template']);
+			$path = $this->conf ['view.'] ['create_event.'] ['template'];
+			$page = $this->cObj->fileResource ($path);
 		}
 		
 		if ($page == '') {
-			return \TYPO3\CMS\Cal\Utility\Functions::createErrorMessage ('No create event template file found at: >' . $this->conf ['view.'] ['create_event.'] ['template'] . '<.', 'Please make sure the path is correct and that you included the static template for fe-editing.');
+			return \TYPO3\CMS\Cal\Utility\Functions::createErrorMessage ('No create event template file found at: >' . $path . '<.', 'Please make sure the path is correct and that you included the static template for fe-editing.');
 		}
 		
 		if (is_object ($object) && ! $object->isUserAllowedToEdit ()) {

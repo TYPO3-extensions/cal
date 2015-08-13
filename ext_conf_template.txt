@@ -23,9 +23,6 @@ showTimes = 1
 # cat=basic/enable/250; type=boolean; label= Use Teaser Field:  Show the teaser field in addition to title and description.
 useTeaser = 0
 
-# cat=basic/enable/270; type=boolean; label= Use Record Selector:  Displays the record selector instead of dropdown boxes for fe_users and fe_groups selection in backend
-useRecordSelector = 0
-
 # cat=basic/enable/290; type=boolean; label= Use New Recurring Event Model:  This will use an index table for recurring events, reducing memory consumption and improving performance. If you have already created events, you must visit the Cal Indexer backend module to make sure they are indexed properly. If you use the Scheduler in TYPO3 4.3 with Calendar Base, you must enable this setting.
 useNewRecurringModel = 1
 

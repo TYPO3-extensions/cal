@@ -66,8 +66,6 @@ $tx_cal_calendar = array(
 							'type' => 'group',
 							'internal_type' => 'db',
 							'MM' => 'tx_cal_calendar_user_group_mm',
-							'foreign_table' => 'fe_users',
-							'neg_foreign_table' => 'fe_groups',
 							'size' => 4,
 							'minitems' => 0,
 							'autoSizeMax' => 25,
@@ -94,8 +92,6 @@ $tx_cal_calendar = array(
 							'type' => 'group',
 							'internal_type' => 'db',
 							'MM' => 'tx_cal_calendar_fnb_user_group_mm',
-							'foreign_table' => 'fe_users',
-							'neg_foreign_table' => 'fe_groups',
 							'size' => 6,
 							'minitems' => 0,
 							'maxitems' => 100,
@@ -284,22 +280,6 @@ $tx_cal_calendar = array(
 		)
 	)
 );
-
-if ($configuration['useRecordSelector']){
-	unset($tx_cal_calendar['columns']['owner']['config']['foreign_table']);
-	unset($tx_cal_calendar['columns']['owner']['config']['neg_foreign_table']);
-
-	$tx_cal_calendar['columns']['owner']['config']['type'] = 'group';
-	$tx_cal_calendar['columns']['owner']['config']['internal_type'] = 'db';
-	$tx_cal_calendar['columns']['owner']['config']['allowed'] = 'fe_users,fe_groups';
-
-	unset($tx_cal_calendar['columns']['fnb_user_cnt']['config']['foreign_table']);
-	unset($tx_cal_calendar['columns']['fnb_user_cnt']['config']['neg_foreign_table']);
-
-	$tx_cal_calendar['columns']['fnb_user_cnt']['config']['type'] = 'group';
-	$tx_cal_calendar['columns']['fnb_user_cnt']['config']['internal_type'] = 'db';
-	$tx_cal_calendar['columns']['fnb_user_cnt']['config']['allowed'] = 'fe_users,fe_groups';
-}
 
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('scheduler')){
 	$tx_cal_calendar['tx_cal_calendar']['columns']['refresh']['displayCond'] = 'EXT:scheduler:LOADED:true';

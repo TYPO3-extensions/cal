@@ -1,34 +1,16 @@
 <?php
 namespace TYPO3\CMS\Cal\View;
 /**
- * *************************************************************
- * Copyright notice
+ * This file is part of the TYPO3 extension Calendar Base (cal).
  *
- * (c) 2005-2008 Mario Matzulla
- * (c) 2005-2008 Christian Technology Ministries International Inc.
- * All rights reserved
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- * This file is part of the Web-Empowered Church (WEC)
- * (http://WebEmpoweredChurch.org) ministry of Christian Technology Ministries
- * International (http://CTMIinc.org). The WEC is developing TYPO3-based
- * (http://typo3.org) free software for churches around the world. Our desire
- * is to use the Internet to help offer new life through Jesus Christ. Please
- * see http://WebEmpoweredChurch.org/Jesus.
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- * You can redistribute this file and/or modify it under the terms of the
- * GNU General Public License as published by the Free Software Foundation;
- * either version 2 of the License, or (at your option) any later version.
- *
- * The GNU General Public License can be found at
- * http://www.gnu.org/copyleft/gpl.html.
- *
- * This file is distributed in the hope that it will be useful for ministry,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * This copyright notice MUST APPEAR in all copies of the file!
- * *************************************************************
+ * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
 /**

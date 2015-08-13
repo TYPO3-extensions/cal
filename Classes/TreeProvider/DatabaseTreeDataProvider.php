@@ -1,6 +1,7 @@
 <?php
+namespace TYPO3\CMS\Cal\TreeProvider;
 /**
- * This file is part of the TYPO3 CMS project.
+ * This file is part of the TYPO3 extension Calendar Base (cal).
  *
  * It is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License, either version 2
@@ -9,13 +10,13 @@
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  *
- * The TYPO3 project - inspiring people to share!
+ * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
 /**
  * TCA tree data provider which considers
  */
-class Tx_Cal_TreeProvider_DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\DatabaseTreeDataProvider {
+class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\DatabaseTreeDataProvider {
 
 	/**
 	 * @var \TYPO3\CMS\Core\Authentication\BackendUserAuthentication

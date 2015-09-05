@@ -379,6 +379,21 @@ plugin.tx\_cal\_controller
    Default
 
 
+.. container:: table-row
+
+   Property
+         activateFluid
+
+   Data type
+         Boolean
+
+   Description
+         If set, it activates the rendering of the fluid list template
+
+   Default
+         0
+   
+
 .. ###### END~OF~TABLE ######
 
 [tsref:plugin.tx\_cal\_controller]

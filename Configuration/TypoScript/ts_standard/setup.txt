@@ -70,6 +70,9 @@ plugin.tx_cal_controller {
 	#				Useful if an event should only show up for one language. 
 	showRecordsWithoutDefaultTranslation = 0
 	
+	# @description boolean that activates the rendering of the fluid list template
+	activateFluid = 0 
+	
 	view {
 		# @description	Allowed calendar views. First one in the list is the default view.  
 		#				Options are day,week,month,year,list,event,search_all,search_event,search_location,search_organizer,organizer,location,admin,create_event,confirm_event,save_event,edit_event,delete_event,remove_event,create_location,confirm_location,save_location,edit_loaction,delete_location,remove_location,create_organizer,confirm_organizer,save_organizer,edit_organizer,delete_organizer,remove_organizer,create_calendar,confirm_calendar,save_calendar,edit_calendar,delete_calendar,remove_calendar,create_category,confirm_category,save_category,edit_category,delete_category,remove_category.

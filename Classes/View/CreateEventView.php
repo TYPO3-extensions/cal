@@ -41,9 +41,6 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	var $RTEtypeVal = 'text';
 	var $thePidValue;
 	var $validation = '';
-	var $useDateSelector = false;
-	var $dateSelectorConf = '';
-	var $dateFormatArray = Array ();
 	var $cal_notifyUserIds = Array ();
 	var $cal_notifyGroupIds = Array ();
 	var $eventType = 'tx_cal_phpicalendar';
@@ -168,41 +165,9 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$page = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($page, $sims, Array (), Array ());
 		
 		$sims = array_merge ($requiredFieldsSims, $constrainFieldSims);
-		$sims ['###STARTDATE_SELECTOR###'] = '';
-		$sims ['###ENDDATE_SELECTOR###'] = '';
-		$sims ['###UNTIL_SELECTOR###'] = '';
-		if ($this->useDateSelector) {
-			$sims ['###STARTDATE_SELECTOR###'] = $this->useDateSelector ? tx_rlmpdateselectlib::getInputButton ('startdate', $this->dateSelectorConf) : '';
-			$sims ['###ENDDATE_SELECTOR###'] = $this->useDateSelector ? tx_rlmpdateselectlib::getInputButton ('enddate', $this->dateSelectorConf) : '';
-			$sims ['###UNTIL_SELECTOR###'] = $this->useDateSelector ? tx_rlmpdateselectlib::getInputButton ('until_value', $this->dateSelectorConf) : '';
-		}
 		return \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($page, $sims, Array (), Array ());
 	}
 	function initTemplate() {
-		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('rlmp_dateselectlib')) {
-			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('rlmp_dateselectlib') . 'class.tx_rlmpdateselectlib.php');
-			tx_rlmpdateselectlib::includeLib ();
-			
-			/* Only read date selector option if rlmp_dateselectlib is installed */
-			$this->useDateSelector = $this->conf ['view.'] ['event.'] ['useDateSelector'];
-		}
-		
-		$dateFormatArray = Array ();
-		$dateFormatArray [$this->conf ['dateConfig.'] ['dayPosition']] = '%d';
-		$dateFormatArray [$this->conf ['dateConfig.'] ['monthPosition']] = '%m';
-		$dateFormatArray [$this->conf ['dateConfig.'] ['yearPosition']] = '%Y';
-		$dateFormatString = $dateFormatArray [0] . $this->conf ['dateConfig.'] ['splitSymbol'] . $dateFormatArray [1] . $this->conf ['dateConfig.'] ['splitSymbol'] . $dateFormatArray [2];
-		
-		$this->dateSelectorConf = array (
-				'calConf.' => array (
-						'dateTimeFormat' => $dateFormatString,
-						'inputFieldDateTimeFormat' => $dateFormatString,
-						'toolTipDateTimeFormat' => $dateFormatString 
-				// 'showMethod' => 'absolute',
-				// 'showPositionAbsolute' => '100,150',
-				// 'stylesheet' => 'fileadmin/mystyle.css'
-								) 
-		);
 	}
 	function getEventCalendarMarker(& $template, & $sims, & $rems) {
 		$sims ['###EVENT_CALENDAR###'] = $this->object->getCalendarUid ();

@@ -674,21 +674,6 @@ plugin.tx\_cal\_controller.view.event
 .. container:: table-row
 
    Property
-         useDateSelector
-   
-   Data type
-         Boolean
-   
-   Description
-         Switch to enable the dateSelector for create- and edit-event view
-   
-   Default
-         0
-
-
-.. container:: table-row
-
-   Property
          substitutePageTitle
    
    Data type
@@ -10061,87 +10046,9 @@ plugin.tx\_cal\_controller.view.list.event
          Default:
 
 
-.. container:: table-row
-
-   Property
-         useDateSelector
-   
-   Data type
-         Boolean
-   
-   Description
-         Use the frontend date selector from rlmp\_dateselectlib in frontend
-         editing.
-         
-         also:
-         `http://typo3.org/extensions/repository/search/rlmp\_dateselectlib/
-         <http://typo3.org/extensions/repository/search/rlmp_dateselectlib/>`_
-   
-   Default
-         0
-
-
 .. ###### END~OF~TABLE ######
 
 [tsref:plugin.tx\_cal\_controller.view.search\_event.event]
-
-plugin.tx\_cal\_controller.view.search\_event.rlmp\_dateselectorlib\_c
-onfig
-
-.. ### BEGIN~OF~TABLE ###
-
-.. container:: table-row
-
-   Property
-         Property:
-   
-   Data type
-         Data type:
-   
-   Description
-         Description:
-   
-   Default
-         Default:
-
-
-.. container:: table-row
-
-   Property
-         toolTipDateTimeFormat
-   
-   Data type
-         String
-   
-   Description
-         Format for the tooltip
-   
-   Default
-         %Y%m%d
-
-
-.. container:: table-row
-
-   Property
-         inputFieldLabel
-   
-   Data type
-         String
-   
-   Description
-         The label for the input button
-         
-         tweaking the selectorlib also allows images:<img
-         src="###IMG\_PATH###/calendar.gif">
-   
-   Default
-         Select
-
-
-.. ###### END~OF~TABLE ######
-
-[tsref:plugin.tx\_cal\_controller.view.search\_event.rlmp\_dateselecto
-rlib\_config]
 
 plugin.tx\_cal\_controller.view.search\_event.location <
 plugin.tx\_cal\_controller.view.location.location
@@ -10473,7 +10380,7 @@ plugin.tx\_cal\_controller.view.create\_event
          dataWrap = <div><label for="startdate">{LLL:EXT:cal/controller/localla
          ng.xml:l\_event\_edit\_startdate}:</label><input type="text"
          value="\|" name="tx\_cal\_controller[event\_start\_day]"
-         id="event\_start\_day" />###START\_DAY\_SELECTOR###</div>
+         id="event\_start\_day" /></div>
    
    Default
          See Description
@@ -10493,7 +10400,7 @@ plugin.tx\_cal\_controller.view.create\_event
          dataWrap = <div><label for="enddate">{LLL:EXT:cal/controller/locallang
          .xml:l\_event\_edit\_enddate}:</label><input type="text" value="\|"
          name="tx\_cal\_controller[event\_end\_day]" id="event\_end\_day"
-         />###END\_DAY\_SELECTOR###</div>
+         /></div>
    
    Default
          See Description
@@ -10888,7 +10795,7 @@ plugin.tx\_cal\_controller.view.create\_event
          dataWrap = <span id="until"><label for="until">{LLL:EXT:cal/controller
          /locallang.xml:l\_until}:</label><input type="text" value="\|"
          id="until\_value" name="tx\_cal\_controller[until]"
-         />###UNTIL\_SELECTOR###</span>
+         /></span>
    
    Default
          See Description

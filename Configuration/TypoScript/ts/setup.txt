@@ -2637,20 +2637,6 @@ plugin.tx_cal_controller {
 			heading {
 				value = %%%QUERY_FOR%%% %%%EVENT%%%
 			}
-			event {
-				# @description	Use the frontend date selector from rlmp_dateselectlib in search.
-				# @see	http://typo3.org/extensions/repository/search/rlmp_dateselectlib/
-				useDateSelector = 0
-	
-				rlmp_dateselectorlib_config {
-					# @description	Format for the tooltip
-					toolTipDateTimeFormat = {$plugin.tx_cal_controller.view.dateFormat}
-		
-					# @description	The label for the input button
-					# tweaking the selectorlib also allows images:<img src="###IMG_PATH###/calendar.gif">
-					inputFieldLabel =  Select
-				}
-			}
 		}
 		
 		search_location < plugin.tx_cal_controller.view.list

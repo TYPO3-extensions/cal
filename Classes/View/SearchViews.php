@@ -162,47 +162,6 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 		}
 	}
 	
-	public function getSelector(&$page, &$sims, &$rems, $view) {
-		$useDateSelector = false;
-		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('rlmp_dateselectlib')) {
-			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('rlmp_dateselectlib') . 'class.tx_rlmpdateselectlib.php');
-			\tx_rlmpdateselectlib::includeLib ();
-			
-			/* Only read date selector option if rlmp_dateselectlib is installed */
-			$useDateSelector = $this->conf ['view.'] [$this->conf ['view'] . '.'] ['event.'] ['useDateSelector'];
-		}
-		$outputFormat = \TYPO3\CMS\Cal\Utility\Functions::getFormatStringFromConf ($this->conf);
-		
-		$dateSelectorConf = Array (
-				'calConf.' => $this->conf ['view.'] [$this->conf ['view'] . '.'] ['event.'] ['rlmp_dateselectorlib_config.'] 
-		);
-		
-		$dateSelectorConf ['calConf.'] ['dateTimeFormat'] = $outputFormat;
-		$dateSelectorConf ['calConf.'] ['inputFieldDateTimeFormat'] = $outputFormat;
-		
-		$sims ['###SINGLE_DAY_SELECTOR###'] = $useDateSelector ? tx_rlmpdateselectlib::getInputButton ('single_date', $dateSelectorConf) : '';
-		$sims ['###START_DAY_SELECTOR###'] = $useDateSelector ? tx_rlmpdateselectlib::getInputButton ('event_start_day', $dateSelectorConf) : '';
-		$sims ['###END_DAY_SELECTOR###'] = $useDateSelector ? tx_rlmpdateselectlib::getInputButton ('event_end_day', $dateSelectorConf) : '';
-	}
-	
-	public function getStartDaySelectorMarker(&$page, &$sims, &$rems, $view) {
-		if (! $sims ['###START_DATE_SELECTOR###']) {
-			$this->getSelector ($page, $sims, $rems, $view);
-		}
-	}
-	
-	public function getEndDaySelectorMarker(&$page, &$sims, &$rems, $view) {
-		if (! $sims ['###END_DATE_SELECTOR###']) {
-			$this->getSelector ($page, $sims, $rems, $view);
-		}
-	}
-	
-	public function getSingleDaySelectorMarker(&$page, &$sims, &$rems, $view) {
-		if (! $sims ['###SINGLE_DATE_SELECTOR###']) {
-			$this->getSelector ($page, $sims, $rems, $view);
-		}
-	}
-	
 	public function getStartAndEnd(&$page, &$sims, &$rems, $view) {
 		$outputFormat = \TYPO3\CMS\Cal\Utility\Functions::getFormatStringFromConf ($this->conf);
 		if (! $this->controller->piVars ['submit']) {

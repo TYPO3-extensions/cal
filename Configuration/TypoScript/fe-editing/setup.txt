@@ -2,9 +2,6 @@ plugin.tx_cal_controller {
 	view {
 		dontShowConfirmView = 0
 		
-		# @description	Switch to enable the dateSelector for create- and edit-event view
-		event.useDateSelector = 0
-		
 		create_event {
 		
 			# @description	Template for creation of an event in the frontend.
@@ -90,12 +87,12 @@ plugin.tx_cal_controller {
 			
 			# @description	Standard wrap for the startdate field
 			startdate_stdWrap {
-				dataWrap = 	<p><label for="startdate">%%%WHEN%%%:</label><input type="text" value="|" name="tx_cal_controller[startdate]" id="startdate" />###STARTDATE_SELECTOR### ###STARTDATE_REQUIRED###
+				dataWrap = 	<p><label for="startdate">%%%WHEN%%%:</label><input type="text" value="|" name="tx_cal_controller[startdate]" id="startdate" class="datepicker"/>###STARTDATE_REQUIRED###
 			}
 			
 			# @description	Standard wrap for the enddate field
 			enddate_stdWrap {
-				dataWrap = 	<input type="text" value="|" name="tx_cal_controller[enddate]" id="enddate" />###ENDDATE_REQUIRED### ###ENDDATE_SELECTOR### ###STARTDATE_CONSTRAIN### ###START_CONSTRAIN###</p>
+				dataWrap = 	<input type="text" value="|" name="tx_cal_controller[enddate]" id="enddate" class="datepicker"/>###ENDDATE_REQUIRED### ###STARTDATE_CONSTRAIN### ###START_CONSTRAIN###</p>
 			}
 			
 			# @description	Standard wrap for the starttime field
@@ -287,7 +284,7 @@ plugin.tx_cal_controller {
 			
 			# @description	Standard wrap for the until field
 			until_stdWrap {
-				dataWrap = <span id="until"><label for="until">%%%UNTIL%%%:</label><input type="text" value="|" id="until_value" name="tx_cal_controller[until]" id="until" />###UNTIL_SELECTOR###</span>
+				dataWrap = <span id="until"><label for="until">%%%UNTIL%%%:</label><input type="text" value="|" id="until_value" name="tx_cal_controller[until]" id="until" /></span>
 			}
 			
 			# @description	Standard wrap for the count field

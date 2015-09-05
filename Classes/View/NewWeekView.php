@@ -504,6 +504,14 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 			$classes .= ' ' . $conf['view.']['month.']['monthOffStyle'];
 		}
 		
+		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray('NewWeekView','postDayClassesViewMarker','view');
+		// Hook: postDayClassesViewMarker
+		foreach ($hookObjectsArr as $hookObj) {
+			if (method_exists($hookObj, 'postDayClassesViewMarker')) {
+				$hookObj->postDayClassesViewMarker($this, $weekdayIndex, $classes);
+			}
+		}
+		
 		return $classes;
 	}
 	private function getDayLink($weekdayIndex) {

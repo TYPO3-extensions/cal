@@ -747,7 +747,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$category_mm_relation_table = 'tx_cal_event_category_mm';
 		$switchUidLocalForeign = false;
-		if ($this->extConf ['categoryService'] == 'sys_cateogry'){
+		if ($this->extConf ['categoryService'] == 'sys_category'){
 			$category_mm_relation_table = 'sys_category_record_mm';
 			$switchUidLocalForeign = true;
 		}
@@ -902,7 +902,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$where = 'uid_local = ' . $uid;
 			$category_mm_relation_table = 'tx_cal_event_category_mm';
 			$switchUidLocalForeign = false;
-			if ($this->extConf ['categoryService'] == 'sys_cateogry'){
+			if ($this->extConf ['categoryService'] == 'sys_category'){
 				$category_mm_relation_table = 'sys_category_record_mm';
 				$switchUidLocalForeign = true;
 				$GLOBALS ['TYPO3_DB']->exec_DELETEquery ($category_mm_relation_table, $where);

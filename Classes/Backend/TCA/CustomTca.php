@@ -441,7 +441,7 @@ class CustomTca {
 	public function getByMonthDayRow($endString) {
 		$html = '<div class="row">';
 		
-		$html .= 'Day ';
+		$html .= $GLOBALS['LANG']->getLL ('tx_cal_event.recurs_day') . ' ';
 		$html .= '<select class="day" onchange="byMonthDay.save()">';
 		$html .= '<option value=""></option>';
 		for ($i = 1; $i < 32; $i ++) {

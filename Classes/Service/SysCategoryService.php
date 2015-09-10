@@ -189,17 +189,18 @@ class SysCategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$categorySearchString .= ' AND sys_category_record_mm.uid_local = "'.$categories[$i].'" ';
 				} else {
 					$categorySearchString .= ' AND (';
-
-					$categorySearchString .= '	SELECT
-													tx_cal_event'.$i.'.uid
-												FROM
-													sys_category_record_mm sys_category_record_mm'.$i.'
-													JOIN tx_cal_event tx_cal_event'.$i.' ON sys_category_record_mm'.$i.'.uid_foreign = tx_cal_event'.$i.'.uid
-												WHERE
-													tx_cal_event'.$i.'.uid = tx_cal_event.uid
-													AND sys_category_record_mm'.$i.'.uid_local = "'.$categories[$i].'"
-												GROUP BY
-													sys_category_record_mm'.$i.'.uid_local)';
+					
+					$categorySearchString .= '    SELECT
+                                                    tx_cal_event'.$i.'.uid
+                                                FROM
+                                                    sys_category_record_mm sys_category_record_mm'.$i.'
+                                                    JOIN tx_cal_event tx_cal_event'.$i.' ON sys_category_record_mm'.$i.'.uid_foreign = tx_cal_event'.$i.'.uid
+                                                WHERE
+                                                    tx_cal_event'.$i.'.uid = tx_cal_event.uid
+                                                    AND sys_category_record_mm'.$i.'.uid_local = "'.$categories[$i].'"
+                                                    AND sys_category_record_mm'.$i.'.tablenames = "tx_cal_event"
+                                                GROUP BY
+                                                    sys_category_record_mm'.$i.'.uid_local)';
 
 				}
 			}

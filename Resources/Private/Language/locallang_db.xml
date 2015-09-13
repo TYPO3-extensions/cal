@@ -48,6 +48,7 @@
 			<label index="tx_cal_event.freq">Regular Frequency Rule</label>
 			<label index="tx_cal_event.add_recurrence">Add Recurrence</label>
 			<label index="tx_cal_event.remove_recurrence">Remove Recurrence</label>
+			<label index="tx_cal_event.recurs_day">Day</label>
 			<label index="tx_cal_event.recurs_every_month">of every month.</label>
 			<label index="tx_cal_event.recurs_selected_months">of selected months.</label>
 			<label index="tx_cal_event.byday">By Day (a combination of:

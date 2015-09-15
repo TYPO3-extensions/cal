@@ -213,7 +213,12 @@ class ItemsProcFunc {
 			if (is_array ($cache [$GLOBALS ['BE_USER']->user ['uid']]) && $cache [$GLOBALS ['BE_USER']->user ['uid']] ['pidlist']) {
 				$pidlist = $cache [$GLOBALS ['BE_USER']->user ['uid']] ['pidlist'];
 			} else {
-				$mounts = $GLOBALS ['WEBMOUNTS'];
+				$mounts = Array();
+				if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7001000) {
+					$mounts = $GLOBALS ['BE_USER']->returnWebmounts();
+				} else {
+					$mounts = $GLOBALS ['WEBMOUNTS'];
+				}
 				$qG = new \TYPO3\CMS\Core\Database\QueryGenerator();
 				$pidlist = '';
 				foreach ($mounts as $idx => $uid) {

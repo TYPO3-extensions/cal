@@ -252,7 +252,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			if ($this->conf ['view.'] ['showEditableEventsOnly'] == 1 && (! $event->isUserAllowedToEdit () && ! $event->isUserAllowedToDelete ())) {
 				continue;
 			}
-			if ($row ['category_uid'] != '') {
+			if ($row ['category_uid'] > 0) {
 				$categoryArray = $categoryService->getCategoriesForEvent($row ['uid']);
 				foreach ($categoryArray as $category) {
 					$event->addCategory ($category);

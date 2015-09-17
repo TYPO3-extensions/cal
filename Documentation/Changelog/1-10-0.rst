@@ -1,0 +1,27 @@
+
+1.10.0 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+	* Bug #68755     - Fatal error: Class 'TYPO3\CMS\cal\cron\CalendarScheduler' not found
+	* Bug #68943     - RTE not loading in T3 7.4
+	* Bug #68944     - Date handling for events broken (T3 7.4)
+	* Bug #68847     - Alter registering of wizard in TCA
+	* Bug #69385     - recurrence events doesn't work with TYPO3 7.4
+	* Bug #69536     - Typo in category if clause
+	* Bug #69530     - FE-Editing not working in actual master -> removed support for rlmp_dateselectlib
+	* Bug #69831     - choose calendar as user in TYPO3 > 7.1
+	* Bug #69468     - cal: Fatal error: Call to a member function modAccess() on null
+	* Bug #69866     - Frontend-Error when no category is selected
+    * Bug            - Pulling things straight: fe_editing templates are now in their own folder
+    * Bug            - Fixes to templates in v1 never got merged into v2
+    * Bug            - Added missing pidList to loadCalendar
+    * Bug            - Fixed json output for loadRights
+    * Bug            - added missing activateFluid parameter to TS and manual
+    * Bug            - Added missing language variable for 'Day' inside the backend form for 'By Day of the Month'
+    * Cleanup        - removed support for phpicalendarEventTemplate - as announced for version 1.5.0
+    * Cleanup        - TYPO3 7.5 removes support for neg_foreign_table in TCA
+    * Cleanup        - removed extension option useRecordSelector
+    * Feature #68495 - New Category selection mode for list view
+    * Feature        - added postDayClassesViewMarker hook for new template rendering

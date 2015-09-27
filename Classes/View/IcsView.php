@@ -57,7 +57,7 @@ class IcsView extends \TYPO3\CMS\Cal\View\BaseView {
 		$this->calendarService = $this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
 		$calendarIds = $this->calendarService->getIdsFromTable ('', $this->conf ['pidList'], true, true);
 		
-		$calendarArray = $this->modelObj->findAllCalendar ('tx_cal_calendar');
+		$calendarArray = $this->modelObj->findAllCalendar ('tx_cal_calendar', $this->conf ['pidList']);
 		
 		foreach ($calendarArray ['tx_cal_calendar'] as $calendar) {
 			if (is_object ($calendar)) {

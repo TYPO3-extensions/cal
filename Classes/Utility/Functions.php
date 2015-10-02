@@ -595,7 +595,7 @@ class Functions {
 	 * @return string code with absolute links
 	 */
 	public static function fixURI($html) {
-		$uriHandler = new TYPO3\CMS\Cal\Controller\UriHandler();
+		$uriHandler = new \TYPO3\CMS\Cal\Controller\UriHandler();
 		$uriHandler->setHTML ($html);
 		$uriHandler->setPATH ('http://' . GeneralUtility::getHostname (1) . '/');
 		

@@ -12,6 +12,7 @@ namespace TYPO3\CMS\Cal\Controller;
  *
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * API for calendar base (cal)
@@ -88,7 +89,8 @@ class Api {
 		// Creating a fake $TSFE object
 		// ***********************************
 		$this->unsetTSFEOnDestruct = true;
-		$GLOBALS ['TSFE'] = new \TYPO3\CMS\Cal\Controller\Tsfe ($GLOBALS ['TYPO3_CONF_VARS'], $pid, '0', 1, '', '', '', '');
+
+		$GLOBALS ['TSFE'] = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Tsfe', $GLOBALS ['TYPO3_CONF_VARS'], $pid, '0', 1, '', '', '', '');
 		$GLOBALS ['TSFE']->connectToDB ();
 		if ($feUserObj == '') {
 			$GLOBALS ['TSFE']->initFEuser ();

@@ -14,30 +14,21 @@ namespace TYPO3\CMS\Cal\Slot;
  */
 
 use TYPO3\CMS\Backend\Form\DataPreprocessor;
-use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
-use TYPO3\CMS\Core\Database\DatabaseConnection;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Slot class for the FormEngine DataPreprocessor
+ * @deprecated since TYPO3 7.5
+ * @see \TYPO3\CMS\Cal\Backend\Form\FormDateDataProvider
  */
-class FormDataPreprocessorSlot implements FormDataProviderInterface {
+class FormDataPreprocessorSlot {
 	
 	public static function register() {
-		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7005000) {
-			$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][\TYPO3\CMS\Cal\Slot\FormDataPreprocessorSlot::class] = array(
-					'before' => array(
-							\TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields::class,
-					),
-			);
-		} else {
-			\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class)->connect(
-					\TYPO3\CMS\Backend\Form\DataPreprocessor::class,
-					'fetchRecordPostProcessing',
-					\TYPO3\CMS\Cal\Slot\FormDataPreprocessorSlot::class,
-					'fetchCalRecordPostProcessing'
-			);
-		}
+		\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher::class)->connect(
+			\TYPO3\CMS\Backend\Form\DataPreprocessor::class,
+			'fetchRecordPostProcessing',
+			\TYPO3\CMS\Cal\Slot\FormDataPreprocessorSlot::class,
+			'fetchCalRecordPostProcessing'
+		);
 	}
 
 	/**
@@ -60,34 +51,5 @@ class FormDataPreprocessorSlot implements FormDataProviderInterface {
 
 			$recordData->regTableItems_data[$key] = $value;
 		}
-	}
-	
-	/**
-	 * Migrate date and datetime db field values to timestamp
-	 *
-	 * @param array $result
-	 * @return array
-	 */
-	public function addData(array $result) {
-		$dateTimeFormats = $this->getDatabase()->getDateTimeFormats($result['tableName']);
-		foreach ($result['vanillaTableTca']['columns'] as $column => $columnConfig) {
-			if (isset($columnConfig['config']['tx_cal_event'])) {
-				
-				
-				$mainFields = new \TYPO3\CMS\Cal\Hooks\TceFormsGetmainfields();
-				$mainFields->getMainFields_preProcess($result['tableName'], $result['databaseRow'], NULL);
-				
-				return $result;
-				
-			}
-		}
-		return $result;
-	}
-	
-	/**
-	 * @return DatabaseConnection
-	 */
-	protected function getDatabase() {
-		return $GLOBALS['TYPO3_DB'];
 	}
 }

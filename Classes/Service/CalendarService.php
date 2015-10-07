@@ -25,10 +25,7 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 	var $calendarOwner;
 	var $calendarIds;
 	
-	public function __construct() {
-		parent::__construct ();
-	}
-	
+
 	public function createCalendar($row) {
 		return new \TYPO3\CMS\Cal\Model\CalendarModel($row, $this->getServiceKey ());
 	}

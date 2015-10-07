@@ -27,10 +27,6 @@ class OrganizerAddressService extends \TYPO3\CMS\Cal\Service\BaseService {
 	var $keyId = 'tx_tt_address';
 	var $tableId = 'tt_address';
 	
-	public function __construct() {
-		parent::__construct();
-	}
-	
 	/**
 	 * Looks for an organizer with a given uid on a certain pid-list
 	 * 

@@ -27,10 +27,6 @@ class OrganizerFeUserService extends \TYPO3\CMS\Cal\Service\BaseService {
 	var $keyId = 'tx_feuser';
 	var $tableId = 'fe_users';
 	
-	public function __construct() {
-		parent::__construct();
-	}
-	
 	/**
 	 * Looks for an organizer with a given uid on a certain pid-list
 	 * @param integer $uid

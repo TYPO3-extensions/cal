@@ -424,7 +424,7 @@ class EventRecModel extends \TYPO3\CMS\Cal\Model\Model {
 		} else {
 			$temp = new \TYPO3\CMS\Cal\Model\CalDate ();
 			$temp->setTZbyId ('UTC');
-			$temp->addSeconds ($editOffset);
+			$temp->addSeconds ($deleteOffset);
 			$eventStart = $this->getStart ();
 			$eventHasntStartedYet = $eventStart->after ($temp);
 		}

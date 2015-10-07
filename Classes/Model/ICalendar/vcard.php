@@ -35,8 +35,8 @@ define ('VCARD_GEO_LON', 1);
  * @package Horde_iCalendar
  */
 class vcard extends \TYPO3\CMS\Cal\Model\ICalendar {
-	function vcard($version = '2.1') {
-		return parent::ICalendar ($version);
+	function __construct($version = '2.1') {
+		return parent::__construct ($version);
 	}
 	function getType() {
 		return 'vcard';

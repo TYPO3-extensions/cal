@@ -254,6 +254,7 @@ class ModelController extends \TYPO3\CMS\Cal\Controller\BaseController {
 		return $attendee;
 	}
 	function findAllAttendees($type = '', $pidList = '') {
+		$service = $this->getServiceObjByKey ('cal_attendee_model', 'attendee', $type);
 		
 		/* Look up an attendee with a specific ID inside the model */
 		$attendees = $service->findAllObjects ('attendee', $type, $pidList);
@@ -457,7 +458,7 @@ class ModelController extends \TYPO3\CMS\Cal\Controller\BaseController {
 	/*
 	 * Returns events from all calendar models or a specified model. @param		key		The optional service key to return events for. If no key is given, all events are returned. @return		array		Array of events.
 	 */
-	function findAll($serviceName, $type, $subtype, $pidList, $eventType = '0,1,2,3') {
+	function findAll($serviceName, $type, $subtype, $pidList, $eventTypes = '0,1,2,3') {
 		/* No key provided so return all events */
 		if ($type == '') {
 			

@@ -29,10 +29,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 	var $internalAdditionWhere = ' AND tx_cal_calendar.nearby = 0';
 	var $internalAdditionTable = '';
 	
-	public function __construct() {
-		parent::__construct ();
-	}
-	
+
 	public function getCalNumber() {
 		return $this->calnumber;
 	}
@@ -2464,7 +2461,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$categoryService->getCategoryArray ($this->conf ['pidList'], $categories);
 		// creating events
-		return $this->getEventsFromTable ($categories [0] [0], false, $additionalWhere, $this->getServiceKey (), true, $false, '');
+		return $this->getEventsFromTable ($categories [0] [0], false, $additionalWhere, $this->getServiceKey (), true, false, '');
 	}
 }
 ?>

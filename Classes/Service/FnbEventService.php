@@ -23,10 +23,7 @@ class FnbEventService extends \TYPO3\CMS\Cal\Service\EventService {
 	protected  $calendarIds;
 	protected  $calendarOwner;
 	
-	public function __construct() {
-		parent::__construct();
-	}
-	
+
 	public function findAllWithin(&$start_date, &$end_date, $pidList, $eventType = '0,1,2,3', $additionalWhere = '') {
 		
 		// How to get the events

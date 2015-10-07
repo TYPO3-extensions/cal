@@ -191,7 +191,7 @@ class CategoryModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 		$isAllowedToDeleteGeneralCategory = $rightsObj->isAllowedToDeleteGeneralCategory ();
 		
 		if ($isAllowedToDeleteOwnCategoryOnly) {
-			return $isCalendarOwner;
+			return $isCategoryOwner;
 		}
 		return $isAllowedToDeleteCategory && ($isCategoryOwner || ($this->getCalendarUid () == 0 && $isAllowedToDeleteGeneralCategory) || $isAllowedToDeletePublicCategory);
 	}

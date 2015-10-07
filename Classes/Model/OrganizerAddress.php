@@ -33,7 +33,7 @@ class OrganizerAddress extends \TYPO3\CMS\Cal\Model\Organizer {
 	 *        	to search in
 	 */
 	public function __construct($row, $pidList) {
-		parent::__construct ($row, $pidlist);
+		parent::__construct ($row, $pidList);
 		$this->setObjectType ('organizer');
 		$this->setType ('tx_tt_address');
 		$this->createOrganizer ($row);

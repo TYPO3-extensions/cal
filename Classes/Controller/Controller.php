@@ -2507,7 +2507,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		
 		if ($searchword != '') {
-			$additionalWhere .= $this->cObj->searchWhere ($sw, $this->conf ['view.'] ['search.'] ['searchUserFieldList'], 'fe_users');
+			$additionalWhere .= $this->cObj->searchWhere ($searchword, $this->conf ['view.'] ['search.'] ['searchUserFieldList'], 'fe_users');
 		}
 		
 		// Hook: preSearchUser
@@ -2544,7 +2544,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		
 		if ($searchword != '') {
-			$additionalWhere .= $this->cObj->searchWhere ($sw, $this->conf ['view.'] ['search.'] ['searchGroupFieldList'], 'fe_groups');
+			$additionalWhere .= $this->cObj->searchWhere ($searchword, $this->conf ['view.'] ['search.'] ['searchGroupFieldList'], 'fe_groups');
 		}
 		
 		// Hook: preSearchGroup
@@ -3315,6 +3315,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	public static function convertLinkVarArrayToList($linkVar) {
 		if (is_array ($linkVar)) {
 			$first = true;
+			$new = '';
 			foreach ($linkVar as $key => $value) {
 				if ($first) {
 					if ($value == 'on') {

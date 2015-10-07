@@ -23,11 +23,7 @@ namespace TYPO3\CMS\Cal\Service;
  * @subpackage cal
  */
 class AttendeeService extends \TYPO3\CMS\Cal\Service\BaseService {
-	
-	public function __construct() {
-		parent::__construct ();
-	}
-	
+
 	/**
 	 * Looks for an attendee with a given uid on a certain pid-list
 	 * 

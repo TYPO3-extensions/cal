@@ -94,6 +94,7 @@ if ($controllerPiVars ['translations']) {
 			break;
 	}
 } else if (is_array ($controllerPiVars ['translate'])) {
+	$tempScriptRelPath = $calAPI->controller->scriptRelPath;
 	$calAPI->controller->scriptRelPath = $calAPI->controller->locallangPath;
 	$calAPI->controller->pi_loadLL ();
 	$calAPI->controller->scriptRelPath = $tempScriptRelPath;

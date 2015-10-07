@@ -246,10 +246,10 @@ class TceMainProcessdatamap {
 		 */
 
 		/* preview events on eventViewPid on "save and preview" calls. but only if it's a regular event and the user is in live workspace */
-		if ($table == 'tx_cal_event' && isset ($GLOBALS ['_POST'] ['_savedokview_x']) && ! $fieldArray ['type'] && ! $GLOBALS ['BE_USER']->workspace) {
+		if ($table == 'tx_cal_event' && isset ($GLOBALS ['_POST'] ['_savedokview_x']) && ! $incomingFieldArray ['type'] && ! $GLOBALS ['BE_USER']->workspace) {
 			$pagesTSConfig = BackendUtility::getPagesTSconfig ($GLOBALS ['_POST'] ['popViewId']);
 			if ($pagesTSConfig ['options.'] ['tx_cal_controller.'] ['eventViewPid']) {
-				$GLOBALS ['_POST'] ['popViewId_addParams'] = ($fieldArray ['sys_language_uid'] > 0 ? '&L=' . $fieldArray ['sys_language_uid'] : '') . '&no_cache=1&tx_cal_controller[view]=event&tx_cal_controller[type]=tx_cal_phpicalendar&tx_cal_controller[uid]=' . $id;
+				$GLOBALS ['_POST'] ['popViewId_addParams'] = ($incomingFieldArray ['sys_language_uid'] > 0 ? '&L=' . $incomingFieldArray ['sys_language_uid'] : '') . '&no_cache=1&tx_cal_controller[view]=event&tx_cal_controller[type]=tx_cal_phpicalendar&tx_cal_controller[uid]=' . $id;
 				$GLOBALS ['_POST'] ['popViewId'] = $pagesTSConfig ['options.'] ['tx_cal_controller.'] ['eventViewPid'];
 			}
 		}

@@ -14,8 +14,8 @@ namespace TYPO3\CMS\Cal\Model\ICalendar;
  * @package Horde_iCalendar
  */
 class vnote extends \TYPO3\CMS\Cal\Model\ICalendar {
-	function vnote($version = '1.1') {
-		return parent::ICalendar ($version);
+	function __construct($version = '1.1') {
+		return parent::__construct ($version);
 	}
 	function getType() {
 		return 'vNote';

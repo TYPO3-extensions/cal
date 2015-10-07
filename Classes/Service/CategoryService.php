@@ -30,10 +30,6 @@ class CategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 	var $categoryArrayCached = Array ();
 	public static $categoryToFilter;
 	
-	public function __construct() {
-		parent::__construct ();
-	}
-	
 	/**
 	 * Looks for a category with a given uid on a certain pid-list
 	 * 

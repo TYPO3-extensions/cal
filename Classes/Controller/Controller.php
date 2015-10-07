@@ -3824,8 +3824,8 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	
 	/**
 	 * 
-	 * @param unknown $action
-	 * @param unknown $object
+	 * @param string $action
+	 * @param object $object
 	 */
 	private function checkRedirect($action, $object) {
 		if ($this->conf ['view.'] ['enableAjax']) {
@@ -3849,7 +3849,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	/**
 	 * Method for post processing the rendered event
 	 * 
-	 * @return processed content/output
+	 * @return string $content
 	 */
 	public function finish(&$content) {
 		$hookObjectsArr = $this->getHookObjectsArray ('finishViewRendering');

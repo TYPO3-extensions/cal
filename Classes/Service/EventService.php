@@ -1396,7 +1396,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$i = intval ($this->starttime->getYear ()) - (($this->starttime->getYear () - $eventStart->getYear ()) % $event->getInterval ());
 		}
 		
-		for ($i; $i < intval ($until->getYear ()) + 1; $i ++) {
+		for (; $i < intval ($until->getYear ()) + 1; $i ++) {
 			$byyear [] = $i;
 		}
 		/* If starttime is before or at the same time as the event date, add the event */

@@ -258,8 +258,8 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 				case 'exception_ids' :
 					$this->setExceptionSingleIds (array ());
 					$this->setExceptionGroupIds (array ());
-					foreach (GeneralUtility::trimExplode (',', $piVars ['exception_ids'], 1) as $value) {
-						preg_match ('/(^[a-z])_([0-9]+)/', $value, $idname);
+					foreach (GeneralUtility::trimExplode (',', $piVars ['exception_ids'], 1) as $valueInner) {
+						preg_match ('/(^[a-z])_([0-9]+)/', $valueInner, $idname);
 						if ($idname [1] == 'u') {
 							$this->addExceptionSingleId ($idname [2]);
 						} else if ($idname [1] == 'g') {

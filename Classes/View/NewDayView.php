@@ -122,7 +122,7 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 					}
 					
 					$entries = 0;
-					for ($i; $i->before ($this->events [$timeKey] [$eventKey]->getEnd ()); $i->addSeconds ($gridLength * 60)) {
+					for (; $i->before ($this->events [$timeKey] [$eventKey]->getEnd ()); $i->addSeconds ($gridLength * 60)) {
 						$ymd = $i->format ('%Y%m%d');
 						$hm = $i->format ('%H%M');
 						$viewArray [$ymd] [$hm] [] = $eventMappingKey;

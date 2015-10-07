@@ -74,11 +74,11 @@ class vevent extends \TYPO3\CMS\Cal\Model\ICalendar {
 	/**
 	 * Update the status of an attendee of an event.
 	 *
-	 * @param $email The
+	 * @param string $email The
 	 *        	email address of the attendee.
-	 * @param $status The
+	 * @param string $status The
 	 *        	participant status to set.
-	 * @param $fullname The
+	 * @param string $fullname The
 	 *        	full name of the participant to set.
 	 */
 	function updateAttendee($email, $status, $fullname = '') {

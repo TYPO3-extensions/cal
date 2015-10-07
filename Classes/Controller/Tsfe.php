@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\CMS\Cal\Controller;
+
 /**
  * This file is part of the TYPO3 extension Calendar Base (cal).
  *
@@ -12,19 +12,32 @@ namespace TYPO3\CMS\Cal\Controller;
  *
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
-class Tsfe extends \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController {
-	function Tsfe($TYPO3_CONF_VARS, $id, $type, $no_cache = '', $cHash = '', $jumpurl = '', $MP = '', $RDCT = '') {
-		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 4006000) {
-			return $this->tslib_fe ($TYPO3_CONF_VARS, $id, $type, $no_cache, $cHash, $jumpurl, $MP, $RDCT);
-		}
-		return $this->__construct ($TYPO3_CONF_VARS, $id, $type, $no_cache, $cHash, $jumpurl, $MP, $RDCT);
-	}
-	function pageNotFoundHandler($code, $header = '', $reason = '') {
-		// do nothing
-	}
-	function pageNotFoundAndExit($reason = '', $header = '') {
-		// do nothing
-	}
-}
 
-?>
+namespace TYPO3\CMS\Cal\Controller;
+
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+
+/**
+ * Tsfe
+ */
+class Tsfe extends TypoScriptFrontendController
+{
+    /**
+     * @param mixed $code
+     * @param string $header
+     * @param string $reason
+     */
+    function pageNotFoundHandler($code, $header = '', $reason = '')
+    {
+        // do nothing
+    }
+
+    /**
+     * @param string $reason
+     * @param string $header
+     */
+    function pageNotFoundAndExit($reason = '', $header = '')
+    {
+        // do nothing
+    }
+}

@@ -33,9 +33,6 @@ class DateParser {
 	var $timeObj;
 	var $conf;
 	
-	public function __construct() {
-	}
-	
 	public function parse($value, $conf = array(), $timeObj = '') {
 		if ($timeObj == '') {
 			$timeObj = new \TYPO3\CMS\Cal\Model\CalDate ();

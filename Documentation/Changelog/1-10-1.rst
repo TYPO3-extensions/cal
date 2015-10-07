@@ -1,0 +1,10 @@
+
+1.10.1 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+    * Bug #70140     - cal ics-view: missing links
+    * Bug #70319     - Crash due to Missing Backslash at Beginning of Namespace
+    * Bug #70268     - infinite loop - wrong check in CalDate
+	* Bug            - Fixed rendering for Date / Date & time fields of "Recurrence by"

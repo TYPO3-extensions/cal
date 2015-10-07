@@ -497,7 +497,7 @@ class NotificationView extends \TYPO3\CMS\Cal\Service\BaseService {
 					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 4005010) {
 						$this->mailer->addAttachment ($icsAttachmentFile);
 					} else {
-						$attachment = Swift_Attachment::fromPath ($icsAttachmentFile, 'text/calendar');
+						$attachment = \Swift_Attachment::fromPath ($icsAttachmentFile, 'text/calendar');
 						$this->mailer->attach ($attachment);
 					}
 					

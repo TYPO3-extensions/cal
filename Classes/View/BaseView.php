@@ -1694,7 +1694,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 	function renderWithFluid($object = null){
 		$templateFile = GeneralUtility::getFileAbsFileName($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'TemplateFluid']);
 
-        /** @var $view Tx_Fluid_View_StandaloneView */
+        /** @var $view \TYPO3\CMS\Fluid\View\StandaloneView */
 		$view = new \TYPO3\CMS\Fluid\View\StandaloneView();
 		$view->setTemplatePathAndFilename($templateFile);
 		$view->assign($this->conf['view'].'View', $this);

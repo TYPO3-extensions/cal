@@ -28,14 +28,6 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 	var $pageinfo;
 	
 	/**
-	 */
-	function init() {
-		global $BE_USER, $BACK_PATH, $TCA_DESCR, $TCA, $CLIENT, $TYPO3_CONF_VARS;
-		
-		parent::init ();
-	}
-	
-	/**
 	 * Adds items to the ->MOD_MENU array.
 	 * Used for the function menu selector.
 	 */
@@ -55,18 +47,18 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 	 * Write the content to $this->content
 	 */
 	function main() {
-		global $BE_USER, $BACK_PATH, $TCA_DESCR, $TCA, $CLIENT, $TYPO3_CONF_VARS;
-		
+
 		// Access check!
 		// The page will show only if there is a valid page and if this page may be viewed by the user
 		$this->pageinfo = \TYPO3\CMS\Backend\Utility\BackendUtility::readPageAccess ($this->id, $this->perms_clause);
 		$access = is_array ($this->pageinfo) ? 1 : 0;
+
+		$this->doc = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Template\\DocumentTemplate');
+		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		
-		if (($this->id && $access) || ($BE_USER->user ['admin'] && ! $this->id)) {
+		if (($this->id && $access) || ($GLOBALS['BE_USER']->user ['admin'] && ! $this->id)) {
 			
 			// Draw the header.
-			$this->doc = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Template\\DocumentTemplate');
-			$this->doc->backPath = $BACK_PATH;
 			$this->doc->form = '<form action="" method="POST">';
 			
 			// JavaScript
@@ -97,16 +89,13 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 			$this->moduleContent ();
 			
 			// ShortCut
-			if ($BE_USER->mayMakeShortcut ()) {
+			if ($GLOBALS['BE_USER']->mayMakeShortcut ()) {
 				$this->content .= $this->doc->spacer (20) . $this->doc->section ('', $this->doc->makeShortcutIcon ('id', implode (',', array_keys ($this->MOD_MENU)), $this->MCONF ['name']));
 			}
 			
 			$this->content .= $this->doc->spacer (10);
 		} else {
 			// If no access or if ID == zero
-			
-			$this->doc = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Template\\DocumentTemplate');
-			$this->doc->backPath = $BACK_PATH;
 			
 			$this->content .= $this->doc->startPage ($GLOBALS ['LANG']->getLL ('title'));
 			$this->content .= $this->doc->header ($GLOBALS ['LANG']->getLL ('title'));

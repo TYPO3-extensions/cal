@@ -157,7 +157,7 @@ abstract class NewTimeView {
 	/**
 	 * Method for post processing the rendered event
 	 * 
-	 * @return processed content/output
+	 * @return string $content content/output
 	 */
 	protected function finish(&$content) {
 		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_base_model', 'finishModelRendering', 'model');

@@ -789,7 +789,7 @@ class TreeView {
 					$treeViewObj->backPath = $this->pObj->backPath;
 					
 					$treeViewObj->setDataFromArray ($dataArray);
-					// $treeViewObj->parentField = $TCA[$config['foreign_table']]['ctrl']['treeParentField'];
+					// $treeViewObj->parentField = $GLOBALS['TCA'][$config['foreign_table']]['ctrl']['treeParentField'];
 					// $treeViewObj->parentField = 'parent_category';
 					// if($row['calendar_id']){
 					// $treeViewObj->clause = ' AND calendar_id = '.$row['calendar_id'];

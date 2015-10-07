@@ -658,7 +658,7 @@ class ICalendar {
 			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('lang') . 'lang.php');
 			$LANG = new language();
 			if (TYPO3_MODE == 'BE') {
-				$LANG->init ($BE_USER->uc ['lang']);
+				$LANG->init ($GLOBALS['BE_USER']->uc ['lang']);
 				$csConvObj = &$LANG->csConvObj;
 			} else {
 				$LANG->init ($GLOBALS ['TSFE']->config ['config'] ['language']);

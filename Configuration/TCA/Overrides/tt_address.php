@@ -6,8 +6,8 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('tt_address')) 
 	$configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
 
 	// Append backend search configuration for tt_address:
-	$delimeter = isset($TCA['tt_address']['ctrl']['searchFields']) ? ',' : '';
-	$TCA['tt_address']['ctrl']['searchFields'] .= $delimeter . 'tx_cal_controller_latitude,tx_cal_controller_longitude';
+	$delimeter = isset($GLOBALS['TCA']['tt_address']['ctrl']['searchFields']) ? ',' : '';
+	$GLOBALS['TCA']['tt_address']['ctrl']['searchFields'] .= $delimeter . 'tx_cal_controller_latitude,tx_cal_controller_longitude';
 
 	// Get the location and organizer structures.
 	$useLocationStructure = $configuration['useLocationStructure'] ?: 'tx_cal_location';

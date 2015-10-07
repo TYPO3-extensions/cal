@@ -49,11 +49,11 @@ $tempColumns = array(
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_enable_accesscontroll;;;;1-1-1', '0');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_calendar;;;;1-1-1', '0');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_category;;;;1-1-1', '0');
-$TCA['be_users']['ctrl']['requestUpdate'] .= ',tx_cal_enable_accesscontroll';
+$GLOBALS['TCA']['be_users']['ctrl']['requestUpdate'] .= ',tx_cal_enable_accesscontroll';
 
 // Add the checkbox and the calendar-/category selector for backend groups.
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('be_groups', $tempColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_enable_accesscontroll;;;;1-1-1');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_calendar;;;;1-1-1');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_category;;;;1-1-1');
-$TCA['be_groups']['ctrl']['requestUpdate'] .= ',tx_cal_enable_accesscontroll';
+$GLOBALS['TCA']['be_groups']['ctrl']['requestUpdate'] .= ',tx_cal_enable_accesscontroll';

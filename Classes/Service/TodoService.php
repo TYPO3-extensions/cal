@@ -511,10 +511,9 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		}
 		
 		// Hook initialization:
-		global $TYPO3_CONF_VARS;
 		$hookObjectsArr = array ();
-		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'])) {
-			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'] as $classRef) {
+		if (is_array ($GLOBALS['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'])) {
+			foreach ($GLOBALS['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'] as $classRef) {
 				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}
@@ -614,10 +613,9 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		}
 		
 		// Hook initialization:
-		global $TYPO3_CONF_VARS;
 		$hookObjectsArr = array ();
-		if (is_array ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'])) {
-			foreach ($TYPO3_CONF_VARS [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'] as $classRef) {
+		if (is_array ($GLOBALS['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'])) {
+			foreach ($GLOBALS['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/service/class.tx_cal_todo_service.php'] ['addAdditionalField'] as $classRef) {
 				$hookObjectsArr [] = & GeneralUtility::getUserObj ($classRef);
 			}
 		}

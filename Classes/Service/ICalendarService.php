@@ -187,8 +187,6 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 	 * Schedules future updates using the gabriel scheduling engine. @param	integer		Frequency (in minutes) between calendar updates. @param 	integer		UID of the calendar to be updated. @param 	integer		URL of the calendar to be updated. @return	none
 	 */
 	function scheduleUpdates($refreshInterval, $uid) {
-		global $TYPO3_CONF_VARS;
-		
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('scheduler')) {
 			$recurring = $refreshInterval * 60;
 			/* If calendar has a refresh time, schedule recurring gabriel event for refresh */

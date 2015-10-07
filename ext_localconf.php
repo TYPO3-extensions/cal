@@ -19,7 +19,7 @@ if (! defined ('TYPO3_MODE'))
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig ('options.tx_cal_controller.headerStyles = default_catheader=#557CA3,green_catheader=#53A062,orange_catheader=#E84F25,pink_catheader=#B257A2,red_catheader=#D42020,yellow_catheader=#B88F0B,grey_catheader=#73738C
 	 options.tx_cal_controller.bodyStyles = default_catbody=#6699CC,green_catbody=#4FC464,orange_catbody=#FF6D3B,pink_catbody=#EA62D4,red_catbody=#FF5E56,yellow_catbody=#CCB21F,grey_catbody=#9292A1');
 
-$TYPO3_CONF_VARS ['FE'] ['eID_include'] ['cal_ajax'] = 'EXT:cal/Classes/Ajax/Ajax.php';
+$GLOBALS['TYPO3_CONF_VARS'] ['FE'] ['eID_include'] ['cal_ajax'] = 'EXT:cal/Classes/Ajax/Ajax.php';
 
 /**
  * Both views and model are provided using TYPO3 services.
@@ -900,7 +900,7 @@ $GLOBALS ['TYPO3_CONF_VARS'] ['SC_OPTIONS'] ['scheduler'] ['tasks'] ['TYPO3\\CMS
 );
 
 /* defining stuff for scheduler */
-if (\TYPO3\CMS\Core\Utility\GeneralUtility::inList ($TYPO3_CONF_VARS ['EXT'] ['extList'], 'scheduler')) {
+if (\TYPO3\CMS\Core\Utility\GeneralUtility::inList ($GLOBALS['TYPO3_CONF_VARS'] ['EXT'] ['extList'], 'scheduler')) {
 	// find type of ext and determine paths
 	// add these to the global TYPO3_LOADED_EXT
 	$temp_extKey = 'scheduler';
@@ -952,28 +952,28 @@ require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXT
 
 // caching framework configuration
 // Register cache 'tx_cal_cache'
-if (! is_array ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'])) {
-	$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] = Array ();
+if (! is_array ($GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'])) {
+	$GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] = Array ();
 }
 // Define string frontend as default frontend, this must be set with TYPO3 4.5 and below
 // and overrides the default variable frontend of 4.6
-if (! isset ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['frontend'])) {
-	$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['frontend'] = 'TYPO3\\CMS\\Core\\Cache\\Frontend\\StringFrontend';
+if (! isset ($GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['frontend'])) {
+	$GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['frontend'] = 'TYPO3\\CMS\\Core\\Cache\\Frontend\\StringFrontend';
 }
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < '4006000') {
 	// Define database backend as backend for 4.5 and below (default in 4.6)
-	if (! isset ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'])) {
-		$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'] = 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend';
+	if (! isset ($GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'])) {
+		$GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['backend'] = 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend';
 	}
 	// Define data and tags table for 4.5 and below (obsolete in 4.6)
-	if (! isset ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'])) {
-		$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] = Array ();
+	if (! isset ($GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'])) {
+		$GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] = Array ();
 	}
-	if (! isset ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] ['cacheTable'])) {
-		$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] ['cacheTable'] = 'tx_cal_cache';
+	if (! isset ($GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] ['cacheTable'])) {
+		$GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] ['cacheTable'] = 'tx_cal_cache';
 	}
-	if (! isset ($TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] ['tagsTable'])) {
-		$TYPO3_CONF_VARS ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] ['tagsTable'] = 'tx_cal_cache_tags';
+	if (! isset ($GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] ['tagsTable'])) {
+		$GLOBALS['TYPO3_CONF_VARS'] ['SYS'] ['caching'] ['cacheConfigurations'] ['tx_cal_cache'] ['options'] ['tagsTable'] = 'tx_cal_cache_tags';
 	}
 }
 

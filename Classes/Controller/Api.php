@@ -30,8 +30,7 @@ class Api {
 	var $conf;
 	var $prefixId = 'tx_cal_controller';
 	var $unsetTSFEOnDestruct = false;
-	function Api() {
-	}
+
 	/**
 	 * Example:
 	 * require_once ('class.tx_cal_api.php');
@@ -39,7 +38,6 @@ class Api {
 	 * $event = $calAPI->findEvent('2','tx_cal_phpicalendar');
 	 */
 	function tx_cal_api_with(&$cObj, &$conf) {
-		// global $TCA,$_EXTKEY;
 		$this->cObj = &$cObj;
 		$this->conf = &$conf;
 		if (! $GLOBALS ['TCA']) {
@@ -255,6 +253,7 @@ class Api {
 			// Get TS object hierarchy in template
 			$tmplPath = explode ('.', $tsObjPath);
 			// Process TS object hierarchy
+			$error = 0;
 			for ($i = 0; $i < count ($tmplPath); $i ++) {
 				
 				// Try to get content type

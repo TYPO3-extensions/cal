@@ -20,9 +20,7 @@ namespace TYPO3\CMS\Cal\View;
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
 class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
-	function AdminView() {
-		$this->BaseView ();
-	}
+
 	function drawAdminPage() {
 		$a = array ();
 		$rems = array ();
@@ -46,7 +44,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 		$feUserUid = $this->rightsObj->getUserId ();
 		$feGroupsArray = $this->rightsObj->getUserGroups ();
 		$isAdmin = $this->rightsObj->isCalAdmin ();
-		
+		$createCalendarLink = '';
 		if ($this->rightsObj->isAllowedTo ("create", "calendar") && $this->rightsObj->isViewEnabled ('create_calendar')) {
 			$this->local_cObj->setCurrentVal ($this->controller->pi_getLL ('l_create_calendar'));
 			$this->controller->getParametersForTyposcriptLink ($this->local_cObj->data, array (
@@ -74,6 +72,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 		if (! $showCalendarForm) {
 			$rems ['###CALENDAR_FORM###'] = '';
 		}
+		$createCategoryLink = '';
 		if ($this->rightsObj->isAllowedTo ("create", "category") && $this->rightsObj->isViewEnabled ('create_category')) {
 			$this->local_cObj->setCurrentVal ($this->controller->pi_getLL ('l_create_category'));
 			$this->controller->getParametersForTyposcriptLink ($this->local_cObj->data, array (
@@ -101,6 +100,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 		if (! $showCategoryForm) {
 			$rems ['###CATEGORY_FORM###'] = '';
 		}
+		$createOrganizerLink = '';
 		if ($this->rightsObj->isAllowedTo ("create", "organizer") && $this->rightsObj->isViewEnabled ('create_organizer')) {
 			$this->local_cObj->setCurrentVal ($this->controller->pi_getLL ('l_create_organizer'));
 			$this->controller->getParametersForTyposcriptLink ($this->local_cObj->data, array (
@@ -127,6 +127,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 		if (! $showOrganizerForm) {
 			$rems ['###ORGANIZER_FORM###'] = '';
 		}
+		$createLocationLink = '';
 		if ($this->rightsObj->isAllowedTo ("create", "location") && $this->rightsObj->isViewEnabled ('create_location')) {
 			$this->local_cObj->setCurrentVal ($this->controller->pi_getLL ('l_create_location'));
 			$this->controller->getParametersForTyposcriptLink ($this->local_cObj->data, array (
@@ -153,6 +154,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 		if (! $showLocationForm) {
 			$rems ['###LOCATION_FORM###'] = '';
 		}
+		$createEventLink = '';
 		if ($this->rightsObj->isAllowedTo ("create", "event") && $this->rightsObj->isViewEnabled ('create_event')) {
 			$this->local_cObj->setCurrentVal ($this->controller->pi_getLL ('l_create_event'));
 			$this->controller->getParametersForTyposcriptLink ($this->local_cObj->data, array (
@@ -192,6 +194,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 				'view' => 'edit_calendar',
 				'type' => 'tx_cal_calendar' 
 		);
+		$editCalendarParams = '';
 		foreach ($params as $key => $value) {
 			$editCalendarParams .= '<input type="hidden" value="' . $value . '" id="calendar_' . $key . '" name="' . $this->prefixId . '[' . $key . ']"/>';
 		}
@@ -210,6 +213,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 				'view' => 'edit_category',
 				'type' => 'tx_cal_category' 
 		);
+		$editCategoryParams = '';
 		foreach ($params as $key => $value) {
 			$editCategoryParams .= '<input type="hidden" value="' . $value . '" id="category_' . $key . '" name="' . $this->prefixId . '[' . $key . ']"/>';
 		}
@@ -236,6 +240,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 				'view' => 'edit_location',
 				'type' => $locationModel 
 		);
+		$editLocationParams = '';
 		foreach ($params as $key => $value) {
 			$editLocationParams .= '<input type="hidden" value="' . $value . '" id="location_' . $key . '" name="' . $this->prefixId . '[' . $key . ']"/>';
 		}
@@ -252,6 +257,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 				'view' => 'edit_organizer',
 				'type' => $organizerModel 
 		);
+		$editOrganizerParams = '';
 		foreach ($params as $key => $value) {
 			$editOrganizerParams .= '<input type="hidden" value="' . $value . '" id="organizer_' . $key . '" name="' . $this->prefixId . '[' . $key . ']"/>';
 		}
@@ -350,9 +356,6 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 				$table = 'fe_users';
 				$where = 'uid = ' . $this->rightsObj->getUserId ();
 				$ids = is_array ($this->controller->piVars ['calendarSubscription']) ? $this->controller->piVars ['calendarSubscription'] : ($this->controller->piVars ['calendarSubscription'] != '' ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->controller->piVars ['calendarSubscription'], 1) : Array ());
-				$fields = Array (
-						'tx_cal_calendar_subscription' => '' 
-				);
 				$allIds = $this->controller->piVars ['calendarSubscriptionIds'] ? \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->controller->piVars ['calendarSubscriptionIds'], 1) : Array ();
 				$fields = Array (
 						'tx_cal_calendar_subscription' => implode (',', array_diff ($allIds, $ids)) 

@@ -95,12 +95,11 @@ class Functions {
 		return $charset;
 	}
 	public static function getOrderBy($table) {
-		global $TCA;
-		
-		if (isset ($TCA [$table] ['ctrl'] ['default_sortby'])) {
-			$orderBy = str_replace ("ORDER BY ", "", $TCA [$table] ['ctrl'] ['default_sortby']);
-		} elseif (isset ($TCA [$table] ['ctrl'] ['sortby'])) {
-			$orderBy = $TCA [$table] ['ctrl'] ['sortby'];
+
+		if (isset ($GLOBALS['TCA'] [$table] ['ctrl'] ['default_sortby'])) {
+			$orderBy = str_replace ("ORDER BY ", "", $GLOBALS['TCA'] [$table] ['ctrl'] ['default_sortby']);
+		} elseif (isset ($GLOBALS['TCA'] [$table] ['ctrl'] ['sortby'])) {
+			$orderBy = $GLOBALS['TCA'] [$table] ['ctrl'] ['sortby'];
 		}
 		
 		return $orderBy;

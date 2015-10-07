@@ -13,6 +13,7 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use OutOfBoundsException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
@@ -84,8 +85,7 @@ class ReminderView extends \TYPO3\CMS\Cal\View\NotificationView {
 	
 	/* @todo	Figure out where this should live */
 	public function scheduleReminder($calEventUID) {
-		global $TYPO3_CONF_VARS;
-		
+
 		// Get complete record
 		$eventRecord = BackendUtility::getRecord ('tx_cal_event', $calEventUID);
 		

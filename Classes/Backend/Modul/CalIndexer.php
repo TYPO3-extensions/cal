@@ -161,7 +161,8 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 
 				if (count($pageIds) > 0 && is_int ($starttime) && is_int ($endtime)) {
 					$content = $GLOBALS ['LANG']->getLL ('indexing') . '<br/>';
-					$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator(0, $starttime, $endtime);
+					/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+					$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', 0, $starttime, $endtime);
 					foreach ($pageIds as $eventPage => $pluginPage) {
 						$this->content .= $this->doc->section (sprintf($GLOBALS ['LANG']->getLL ('droppingTable'),$eventPage), $rgc->cleanIndexTable ($eventPage), 0, 1);
 						$rgc->pageIDForPlugin = $pluginPage;
@@ -176,8 +177,10 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 // 					if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) > 4004999) {
 // 						$this->content .= '<script type="text/javascript" src="jsfunc.tbe_editor.js"></script>';
 // 					}
-					
-					$pages = \TYPO3\CMS\Cal\Utility\RecurrenceGenerator::getRecurringEventPages();
+
+					/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+					$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+					$pages = $rgc->getRecurringEventPages();
 					$selectFieldIds = Array ();
 // 					$content .= '<table><tbody>';
 // 					$content .= '<tr><td>';

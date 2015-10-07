@@ -1,5 +1,4 @@
 <?php
-namespace TYPO3\CMS\Cal\Utility;
 /**
  * This file is part of the TYPO3 extension Calendar Base (cal).
  *
@@ -13,20 +12,30 @@ namespace TYPO3\CMS\Cal\Utility;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+namespace TYPO3\CMS\Cal\Utility;
+
+use TYPO3\CMS\Cal\Backend\Modul\CalIndexer;
+use TYPO3\CMS\Cal\Controller\Api;
+use TYPO3\CMS\Cal\Controller\DateParser;
+use TYPO3\CMS\Cal\Model\CalDate;
+use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+
 /**
  * @author: Mario Matzulla
  */
-
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-
 class RecurrenceGenerator {
 	var $info = '';
 	var $pageIDForPlugin;
 	var $starttime;
 	var $endtime;
 	var $extConf;
+	/**
+	 * @var object
+	 */
+	protected $eventService;
 	
-	public function __construct($pageIDForPlugin, $starttime = null, $endtime = null) {
+	public function __construct($pageIDForPlugin = null, $starttime = null, $endtime = null) {
 		$this->extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		$this->pageIDForPlugin = $pageIDForPlugin;
 		if ($starttime == null) {
@@ -43,48 +52,51 @@ class RecurrenceGenerator {
 		return $this->info;
 	}
 	
-	public static function cleanIndexTable($pageId) {
-		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid in (select uid from tx_cal_event where pid = '. intval($pageId).')');
+	public function cleanIndexTable($pageId) {
+		$this->getDatabaseConnection()->exec_DELETEquery ('tx_cal_index', 'event_uid in (select uid from tx_cal_event where pid = '. intval($pageId).')');
 	}
 	
-	public static function cleanIndexTableOfUid($uid, $table) {
-		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid = ' . $uid . ' AND tablename = "' . $table . '"');
+	public function cleanIndexTableOfUid($uid, $table) {
+		$this->getDatabaseConnection()->exec_DELETEquery ('tx_cal_index', 'event_uid = ' . $uid . ' AND tablename = "' . $table . '"');
 	}
 	
 	function cleanIndexTableOfCalendarUid($uid) {
+		$databaseConnection = $this->getDatabaseConnection();
 		$uids = Array (
 				0 
 		);
 		$select = 'uid';
 		$table = 'tx_cal_event';
 		$where = 'deleted = 0 AND calendar_id = ' . $uid;
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
+		$results = $databaseConnection->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$uids [] = $row ['uid'];
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
-		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid IN (' . implode ($uids) . ')' . ' AND tablename = "' . $table . '"');
+		$databaseConnection->exec_DELETEquery ('tx_cal_index', 'event_uid IN (' . implode ($uids) . ')' . ' AND tablename = "' . $table . '"');
 	}
 	
 	function cleanIndexTableOfExceptionGroupUid($uid) {
-		$cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
+		$databaseConnection = $this->getDatabaseConnection();
+		$cObj = &Registry::Registry ('basic', 'cobj');
 		$uids = Array (
 				0 
 		);
 		$where = 'AND tx_cal_exception_event_group.uid = ' . $uid . $cObj->enableFields ('tx_cal_exception_event') . $cObj->enableFields ('tx_cal_exception_event_group');
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECT_mm_query ('tx_cal_exception_event_group.*', 'tx_cal_exception_event', 'tx_cal_exception_event_mm', 'tx_cal_exception_event_group', $where);
+		$results = $databaseConnection->exec_SELECT_mm_query ('tx_cal_exception_event_group.*', 'tx_cal_exception_event', 'tx_cal_exception_event_mm', 'tx_cal_exception_event_group', $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$uids [] = $row ['uid'];
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
-		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_index', 'event_uid IN (' . implode ($uids) . ')' . ' AND tablename = "tx_cal_exception_event"');
+		$databaseConnection->exec_DELETEquery ('tx_cal_index', 'event_uid IN (' . implode ($uids) . ')' . ' AND tablename = "tx_cal_exception_event"');
 	}
 	
 	function countRecurringEvents($eventPage = 0) {
+		$databaseConnection = $this->getDatabaseConnection();
 		$count = 0;
 		$select = 'count(*)';
 		$table = 'tx_cal_event';
@@ -92,59 +104,59 @@ class RecurrenceGenerator {
 		if ($eventPage > 0) {
 			$where = 'pid = ' . $eventPage . ' AND ' . $where;
 		}
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
+		$results = $databaseConnection->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$count = $row ['count(*)'];
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
 		
 		$table = 'tx_cal_exception_event';
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
+		$results = $databaseConnection->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$count += $row ['count(*)'];
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
 		return $count;
 	}
 	
-	public static function getRecurringEventPages() {
+	public function getRecurringEventPages() {
 		
 		$pages = Array();
 		$table = 'tx_cal_event';
-		self::getPageTitleAndUidFromPagesContaining($table, $pages);
+		$this->getPageTitleAndUidFromPagesContaining($table, $pages);
 		
 		$table = 'tx_cal_exception_event';
-		self::getPageTitleAndUidFromPagesContaining($table, $pages);
+		$this->getPageTitleAndUidFromPagesContaining($table, $pages);
 	
 		return $pages;
 	}
 	
-	private static function getPageTitleAndUidFromPagesContaining($table, &$pages) {
+	protected function getPageTitleAndUidFromPagesContaining($table, &$pages) {
+		$databaseConnection = $this->getDatabaseConnection();
 		$select = 'pid';
 		$where = 'deleted = 0 AND (freq IN ("day","week","month","year") OR (rdate AND rdate_type IN ("date_time","date","period")))';
 		$pids = Array();
 		$groupBy = 'pid';
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where, $groupBy);
+		$results = $databaseConnection->exec_SELECTquery ($select, $table, $where, $groupBy);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$pids[] = $row ['pid'];
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
 		if(!empty($pids)) {
 			$select = 'title,uid';
 			$where = 'deleted = 0 and uid in ('.implode (',', $pids).')';
-			$pids = Array();
-			$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, 'pages', $where);
+			$results = $databaseConnection->exec_SELECTquery ($select, 'pages', $where);
 			if ($results) {
-				while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+				while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 					$pages[$row ['uid']] = $row ['title'];
 				}
-				$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+				$databaseConnection->sql_free_result ($results);
 			}
 		}
 	}
@@ -153,16 +165,18 @@ class RecurrenceGenerator {
 		if (!is_object($this->eventService)){
 			try {
 			$this->eventService = $this->getEventService ();
-			} catch (Exception $e) {
-				$this->info = \TYPO3\CMS\Cal\Backend\Modul\CalIndexer::getMessage($e, FlashMessage::ERROR);
+			} catch (\Exception $e) {
+				$this->info = CalIndexer::getMessage($e, FlashMessage::ERROR);
 			}
 		}
 		if (! is_object ($this->eventService)) {
-			$this->info = \TYPO3\CMS\Cal\Backend\Modul\CalIndexer::getMessage('Could not fetch the event service! Please make sure the page id is correct!', FlashMessage::ERROR);
+			$this->info = CalIndexer::getMessage('Could not fetch the event service! Please make sure the page id is correct!', FlashMessage::ERROR);
 			return;
 		}
-		$this->eventService->starttime = new  \TYPO3\CMS\Cal\Model\CalDate ($this->starttime);
-		$this->eventService->endtime = new  \TYPO3\CMS\Cal\Model\CalDate ($this->endtime);
+		$this->eventService->starttime = new  CalDate ($this->starttime);
+		$this->eventService->endtime = new  CalDate ($this->endtime);
+		$databaseConnection = $this->getDatabaseConnection();
+
 		$select = '*';
 		$table = 'tx_cal_event';
 		$this->info .= '<h3>tx_cal_event</h3><br/><ul>';
@@ -170,9 +184,9 @@ class RecurrenceGenerator {
 		if ($eventPage > 0) {
 			$where = 'pid = ' . $eventPage . ' AND ' . $where;
 		}
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
+		$results = $databaseConnection->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				// make sure that rdate is empty in case that something went wrong during event creation (e.g. by copying)
 				if ($row ["rdate_type"] == "none" || $row ["rdate_type"] == "" || $row ["rdate_type"] == "0") {
 					$row ["rdate"] = "";
@@ -181,19 +195,19 @@ class RecurrenceGenerator {
 				$event = $this->eventService->createEvent ($row, false);
 				$this->eventService->recurringEvent ($event);
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
 		$this->info .= '</ul>';
 		$this->info .= '<h3>tx_cal_exception_event</h3><br/><ul>';
 		$table = 'tx_cal_exception_event';
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
+		$results = $databaseConnection->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$this->info .= '<li>'.$row['title'].'</li>';
 				$event = $this->eventService->createEvent ($row, true);
 				$this->eventService->recurringEvent ($event);
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
 		$this->info .= '</ul>';
 		$this->info .= 'Done.';
@@ -203,23 +217,24 @@ class RecurrenceGenerator {
 	function generateIndexForUid($uid, $table) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
-			$this->info = \TYPO3\CMS\Cal\Backend\Modul\CalIndexer::getMessage('Could not fetch the event service! Please make sure the page id is correct!', $type);
+			$this->info = CalIndexer::getMessage('Could not fetch the event service! Please make sure the page id is correct!', FlashMessage::ERROR);
 			return;
 		}
-		$this->eventService->starttime = new  \TYPO3\CMS\Cal\Model\CalDate ($this->starttime);
-		$this->eventService->endtime = new  \TYPO3\CMS\Cal\Model\CalDate ($this->endtime);
+		$this->eventService->starttime = new  CalDate ($this->starttime);
+		$this->eventService->endtime = new  CalDate ($this->endtime);
 		
 		$this->cleanIndexTableOfUid ($uid, $table);
+		$databaseConnection = $this->getDatabaseConnection();
 		
 		$select = '*';
 		$where = 'uid = ' . $uid;
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
+		$results = $databaseConnection->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$event = $this->eventService->createEvent ($row, $table == 'tx_cal_exception_event');
 				$this->eventService->recurringEvent ($event);
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
 		$this->info = 'Done.';
 	}
@@ -227,24 +242,25 @@ class RecurrenceGenerator {
 	function generateIndexForCalendarUid($uid) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
-			$this->info = \TYPO3\CMS\Cal\Backend\Modul\CalIndexer::getMessage('Could not fetch the event service! Please make sure the page id is correct!', $type);
+			$this->info = CalIndexer::getMessage('Could not fetch the event service! Please make sure the page id is correct!', FlashMessage::ERROR);
 			return;
 		}
-		$this->eventService->starttime = new  \TYPO3\CMS\Cal\Model\CalDate ($this->starttime);
-		$this->eventService->endtime = new  \TYPO3\CMS\Cal\Model\CalDate ($this->endtime);
+		$this->eventService->starttime = new  CalDate ($this->starttime);
+		$this->eventService->endtime = new  CalDate ($this->endtime);
 		
 		$this->cleanIndexTableOfCalendarUid ($uid);
+		$databaseConnection = $this->getDatabaseConnection();
 		
 		$select = '*';
 		$table = 'tx_cal_event';
 		$where = 'calendar_id = ' . $uid;
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
+		$results = $databaseConnection->exec_SELECTquery ($select, $table, $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$event = $this->eventService->createEvent ($row, false);
 				$this->eventService->recurringEvent ($event);
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
 		$this->info = 'Done.';
 	}
@@ -252,42 +268,48 @@ class RecurrenceGenerator {
 	function generateIndexForExceptionGroupUid($uid) {
 		$this->eventService = $this->getEventService ();
 		if (! is_object ($this->eventService)) {
-			$this->info = \TYPO3\CMS\Cal\Backend\Modul\CalIndexer::getMessage('Could not fetch the event service! Please make sure the page id is correct!', $type);
+			$this->info = CalIndexer::getMessage('Could not fetch the event service! Please make sure the page id is correct!', FlashMessage::ERROR);
 			return;
 		}
-		$this->eventService->starttime = new  \TYPO3\CMS\Cal\Model\CalDate ($this->starttime);
-		$this->eventService->endtime = new  \TYPO3\CMS\Cal\Model\CalDate ($this->endtime);
+		$this->eventService->starttime = new  CalDate ($this->starttime);
+		$this->eventService->endtime = new  CalDate ($this->endtime);
 		
 		$this->cleanIndexTableOfExceptionGroupUid ($uid);
-		
-		$select = '*';
+		$databaseConnection = $this->getDatabaseConnection();
+
+		$cObj = &Registry::Registry ('basic', 'cobj');
 		$where = 'tx_cal_exception_event_group.id = ' . $uid . $cObj->enableFields ('tx_cal_exception_event') . $cObj->enableFields ('tx_cal_exception_event_group');
-		$results = $GLOBALS ['TYPO3_DB']->exec_SELECT_mm_query ('tx_cal_exception_event_group.*', 'tx_cal_exception_event', 'tx_cal_exception_event_mm', 'tx_cal_exception_event_group', $where);
+		$results = $databaseConnection->exec_SELECT_mm_query ('tx_cal_exception_event_group.*', 'tx_cal_exception_event', 'tx_cal_exception_event_mm', 'tx_cal_exception_event_group', $where);
 		if ($results) {
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($results)) {
+			while ($row = $databaseConnection->sql_fetch_assoc ($results)) {
 				$event = $this->eventService->createEvent ($row, false);
 				$this->eventService->recurringEvent ($event);
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($results);
+			$databaseConnection->sql_free_result ($results);
 		}
 		$this->info = 'Done.';
 	}
 	
 	function getEventService() {
-		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
+		$modelObj = &Registry::Registry ('basic', 'modelcontroller');
 		if (! $modelObj) {
-			$calAPI = new \TYPO3\CMS\Cal\Controller\Api ();
+			$calAPI = new Api ();
 			$calAPI = &$calAPI->tx_cal_api_without ($this->pageIDForPlugin);
 			$modelObj = $calAPI->modelObj;
 		}
 		return $modelObj->getServiceObjByKey ('cal_event_model', 'event', 'tx_cal_phpicalendar');
 	}
 	
-	private function getTimeParsed($timeString) {
-		$dp = new \TYPO3\CMS\Cal\Controller\DateParser ();
+	protected function getTimeParsed($timeString) {
+		$dp = new DateParser ();
 		$dp->parse ($timeString, 0, '');
 		return $dp->getDateObjectFromStack ();
 	}
-}
 
-?>
+	/**
+	 * @return DatabaseConnection
+	 */
+	protected function getDatabaseConnection(){
+		return $GLOBALS['TYPO3_DB'];
+	}
+}

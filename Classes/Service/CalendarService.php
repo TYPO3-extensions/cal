@@ -12,6 +12,7 @@ namespace TYPO3\CMS\Cal\Service;
  *
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  *
@@ -110,7 +111,8 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator($GLOBALS ['TSFE']->id);
+				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
 				$rgc->generateIndexForCalendarUid ($uid);
 			}
 		} else {
@@ -118,7 +120,9 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfCalendarUid ($uid);
+				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $uid);
+				$rgc->cleanIndexTableOfCalendarUid ($uid);
 			}
 		}
 		
@@ -167,7 +171,9 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		\TYPO3\CMS\Cal\Utility\Functions::clearCache ();
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfCalendarUid ($uid);
+			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $uid);
+			$rgc->cleanIndexTableOfCalendarUid ($uid);
 		}
 	}
 	function retrievePostData(&$insertFields) {
@@ -250,7 +256,8 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator($GLOBALS ['TSFE']->id);
+				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
 				$rgc->generateIndexForCalendarUid ($uid);
 			}
 		}

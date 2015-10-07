@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\CMS\Cal\Cron;
+
 /**
  * This file is part of the TYPO3 extension Calendar Base (cal).
  *
@@ -12,7 +12,19 @@ namespace TYPO3\CMS\Cal\Cron;
  *
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
-class ReminderScheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
+
+namespace TYPO3\CMS\Cal\Cron;
+
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Cal\Controller\Api;
+use TYPO3\CMS\Cal\Utility\Functions;
+use TYPO3\CMS\Scheduler\FailedExecutionException;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
+/**
+ * ReminderScheduler
+ */
+class ReminderScheduler extends AbstractTask {
 	
 	var $uid;
 	
@@ -26,7 +38,7 @@ class ReminderScheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	}
 	
 	public function execute() {
-		$event = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecord ('tx_cal_event', $this->uid);
+		$event = BackendUtility::getRecord ('tx_cal_event', $this->uid);
 		
 		$select = '*';
 		$table = 'tx_cal_fe_user_event_monitor_mm';
@@ -69,29 +81,29 @@ class ReminderScheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 		chdir (PATH_site);
 		
 		/* Check Page TSConfig for a preview page that we should use */
-		$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($event ['pid']);
+		$pageTSConf = BackendUtility::getPagesTSconfig ($event ['pid']);
 		if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
 			$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
 		} else {
 			$pageIDForPlugin = $event ['pid'];
 		}
 		
-		$page = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+		$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 		
 		if ($page ['doktype'] != 254) {
-			$calAPI = new \TYPO3\CMS\Cal\Controller\Api();
+			$calAPI = new Api();
 			$calAPI = &$calAPI->tx_cal_api_without ($pageIDForPlugin);
 			
 			$eventObject = $calAPI->modelObj->findEvent ($event ['uid'], 'tx_cal_phpicalendar', $calAPI->conf ['pidList'], false, false, false, true);
-			$tx_cal_api->conf ['view'] = 'event';
+			$calAPI->conf ['view'] = 'event';
 			
-			$reminderService = &\TYPO3\CMS\Cal\Utility\Functions::getReminderService ();
+			$reminderService = &Functions::getReminderService ();
 			$reminderService->remind ($eventObject, $eventMonitor);
 			return true;
 		}
 		
 		$message = 'Cal was not able to send a reminder notice. You have to point to a page containing the cal Plugin. Configure in pageTSConf of page ' . $event ['pid'] . ': options.tx_cal_controller.pageIDForPlugin';
-		throw new \TYPO3\CMS\Scheduler\FailedExecutionException ($message, 1250596541);
+		throw new FailedExecutionException ($message, 1250596541);
 	}
 	
 	public function getUID() {
@@ -102,5 +114,3 @@ class ReminderScheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 		$this->uid = $uid;
 	}
 }
-
-?>

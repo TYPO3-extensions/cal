@@ -164,29 +164,6 @@ class ReminderView extends \TYPO3\CMS\Cal\View\NotificationView {
 					// taskId == 0 -> schedule task
 					$this->createSchedulerTask ($scheduler, $date, $calEventUID, $timestamp, $offset, $row ['uid']);
 				}
-			} else if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('gabriel')) {
-				
-				$date = new  \TYPO3\CMS\Cal\Model\CalDate ($eventRecord ['start_date'] . '000000');
-				$date->setTZbyId ('UTC');
-				$date->addSeconds ($eventRecord ['start_time']);
-				$timestamp = $date->getTime ();
-				
-				$monitoringUID = 'tx_cal_fe_user_event_monitor_mm:' . $calEventUID;
-				/* Check for existing gabriel events and remove them */
-				$this->deleteReminder ($calEventUID);
-				
-				// No need to remind someone about a past event, but we should delete the existing reminder records
-				if ($date->isFuture ()) {
-					
-					/* Set up the gabriel event */
-					$cron = new \TYPO3\CMS\Cal\Cron\ReminderCron();
-					$cron->setUID ($calEventUID);
-					
-					/* Schedule the gabriel event */
-					$cron->registerSingleExecution ($timestamp - ($offset * 60));
-					$gabriel = GeneralUtility::getUserObj ('EXT:gabriel/class.tx_gabriel.php:&tx_gabriel');
-					$gabriel->addEvent ($cron, $monitoringUID);
-				}
 			}
 		}
 	}

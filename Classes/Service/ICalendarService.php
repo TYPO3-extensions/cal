@@ -214,24 +214,6 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$this->createSchedulerTask ($scheduler, $recurring, $uid);
 				}
 			}
-		} else if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('gabriel')) {
-			$eventUID = 'tx_cal_calendar:' . $uid;
-			
-			/* Check for existing gabriel events and remove them */
-			$this->deleteScheduledUpdates ($uid);
-			
-			/* If calendar has a refresh time, schedule recurring gabriel event for refresh */
-			$recurring = $refreshInterval * 60;
-			if ($recurring) {
-				/* Set up the gabriel event */
-				$cron = new \TYPO3\CMS\Cal\Cron\CalendarCron ();
-				$cron->setUID ($uid);
-				
-				/* Schedule the gabriel event */
-				$cron->registerRecurringExecution (time () + $recurring, $recurring, strtotime ('+10 years'));
-				$gabriel = GeneralUtility::getUserObj ('EXT:gabriel/class.tx_gabriel.php:&tx_gabriel');
-				$gabriel->addEvent ($cron, $eventUID);
-			}
 		}
 	}
 	function createSchedulerTask(&$scheduler, $offset, $calendarUid) {
@@ -649,7 +631,8 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 						} else {
 							$pageIDForPlugin = $pid;
 						}
-						$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator($pageIDForPlugin);
+						/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+						$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
 						$rgc->generateIndexForUid ($eventUid, 'tx_cal_event');
 					}
 					

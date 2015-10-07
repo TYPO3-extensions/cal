@@ -615,7 +615,8 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator($GLOBALS ['TSFE']->id);
+			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
@@ -853,7 +854,9 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		if ($extConf ['useNewRecurringModel']) {
-			$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator($GLOBALS ['TSFE']->id);
+
+			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
 			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		}
 		
@@ -1081,7 +1084,10 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			
 			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($extConf ['useNewRecurringModel']) {
-				\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfUid ($uid, $table);
+
+				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+				$rgc->cleanIndexTableOfUid ($uid, $table);
 			}
 			
 			// Hook: removeEvent

@@ -217,7 +217,8 @@ class TceMainProcessdatamap {
 					
 					$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 					if ($extConf ['useNewRecurringModel']) {
-						$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator($pageIDForPlugin);
+						/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+						$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
 						$rgc->generateIndexForUid ($event ['uid'], $table);
 					}
 					
@@ -335,7 +336,9 @@ class TceMainProcessdatamap {
 						
 						$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 						if ($extConf ['useNewRecurringModel']) {
-							\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfCalendarUid ($id);
+							/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+							$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+							$rgc->cleanIndexTableOfCalendarUid ($id);
 						}
 					}
 					break;
@@ -366,7 +369,9 @@ class TceMainProcessdatamap {
 					if ($page ['doktype'] != 254) {
 						$tx_cal_api = new \TYPO3\CMS\Cal\Controller\Api ();
 						$tx_cal_api = $tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
-						\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfExceptionGroupUid ($id);
+						/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+						$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+						$rgc->cleanIndexTableOfExceptionGroupUid ($id);
 					}
 				}
 			}
@@ -453,7 +458,8 @@ class TceMainProcessdatamap {
 				$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 				$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 				if ($extConf ['useNewRecurringModel'] && $page ['doktype'] != 254) {
-					$rgc = new \TYPO3\CMS\Cal\Utility\RecurrenceGenerator($pageIDForPlugin);
+					/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+					$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
 					$rgc->generateIndexForCalendarUid ($calendar ['uid']);
 				}
 			}

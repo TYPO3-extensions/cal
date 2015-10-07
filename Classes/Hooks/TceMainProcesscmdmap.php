@@ -14,6 +14,7 @@ namespace TYPO3\CMS\Cal\Hooks;
  */
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This hook extends the tcemain class.
@@ -60,7 +61,9 @@ class TceMainProcesscmdmap {
 									
 									$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 									if ($extConf ['useNewRecurringModel']) {
-										\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfUid ($id, $table);
+										/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+										$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+										$rgc->cleanIndexTableOfUid ($id, $table);
 									}
 									
 									/* Delete all deviations of the event */
@@ -134,7 +137,10 @@ class TceMainProcesscmdmap {
 								if ($command == 'delete') {
 									$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 									if ($extConf ['useNewRecurringModel']) {
-										\TYPO3\CMS\Cal\Utility\RecurrenceGenerator::cleanIndexTableOfUid ($id, $table);
+
+										/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+										$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+										$rgc->cleanIndexTableOfUid ($id, $table);
 									}
 								}
 							}

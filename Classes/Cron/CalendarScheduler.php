@@ -1,5 +1,5 @@
 <?php
-namespace TYPO3\CMS\Cal\Cron;
+
 /**
  * This file is part of the TYPO3 extension Calendar Base (cal).
  *
@@ -12,7 +12,16 @@ namespace TYPO3\CMS\Cal\Cron;
  *
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
-class CalendarScheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
+
+namespace TYPO3\CMS\Cal\Cron;
+
+use TYPO3\CMS\Cal\Service\ICalendarService;
+use TYPO3\CMS\Scheduler\Task\AbstractTask;
+
+/**
+ * CalendarScheduler
+ */
+class CalendarScheduler extends AbstractTask {
 	
 	var $uid;
 	
@@ -27,7 +36,7 @@ class CalendarScheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 	
 	public function execute() {
 		$success = true;
-		$service = new \TYPO3\CMS\Cal\Service\ICalendarService();
+		$service = new ICalendarService();
 		$service->update ($this->uid);
 		
 		return $success;
@@ -41,5 +50,3 @@ class CalendarScheduler extends \TYPO3\CMS\Scheduler\Task\AbstractTask {
 		$this->uid = $uid;
 	}
 }
-
-?>

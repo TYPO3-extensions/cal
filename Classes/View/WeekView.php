@@ -229,7 +229,7 @@ class WeekView extends \TYPO3\CMS\Cal\View\BaseView {
 							$j->copy ($starttime);
 							$view_array [$j->format ('%Y%m%d')] ['-1'] [] = $ovlKey . '_' . $eventMappingKey;
 							$j->addSeconds (86400);
-							for ($j; $j->before ($endtime) && $j->before ($end_week_time); $j->addSeconds (86400)) {
+							for (; $j->before ($endtime) && $j->before ($end_week_time); $j->addSeconds (86400)) {
 								$view_array [$j->format ('%Y%m%d')] ['-1'] [] = $ovlKey . '_' . $eventMappingKey;
 							}
 						} else if ($starttime->before ($end_week_time)) {

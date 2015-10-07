@@ -102,9 +102,7 @@ class LocationService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$rightsObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'rightscontroller');
 		$feUserUid = $rightsObj->getUserId ();
 		$feGroupsArray = $rightsObj->getUserGroups ();
-		
-		$lastLocation;
-		
+
 		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_location_service', 'locationServiceClass', 'service');
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'preGetLocationFromTableExec')) {

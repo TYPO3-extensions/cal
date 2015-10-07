@@ -284,8 +284,8 @@ class CalendarModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 					unset ($piVars ['calendarType']);
 					break;
 				case 'owner' :
-					foreach ((array) strip_tags ($this->controller->piVars ['owner']) as $value) {
-						preg_match ('/(^[a-z])_([0-9]+)_(.*)/', $value, $idname);
+					foreach ((array) strip_tags ($this->controller->piVars ['owner']) as $valueInner) {
+						preg_match ('/(^[a-z])_([0-9]+)_(.*)/', $valueInner, $idname);
 						if ($idname [1] == 'u') {
 							$this->setOwner ('fe_users', $idname [2]);
 						} else {
@@ -298,8 +298,8 @@ class CalendarModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 					unset ($piVars ['activateFreeAndBusy']);
 					break;
 				case 'freeAndBusyUser' :
-					foreach ((array) strip_tags ($this->controller->piVars ['freeAndBusyUser']) as $value) {
-						preg_match ('/(^[a-z])_([0-9]+)_(.*)/', $value, $idname);
+					foreach ((array) strip_tags ($this->controller->piVars ['freeAndBusyUser']) as $valueInner) {
+						preg_match ('/(^[a-z])_([0-9]+)_(.*)/', $valueInner, $idname);
 						if ($idname [1] == 'u') {
 							$this->setOwner ('fe_users', $idname [2]);
 						} else {

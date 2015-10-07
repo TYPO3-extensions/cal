@@ -43,7 +43,8 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 		if ($page == '') {
 			return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['other.'] ['searchBoxTemplate'];
 		}
-		return $this->finish ($page, Array ());
+		$rems = array();
+		return $this->finish ($page, $rems);
 	}
 	
 	/**

@@ -1337,7 +1337,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 								$j->setHour(0);
 								$j->setMinute(0);
 								$j->setSecond(0);
-								for ($j;$j->before($endtime); $j->addSeconds(60 * 60 * 24)) {
+								for (;$j->before($endtime); $j->addSeconds(60 * 60 * 24)) {
 									$view_array[$j->format('%Y%m%d')]['000000'][count($view_array[$j->format('%Y%m%d')]['000000'])] = $eventReferenceKey;
 								}
 							}

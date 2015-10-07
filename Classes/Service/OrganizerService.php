@@ -99,9 +99,7 @@ class OrganizerService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$rightsObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'rightscontroller');
 		$feUserUid = $rightsObj->getUserId ();
 		$feGroupsArray = $rightsObj->getUserGroups ();
-		
-		$lastOrganizer;
-		
+
 		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_organizer_service', 'organizerServiceClass', 'service');
 		foreach ($hookObjectsArr as $hookObj) {
 			if (method_exists ($hookObj, 'preGetOrganizerFromTableExec')) {

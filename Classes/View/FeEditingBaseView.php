@@ -430,7 +430,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 				}
 				$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 				$upload = '';
-				for ($i; $i < $max; $i ++) {
+				for (; $i < $max; $i ++) {
 					$temp_sims = Array ();
 					$upload .= $this->cObj->stdWrap ('', $this->conf ['view.'] [$this->conf ['view'] . '.'] [$marker . 'Upload_stdWrap.']);
 					if ($this->isAllowed ($marker.'_caption')) {

@@ -49,8 +49,9 @@ class Api {
 		$this->conf ['writeCachingInfoToDevlog'] = 0;
 		
 		$GLOBALS ['TSFE']->settingLocale ();
-		
-		$this->controller = new \TYPO3\CMS\Cal\Controller\Controller();
+
+
+		$this->controller = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Controller');
 		$this->controller->cObj = &$this->cObj;
 		$this->controller->conf = &$this->conf;
 		
@@ -71,7 +72,7 @@ class Api {
 		$this->modelObj = new \TYPO3\CMS\Cal\Controller\ModelController();
 		
 		$this->viewObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'viewcontroller');
-		$this->viewObj = new \TYPO3\CMS\Cal\Controller\ViewController();
+		$this->viewObj = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\ViewController');
 		
 		/*
 		 * $this->rightsObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry('basic','rightscontroller'); $this->modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry('basic','modelcontroller'); $this->viewObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry('basic','viewcontroller');

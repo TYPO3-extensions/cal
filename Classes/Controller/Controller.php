@@ -56,21 +56,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->conf ['cachingEngine'] = 'cachingFramework';
 		$this->conf ['writeCachingInfoToDevlog'] = 0;
 		
-		// switch for more intelligent caching
-		if ($this->conf ['isUserInt']) {
-			// this->pi_USER_INT_obj=1;
-		} else {
-			$this->pi_checkCHash = TRUE;
-			$requestedNoCache = GeneralUtility::_GP('no_cache');
-			if ($requestedNoCache) {
-				$this->pi_checkCHash = FALSE;
-				$GLOBALS ['TSFE']->set_no_cache();
-			}
-			if (count ($this->piVars) && !$requestedNoCache) {
-				$GLOBALS ['TSFE']->reqCHash ();
-			}
-			$this->pi_USER_INT_obj = 0;
-		}
+		$this->cacheHandling();
 		
 		// Set the week start day, and then include \TYPO3\CMS\Cal\Model\CalDate so that the week start day is already defined.
 		$this->setWeekStartDay ();
@@ -86,6 +72,24 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		
 		return $return;
+	}
+
+	protected function cacheHandling(){
+		// switch for more intelligent caching
+		if ($this->conf ['isUserInt']) {
+			// this->pi_USER_INT_obj=1;
+		} else {
+			$this->pi_checkCHash = TRUE;
+			$requestedNoCache = GeneralUtility::_GP('no_cache');
+			if ($requestedNoCache) {
+				$this->pi_checkCHash = FALSE;
+				$GLOBALS ['TSFE']->set_no_cache();
+			}
+			if (count ($this->piVars) && !$requestedNoCache) {
+				$GLOBALS ['TSFE']->reqCHash ();
+			}
+			$this->pi_USER_INT_obj = 0;
+		}
 	}
 	
 	/**
@@ -271,7 +275,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		
 		if ($this->piVars ['jumpto']) {
-			$dp = new \TYPO3\CMS\Cal\Controller\DateParser ();
+			$dp = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\DateParser');
 			$dp->parse ($this->piVars ['jumpto'], $this->conf ['dateParserConf.']);
 			$newGetdate = $dp->getDateObjectFromStack ();
 			$this->conf ['getdate'] = $newGetdate->format ('%Y%m%d');
@@ -350,7 +354,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$modelObj = new \TYPO3\CMS\Cal\Controller\ModelController ();
 		
 		$viewObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'viewcontroller');
-		$viewObj = new \TYPO3\CMS\Cal\Controller\ViewController ();
+		$viewObj = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\ViewController');
 		
 		$this->checkCalendarAndCategory ();
 		

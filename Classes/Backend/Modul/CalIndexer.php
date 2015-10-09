@@ -223,7 +223,7 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 	}
 	
 	private function getTimeParsed($timeString) {
-		$dp = new \TYPO3\CMS\Cal\Controller\DateParser ();
+		$dp = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\DateParser');
 		$dp->parse ($timeString, 0, '');
 		return $dp->getDateObjectFromStack ();
 	}

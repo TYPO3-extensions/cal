@@ -45,7 +45,7 @@ class TceMainProcesscmdmap {
 							
 							$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 							if ($page ['doktype'] != 254) {
-								$tx_cal_api = new \TYPO3\CMS\Cal\Controller\Api ();
+								$tx_cal_api = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
 								$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 								
 								$notificationService = & \TYPO3\CMS\Cal\Utility\Functions::getNotificationService ();
@@ -176,7 +176,7 @@ class TceMainProcesscmdmap {
 								$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 								if ($page ['doktype'] != 254) {
 									
-									$tx_cal_api = new \TYPO3\CMS\Cal\Controller\Api ();
+									$tx_cal_api = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
 									$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 									
 									$notificationService = & \TYPO3\CMS\Cal\Utility\Functions::getNotificationService ();

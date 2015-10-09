@@ -56,7 +56,7 @@ class IndexerScheduler extends AbstractTask {
 	}
 	
 	private function getTimeParsed($timeString) {
-		$dp = new DateParser ();
+		$dp = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\DateParser');
 		$dp->parse ($timeString, 0, '');
 		return $dp->getDateObjectFromStack ();
 	}	

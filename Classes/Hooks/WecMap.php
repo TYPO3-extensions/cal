@@ -31,7 +31,7 @@ class WecMap {
 		$locationStructure = $this->confArr ['useLocationStructure'] ? $this->confArr ['useLocationStructure'] : 'tx_cal_location';
 		
 		if ($table == $locationStructure && is_object ($markerObj)) {
-			$tx_cal_api = new \TYPO3\CMS\Cal\Controller\Api ();
+			$tx_cal_api = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
 			
 			$cObj = new \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer();
 			$conf = $GLOBALS ['TSFE']->tmpl->setup ['plugin.'] ['tx_cal_controller.'];

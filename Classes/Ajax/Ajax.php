@@ -14,6 +14,8 @@ namespace TYPO3\CMS\Cal\Ajax;
  */
 
 // Exit, if script is called directly (must be included via eID in index_ts.php)
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 if (! defined ('PATH_typo3conf'))
 	die ('Could not access this script directly!');
 
@@ -25,8 +27,8 @@ if ($_COOKIE ['fe_typo_user']) {
 $feUserObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser ();
 // Connect to database:
 \TYPO3\CMS\Frontend\Utility\EidUtility::connectDB ();
-$controllerPiVarsGET = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET ('tx_cal_controller');
-$controllerPiVarsPOST = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST ('tx_cal_controller');
+$controllerPiVarsGET = GeneralUtility::_GET ('tx_cal_controller');
+$controllerPiVarsPOST = GeneralUtility::_POST ('tx_cal_controller');
 $controllerPiVars = Array ();
 if (is_array ($controllerPiVarsPOST) && is_array ($controllerPiVarsGET)) {
 	$controllerPiVars = array_merge ($controllerPiVarsPOST, $controllerPiVarsGET);
@@ -43,14 +45,14 @@ $pidList = $controllerPiVars ['pidList'];
 $view = $controllerPiVars ['view'];
 $type = $controllerPiVars ['type'];
 
+/** @var \TYPO3\CMS\Cal\Controller\Api $calAPI */
+$calAPI = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
 if (is_array ($_SESSION ['cal_api_' . $pid . '_conf'])) {
-	$calAPI = new \TYPO3\CMS\Cal\Controller\Api();
 	$cObj = new \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer();
 	$GLOBALS ['TSFE'] = &$_SESSION ['cal_api_' . $pid . '_tsfe'];
 	$GLOBALS ['TCA'] = &$_SESSION ['cal_api_' . $pid . '_tca'];
 	$calAPI = $calAPI->tx_cal_api_with ($cObj, $_SESSION ['cal_api_' . $pid . '_conf']);
 } else {
-	$calAPI = new \TYPO3\CMS\Cal\Controller\Api();
 	$calAPI = $calAPI->tx_cal_api_without ($pid, $feUserObj);
 	$_SESSION ['cal_api_' . $pid . '_conf'] = $calAPI->conf;
 	$_SESSION ['cal_api_' . $pid . '_tsfe'] = $GLOBALS ['TSFE'];
@@ -115,7 +117,7 @@ if ($controllerPiVars ['translations']) {
 		$res = 'You do not have the proper rights!' . $checkedView . '=' . $view;
 	}
 	
-	$ajax_return_data = \TYPO3\CMS\Core\Utility\GeneralUtility::array2xml (array (
+	$ajax_return_data = GeneralUtility::array2xml (array (
 			'error' => $error,
 			'response' => $res 
 	));

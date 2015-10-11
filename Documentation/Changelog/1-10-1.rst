@@ -7,6 +7,8 @@
     * Bug #70140     - cal ics-view: missing links
     * Bug #70319     - Crash due to Missing Backslash at Beginning of Namespace
     * Bug #70268     - infinite loop - wrong check in CalDate
+    * Bug #70322     - FormEngine removed in CMS7.5 breaks date processing
+    * Bug #70521     - Dates in "Event Record" BE Edit Page interpreted incorrectly
 	* Bug            - Fixed rendering for Date / Date & time fields of "Recurrence by"
 	* Task #70470    - Streamline Tsfe object
 	* Task #70471    - Streamline probale bugs

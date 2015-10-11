@@ -8,3 +8,9 @@
     * Bug #70319     - Crash due to Missing Backslash at Beginning of Namespace
     * Bug #70268     - infinite loop - wrong check in CalDate
 	* Bug            - Fixed rendering for Date / Date & time fields of "Recurrence by"
+	* Task #70470    - Streamline Tsfe object
+	* Task #70471    - Streamline probale bugs
+	* Task #70478    - Streamlin more code....
+	* Task #70479    - Even more code cleanups...
+	* Task #70480    - Complete cleanup of the RecurrenceGenerator
+	* Task #70536    - Use more GeneralUtility::makInstance

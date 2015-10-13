@@ -36,12 +36,15 @@ class Functions {
 		return $path;
 	}
 	public static function clearCache() {
-		// only use cachingFramework if initialized and configured in TYPO3
-		if (\TYPO3\CMS\Core\Cache\Cache::isCachingFrameworkInitialized () && TYPO3_UseCachingFramework && is_object($GLOBALS ['typo3CacheManager'])) {
-			$pageCache = $GLOBALS ['typo3CacheManager']->getCache ('cache_pages');
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7005000) {
+			$pageCache = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager')->getCache('cache_pages');
 			$pageCache->flushByTag ('cal');
 		} else {
-			//$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('cache_pages', 'reg1=77');
+			// only use cachingFramework if initialized and configured in TYPO3
+			if (\TYPO3\CMS\Core\Cache\Cache::isCachingFrameworkInitialized () && TYPO3_UseCachingFramework && is_object($GLOBALS ['typo3CacheManager'])) {
+				$pageCache = $GLOBALS ['typo3CacheManager']->getCache ('cache_pages');
+				$pageCache->flushByTag ('cal');
+			}
 		}
 	}
 	public static function &getNotificationService() {

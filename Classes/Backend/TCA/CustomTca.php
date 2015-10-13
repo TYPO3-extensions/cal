@@ -38,6 +38,9 @@ class CustomTca {
 		$GLOBALS['LANG']->includeLLFile (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('cal') . 'Resources/Private/Language/locallang_db.xml');
 		
 		$this->frequency = $PA ['row'] ['freq'];
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7005000) {
+			$this->frequency = $PA ['row'] ['freq'] [0];
+		}
 		$this->uid = $PA ['row'] ['uid'];
 		$this->row = $PA ['row'];
 		$this->table = $PA ['table'];
@@ -144,7 +147,7 @@ class CustomTca {
 	
 	public function extUrl($PA, $fobj) {
 		$this->init ($PA, $fobj);
-		
+		$out = array();
 		$out [] = $this->commonJS;
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var extUrl = new ExtUrlUI('ext_url-container', 'data[" . $this->table . "][" . $this->uid . "][ext_url]', 'row', '" . $this->getExtUrlRow () . "');";
@@ -175,7 +178,7 @@ class CustomTca {
 	
 	public function byDay($PA, $fobj) {
 		$this->init ($PA, $fobj);
-		
+
 		switch ($this->frequency) {
 			case 'week' :
 				$html = $this->byDay_checkbox ();
@@ -189,7 +192,7 @@ class CustomTca {
 				$html = $this->byDay_select ($row);
 				break;
 		}
-		
+		$out = array();
 		$out [] = $this->commonJS;
 		$out [] = $html;
 		$out [] = '<input type="hidden" name="data[' . $this->table . '][' . $this->uid . '][byday]" id="data[' . $this->table . '][' . $this->uid . '][byday]" value="' . $this->row ['byday'] . '" />';
@@ -214,7 +217,7 @@ class CustomTca {
 				$html = $this->byMonthDay_select ($row);
 				break;
 		}
-		
+		$out = array();
 		$out [] = $this->commonJS;
 		$out [] = $html;
 		$out [] = '<input type="hidden" name="data[' . $this->table . '][' . $this->uid . '][bymonthday]" id="data[' . $this->table . '][' . $this->uid . '][bymonthday]" value="' . $this->row ['bymonthday'] . '" />';
@@ -239,7 +242,7 @@ class CustomTca {
 		$out [] = '<div id="bymonth-container" style="margin-bottom: 5px;">';
 		foreach ($this->months as $value => $label) {
 			$name = "bymonth_" . $value;
-			$out [] = '<div class="row">';
+			$out [] = '<div class="cal-row">';
 			$out [] = '<input style="padding: 0px; margin: 0px;" type="checkbox" name="' . $name . '" value="' . $value . '" onchange="byMonth.save();"/><label style="padding-left: 2px;" for="' . $name . '">' . $label . '</label>';
 			$out [] = '</div>';
 		}
@@ -342,8 +345,8 @@ class CustomTca {
 			} else if ($this->rdateType == 'date_time' || $this->rdateType == 'period') {
 				$params ['wConf'] ['evalValue'] = 'datetime';
 			}
-			
 			if ($this->rdateType == 'period') {
+				$periodArray = array();
 				preg_match ('/P((\d+)Y)?((\d+)M)?((\d+)W)?((\d+)D)?T((\d+)H)?((\d+)M)?((\d+)S)?/', $splittedPeriod [1], $periodArray);
 				$params ['item'] .= '<span style="padding-left:10px;">' . $GLOBALS['LANG']->getLL ('l_duration') . ':</span>' . $GLOBALS['LANG']->getLL ('l_year') . ':<input type="text" value="' . intval ($periodArray [2]) . '" name="rdateYear' . $key . '" id="rdateYear' . $key . '" size="2" onchange="rdateChanged();" />' . $GLOBALS['LANG']->getLL ('l_month') . ':<input type="text" value="' . intval ($periodArray [4]) . '" name="rdateMonth' . $key . '" id="rdateMonth' . $key . '" size="2" onchange="rdateChanged();" />' . $GLOBALS['LANG']->getLL ('l_week') . ':<input type="text" value="' . intval ($periodArray [6]) . '" name="rdateWeek' . $key . '" id="rdateWeek' . $key . '" size="2" onchange="rdateChanged();" />' . $GLOBALS['LANG']->getLL ('l_day') . ':<input type="text" value="' . intval ($periodArray [8]) . '" name="rdateDay' . $key . '" id="rdateDay' . $key . '" size="2" onchange="rdateChanged();" />' . $GLOBALS['LANG']->getLL ('l_hour') . ':<input type="text" value="' . intval ($periodArray [10]) . '" name="rdateHour' . $key . '" id="rdateHour' . $key . '" size="2" onchange="rdateChanged();" />' . $GLOBALS['LANG']->getLL ('l_minute') . ':<input type="text" value="' . intval ($periodArray [12]) . '" name="rdateMinute' . $key . '" id="rdateMinute' . $key . '" size="2" onchange="rdateChanged();" />' . '<br/>';
 			}
@@ -358,6 +361,7 @@ class CustomTca {
 	}
 	
 	public function byDay_checkbox() {
+		$out = array();
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'row');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
@@ -370,7 +374,7 @@ class CustomTca {
 		$out [] = '<div id="byday-container" style="margin-bottom: 5px;">';
 		foreach ($this->weekdays as $value => $label) {
 			$name = "byday_" . $value;
-			$out [] = '<div class="row">';
+			$out [] = '<div class="cal-row">';
 			$out [] = '<input style="padding: 0px; margin: 0px;" type="checkbox" name="' . $name . '" value="' . $value . '" onchange="byDay.save();"/><label style="padding-left: 2px;" for="' . $name . '">' . $label . '</label>';
 			$out [] = '</div>';
 		}
@@ -380,7 +384,7 @@ class CustomTca {
 	}
 	
 	public function byDay_select($row) {
-		
+		$out = array();
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'row', '" . $row . "');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
@@ -397,7 +401,7 @@ class CustomTca {
 	}
 	
 	public function byMonthDay_select($row) {
-		
+		$out = array();
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byMonthDay = new ByMonthDayUI('bymonthday-container', 'data[" . $this->table . "][" . $this->uid . "][bymonthday]', 'row', '" . $row . "');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
@@ -414,7 +418,7 @@ class CustomTca {
 	}
 	
 	public function getByDayRow($endString) {
-		$html = '<div class="row">';
+		$html = '<div class="cal-row">';
 		
 		$html .= '<select class="count" onchange="byDay.save()">';
 		$html .= '<option value="" />';
@@ -439,7 +443,7 @@ class CustomTca {
 	}
 	
 	public function getByMonthDayRow($endString) {
-		$html = '<div class="row">';
+		$html = '<div class="cal-row">';
 		
 		$html .= $GLOBALS['LANG']->getLL ('tx_cal_event.recurs_day') . ' ';
 		$html .= '<select class="day" onchange="byMonthDay.save()">';

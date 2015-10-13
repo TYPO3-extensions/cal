@@ -150,7 +150,7 @@ class CustomTca {
 		$out = array();
 		$out [] = $this->commonJS;
 		$out [] = '<script type="text/javascript">';
-		$out [] = "var extUrl = new ExtUrlUI('ext_url-container', 'data[" . $this->table . "][" . $this->uid . "][ext_url]', 'row', '" . $this->getExtUrlRow () . "');";
+		$out [] = "var extUrl = new ExtUrlUI('ext_url-container', 'data[" . $this->table . "][" . $this->uid . "][ext_url]', 'cal-row', '" . $this->getExtUrlRow () . "');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
 			$out [] = "TYPO3.jQuery(function(){ extUrl.load(); });";
 		} else {
@@ -167,7 +167,7 @@ class CustomTca {
 	}
 	
 	public function getExtUrlRow() {
-		$html = '<div class="row">';
+		$html = '<div class="cal-row">';
 		$html .= $GLOBALS['LANG']->getLL ('tx_cal_calendar.ext_url_note') . ':<input type="text" class="exturlnote" onchange="extUrl.save()" >';
 		$html .= $GLOBALS['LANG']->getLL ('tx_cal_calendar.ext_url_url') . ':<input type="text" class="exturl" onchange="extUrl.save()" >';
 		$html .= '<a id="garbage" href="#" onclick="extUrl.removeUrl(this);">' . $this->garbageIcon . '</a>';
@@ -231,7 +231,7 @@ class CustomTca {
 		
 		$out [] = $this->commonJS;
 		$out [] = '<script type="text/javascript">';
-		$out [] = "var byMonth = new ByMonthUI('bymonth-container', 'data[" . $this->table . "][" . $this->uid . "][bymonth]', 'row');";
+		$out [] = "var byMonth = new ByMonthUI('bymonth-container', 'data[" . $this->table . "][" . $this->uid . "][bymonth]', 'cal-row');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
 			$out [] = "TYPO3.jQuery(function(){ byMonth.load(); });";
 		} else {
@@ -363,7 +363,7 @@ class CustomTca {
 	public function byDay_checkbox() {
 		$out = array();
 		$out [] = '<script type="text/javascript">';
-		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'row');";
+		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'cal-row');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
 			$out [] = "TYPO3.jQuery(function(){ byDay.load(); });";
 		} else {
@@ -386,7 +386,7 @@ class CustomTca {
 	public function byDay_select($row) {
 		$out = array();
 		$out [] = '<script type="text/javascript">';
-		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'row', '" . $row . "');";
+		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'cal-row', '" . $row . "');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
 			$out [] = "TYPO3.jQuery(function(){ byDay.load(); });";
 		} else {
@@ -403,7 +403,7 @@ class CustomTca {
 	public function byMonthDay_select($row) {
 		$out = array();
 		$out [] = '<script type="text/javascript">';
-		$out [] = "var byMonthDay = new ByMonthDayUI('bymonthday-container', 'data[" . $this->table . "][" . $this->uid . "][bymonthday]', 'row', '" . $row . "');";
+		$out [] = "var byMonthDay = new ByMonthDayUI('bymonthday-container', 'data[" . $this->table . "][" . $this->uid . "][bymonthday]', 'cal-row', '" . $row . "');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
 			$out [] = "TYPO3.jQuery(function(){ byMonthDay.load(); });";
 		} else {
@@ -493,7 +493,7 @@ class CustomTca {
 		$table = $PA ['table'];
 		$pid = $PA ['row'] ['pid'];
 		$value = $PA ['row'] [$part . 'style'];
-		$html = '<div class="row">';
+		$html = '<div class="cal-row">';
 		
 		$pageTSConf = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig ($pid);
 		if ($pageTSConf ['options.'] ['tx_cal_controller.'] [$part . 'Styles']) {

@@ -8,53 +8,55 @@ function ExtUrlUI (containerID, storageID, rowClass, rowHTML) {
 ExtUrlUI.prototype = {
 						
 	addUrl: function(defaultNote, defaultUrl){
-		new Insertion.Bottom(this.containerID, this.rowHTML);
+		var container = TYPO3.jQuery("#"+escapeRegExp(this.containerID));
+		
+		container.append(this.rowHTML);
 		
 		if(defaultUrl) {
-			$(this.containerID).getElementsBySelector('input[type="text"]').last().value = defaultUrl;
+			TYPO3.jQuery("#"+escapeRegExp(this.containerID) + ' input[type="text"]').last().val(defaultUrl);
 		}
 		if(defaultNote) {
-			$(this.containerID).getElementsBySelector('input[type="text"]').last().previous().value = defaultNote;
+			TYPO3.jQuery("#"+escapeRegExp(this.containerID) + ' input[type="text"]').last().prev().val(defaultNote);
 		}
 		
 		this.save();
 	},
 	
 	removeUrl: function(icon) {
-		$(icon).up().remove();
+		TYPO3.jQuery(icon).parent().remove();
 		this.save();
 	},
 	
 	save: function() {
-		storage = $(this.storageID);
-		storage.clear();
+		storage = TYPO3.jQuery("#"+escapeRegExp(this.storageID));
+		storage.val('');
 		
-		storageNotes = $(this.storageID.substr(0,this.storageID.length-1)+"_notes]");
-		storageNotes.clear();
+		storageNotes = TYPO3.jQuery("#"+escapeRegExp(this.storageID.substr(0,this.storageID.length-1)+"_notes]"));
+		storageNotes.val('');
 		
-		//@todo  Figure out how to differentiate selector based forms from element based forms
-		$(this.containerID).getElementsBySelector('div.' + this.rowClass).each( function(div) {
-			div.getElementsBySelector('input[type="text"]').each( function(input) {
+		var container = TYPO3.jQuery("#"+escapeRegExp(this.containerID));
+		container.find('div.' + this.rowClass).each( function(index, div) {
+			TYPO3.jQuery(div).find('input[type="text"]').each( function(index, input) {
 				if(input.className=="exturl") {
 					if(storage.value) {
-						storage.value += '\n';
+						storage.val(storage.val() + '\n');
 					}
-					storage.value += input.value;
+					storage.val(storage.val() + input.value);
 				}
 				if(input.className=="exturlnote") {
-					if(storageNotes.value) {
-						storageNotes.value += '\n';
+					if(storageNotes.val()) {
+						storageNotes.val(storageNotes.val() + '\n');
 					}
-					storageNotes.value += input.value;
+					storageNotes.val(storageNotes.val() + input.value);
 				}
 			});
 		});
 	},
 	
 	load: function() {
-		initialUrlValue = $(this.storageID).value;
+		initialUrlValue = TYPO3.jQuery("#"+escapeRegExp(this.storageID)).val();
 		urlArray = initialUrlValue.split('\n');
-		initialNoteValue = $(this.storageID.substr(0,this.storageID.length-1)+"_notes]").value;
+		initialNoteValue = TYPO3.jQuery("#"+escapeRegExp(this.storageID.substr(0,this.storageID.length-1)+"_notes]")).val();
 		noteArray = initialNoteValue.split('\n');
 		var obj = this;
 		
@@ -63,14 +65,18 @@ ExtUrlUI.prototype = {
 		}
 	},
 	
-	storageToHash: function(url) {
-		urlValue = url;
-		return $H({ url: urlValue });
-	}
 };
+
+function escapeRegExp(str) {
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
 
 function ExtUrlInstanceUI (containerID, storageID, rowClass, rowHTML) {
 	ExtUrlUI.call(this, containerID, storageID, rowClass, rowHTML);
 };
 ExtUrlInstanceUI.prototype = Object.create(ExtUrlUI.prototype, {
+	storageToHash: function(url) {
+		urlValue = url;
+		return { url: urlValue };
+	}
 });

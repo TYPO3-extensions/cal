@@ -584,6 +584,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$functionA = 'get' . ucwords ( $field );
 						if (method_exists ( $this->object, $functionA )) {
 							$a = $this->object->$functionA ();
+							if ($rule['count']) {
+								$a = count($a);
+							}
 							if ($rule ['field']) {
 								$functionB = 'get' . ucwords ( $rule ['field'] );
 								if (method_exists ( $this->object, $functionB )) {
@@ -614,6 +617,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$functionA = 'get' . ucwords ( $field );
 						if (method_exists ( $this->object, $functionA )) {
 							$a = $this->object->$functionA ();
+							if ($rule['count']) {
+								$a = count($a);
+							}
 							if ($rule ['field']) {
 								$functionB = 'get' . ucwords ( $rule ['field'] );
 								if (method_exists ( $this->object, $functionB )) {
@@ -644,6 +650,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$functionA = 'get' . ucwords ( $field );
 						if (method_exists ( $this->object, $functionA )) {
 							$a = $this->object->$functionA ();
+							if ($rule['count']) {
+								$a = count($a);
+							}
 							if ($rule ['field']) {
 								$functionB = 'get' . ucwords ( $rule ['field'] );
 								if (method_exists ( $this->object, $functionB )) {
@@ -674,6 +683,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$functionA = 'get' . ucwords ( $field );
 						if (method_exists ( $this->object, $functionA )) {
 							$a = $this->object->$functionA ();
+							if ($rule['count']) {
+								$a = count($a);
+							}
 							if ($rule ['field']) {
 								$functionB = 'get' . ucwords ( $rule ['field'] );
 								if (method_exists ( $this->object, $functionB )) {

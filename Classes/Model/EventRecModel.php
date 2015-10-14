@@ -189,6 +189,7 @@ class EventRecModel extends \TYPO3\CMS\Cal\Model\Model {
 	}
 	function getStartAndEndMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->parentEvent->initLocalCObject ();
+		array_merge($this->parentEvent->local_cObj->data, $this->getAdditionalValuesAsArray());
 		$eventStart = $this->getStart ();
 		$eventEnd = $this->getEnd ();
 		if ($eventStart->equals ($eventEnd)) {
@@ -530,6 +531,8 @@ class EventRecModel extends \TYPO3\CMS\Cal\Model\Model {
 	}
 	function getAdditionalValuesAsArray() {
 		$values = parent::getAdditionalValuesAsArray ();
+		$values ['start'] = $this->getStartAsTimestamp ();
+		$values ['end'] = $this->getEndAsTimestamp ();
 		$values ['parent_startdate'] = $this->parentEvent->start->format ('%Y%m%d');
 		$values ['parent_enddate'] = $this->parentEvent->end->format ('%Y%m%d');
 		$values ['parent_starttime'] = $this->parentEvent->start->getHour () * 60 + $this->parentEvent->start->getMinute ();

@@ -622,7 +622,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 										}
 									}
 								}
-							} else if ($rule ['value']) {
+							} else if (isset($rule ['value'])) {
 								$b = $rule ['value'];
 								if ($a >= $b) {
 									$failed = true;

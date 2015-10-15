@@ -602,6 +602,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 								}
 							} else if (isset ( $rule ['value'] )) {
 								$b = $rule ['value'];
+								if ($rule['count']) {
+									$b = count($b);
+								}
 								if ($a >= $b) {
 									$failed = true;
 								}
@@ -636,6 +639,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 								}
 							} else if (isset($rule ['value'])) {
 								$b = $rule ['value'];
+								if ($rule['count']) {
+									$b = count($b);
+								}
 								if ($a <= $b) {
 									$failed = true;
 								}
@@ -669,6 +675,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 								}
 							} else if (isset($rule ['value'])) {
 								$b = $rule ['value'];
+								if ($rule['count']) {
+									$b = count($b);
+								}
 								if ($a != $b) {
 									$failed = true;
 								}
@@ -702,6 +711,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 								}
 							} else if (is_null ( $rule ['value'] ) || isset ( $rule ['value'] )) {
 								$b = $rule ['value'];
+								if ($rule['count']) {
+									$b = count($b);
+								}
 								if ($a == $b) {
 									$failed = true;
 								}

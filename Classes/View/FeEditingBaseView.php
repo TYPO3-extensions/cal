@@ -347,8 +347,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			if (! empty ( $removeFiles )) {
 				$where .= ' AND uid not in (' . implode ( ',', array_values ( $removeFiles ) ) . ')';
 			}
-			$titleFunc = 'get' . ucfirst ( $marker ) . 'TitleText';
-			$captionFunc = 'get' . ucfirst ( $marker ) . 'Caption';
+
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ( '*', 'sys_file_reference', $where );
 			while ( $row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ( $result ) ) {
 				
@@ -537,7 +536,6 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		return $defaultValues;
 	}
 	protected function checkContrains(&$constrainSims) {
-		$defaultValues = Array ();
 		$noComplains = true;
 		$viewParts = explode ( '_', $this->conf ['view'] );
 		if (count ( $viewParts ) == 2 && is_array ( $this->conf ['rights.'] [$viewParts [0] . '.'] [$viewParts [1] . '.'] ['fields.'] ) > 0) {
@@ -636,7 +634,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 										}
 									}
 								}
-							} else if ($rule ['value']) {
+							} else if (isset($rule ['value'])) {
 								$b = $rule ['value'];
 								if ($a <= $b) {
 									$failed = true;
@@ -669,7 +667,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 										}
 									}
 								}
-							} else if ($rule ['value'] != '') {
+							} else if (isset($rule ['value'])) {
 								$b = $rule ['value'];
 								if ($a != $b) {
 									$failed = true;
@@ -750,7 +748,6 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		}
 		if ($this->conf ['rights.'] [$action . '.'] [$this->objectString . '.'] ['fields.'] [$field . '.'] ['displayCondition.'] != '') {
 			$displayCondition = $this->conf ['rights.'] [$action . '.'] [$this->objectString . '.'] ['fields.'] [$field . '.'] ['displayCondition.'];
-			$isAllowed = false;
 			foreach ( $displayCondition as $rule ) {
 				$value = $this->ruleParser ( $field, $rule );
 				if ($value != '') {

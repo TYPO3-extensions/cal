@@ -26,7 +26,6 @@ class RealUrl {
 	 */
 	function addRealURLConfig(&$params, $parentObj) {
 		$config = &$params ['config'];
-		$extKey = &$params ['extKey'];
 		
 		if (! is_array ( $config ['postVarSets'] ['_DEFAULT'] )) {
 			$config ['postVarSets'] ['_DEFAULT'] = Array ();

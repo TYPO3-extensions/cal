@@ -168,14 +168,11 @@ class ModelController extends \TYPO3\CMS\Cal\Controller\BaseController {
 	function findAllCalendar($type = '', $pidList = '') {
 		/* No key provided so return all events */
 		$serviceName = 'cal_calendar_model';
-		$categoryArrayToBeFilled = array ();
 		$calendar = array ();
 		
 		if ($type == '') {
 			
 			$serviceChain = '';
-			
-			$calendarFromService = array ();
 			
 			/* Iterate over all classes providing the cal_model service */
 			while (is_object ($service = &GeneralUtility::makeInstanceService ($serviceName, 'calendar', $serviceChain))) {
@@ -531,8 +528,6 @@ class ModelController extends \TYPO3\CMS\Cal\Controller\BaseController {
 		if ($type == '') {
 			
 			$serviceChain = '';
-			
-			$categoriesFromService = array ();
 			
 			/* Iterate over all classes providing the cal_model service */
 			while (is_object ($service = &GeneralUtility::makeInstanceService ($serviceName, 'category', $serviceChain))) {

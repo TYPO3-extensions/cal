@@ -30,6 +30,7 @@ class vnote extends \TYPO3\CMS\Cal\Model\ICalendar {
 	 * (BEGIN..END)
 	 */
 	function exportvCalendar() {
+		$requiredAttributes = array();
 		$requiredAttributes ['BODY'] = '';
 		$requiredAttributes ['VERSION'] = '1.1';
 		

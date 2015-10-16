@@ -483,10 +483,8 @@ class DateParser {
 		$lastKey = '';
 		$post = Array ();
 		$foundMonth = false;
-		$foundDay = false;
 		$range = '';
 		$rangeValue = '';
-		$weekday = '';
 		while (! empty ($this->stack)) {
 			$valueArray = array_shift ($this->stack);
 			foreach ($valueArray as $key => $value) {
@@ -540,7 +538,6 @@ class DateParser {
 							$date->setMinute (0);
 							$date->setSecond (0);
 							$date->setHour (0);
-							$foundDay = true;
 							$key = 'day';
 						} else if ($lastKey == 'year') {
 							if ($this->conf ['USmode']) {
@@ -548,7 +545,6 @@ class DateParser {
 								$date->setMinute (0);
 								$date->setSecond (0);
 								$date->setHour (0);
-								$foundDay = true;
 								$key = 'day';
 							} else {
 								$date->setMonth ($value);
@@ -623,7 +619,6 @@ class DateParser {
 						} else {
 							if ($this->conf ['USmode']) {
 								$date->setDay ($value);
-								$foundDay = true;
 							} else {
 								$date->setMonth ($value);
 								$foundMonth = true;

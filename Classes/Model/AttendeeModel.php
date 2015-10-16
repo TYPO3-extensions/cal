@@ -33,13 +33,14 @@ class AttendeeModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 	/**
 	 * Constructor.
 	 */
-	function __construct($row, $serviceKey) {
+	public function __construct($row, $serviceKey) {
 		$this->setType ('tx_cal_attendee');
 		$this->setObjectType ('attendee');
 		parent::__construct ($serviceKey);
 		$this->init ($row);
 	}
-	function init(&$row) {
+	
+	private function init(&$row) {
 		$this->row = $row;
 		if (isset ($row ['uid'])) {
 			$this->setUid ($row ['uid']);
@@ -66,44 +67,57 @@ class AttendeeModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 			$this->setName ($row ['name']);
 		}
 	}
-	function setEventUid($uid) {
+	
+	public function setEventUid($uid) {
 		$this->eventUid = $uid;
 	}
-	function getEventUid() {
+	
+	public function getEventUid() {
 		return $this->eventUid;
 	}
-	function setFeUserId($uid) {
+	
+	public function setFeUserId($uid) {
 		$this->feUserId = $uid;
 	}
-	function getFeUserId() {
+	
+	public function getFeUserId() {
 		return $this->feUserId;
 	}
-	function setEmail($email) {
+	
+	public function setEmail($email) {
 		$this->email = $email;
 	}
-	function getEmail() {
+	
+	public function getEmail() {
 		return $this->email;
 	}
-	function setAttendance($attendance) {
+	
+	public function setAttendance($attendance) {
 		$this->attendance = $attendance;
 	}
-	function getAttendance() {
+	
+	public function getAttendance() {
 		return $this->attendance;
 	}
-	function setStatus($status) {
+	
+	public function setStatus($status) {
 		$this->status = $status;
 	}
-	function getStatus() {
+	
+	public function getStatus() {
 		return $this->status;
 	}
-	function setName($name) {
+	
+	public function setName($name) {
 		$this->name = $name;
 	}
-	function getName() {
+	
+	public function getName() {
 		return $this->name;
 	}
-	function isUserAllowedToEdit($feUserUid = '', $feGroupsArray = array ()) {
-		if (! $rightsObj->isViewEnabled ('edit_attendee')) {
+	
+	public function isUserAllowedToEdit($feUserUid = '', $feGroupsArray = array ()) {
+		if (! $this->rightsObj->isViewEnabled ('edit_attendee')) {
 			return false;
 		}
 		if ($this->rightsObj->isCalAdmin ()) {
@@ -126,8 +140,9 @@ class AttendeeModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 		
 		return $isAllowedToEditAttendee && $isAttendee;
 	}
-	function isUserAllowedToDelete($feUserUid = '', $feGroupsArray = array ()) {
-		if (! $rightsObj->isViewEnabled ('delete_attendee')) {
+	
+	public function isUserAllowedToDelete($feUserUid = '', $feGroupsArray = array ()) {
+		if (! $this->rightsObj->isViewEnabled ('delete_attendee')) {
 			return false;
 		}
 		if ($this->rightsObj->isCalAdmin ()) {
@@ -149,7 +164,8 @@ class AttendeeModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 		
 		return $isAllowedToDeleteAttendee && $isAttendee;
 	}
-	function __toString() {
+	
+	public function __toString() {
 		return 'Attendee ' . (is_object ($this) ? 'object' : 'something') . ': ' . implode (',', $this->row);
 	}
 }

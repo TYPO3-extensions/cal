@@ -12,6 +12,9 @@ namespace TYPO3\CMS\Cal\Hooks;
  *
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class WecMap {
 	
 	/**
@@ -27,7 +30,6 @@ class WecMap {
 		$data = $params ['data'];
 		$markerObj = $params ['markerObj'];
 		
-		$confArray = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		$locationStructure = $this->confArr ['useLocationStructure'] ? $this->confArr ['useLocationStructure'] : 'tx_cal_location';
 		
 		if ($table == $locationStructure && is_object ($markerObj)) {

@@ -91,7 +91,6 @@ class TceFormsGetmainfields {
 		if ($table == 'tx_cal_fe_user_event_monitor_mm') {
 			$rec = BackendUtility::getRecord ($table, $row ['uid']);
 			
-			$label = '';
 			switch ($row ['tablenames']) {
 				case 'fe_users' :
 					$feUserRec = BackendUtility::getRecord ('fe_users', $rec ['uid_foreign']);

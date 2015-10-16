@@ -34,6 +34,7 @@ class vtimezone extends \TYPO3\CMS\Cal\Model\ICalendar {
 	 */
 	function parseChild(&$child, $year) {
 		// Make sure 'time' key is first for sort().
+		$result = array();
 		$result ['time'] = 0;
 		
 		$t = $child->getAttribute ('TZOFFSETFROM');

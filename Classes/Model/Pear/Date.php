@@ -51,7 +51,6 @@ namespace TYPO3\CMS\Cal\Model\Pear;
 // {{{ Includes
 
 use TYPO3\CMS\Cal\Model\Pear\Date\Calc;
-use TYPO3\CMS\Cal\Model\Pear\Date\Human;
 use TYPO3\CMS\Cal\Model\Pear\Date\Span;
 use TYPO3\CMS\Cal\Model\Pear\Date\TimeZone;
 // }}}

@@ -24,7 +24,6 @@ class EventLinkHandler {
 			return;
 		}
 		
-		$pid = $pObj->data ['pid'];
 		$values = explode ('|', $linkHandlerValue);
 		$lconf = Array ();
 		if ($values [1]) {

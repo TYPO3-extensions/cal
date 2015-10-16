@@ -1141,6 +1141,8 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 	function getStartAndEndMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		// controller = &\TYPO3\CMS\Cal\Utility\Registry::Registry('basic','controller');
 		$this->initLocalCObject ();
+		\TYPO3\CMS\Core\Utility\DebugUtility::debug(strftime('%d.%m.%Y',$this->local_cObj->data['end']),'recurring event:'.$this->row['title']);
+		
 		$eventStart = $this->getStart ();
 		$eventEnd = $this->getEnd ();
 		if ($eventStart->equals ($eventEnd)) {

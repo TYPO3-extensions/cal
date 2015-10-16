@@ -51,6 +51,7 @@ class vcard extends \TYPO3\CMS\Cal\Model\ICalendar {
 	 * (BEGIN..END)
 	 */
 	function exportvCalendar() {
+		$requiredAttributes = array();
 		$requiredAttributes ['BODY'] = '';
 		$requiredAttributes ['VERSION'] = '2.1';
 		
@@ -81,6 +82,7 @@ class vcard extends \TYPO3\CMS\Cal\Model\ICalendar {
 			return null;
 		}
 		
+		$name_arr = array();
 		if (! empty ($name_parts [VCARD_N_PREFIX])) {
 			$name_arr [] = $name_parts [VCARD_N_PREFIX];
 		}
@@ -100,30 +102,5 @@ class vcard extends \TYPO3\CMS\Cal\Model\ICalendar {
 		return implode (' ', $name_arr);
 	}
 	
-	/**
-	 * Static function to make a given email address rfc822 compliant.
-	 *
-	 * @param string $address
-	 *        	An email address.
-	 *        	
-	 * @return string The RFC822-formatted email address.
-	 */
-	function getBareEmail($address) {
-		// Empty values are still empty.
-		if (! $address) {
-			return $address;
-		}
-		
-		// require_once 'Mail/RFC822.php';
-		// require_once 'Horde/MIME.php';
-		
-		static $rfc822;
-		if (is_null ($rfc822)) {
-			$rfc822 = new Mail_RFC822 ();
-		}
-		
-		$rfc822->validateMailbox ($address);
-		return MIME::rfc822WriteAddress ($address->mailbox, $address->host);
-	}
 }
 ?>

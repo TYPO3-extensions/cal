@@ -449,7 +449,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		
 		$allCategoryByParentId = array ();
-		$allCategoryById = array ();
 		$catIDs = array ();
 		$category = '';
 		
@@ -462,7 +461,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		foreach ((Array) $categoryArray [$this->confArr ['categoryService']] [0] [0] as $category) {
 			$row = $category->row;
 			$allCategoryByParentId [$row ['parent_category']] [] = $row;
-			$allCategoryById [$row ['uid']] = $row;
 			$catIDs [] = $row ['uid'];
 		}
 		
@@ -699,7 +697,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 						$this->conf ['view.'] [$this->conf ['view'] . '.'] ['maxDate'] = $this->piVars ['maxDate'];
 						
 						$eventArray = $modelObj->findEvent ($event->getUid (), $this->conf ['type'], $this->conf ['pidList'], false, false, true, false, false, '0,1,2,3,4');
-						
+						$ajaxStringArray = array();
 						$dateKeys = array_keys ($eventArray);
 						foreach ($dateKeys as $dateKey) {
 							$timeKeys = array_keys ($eventArray [$dateKey]);
@@ -1239,7 +1237,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 */
 	public function ics() {
 		$type = $this->conf ['type'];
-		$getdata = $this->conf ['getdate'];
 		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('drawIcsClass');
@@ -2493,8 +2490,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 * @return string
 	 */
 	public function searchUserAndGroup() {
-		$type = $this->conf ['type'];
-		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('drawSearchUserAndGroupClass');
 		
@@ -2587,8 +2582,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 * @return unknown
 	 */
 	public function subscription() {
-		$type = $this->conf ['type'];
-		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('drawSubscriptionClass');
 		
@@ -2616,8 +2609,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 * @return unknown
 	 */
 	public function meeting() {
-		$type = $this->conf ['type'];
-		$pidList = $this->conf ['pidList'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('drawMeetingClass');
 		
@@ -2646,7 +2637,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 */
 	public function translation() {
 		$type = $this->conf ['type'];
-		$pidList = $this->conf ['pidList'];
 		$overlay = intval ($this->piVars ['overlay']);
 		$uid = $this->conf ['uid'];
 		$servicename = $this->piVars ['servicename'];
@@ -2731,7 +2721,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	public function loadEvents() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
-		$getdate = $this->conf ['getdate'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadEventsClass');
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
@@ -2817,7 +2806,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	public function loadEvent($uid, $eventType = '') {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
-		$getdate = $this->conf ['getdate'];
 		
 		$eventType = intval ($this->piVars ['event_type']);
 		
@@ -2883,24 +2871,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		}
 		$ajaxStringArray = Array ();
 		
-		$badchr = array (
-				"\xc2", // prefix 1
-				"\x80", // prefix 2
-				"\x98", // single quote opening
-				"\x99", // single quote closing
-				"\x8c", // double quote opening
-				"\x9d"  // double quote closing
-	    );
-		
-		$goodchr = array (
-				'',
-				'',
-				'\'',
-				'\'',
-				'"',
-				'"' 
-		);
-		
 		foreach ($eventValues as $key => $value) {
 			if (is_array ($value)) {
 				if (count ($value) > 0) {
@@ -2927,7 +2897,6 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	public function loadTodos() {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
-		$getdate = $this->conf ['getdate'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('drawLoadTodosClass');
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
@@ -3428,15 +3397,8 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	 */
 	public function extendLastView($overrideParams = false) {
 		if (count ($this->conf ['view.'] ['allowedViews']) == 1 && count ($this->conf ['view.'] ['allowedViewsToLinkTo']) == 1) {
-			$lastview = NULL;
-			$view = $this->conf ['view.'] ['allowedViews'] [0];
 			return NULL;
 		}
-		$views = Controller::convertLastViewParamsToArray ($this->conf ['lastview']);
-		
-		/*
-		 * [Franz] what is this code good for? /* Should it prevent that the same view get's added twice? If so - it has to be changed to work propperly /*************************** foreach($views as $view) { if($view['view'] == $this->conf['view'] && $view['page_id'] == $GLOBALS['TSFE']->id) { return 'view-'.$this->conf['view'].'|'.'page_id-'.$GLOBALS['TSFE']->id; } }
-		 */
 		
 		$params = array (
 				'view' => $this->conf ['view'],
@@ -3883,6 +3845,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 	public function translateLanguageMarker(&$content) {
 		// translate leftover markers
 		
+		$match = array();
 		preg_match_all ('!(###|%%%)([A-Z0-9_-|]*)\1!is', $content, $match);
 		$allLanguageMarkers = array_unique ($match [2]);
 		

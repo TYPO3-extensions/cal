@@ -29,7 +29,6 @@ class Labels {
 		$dateObj = new \TYPO3\CMS\Cal\Model\CalDate ($rec ['start_date'] . '000000');
 		$dateObj->setTZbyId ('UTC');
 		
-		$time = $rec ['start_time'];
 		$format = str_replace (array (
 				'd',
 				'm',
@@ -122,7 +121,6 @@ class Labels {
 		}
 		
 		if ($rec ['orig_start_time']) {
-			$origStartTime = new \TYPO3\CMS\Cal\Model\CalDate ($rec ['orig_start_time']);
 			$label .= ' (' . gmdate ($GLOBALS ['TYPO3_CONF_VARS'] ['SYS'] ['hhmm'], $rec ['orig_start_time']) . ')';
 		}
 		

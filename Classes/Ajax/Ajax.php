@@ -39,11 +39,7 @@ if (is_array ($controllerPiVarsPOST) && is_array ($controllerPiVarsGET)) {
 }
 
 $pid = intval ($controllerPiVars ['pid']);
-$uid = intval ($controllerPiVars ['uid']);
-$calendar = intval ($controllerPiVars ['calendar']);
-$pidList = $controllerPiVars ['pidList'];
 $view = $controllerPiVars ['view'];
-$type = $controllerPiVars ['type'];
 
 /** @var \TYPO3\CMS\Cal\Controller\Api $calAPI */
 $calAPI = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
@@ -98,6 +94,7 @@ if ($controllerPiVars ['translations']) {
 	$calAPI->controller->scriptRelPath = $calAPI->controller->locallangPath;
 	$calAPI->controller->pi_loadLL ();
 	$calAPI->controller->scriptRelPath = $tempScriptRelPath;
+	$translationArray = array();
 	foreach ($controllerPiVars ['translate'] as $value) {
 		$translationArray [$value] = $calAPI->controller->pi_getLL ('l_' . strtolower ($value));
 	}

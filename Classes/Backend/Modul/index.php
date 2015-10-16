@@ -12,11 +12,6 @@
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
-use TYPO3\CMS\Core\Messaging\FlashMessageService;
-
 /**
  * Module 'Indexer' for the 'cal' extension.
  *

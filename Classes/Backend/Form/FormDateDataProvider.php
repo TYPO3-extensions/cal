@@ -35,7 +35,6 @@ class FormDateDataProvider implements FormDataProviderInterface {
 	 * @return array
 	 */
 	public function addData(array $result) {
-		$dateTimeFormats = $this->getDatabase()->getDateTimeFormats($result['tableName']);
 		foreach ($result['vanillaTableTca']['columns'] as $column => $columnConfig) {
 			if (isset($columnConfig['config']['tx_cal_event'])) {
 				
@@ -50,10 +49,4 @@ class FormDateDataProvider implements FormDataProviderInterface {
 		return $result;
 	}
 	
-	/**
-	 * @return DatabaseConnection
-	 */
-	protected function getDatabase() {
-		return $GLOBALS['TYPO3_DB'];
-	}
 }

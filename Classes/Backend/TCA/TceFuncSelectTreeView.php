@@ -43,7 +43,6 @@ class TceFuncSelectTreeView extends \TYPO3\CMS\Backend\Tree\View\AbstractTreeVie
 			if (in_array ($v ['uid'], $this->MOUNTS) || in_array ($v ['uid'], $this->TCEforms_nonSelectableItemsArray)) {
 				return '<a href="#" title="' . $v ['title'] . '"><span style="color:#999;cursor:default;">' . $title . '</span></a>';
 			} else {
-				$hrefTitle = $v ['title'];
 				$aOnClick = 'setFormValueFromBrowseWin(\'' . $this->TCEforms_itemFormElName . '\',' . $v ['uid'] . ',\'' . addslashes ($title) . '\'); return false;';
 				return '<a href="#" onclick="' . htmlspecialchars ($aOnClick) . '" title="' . htmlentities ($v ['title']) . '">' . $title . '</a>';
 			}

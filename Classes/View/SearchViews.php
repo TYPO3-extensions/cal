@@ -60,8 +60,10 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 			return '<h3>calendar: no search result template file found:</h3>' . $this->conf ['view.'] ['search.'] ['searchResultAllTemplate'];
 		}
 		
-		$this->_init ($master_array);
+		$sims = Array();
 		
+		//$this->_init ($master_array);
+
 		if (array_key_exists ('phpicalendar_event', $master_array)) {
 			$sims ['SEARCHEVENTRESULTS'] = $this->drawSearchEventResult ($master_array ['phpicalendar_event'], $starttime, $endtime, $searchword, $locationIds, $organizerIds);
 		}

@@ -2954,6 +2954,16 @@ plugin.tx_cal_controller {
 				}
 			}
 		}
+		search_all {
+			searchEvent = TEXT
+			searchEvent.current = 1
+			
+			searchLocation = TEXT
+			searchLocation.current = 1
+			
+			searchOrganizer = TEXT
+			searchOrganizer.current = 1
+		}
 	}
 
 

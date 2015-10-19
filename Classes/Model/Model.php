@@ -1137,7 +1137,7 @@ class Model extends \TYPO3\CMS\Cal\Model\BaseModel {
 	 */
 	function addNotifyGroup($id) {
 		if ($id > 0) {
-			$this->notifyGroup [] = $id;
+			$this->notifyGroupIds [] = $id;
 		}
 	}
 	

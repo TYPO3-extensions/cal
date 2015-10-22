@@ -35,7 +35,12 @@ class FormDateDataProvider implements FormDataProviderInterface {
 	 * @return array
 	 */
 	public function addData(array $result) {
-		foreach ($result['vanillaTableTca']['columns'] as $column => $columnConfig) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7006000) {
+			$processedTcaColumns = $result['processedTca']['columns'];
+		} else {
+			$processedTcaColumns = $result['vanillaTableTca']['columns'];
+		}
+		foreach ($processedTcaColumns as $column => $columnConfig) {
 			if (isset($columnConfig['config']['tx_cal_event'])) {
 				
 				

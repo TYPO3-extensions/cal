@@ -7,18 +7,24 @@
 		<f:format.date format="F d Y">{listView.endtime.time}</f:format.date>
 	</h1>
 	<f:if condition="{listView.master_array}">
-		<dl>
-			<f:for each="{listView.master_array}" as="entriesOfADay" key="day">
-				<f:if
-					condition="{day} >= {f:format.date(format:'Ymd' date:'@{listView.starttime.time}')}">
-					<f:for each="{entriesOfADay}" as="entriesOfAnHour">
-						<f:for each="{entriesOfAnHour}" as="event">
-							<f:render partial="List/event"
-								arguments="{event:event, settings:settings}" />
+		<f:then>
+			<dl>
+				<f:for each="{listView.master_array}" as="entriesOfADay" key="day">
+					<f:if
+						condition="{day} >= {f:format.date(format:'Ymd' date:'@{listView.starttime.time}')}">
+						<f:for each="{entriesOfADay}" as="entriesOfAnHour">
+							<f:for each="{entriesOfAnHour}" as="event">
+								<f:render partial="List/event"
+									arguments="{event:event, settings:settings}" />
+							</f:for>
 						</f:for>
-					</f:for>
-				</f:if>
-			</f:for>
-		</dl>
+					</f:if>
+				</f:for>
+			</dl>
+		</f:then>
+		<f:else>
+			<f:translate
+				key="LLL:EXT:cal/Resources/Private/Language/locallang.xml:l_no_results" />
+		</f:else>
 	</f:if>
 </div>

@@ -516,12 +516,13 @@ CREATE TABLE tx_cal_attendee (
 CREATE TABLE tx_cal_index (
 	uid int(11) unsigned NOT NULL auto_increment,
 	tablename varchar(30) DEFAULT '' NOT NULL,
-	start_datetime varchar(14) DEFAULT '0' NOT NULL,
-	end_datetime varchar(14) DEFAULT '0' NOT NULL,
+	start_datetime bigint(14) NOT NULL DEFAULT '0',
+	end_datetime bigint(14) NOT NULL DEFAULT '0',
 	event_uid int(11) DEFAULT '-1' NOT NULL,
 	event_deviation_uid int(11) DEFAULT '-1' NOT NULL,
 	PRIMARY KEY (uid),
 	KEY start_datetime (start_datetime),
+	KEY event_uid_start_datetime (event_uid,start_datetime),
 );
 
 #

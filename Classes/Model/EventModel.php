@@ -559,9 +559,9 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 		if ($result) {
 			while ($row1 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
 				if ($row1 ['tablenames'] == 'fe_users') {
-					$this->addNotifyUser ($row1 ['uid_foreign'] . '|' . $row ['offset']);
+					$this->addNotifyUser ($row1 ['uid_foreign'] . '|' . $row1 ['offset']);
 				} else if ($row1 ['tablenames'] == 'fe_groups') {
-					$this->addNotifyGroup ($row1 ['uid_foreign'] . '|' . $row ['offset']);
+					$this->addNotifyGroup ($row1 ['uid_foreign'] . '|' . $row1 ['offset']);
 				}
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);

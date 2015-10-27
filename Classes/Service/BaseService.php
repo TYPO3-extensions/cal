@@ -368,6 +368,7 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 	
 	protected function getAdditionalWhereForLocalizationAndVersioning($table) {
 		$localizationPrefix = 'l18n';
+		$selectConf = Array();
 		if($this->extConf ['categoryService'] == 'sys_category') {
 			$localizationPrefix = 'l10n';
 		}

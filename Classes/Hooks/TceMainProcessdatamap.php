@@ -131,10 +131,11 @@ class TceMainProcessdatamap {
 		if ($table == 'tx_cal_calendar') {
 			$calendar = BackendUtility::getRecord ('tx_cal_calendar', $id);
 			
-			$service = new \TYPO3\CMS\Cal\Service\ICalendarService();
+			/** @var \TYPO3\CMS\Cal\Service\ICalendarService $service */
+			$service = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Service\\ICalendarService');
 			
 			if ($calendar ['type'] == 1 or $calendar ['type'] == 2) {
-				TceMainProcessdatamap::processICS ($calendar, $fieldArray, $service);
+				$this->processICS ($calendar, $fieldArray, $service);
 			}
 		}
 		
@@ -344,7 +345,7 @@ class TceMainProcessdatamap {
 					break;
 				case 1 : /* External URL or ICS file */
 				case 2: /* ICS File */
-					TceMainProcessdatamap::processICS ($calendar, $incomingFieldArray, $service);
+					$this->processICS ($calendar, $incomingFieldArray, $service);
 					break;
 			}
 		}
@@ -435,7 +436,14 @@ class TceMainProcessdatamap {
 			unset ($incomingFieldArray ['fe_group_id']);
 		}
 	}
-	function processICS($calendar, &$fieldArray, &$service) {
+	
+	/**
+	 *  @param array $calendar
+	 *  @param array $fieldArray
+	 *  @param \TYPO3\CMS\Cal\Service\ICalendarService $service
+	 **/
+	public function processICS($calendar, &$fieldArray, &$service) {
+		
 		if ($fieldArray ['ics_file'] or $fieldArray ['ext_url']) {
 			if ($fieldArray ['ics_file']) {
 				$url = GeneralUtility::getFileAbsFileName ('uploads/tx_cal/ics/' . $fieldArray ['ics_file']);

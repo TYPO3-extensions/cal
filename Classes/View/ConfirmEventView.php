@@ -47,7 +47,6 @@ class ConfirmEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			return '<h3>calendar: no confirm event template file found:</h3>' . $this->conf ['view.'] ['confirm_event.'] ['template'];
 		}
 		$this->lastPiVars = $this->controller->piVars;
-		$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		
 		$this->object = $this->modelObj->createEvent ('tx_cal_phpicalendar');
 		$this->object->updateWithPIVars ($this->controller->piVars);
@@ -188,7 +187,7 @@ class ConfirmEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	}
 	function getOrganizerMarker(& $template, & $sims, & $rems) {
 		$sims ['###ORGANIZER###'] = '';
-		if (! $this->confArr ['hideOrganizerTextfield'] && $this->isAllowed ('organizer')) {
+		if (! $this->extConf ['hideOrganizerTextfield'] && $this->isAllowed ('organizer')) {
 			$sims ['###ORGANIZER###'] = $this->applyStdWrap ($this->object->getOrganizer (), 'organizer_stdWrap');
 			$sims ['###ORGANIZER_VALUE###'] = htmlspecialchars ($this->object->getOrganizer ());
 		}
@@ -213,7 +212,7 @@ class ConfirmEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	}
 	function getLocationMarker(& $template, & $sims, & $rems) {
 		$sims ['###LOCATION###'] = '';
-		if (! $this->confArr ['hideLocationTextfield'] && $this->isAllowed ('location')) {
+		if (! $this->extConf ['hideLocationTextfield'] && $this->isAllowed ('location')) {
 			$sims ['###LOCATION###'] = $this->applyStdWrap ($this->object->getLocation (), 'location_stdWrap');
 			$sims ['###LOCATION_VALUE###'] = htmlspecialchars ($this->object->getLocation ());
 		}

@@ -142,8 +142,6 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			return $this->controller->pi_getLL ('l_not_allowed_create') . $this->objectString;
 		}
 		
-		$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		
 		$this->validation = '';
 		
 		$this->dateFormatArray = Array ();
@@ -254,7 +252,7 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			$this->conf ['view.'] [$this->conf ['view'] . '.'] ['tree.'] ['calendar'] = $selectedCalendars;
 			$this->conf ['view.'] [$this->conf ['view'] . '.'] ['tree.'] ['category'] = $selectedCategories;
 			
-			$categoryArray = $this->modelObj->findAllCategories ('cal_category_model', $this->confArr ['categoryService'], $this->conf ['pidList']);
+			$categoryArray = $this->modelObj->findAllCategories ('cal_category_model', $this->extConf ['categoryService'], $this->conf ['pidList']);
 			
 			$tree = $this->getCategorySelectionTree ($this->conf ['view.'] [$this->conf ['view'] . '.'] ['tree.'], $categoryArray, true);
 			$sims ['###CATEGORY###'] = $this->applyStdWrap ($tree, 'category_stdWrap');
@@ -354,7 +352,7 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	}
 	function getOrganizerMarker(& $template, & $sims, & $rems) {
 		$sims ['###ORGANIZER###'] = '';
-		if (! $this->confArr ['hideOrganizerTextfield'] && $this->isAllowed ('organizer')) {
+		if (! $this->extConf ['hideOrganizerTextfield'] && $this->isAllowed ('organizer')) {
 			$sims ['###ORGANIZER###'] = $this->applyStdWrap ($this->object->getOrganizer (), 'organizer_stdWrap');
 		}
 	}
@@ -368,8 +366,7 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 				$default = $this->object->getOrganizerId ();
 			}
 			$cal_organizer = '<option value="">' . $this->controller->pi_getLL ('l_select') . '</option>';
-			$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			$useOrganizerStructure = ($this->confArr ['useOrganizerStructure'] ? $this->confArr ['useOrganizerStructure'] : 'tx_cal_organizer');
+			$useOrganizerStructure = ($this->extConf ['useOrganizerStructure'] ? $this->extConf ['useOrganizerStructure'] : 'tx_cal_organizer');
 			$organizers = $this->modelObj->findAllOrganizer ($useOrganizerStructure, $this->conf ['pidList']);
 			$feUserUid = $this->rightsObj->getUserId ();
 			$feGroupsArray = $this->rightsObj->getUserGroups ();
@@ -414,7 +411,7 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	}
 	function getLocationMarker(& $template, & $sims, & $rems) {
 		$sims ['###LOCATION###'] = '';
-		if (! $this->confArr ['hideLocationTextfield'] && $this->isAllowed ('location')) {
+		if (! $this->extConf ['hideLocationTextfield'] && $this->isAllowed ('location')) {
 			$sims ['###LOCATION###'] = $this->applyStdWrap ($this->object->getLocation (), 'location_stdWrap');
 		}
 	}
@@ -428,8 +425,7 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			}
 			// creating options for location
 			$cal_location = '<option value="">' . $this->controller->pi_getLL ('l_select') . '</option>';
-			$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			$useLocationStructure = ($this->confArr ['useLocationStructure'] ? $this->confArr ['useLocationStructure'] : 'tx_cal_location');
+			$useLocationStructure = ($this->extConf ['useLocationStructure'] ? $this->extConf ['useLocationStructure'] : 'tx_cal_location');
 			$locations = $this->modelObj->findAllLocations ($useLocationStructure, $this->conf ['pidList']);
 			$feUserUid = $this->rightsObj->getUserId ();
 			$feGroupsArray = $this->rightsObj->getUserGroups ();

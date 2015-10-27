@@ -51,8 +51,6 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			return 'You are not allowed to delete this event!';
 		}
 		
-		$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		
 		$rems = Array ();
 		$sims = Array ();
 		$wrapped = Array ();
@@ -136,7 +134,7 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	}
 	function getOrganizerMarker(& $template, & $sims, & $rems, & $wrapped) {
 		$sims ['###ORGANIZER###'] = '';
-		if (! $this->confArr ['hideOrganizerTextfield'] && $organizer = $this->object->getOrganizer ()) {
+		if (! $this->extConf ['hideOrganizerTextfield'] && $organizer = $this->object->getOrganizer ()) {
 			$sims ['###ORGANIZER###'] = $this->cObj->stdWrap ($organizer, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['organizer_stdWrap.']);
 		}
 	}
@@ -148,7 +146,7 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	}
 	function getLocationMarker(& $template, & $sims, & $rems, & $wrapped) {
 		$sims ['###LOCATION###'] = '';
-		if (! $this->confArr ['hideLocationTextfield'] && $location = $this->object->getLocation ()) {
+		if (! $this->extConf ['hideLocationTextfield'] && $location = $this->object->getLocation ()) {
 			$sims ['###LOCATION###'] = $this->cObj->stdWrap ($location, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['location_stdWrap.']);
 		}
 	}

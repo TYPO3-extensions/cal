@@ -185,7 +185,7 @@ class CreateCategoryView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			$this->conf ['view.'] ['edit_category.'] ['tree.'] ['calendar'] = $this->conf ['calendar'];
 			$this->conf ['view.'] ['edit_category.'] ['tree.'] ['category'] = $this->conf ['category'];
 			
-			$categoryArray = $this->modelObj->findAllCategories ('cal_category_model', $this->confArr ['categoryService'], $this->conf ['pidList']);
+			$categoryArray = $this->modelObj->findAllCategories ('cal_category_model', $this->extConf ['categoryService'], $this->conf ['pidList']);
 			
 			$sims ['###PARENT_CATEGORY###'] = $this->applyStdWrap ($this->getCategorySelectionTree ($this->conf ['view.'] ['edit_category.'] ['tree.'], $categoryArray, true), 'parent_category_stdWrap');
 			

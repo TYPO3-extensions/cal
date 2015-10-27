@@ -805,7 +805,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 	function list_legend(&$return) {
 		$this->conf['view.']['category.']['tree.']['category'] = $this->conf['category'];
 		$this->conf['view.']['category.']['tree.']['calendar'] = '0,'.$this->conf['calendar'];
-		$categoryArray = $this->modelObj->findAllCategories('cal_category_model', $this->confArr ['categoryService'],$this->conf['pidList']);
+		$categoryArray = $this->modelObj->findAllCategories('cal_category_model', $this->extConf ['categoryService'],$this->conf['pidList']);
 
 		$return = $this->getCategorySelectionTree($this->conf['view.']['category.']['tree.'], $categoryArray, $this->conf['view.']['other.']['showCategorySelection']);
 		$return = $this->cObj->stdWrap($return, $this->conf['view.']['other.']['legend_stdWrap.']);

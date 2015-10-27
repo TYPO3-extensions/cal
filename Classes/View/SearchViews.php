@@ -125,8 +125,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	
 	public function getLocationIdsMarker(&$page, &$sims, &$rems, $view) {
 		$sims ['###LOCATION_IDS###'] = '<option  value="">' . $this->controller->pi_getLL ('l_all') . '</option>';
-		$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		$locationArray = $this->modelObj->findAllLocations ($this->confArr ['useLocationStructure'] ? $this->confArr ['useLocationStructure'] : 'tx_cal_location', $this->conf ['pidList']);
+		$locationArray = $this->modelObj->findAllLocations ($this->extConf ['useLocationStructure'] ? $this->extConf ['useLocationStructure'] : 'tx_cal_location', $this->conf ['pidList']);
 		
 		$locationIdArray = Array ();
 		if ($this->controller->piVars ['submit'] && $this->controller->piVars ['location_ids']) {
@@ -146,8 +145,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	
 	public function getOrganizerIdsMarker(&$page, &$sims, &$rems, $view) {
 		$sims ['###ORGANIZER_IDS###'] = '<option  value="">' . $this->controller->pi_getLL ('l_all') . '</option>';
-		$this->confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		$organizerArray = $this->modelObj->findAllOrganizer ($this->confArr ['useOrganizerStructure'] ? $this->confArr ['useOrganizerStructure'] : 'tx_cal_organizer', $this->conf ['pidList']);
+		$organizerArray = $this->modelObj->findAllOrganizer ($this->extConf ['useOrganizerStructure'] ? $this->extConf ['useOrganizerStructure'] : 'tx_cal_organizer', $this->conf ['pidList']);
 		
 		$organizerIdArray = Array ();
 		if ($organizerIds != '') {

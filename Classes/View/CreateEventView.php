@@ -649,21 +649,19 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			if (empty ($selectedUsers) && ! $this->isEditMode) {
 				$selectedUsers = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
 			}
-			$selectedUsersList = implode (',', $selectedUsers);
-			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_users', 'pid in (' . $this->conf ['pidList'] . ')' . $this->cObj->enableFields ('fe_users'));
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				if (! empty ($allowedUsers) && GeneralUtility::inList ($this->conf ['rights.'] ['allowedUsers'], $row ['uid'])) {
-					if (GeneralUtility::inList ($selectedUsersList, $row ['uid'])) {
-						$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '" checked="checked" name="tx_cal_controller[notify][]" />' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $userOffsetIndex [$row ['uid']] ? $userOffsetIndex [$row ['uid']] : $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
-					} else {
-						$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '"  name="tx_cal_controller[notify][]"/>' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
-					}
-				} else if (empty ($allowedUsers)) {
-					if (GeneralUtility::inList ($selectedUsersList, $row ['uid'])) {
-						$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '" checked="checked" name="tx_cal_controller[notify][]" />' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $userOffsetIndex [$row ['uid']] ? $userOffsetIndex [$row ['uid']] : $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
-					} else {
-						$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '"  name="tx_cal_controller[notify][]"/>' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
-					}
+			
+			$pidWhere = ' pid in (' . $this->conf ['pidList'] . ') ';
+			
+			$allowedUsersList = implode ( ',', $allowedUsers );
+			
+			// Read only allowed users and only users with email address
+			$allowedUsersWhere = ' AND email!="" ' . ($allowedUsers ? ' AND uid in (' . $allowedUsersList . ') ' : '');
+			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ( '*', 'fe_users', $pidWhere . $allowedUsersWhere . $this->cObj->enableFields ( 'fe_users' ) );
+			while ( $row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ( $result ) ) {
+				if (in_array ( $row ['uid'], $selectedUsers )) {
+					$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '" checked="checked" name="tx_cal_controller[notify][]" />' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . ($userOffsetIndex [$row ['uid']] ? $userOffsetIndex [$row ['uid']] : $this->conf ['view.'] ['event.'] ['remind.'] ['time']) . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
+				} else {
+					$cal_notify_user .= '<input type="checkbox" value="u_' . $row ['uid'] . '_' . $row ['username'] . '"  name="tx_cal_controller[notify][]"/>' . $row ['username'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[u_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
 				}
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
@@ -679,21 +677,16 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			if (empty ($selectedGroups) && ! $this->isEditMode) {
 				$selectedGroups = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['fields.'] ['notify.'] ['defaultGroup'], 1);
 			}
-			$selectedGroupsList = implode (',', $selectedGroups);
-			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'fe_groups', 'pid in (' . $this->conf ['pidList'] . ')' . $this->cObj->enableFields ('fe_groups'));
-			while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-				if (! empty ($allowedGroups) && array_search ($row ['uid'], $allowedGroups)) {
-					if (array_search ($row ['uid'], $selectedGroups) !== false) {
-						$cal_notify_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '" checked="checked" name="tx_cal_controller[notify][]" />' . $row ['title'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $userOffsetIndex [$row ['uid']] ? $userOffsetIndex [$row ['uid']] : $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[g_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
-					} else {
-						$cal_notify_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '"  name="tx_cal_controller[notify][]"/>' . $row ['title'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[g_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
-					}
-				} else if (empty ($allowedGroups)) {
-					if (array_search ($row ['uid'], $selectedGroups) !== false) {
-						$cal_notify_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '" checked="checked" name="tx_cal_controller[notify][]" />' . $row ['title'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $userOffsetIndex [$row ['uid']] ? $userOffsetIndex [$row ['uid']] : $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[g_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
-					} else {
-						$cal_notify_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '"  name="tx_cal_controller[notify][]"/>' . $row ['title'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[g_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
-					}
+			
+			$allowedGroupsList = implode (',', $allowedGroups);
+			// Read only allowed groups
+			$allowedGroupsWhere = $allowedGroups ? ' AND uid in (' . $allowedGroupsList . ') ' : '';
+			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ( '*', 'fe_groups', $pidWhere . $allowedGroupsWhere . $this->cObj->enableFields ( 'fe_groups' ) );
+			while ( $row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ( $result ) ) {
+				if (in_array ( $row ['uid'], $selectedGroups ) !== false) {
+					$cal_notify_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '" checked="checked" name="tx_cal_controller[notify][]" />' . $row ['title'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . ($groupOffsetIndex [$row ['uid']] ? $groupOffsetIndex [$row ['uid']] : $this->conf ['view.'] ['event.'] ['remind.'] ['time']) . '"  name="tx_cal_controller[g_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
+				} else {
+					$cal_notify_user .= '<input type="checkbox" value="g_' . $row ['uid'] . '_' . $row ['title'] . '"  name="tx_cal_controller[notify][]"/>' . $row ['title'] . '%%%L_REMIND_MINUTES_1%%%<input type="text" value="' . $this->conf ['view.'] ['event.'] ['remind.'] ['time'] . '"  name="tx_cal_controller[g_' . $row ['uid'] . '_notify_offset]" class="reminderOffset"/>%%%L_REMIND_MINUTES_2%%%<br />';
 				}
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($result);

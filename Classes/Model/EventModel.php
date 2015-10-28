@@ -553,7 +553,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 		$this->notifyUserIds = Array ();
 		$this->notifyGroupIds = Array ();
 		$table = 'tx_cal_fe_user_event_monitor_mm';
-		$select = 'uid_foreign,tablenames';
+		$select = 'uid_foreign,tablenames,offset';
 		$where = 'uid_local = ' . $this->getUid ();
 		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 		if ($result) {

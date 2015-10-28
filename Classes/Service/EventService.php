@@ -922,20 +922,33 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		
 		if ($this->rightsObj->isAllowedToEditEventNotify () && ! is_null ($tempValues ['notify_ids'])) {
-			$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_fe_user_event_monitor_mm', 'uid_local =' . $uid . ' AND tablenames in ("fe_users","fe_groups")');
-			if ($tempValues ['notify_ids'] != '') {
-				$user = Array ();
-				$group = Array ();
-				$this->splitUserAndGroupIds (explode (',', strip_tags ($tempValues ['notify_ids'])), $user, $group);
-				$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', $user, $uid, 'fe_users', array (
-						'offset' => $tempValues ['notify_offset'],
-						'pid' => $object->row ['pid'] 
-				));
-				$this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', $group, $uid, 'fe_groups', array (
-						'offset' => $tempValues ['notify_offset'],
-						'pid' => $object->row ['pid'] 
-				));
-			}
+            $GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_fe_user_event_monitor_mm', 'uid_local =' . $uid . ' AND tablenames in ("fe_users","fe_groups")');
+            if ($tempValues ['notify_ids'] != '') {
+                $user = Array ();
+                $group = Array ();
+                $this->splitUserAndGroupIds (explode (',', strip_tags ($tempValues ['notify_ids'])), $user, $group);
+                foreach ($user as $u) {
+                    $userOffsetArray = GeneralUtility::trimExplode ('_', $u, 1);
+                    $this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', array (
+                        $userOffsetArray [0]
+                    ), $uid, 'fe_users', array (
+                        'offset' => isset ($userOffsetArray [1]) ? $userOffsetArray [1] : $this->conf ['view.'] ['event.'] ['remind.'] ['time'],
+                        'pid' => $eventData ['pid']
+                    ));
+                }
+                $ignore = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['create.'] ['event.'] ['addFeGroupToNotify.'] ['ignore'], 1);
+                foreach ($group as $g) {
+                    $groupOffsetArray = GeneralUtility::trimExplode ('_', $g, 1);
+                    if (! in_array ($groupOffsetArray [0], $ignore)) {
+                        $this->insertIdsIntoTableWithMMRelation ('tx_cal_fe_user_event_monitor_mm', array (
+                            $groupOffsetArray [0]
+                        ), $uid, 'fe_groups', array (
+                            'offset' => isset ($groupOffsetArray [1]) ? $groupOffsetArray [1] : $this->conf ['view.'] ['event.'] ['remind.'] ['time'],
+                            'pid' => $eventData ['pid']
+                        ));
+                    }
+                }
+            }
 		} else {
 			$userIdArray = GeneralUtility::trimExplode (',', $this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['notify.'] ['defaultUser'], 1);
 			if ($this->conf ['rights.'] ['edit.'] ['event.'] ['addFeUserToNotify']) {

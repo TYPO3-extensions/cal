@@ -216,12 +216,9 @@ class TceMainProcessdatamap {
 						$GLOBALS ['TSFE']->tmpl->getFileName_backPath = $oldBackPath;
 					}
 					
-					$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-					if ($extConf ['useNewRecurringModel']) {
-						/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-						$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
-						$rgc->generateIndexForUid ($event ['uid'], $table);
-					}
+					/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+					$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
+					$rgc->generateIndexForUid ($event ['uid'], $table);
 					
 					if ($table == 'tx_cal_event' && $tx_cal_api->conf ['view.'] ['event.'] ['remind']) {
 						/* Schedule reminders for new and changed events */
@@ -335,12 +332,9 @@ class TceMainProcessdatamap {
 						$service->deleteSchedulerTask($id);
 						$calendar['schedulerId'] = 0;
 						
-						$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-						if ($extConf ['useNewRecurringModel']) {
-							/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-							$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
-							$rgc->cleanIndexTableOfCalendarUid ($id);
-						}
+						/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+						$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+						$rgc->cleanIndexTableOfCalendarUid ($id);
 					}
 					break;
 				case 1 : /* External URL or ICS file */
@@ -351,29 +345,26 @@ class TceMainProcessdatamap {
 		}
 		
 		if ($table == 'tx_cal_exception_event_group' && ! strstr ($id, 'NEW')) {
-			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			if ($extConf ['useNewRecurringModel']) {
-				$exceptionEvent = BackendUtility::getRecord ('tx_cal_exception_event_group', $id);
+			$exceptionEvent = BackendUtility::getRecord ('tx_cal_exception_event_group', $id);
+			
+			/* If we're in a workspace, don't notify anyone about the event */
+			if ($exceptionEvent ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
+				/* Check Page TSConfig for a preview page that we should use */
+				$pageTSConf = BackendUtility::getPagesTSconfig ($exceptionEvent ['pid']);
+				if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
+					$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
+				} else {
+					$pageIDForPlugin = $exceptionEvent ['pid'];
+				}
 				
-				/* If we're in a workspace, don't notify anyone about the event */
-				if ($exceptionEvent ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
-					/* Check Page TSConfig for a preview page that we should use */
-					$pageTSConf = BackendUtility::getPagesTSconfig ($exceptionEvent ['pid']);
-					if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
-						$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
-					} else {
-						$pageIDForPlugin = $exceptionEvent ['pid'];
-					}
-					
-					$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
-					
-					if ($page ['doktype'] != 254) {
-						$tx_cal_api = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
-						$tx_cal_api = $tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
-						/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-						$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
-						$rgc->cleanIndexTableOfExceptionGroupUid ($id);
-					}
+				$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+				
+				if ($page ['doktype'] != 254) {
+					$tx_cal_api = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
+					$tx_cal_api = $tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
+					/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+					$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+					$rgc->cleanIndexTableOfExceptionGroupUid ($id);
 				}
 			}
 		}
@@ -464,8 +455,7 @@ class TceMainProcessdatamap {
 				}
 				
 				$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
-				$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-				if ($extConf ['useNewRecurringModel'] && $page ['doktype'] != 254) {
+				if ($page ['doktype'] != 254) {
 					/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
 					$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
 					$rgc->generateIndexForCalendarUid ($calendar ['uid']);

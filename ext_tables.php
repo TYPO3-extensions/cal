@@ -30,10 +30,7 @@ $extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ($_EXTKEY
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr ('tx_cal_organizer', 'EXT:cal/Resources/Private/Help/locallang_csh_txcalorganizer.php');
 
 if (TYPO3_MODE == "BE") {
-	$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-	if ($extConf ['useNewRecurringModel']) {
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule ("tools", "calrecurrencegenerator", "", $extPath . "Classes/Backend/Modul/");
-	}
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule ("tools", "calrecurrencegenerator", "", $extPath . "Classes/Backend/Modul/");
 	$GLOBALS['TBE_MODULES_EXT'] ['xMOD_db_new_content_el'] ['addElClasses'] ['TYPO3\CMS\Cal\Backend\CalWizIcon'] = $extPath . 'Classes/Backend/CalWizIcon.php';
 }
 ?>

@@ -106,21 +106,15 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		if (($insertFields ['type'] == 1 && $insertFields ['ext_url']) or ($insertFields ['type'] == 2 && $insertFields ['ics_file'])) {
 			\TYPO3\CMS\Cal\Hooks\TceMainProcessdatamap::processICS (\TYPO3\CMS\Backend\Utility\BackendUtility::getRecord ('tx_cal_calendar', $uid), $insertFields, $service);
 			
-			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			if ($extConf ['useNewRecurringModel']) {
-				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
-				$rgc->generateIndexForCalendarUid ($uid);
-			}
+			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
+			$rgc->generateIndexForCalendarUid ($uid);
 		} else {
 			$service->deleteTemporaryEvents ($uid);
 			
-			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			if ($extConf ['useNewRecurringModel']) {
-				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $uid);
-				$rgc->cleanIndexTableOfCalendarUid ($uid);
-			}
+			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $uid);
+			$rgc->cleanIndexTableOfCalendarUid ($uid);
 		}
 		
 		$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $insertFields);
@@ -166,12 +160,9 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		$this->unsetPiVars ();
 		\TYPO3\CMS\Cal\Utility\Functions::clearCache ();
-		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		if ($extConf ['useNewRecurringModel']) {
-			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $uid);
-			$rgc->cleanIndexTableOfCalendarUid ($uid);
-		}
+		/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+		$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $uid);
+		$rgc->cleanIndexTableOfCalendarUid ($uid);
 	}
 	function retrievePostData(&$insertFields) {
 		$hidden = 0;
@@ -251,12 +242,9 @@ class CalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$service = new \TYPO3\CMS\Cal\Service\ICalendarService();
 			\TYPO3\CMS\Cal\Hooks\TcemainProcessdatamap::processICS (\TYPO3\CMS\Backend\Utility\BackendUtility::getRecord ('tx_cal_calendar', $uid), $insertFields, $service);
 			
-			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			if ($extConf ['useNewRecurringModel']) {
-				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
-				$rgc->generateIndexForCalendarUid ($uid);
-			}
+			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
+			$rgc->generateIndexForCalendarUid ($uid);
 		}
 		
 		if ($this->rightsObj->isAllowedToCreateCalendarOwner ()) {

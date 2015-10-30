@@ -80,7 +80,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$recurringClause = '';
 		// only include the recurring clause if we don't use the new recurring model or a view not needing recurring events.
-		if ($this->extConf ['useNewRecurringModel'] && $includeRecurring) {
+		if ($includeRecurring) {
 			// get the uids of recurring events from index
 			$select = 'event_uid';
 			$table = 'tx_cal_index';
@@ -308,12 +308,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 					}
 					if (! $exceptionEventCache [$row4 ['uid']]) {
 						$ex_event = $this->createEvent ($row4, true);
-						// $ex_events_group[] = $this->recurringEvent($ex_event);
-						if ($this->extConf ['useNewRecurringModel']) {
-							$recurringInstances = $this->getRecurringEventsFromIndex ($ex_event);
-						} else {
-							$recurringInstances = $this->recurringEvent ($ex_event);
-						}
+						$recurringInstances = $this->getRecurringEventsFromIndex ($ex_event);
 						$exceptionEventCache [$row4 ['uid']] = $recurringInstances;
 						$ex_events_group [] = $recurringInstances;
 					} else {
@@ -332,21 +327,12 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$result2 = $GLOBALS ['TYPO3_DB']->exec_SELECT_mm_query ('tx_cal_exception_event.*', 'tx_cal_event', 'tx_cal_exception_event_mm', 'tx_cal_exception_event', $where, $groupBy, $orderBy, $limit);
 			while ($row2 = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result2)) {
 				if (! $exceptionEventCache [$row2 ['uid']]) {
-					if ($this->extConf ['useNewRecurringModel']) {
-						$event->addExceptionSingleId ($row2 ['uid']);
-						if ($row2 ['end_date'] == 0) {
-							$row2 ['end_date'] = $row2 ['start_date'];
-						}
-						$ex_event = $this->createEvent ($row2, true);
-						$recurringInstances = $this->getRecurringEventsFromIndex ($ex_event);
-					} else {
-						$event->addExceptionSingleId ($row2 ['uid']);
-						if ($row2 ['end_date'] == 0) {
-							$row2 ['end_date'] = $row2 ['start_date'];
-						}
-						$ex_event = $this->createEvent ($row2, true);
-						$recurringInstances = $this->recurringEvent ($ex_event);
+					$event->addExceptionSingleId ($row2 ['uid']);
+					if ($row2 ['end_date'] == 0) {
+						$row2 ['end_date'] = $row2 ['start_date'];
 					}
+					$ex_event = $this->createEvent ($row2, true);
+					$recurringInstances = $this->getRecurringEventsFromIndex ($ex_event);
 					$exceptionEventCache [$row2 ['uid']] = $recurringInstances;
 					$ex_events_group [] = $recurringInstances;
 				} else {
@@ -611,12 +597,9 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$this->_scheduleReminder ($uid);
 		
-		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		if ($extConf ['useNewRecurringModel']) {
-			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
-			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
-		}
+		/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+		$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
+		$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		
 		// Hook: saveEvent
 		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_event_service', 'eventServiceClass');
@@ -850,13 +833,9 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		$this->unsetPiVars ();
 		
-		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		if ($extConf ['useNewRecurringModel']) {
-
-			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
-			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
-		}
+		/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+		$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
+		$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		
 		// Hook: updateEvent
 		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_event_service', 'eventServiceClass');
@@ -1093,13 +1072,9 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$this->_notify ($fields);
 			$this->stopReminder ($uid);
 			
-			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			if ($extConf ['useNewRecurringModel']) {
-
-				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
-				$rgc->cleanIndexTableOfUid ($uid, $table);
-			}
+			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+			$rgc->cleanIndexTableOfUid ($uid, $table);
 			
 			// Hook: removeEvent
 			$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_event_service', 'eventServiceClass');
@@ -1577,24 +1552,16 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$end->addSeconds ($diff);
 					$new_event->setEnd ($end);
 					if ($end->after ($this->starttime) && $start->before ($this->endtime)) {
-						if ($this->extConf ['useNewRecurringModel']) {
-							$table = 'tx_cal_index';
-							$eventData = Array (
-									'start_datetime' => $start->format ('%Y%m%d') . $start->format ('%H%M%S'),
-									'end_datetime' => $end->format ('%Y%m%d') . $end->format ('%H%M%S'),
-									'event_uid' => $event->getUid (),
-									'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
-							);
-							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
-							if (FALSE === $result){
-								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458131);
-							}
-						} else {
-							if ($new_event->isAllday ()) {
-								$master_array [$start->format ('%Y%m%d')] ['-1'] [$new_event->getUid ()] = $new_event;
-							} else {
-								$master_array [$start->format ('%Y%m%d')] [$start->format ('%H%M')] [$new_event->getUid ()] = $new_event;
-							}
+						$table = 'tx_cal_index';
+						$eventData = Array (
+								'start_datetime' => $start->format ('%Y%m%d') . $start->format ('%H%M%S'),
+								'end_datetime' => $end->format ('%Y%m%d') . $end->format ('%H%M%S'),
+								'event_uid' => $event->getUid (),
+								'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
+						);
+						$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+						if (FALSE === $result){
+							throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458131);
 						}
 						$addedCount ++;
 					}
@@ -1650,24 +1617,16 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$new_event->setEnd ($end);
 					
 					if ($end->after ($this->starttime) && $start->before ($this->endtime)) {
-						if ($this->extConf ['useNewRecurringModel']) {
-							$table = 'tx_cal_index';
-							$eventData = Array (
-									'start_datetime' => $start->format ('%Y%m%d') . $start->format ('%H%M%S'),
-									'end_datetime' => $end->format ('%Y%m%d') . $end->format ('%H%M%S'),
-									'event_uid' => $event->getUid (),
-									'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
-							);
-							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
-							if (FALSE === $result){
-								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458132);
-							}
-						} else {
-							if ($new_event->isAllday ()) {
-								$master_array [$start->format ('%Y%m%d')] ['-1'] [$new_event->getUid ()] = $new_event;
-							} else {
-								$master_array [$start->format ('%Y%m%d')] [$start->format ('%H%M')] [$new_event->getUid ()] = $new_event;
-							}
+						$table = 'tx_cal_index';
+						$eventData = Array (
+								'start_datetime' => $start->format ('%Y%m%d') . $start->format ('%H%M%S'),
+								'end_datetime' => $end->format ('%Y%m%d') . $end->format ('%H%M%S'),
+								'event_uid' => $event->getUid (),
+								'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
+						);
+						$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+						if (FALSE === $result){
+							throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458132);
 						}
 						$addedCount ++;
 					}
@@ -1692,24 +1651,16 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$end->addSeconds ($diff);
 					$new_event->setEnd ($end);
 					if ($end->after ($this->starttime) && $start->before ($this->endtime)) {
-						if ($this->extConf ['useNewRecurringModel']) {
-							$table = 'tx_cal_index';
-							$eventData = Array (
-									'start_datetime' => $start->format ('%Y%m%d%H%M%S'),
-									'end_datetime' => $end->format ('%Y%m%d%H%M%S'),
-									'event_uid' => $event->getUid (),
-									'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
-							);
-							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
-							if (FALSE === $result){
-								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458133);
-							}
-						} else {
-							if ($new_event->isAllday ()) {
-								$master_array [$start->format ('%Y%m%d')] ['-1'] [$new_event->getUid ()] = $new_event;
-							} else {
-								$master_array [$start->format ('%Y%m%d')] [$start->format ('%H%M')] [$new_event->getUid ()] = $new_event;
-							}
+						$table = 'tx_cal_index';
+						$eventData = Array (
+								'start_datetime' => $start->format ('%Y%m%d%H%M%S'),
+								'end_datetime' => $end->format ('%Y%m%d%H%M%S'),
+								'event_uid' => $event->getUid (),
+								'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
+						);
+						$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+						if (FALSE === $result){
+							throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458133);
 						}
 						$addedCount ++;
 					}
@@ -2134,54 +2085,42 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$nextOccuranceEndTime->copy ($nextOccuranceTime);
 					$nextOccuranceEndTime->addSeconds ($event->getLengthInSeconds ());
 					if ($this->starttime->before ($nextOccuranceEndTime) || $this->starttime->equals ($nextOccuranceTime)) {
-						if ($this->extConf ['useNewRecurringModel']) {
-							$table = 'tx_cal_index';
-							$eventData = Array (
-									'start_datetime' => $nextOccuranceTime->format ('%Y%m%d') . $nextOccuranceTime->format ('%H%M%S'),
-									'end_datetime' => $nextOccuranceEndTime->format ('%Y%m%d') . $nextOccuranceEndTime->format ('%H%M%S'),
-									'event_uid' => $event->getUid (),
-									'tablename' => $event->getType() == 'tx_cal_phpicalendar' ? ($event->isException ? 'tx_cal_exception_event' : 'tx_cal_event') : $event->getType() 
-							);
-							$deviationDates = $event->getDeviationDates ();
-							if (array_key_exists ($eventData ['start_datetime'], $deviationDates)) {
-								$startDate = null;
-								if ($deviationDates [$eventData ['start_datetime']] ['start_date']) {
-									$startDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationDates [$eventData ['start_datetime']] ['start_date']);
-								} else {
-									$startDate = new \TYPO3\CMS\Cal\Model\CalDate ();
-									$startDate->copy ($nextOccuranceTime);
-								}
-								$endDate = null;
-								if ($deviationDates [$eventData ['start_datetime']] ['end_date']) {
-									$endDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationDates [$eventData ['start_datetime']] ['end_date']);
-								} else {
-									$endDate = new \TYPO3\CMS\Cal\Model\CalDate ();
-									$endDate->copy ($nextOccuranceEndTime);
-								}
-								
-								if (! $deviationDates [$eventData ['start_datetime']] ['allday']) {
-									$startDate->addSeconds ($deviationDates [$eventData ['start_datetime']] ['start_time']);
-									$endDate->addSeconds ($deviationDates [$eventData ['start_datetime']] ['end_time']);
-								}
-								
-								$eventData ['event_deviation_uid'] = $deviationDates [$eventData ['start_datetime']] ['uid'];
-								$eventData ['start_datetime'] = $startDate->format ('%Y%m%d') . $startDate->format ('%H%M%S');
-								$eventData ['end_datetime'] = $endDate->format ('%Y%m%d') . $endDate->format ('%H%M%S');
-							}
-							$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
-							if (FALSE === $result){
-								throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458135);
-							}
-						} else {
-							$new_event = $event->cloneEvent ();
-							$new_event->setStart ($nextOccuranceTime);
-							$new_event->setEnd ($nextOccuranceEndTime);
-							
-							if ($new_event->isAllday ()) {
-								$master_array [$nextOccuranceTime->format ('%Y%m%d')] ['-1'] [$new_event->getUid ()] = $new_event;
+						$table = 'tx_cal_index';
+						$eventData = Array (
+								'start_datetime' => $nextOccuranceTime->format ('%Y%m%d') . $nextOccuranceTime->format ('%H%M%S'),
+								'end_datetime' => $nextOccuranceEndTime->format ('%Y%m%d') . $nextOccuranceEndTime->format ('%H%M%S'),
+								'event_uid' => $event->getUid (),
+								'tablename' => $event->getType() == 'tx_cal_phpicalendar' ? ($event->isException ? 'tx_cal_exception_event' : 'tx_cal_event') : $event->getType() 
+						);
+						$deviationDates = $event->getDeviationDates ();
+						if (array_key_exists ($eventData ['start_datetime'], $deviationDates)) {
+							$startDate = null;
+							if ($deviationDates [$eventData ['start_datetime']] ['start_date']) {
+								$startDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationDates [$eventData ['start_datetime']] ['start_date']);
 							} else {
-								$master_array [$nextOccuranceTime->format ('%Y%m%d')] [$nextOccuranceTime->format ('%H%M')] [$new_event->getUid ()] = $new_event;
+								$startDate = new \TYPO3\CMS\Cal\Model\CalDate ();
+								$startDate->copy ($nextOccuranceTime);
 							}
+							$endDate = null;
+							if ($deviationDates [$eventData ['start_datetime']] ['end_date']) {
+								$endDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationDates [$eventData ['start_datetime']] ['end_date']);
+							} else {
+								$endDate = new \TYPO3\CMS\Cal\Model\CalDate ();
+								$endDate->copy ($nextOccuranceEndTime);
+							}
+							
+							if (! $deviationDates [$eventData ['start_datetime']] ['allday']) {
+								$startDate->addSeconds ($deviationDates [$eventData ['start_datetime']] ['start_time']);
+								$endDate->addSeconds ($deviationDates [$eventData ['start_datetime']] ['end_time']);
+							}
+							
+							$eventData ['event_deviation_uid'] = $deviationDates [$eventData ['start_datetime']] ['uid'];
+							$eventData ['start_datetime'] = $startDate->format ('%Y%m%d') . $startDate->format ('%H%M%S');
+							$eventData ['end_datetime'] = $endDate->format ('%Y%m%d') . $endDate->format ('%H%M%S');
+						}
+						$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
+						if (FALSE === $result){
+							throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458135);
 						}
 						$addedCount ++;
 					}

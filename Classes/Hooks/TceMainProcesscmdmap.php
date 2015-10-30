@@ -59,12 +59,9 @@ class TceMainProcesscmdmap {
 										$GLOBALS ['TYPO3_DB']->exec_UPDATEquery ('tx_cal_calendar', 'uid=' . $calendar_id, $insertFields);
 									}
 									
-									$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-									if ($extConf ['useNewRecurringModel']) {
-										/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-										$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
-										$rgc->cleanIndexTableOfUid ($id, $table);
-									}
+									/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+									$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+									$rgc->cleanIndexTableOfUid ($id, $table);
 									
 									/* Delete all deviations of the event */
 									$GLOBALS ['TYPO3_DB']->exec_DELETEquery ('tx_cal_event_deviation', 'parentid=' . $id);
@@ -135,13 +132,9 @@ class TceMainProcesscmdmap {
 								$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 								
 								if ($command == 'delete') {
-									$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-									if ($extConf ['useNewRecurringModel']) {
-
-										/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-										$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
-										$rgc->cleanIndexTableOfUid ($id, $table);
-									}
+									/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+									$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+									$rgc->cleanIndexTableOfUid ($id, $table);
 								}
 							}
 						}

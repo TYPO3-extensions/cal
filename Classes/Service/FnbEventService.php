@@ -65,7 +65,7 @@ class FnbEventService extends \TYPO3\CMS\Cal\Service\EventService {
 		
 		$recurringClause = '';
 		// only include the recurring clause if we don't use the new recurring model or a view not needing recurring events.
-		if ($this->extConf ['useNewRecurringModel'] && $includeRecurring) {
+		if ($includeRecurring) {
 			// get the uids of recurring events from index
 			$select = 'event_uid';
 			$table = 'tx_cal_index';
@@ -82,8 +82,6 @@ class FnbEventService extends \TYPO3\CMS\Cal\Service\EventService {
 			if (count ($tmpUids)) {
 				$recurringClause = ' OR (tx_cal_event.uid IN (' . implode (',', $tmpUids) . ')) ';
 			}
-		} else if ($includeRecurring) {
-			$recurringClause = ' OR (tx_cal_event.start_date<=' . $formattedEndtime . ' AND (tx_cal_event.freq IN ("day","week","month","year") AND (tx_cal_event.until>=' . $formattedStarttime . ' OR tx_cal_event.until=0))) OR (tx_cal_event.rdate AND tx_cal_event.rdate_type IN ("date_time","date","period")) ';
 		}
 		
 		// putting everything together

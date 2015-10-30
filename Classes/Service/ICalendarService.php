@@ -539,7 +539,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 				
 				$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 				
-				if ($component->getAttribute ('RECURRENCE-ID') && $extConf ['useNewRecurringModel']) {
+				if ($component->getAttribute ('RECURRENCE-ID')) {
 					$recurrenceIdStart = new \TYPO3\CMS\Cal\Model\CalDate ($component->getAttribute ('RECURRENCE-ID'));
 					$params = $component->getAttributeParameters ('RECURRENCE-ID');
 					$timezone = $params ['TZID'];
@@ -626,17 +626,15 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 						}
 					}
 					
-					if ($extConf ['useNewRecurringModel']) {
-						$pageTSConf = BackendUtility::getPagesTSconfig ($pid);
-						if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
-							$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
-						} else {
-							$pageIDForPlugin = $pid;
-						}
-						/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-						$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
-						$rgc->generateIndexForUid ($eventUid, 'tx_cal_event');
+					$pageTSConf = BackendUtility::getPagesTSconfig ($pid);
+					if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
+						$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
+					} else {
+						$pageIDForPlugin = $pid;
 					}
+					/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+					$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
+					$rgc->generateIndexForUid ($eventUid, 'tx_cal_event');
 					
 					if ($this->conf ['view.'] ['event.'] ['remind']) {
 						/* Schedule reminders for new and changed events */

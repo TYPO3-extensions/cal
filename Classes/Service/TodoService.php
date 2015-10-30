@@ -129,12 +129,9 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		}
 		$this->_scheduleReminder ($uid);
 		
-		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		if ($extConf ['useNewRecurringModel']) {
-			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
-			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
-		}
+		/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+		$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
+		$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		
 		// Hook: saveEvent
 		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
@@ -281,12 +278,9 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		}
 		$this->unsetPiVars ();
 		
-		$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-		if ($extConf ['useNewRecurringModel']) {
-			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
-			$rgc->generateIndexForUid ($uid, 'tx_cal_event');
-		}
+		/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+		$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $GLOBALS ['TSFE']->id);
+		$rgc->generateIndexForUid ($uid, 'tx_cal_event');
 		
 		// Hook: updateEvent
 		$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');
@@ -411,12 +405,9 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 			$this->_notify ($fields);
 			$this->stopReminder ($uid);
 			
-			$extConf = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
-			if ($extConf ['useNewRecurringModel']) {
-				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
-				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
-				$rgc->cleanIndexTableOfUid ($uid, $table);
-			}
+			/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+			$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+			$rgc->cleanIndexTableOfUid ($uid, $table);
 			
 			// Hook: removeEvent
 			$hookObjectsArr = \TYPO3\CMS\Cal\Utility\Functions::getHookObjectsArray ('tx_cal_todo_service', 'todoServiceClass');

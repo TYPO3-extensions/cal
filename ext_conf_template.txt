@@ -23,19 +23,16 @@ showTimes = 1
 # cat=basic/enable/250; type=boolean; label= Use Teaser Field:  Show the teaser field in addition to title and description.
 useTeaser = 0
 
-# cat=basic/enable/290; type=boolean; label= Use New Recurring Event Model:  This will use an index table for recurring events, reducing memory consumption and improving performance. If you have already created events, you must visit the Cal Indexer backend module to make sure they are indexed properly. If you use the Scheduler in TYPO3 4.3 with Calendar Base, you must enable this setting.
-useNewRecurringModel = 1
-
 # cat=basic/enable/295; type=boolean; label= Hide Event Deviation records: Event deviation records should be changed only through IRRE editing; the records themselfs can be hidden.  
 hideDeviationRecords = 1
 
 # cat=basic/enable/300; type=options[tx_cal_category,sys_category]; label= Use tx_cal_category or sys_category records
 categoryService = tx_cal_category
 
-# cat=basic/enable/310; type=text; label= Recurring Event Start Date:  If using the new recurring event model, this is the earliest date recurring events will occur. The date format is YYYYMMDD.
+# cat=basic/enable/310; type=text; label= Recurring Event Start Date:  This is the earliest date recurring events will occur. The date format is YYYYMMDD.
 recurrenceStart = 20140101
 
-# cat=basic/enable/320; type=text; label= Value for useNewRecurringModel:  If using the new recurring event model, this is the latest date recurring events will occur. The date format is YYYYMMDD.
+# cat=basic/enable/320; type=text; label= Recurring Event End Date:  This is the latest date recurring events will occur. The date format is YYYYMMDD.
 recurrenceEnd = 20201231
 
 # cat=basic/enable/150; type=boolean; label=LLL:EXT:cal/Resources/Private/Language/locallang_plugin.xml:extmng.useInternalCaching

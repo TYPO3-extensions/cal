@@ -22,37 +22,36 @@ class EventRecDeviationModel extends EventModel {
 	
 	private $origStartDate;
 
-	protected $row;
-	
 	public function __construct($event, $row, $start, $end) {
-		$this->row = $row;
-		parent::__construct ($event->serviceKey);
-		$deviationId = $this->row ['uid'];
-		unset ($this->row ['uid']);
-		unset ($this->row ['pid']);
-		unset ($this->row ['parentid']);
-		unset ($this->row ['tstamp']);
-		unset ($this->row ['crdate']);
-		unset ($this->row ['cruser_id']);
-		unset ($this->row ['deleted']);
-		unset ($this->row ['hidden']);
-		unset ($this->row ['starttime']);
-		unset ($this->row ['endtime']);
+		Model::__construct ($event->serviceKey);
+		$deviationId = $row ['uid'];
+		unset ($row ['uid']);
+		unset ($row ['pid']);
+		unset ($row ['parentid']);
+		unset ($row ['tstamp']);
+		unset ($row ['crdate']);
+		unset ($row ['cruser_id']);
+		unset ($row ['deleted']);
+		unset ($row ['hidden']);
+		unset ($row ['starttime']);
+		unset ($row ['endtime']);
 		// storing allday in a temp var, in case it is set from 1 to 0
-		$allday = $this->row ['allday'];
-		$this->row = array_merge ($event->row, array_filter ($this->row));
-		$this->row ['allday'] = $allday;
-		$this->row ['deviationId'] = $deviationId;
-		$this->createEvent ($this->row, false);
+		$allday = $row ['allday'];
+		$row = array_merge ($event->row, array_filter ($row));
+		$row ['allday'] = $allday;
+		$row ['deviationId'] = $deviationId;
+		$this->createEvent ($row, false);
 		
 		$this->setStart ($start);
 		$this->setEnd ($end);
 		
-		$this->setAllday ($this->row ['allday']);
-		$this->origStartDate = new  \TYPO3\CMS\Cal\Model\CalDate ($this->row ['orig_start_date']);
-		$this->origStartDate->addSeconds ($this->row ['orig_start_time']);
+		
+		$this->setAllday ($row ['allday']);
+		$this->origStartDate = new  \TYPO3\CMS\Cal\Model\CalDate ($row ['orig_start_date']);
+		$this->origStartDate->addSeconds ($row ['orig_start_time']);
 	}
-	function getRRuleMarker(&$template, &$sims, &$rems, &$wrapped, $view) {
+	
+	public function getRRuleMarker(&$template, &$sims, &$rems, &$wrapped, $view) {
 		$eventStart = $this->origStartDate;
 		if ($this->isAllday ()) {
 			$sims ['###RRULE###'] = 'RECURRENCE-ID;VALUE=DATE:' . $eventStart->format ('%Y%m%d');

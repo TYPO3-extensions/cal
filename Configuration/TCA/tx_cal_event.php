@@ -1069,7 +1069,7 @@ if ($configuration['categoryService'] == 'sys_category'){
 		'type' => 'select',
 		'renderMode' => 'tree',
 		'treeConfig' => array(
-			'dataProvider' => 'Tx_Cal_TreeProvider_DatabaseTreeDataProvider',
+			'dataProvider' => 'TYPO3\CMS\Cal\TreeProvider\DatabaseTreeDataProvider',
 			'parentField' => 'parent',
 			'appearance' => array(
 				'showHeader' => TRUE,

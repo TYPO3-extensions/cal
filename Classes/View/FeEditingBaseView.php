@@ -347,7 +347,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			if (! empty ( $removeFiles )) {
 				$where .= ' AND uid not in (' . implode ( ',', array_values ( $removeFiles ) ) . ')';
 			}
-
+			
 			$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ( '*', 'sys_file_reference', $where );
 			while ( $row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ( $result ) ) {
 				
@@ -582,8 +582,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$functionA = 'get' . ucwords ( $field );
 						if (method_exists ( $this->object, $functionA )) {
 							$a = $this->object->$functionA ();
-							if ($rule['count']) {
-								$a = count($a);
+							if ($rule ['count']) {
+								$a = count ( $a );
 							}
 							if ($rule ['field']) {
 								$functionB = 'get' . ucwords ( $rule ['field'] );
@@ -602,9 +602,6 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 								}
 							} else if (isset ( $rule ['value'] )) {
 								$b = $rule ['value'];
-								if ($rule['count']) {
-									$b = count($b);
-								}
 								if ($a >= $b) {
 									$failed = true;
 								}
@@ -618,8 +615,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$functionA = 'get' . ucwords ( $field );
 						if (method_exists ( $this->object, $functionA )) {
 							$a = $this->object->$functionA ();
-							if ($rule['count']) {
-								$a = count($a);
+							if ($rule ['count']) {
+								$a = count ( $a );
 							}
 							if ($rule ['field']) {
 								$functionB = 'get' . ucwords ( $rule ['field'] );
@@ -637,11 +634,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 										}
 									}
 								}
-							} else if (isset($rule ['value'])) {
+							} else if (isset ( $rule ['value'] )) {
 								$b = $rule ['value'];
-								if ($rule['count']) {
-									$b = count($b);
-								}
 								if ($a <= $b) {
 									$failed = true;
 								}
@@ -654,8 +648,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$functionA = 'get' . ucwords ( $field );
 						if (method_exists ( $this->object, $functionA )) {
 							$a = $this->object->$functionA ();
-							if ($rule['count']) {
-								$a = count($a);
+							if ($rule ['count']) {
+								$a = count ( $a );
 							}
 							if ($rule ['field']) {
 								$functionB = 'get' . ucwords ( $rule ['field'] );
@@ -673,11 +667,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 										}
 									}
 								}
-							} else if (isset($rule ['value'])) {
+							} else if (isset ( $rule ['value'] )) {
 								$b = $rule ['value'];
-								if ($rule['count']) {
-									$b = count($b);
-								}
 								if ($a != $b) {
 									$failed = true;
 								}
@@ -690,8 +681,8 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						$functionA = 'get' . ucwords ( $field );
 						if (method_exists ( $this->object, $functionA )) {
 							$a = $this->object->$functionA ();
-							if ($rule['count']) {
-								$a = count($a);
+							if ($rule ['count']) {
+								$a = count ( $a );
 							}
 							if ($rule ['field']) {
 								$functionB = 'get' . ucwords ( $rule ['field'] );
@@ -711,9 +702,6 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 								}
 							} else if (is_null ( $rule ['value'] ) || isset ( $rule ['value'] )) {
 								$b = $rule ['value'];
-								if ($rule['count']) {
-									$b = count($b);
-								}
 								if ($a == $b) {
 									$failed = true;
 								}

@@ -491,10 +491,6 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 				$this->addAttachment ($val);
 			}
 		}
-		if ($row ['attachmentcaption']) {
-			$captionArray = GeneralUtility::trimExplode (chr (10), $row ['attachmentcaption']);
-			$this->setAttachmentCaption ($captionArray);
-		}
 		
 		if ($row ['exception_single_ids']) {
 			$ids = explode (',', $row ['exception_single_ids']);

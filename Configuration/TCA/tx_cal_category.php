@@ -101,6 +101,24 @@ $tx_cal_category = array(
 				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.parent_category',
 				'config' => array(
 						'type' => 'select',
+						'renderType' => 'selectTree',
+						'parameterArray' => array(
+								'fieldConf' => array(
+										'config' => array(
+												'renderMode' => 'tree',
+										),
+								),
+						),
+						'treeConfig' => array(
+// 								'dataProvider' => 'TYPO3\\CMS\\Cal\\TreeProvider\\DatabaseTreeDataProvider',
+								'parentField' => 'parent_category',
+								'appearance' => array(
+										'showHeader' => TRUE,
+										'allowRecursiveMode' => TRUE,
+										'expandAll' => TRUE,
+										'maxLevels' => 99
+								)
+						),
 						'form_type' => 'user',
 						'userFunc' => 'TYPO3\CMS\Cal\TreeProvider\TreeView->displayCategoryTree',
 						'treeView' => 1,

@@ -156,6 +156,24 @@ $tx_cal_event = array(
 					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.category',
 					'config' => array(
 							'type' => 'select',
+							'renderType' => 'selectTree',
+							'parameterArray' => array(
+									'fieldConf' => array(
+											'config' => array(
+													'renderMode' => 'tree',
+											),
+									),
+							),
+							'treeConfig' => array(
+								'dataProvider' => 'TYPO3\\CMS\\Cal\\TreeProvider\\DatabaseTreeDataProvider',
+								'parentField' => 'parent_category',
+								'appearance' => array(
+									'showHeader' => TRUE,
+									'allowRecursiveMode' => TRUE,
+									'expandAll' => TRUE,
+									'maxLevels' => 99
+								)
+							),
 							'form_type' => 'user',
 							'userFunc' => 'TYPO3\CMS\Cal\TreeProvider\TreeView->displayCategoryTree',
 							'treeView' => 1,
@@ -1067,9 +1085,9 @@ if ($configuration['categoryService'] == 'sys_category'){
 	unset($tx_cal_event['columns']['category_id']['config']);
 	$tx_cal_event['columns']['category_id']['config'] = array(
 		'type' => 'select',
-		'renderMode' => 'tree',
+		'renderType' => 'selectTree',
 		'treeConfig' => array(
-			'dataProvider' => 'Tx_Cal_TreeProvider_DatabaseTreeDataProvider',
+			'dataProvider' => 'TYPO3\\CMS\\Cal\\TreeProvider\\DatabaseTreeDataProvider',
 			'parentField' => 'parent',
 			'appearance' => array(
 				'showHeader' => TRUE,

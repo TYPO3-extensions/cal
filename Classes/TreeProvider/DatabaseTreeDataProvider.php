@@ -13,6 +13,10 @@ namespace TYPO3\CMS\Cal\TreeProvider;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Utility\IconUtility;
+
 /**
  * TCA tree data provider which considers
  */
@@ -22,6 +26,11 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	 * @var \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
 	 */
 	protected $backendUserAuthentication;
+	
+	protected $parentRow;
+	
+	const CALENDAR_PREFIX = 'calendar_';
+	const GLOBAL_PREFIX = 'global';
 
 	/**
 	 * Required constructor
@@ -29,9 +38,118 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	 * @param array $configuration TCA configuration
 	 */
 	public function __construct (array $configuration) {
+		
 		$this->backendUserAuthentication = $GLOBALS['BE_USER'];
 	}
-
+	
+	/**
+	 * Sets the list for selected nodes
+	 *
+	 * @param string $selectedList
+	 * @return void
+	 */
+	public function setSelectedList($selectedList) {
+		// During initialization the first set contains the parent object row.
+		// Where as the second call really fills the correct values.
+		if($this->selectedList == ''){
+			$this->parentRow = $selectedList;
+		}
+		$this->selectedList = $selectedList;
+	}
+	
+	/**
+	 * Loads the tree data (all possible children)
+	 *
+	 * @return void
+	 */
+	protected function loadTreeData() {
+		$this->treeData->setId($this->getRootUid());
+		$this->treeData->setParentNode(NULL);
+		$level = 1;
+		
+		if ($this->levelMaximum >= $level) {
+				
+			$childNodes = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNodeCollection::class);
+				
+			$this->appendGlobalCategories($level, $childNodes);
+			$this->appendCalendarCategories($level, $childNodes);
+				
+			if ($childNodes !== NULL) {
+				$this->treeData->setChildNodes($childNodes);
+			}
+		}
+	}
+	
+	protected function appendGlobalCategories($level, $parentChildNodes){
+		$node = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNode::class);
+		$node->setId(GLOBAL_PREFIX);
+		
+		$childNodes = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNodeCollection::class);
+		
+		$where = 'l18n_parent = 0  and parent_category = 0 and calendar_id = 0';
+		$this->appendCategories($level, $childNodes, $where);
+		if ($childNodes !== NULL) {
+			$node->setChildNodes($childNodes);
+		}
+		
+		$parentChildNodes->append($node);
+	}
+	
+	protected function appendCalendarCategories($level, $childNodes){
+		if(isset($this->parentRow['calendar_id'][0])){
+			$calendarId = $this->parentRow['calendar_id'][0];
+		}
+		if($calendarId > 0){
+			$calres = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('tx_cal_calendar.uid, tx_cal_calendar.title', 'tx_cal_calendar', $this->getCalendarWhere());
+			if ($calres) {
+				while ($calrow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($calres)) {
+					$node = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNode::class);
+					$node->setId(CALENDAR_PREFIX.$calrow['uid']);
+					
+					if ($level < $this->levelMaximum) {
+						$where = 'l18n_parent = 0 and tx_cal_category.calendar_id = '.$calrow['uid'];
+						$calendarChildNodes = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNodeCollection::class);
+						
+						$this->appendCategories($level + 1, $calendarChildNodes, $where);
+						if ($calendarChildNodes !== NULL) {
+							$node->setChildNodes($calendarChildNodes);
+						}
+					}
+					$childNodes->append($node);
+				}
+				$GLOBALS ['TYPO3_DB']->sql_free_result ($calres);
+			}
+		}
+	}
+	
+	protected function appendCategories($level, $childNodes, $where){
+		$categoryResult = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('tx_cal_category.uid, tx_cal_category.title', 'tx_cal_category', $where);
+		if ($categoryResult) {
+			while ($categoryRow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($categoryResult)) {
+				$categoryNode = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNode::class);
+				$categoryNode->setId($categoryRow['uid']);
+				
+				if ($level < $this->levelMaximum) {
+					$children = $this->getChildrenOf($categoryNode, $level + 1);
+					if ($children !== NULL) {
+						$categoryNode->setChildNodes($children);
+					}
+				}
+				$childNodes->append($categoryNode);
+			}
+			$GLOBALS ['TYPO3_DB']->sql_free_result ($categoryResult);
+		}
+	}
+	
+	protected function getCalendarWhere(){
+		$calWhere = 'l18n_parent = 0  AND tx_cal_calendar.uid = '.$this->parentRow['calendar_id'][0];;
+	
+		if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {
+			$calWhere .= BackendUtility::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';
+		}
+		return $calWhere;
+	}
+	
 	/**
 	 * Builds a complete node including children
 	 *
@@ -43,23 +161,37 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	 */
 	protected function buildRepresentationForNode (\TYPO3\CMS\Backend\Tree\TreeNode $basicNode, \TYPO3\CMS\Core\Tree\TableConfiguration\DatabaseTreeNode $parent = NULL, $level = 0, $restriction = FALSE) {
 		/**@param $node \TYPO3\CMS\Core\Tree\TableConfiguration\DatabaseTreeNode */
-		$node = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance ('TYPO3\\CMS\\Core\\Tree\\TableConfiguration\\DatabaseTreeNode');
+		$node = GeneralUtility::makeInstance ('TYPO3\\CMS\\Core\\Tree\\TableConfiguration\\DatabaseTreeNode');
 		$row = array();
-		if ($basicNode->getId () == 0) {
-			$node->setSelected (FALSE);
-			$node->setExpanded (TRUE);
+		$node->setSelected (FALSE);
+		$node->setExpanded (TRUE);
+		$node->setSelectable(FALSE);
+		
+		if(strrpos($basicNode->getId (), CALENDAR_PREFIX, -strlen($basicNode->getId ())) !== FALSE) {
+			$id = intval(substr($basicNode->getId (),strlen(CALENDAR_PREFIX)));
+			$row = BackendUtility::getRecordWSOL ('tx_cal_calendar', $id, '*', '', FALSE);
+			$node->setIcon (IconUtility::mapRecordTypeToSpriteIconClass ('tx_cal_calendar', $row));
+			$node->setLabel ($row['title']);
+			$node->setSortValue($id);
+		} else if($basicNode->getId () === GLOBAL_PREFIX) {
+			$node->setLabel ($GLOBALS['LANG']->sL ('LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.global'));
+			$node->setSortValue(0);
+		} else if ($basicNode->getId () == 0) {
 			$node->setLabel ($GLOBALS['LANG']->sL ($GLOBALS['TCA'][$this->tableName]['ctrl']['title']));
 		} else {
-			$row = \TYPO3\CMS\Backend\Utility\BackendUtility::getRecordWSOL ($this->tableName, $basicNode->getId (), '*', '', FALSE);
+			$row = BackendUtility::getRecordWSOL ($this->tableName, $basicNode->getId (), '*', '', FALSE);
 
 			if ($this->getLabelField () !== '') {
 				$node->setLabel($row[$this->getLabelField()]);
 			} else {
 				$node->setLabel ($basicNode->getId ());
 			}
-			$node->setSelected (\TYPO3\CMS\Core\Utility\GeneralUtility::inList ($this->getSelectedList (), $basicNode->getId ()));
+			$node->setSelected (GeneralUtility::inList ($this->getSelectedList (), $basicNode->getId ()));
 			$node->setExpanded ($this->isExpanded ($basicNode));
 			$node->setLabel ($node->getLabel ());
+			$node->setIcon (IconUtility::mapRecordTypeToSpriteIconClass ($this->tableName, $row));
+			$node->setSelectable (!GeneralUtility::inList ($this->getNonSelectableLevelList (), $level) && !in_array ($basicNode->getId (), $this->getItemUnselectableList ()));
+			$node->setSortValue ($this->nodeSortValues[$basicNode->getId ()]);
 		}
 
 		$node->setId ($basicNode->getId ());
@@ -68,14 +200,12 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 		if ($parent != NULL && $level != 0 && $this->isSingleCategoryAclActivated() && !$this->isCategoryAllowed ($node)) {
 			return NULL;
 		}
-		$node->setSelectable (!\TYPO3\CMS\Core\Utility\GeneralUtility::inList ($this->getNonSelectableLevelList (), $level) && !in_array ($basicNode->getId (), $this->getItemUnselectableList ()));
-		$node->setSortValue ($this->nodeSortValues[$basicNode->getId ()]);
-		$node->setIcon (\TYPO3\CMS\Backend\Utility\IconUtility::mapRecordTypeToSpriteIconClass ($this->tableName, $row));
+		
 		$node->setParentNode ($parent);
 		if ($basicNode->hasChildNodes ()) {
 			$node->setHasChildren (TRUE);
 			/** @var \TYPO3\CMS\Backend\Tree\SortedTreeNodeCollection $childNodes */
-			$childNodes = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance ('TYPO3\\CMS\\Backend\\Tree\\SortedTreeNodeCollection');
+			$childNodes = GeneralUtility::makeInstance ('TYPO3\\CMS\\Backend\\Tree\\SortedTreeNodeCollection');
 			$foundSomeChild = FALSE;
 			foreach ($basicNode->getChildNodes () as $child) {
 				// Change in custom TreeDataProvider by adding the if clause

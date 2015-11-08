@@ -36,12 +36,7 @@ class TceMainProcesscmdmap {
 						/* If we're in a workspace, don't notify anyone about the event */
 						if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 							/* Check Page TSConfig for a preview page that we should use */
-							$pageTSConf = BackendUtility::getPagesTSconfig ($row ['pid']);
-							if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
-								$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
-							} else {
-								$pageIDForPlugin = $row ['pid'];
-							}
+							$pageIDForPlugin = $this->getPageIDForPlugin($row ['pid']);
 							
 							$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 							if ($page ['doktype'] != 254) {
@@ -109,39 +104,46 @@ class TceMainProcesscmdmap {
 			
 			case 'tx_cal_exception_event_group' :
 			case 'tx_cal_exception_event' :
-			case 'tx_cal_event_deviation' :
-				$select = '*';
-				$where = 'uid = ' . $id;
-				$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
-				if ($result) {
-					while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
-						
-						/* If we're in a workspace, don't notify anyone about the event */
-						if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
-							/* Check Page TSConfig for a preview page that we should use */
-							$pageTSConf = BackendUtility::getPagesTSconfig ($row ['pid']);
-							if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
-								$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
-							} else {
-								$pageIDForPlugin = $row ['pid'];
-							}
+				if ($command == 'delete') {
+					$select = '*';
+					$where = 'uid = ' . $id;
+					$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
+					if ($result) {
+						while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
 							
-							$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
-							if ($page ['doktype'] != 254) {
-								$tx_cal_api = new \TYPO3\CMS\Cal\Controller\Api ();
-								$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
+							/* If we're in a workspace, don't notify anyone about the event */
+							if ($row ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
+								/* Check Page TSConfig for a preview page that we should use */
+								$pageIDForPlugin = $this->getPageIDForPlugin($row ['pid']);
 								
-								if ($command == 'delete') {
+								$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+								if ($page ['doktype'] != 254) {
+									$tx_cal_api = new \TYPO3\CMS\Cal\Controller\Api ();
+									$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
+									
+									
 									/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
 									$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
 									$rgc->cleanIndexTableOfUid ($id, $table);
 								}
 							}
 						}
+						$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 					}
-					$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 				}
 				break;
+				case 'tx_cal_event_deviation' :
+					if ($command == 'delete') {
+						$select = 'tx_cal_event.uid, tx_cal_event.pid';
+						$where = 'tx_cal_index.event_uid = tx_cal_event.uid and tx_cal_index.event_deviation_uid = ' . $id;
+						$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, 'tx_cal_index, tx_cal_event', $where);
+						if ($result) {
+							while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
+								$this->reindexEvent($row['uid'], $row['pid']);
+							}
+						}
+					}
+					break;
 		}
 	}
 	function processCmdmap_preProcess(&$command, &$table, &$id, &$value, &$tce) {
@@ -205,6 +207,33 @@ class TceMainProcesscmdmap {
 				}
 				break;
 		}
+	}
+	
+	public function reindexEvent($eventUid, $pid) {
+		/* If we're in a workspace, don't notify anyone about the event */
+		if ($pid > 0 && !$GLOBALS['BE_USER']->workspace) {
+			/* Check Page TSConfig for a preview page that we should use */
+			$pageIDForPlugin = $this->getPageIDForPlugin($pid);
+	
+			$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+			if ($page ['doktype'] != 254) {
+				$tx_cal_api = new \TYPO3\CMS\Cal\Controller\Api ();
+				$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
+					
+					
+				/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
+				$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator');
+				$rgc->generateIndexForUid ($eventUid, 'tx_cal_event');
+			}
+		}
+	}
+	
+	public function getPageIDForPlugin($pid) {
+		$pageTSConf = BackendUtility::getPagesTSconfig ($pid);
+		if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
+			return $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
+		}
+		return $pid;
 	}
 }
 

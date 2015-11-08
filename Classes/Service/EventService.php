@@ -1353,7 +1353,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$deviations = Array ();
 		$select = '*';
 		$table = 'tx_cal_event_deviation';
-		$where = 'parentid = ' . $event->getUid ();
+		$where = 'parentid = ' . $event->getUid () . $this->cObj->enableFields ('tx_cal_event_deviation');
 		$deviationResult = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 		if ($deviationResult) {
 			while ($deviationRow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($deviationResult)) {

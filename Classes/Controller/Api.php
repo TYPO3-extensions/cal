@@ -13,6 +13,7 @@ namespace TYPO3\CMS\Cal\Controller;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Page\PageRenderer;
 
 /**
  * API for calendar base (cal)
@@ -135,6 +136,9 @@ class Api {
 		if ($tt_content_row ['pages']) {
 			// $conf['pages'] = $tt_content_row['pages'];
 			$cObj->data = $tt_content_row;
+		}
+		if (TYPO3_MODE == 'BE') {
+			$this->cleanUpPageRendererBackPath();
 		}
 		return $this->tx_cal_api_with ($cObj, $conf);
 	}
@@ -297,6 +301,25 @@ class Api {
 			// Return object
 			return $code;
 		}
+	}
+
+	/**
+	 * Returns current PageRenderer
+	 *
+	 * @return PageRenderer
+	 */
+	protected function getPageRenderer() {
+		return GeneralUtility::makeInstance(PageRenderer::class);
+	}
+
+	/**
+	 * Sets backPath of PageRenderer back to null (for Backend)
+	 * Fixes backpath in for backend. See forge #69319
+	 *
+	 * @return void
+	 */
+	protected function cleanUpPageRendererBackPath() {
+		$this->getPageRenderer()->setBackPath(null);
 	}
 }
 

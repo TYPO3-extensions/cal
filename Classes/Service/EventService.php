@@ -1495,11 +1495,11 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		
 		$added = 0;
-		// if the 'parent' event is still in future, set $added to 1 (true), because we already have one instance of this event
-		$eventStart = new \TYPO3\CMS\Cal\Model\CalDate ();
-		$eventStart->copy ($event->getStart ());
-		$added = (int) $eventStart->isFuture ();
-		
+		// if the 'parent' event is still in future, set $added to 1, because we already have one instance of this event
+		$now = new \TYPO3\CMS\Cal\Model\CalDate ();
+		if(intval($now->format ('%Y%m%d%H%M%S')) < intval($event->getStart ()->format ('%Y%m%d%H%M%S'))){ 
+			$added = 1;
+		}
 		$select = '*';
 		$table = 'tx_cal_index';
 		$where = 'event_uid = ' . $event->getUid () . ' AND start_datetime >= ' . $this->starttime->format ('%Y%m%d%H%M%S') . ' AND start_datetime <= ' . $this->endtime->format ('%Y%m%d%H%M%S') . ' AND tablename = "' . ($event->getType() == 'tx_cal_phpicalendar' ? ($event->isException ? 'tx_cal_exception_event' : 'tx_cal_event') : $event->getType()) . '"';

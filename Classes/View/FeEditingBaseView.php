@@ -173,13 +173,13 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		} else {
 			$sims ['###HIDDEN###'] = '';
 			if ($this->isEditMode && $this->rightsObj->isAllowedTo ( 'edit', $this->objectString, 'hidden' )) {
-				$hidden = '';
-				if ($this->conf ['rights.'] ['edit.'] [$this->objectString . '.'] ['fields.'] ['hidden.'] ['default']) {
+				$hidden = ' ';
+				if ($this->object->isHidden ()) {
 					$hidden = ' checked="checked" ';
 				}
-				$sims ['###HIDDEN###'] = $this->cObj->stdWrap ( $this->object->isHidden (), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['hidden_stdWrap.'] );
+				$sims ['###HIDDEN###'] = $this->cObj->stdWrap ($hidden, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['hidden_stdWrap.'] );
 			} else if (! $this->isEditMode && $this->rightsObj->isAllowedTo ( 'create', $this->objectString, 'hidden' )) {
-				$hidden = '';
+				$hidden = ' ';
 				if ($this->conf ['rights.'] ['create.'] [$this->objectString . '.'] ['fields.'] ['hidden.'] ['default'] || $this->controller->piVars ['hidden']) {
 					$hidden = ' checked="checked" ';
 				}

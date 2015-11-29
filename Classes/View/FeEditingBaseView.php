@@ -475,7 +475,11 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 						);
 						$piVars = ( array ) $this->piVars;
 						unset ( $piVars ['DATA'] );
-						\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule ( $piVars, $overrulePIvars );
+						if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < '6002000') {
+							$piVars = GeneralUtility::array_merge_recursive_overrule($piVars, $overrulePIvars);
+						} else {
+							\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
+						}
 						$overrulePIvars = $piVars;
 						$sims ['###TRANSLATION_OPTIONS###'] .= ' ' . $this->controller->pi_linkTP ( $this->cObj->cObjGetSingle ( $this->conf ['view.'] ['translation.'] ['languageMenu.'] [$langId], $this->conf ['view.'] ['translation.'] ['languageMenu.'] [$langId . '.'] ), Array (
 								$this->controller->prefixId => $overrulePIvars,

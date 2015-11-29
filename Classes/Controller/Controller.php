@@ -3634,7 +3634,11 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		if (is_array ($this->piVars) && is_array ($overrulePIvars) && ! $clearAnyway) {
 			$piVars = $this->piVars;
 			unset ($piVars ['DATA']);
-			\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
+			if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < '6002000') {
+				$piVars = GeneralUtility::array_merge_recursive_overrule($piVars, $overrulePIvars);
+			} else {
+				\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule($piVars, $overrulePIvars);
+			}
 			$overrulePIvars = $piVars;
 			if ($this->pi_autoCacheEn) {
 				$cache = $this->pi_autoCache ($overrulePIvars);

@@ -18,7 +18,6 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 
 class ItemsProcFunc {
-	var $pid;
 	
 	/**
 	 * Gets the items array of all available translations.
@@ -118,10 +117,9 @@ class ItemsProcFunc {
 		$groupBy = $params ['config'] ['itemsProcFunc_config'] ['groupBy'];
 		$orderBy = $params ['config'] ['itemsProcFunc_config'] ['orderBy'];
 		$limit = $params ['config'] ['itemsProcFunc_config'] ['limit'];
-		$this->pid = $params ['row'] ['pid'];
 		
 		/* Get the records, with access restrictions and all that good stuff applied. */
-		$res = $this->getSQLResource ($table, $where, $groupBy, $orderBy, $limit);
+		$res = self::getSQLResource ($table, $where, $groupBy, $orderBy, $limit, $params ['row'] ['pid']);
 		
 		/* Loop over all records, adding them to the items array */
 		while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($res)) {
@@ -152,7 +150,7 @@ class ItemsProcFunc {
 	 *        	string		LIMIT options.
 	 * @return object resource.
 	 */
-	public function getSQLResource($table, $where = '', $groupBy = '', $orderBy = '', $limit = '') {
+	public static function getSQLResource($table, $where = '', $groupBy = '', $orderBy = '', $limit = '', $pid = '') {
 		/* Initialize the variables and config options */
 		$be_userCategories = Array (
 				0 
@@ -231,8 +229,8 @@ class ItemsProcFunc {
 		}
 		
 		// Orders items from the current page first
-		if ($this->pid) {
-			$orderBy = $table . '.pid=' . $this->pid . ' DESC' . ($orderBy ? ',' . $orderBy : '');
+		if ($pid) {
+			$orderBy = $table . '.pid=' . $pid . ' DESC' . ($orderBy ? ',' . $orderBy : '');
 		}
 		
 		if ($pidlist != '') {

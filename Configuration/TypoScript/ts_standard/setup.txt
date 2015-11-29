@@ -727,6 +727,14 @@ plugin.tx_cal_controller {
 				# @description	Time format for notification emails.
 				# @also	Constants
 				timeFormat = {$plugin.tx_cal_controller.view.timeFormat}
+				
+				# @description Add the (configurable) details of the currently logged in user for the notification-mail.
+	 			# The detailed info of the currently logged in user is retrieved from the template (notifyOnCreate.tmpl, notifyOnChange.tmpl or notifyOnDelete.tmpl)
+	 			# with the tag ###CURRENT_USER###. The structure of the info is given between ###CURRENT_USER_SUBPART###. Every field of the 'fe_users' record can
+	 			# be used by converting the field-name to uppercase and putting it between '###', e.g. first_name --> ###FIRST_NAME###.
+	 			# The fields can be wrapped by specifying tx_cal_controller.view.event.notify.currentUser.<field-name>_stdWrap { dataWrap = ... }, e.g.
+	 			# tx_cal_controller.view.event.notify.currentUser.first_name_stdWrap { dataWrap = Firstname: | }
+				currentUser =
 			}
 			
 			# @description	Enables the reminder functionality for all events

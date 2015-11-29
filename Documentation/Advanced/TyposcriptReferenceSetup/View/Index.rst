@@ -2240,6 +2240,23 @@ plugin.tx\_cal\_controller.view.event.event.notify
          {$plugin.tx\_cal\_controller.view.timeFormat}
 
 
+.. container:: table-row
+
+   Property
+         currentUser
+   
+   Data type
+         Configuration Array
+   
+   Description
+         Add the (configurable) details of the currently logged in user for the notification-mail.
+	 	 The detailed info of the currently logged in user is retrieved from the template (notifyOnCreate.tmpl, notifyOnChange.tmpl or notifyOnDelete.tmpl)
+	 	 with the tag ###CURRENT_USER###. The structure of the info is given between ###CURRENT_USER_SUBPART###. Every field of the 'fe_users' record can
+	 	 be used by converting the field-name to uppercase and putting it between '###', e.g. first_name --> ###FIRST_NAME###.
+	 	 The fields can be wrapped by specifying tx_cal_controller.view.event.notify.currentUser.<field-name>_stdWrap { dataWrap = ... }, e.g.
+	 	 tx_cal_controller.view.event.notify.currentUser.first_name_stdWrap { dataWrap = Firstname: | }
+
+
 .. ###### END~OF~TABLE ######
 
 [tsref:plugin.tx\_cal\_controller.view.event.event.notify]

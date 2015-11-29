@@ -190,6 +190,8 @@ class NotificationView extends \TYPO3\CMS\Cal\Service\BaseService {
 		$switch ['###ACCEPT_LINK###'] = $acceptLink;
 		$switch ['###DECLINE_LINK###'] = $declineLink;
 		
+		$switch['###CURRENT_USER###'] = $this->getModifyingUser($template);
+
 		$htmlTemplate = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($htmlTemplate, $switch, array (
 				'###OLD_EVENT###' => $oldEventHTMLSubpart,
 				'###NEW_EVENT###' => $newEventHTMLSubpart 
@@ -212,6 +214,31 @@ class NotificationView extends \TYPO3\CMS\Cal\Service\BaseService {
 			$this->mailer->setSubject (\TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($titleText, $switch, $rems, $wrapped));
 		}
 		$this->sendEmail ($email, $htmlTemplate, $plainTemplate);
+	}
+	/**
+	 * Get the (configurable) details of the currently logged in user for the notification-mail.
+	 * The detailed info of the currently logged in user is retrieved from the template (notifyOnCreate.tmpl, notifyOnChange.tmpl or notifyOnDelete.tmpl)
+	 * with the tag ###CURRENT_USER###. The structure of the info is given between ###CURRENT_USER_SUBPART###. Every field of the 'fe_users' record can
+	 * be used by converting the field-name to uppercase and putting it between '###', e.g. first_name --> ###FIRST_NAME###.
+	 * The fields can be wrapped by specifying tx_cal_controller.view.event.notify.currentUser.<field-name>_stdWrap { dataWrap = ... }, e.g.
+	 * tx_cal_controller.view.event.notify.currentUser.first_name_stdWrap { dataWrap = Firstname: | }
+	 *
+	 * @param $template
+	 * @return string
+	 */
+	function getModifyingUser($template) {
+		$currentUserSubpart = $this->cObj->getSubpart ($template, '###CURRENT_USER_SUBPART###');
+
+		if (TYPO3_MODE == 'FE') {
+			$feUser = $GLOBALS['TSFE']->fe_user->user;
+			$sims = array();
+			foreach ($feUser as $index => $value) {
+				$wrappedValue =	$this->cObj->stdWrap ( $value, $this->conf['view.']['event.']['notify.']['currentUser.'][strtolower($index) . '_stdWrap.'] );
+				$sims['###'.strtoupper($index).'###'] = $wrappedValue;
+			}
+			$modifyingUser = $this->cObj->substituteMarkerArray ($currentUserSubpart, $sims);
+		}
+		return $modifyingUser;
 	}
 	function fillTemplate(&$event, &$eventHTMLSubpart, &$eventPlainSubpart) {
 		$switch = array ();
@@ -397,6 +424,8 @@ class NotificationView extends \TYPO3\CMS\Cal\Service\BaseService {
 		$wrapped = array ();
 		$event->getMarker ($htmlTemplate, $switch, $rems, $wrapped, 'notification');
 		
+		$switch['###CURRENT_USER###'] = $this->getModifyingUser($template);
+
 		$switch ['###UNSUBSCRIBE_LINK###'] = $unsubscribeLink;
 		$switch ['###ACCEPT_LINK###'] = $acceptLink;
 		$switch ['###DECLINE_LINK###'] = $declineLink;

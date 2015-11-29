@@ -309,7 +309,7 @@ class Api {
 	 * @return PageRenderer
 	 */
 	protected function getPageRenderer() {
-		return GeneralUtility::makeInstance(PageRenderer::class);
+		return GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Page\\PageRenderer');
 	}
 
 	/**

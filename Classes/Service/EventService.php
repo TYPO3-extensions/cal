@@ -496,7 +496,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		// putting everything together
 		
 		$additionalWhere = $calendarSearchString . ' AND tx_cal_event.uid=' . $uid;
-		if ($showHiddenEvents) {
+		if (! $showHiddenEvents) {
 			$additionalWhere .= ' AND tx_cal_event.hidden = 0';
 		}
 		if (! $showDeletedEvents) {

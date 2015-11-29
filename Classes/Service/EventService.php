@@ -1287,7 +1287,6 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$formattedStarttime = $this->starttime->format ('%Y%m%d');
 		$formattedEndtime = $this->endtime->format ('%Y%m%d');
 		
-		$events = array ();
 		$additionalSearch = '';
 		if ($searchword != '') {
 			$additionalSearch = $this->searchWhere ($searchword);

@@ -262,9 +262,9 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$sims ['###ALLDAY###'] = '';
 		if ($this->isAllowed ('allday')) {
 			if ($this->object->isAllday ()) {
-				$allDayValue = 'checked="checked"';
+				$allDayValue = ' checked="checked"';
 			} else {
-				$allDayValue = '';
+				$allDayValue = ' ';
 			}
 			$sims ['###ALLDAY###'] = $this->applyStdWrap ($allDayValue, 'allday_stdWrap');
 		}

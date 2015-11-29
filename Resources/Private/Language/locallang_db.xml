@@ -192,6 +192,7 @@
 			<label index="tx_cal_category.edit">edit selected category</label>
 			<label index="tx_cal_category.notification_emails">Notification emails (comma separated)</label>
 			<label index="tx_cal_category.icon">Icon</label>
+			<label index="tx_cal_category.global">Global categories</label>
 			<label index="tx_cal_organizer">Calendar Event Organizer</label>
 			<label index="tx_cal_organizer.name">Name</label>
 			<label index="tx_cal_organizer.description">Description</label>

@@ -343,7 +343,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			}
 			
 			$removeFiles = $this->controller->piVars ['remove_' . $marker] ? $this->controller->piVars ['remove_' . $marker] : Array ();
-			$where = 'uid_foreign = ' . $this->conf ['uid'] . ' AND  tablenames=\'tx_cal_' . $this->objectString . '\' AND fieldname=\'' . $marker . '\'';
+			$where = 'uid_foreign = ' . $this->conf ['uid'] . ' AND  tablenames=\'tx_cal_' . $this->objectString . '\' AND fieldname=\'' . $marker . '\' AND deleted=0';
 			if (! empty ( $removeFiles )) {
 				$where .= ' AND uid not in (' . implode ( ',', array_values ( $removeFiles ) ) . ')';
 			}
@@ -388,7 +388,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			if ($this->isEditMode && $this->rightsObj->isAllowedTo ( 'edit', $this->objectString, $marker )) {
 				$sims ['###' . strtoupper ( $marker ) . '###'] = '';
 				$i = 0;
-				$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ( '*', 'sys_file_reference', 'uid_foreign = ' . $this->conf ['uid'] . ' AND  tablenames=\'tx_cal_' . $this->objectString . '\' AND fieldname=\'' . $marker . '\'' );
+				$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ( '*', 'sys_file_reference', 'uid_foreign = ' . $this->conf ['uid'] . ' AND  tablenames=\'tx_cal_' . $this->objectString . '\' AND fieldname=\'' . $marker . '\' AND deleted=0' );
 				while ( $row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ( $result ) ) {
 					
 					$temp_sims = Array ();

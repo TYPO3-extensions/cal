@@ -933,7 +933,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 											'tx_cal_controller[view]' => 'event',
 											'tx_cal_controller[uid]' => $this->getUid(),
 											'tx_cal_controller[type]' => $this->getType(),
-											'tx_cal_controller[getdate]' => $this->getStart->format('%Y%m%d')));
+											'tx_cal_controller[getdate]' => $this->getStart()->format('%Y%m%d')));
 									$htmlTemplate = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached($htmlTemplate, $local_switch, $local_rems, $local_wrapped);
 									
 									$htmlTemplate = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($htmlTemplate, $local_switch, $local_rems, $local_wrapped);

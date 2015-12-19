@@ -1,0 +1,41 @@
+
+1.10.2 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+    * Bug #70645     - Javascript loading ERROR - Uncaught TypeError: $ is not a function (url2.js line 55)    and all the related issues
+    * Bug            - Bugfix for TYPO3 7.5 handling of select values as array; Style cleanup for checkboxes in backend recurrence form; code cleanup; Changed all class definitions from 'row' to 'cal-row'
+    * Bug            - Fixed missing class: 'Cache' got removed with TYPO3 7.5
+    * Bug #70695     - FE-Editing constraints: Cannot compare with 0
+    * Issue #70703   - FE-Editing constraints: Cannot compare 'unequal'
+    * Issue #70719   - FE-Editing constraints: Cannot compare with arrays
+    * Bug #70735     - Error in backend, when editing sys_categories (TYPO3 7.4, cal 1.10.1
+    * Bug #70744     - FE-Editing constraints: Cannot compare with 0 CONTINUATION
+    * Bug #70835     - Search events with Advanced Search
+    * Bug #70851     - FE-Editing: addNotifyGroup()
+    * Bug #70942     - Removed vanillaTableTca used in FormDateDataProvider
+    * Bug #70930     - No results message mssing in Fluid template "list.html"
+    * Bug #70839     - No task will be added in the scheduler
+    * Bug #70915     - Unknown column 'tx_cal_calendar.l10n_parent' in 'field list'
+    * Bug #70866     - FE-Editing: Notify functionality
+    * Bug #70870     - FE-Editing: Notify functionality 2
+    * Bug #70876     - FE-Editing: Notify functionality 3
+    * Bug #71080     - Solution of Bug #70866: (FE-Editing: Notify functionality) something is missing!
+    * Bug #71140     - Break FE output
+    * Bug #71313     - Fatal Error: Method EventModel->setAttachmentCaption not defined
+    * Bug #71250     - Follow-Up for Suggestion #70719: Bug in corrected code of method FeEditingBaseView::ruleParser()
+    * Bug #70357     - TreeView CMS7 compatibilty
+    * Bug #63493     - Fatal Error in class.tx_cal_event_service.php
+    * Bug #71434     - Does't work: Max instances of the same recurring event
+    * Bug #71441     - Non-static method TYPO3\CMS\Cal\Backend\TCA\ItemsProcFunc::getSQLResource() should not be called statically
+    * Bug #70914     - FE-Editing: Notification mail does not contain modifying user
+    * Bug #71627     - Call to undefined method in TYPO3 6.1
+    * Bug #71788     - FE-Editing: Bug in handling of field "hidden"
+    * Bug #71789     - Bug with showing hidden events.
+    * Bug #71792     - FE-Editing: Bug in handling field "allday"
+    * Bug #71865     - FE-Editing: Deleted images are displayed
+    * Bug #71974     - Fatal error: Call to a member function format() on a non-object in /typo3conf/ext/cal/Classes/Model/EventModel.php on line 940
+    * Bug #71667     - Cal indexer fails in TYPO3 7.6
+    * Bug #71922     - Broken form-field rdate in BE
+    * Task #71036    - Speed up the index selection 

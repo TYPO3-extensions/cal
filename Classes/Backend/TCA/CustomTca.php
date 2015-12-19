@@ -44,7 +44,11 @@ class CustomTca {
 		$this->uid = $PA ['row'] ['uid'];
 		$this->row = $PA ['row'];
 		$this->table = $PA ['table'];
-		$this->rdateType = $this->row ['rdate_type'];
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7005000) {
+			$this->rdateType = $this->row ['rdate_type'][0];
+		} else {
+			$this->rdateType = $this->row ['rdate_type'];
+		}
 		$this->rdate = $this->row ['rdate'];
 		$this->rdateValues = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode (',', $this->row ['rdate'], 1);
 		
@@ -330,16 +334,44 @@ class CustomTca {
 					$formatedValue = count ($splittedDateTime) == 2 ? substr ($splittedDateTime [1], 0, 2) . ':' . substr ($splittedDateTime [1], 2, 2) . ' ' . $formatedValue : '00:00 ' . $formatedValue;
 				}
 			}
-			if ($this->rdateType == 'date_time' || $this->rdateType == 'period') {
-				$out [] = '<span class="t3-form-palette-fieldclass-main5"><input type="text" value="' . $formatedValue . '" class="tceforms-datetimefield" name="rdate' . $key . '" id="tceforms-datetimefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" onchange="' . 'rdateChanged();"/>' . '<input type="hidden" value="' . $formatedValue . '" id="data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '" />' . '<span id="picker-tceforms-datetimefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" style="cursor: pointer; vertical-align: middle;" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></span></span><br/>';
-			} else {
-				$out [] = '<span class="t3-form-palette-fieldclass-main5"><input type="text" value="' . $formatedValue . '" class="tceforms-datefield" name="rdate' . $key . '" id="tceforms-datefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" onchange="' . 'rdateChanged();"/>' . '<input type="hidden" value="' . $formatedValue . '" id="data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '" />' . '<span id="picker-tceforms-datefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" style="cursor: pointer; vertical-align: middle;" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></span></span><br/>';
-			}
 			$params = Array ();
 			$params ['table'] = $this->table;
 			$params ['uid'] = $this->uid;
 			$params ['field'] = 'rdate' . $key;
 			$params ['md5ID'] = $this->table . '_' . $this->uid . '_' . 'rdate' . $key;
+			if ($this->rdateType == 'date_time' || $this->rdateType == 'period') {
+				if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= '7000000') {
+					$out [] = '<div class="form-control-wrap" style="max-width: 192px">
+						<div class="input-group">
+						    <input type="hidden" value="' . $formatedValue . '" id="data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '" />
+							<div class="form-control-clearable">
+						    	<input data-date-type="datetime" onblur="rdateChanged();" data-formengine-validation-rules="[{&quot;type&quot;:&quot;datetime&quot;,&quot;config&quot;:{&quot;type&quot;:&quot;input&quot;,&quot;size&quot;:&quot;13&quot;,&quot;default&quot;:&quot;0&quot;}}]" data-formengine-input-params="{&quot;field&quot;:&quot;data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]&quot;,&quot;evalList&quot;:&quot;datetime&quot;,&quot;is_in&quot;:&quot;&quot;}" data-formengine-input-name="data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]" id="tceforms-datetimefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" value="'.$formatedValue.'" maxlength="20" class="t3js-datetimepicker form-control t3js-clearable hasDefaultValue" type="text">
+								<button style="display: none;" type="button" class="close" tabindex="-1" aria-hidden="true">
+									<span class="fa fa-times"></span>
+								</button>
+							</div>
+						</div>
+					</div>';
+				} else {
+					$out [] = '<span class="t3-form-palette-fieldclass-main5"><input type="text" value="' . $formatedValue . '" class="tceforms-datetimefield" name="rdate' . $key . '" id="tceforms-datetimefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" onchange="' . 'rdateChanged();"/>' . '<input type="hidden" value="' . $formatedValue . '" id="data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '" />' . '<span id="picker-tceforms-datetimefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" style="cursor: pointer; vertical-align: middle;" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></span></span><br/>';
+				}
+			} else {
+				if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= '7000000') {
+					$out [] = '<div class="form-control-wrap" style="max-width: 192px">
+						<div class="input-group">
+						    <input type="hidden" value="' . $formatedValue . '" id="data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '" />
+							<div class="form-control-clearable">
+						    	<input data-date-type="date" onblur="rdateChanged();" data-formengine-validation-rules="[{&quot;type&quot;:&quot;date&quot;,&quot;config&quot;:{&quot;type&quot;:&quot;input&quot;,&quot;size&quot;:&quot;12&quot;,&quot;max&quot;:&quot;20&quot;}}]" data-formengine-input-params="{&quot;field&quot;:&quot;data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]&quot;,&quot;evalList&quot;:&quot;date&quot;,&quot;is_in&quot;:&quot;&quot;}" data-formengine-input-name="data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]" id="tceforms-datefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" value="'.$formatedValue.'" maxlength="20" class="t3js-datetimepicker form-control t3js-clearable hasDefaultValue" type="text">
+								<button style="display: none;" type="button" class="close" tabindex="-1" aria-hidden="true">
+									<span class="fa fa-times"></span>
+								</button>
+							</div>
+						</div>
+					</div>';
+				} else {
+					$out [] = '<span class="t3-form-palette-fieldclass-main5"><input type="text" value="' . $formatedValue . '" class="tceforms-datefield" name="rdate' . $key . '" id="tceforms-datefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" onchange="' . 'rdateChanged();"/>' . '<input type="hidden" value="' . $formatedValue . '" id="data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '" />' . '<span id="picker-tceforms-datefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" style="cursor: pointer; vertical-align: middle;" class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date"/></span></span><br/>';
+				}
+			}
 			if ($this->rdateType == 'date') {
 				$params ['wConf'] ['evalValue'] = 'date';
 			} else if ($this->rdateType == 'date_time' || $this->rdateType == 'period') {

@@ -589,7 +589,7 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$sims ['###UNTIL###'] = '';
 		if ($this->isAllowed ('recurring')) {
 			$until = $this->object->getUntil ();
-			if (is_object ($until) && $until->getYear () != 0) {
+			if (is_object ($until) && $until->getYear () != 0 && $until->format('%Y%m%d') != '19700101') {
 				$untilValue = $until->format (\TYPO3\CMS\Cal\Utility\Functions::getFormatStringFromConf ($this->conf));
 				$sims ['###UNTIL###'] = $this->applyStdWrap ($untilValue, 'until_stdWrap');
 			} else {

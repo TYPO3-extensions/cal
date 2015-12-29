@@ -2605,11 +2605,36 @@ plugin.tx_cal_controller {
 				}
 				
 				# @description	Content object for event attachment in ics view
-				attachment_url = TEXT
+				attachment_url = COA
 				attachment_url {
-					current = 1
-					required = 1
-					wrap = ATTACH:|;
+					20 = FILES
+					20 {
+						references {
+						  table = tx_cal_event
+						  uid.data = uid
+						  fieldName = attachment
+						}
+										
+						# render the files
+						renderObj = COA
+						renderObj.10 = TEXT
+						renderObj.10 {
+							data = getIndpEnv:TYPO3_SITE_URL
+							wrap = ATTACH:|
+						}
+						renderObj.20 = TEXT
+						renderObj.20 {
+							data = file:current:publicUrl
+						}
+						renderObj.30 = TEXT
+						renderObj.30 {
+							char = 13
+						}
+						renderObj.40 = TEXT
+						renderObj.40 {
+							char = 10
+						}
+					}
 				}
 			}
 			

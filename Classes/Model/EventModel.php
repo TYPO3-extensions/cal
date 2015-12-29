@@ -1317,15 +1317,9 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 	}
 	function getAttachmentUrlMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$sims ['###ATTACHMENT_URL###'] = '';
-		if ($this->getAttachment ()) {
-			$this->initLocalCObject ();
-			$tempArray = Array ();
-			foreach ($this->getAttachment () as $attachment) {
-				$tempArray [] = GeneralUtility::getIndpEnv ('TYPO3_SITE_URL') . 'uploads/tx_cal/media/' . $attachment;
-			}
-			$this->local_cObj->setCurrentVal (implode (',', $tempArray));
-			$sims ['###ATTACHMENT_URL###'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] [$view . '.'] ['event.'] ['attachment_url'], $this->conf ['view.'] [$view . '.'] ['event.'] ['attachment_url.']);
-		}
+		$tempData = $this->getValuesAsArray ();
+		$this->initLocalCObject ($tempData);
+		$sims ['###ATTACHMENT_URL###'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] [$view . '.'] ['event.'] ['attachment_url'], $this->conf ['view.'] [$view . '.'] ['event.'] ['attachment_url.']);
 	}
 	function getEventLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$eventStart = $this->getStart ();

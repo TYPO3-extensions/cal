@@ -2711,7 +2711,7 @@ plugin.tx\_cal\_controller.view.location
          Maximum date to search for events in the future
    
    Default
-         20090101
+         20200101
 
 
 .. container:: table-row
@@ -3679,7 +3679,7 @@ plugin.tx\_cal\_controller.view.organizer
          Maximum date to search for events in the future
    
    Default
-         20090101
+         20200101
 
 
 .. container:: table-row

@@ -218,7 +218,7 @@ ICS is a special view and has its own page:
          The maximum date for recurring events
    
    Default
-         20090101
+         20200101
 
 
 .. container:: table-row

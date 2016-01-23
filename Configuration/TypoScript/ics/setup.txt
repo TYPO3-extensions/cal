@@ -5,8 +5,10 @@ ics = PAGE
 ics {
 	typeNum = {$plugin.tx_cal_controller.view.ics.typeNum} 
 	# use a referenced copy now so that it will always reflect the current cal configuration
-	10 =< plugin.tx_cal_controller
+	10 < styles.content.get
 	10 {
+		select.where = colpos = 0
+        select.andWhere = list_type='cal_controller'
 		pages = {$plugin.tx_cal_controller.pidList}
 		recursive = 1
 		

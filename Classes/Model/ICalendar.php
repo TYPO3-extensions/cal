@@ -625,6 +625,7 @@ class ICalendar {
 				}
 				$component = &ICalendar::newComponent ($type, $this);
 				if ($component === false) {
+					continue;
 					// return PEAR::raiseError("Unable to create object for type $type");
 				}
 				$component->parsevCalendar ($data);

@@ -50,7 +50,7 @@
 <f:if condition="{event.locationObject}">
 	<f:then>
 		<h3><f:translate key="LLL:EXT:cal/Resources/Private/Language/locallang.xml:l_event_location" /></h3>
-		{event.locationObject.title}
+		{event.locationObject.name}
 	</f:then>
 	<f:else>
 		<f:if condition="{event.location} != ''">

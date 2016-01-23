@@ -589,7 +589,7 @@ CREATE TABLE tx_cal_event_deviation (
 #
 CREATE TABLE tx_cal_cache (
     id int(11) unsigned NOT NULL auto_increment,
-    identifier varchar(32) DEFAULT '' NOT NULL,
+    identifier varchar(128) DEFAULT '' NOT NULL,
     content text NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
 	lifetime int(11) DEFAULT '0' NOT NULL,    

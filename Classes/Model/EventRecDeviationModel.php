@@ -49,6 +49,10 @@ class EventRecDeviationModel extends EventModel {
 		$this->setAllday ($row ['allday']);
 		$this->origStartDate = new  \TYPO3\CMS\Cal\Model\CalDate ($row ['orig_start_date']);
 		$this->origStartDate->addSeconds ($row ['orig_start_time']);
+		
+		$this->setCategories($event->getCategories());
+		$this->setSharedGroups($event->getSharedGroups());
+		$this->setSharedUsers($event->getSharedUsers());
 	}
 	
 	public function getRRuleMarker(&$template, &$sims, &$rems, &$wrapped, $view) {

@@ -267,6 +267,7 @@ UID:###GUID###
 ###TITLE###
 ###DESCRIPTION###
 ###LOCATION###
+###GEO###
 ###ATTACHMENT_URL###
 ###RRULE###
 ###RDATE###
@@ -276,7 +277,26 @@ UID:###GUID###
 ###ATTENDEE###
 END:VTODO
 <!-- ###TEMPLATE_TODO_ICS### end -->
-
+<!-- ###TEMPLATE_TODO_ICS_ALLDAY### start -->
+BEGIN:VEVENT
+UID:###GUID###
+###DTSTAMP###
+###DTSTART_YEAR_MONTH_DAY_HOUR_MINUTE###
+###DTEND_YEAR_MONTH_DAY_HOUR_MINUTE###
+###CATEGORY###
+###TITLE###
+###DESCRIPTION###
+###LOCATION###
+###GEO###
+###ATTACHMENT_URL###
+###RRULE###
+###RDATE###
+###EXDATE###
+###EXRULE###
+###ORGANIZER###
+###ATTENDEE###
+END:VEVENT
+<!-- ###TEMPLATE_TODO_ICS_ALLDAY### end -->
 Free And Busy views:
 
 <!--###TEMPLATE_TODO_FNB### begin -->

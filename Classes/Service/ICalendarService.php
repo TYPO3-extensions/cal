@@ -376,7 +376,9 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 	function getiCalendarFromIcsFile($text) {
 		require_once (ICALENDAR_PATH);
 		$iCalendar = new \TYPO3\CMS\Cal\Model\ICalendar ();
-		$boolean = $iCalendar->parsevCalendar ($text);
+		if (!$iCalendar->parsevCalendar ($text)) {
+			throw new \RuntimeException ('Could not parse vCalendar data '.$text, 1451245373);
+		}
 		return $iCalendar;
 	}
 	
@@ -393,8 +395,6 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			return $insertedOrUpdatedEventUids;
 		}
 		
-		$offsetArray = array ();
-		
 		foreach ($iCalendarComponentArray as $component) {
 			$table = 'tx_cal_event';
 			$insertFields = array ();
@@ -402,7 +402,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$insertFields ['tstamp'] = time ();
 			$insertFields ['crdate'] = time ();
 			$insertFields ['pid'] = $pid;
-			if (is_a ($component, '\TYPO3\CMS\Cal\Model\ICalendar\vevent')) {
+			if ($component->getType() == 'vEvent' || $component->getType() == 'vTodo') {
 				$insertFields ['cruser_id'] = $cruserId;
 				$insertFields ['calendar_id'] = $calId;
 				if ($component->getAttribute ('DTSTART')) {
@@ -420,7 +420,9 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$insertFields ['start_date'] = $dateTime->format ('%Y%m%d');
 					$insertFields ['start_time'] = $dateTime->hour * 3600 + $dateTime->minute * 60;
 				} else {
-					continue;
+					if ($component->getType() == 'vEvent') {
+						continue;
+					}
 				}
 				if ($component->getAttribute ('DTEND')) {
 					$enddate = $component->getAttribute ('DTEND');
@@ -451,7 +453,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 				}
 				$insertFields ['icsUid'] = $component->getAttribute ('UID');
 				$insertFields ['title'] = $component->getAttribute ('SUMMARY');
-				if ($component->organizerName ()) {
+				if ($component->getType() == 'vEvent' && $component->organizerName ()) {
 					$insertFields ['organizer'] = str_replace ('"', '', $component->organizerName ());
 				}
 				$insertFields ['location'] = $component->getAttribute ('LOCATION');
@@ -459,10 +461,21 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$insertFields ['location'] = '';
 				}
 				$insertFields ['description'] = $component->getAttribute ('DESCRIPTION');
+				
+				$categories = array ();
 				$categoryString = $component->getAttribute ('CATEGORY');
-				if ($categoryString == "")
-					$categoryString = $component->getAttribute ('CATEGORIES');
-				$categories = GeneralUtility::trimExplode (',', $categoryString, 1);
+				if ($categoryString == "") {
+					if (is_array ($component->getAttribute ('CATEGORIES'))) {
+						foreach ($component->getAttribute ('CATEGORIES') as $cat) {
+							$categories[] = $cat;
+						}
+					} else {
+						$categoryString = $component->getAttribute ('CATEGORIES');
+						$categories = GeneralUtility::trimExplode (',', $categoryString, 1);
+					}
+				} else {
+					$categories = GeneralUtility::trimExplode (',', $categoryString, 1);
+				}
 				
 				$categoryUids = array ();
 				foreach ($categories as $category) {
@@ -518,7 +531,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 				}
 				
 				// Fix for allday events
-				if ($insertFields ['start_time'] == 0 && $insertFields ['end_time'] == 0) {
+				if ($insertFields ['start_time'] == 0 && $insertFields ['end_time'] == 0 && $insertFields ['start_date'] != 0) {
 					$date = new \TYPO3\CMS\Cal\Model\CalDate ($insertFields ['end_date'] . '000000');
 					$date->setTZbyId ('UTC');
 					$date->subtractSeconds (86400);
@@ -550,8 +563,6 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 					$indexEntry = BackendUtility::getRecordRaw ('tx_cal_index', 'event_uid="' . $eventUid . '" AND start_datetime="' . $recurrenceIdStart->format ('%Y%m%d%H%M%S') . '"');
 					
 					if ($indexEntry) {
-						$origStartDate = new \TYPO3\CMS\Cal\Model\CalDate ();
-						$origStartDate = new \TYPO3\CMS\Cal\Model\CalDate ();
 						$table = 'tx_cal_event_deviation';
 						$insertFields ['parentid'] = $eventUid;
 						$insertFields ['orig_start_time'] = $recurrenceIdStart->getHour () * 3600 + $recurrenceIdStart->getMinute () * 60;
@@ -687,6 +698,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		}
 		return $insertedOrUpdatedEventUids;
 	}
+	
 	function insertRuleValues($rule, &$insertFields) {
 		$data = str_replace ('RRULE:', '', $rule);
 		$rule = explode (';', $data);

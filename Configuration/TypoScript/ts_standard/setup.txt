@@ -2636,6 +2636,28 @@ plugin.tx_cal_controller {
 						}
 					}
 				}
+				
+				geo = COA
+				geo {
+					if.isTrue.field = location_id
+					10 = RECORDS
+					10 {
+						source.field = location_id
+						tables = tx_cal_location
+						conf.tx_cal_location = COA
+						conf.tx_cal_location {
+							if.equals.field = latitude
+							if.value = 0
+							if.negate = 1
+							20 = TEXT
+							20.field = latitude
+							20.wrap = GEO:|
+							30 = TEXT
+							30.field = longitude
+							30.wrap = ;|
+						}
+					}
+				}
 			}
 			
 			# @description	for more than one category this is the separator

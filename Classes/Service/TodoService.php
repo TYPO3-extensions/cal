@@ -620,7 +620,7 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 	function search($pidList = '', $start_date, $end_date, $searchword, $locationIds = '', $organizerIds = '', $eventType = '0,1,2,3') {
 		return parent::search ($pidList, $start_date, $end_date, $searchword, $locationIds, $organizerIds, '4');
 	}
-	function getRecurringEventsFromIndex($event) {
+	function getRecurringEventsFromIndex($event, $ex_event_dates = Array()) {
 		$master_array = Array ();
 		$startDate = $event->getStart ();
 		$master_array [$startDate->format ('%Y%m%d')] [$event->isAllday () ? '-1' : ($startDate->format ('%H%M'))] [$event->getUid ()] = &$event;

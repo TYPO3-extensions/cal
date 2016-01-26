@@ -31,8 +31,8 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 	 *
 	 * @return array array of events represented by the model.
 	 */
-	function findAllWithin(&$start_date, &$end_date, $pidList, $eventType = '4') {
-		return parent::findAllWithin ($start_date, $end_date, $pidList, '4');
+	function findAllWithin(&$start_date, &$end_date, $pidList, $eventType = '4', $additionalWhere = '') {
+		return parent::findAllWithin ($start_date, $end_date, $pidList, '4', $additionalWhere);
 	}
 	
 	/**
@@ -53,9 +53,10 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 	 * @return object todo represented by the model.
 	 */
 	function find($uid, $pidList, $showHiddenEvents = false, $showDeletedEvents = false, $getAllInstances = false, $disableCalendarSearchString = false, $disableCategorySearchString = false, $eventType = '4') {
-		return parent::find ($uid, $pidList, $showHiddenEvents, $showDeletedEvents, $getAllInstances, $disableCalendarSearchString, $disableCategorySearchString, $eventType);
+		return parent::find ($uid, $pidList, $showHiddenEvents, $showDeletedEvents, $getAllInstances, $disableCalendarSearchString, $disableCategorySearchString, '4');
 	}
-	function findCurrentTodos() {
+	
+	function findCurrentTodos($disableCalendarSearchString = false, $disableCategorySearchString = false) {
 		$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		$this->starttime = new \TYPO3\CMS\Cal\Model\CalDate ($confArr ['recurrenceStart']);
 		$this->endtime = new \TYPO3\CMS\Cal\Model\CalDate ($confArr ['recurrenceEnd']);
@@ -158,11 +159,11 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		$uid = $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 
 		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'image')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $insertFields);
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $eventData);
 		}
 		
 		if ($this->rightsObj->isAllowedTo ('create', 'todo', 'attachment')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $insertFields);
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $eventData);
 		}
 		
 		// creating relation records
@@ -242,7 +243,6 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		$insertFields = array (
 				'tstamp' => time () 
 		);
-		$tempCategoryConf = $this->conf ['category'];
 		
 		$event = $this->find ($uid, $this->conf ['pidList'], true, true, false, false, false, '0,1,2,3,4');
 		$event_old = $this->find ($uid, $this->conf ['pidList'], true, true, false, false, false, '0,1,2,3,4');
@@ -302,22 +302,21 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 		$table = 'tx_cal_event';
 		$where = 'uid = ' . $uid;
 		$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $eventData);
+		if (FALSE === $result){
+			throw new \RuntimeException('Could not write todo record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1453825432);
+		}
 
 		$eventData['pid'] = $object->row ['pid'];
 		
 		if ($this->rightsObj->isAllowedTo ('edit', 'todo', 'image')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $insertFields);
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'image', $eventData);
 		}
 		
 		if ($this->rightsObj->isAllowedTo ('edit', 'todo', 'attachment')) {
-			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $insertFields);
+			$this->checkOnNewOrDeletableFiles ('tx_cal_event', 'attachment', $eventData);
 		}
 		
-		$cal_user_ids = array ();
 		$where = ' AND tx_cal_event.uid=' . $uid . ' AND tx_cal_fe_user_category_mm.tablenames="fe_users" ' . $this->cObj->enableFields ('tx_cal_event');
-		$orderBy = '';
-		$groupBy = '';
-		$limit = '';
 		
 		if ($this->rightsObj->isAllowedTo ('edit', 'todo', 'category')) {
 			$categoryIds = Array ();
@@ -398,6 +397,9 @@ class TodoService extends \TYPO3\CMS\Cal\Service\EventService {
 			$table = 'tx_cal_event';
 			$where = 'uid = ' . $uid;
 			$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $updateFields);
+			if (FALSE === $result){
+				throw new \RuntimeException('Could not write todo record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1453825617);
+			}
 			
 			$fields = $event->getValuesAsArray ();
 			$fields ['deleted'] = 1;

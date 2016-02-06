@@ -3573,7 +3573,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 					$this->piVars ['day'] = $date->format ('%d');
 				}
 				if ($this->piVars ['month'] == 2) {
-					if ((($this->piVars ['year'] % 400) == 0 || (($this->piVars ['year'] % 4) == 0 && ($this->piVars ['year'] % 100) != 0)) && $this->piVars ['day'] > 29) {
+					if ((($this->piVars ['year'] % 400) == 0 || (($this->piVars ['year'] % 4) == 0 && ($this->piVars ['year'] % 100) != 0)) && $this->piVars ['day'] >= 29) {
 						$this->piVars ['day'] = 29;
 					} else if ($this->piVars ['day'] > 28) {
 						$this->piVars ['day'] = 28;

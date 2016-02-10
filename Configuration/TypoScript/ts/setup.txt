@@ -565,7 +565,7 @@ plugin.tx_cal_controller {
 				ics =< plugin.tx_cal_controller.view.defaultLinkSetup
 				ics {
 					current = 0
-					value = |
+					value = $5&xs2
 					required = 1
 					typolink {
 						# wrapping the parameter with the typenum of the ics page

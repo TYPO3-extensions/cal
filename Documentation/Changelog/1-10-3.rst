@@ -1,0 +1,22 @@
+
+1.10.3 - TYPO3 LTS 6.2 & TYPO3 7
+--------------------------------
+
+::
+
+    * Bug #72351     - In fe-editing the until date gets set to 19700101 if it is not set before
+    * Bug #72468     - Attachment urls in ics are not correct
+    * Bug #72469     - maxDate for several views is set to 20150101 - should be increased
+    * Bug #72374     - ICS View
+    * Bug #72522     - Field 'identifier' in table tx_cal_cache wrong size
+    * Bug #72551     - Core: Error handler (FE): PHP Warning: Declaration of TYPO3\CMS\Cal\Service\TodoService::getRecurringEventsFromIndex($event) should be compatible
+    * Bug #72607     - Event lose category on
+    * Bug #72640     - ics-import with VTIMEZONE crashes
+    * Bug #72790     - sys_category localization Prefix ( l18n instead od l10n)
+    * Bug #72881     - Wrong object reference in Fluid partial for events
+    * Bug #72945     - new Bug after Patch - Bug #72551
+    * Bug #73149     - Wrong result for date select at 29.feb for leap-year
+    * Bug            - Fixed issue with parsing vTodos
+    * Bug            - Fixed attachment in ics
+    * Bug            - fixed old ics link configuration (classic template)
+    * Feature        - Added GEO information in ics

@@ -86,7 +86,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 		
 		$childNodes = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNodeCollection::class);
 		
-		$where = 'l18n_parent = 0  and parent_category = 0 and calendar_id = 0';
+		$where = 'l18n_parent = 0 and deleted = 0 and parent_category = 0 and calendar_id = 0';
 		$this->appendCategories($level, $childNodes, $where);
 		if ($childNodes !== NULL) {
 			$node->setChildNodes($childNodes);
@@ -107,7 +107,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 					$node->setId(CALENDAR_PREFIX.$calrow['uid']);
 					
 					if ($level < $this->levelMaximum) {
-						$where = 'l18n_parent = 0 and tx_cal_category.calendar_id = '.$calrow['uid'];
+						$where = 'l18n_parent = 0 and tx_cal_category.deleted = 0 and tx_cal_category.calendar_id = '.$calrow['uid'];
 						$calendarChildNodes = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNodeCollection::class);
 						
 						$this->appendCategories($level + 1, $calendarChildNodes, $where);

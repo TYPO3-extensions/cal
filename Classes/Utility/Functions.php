@@ -539,7 +539,7 @@ class Functions {
 				'makeInstance' 
 		), $constructorArguments);
 	}
-	public function removeEmptyLines($string) {
+	public static function removeEmptyLines($string) {
 		return preg_replace ("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $string);
 	}
 	public static function getMonthNames($type) {

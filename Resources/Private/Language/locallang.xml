@@ -298,6 +298,7 @@
 			<label index="l_event_attendee_CHAIR">Status: Chairman</label>
 			<label index="l_event_attendee_OPT-PARTICIPANT">Status: Optional</label>
 			<label index="l_event_attendee_REQ-PARTICIPANT">Status: Required</label>
+			<label index="l_event_exturl">Link</label>
 			<label index="l_category_relatedevents">Related event(s)</label>
 			<label index="l_todo_enddate">Due date</label>
 			<label index="l_todo_endtime">Due time</label>

@@ -543,6 +543,14 @@ plugin.tx_cal_controller {
 					}
 					required = 1
 				}
+				
+				ext_url = TEXT
+					ext_url {
+					field = ext_url
+					typolink.parameter.field = ext_url
+					required = 1
+					dataWrap = <div>%%%EXTURL_LABEL%%%:&nbsp; |</div>
+				}
 	
 				# @description	Icon definition for the different attendee status: CHAIR, ACCEPTED or DECLINE
 				attendeeIcon = <img src="###IMG_PATH###/%s.png" alt="%s" title="%s" class="no_border"/>

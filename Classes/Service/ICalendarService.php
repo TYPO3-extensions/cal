@@ -713,8 +713,10 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$report = array ();
 		GeneralUtility::getURL ( $externalUrl, 1, FALSE, $report );
 		$content = GeneralUtility::getURL ( $externalUrl );
+		
+		$imageExt = explode ( ',', $GLOBALS ['TYPO3_CONF_VARS'] ['GFX'] ['imagefile_ext'] );
 		$type = 'attachment';
-		if (stristr ( $report ['content_type'], 'image' )) {
+		if (stristr ( $report ['content_type'], 'image' ) || in_array ( $ext, $imageExt )) {
 			$type = 'image';
 		}
 		

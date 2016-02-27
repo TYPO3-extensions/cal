@@ -2686,6 +2686,12 @@ plugin.tx_cal_controller {
 						}
 					}
 				}
+				ext_url = TEXT
+				ext_url {
+					required = 1
+					current = 1
+					dataWrap = URL:|
+				}
 			}
 			
 			# @description	for more than one category this is the separator

@@ -326,6 +326,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			if ($result) {
 				while ( $row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ( $result ) ) {
 					$uids [] = $row ['uid'];
+					$this->clearAllImagesAndAttachments( $row ['uid'] );
 				}
 				$GLOBALS ['TYPO3_DB']->sql_free_result ( $result );
 			}
@@ -677,7 +678,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		return $GLOBALS ['TYPO3_DB']->sql_insert_id ();
 	}
 	private function setAttachments($component, &$insertFields, $pid, $eventUid) {
-		$this->clearAllImagesandAttachments ( $eventUid );
+		$this->clearAllImagesAndAttachments ( $eventUid );
 		$attachmentUrls = $component->getAttribute ( 'ATTACH' );
 		if (is_array ( $attachmentUrls )) {
 			foreach ( $attachmentUrls as $attachmentUrl ) {
@@ -687,12 +688,14 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$this->storeAttachment ( $attachmentUrls, $insertFields, $eventUid, $pid );
 		}
 	}
-	private function clearAllImagesandAttachments($uid) {
+	public function clearAllImagesAndAttachments($uid) {
 		$fileIndexRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance ( 'TYPO3\\CMS\\Core\\Resource\\Index\\FileIndexRepository' );
-		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ( 'uid_local', 'sys_file_reference', 'tablenames="tx_cal_event" and uid_foreign =' . $uid );
+		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ( '*', 'sys_file_reference', 'tablenames="tx_cal_event" and uid_foreign =' . $uid );
 		if ($result) {
 			while ( $row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ( $result ) ) {
-				$fileIndexRepository->remove ( $row ['uid_local'] );
+				if($GLOBALS ['TYPO3_DB']->exec_SELECTcountRows ( '*', 'sys_file_reference', 'uid_local=' . $row ['uid_local'] ) == 1) {
+					$fileIndexRepository->remove ( $row ['uid_local'] );
+				}
 			}
 		}
 		$result = $GLOBALS ['TYPO3_DB']->exec_DELETEquery ( 'sys_file_reference', 'tablenames="tx_cal_event" and uid_foreign =' . $uid );

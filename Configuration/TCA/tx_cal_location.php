@@ -1,8 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cal');
-
 $tx_cal_location = array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location',
@@ -12,7 +10,7 @@ $tx_cal_location = array(
 		'cruser_id' => 'cruser_id',
 		'default_sortby' => 'ORDER BY name',
 		'delete' => 'deleted',
-		'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_location.gif',
+		'iconfile' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_location.gif',
 		'enablecolumns' => array(
 			'disabled' => 'hidden'
 		),
@@ -33,7 +31,7 @@ $tx_cal_location = array(
 	'columns' => array(
 		'hidden' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
+			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
 				'default' => '0'
@@ -62,7 +60,7 @@ $tx_cal_location = array(
 						'RTEonly' => 1,
 						'type' => 'script',
 						'title' => 'Full screen Rich Text Editing|Formatteret redigering i hele vinduet',
-						'icon' => 'wizard_rte2.gif',
+						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
 						'module' => array(
 							'name' => 'wizard_rte'
 						)
@@ -171,12 +169,9 @@ $tx_cal_location = array(
 					'link' => array(
 						'type' => 'popup',
 						'title' => 'Link',
-						'icon' => 'link_popup.gif',
+						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
 						'module' => array(
-							'name' => 'wizard_element_browser',
-							'urlParameters' => array(
-								'mode' => 'wizard'
-							)
+							'name' => 'wizard_link'
 						),
 						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
 					)
@@ -219,18 +214,19 @@ $tx_cal_location = array(
 		),
 		'sys_language_uid' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.language',
+			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
 			'config' => array(
+                'renderType' => 'selectSingle',
 				'type' => 'select',
 				'foreign_table' => 'sys_language',
 				'foreign_table_where' => 'ORDER BY sys_language.title',
 				'items' => array(
 					array(
-						'LLL:EXT:lang/locallang_general.php:LGL.allLanguages',
+						'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
 						- 1
 					),
 					array(
-						'LLL:EXT:lang/locallang_general.php:LGL.default_value',
+						'LLL:EXT:lang/locallang_general.xlf:LGL.default_value',
 						0
 					)
 				)
@@ -239,8 +235,9 @@ $tx_cal_location = array(
 		'l18n_parent' => array(
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
+			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 			'config' => array(
+                'renderType' => 'selectSingle',
 				'type' => 'select',
 				'items' => array(
 					array(
@@ -259,7 +256,7 @@ $tx_cal_location = array(
 		),
 		't3ver_label' => array(
 			'displayCond' => 'FIELD:t3ver_label:REQ:true',
-			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
+			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
 			'config' => array(
 				'type' => 'none',
 				'cols' => 27
@@ -268,7 +265,12 @@ $tx_cal_location = array(
 	),
 	'types' => array(
 		'0' => array(
-			'showitem' => 'name;;1;;2-2-2,description;;;richtext, street, city, country, country_zone, zip, latitude, longitude, phone, fax, email, image, link, shared_user_cnt'
+            'columnsOverrides' => array(
+                'description' => array(
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
+                )
+            ),
+			'showitem' => 'name, --palette--;;1, description, street, city, country, country_zone, zip, latitude, longitude, phone, fax, email, image, link, shared_user_cnt'
 		)
 	),
 	'palettes' => array(

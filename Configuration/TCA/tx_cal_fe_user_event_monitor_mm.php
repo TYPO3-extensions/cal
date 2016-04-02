@@ -1,8 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cal');
-
 $tx_cal_fe_user_event_monitor_mm = array(
 	'ctrl' => array(
 		'requestUpdate' => '',
@@ -10,7 +8,7 @@ $tx_cal_fe_user_event_monitor_mm = array(
 		'label' => 'tablenames',
 		'label_alt' => 'tablenames,offset',
 		'label_alt_force' => 1,
-		'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_fe_user_event_monitor_mm.gif',
+		'iconfile' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_fe_user_event_monitor_mm.gif',
 		'label_userFunc' => 'TYPO3\\CMS\\Cal\\Backend\\TCA\\Labels->getMonitoringRecordLabel'
 	),
 	'feInterface' => array(

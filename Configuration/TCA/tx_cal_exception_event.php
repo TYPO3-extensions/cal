@@ -1,9 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cal');
-
-
 $tx_cal_exception_event = array(
 		'ctrl' => array(
 				'requestUpdate' => 'calendar_id,freq,rdate_type,allday',
@@ -20,7 +17,7 @@ $tx_cal_exception_event = array(
 						'endtime' => 'endtime'
 				),
 				'versioningWS' => TRUE,
-				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_exception_event.gif',
+				'iconfile' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_exception_event.gif',
 				'searchFields' => 'title'
 		),
 		'feInterface' => array(
@@ -32,7 +29,7 @@ $tx_cal_exception_event = array(
 		'columns' => array(
 				'hidden' => array(
 						'exclude' => 1,
-						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
+						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 						'config' => array(
 								'type' => 'check',
 								'default' => '0'
@@ -50,7 +47,7 @@ $tx_cal_exception_event = array(
 				),
 				'starttime' => array(
 						'exclude' => 1,
-						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.starttime',
+						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
 						'config' => array(
 								'type' => 'input',
 								'size' => '12',
@@ -62,7 +59,7 @@ $tx_cal_exception_event = array(
 				),
 				'endtime' => array(
 						'exclude' => 1,
-						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.endtime',
+						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
 						'config' => array(
 								'type' => 'input',
 								'size' => '12',
@@ -93,6 +90,7 @@ $tx_cal_exception_event = array(
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_exception_event.freq',
 						'config' => array(
+                                'renderType' => 'selectSingle',
 								'type' => 'select',
 								'size' => '1',
 								'items' => array(
@@ -154,6 +152,7 @@ $tx_cal_exception_event = array(
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_exception_event.rdate_type',
 						'config' => array(
+                                'renderType' => 'selectSingle',
 								'type' => 'select',
 								'size' => 1,
 								'items' => array(
@@ -225,7 +224,7 @@ $tx_cal_exception_event = array(
 				),
 				't3ver_label' => array(
 						'displayCond' => 'FIELD:t3ver_label:REQ:true',
-						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
+						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
 						'config' => array(
 								'type' => 'none',
 								'cols' => 27 
@@ -234,7 +233,7 @@ $tx_cal_exception_event = array(
 		),
 		'types' => array(
 				'0' => array(
-						'showitem' => 'title;;1;;,start_date,end_date, freq;;2;;, byday, bymonthday, bymonth, rdate_type;;3;;, monitor_cnt'
+						'showitem' => 'title, --palette--;;1,start_date,end_date, freq, --palette--;;2, byday, bymonthday, bymonth, rdate_type, --palette--;;3, monitor_cnt'
 				)
 		),
 		'palettes' => array(

@@ -1,8 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cal');
-
 $tx_cal_attendee = array(
 		'ctrl' => array(
 				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_attendee',
@@ -12,7 +10,7 @@ $tx_cal_attendee = array(
 				'cruser_id' => 'cruser_id',
 				'default_sortby' => 'uid',
 				'delete' => 'deleted',
-				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_attendee.gif',
+				'iconfile' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_attendee.gif',
 				'enablecolumns' => array(
 						'disabled' => 'hidden'
 				),
@@ -26,7 +24,7 @@ $tx_cal_attendee = array(
 		'columns' => array(
 				'hidden' => array(
 						'exclude' => 1,
-						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
+						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 						'config' => array(
 								'type' => 'check',
 								'default' => '0'
@@ -80,6 +78,7 @@ $tx_cal_attendee = array(
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_attendee.attendance',
 						'config' => array(
+                                'renderType' => 'selectSingle',
 								'type' => 'select',
 								'items' => array(
 										array(
@@ -108,6 +107,7 @@ $tx_cal_attendee = array(
 						'exclude' => 1,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_attendee.status',
 						'config' => array(
+                                'renderType' => 'selectSingle',
 								'type' => 'select',
 								'items' => array(
 										array(

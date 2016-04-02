@@ -17,7 +17,7 @@ $newCalSysCategoryColumns = array (
 						'images',
 						array(
 								'appearance' => array(
-										'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference',
+										'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
 										'showPossibleLocalizationRecords' => 1,
 										'showRemovedLocalizationRecords' => 1,
 										'showAllLocalizationLink' => 1,
@@ -90,6 +90,7 @@ $newCalSysCategoryColumns = array (
 				'exclude' => 1,
 				'label' => $ll . 'tx_cal_category.calendar',
 				'config' => Array (
+                        'renderType' => 'selectSingle',
 						'type' => 'select',
 						'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\ItemsProcFunc->getRecords',
 						'itemsProcFunc_config' => array (
@@ -132,7 +133,7 @@ $newCalSysCategoryColumns = array (
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns ( 'sys_category', $newCalSysCategoryColumns );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ( 'sys_category', '--div--;LLL:EXT:cms/locallang_tca.xls:pages.tabs.options, images', '', 'before:description' );
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ( 'sys_category', '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.tabs.options, images', '', 'before:description' );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ( 'sys_category', 'single_pid', '', 'after:description' );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ( 'sys_category', 'shortcut', '', 'after:shortcut' );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes ( 'sys_category', 'headerstyle', '', 'after:single_pid' );

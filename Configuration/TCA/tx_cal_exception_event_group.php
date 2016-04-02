@@ -1,8 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cal');
-
 $tx_cal_exception_event_group = array(
 		'ctrl' => array(
 				'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_exception_event_group',
@@ -12,7 +10,7 @@ $tx_cal_exception_event_group = array(
 				'cruser_id' => 'cruser_id',
 				'default_sortby' => 'ORDER BY title',
 				'delete' => 'deleted',
-				'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_exception_event_group.gif',
+				'iconfile' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_exception_event_group.gif',
 				'enablecolumns' => array(
 						'disabled' => 'hidden'
 				),
@@ -28,7 +26,7 @@ $tx_cal_exception_event_group = array(
 		'columns' => array(
 				'hidden' => array(
 						'exclude' => 1,
-						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
+						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 						'config' => array(
 								'type' => 'check',
 								'default' => '0'
@@ -64,7 +62,7 @@ $tx_cal_exception_event_group = array(
 				),
 				't3ver_label' => array(
 						'displayCond' => 'FIELD:t3ver_label:REQ:true',
-						'label' => 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
+						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
 						'config' => array(
 								'type' => 'none',
 								'cols' => 27 
@@ -73,7 +71,7 @@ $tx_cal_exception_event_group = array(
 		),
 		'types' => array(
 				'0' => array(
-						'showitem' => 'title;;1;;,color,exception_event_cnt'
+                    'showitem' => 'title, --palette--;;1,color,exception_event_cnt'
 				)
 		),
 		'palettes' => array(

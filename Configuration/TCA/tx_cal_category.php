@@ -1,8 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cal');
-
 $tx_cal_category = array(
 	'ctrl' => array(
 		'requestUpdate' => 'calendar_id',
@@ -24,7 +22,7 @@ $tx_cal_category = array(
 		'transOrigPointerField' => 'l18n_parent',
 		'transOrigDiffSourceField' => 'l18n_diffsource',
 		'languageField' => 'sys_language_uid',
-		'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_category.gif',
+		'iconfile' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_category.gif',
 		// 'treeParentField' => 'calendar_id',
 		'searchFields' => 'title,notification_emails'
 	),
@@ -37,7 +35,7 @@ $tx_cal_category = array(
 	'columns' => array(
 		'hidden' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
+				'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 				'config' => array(
 						'type' => 'check',
 						'default' => '0'
@@ -73,6 +71,7 @@ $tx_cal_category = array(
 				'exclude' => 1,
 				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.calendar',
 				'config' => array(
+                        'renderType' => 'selectSingle',
 						'type' => 'select',
 						'itemsProcFunc' => 'TYPO3\CMS\Cal\Backend\TCA\ItemsProcFunc->getRecords',
 						'itemsProcFunc_config' => array(
@@ -173,18 +172,19 @@ $tx_cal_category = array(
 		),
 		'sys_language_uid' => array(
 				'exclude' => 1,
-				'label' => 'LLL:EXT:lang/locallang_general.php:LGL.language',
+				'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
 				'config' => array(
+                        'renderType' => 'selectSingle',
 						'type' => 'select',
 						'foreign_table' => 'sys_language',
 						'foreign_table_where' => 'ORDER BY sys_language.title',
 						'items' => array(
 								array(
-										'LLL:EXT:lang/locallang_general.php:LGL.allLanguages',
+										'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
 										- 1
 								),
 								array(
-										'LLL:EXT:lang/locallang_general.php:LGL.default_value',
+										'LLL:EXT:lang/locallang_general.xlf:LGL.default_value',
 										0
 								)
 						)
@@ -193,8 +193,9 @@ $tx_cal_category = array(
 		'l18n_parent' => array(
 				'displayCond' => 'FIELD:sys_language_uid:>:0',
 				'exclude' => 1,
-				'label' => 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
+				'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 				'config' => array(
+                        'renderType' => 'selectSingle',
 						'type' => 'select',
 						'items' => array(
 								array(
@@ -213,7 +214,7 @@ $tx_cal_category = array(
 		),
 		't3ver_label' => array(
 				'displayCond' => 'FIELD:t3ver_label:REQ:true',
-				'label' => 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
+				'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
 				'config' => array(
 						'type' => 'none',
 						'cols' => 27 
@@ -222,7 +223,7 @@ $tx_cal_category = array(
 	),
 	'types' => array(
 			'0' => array(
-					'showitem' => 'type,title;;1;;,calendar_id,parent_category,shared_user_allowed,single_pid,notification_emails,icon'
+                'showitem' => 'type,title, --palette--;;1,calendar_id,parent_category,shared_user_allowed,single_pid,notification_emails,icon'
 			)
 	),
 	'palettes' => array(

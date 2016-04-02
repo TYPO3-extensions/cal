@@ -1,7 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cal');
 $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
 
 $tx_cal_calendar = array(
@@ -22,8 +21,8 @@ $tx_cal_calendar = array(
 			'type' => 'type',
 			'typeicon_column' => 'type',
 			'typeicons' => array(
-					'1' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_calendar_exturl.gif',
-					'2' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_calendar_ics.gif'
+					'1' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_calendar_exturl.gif',
+					'2' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_calendar_ics.gif'
 			),
 			'versioningWS' => TRUE,
 			'origUid' => 't3_origuid',
@@ -31,7 +30,7 @@ $tx_cal_calendar = array(
 			'transOrigPointerField' => 'l18n_parent',
 			'transOrigDiffSourceField' => 'l18n_diffsource',
 			'languageField' => 'sys_language_uid',
-			'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_calendar.gif',
+			'iconfile' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_calendar.gif',
 			'searchFields' => 'title,ext_url,ext_url_notes,ics_file'
 	),
 	'feInterface' => array(
@@ -43,7 +42,7 @@ $tx_cal_calendar = array(
 	'columns' => array(
 			'hidden' => array(
 					'exclude' => 1,
-					'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
+					'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 					'config' => array(
 							'type' => 'check',
 							'default' => '0'
@@ -114,6 +113,7 @@ $tx_cal_calendar = array(
 					'exclude' => 1,
 					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.type',
 					'config' => array(
+                            'renderType' => 'selectSingle',
 							'type' => 'select',
 							'size' => 1,
 							'items' => array(
@@ -216,18 +216,19 @@ $tx_cal_calendar = array(
 			),
 			'sys_language_uid' => array(
 					'exclude' => 1,
-					'label' => 'LLL:EXT:lang/locallang_general.php:LGL.language',
+					'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
 					'config' => array(
+                            'renderType' => 'selectSingle',
 							'type' => 'select',
 							'foreign_table' => 'sys_language',
 							'foreign_table_where' => 'ORDER BY sys_language.title',
 							'items' => array(
 									array(
-											'LLL:EXT:lang/locallang_general.php:LGL.allLanguages',
+											'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
 											- 1
 									),
 									array(
-											'LLL:EXT:lang/locallang_general.php:LGL.default_value',
+											'LLL:EXT:lang/locallang_general.xlf:LGL.default_value',
 											0
 									)
 							)
@@ -236,8 +237,9 @@ $tx_cal_calendar = array(
 			'l18n_parent' => array(
 					'displayCond' => 'FIELD:sys_language_uid:>:0',
 					'exclude' => 1,
-					'label' => 'LLL:EXT:lang/locallang_general.php:LGL.l18n_parent',
+					'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
 					'config' => array(
+                            'renderType' => 'selectSingle',
 							'type' => 'select',
 							'items' => array(
 									array(
@@ -256,7 +258,7 @@ $tx_cal_calendar = array(
 			),
 			't3ver_label' => array(
 					'displayCond' => 'FIELD:t3ver_label:REQ:true',
-					'label' => 'LLL:EXT:lang/locallang_general.php:LGL.versionLabel',
+					'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
 					'config' => array(
 							'type' => 'none',
 							'cols' => 27 
@@ -265,13 +267,13 @@ $tx_cal_calendar = array(
 	),
 	'types' => array(
 			'0' => array(
-					'showitem' => 'type,title;;1;;,owner,headerstyle,bodystyle,activate_fnb,fnb_user_cnt,nearby'
+                'showitem' => 'type,title, --palette--;;1,owner,headerstyle,bodystyle,activate_fnb,fnb_user_cnt,nearby'
 			),
 			'1' => array(
-					'showitem' => 'type,title;;1;;,owner,headerstyle,bodystyle,activate_fnb,fnb_user_cnt,nearby,ext_url,refresh,schedulerId'
+                'showitem' => 'type,title, --palette--;;1,owner,headerstyle,bodystyle,activate_fnb,fnb_user_cnt,nearby,ext_url,refresh,schedulerId'
 			),
 			'2' => array(
-					'showitem' => 'type,title;;1;;,owner,headerstyle,bodystyle,activate_fnb,fnb_user_cnt,nearby,ics_file,refresh,schedulerId'
+                'showitem' => 'type,title, --palette--;;1,owner,headerstyle,bodystyle,activate_fnb,fnb_user_cnt,nearby,ics_file,refresh,schedulerId'
 			)
 	),
 	'palettes' => array(

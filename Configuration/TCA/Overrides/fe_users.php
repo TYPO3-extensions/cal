@@ -65,4 +65,4 @@ $tempColumns = array(
 
 // Add the calendar selector for backend users.
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_cal_calendar,tx_cal_calendar_subscription;;;;1-1-1');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('fe_users', 'tx_cal_calendar,tx_cal_calendar_subscription');

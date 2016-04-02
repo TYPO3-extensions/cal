@@ -1,8 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$extRelPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('cal');
-
 $tx_cal_unknown_users = array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_unknown_users',
@@ -14,7 +12,7 @@ $tx_cal_unknown_users = array(
 		'delete' => 'deleted',
 		'enablecolumns' => array(),
 		'versioningWS' => TRUE,
-		'iconfile' => $extRelPath . 'Resources/Public/icons/icon_tx_cal_unknown_users.gif',
+		'iconfile' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_unknown_users.gif',
 		'searchFields' => 'email'
 	),
 	'feInterface' => array(
@@ -26,7 +24,7 @@ $tx_cal_unknown_users = array(
 	'columns' => array(
 		'hidden' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.php:LGL.hidden',
+			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
 				'default' => '0'

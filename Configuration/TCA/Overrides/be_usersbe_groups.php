@@ -16,6 +16,7 @@ $tempColumns = array(
 		'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar_accesscontroll',
 		'displayCond' => 'FIELD:tx_cal_enable_accesscontroll:REQ:true',
 		'config' => array(
+            'renderType' => 'selectMultipleSideBySide',
 			'type' => 'select',
 			'size' => 10,
 			'minitems' => 0,
@@ -30,6 +31,7 @@ $tempColumns = array(
 		'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category_accesscontroll',
 		'displayCond' => 'FIELD:tx_cal_enable_accesscontroll:REQ:true',
 		'config' => array(
+            'renderType' => 'selectMultipleSideBySide',
 			'type' => 'select',
 			'form_type' => 'user',
 			'userFunc' => 'TYPO3\CMS\Cal\TreeProvider\TreeView->displayCategoryTree',
@@ -46,14 +48,14 @@ $tempColumns = array(
 
 // Add the checkbox and the calendar-/category selector for backend users.
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('be_users', $tempColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_enable_accesscontroll;;;;1-1-1', '0');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_calendar;;;;1-1-1', '0');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_category;;;;1-1-1', '0');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_enable_accesscontroll', '0');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_calendar', '0');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_users', 'tx_cal_category', '0');
 $GLOBALS['TCA']['be_users']['ctrl']['requestUpdate'] .= ',tx_cal_enable_accesscontroll';
 
 // Add the checkbox and the calendar-/category selector for backend groups.
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('be_groups', $tempColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_enable_accesscontroll;;;;1-1-1');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_calendar;;;;1-1-1');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_category;;;;1-1-1');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_enable_accesscontroll');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_calendar');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('be_groups', 'tx_cal_category');
 $GLOBALS['TCA']['be_groups']['ctrl']['requestUpdate'] .= ',tx_cal_enable_accesscontroll';

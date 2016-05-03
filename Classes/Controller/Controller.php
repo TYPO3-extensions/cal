@@ -1022,6 +1022,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$type = $this->conf ['type'];
 		$pidList = $this->conf ['pidList'];
 		$getdate = $this->conf ['getdate'];
+		$emtyEventPid = $this->conf ['emtyEventPid'];
 		
 		$hookObjectsArr = $this->getHookObjectsArray ('drawEventClass');
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
@@ -1036,7 +1037,28 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			if (is_string ($event)) {
 				return $event;
 			}
-			return \TYPO3\CMS\Cal\Utility\Functions::createErrorMessage ('Missing or wrong parameter. The event you are looking for could not be found.', 'Please verify your URL parameter: tx_cal_controller[uid]');
+			// do not display error mesages - redirect to list view | by nachVORNE
+			if($emtyEventPid){
+				// not in extabse context -> need object manager
+				$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance( 'TYPO3\CMS\Extbase\Object\ObjectManager');
+				// get uri builder
+				$uriBuilder = $objectManager->get( 'TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder' );
+				// initialize object manager
+				$uriBuilder->initializeObject();
+				// reset (just in case), resets some config stuff from eventually previously configured URI related calls
+				// we would rather not like to include these settings here, you never know what was configured
+				$uriBuilder->reset();
+				// specify the page ID for the link (from cal typoscript)
+				$uriBuilder->setTargetPageUid($emtyEventPid);
+				// get url (let real_url / cooluri / whatever do the magic)
+				$uri = $uriBuilder->build();
+				header('Location: /'.$uri);
+				// $objectManager->redirectToUri($uri); // …go!
+			}
+			else{
+				// display error message if no redirect pid is defined
+				return \TYPO3\CMS\Cal\Utility\Functions::createErrorMessage ('Missing or wrong parameter. The event you are looking for could not be found.', 'Please verify your URL parameter: tx_cal_controller[uid] or configure a fallback pid (list view or a more beautiful "sorry not available" page) via typoscript – called emtyEventPid)');
+			}
 		}
 		
 		$categoryArray = implode (',', $event->getCategoryUidsAsArray ());

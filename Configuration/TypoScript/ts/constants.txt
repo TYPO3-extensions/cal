@@ -5,7 +5,10 @@
 plugin.tx_cal_controller {
 	# cat=Calendar Base (General)/general/pidlist/1; type=string; label=Page ID where events are stored.  Required for ICS and XML output.
 	pidList =
-	
+
+	# cat=Calendar Base (General)/general/emptyEventPid/2; type=string; label=Page ID the visitor should get redirected to when the detail view event id is not available (e.g. during change of language)
+	emtyEventPid =
+
 	# cat=Calendar Base (General)/dims/110; type=int+; label= Event Image Max Width: Max width for an image displayed in Event view.
 	singleMaxW = 240
 		  

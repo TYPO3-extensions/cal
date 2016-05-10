@@ -138,7 +138,9 @@ class Api {
 			$cObj->data = $tt_content_row;
 		}
 		if (TYPO3_MODE == 'BE') {
-			$this->cleanUpPageRendererBackPath();
+			if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 8000000) {
+				$this->cleanUpPageRendererBackPath();
+			}
 		}
 		return $this->tx_cal_api_with ($cObj, $conf);
 	}

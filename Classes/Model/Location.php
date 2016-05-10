@@ -96,7 +96,7 @@ class Location extends \TYPO3\CMS\Cal\Model\LocationModel {
 		return $isAllowedToDeleteLocation;
 	}
 	
-	public function getEditLinkMarker(& $template, & $sims, & $rems, $view) {
+	public function getEditLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$editlink = '';
 		if ($this->isUserAllowedToEdit ()) {
 			$this->initLocalCObject ($this->getValuesAsArray ());

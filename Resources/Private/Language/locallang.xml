@@ -680,6 +680,7 @@
 			<label index="l_gomonth">Gehe zum aktuellen Monat</label>
 			<label index="l_goyear">Gehe zum aktuellen Jahr</label>
 			<label index="l_search">Suchen</label>
+			<label index="l_search_everything">Alles durchsuchen</label>
 			<label index="l_dosearch">suchen</label>
 			<label index="l_query_for">Suche nach</label>
 			<label index="l_search_string">Suchtext</label>

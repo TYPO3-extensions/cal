@@ -627,7 +627,7 @@ $tx_cal_event = array(
 											'period'
 									)
 							),
-							'default' => 0
+							'default' => 'none'
 					)
 			),
 			'rdate' => array(
@@ -1128,11 +1128,11 @@ if ($configuration['categoryService'] == 'sys_category'){
 		),
 		'MM_opposite_field' => 'items',
 		'foreign_table' => 'sys_category',
-		'foreign_table_where' => ' AND (sys_category.sys_language_uid = 0 OR sys_category.l10n_parent = 0)ORDER BY sys_category.sorting',
+		'foreign_table_where' => ' AND (sys_category.sys_language_uid = 0 OR sys_category.l10n_parent = 0) ORDER BY sys_category.sorting',
 		'size' => 10,
 		'autoSizeMax' => 20,
 		'minitems' => 0,
-		'maxitems' => 20
+		'maxitems' => 99
 	);
 }
 

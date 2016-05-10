@@ -330,7 +330,7 @@ CREATE TABLE tx_cal_exception_event (
 	bymonth varchar(128) DEFAULT '',
 	intrval tinyint(4) unsigned DEFAULT '1',
 	rdate text,
-	rdate_type varchar(10) DEFAULT '0' NOT NULL,
+	rdate_type varchar(10) DEFAULT 'none' NOT NULL,
 	monitor_cnt int(11) unsigned DEFAULT '0',
 	
 	t3ver_oid int(11) DEFAULT '0' NOT NULL,

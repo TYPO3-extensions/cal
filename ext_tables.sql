@@ -30,7 +30,7 @@ CREATE TABLE tx_cal_event (
 	location_link varchar(255) DEFAULT '' NOT NULL,
 	teaser text,
 	description text,
-	freq varchar(128) DEFAULT '',
+	freq varchar(128) DEFAULT 'none',
 	until int(11) DEFAULT '0' NOT NULL,
 	cnt tinyint(4) unsigned DEFAULT '0',
 	byday varchar(128) DEFAULT '',
@@ -38,7 +38,7 @@ CREATE TABLE tx_cal_event (
 	bymonth varchar(128) DEFAULT '',
 	intrval tinyint(4) unsigned DEFAULT '1',
 	rdate text,
-	rdate_type varchar(10) DEFAULT '0' NOT NULL,
+	rdate_type varchar(10) DEFAULT 'none' NOT NULL,
 	deviation varchar(255) DEFAULT '',
 	monitor_cnt int(11) unsigned DEFAULT '0',
 	exception_cnt int(11) unsigned DEFAULT '0',
@@ -67,6 +67,7 @@ CREATE TABLE tx_cal_event (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 	
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
@@ -121,6 +122,7 @@ CREATE TABLE tx_cal_calendar (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 	
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
@@ -187,6 +189,7 @@ CREATE TABLE tx_cal_category (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
@@ -251,6 +254,7 @@ CREATE TABLE tx_cal_unknown_users (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
@@ -296,6 +300,7 @@ CREATE TABLE tx_cal_exception_event_group (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
@@ -336,6 +341,7 @@ CREATE TABLE tx_cal_exception_event (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
@@ -377,6 +383,7 @@ CREATE TABLE tx_cal_organizer (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
@@ -433,6 +440,7 @@ CREATE TABLE tx_cal_location (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
@@ -502,6 +510,7 @@ CREATE TABLE tx_cal_attendee (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 	
 	PRIMARY KEY (uid),
@@ -572,6 +581,7 @@ CREATE TABLE tx_cal_event_deviation (
 	t3ver_stage tinyint(4) DEFAULT '0' NOT NULL,
 	t3ver_count int(11) DEFAULT '0' NOT NULL,
 	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 	
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,

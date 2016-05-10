@@ -16,7 +16,7 @@ $EM_CONF [$_EXTKEY] = array (
 		'description' => 'A calendar combining all the functions of the existing calendar extensions plus adding some new features. It is based on the ical standard',
 		'category' => 'plugin',
 		'shy' => 0,
-		'version' => '1.10.3',
+		'version' => '1.11.0',
 		'loadOrder' => '',
 		'state' => 'stable',
 		'uploadfolder' => 0,
@@ -27,10 +27,10 @@ $EM_CONF [$_EXTKEY] = array (
 		'author_company' => '',
 		'constraints' => array (
 				'depends' => array (
-						'typo3' => '6.1.0-7.9.99' 
+						'typo3' => '6.1.0-8.9.99' 
 				),
 				'suggests' => array (
-						'css_styled_content' => '6.1.0-7.9.99'
+						'css_styled_content' => '6.1.0-8.9.99'
 				)
 		)
 );

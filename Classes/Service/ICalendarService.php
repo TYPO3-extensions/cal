@@ -643,11 +643,12 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		/* Delete the old category relations */
 		$where = ' uid_local=' . $eventUid;
 		$GLOBALS ['TYPO3_DB']->exec_DELETEquery ( 'tx_cal_event_category_mm', $where );
-		
+		$i = 0;
 		foreach ( $categoryUids as $uid ) {
 			$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ( 'tx_cal_event_category_mm', array (
 					'uid_local' => $eventUid,
-					'uid_foreign' => $uid 
+					'uid_foreign' => $uid,
+					'sorting' => $i++
 			) );
 			if (FALSE === $result) {
 				throw new \RuntimeException ( 'Could not write tx_cal_event_category_mm record to database: ' . $GLOBALS ['TYPO3_DB']->sql_error (), 1431458146 );

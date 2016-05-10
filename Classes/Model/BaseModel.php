@@ -483,13 +483,21 @@ abstract class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 					if ($markerArray [0] == '') {
 						$sims ['###MODULE__' . $themodule . '###'] = $module->start ($this); // ld way
 					} else {
-						$moduleMarker = $module->start ($this); // get Markerarray from Module
-						foreach ($moduleMarker as $key => $val) {
-							if ($this->conf [$base . '.'] [$view . '.'] [$this->getObjectType () . '.'] ['module__' . strtolower ($themodule) . '___' . strtolower ($key)]) {
-								$this->local_cObj->setCurrentVal ($val);
-								$sims ['###MODULE__' . $themodule . '___' . strtoupper ($key) . '###'] = $this->local_cObj->cObjGetSingle ($this->conf [$base . '.'] [$view . '.'] [$this->getObjectType () . '.'] ['module__' . strtolower ($themodule) . '___' . strtolower ($key)], $this->conf [$base . '.'] [$view . '.'] [$this->getObjectType () . '.'] ['module__' . strtolower ($themodule) . '___' . strtolower ($key) . '.']);
-							} else {
-								$sims ['###MODULE__' . $themodule . '___' . strtoupper ($key) . '###'] = $val;
+						$moduleMarker = $module->start ($this, TRUE); // get Markerarray from Module
+						if(is_array($moduleMarker)) {
+							foreach ($markerArray as $key => $requestedKey) {
+								if (array_key_exists('###'.$requestedKey.'###', $moduleMarker)) {
+									$val = $moduleMarker['###'.$requestedKey.'###'];
+									if ($this->conf [$base . '.'] [$view . '.'] [$this->getObjectType () . '.'] ['module__' . strtolower ($themodule) . '___' . strtolower ($requestedKey)]) {
+										$this->local_cObj->setCurrentVal ($val);
+										$sims ['###MODULE__' . $themodule . '___' . strtoupper ($requestedKey) . '###'] = $this->local_cObj->cObjGetSingle ($this->conf [$base . '.'] [$view . '.'] [$this->getObjectType () . '.'] ['module__' . strtolower ($themodule) . '___' . strtolower ($requestedKey)], $this->conf [$base . '.'] [$view . '.'] [$this->getObjectType () . '.'] ['module__' . strtolower ($themodule) . '___' . strtolower ($requestedKey) . '.']);
+									} else {
+										$sims ['###MODULE__' . $themodule . '___' . strtoupper ($requestedKey) . '###'] = $val;
+									}
+								} else {
+									$sims ['###MODULE__' . $themodule . '___' . strtoupper ($requestedKey) . '###'] = 'Could not find the marker "'.$requestedKey.'" in the module '.$themodule.' template.';
+								}
+							
 							}
 						}
 					}

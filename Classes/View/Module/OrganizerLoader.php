@@ -27,7 +27,7 @@ class OrganizerLoader extends AbstractModul {
 	 * @param Object $moduleCaller
 	 *        	Instance of the event model (phpicalendar_model)
 	 */
-	public function start(&$moduleCaller) {
+	public function start(&$moduleCaller, $onlyMarker = FALSE) {
 		if ($moduleCaller->getOrganizerId () > 0) {
 			$this->modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ( 'basic', 'modelcontroller' );
 			$this->cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ( 'basic', 'cobj' );
@@ -45,6 +45,9 @@ class OrganizerLoader extends AbstractModul {
 				$rems = Array ();
 				$wrapped = Array ();
 				$organizer->getMarker ( $page, $sims, $rems, $wrapped );
+				if($onlyMarker) {
+					return $sims;
+				}
 				return \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ( $page, $sims, $rems, Array () );
 			}
 		}

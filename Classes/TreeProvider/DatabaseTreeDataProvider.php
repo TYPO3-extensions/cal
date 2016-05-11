@@ -15,7 +15,8 @@ namespace TYPO3\CMS\Cal\TreeProvider;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Backend\Utility\IconUtility;
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 
 /**
  * TCA tree data provider which considers
@@ -170,7 +171,9 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 		if(strrpos($basicNode->getId (), CALENDAR_PREFIX, -strlen($basicNode->getId ())) !== FALSE) {
 			$id = intval(substr($basicNode->getId (),strlen(CALENDAR_PREFIX)));
 			$row = BackendUtility::getRecordWSOL ('tx_cal_calendar', $id, '*', '', FALSE);
-			$node->setIcon (IconUtility::mapRecordTypeToSpriteIconClass ('tx_cal_calendar', $row));
+			$iconFactory = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
+			$icon = $iconFactory->getIconForRecord('tx_cal_calendar', $row, \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL);
+			$node->setIcon($icon->getMarkup());
 			$node->setLabel ($row['title']);
 			$node->setSortValue($id);
 		} else if($basicNode->getId () === GLOBAL_PREFIX) {
@@ -189,7 +192,9 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 			$node->setSelected (GeneralUtility::inList ($this->getSelectedList (), $basicNode->getId ()));
 			$node->setExpanded ($this->isExpanded ($basicNode));
 			$node->setLabel ($node->getLabel ());
-			$node->setIcon (IconUtility::mapRecordTypeToSpriteIconClass ($this->tableName, $row));
+			$iconFactory = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
+			$icon = $iconFactory->getIconForRecord($this->tableName, $row, \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL);
+			$node->setIcon($icon->getMarkup());
 			$node->setSelectable (!GeneralUtility::inList ($this->getNonSelectableLevelList (), $level) && !in_array ($basicNode->getId (), $this->getItemUnselectableList ()));
 			$node->setSortValue ($this->nodeSortValues[$basicNode->getId ()]);
 		}

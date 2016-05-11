@@ -315,4 +315,8 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_ta
 	);
 }
 
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 7000000) {
+	$tx_cal_organizer['types']['0']['showitem'] = 'name, --palette--;;1, description;;;richtext:rte_transform[flag=rte_enabled|mode=ts_css], street, city, country, country_zone, zip, phone,fax,email,image,link,shared_user_cnt';
+}
+
 return $tx_cal_organizer;

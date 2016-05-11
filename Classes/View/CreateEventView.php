@@ -760,7 +760,9 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		}
 		$sims ['###ACTION_URL###'] = htmlspecialchars ($this->controller->pi_linkTP_keepPIvars_url ($linkParams));
 		
-		$sims ['###CHANGE_CALENDAR_ACTION_URL###'] = htmlspecialchars ($this->controller->pi_linkTP_keepPIvars_url ());
+		$change_calendar_action_url = $this->controller->pi_linkTP_keepPIvars_url ();
+		$sims ['###CHANGE_CALENDAR_ACTION_URL###'] = htmlspecialchars ($change_calendar_action_url);
+		$sims ['###CHANGE_CALENDAR_ACTION_URL_JS###'] = $this->escapeForJS ($change_calendar_action_url);
 	}
 	function getDateFormatMarker(& $template, & $sims, & $rems) {
 		$dateFormatArray = Array ();

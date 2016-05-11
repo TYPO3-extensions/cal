@@ -180,7 +180,17 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 			$rems['###JUMPS###'] = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached($this->cObj->getSubpart($page, '###JUMPS###'), $temp_sims, array(), array());
 		}
 	}
-	
+
+	/**
+	 * Escapes the given string for use in JavaScript variables.
+	 * @param string $s string to escape
+	 * @return string escaped string to use in JS variable contents
+	 */
+	function escapeForJS($s) {
+		// escape all single & double quotes and backslashes
+		return preg_replace('/(["\'\\\\])/', '\\\\$1', $s);
+	}
+
 	function getCalendarSelectorMarker(&$page, &$sims, &$rems, &$wrapped){
 		$rems['###CALENDAR_SELECTOR###'] = '';
 		if ($this->conf['view.']['other.']['showCalendarSelection']) {
@@ -201,7 +211,9 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 	
 			$temp_sims['###L_CALENDAR###'] = $this->controller->pi_getLL('l_calendar');
 			$temp_sims['###CALENDAR_IDS###'] = $calendarOptions;
-			$temp_sims['###CHANGE_CALENDAR_ACTION_URL###'] = htmlspecialchars($this->controller->pi_linkTP_keepPIvars_url( array('view'=>$this->conf['view']),$this->conf['cache'],true));
+			$change_calendar_action_url = $this->controller->pi_linkTP_keepPIvars_url( array('view'=>$this->conf['view']),$this->conf['cache'],true);
+			$temp_sims['###CHANGE_CALENDAR_ACTION_URL###'] = htmlspecialchars($change_calendar_action_url);
+			$temp_sims['###CHANGE_CALENDAR_ACTION_URL_JS###'] = $this->escapeForJS($change_calendar_action_url);
 			$rems['###CALENDAR_SELECTOR###'] = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached($this->cObj->getSubpart($page, '###CALENDAR_SELECTOR###'), $temp_sims, array(), array());
 		}
 	}

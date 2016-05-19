@@ -1289,7 +1289,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 	/**
 	 * Returns the calendar style name
 	 */
-	function getCalendarStyle(& $template, & $sims, & $rems, & $wrapped, $view) {
+	function getCalendarStyleMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
 		$this->local_cObj->setCurrentVal ($this->getCalendarUid ());
 		$sims ['###CALENDARSTYLE###'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] [$view . '.'] ['event.'] ['calendarStyle'], $this->conf ['view.'] [$view . '.'] ['event.'] ['calendarStyle.']);

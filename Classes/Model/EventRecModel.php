@@ -280,7 +280,7 @@ class EventRecModel extends \TYPO3\CMS\Cal\Model\Model {
 	/**
 	 * Returns the calendar style name
 	 */
-	function getCalendarStyle(& $template, & $sims, & $rems, & $wrapped, $view) {
+	function getCalendarStyleMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->parentEvent->getCalendarStyle ($template, $sims, $rems, $wrapped, $view);
 	}
 	function getMapMarker(& $template, & $sims, & $rems, & $wrapped, $view) {

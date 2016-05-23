@@ -499,6 +499,7 @@ CREATE TABLE tx_cal_attendee (
 	event_id int(11) unsigned DEFAULT '0' NOT NULL,
 	email varchar(128) DEFAULT '',
 	fe_user_id int(11) unsigned DEFAULT '0' NOT NULL,
+	fe_group_id int(11) unsigned DEFAULT '0' NOT NULL,
 	attendance varchar(16) DEFAULT '' NOT NULL,
 	status varchar(12) DEFAULT '' NOT NULL,
 	

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T10:59:49Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id=".description" xml:space="preserve">
+				<source>Organizers for Calendar Base event records.</source>
+			</trans-unit>
+			<trans-unit id=".details" xml:space="preserve">
+				<source>If your events regularly use a particular
+				organizer, or if you want to provide the organizer's information for
+				registration or for other reasons, you may create a Calendar Event
+				Organizer record that includes more information than the Event
+				Record contains in the Organizer Tab.</source>
+			</trans-unit>
+			<trans-unit id="hidden.description" xml:space="preserve">
+				<source>Use this to temporarily exclude this organizer
+				from display.</source>
+			</trans-unit>
+			<trans-unit id="name.description" xml:space="preserve">
+				<source>Name of the individual, group, or company
+				responsible for organizing the event.</source>
+			</trans-unit>
+			<trans-unit id="description.description" xml:space="preserve">
+				<source>The description of the organizer.</source>
+			</trans-unit>
+			<trans-unit id="street.description" xml:space="preserve">
+				<source>The street address of the organizer.</source>
+			</trans-unit>
+			<trans-unit id="zip.description" xml:space="preserve">
+				<source>The ZIP code or postal code of the organizer.</source>
+			</trans-unit>
+			<trans-unit id="city.description" xml:space="preserve">
+				<source>The city of the organizer.</source>
+			</trans-unit>
+			<trans-unit id="country.description" xml:space="preserve">
+				<source>The country of the organizer.</source>
+			</trans-unit>
+			<trans-unit id="country_zone.description" xml:space="preserve">
+				<source>The state of the organizer. The drop-down menu
+				will not be available until you have included the country
+				information and saved the form.</source>
+			</trans-unit>
+			<trans-unit id="phone.description" xml:space="preserve">
+				<source>The phone number of the organizer.</source>
+			</trans-unit>
+			<trans-unit id="email.description" xml:space="preserve">
+				<source>The email address of the organizer.</source>
+			</trans-unit>
+			<trans-unit id="image.description" xml:space="preserve">
+				<source>A logo or photo of the organizer or their company.</source>
+			</trans-unit>
+			<trans-unit id="link.description" xml:space="preserve">
+				<source>The website of the organizer.</source>
+			</trans-unit>
+			<trans-unit id="link.details" xml:space="preserve">
+				<source>This link can be used to provide more information
+				about the organizer.</source>
+			</trans-unit>
+			<trans-unit id="imagealttext.description" xml:space="preserve">
+				<source>Alternate text shown if images are not found or
+				not supported.</source>
+			</trans-unit>
+			<trans-unit id="imagealttext.details" xml:space="preserve">
+				<source>If you have multiple images, alt text entries must
+				be listed on separate lines.</source>
+			</trans-unit>
+			<trans-unit id="imagetitletext.description" xml:space="preserve">
+				<source>Tooltip or hover text.</source>
+			</trans-unit>
+			<trans-unit id="imagetitletext.details" xml:space="preserve">
+				<source>If you have multiple images, title text entries
+				must be listed on separate lines.</source>
+			</trans-unit>
+			<trans-unit id="imagecaption.description" xml:space="preserve">
+				<source>Adds a caption beneath each image.</source>
+			</trans-unit>
+			<trans-unit id="imagecaption.details" xml:space="preserve">
+				<source>If you have multiple images, captions must be
+				listed on separate lines.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

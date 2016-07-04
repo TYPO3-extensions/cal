@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T10:58:58Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id=".description" xml:space="preserve">
+				<source>Individual calendars for the Calendar Base
+				extension.</source>
+			</trans-unit>
+			<trans-unit id=".details" xml:space="preserve">
+				<source>Many calendars can be created, each with unique
+				categories and events.</source>
+			</trans-unit>
+			<trans-unit id="title.description" xml:space="preserve">
+				<source>Name of the calendar.</source>
+			</trans-unit>
+			<trans-unit id="hidden.description" xml:space="preserve">
+				<source>Disables the calendar so that it is not visible in
+				the frontend.</source>
+			</trans-unit>
+			<trans-unit id="starttime.description" xml:space="preserve">
+				<source>Sets a date at which the calendar will be visible
+				in the frontend.</source>
+			</trans-unit>
+			<trans-unit id="_starttime.seeAlso" xml:space="preserve">
+				<source>tx_cal_calendar:hidden</source>
+			</trans-unit>
+			<trans-unit id="endtime.description" xml:space="preserve">
+				<source>Sets a date at which the calendar will no longer
+				be visible in the frontend.</source>
+			</trans-unit>
+			<trans-unit id="_endtime.seeAlso" xml:space="preserve">
+				<source>tx_cal_calendar:hidden</source>
+			</trans-unit>
+			<trans-unit id="type.description" xml:space="preserve">
+				<source>There are three types of calendars within the
+				Calendar Base extension. Each type indicates how Calendar Event
+				records are generated.</source>
+			</trans-unit>
+			<trans-unit id="type.details" xml:space="preserve">
+				<source>
+				
+				There are three types of calendars:
+				&lt;b&gt;Standard&lt;/b&gt;: The Standard Calendar (database) is the default record. It depends on manual entry to generate Calendar Event records.
+				&lt;b&gt;Include ICS File&lt;/b&gt;: The Include ICS File Calendar allows you to upload an .ics file for the creation of Calendar Event records. The Include ICS File Calendar's form is identical to the Standard Calendar's form, with the exception that it provides a field for uploading or attaching a previously uploaded file.
+				NOTE: Desktop applications such as Microsoft Outlook and Apple iCal are able to export ICS files, which can then be uploaded for use with Calendar Base.
+				&lt;b&gt;External Calendar&lt;/b&gt;: The External Calendar depends on an ICS feed for the creation of Calendar Event records. The External Calendar's form is identical to the Standard Calendar's form, with the exception that it provides a field for the URL of a web-based ICS calendar feed.
+				NOTE: Google, Yahoo, and others provide online calendars that allow exports of their data. Look for links about &quot;sharing your calendar.&quot; You will need the provided URL - look for their ICS or iCal URLs. They will be files with an .ics extension.
+				
+			</source>
+			</trans-unit>
+			<trans-unit id="ext_url.description" xml:space="preserve">
+				<source>URL for an ICS feed.</source>
+			</trans-unit>
+			<trans-unit id="ics_file.description" xml:space="preserve">
+				<source>Static ICS file to upload.</source>
+			</trans-unit>
+			<trans-unit id="refresh.description" xml:space="preserve">
+				<source>Time period (in minutes) at which the external
+				calendar should be automatically checked for updates. A time period
+				of 0 means it will never be automatically updated.</source>
+			</trans-unit>
+			<trans-unit id="owner.description" xml:space="preserve">
+				<source>If you leave this field blank, anyone can view the
+				calendar in the frontend. If you select users or groups, the
+				calendar and its events will only be visible to user or group that
+				owns it.</source>
+			</trans-unit>
+			<trans-unit id="owner.details" xml:space="preserve">
+				<source>This is useful for creating Staff or Members-Only
+				calendar events.</source>
+			</trans-unit>
+			<trans-unit id="activate_fnb.description" xml:space="preserve">
+				<source>When used in conjunction with the Owner field,
+				appointments for the owner group will not be shown, but in the Day
+				and Week views the time will be shown as busy.</source>
+			</trans-unit>
+			<trans-unit id="fnb_user_cnt.description" xml:space="preserve">
+				<source>Limits the generated free and busy views to the
+				users or groups you select. Leaving this field blank will allow the
+				free and busy view to be generated for all calendar users.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

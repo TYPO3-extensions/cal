@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T10:59:59Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id=".description" xml:space="preserve">
+				<source>An exception event group is a collection of
+				multiple exception events that can be applied to an event at one
+				time.</source>
+			</trans-unit>
+			<trans-unit id=".details" xml:space="preserve">
+				<source>Exception event groups provide the ability to
+				group common exceptions, such as holidays, into one record and apply
+				that single record to an event. As an example, this allows you to
+				close the office for all holidays by adding one exception group to
+				the recurring event for office hours.</source>
+			</trans-unit>
+			<trans-unit id="title.description" xml:space="preserve">
+				<source>Title of the exception event group.</source>
+			</trans-unit>
+			<trans-unit id="hidden.description" xml:space="preserve">
+				<source>Use this to temporarily exclude this exception
+				event from display.</source>
+			</trans-unit>
+			<trans-unit id="starttime.description" xml:space="preserve">
+				<source>The &quot;Start&quot; time determines the date
+				from which the record will be available online.</source>
+			</trans-unit>
+			<trans-unit id="endtime.description" xml:space="preserve">
+				<source>The &quot;End&quot; time determines the date from
+				which the db-record will NOT be available online anymore.</source>
+			</trans-unit>
+			<trans-unit id="exception_event_cnt.description" xml:space="preserve">
+				<source>Assigns exception event records to this group.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

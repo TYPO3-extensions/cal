@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T10:59:22Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id=".description" xml:space="preserve">
+				<source>Categories for the Calendar Base extension.</source>
+			</trans-unit>
+			<trans-unit id=".details" xml:space="preserve">
+				<source>Categories that events can be assigned to.</source>
+			</trans-unit>
+			<trans-unit id="title.description" xml:space="preserve">
+				<source>Category name.</source>
+			</trans-unit>
+			<trans-unit id="hidden.description" xml:space="preserve">
+				<source>Disables the category so that it is not visible in
+				the frontend.</source>
+			</trans-unit>
+			<trans-unit id="starttime.description" xml:space="preserve">
+				<source>Sets a date at which the category will be visible
+				in the frontend.</source>
+			</trans-unit>
+			<trans-unit id="_starttime.seeAlso" xml:space="preserve">
+				<source>tx_cal_category:hidden</source>
+			</trans-unit>
+			<trans-unit id="endtime.description" xml:space="preserve">
+				<source>Sets a date at which the category will no longer
+				be visible in the frontend.</source>
+			</trans-unit>
+			<trans-unit id="_endtime.seeAlso" xml:space="preserve">
+				<source>tx_cal_category:hidden</source>
+			</trans-unit>
+			<trans-unit id="headerstyle.description" xml:space="preserve">
+				<source>CSS class used to format all event headers in this
+				category.</source>
+			</trans-unit>
+			<trans-unit id="headerstyle.details" xml:space="preserve">
+				<source>
+				
+				You can assign each category a different colored bullet that precedes the events in the Month View and the Header colors in the Day and Week views. To use the out-of-the-box bullet colors, simply enter the corresponding style in the Header Style field:
+
+				Blue Bullets: 	default_catheader
+				Green Bullets:	green_catheader
+				Grey Bullets:	grey_catheader
+				Orange Bullets:	orange_catheader
+				Pink Bullets:	pink_catheader
+				Red Bullets:	red_catheader
+				Yellow Bullets:	yellow_catheader
+				
+				Note: If you would like to expand or change the color choices, you can do so by modifying the default style sheet.
+				
+			</source>
+			</trans-unit>
+			<trans-unit id="bodystyle.description" xml:space="preserve">
+				<source>CSS class used to format all event bodies in this
+				category.</source>
+			</trans-unit>
+			<trans-unit id="bodystyle.details" xml:space="preserve">
+				<source>
+				
+				You can assign each category a different colored “Busy Time” in the Day and Week views. To use the out-of-the-box colors, simply enter the corresponding style in the Body Style field:
+
+				Blue:		default_catbody
+				Green:		green_catbody
+				Grey:		grey_catbody
+				Orange:		orange_catbody
+				Pink:		pink_catbody
+				Red:		red_catbody
+				Yellow:		yellow_catbody
+
+
+				Note: If you would like to expand or change the color choices, you can do so by modifying the default style sheet.
+				
+			</source>
+			</trans-unit>
+			<trans-unit id="calendar_id.description" xml:space="preserve">
+				<source>Calendar that this category appears on.</source>
+			</trans-unit>
+			<trans-unit id="calendar_id.details" xml:space="preserve">
+				<source>By limiting the category to a specific calendar,
+				you can limit users or usergroups who can view the category's events</source>
+			</trans-unit>
+			<trans-unit id="parent_category.description" xml:space="preserve">
+				<source>Sets the current category as a sub-category.</source>
+			</trans-unit>
+			<trans-unit id="shared_user_allowed.description" xml:space="preserve">
+				<source>Allows the category to be shared with anyone who
+				has shared event priviliges already.</source>
+			</trans-unit>
+			<trans-unit id="single_pid.description" xml:space="preserve">
+				<source>Page where individual events from this category
+				will be shown.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

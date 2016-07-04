@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T10:59:33Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id="pi1_title" xml:space="preserve">
+				<source>Calendar</source>
+			</trans-unit>
+			<trans-unit id="pi1_plus_wiz_description" xml:space="preserve">
+				<source>A Calendar designed to fit the needs of a
+				community, FE and BE entries</source>
+			</trans-unit>
+			<trans-unit id="extmng.useInternalCaching" xml:space="preserve">
+				<source>Internal caching: If enabled cal caches some
+				processing intensive information (archive period count,
+				category count, categories) in an internal cache.</source>
+			</trans-unit>
+			<trans-unit id="extmng.writeCachingInfoToDevlog" xml:space="preserve">
+				<source>Debug caching info: Which information about
+				internal caching should be written to devlog
+				(extension &quot;devlog&quot; required).&quot;disabled&quot;: don't write any information about
+				caching to devlog. &quot;cache misses&quot;: log only cache misses.
+				&quot;all&quot;: log cache misses and cache hits to devlog.</source>
+			</trans-unit>
+			<trans-unit id="extmng.cachingMode" xml:space="preserve">
+				<source>Caching Mode: Determines the cache entries
+				lifetime and when the internal cache from cal will be cleared.
+				&quot;normal&quot;: (default) the cache entries will get the same lifetime as
+				normal pages. The cal cache will be cleared
+				when the &quot;clear all caches&quot; button is pressed.
+				&quot;lifetime&quot;: will set the livetime of cache entries to the given amount of
+				seconds in field &quot;cacheLifetime&quot;. The cache table is not cleared
+				when &quot;clear all caches&quot; is clicked.
+				&quot;static&quot;: means: the lifetime of cache entries is set to zero (= unlimited).
+				TYPO3 does not clear the cal cache (useful if you clear the cache
+				with an external script or
+				for debugging).</source>
+			</trans-unit>
+			<trans-unit id="extmng.cacheLifetime" xml:space="preserve">
+				<source>Cache lifetime: lifetime in seconds of the
+				internal cache entries (if &quot;cachingMode&quot; is set to &quot;lifetime&quot;).
+				example: 86400 (a day), 604800 (a week)</source>
+			</trans-unit>
+			<trans-unit id="extmng.cachingEngine" xml:space="preserve">
+				<source>Caching engine: where should the cache entries
+				from cal be stored. &quot;internal&quot;: store cache records directly in the
+				database using internal methods. &quot;cachingFramework&quot; Requires at
+				least TYPO3 4.3: store cache records in the TYPO3 caching framework
+				(in the default configuration cal uses the DB backend of the caching
+				framework).</source>
+			</trans-unit>
+			<trans-unit id="extmng.treeOrderBy" xml:space="preserve">
+				<source>Category ordering in BackEnd trees: Here you can
+				configure the the ordering of categories in category trees in
+				BackEnd forms.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

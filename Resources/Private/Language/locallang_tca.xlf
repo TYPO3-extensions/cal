@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T10:57:14Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id="cal.pi_flexform.sheetGeneral" xml:space="preserve">
+				<source>General Settings</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.allowedViews" xml:space="preserve">
+				<source>Allowed views</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewMonth" xml:space="preserve">
+				<source>Month</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewYear" xml:space="preserve">
+				<source>Year</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewList" xml:space="preserve">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewWeek" xml:space="preserve">
+				<source>Week</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewDay" xml:space="preserve">
+				<source>Day</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewOrganizer" xml:space="preserve">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewLocation" xml:space="preserve">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewSingle" xml:space="preserve">
+				<source>Single Event</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewIcs" xml:space="preserve">
+				<source>ICS</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewRss" xml:space="preserve">
+				<source>Rss</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewSearchEvent" xml:space="preserve">
+				<source>Search Event</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewSearchLocation" xml:space="preserve">
+				<source>Search Location</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewSearchOrganizer" xml:space="preserve">
+				<source>Search Organizer</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewSearchAll" xml:space="preserve">
+				<source>Search All</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewCreateEvent" xml:space="preserve">
+				<source>Create Event</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewEditEvent" xml:space="preserve">
+				<source>Edit Event</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewDeleteEvent" xml:space="preserve">
+				<source>Delete Event</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewCreateCalendar" xml:space="preserve">
+				<source>Create Calendar</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewEditCalendar" xml:space="preserve">
+				<source>Edit Calendar</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewDeleteCalendar" xml:space="preserve">
+				<source>Delete Calendar</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewCreateCategory" xml:space="preserve">
+				<source>Create Category</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewEditCategory" xml:space="preserve">
+				<source>Edit Category</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewDeleteCategory" xml:space="preserve">
+				<source>Delete Category</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewCreateLocation" xml:space="preserve">
+				<source>Create Location</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewEditLocation" xml:space="preserve">
+				<source>Edit Location</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewDeleteLocation" xml:space="preserve">
+				<source>Delete Location</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewCreateOrganizer" xml:space="preserve">
+				<source>Create Organizer</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewEditOrganizer" xml:space="preserve">
+				<source>Edit Organizer</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewDeleteOrganizer" xml:space="preserve">
+				<source>Delete Organizer</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewSubscriptionManager" xml:space="preserve">
+				<source>Subscription Manager</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewMeetingManager" xml:space="preserve">
+				<source>Meeting Manager</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewTranslation" xml:space="preserve">
+				<source>Translation Options</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewTodo" xml:space="preserve">
+				<source>Todo</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewAjax" xml:space="preserve">
+				<source>Ajax (requires ext:calajax)</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.viewAdmin" xml:space="preserve">
+				<source>Administration Options</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.calendarName" xml:space="preserve">
+				<source>Calendar name</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.defaultCalendarUid" xml:space="preserve">
+				<source>Default calendar</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.subscrition" xml:space="preserve">
+				<source>Subscription</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.noSubscription" xml:space="preserve">
+				<source>Disabled</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.allowSubscribe" xml:space="preserve">
+				<source>Allow anyone to subscribe</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.subscribeFeUser" xml:space="preserve">
+				<source>Only allow frontend users to subscribe</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.subscribeWithCaptcha" xml:space="preserve">
+				<source>Force captcha to subscribe</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetCategory" xml:space="preserve">
+				<source>Filters</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.category_selection" xml:space="preserve">
+				<source>Category selection</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.calendar_selection" xml:space="preserve">
+				<source>Calendar selection</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.select_deselect_categories" xml:space="preserve">
+				<source>Category mode</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.itemsHeader" xml:space="preserve">
+				<source>Special options:</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.category_selection_notCategorized" xml:space="preserve">
+				<source>[not categorized]</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.calendarMode" xml:space="preserve">
+				<source>Calendar selection mode</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.calendarMode.showAll" xml:space="preserve">
+				<source>Show all calendars (don't care about selection
+				below)</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.calendarMode.showSelected" xml:space="preserve">
+				<source>Show only selected calendars</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.calendarMode.excludeSelected" xml:space="preserve">
+				<source>Don't show selected calendars</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.categoryMode" xml:space="preserve">
+				<source>Category selection mode</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.categoryMode.showAll" xml:space="preserve">
+				<source>Show all categories (don't care about selection
+				below)</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.categoryMode.showSelected" xml:space="preserve">
+				<source>Show only selected categories (exact match)</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.categoryMode.excludeSelected" xml:space="preserve">
+				<source>Don't show selected categories</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.categoryMode.showSelectedOr" xml:space="preserve">
+				<source>Show only selected categories (any)</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.categoryMode.showMinSelected" xml:space="preserve">
+				<source>Show selected categories (minimum match)</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetYearView" xml:space="preserve">
+				<source>Year View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.yearViewPid" xml:space="preserve">
+				<source>Year view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.yearTemplate" xml:space="preserve">
+				<source>Year template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetMonthView" xml:space="preserve">
+				<source>Month View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.monthViewPid" xml:space="preserve">
+				<source>Month view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.monthShowListView" xml:space="preserve">
+				<source>Show list view (not applicable for mini calendar)</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.monthTemplate" xml:space="preserve">
+				<source>Month template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.monthSmallTemplate" xml:space="preserve">
+				<source>Month small template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.monthMediumTemplate" xml:space="preserve">
+				<source>Month medium template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.monthLargeTemplate" xml:space="preserve">
+				<source>Month large template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.monthMakeMiniCal" xml:space="preserve">
+				<source>Display as a mini calendar</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showListInMonthView" xml:space="preserve">
+				<source>Show events of this month</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetWeekView" xml:space="preserve">
+				<source>Week View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.weekViewPid" xml:space="preserve">
+				<source>Week view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.weekTemplate" xml:space="preserve">
+				<source>Week template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.weekStartDay" xml:space="preserve">
+				<source>Week start day</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetDayView" xml:space="preserve">
+				<source>Day View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.dayViewPid" xml:space="preserve">
+				<source>Day view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.dayTemplate" xml:space="preserve">
+				<source>Day template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.dayStart" xml:space="preserve">
+				<source>Day start time</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.dayEnd" xml:space="preserve">
+				<source>Day endtime</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.gridLength" xml:space="preserve">
+				<source>Show divider every x minutes</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetListView" xml:space="preserve">
+				<source>List View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listViewPid" xml:space="preserve">
+				<source>List view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listTemplate" xml:space="preserve">
+				<source>List template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.starttime" xml:space="preserve">
+				<source>Start time</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.endtime" xml:space="preserve">
+				<source>End time</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.default" xml:space="preserve">
+				<source>Use Typoscript Default</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.now" xml:space="preserve">
+				<source>Now</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.yesterday" xml:space="preserve">
+				<source>Yesterday</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.today" xml:space="preserve">
+				<source>Today</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.tomorrow" xml:space="preserve">
+				<source>Tomorrow</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.weekStart" xml:space="preserve">
+				<source>Beginning Of This Week</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.weekEnd" xml:space="preserve">
+				<source>End Of This Week</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.plusOneWeek" xml:space="preserve">
+				<source>1 Week From Now</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.monthStart" xml:space="preserve">
+				<source>Beginning Of This Month</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.monthEnd" xml:space="preserve">
+				<source>End Of This Month</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.plusOneMonth" xml:space="preserve">
+				<source>1 Month From Now</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.yearStart" xml:space="preserve">
+				<source>Beginning Of This Year</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.yearEnd" xml:space="preserve">
+				<source>End Of This Year</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.quarterStart" xml:space="preserve">
+				<source>Beginning Of This Quarter</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.quarterEnd" xml:space="preserve">
+				<source>End Of This Quarter</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.plusOneYear" xml:space="preserve">
+				<source>1 Year From Now</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.usePageBrowser" xml:space="preserve">
+				<source>Page browser options</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.usePageBrowser.use" xml:space="preserve">
+				<source>Enable the page browser</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.usePageBrowser.dontUse" xml:space="preserve">
+				<source>Disable the page browser</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.recordsPerPage" xml:space="preserve">
+				<source>Events per page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.listView.pagesCount" xml:space="preserve">
+				<source>Max pages</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.maxEvents" xml:space="preserve">
+				<source>Max events</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.maxRecurringEvents" xml:space="preserve">
+				<source>Max instances of the same recurring event</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetEventView" xml:space="preserve">
+				<source>Event View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.eventViewPid" xml:space="preserve">
+				<source>Event view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.eventTemplate" xml:space="preserve">
+				<source>Event template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.isPreview" xml:space="preserve">
+				<source>Show preview</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.createEventTemplate" xml:space="preserve">
+				<source>Create event template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.confirmEventTemplate" xml:space="preserve">
+				<source>Confirm event template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.deleteEventTemplate" xml:space="preserve">
+				<source>Delete event template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetLocationView" xml:space="preserve">
+				<source>Location View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.locationViewPid" xml:space="preserve">
+				<source>Location view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.locationTemplate" xml:space="preserve">
+				<source>Location template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.createLocationTemplate" xml:space="preserve">
+				<source>Create location template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.confirmLocationTemplate" xml:space="preserve">
+				<source>Confirm location template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetOrganizerView" xml:space="preserve">
+				<source>Organizer View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.organizerViewPid" xml:space="preserve">
+				<source>Organizer view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.organizerTemplate" xml:space="preserve">
+				<source>Organizer template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetIcsView" xml:space="preserve">
+				<source>Ics View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.icsViewPid" xml:space="preserve">
+				<source>Ics view page</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.icsTemplate" xml:space="preserve">
+				<source>Ics template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.calUid" xml:space="preserve">
+				<source>Calendar id</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showIcsLinks" xml:space="preserve">
+				<source>Show ics links</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetOtherView" xml:space="preserve">
+				<source>Other View</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sidebarTemplate" xml:space="preserve">
+				<source>Sidebar template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.searchBoxTemplate" xml:space="preserve">
+				<source>Searchbox template</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showLogin" xml:space="preserve">
+				<source>Show login</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showSearch" xml:space="preserve">
+				<source>Show search</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showJumps" xml:space="preserve">
+				<source>Show jumps</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showGoto" xml:space="preserve">
+				<source>Show goto</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showCalendarSelection" xml:space="preserve">
+				<source>Show calendar selector</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showCategorySelection" xml:space="preserve">
+				<source>Show category selector</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.showTomorrowEvents" xml:space="preserve">
+				<source>Show tomorrows events</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.sheetTSView" xml:space="preserve">
+				<source>Typoscript</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.tsconfig" xml:space="preserve">
+				<source>plugin.tx_cal_controller:</source>
+			</trans-unit>
+			<trans-unit id="cal.pi_flexform.calendarDistance" xml:space="preserve">
+				<source>Distance (Km) for events in a nearby calendar</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

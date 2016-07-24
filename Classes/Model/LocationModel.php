@@ -174,7 +174,7 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 			$showWrittenDirections = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['showWrittenDirections'];
 			$prefillAddress = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['prefillAddress'];
 			
-			include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('wec_map') . 'map_service/google/class.tx_wecmap_map_google.php');
+			include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('wec_map') . 'Classes/MapService/Google/Map.php');
 			$mapName = 'map' . $this->getUid ();
 			$map = new \tx_wecmap_map_google($apiKey, $width, $height, $centerLat, $centerLong, $zoomLevel, $mapName);
 			

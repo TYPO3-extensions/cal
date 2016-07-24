@@ -43,8 +43,8 @@ class NotificationView extends \TYPO3\CMS\Cal\Service\BaseService {
 			return;
 		}
 		$eventDataArray = array_merge ($oldEventDataArray, $newEventDataArray);
-		$event_old = $this->modelObj->findEvent ($oldEventDataArray ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], true, true, false, true, true);
-		$event_new = $this->modelObj->findEvent ($oldEventDataArray ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], true, true, false, true, true);
+		$event_old = $this->modelObj->findEvent ($oldEventDataArray ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], true, true, false, true, false);
+		$event_new = $this->modelObj->findEvent ($oldEventDataArray ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], true, true, false, true, false);
 		
 		// Make sure we have an old event and new event before notifying.
 		if (is_object ($event_old) && is_object ($event_new)) {
@@ -254,7 +254,7 @@ class NotificationView extends \TYPO3\CMS\Cal\Service\BaseService {
 		$eventPlainSubpart = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($eventPlainSubpart, $switch, $rems, $wrapped);
 	}
 	function notify(&$newEventDataArray, $forceDeletionMode = 0) {
-		$event = $this->modelObj->findEvent ($newEventDataArray ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], true, true, false, true, true);
+		$event = $this->modelObj->findEvent ($newEventDataArray ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], true, true, false, true, false);
 		
 		if (is_object ($event)) {
 			$this->startMailer ();
@@ -462,9 +462,9 @@ class NotificationView extends \TYPO3\CMS\Cal\Service\BaseService {
 		unset ($newEventDataArray ['starttime']);
 		unset ($newEventDataArray ['endtime']);
 		
-		$event_new = $event_old = $this->modelObj->findEvent ($oldEventDataArray ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], false, false, false, true, true);
+		$event_new = $event_old = $this->modelObj->findEvent ($oldEventDataArray ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], false, false, false, true, false);
 		// no need for executing the same query twice, is it?
-		// event_new = $this->modelObj->findEvent($oldEventDataArray['uid'],'tx_cal_phpicalendar', $this->conf['pidList'], false, false, false, true, true);
+		// event_new = $this->modelObj->findEvent($oldEventDataArray['uid'],'tx_cal_phpicalendar', $this->conf['pidList'], false, false, false, true, false);
 		if (count ($newEventDataArray) > 0) {
 			$event_new->updateWithPiVars (array_merge ($oldEventDataArray, $newEventDataArray));
 		}

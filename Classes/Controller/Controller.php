@@ -696,7 +696,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 						$this->conf ['view.'] [$this->conf ['view'] . '.'] ['minDate'] = $event->start->format ('%Y%m%d');
 						$this->conf ['view.'] [$this->conf ['view'] . '.'] ['maxDate'] = $this->piVars ['maxDate'];
 						
-						$eventArray = $modelObj->findEvent ($event->getUid (), $this->conf ['type'], $this->conf ['pidList'], false, false, true, false, false, '0,1,2,3,4');
+						$eventArray = $modelObj->findEvent ($event->getUid (), $this->conf ['type'], $this->conf ['pidList'], false, false, true, false, true, '0,1,2,3,4');
 						$ajaxStringArray = array();
 						$dateKeys = array_keys ($eventArray);
 						foreach ($dateKeys as $dateKey) {

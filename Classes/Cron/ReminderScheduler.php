@@ -96,7 +96,7 @@ class ReminderScheduler extends AbstractTask {
 			$calAPI = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
 			$calAPI = &$calAPI->tx_cal_api_without ($pageIDForPlugin);
 			
-			$eventObject = $calAPI->modelObj->findEvent ($event ['uid'], 'tx_cal_phpicalendar', $calAPI->conf ['pidList'], false, false, false, true);
+			$eventObject = $calAPI->modelObj->findEvent ($event ['uid'], 'tx_cal_phpicalendar', $calAPI->conf ['pidList'], false, false, false, false);
 			$calAPI->conf ['view'] = 'event';
 			
 			$reminderService = &Functions::getReminderService ();

@@ -250,7 +250,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 				continue;
 			}
 
-			if ($row ['category_uid'] > 0) {
+			if (($this->conf['view.']['categoryMode'] != 0) && ($row ['category_uid'] > 0)) {
 				$categoryArray = $categoryService->getCategoriesForEvent($row ['uid']);
 				foreach ($categoryArray as $category) {
 					$event->addCategory ($category);

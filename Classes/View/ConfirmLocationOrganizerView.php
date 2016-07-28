@@ -97,7 +97,7 @@ class ConfirmLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView
 		$sims ['###COUNTRY_VALUE###'] = '';
 		if ($this->isAllowed ('country')) {
 			if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-				$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
+				$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('SJBR\\StaticInfoTables\\PiBaseApi');
 				$staticInfo->init ();
 				$current = \SJBR\StaticInfoTables\Utility\LocalizationUtility::translate(array('uid' => $this->object->getCountry () ), 'static_countries', FALSE);
 				$sims ['###COUNTRY###'] = $this->applyStdWrap ( $current, 'country_static_info_stdWrap' );
@@ -115,7 +115,7 @@ class ConfirmLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView
 		$sims ['###COUNTRYZONE_VALUE###'] = '';
 		if ($this->isAllowed ('countryzone')) {
 			if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-				$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
+				$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('SJBR\\StaticInfoTables\\PiBaseApi');
 				$staticInfo->init ();
 				$current = \SJBR\StaticInfoTables\Utility\LocalizationUtility::translate(array('uid' => $this->object->getCountryzone () ), 'static_country_zones', FALSE);
 				$sims ['###COUNTRYZONE###'] = $this->applyStdWrap ( $current, 'countryzone_static_info_stdWrap' );

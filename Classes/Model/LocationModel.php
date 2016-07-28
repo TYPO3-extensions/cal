@@ -219,7 +219,7 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 	function getCountryMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-			$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
+			$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('SJBR\\StaticInfoTables\\PiBaseApi');
 			$staticInfo->init ();
 			$current = \SJBR\StaticInfoTables\Utility\LocalizationUtility::translate(array('uid' => $this->getCountry () ), 'static_countries', FALSE);
 			$this->local_cObj->setCurrentVal ($current);
@@ -233,7 +233,7 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 	function getCountryZoneMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$this->initLocalCObject ();
 		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('static_info_tables')) {
-			$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_staticinfotables_pi1');
+			$staticInfo = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('SJBR\\StaticInfoTables\\PiBaseApi');
 			$staticInfo->init ();
 			$current = \SJBR\StaticInfoTables\Utility\LocalizationUtility::translate(array('uid' => $this->getCountryzone () ), 'static_country_zones', FALSE);
 			$this->local_cObj->setCurrentVal ($current);

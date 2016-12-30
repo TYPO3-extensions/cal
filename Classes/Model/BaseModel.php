@@ -368,6 +368,7 @@ abstract class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 		
 		$this->initLocalCObject ();
 		$this->local_cObj->setCurrentVal ($description);
+		$this->local_cObj->data['bodytext'] = $description;
 		if ($this->striptags) {
 			$sims ['###DESCRIPTION_STRIPTAGS###'] = strip_tags ($this->local_cObj->cObjGetSingle ($this->conf ['view.'] [$view . '.'] [$this->getObjectType () . '.'] ['description'], $this->conf ['view.'] [$view . '.'] [$this->getObjectType () . '.'] ['description.']));
 		} else {

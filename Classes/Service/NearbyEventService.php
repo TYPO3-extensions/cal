@@ -25,11 +25,10 @@ class NearbyEventService extends \TYPO3\CMS\Cal\Service\EventService {
 		
 		// Lets see if the user is logged in
 		if ($this->rightsObj->isLoggedIn () && ! $this->rightsObj->isCalAdmin () && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map') && $this->conf ['view.'] ['calendar.'] ['nearbyDistance'] > 0) {
-			require_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('wec_map') . 'class.tx_wecmap_cache.php');
 			$user = $GLOBALS ['TSFE']->fe_user->user;
 			
 			/* Geocode the address */
-			$latlong = \tx_wecmap_cache::lookup ($user ['street'], $user ['city'], $user ['state'], $user ['zip'], $user ['country']);
+			$latlong = \JBartels\WecMap\Utility\Cache::lookup ($user ['street'], $user ['city'], $user ['state'], $user ['zip'], $user ['country']);
 			if (isset ($latlong ['long']) && isset ($latlong ['lat'])) {
 				$this->internalAdditionTable = ',' . $this->conf ['view.'] ['calendar.'] ['nearbyAdditionalTable'];
 				$this->internalAdditionWhere = ' ' . str_replace (Array (

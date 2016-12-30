@@ -156,7 +156,7 @@ class TceMainProcessdatamap {
 			}
 			
 			/* Geocode the address */
-			$lookupTable = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('tx_wecmap_cache');
+			$lookupTable = \TYPO3\CMS\Cal\Utility\Functions::makeInstance('JBartels\WecMap\Utility\Cache');
 			$latlong = $lookupTable->lookup ($location ['street'], $location ['city'], $location ['state'], $location ['zip'], $location ['country']);
 			$fieldArray ['latitude'] = $latlong ['lat'];
 			$fieldArray ['longitude'] = $latlong ['long'];

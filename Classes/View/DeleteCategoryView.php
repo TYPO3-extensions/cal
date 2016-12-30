@@ -72,7 +72,7 @@ class DeleteCategoryView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		return \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($page, $sims, Array (), Array ());
 	}
 	
-	public function getFormStartMarker(& $template, & $sims, & $rems) {
+	public function getFormStartMarker(& $template, & $sims, & $rems, & $wrapped) {
 		$rems ['###FORM_START###'] = $this->cObj->getSubpart ($template, '###FORM_START###');
 	}
 	

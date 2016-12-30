@@ -721,7 +721,7 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			$sims ['###EXCEPTION###'] = $this->cObj->stdWrap ($exception, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['exception_stdWrap.']);
 		}
 	}
-	function getFormStartMarker(& $template, & $sims, & $rems) {
+	function getFormStartMarker(& $template, & $sims, & $rems, & $wrapped) {
 		$temp = $this->cObj->getSubpart ($template, '###FORM_START###');
 		$temp_sims = Array ();
 		

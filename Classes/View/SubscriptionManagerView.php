@@ -49,7 +49,7 @@ class SubscriptionManagerView extends \TYPO3\CMS\Cal\View\BaseView {
 		$subscriptionHash = strip_tags ($this->controller->piVars ['sid']);
 		/* If we have an event, email, and subscription id, try to subscribe or unsubscribe */
 		if ($eventUID > 0 && $email && $subscriptionHash) {
-			$event = $this->modelObj->findEvent ($eventUID, 'tx_cal_phpicalendar', $this->conf ['pidList']);
+			$event = $this->modelObj->findEvent ($eventUID, 'tx_cal_phpicalendar', $this->conf ['pidList'], true, true, false, true, false);
 			
 			if (is_object ($event)) {
 				unset ($this->controller->piVars ['monitor']);
@@ -110,7 +110,7 @@ class SubscriptionManagerView extends \TYPO3\CMS\Cal\View\BaseView {
 					$local_sims = Array ();
 					$local_wrapped = Array ();
 					$subscriptionContainer = $this->cObj->getSubpart ($page, '###SUBSCRIPTION_CONTAINER###');
-					$event = $this->modelObj->findEvent ($row ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList']);
+					$event = $this->modelObj->findEvent ($row ['uid'], 'tx_cal_phpicalendar', $this->conf ['pidList'], true, true, false, true, false);
 					$this->conf ['uid'] = $row ['uid'];
 					$this->conf ['type'] = $event->getType ();
 					$event->getMarker ($subscriptionContainer, $local_sims, $local_rems, $local_wrapped);

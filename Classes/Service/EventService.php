@@ -15,6 +15,7 @@ namespace TYPO3\CMS\Cal\Service;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Cal\Model\Pear\Date\Calc;
+use TYPO3\CMS\Cal\Controller\DateParser;
 
 /**
  * A concrete model for the calendar.
@@ -250,10 +251,12 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 				continue;
 			}
 
-			if (($this->conf['view.']['categoryMode'] != 0) && ($row ['category_uid'] > 0)) {
+			if ($row ['category_uid'] > 0) {
 				$categoryArray = $categoryService->getCategoriesForEvent($row ['uid']);
-				foreach ($categoryArray as $category) {
-					$event->addCategory ($category);
+				if(is_array($categoryArray)){
+					foreach ($categoryArray as $category) {
+						$event->addCategory ($category);
+					}
 				}
 			}
 			
@@ -414,21 +417,33 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		// 3rd get all related events
 		// make an array out of the list, so we can handle it better
 		$start_date = new  \TYPO3\CMS\Cal\Model\CalDate ('00000001000000');
+		if (isset($this->conf ['view.'] [$this->conf ['view'] . '.'] ['minDate'])) {
+			$start_date = $this->getTimeParsed($this->conf ['view.'] [$this->conf ['view'] . '.'] ['minDate']);
+		}
 		$start_date->setTZbyId ('UTC');
-		$end_date = new  \TYPO3\CMS\Cal\Model\CalDate ($this->conf ['view.'] [$this->conf ['view'] . '.'] ['maxDate'] . '000000');
+		
+		$end_date = $this->getTimeParsed('+2 years');
+		if (isset($this->conf ['view.'] [$this->conf ['view'] . '.'] ['maxDate'])) {
+			$end_date = $this->getTimeParsed($this->conf ['view.'] [$this->conf ['view'] . '.'] ['maxDate']);
+		}
 		$end_date->setTZbyId ('UTC');
 		$this->setStartAndEndPoint ($start_date, $end_date);
 		
 		$this->endtime->setHour (0);
 		$this->endtime->setMinute (0);
 		
+		$formattedStarttime = $this->starttime->format ('%Y%m%d');
+		$formattedEndtime = $this->endtime->format ('%Y%m%d');
+		
 		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');
 		$categoryService = &$this->modelObj->getServiceObjByKey ('cal_category_model', 'category', $this->extConf ['categoryService']);
 		
 		$calendarSearchString = $calendarService->getCalendarSearchString ($pidList, true, $this->conf ['calendar'] ? $this->conf ['calendar'] : '');
 		
+		$recurringClause = ' OR (tx_cal_event.start_date<=' . $formattedEndtime . ' AND (tx_cal_event.freq IN ("day", "week", "month", "year") AND (tx_cal_event.until>=' . $formattedStarttime . ' OR tx_cal_event.until=0))) OR (tx_cal_event.rdate AND tx_cal_event.rdate_type IN ("date_time", "date", "period")) ';
+		
 		// putting everything together
-		$additionalWhere = $calendarSearchString . ' AND tx_cal_event.pid IN (' . $pidList . ') ' . $this->cObj->enableFields ('tx_cal_event') . ' AND (tx_cal_event.freq!="none" OR tx_cal_event.freq!="")';
+		$additionalWhere = $calendarSearchString . ' AND tx_cal_event.pid IN (' . $pidList . ') ' . $this->cObj->enableFields ('tx_cal_event') . ' AND ((tx_cal_event.start_date>=' . $formattedStarttime . ' AND tx_cal_event.start_date<=' . $formattedEndtime . ') OR (tx_cal_event.end_date<=' . $formattedEndtime . ' AND tx_cal_event.end_date>=' . $formattedStarttime . ') OR (tx_cal_event.end_date>=' . $formattedEndtime . ' AND tx_cal_event.start_date<=' . $formattedStarttime . ')' . $recurringClause . ')' . $additionalWhere;
 		
 		// creating the arrays the user is allowed to see
 		
@@ -450,6 +465,21 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			return Array ();
 		}
 	}
+	
+	/**
+	 * Get the time parsed
+	 *
+	 * @param string $timeString
+	 *
+	 * @return CalDate
+	 */
+	protected function getTimeParsed($timeString) {
+		/** @var DateParser $dp */
+		$dp = GeneralUtility::makeInstance ( 'TYPO3\\CMS\\Cal\\Controller\\DateParser' );
+		$dp->parse ( $timeString, 0, '' );
+		return $dp->getDateObjectFromStack ();
+	}
+	
 	function createEvent($row, $isException) {
 		return new \TYPO3\CMS\Cal\Model\EventModel( $row, $isException, $this->getServiceKey ());
 	}
@@ -1166,6 +1196,8 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$insertFields ['cnt'] = $object->getCount ();
 			$insertFields ['intrval'] = $object->getInterval ();
 		}
+		
+		$insertFields ['icsUid'] = $this->conf ['view.'] ['ics.'] ['eventUidPrefix'] . '_' . $this->getCalendarUid () . '_' . $this->getUid ();
 		
 		// Hook initialization:
 		$hookObjectsArr = array ();

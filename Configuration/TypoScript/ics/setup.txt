@@ -15,8 +15,8 @@ ics {
 			eventUidPrefix = {$plugin.tx_cal_controller.view.ics.eventUidPrefix}
 
 			# @description	The maximum date for recurring events
-			maxDate = 20200101
-			minDate = 00000001
+			maxDate = +2 years
+			minDate = -4 weeks
 
 			#stdWraps, e.g. to convert Text to utf8
 			event.title {

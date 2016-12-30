@@ -81,6 +81,8 @@ class TceMainProcessdatamap {
 						$tx_cal_api = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
 						$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 						
+						$fieldArray ['icsUid'] = $tx_cal_api->conf ['view.'] ['ics.'] ['eventUidPrefix'] . '_' . $event ['calendar_id'] . '_' . $event ['uid'];
+						
 						$notificationService = & \TYPO3\CMS\Cal\Utility\Functions::getNotificationService ();
 						
 						$oldPath = &$notificationService->conf ['view.'] ['event.'] ['eventModelTemplate'];
@@ -227,6 +229,43 @@ class TceMainProcessdatamap {
 					}
 				}
 			}
+		}
+		
+		// t3ver_stage is always in the $fieldArray
+		if ($table == 'tx_cal_event_deviation' && count ($fieldArray) > 0){
+			$deviationRow = BackendUtility::getRecord ('tx_cal_event_deviation', $id);
+			if (is_array($deviationRow)) {
+				$startDate = null;
+				if ($deviationRow['start_date']) {
+					$startDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationRow['start_date']);
+				} else {
+					$startDate = new \TYPO3\CMS\Cal\Model\CalDate ($deviationRow['orig_start_date']);
+				}
+				$endDate = null;
+				if ($deviationRow['end_date']) {
+					$endDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationRow['end_date']);
+				} else {
+					$endDate = new \TYPO3\CMS\Cal\Model\CalDate ($deviationRow['orig_end_date']);
+				}
+					
+				if (! $deviationRow['allday']) {
+					if ($deviationRow['start_time']) {
+						$startDate->addSeconds ($deviationRow['start_time']);
+					}
+					if ($deviationRow['end_time']) {
+						$endDate->addSeconds ($deviationRow['end_time']);
+					}
+				}
+		
+				$table = 'tx_cal_index';
+				$where = 'event_deviation_uid = '.$id;
+				$insertFields = Array(
+						'start_datetime' => $startDate->format ('%Y%m%d') . $startDate->format ('%H%M%S'),
+						'end_datetime' => $endDate->format ('%Y%m%d') . $endDate->format ('%H%M%S')
+						);
+				$result = $GLOBALS ['TYPO3_DB']->exec_UPDATEquery ($table, $where, $insertFields);
+			}
+				
 		}
 		if ($table == 'pages' && $status == 'new') {
 			$GLOBALS ['BE_USER']->setAndSaveSessionData ('cal_itemsProcFunc', array ());

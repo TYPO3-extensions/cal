@@ -46,7 +46,7 @@ class ConfirmLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView
 			$this->objectString = 'organizer';
 		}
 		
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['confirm_location.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['confirm_location.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no confirm ' . $this->objectString . ' template file found:</h3>' . $this->conf ['view.'] ['confirm_location.'] ['template'];
 		}

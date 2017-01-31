@@ -39,7 +39,7 @@ class MeetingManagerView extends \TYPO3\CMS\Cal\View\BaseView {
 		$rems ['###MEETING_CONTAINER###'] = '';
 		
 		/* Get the meeting manager template */
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['event.'] ['meeting.'] ['managerTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['event.'] ['meeting.'] ['managerTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no meeting manager template file found:</h3>' . $this->conf ['view.'] ['meeting.'] ['managerTemplate'];
 		}

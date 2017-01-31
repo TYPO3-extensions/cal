@@ -55,7 +55,7 @@ class TodoRecModel extends \TYPO3\CMS\Cal\Model\EventRecModel {
 		$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		$modelTemplate = $confArr ['todoSubtype'] == 'event' ? 'todoInlineModelTemplate' : 'todoSeparateModelTemplate';
 		
-		$page = $cObj->fileResource ($this->parentEvent->conf ['view.'] ['todo.'] [$modelTemplate]);
+		$page = file_get_contents ($this->parentEvent->conf ['view.'] ['todo.'] [$modelTemplate]);
 		if ($page == '') {
 			return '<h3>calendar: no todo model template file found:</h3>' . $this->parentEvent->conf ['view.'] ['todo.'] [$modelTemplate];
 		}

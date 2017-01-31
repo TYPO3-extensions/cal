@@ -37,7 +37,7 @@ class ConfirmCategoryView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$this->objectString = 'category';
 		$this->isConfirm = true;
 		unset ($this->controller->piVars ['formCheck']);
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['confirm_category.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['confirm_category.'] ['template']);
 		if ($page == '') {
 			return '<h3>category: no create category template file found:</h3>' . $this->conf ['view.'] ['confirm_category.'] ['template'];
 		}

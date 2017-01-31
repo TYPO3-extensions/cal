@@ -42,9 +42,9 @@ class ListView extends \TYPO3\CMS\Cal\View\BaseView {
 		if ($page == '') {
 			$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($confArr ['useTeaser']) {
-				$page = $this->cObj->fileResource ($this->conf ['view.'] ['list.'] ['listWithTeaserTemplate']);
+				$page = file_get_contents ($this->conf ['view.'] ['list.'] ['listWithTeaserTemplate']);
 			} else {
-				$page = $this->cObj->fileResource ($this->conf ['view.'] ['list.'] ['listTemplate']);
+				$page = file_get_contents ($this->conf ['view.'] ['list.'] ['listTemplate']);
 			}
 			if ($page == '') {
 				$this->error = true;
@@ -63,9 +63,9 @@ class ListView extends \TYPO3\CMS\Cal\View\BaseView {
 		if ($listTemplate == '') {
 			$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($confArr ['useTeaser']) {
-				$page = $this->cObj->fileResource ($this->conf ['view.'] ['list.'] ['listWithTeaserTemplate']);
+				$page = file_get_contents ($this->conf ['view.'] ['list.'] ['listWithTeaserTemplate']);
 			} else {
-				$page = $this->cObj->fileResource ($this->conf ['view.'] ['list.'] ['listTemplate']);
+				$page = file_get_contents ($this->conf ['view.'] ['list.'] ['listTemplate']);
 			}
 			if ($page == '') {
 				$this->error = true;

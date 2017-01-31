@@ -63,8 +63,8 @@ class WeekView extends \TYPO3\CMS\Cal\View\BaseView {
 			}
 		}
 		
-		$subpart = $this->cObj->fileResource ($this->conf ['view.'] ['week.'] ['newWeekTemplate']);
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['week.'] ['weekTemplate']);
+		$subpart = file_get_contents ($this->conf ['view.'] ['week.'] ['newWeekTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['week.'] ['weekTemplate']);
 		$page = str_replace ('###WEEK###', $weekModel->render ($subpart), $page);
 		$rems = Array ();
 		
@@ -86,7 +86,7 @@ class WeekView extends \TYPO3\CMS\Cal\View\BaseView {
 		}
 		$this->_init ($master_array);
 		
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['week.'] ['weekTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['week.'] ['weekTemplate']);
 		if ($page == '') {
 			return "<h3>week: no template file found:</h3>" . $this->conf ['view.'] ['week.'] ['weekTemplate'] . "<br />Please check your template record and add both cal items at 'include static (from extension)'";
 		}

@@ -84,7 +84,7 @@ class TodoModel extends \TYPO3\CMS\Cal\Model\EventModel {
 		} else {
 			$resourcePath = $this->conf ['view.'] ['todo.'] ['todoSeparateModelTemplate'];
 		}
-		$page = $cObj->fileResource ($resourcePath);
+		$page = file_get_contents ($resourcePath);
 		if ($page == '') {
 			return '<h3>calendar: no todo model template file found:</h3>' . $resourcePath;
 		}

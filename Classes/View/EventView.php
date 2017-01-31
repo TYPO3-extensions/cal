@@ -41,7 +41,7 @@ class EventView extends \TYPO3\CMS\Cal\View\BaseView {
 			return $this->renderWithFluid ($event);
 		}
 		
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['event.'] ['eventTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['event.'] ['eventTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['event.'] ['eventTemplate'];
 		}

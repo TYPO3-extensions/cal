@@ -35,7 +35,7 @@ class LocationLoader extends AbstractModul {
 			$useLocationStructure = ($moduleCaller->confArr ['useLocationStructure'] ? $moduleCaller->confArr ['useLocationStructure'] : 'tx_cal_location');
 			$location = $this->modelObj->findLocation ( $moduleCaller->getLocationId (), $useLocationStructure );
 			if (is_object ( $location )) {
-				$page = $this->cObj->fileResource ( $moduleCaller->conf ['module.'] ['locationloader.'] ['template'] );
+				$page = file_get_contents ( $moduleCaller->conf ['module.'] ['locationloader.'] ['template'] );
 				if ($page == '') {
 					return '<h3>module locationloader: no template file found:</h3>' . $moduleCaller->conf ['module.'] ['locationloader.'] ['template'];
 				}

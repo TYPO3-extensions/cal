@@ -40,7 +40,7 @@ class DeleteCalendarView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	 * @return string HTML output.
 	 */
 	public function drawDeleteCalendar(&$calendar) {
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['delete_calendar.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['delete_calendar.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no confirm calendar template file found:</h3>' . $this->conf ['view.'] ['delete_calendar.'] ['template'];
 		}

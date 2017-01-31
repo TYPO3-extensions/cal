@@ -57,8 +57,8 @@ class DayView extends \TYPO3\CMS\Cal\View\BaseView {
 				}
 			}
 		}
-		$subpart = $this->cObj->fileResource ($this->conf ['view.'] ['day.'] ['newDayTemplate']);
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['day.'] ['dayTemplate']);
+		$subpart = file_get_contents ($this->conf ['view.'] ['day.'] ['newDayTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['day.'] ['dayTemplate']);
 		$page = str_replace ('###DAY###', $dayModel->render ($subpart), $page);
 		$rems = Array ();
 		
@@ -80,7 +80,7 @@ class DayView extends \TYPO3\CMS\Cal\View\BaseView {
 			return $this->newDrawDay ($master_array, $getdate);
 		}
 		
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['day.'] ['dayTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['day.'] ['dayTemplate']);
 		if ($page == '') {
 			return "<h3>day: no template file found:</h3>" . $this->conf ['view.'] ['day.'] ['dayTemplate'] . "<br />Please check your template record and add both cal items at 'include static (from extension)'";
 		}
@@ -145,7 +145,7 @@ class DayView extends \TYPO3\CMS\Cal\View\BaseView {
 		
 		$display_date = $this->cObj->cObjGetSingle ($this->conf ['view.'] ['day.'] ['titleWrap'], $this->conf ['view.'] ['day.'] ['titleWrap.'], $TSkey = '__');
 		
-		$dayTemplate = $this->cObj->fileResource ($this->conf ['view.'] ['day.'] ['dayTemplate']);
+		$dayTemplate = file_get_contents ($this->conf ['view.'] ['day.'] ['dayTemplate']);
 		if ($dayTemplate == '') {
 			return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['day.'] ['dayTemplate'] . '<br />Please check your template record and add both cal items at "include static (from extension)"';
 		}

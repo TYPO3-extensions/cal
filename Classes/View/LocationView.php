@@ -37,7 +37,7 @@ class LocationView extends \TYPO3\CMS\Cal\View\BaseView {
 		$lastview = $this->controller->extendLastView ();
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['location.'] ['locationTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['location.'] ['locationTemplate']);
 		if ($page == '') {
 			return $this->createErrorMessage ('No location template file found at: >' . $this->conf ['view.'] ['location.'] ['locationTemplate'] . '<.', 'Please make sure the path is correct and that you included the static template and double-check the path using the Typoscript Object Browser.');
 		}

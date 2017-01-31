@@ -41,7 +41,7 @@ class DeleteLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView 
 	 * @return string HTML output.
 	 */
 	public function drawDeleteLocationOrOrganizer($isLocation = true, &$object) {
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['delete_location.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['delete_location.'] ['template']);
 		if ($page == '') {
 			return '<h3>category: no delete location template file found:</h3>' . $this->conf ['view.'] ['delete_location.'] ['template'];
 		}

@@ -39,7 +39,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	public function drawSearch(&$master_array, $getdate) {
 		$this->_init ($master_array);
 		
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['other.'] ['searchBoxTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['other.'] ['searchBoxTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['other.'] ['searchBoxTemplate'];
 		}
@@ -55,7 +55,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	 * @return string HTML output.
 	 */
 	public function drawSearchAllResult(&$master_array, $starttime, $endtime, $searchword, $locationIds = '', $organizerIds = '') {
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['search.'] ['searchResultAllTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['search.'] ['searchResultAllTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no search result template file found:</h3>' . $this->conf ['view.'] ['search.'] ['searchResultAllTemplate'];
 		}
@@ -248,7 +248,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	
 	public function initTemplate(&$page) {
 		if ($page == '') {
-			$page = $this->cObj->fileResource ($this->conf ['view.'] ['search.'] ['searchResult' . ucwords ($this->objectType) . 'Template']);
+			$page = file_get_contents ($this->conf ['view.'] ['search.'] ['searchResult' . ucwords ($this->objectType) . 'Template']);
 			if ($page == '') {
 				$this->error = true;
 				$this->errorMessage = 'No search ' . $this->objectType . ' result template file found for "view.search.searchResult' . ucwords ($this->objectType) . 'Template" at >' . $this->conf ['view.'] ['search.'] ['searchResult' . ucwords ($this->objectType) . 'Template'] . '<';

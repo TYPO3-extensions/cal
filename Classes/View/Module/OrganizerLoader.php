@@ -37,7 +37,7 @@ class OrganizerLoader extends AbstractModul {
 			$organizer = $this->modelObj->findOrganizer ( $moduleCaller->getOrganizerId (), $useOrganizerStructure );
 			
 			if (is_object ( $organizer )) {
-				$page = $this->cObj->fileResource ( $moduleCaller->conf ['module.'] ['organizerloader.'] ['template'] );
+				$page = file_get_contents ( $moduleCaller->conf ['module.'] ['organizerloader.'] ['template'] );
 				if ($page == '') {
 					return '<h3>module organizerloader: no template file found:</h3>' . $moduleCaller->conf ['module.'] ['organizerloader.'] ['template'];
 				}

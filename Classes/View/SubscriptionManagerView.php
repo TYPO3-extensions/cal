@@ -39,7 +39,7 @@ class SubscriptionManagerView extends \TYPO3\CMS\Cal\View\BaseView {
 		$rems ['###SUBSCRIPTION_CONTAINER###'] = '';
 		
 		/* Get the subscription manager template */
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['event.'] ['subscriptionManagerTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['event.'] ['subscriptionManagerTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no event template file found:</h3>' . $this->conf ['view.'] ['event.'] ['subscriptionManagerTemplate'];
 		}

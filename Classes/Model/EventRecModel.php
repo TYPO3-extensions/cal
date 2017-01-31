@@ -169,7 +169,7 @@ class EventRecModel extends \TYPO3\CMS\Cal\Model\Model {
 		
 		$templatePath = $this->parentEvent->conf ['view.'] ['event.'] ['eventModelTemplate'];
 		
-		$page = $cObj->fileResource ($templatePath);
+		$page = file_get_contents ($templatePath);
 		
 		if ($page == '') {
 			return '<h3>calendar: no event model template file found:</h3>' . $templatePath;

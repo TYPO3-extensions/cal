@@ -37,7 +37,7 @@ class ConfirmCalendarView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$this->objectString = 'calendar';
 		$this->isConfirm = true;
 		unset ($this->controller->piVars ['formCheck']);
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['confirm_calendar.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['confirm_calendar.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no create calendar template file found:</h3>' . $this->conf ['view.'] ['confirm_calendar.'] ['template'];
 		}

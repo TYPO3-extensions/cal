@@ -40,7 +40,7 @@ class DeleteCategoryView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	 * @return string HTML output.
 	 */
 	public function drawDeleteCategory(&$category) {
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['delete_category.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['delete_category.'] ['template']);
 		if ($page == '') {
 			return '<h3>category: no delete category template file found:</h3>' . $this->conf ['view.'] ['delete_category.'] ['template'];
 		}

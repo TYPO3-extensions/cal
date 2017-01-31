@@ -42,7 +42,7 @@ class MonthView extends \TYPO3\CMS\Cal\View\BaseView {
 		if ($this->conf ['view.'] ['month.'] ['monthMakeMiniCal']) {
 			$incFile = $GLOBALS['TSFE']->tmpl->getFileName($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
 			if(file_exists (PATH_site . $incFile )) {
-				$page = $this->cObj->fileResource ($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
+				$page = file_get_contents ($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
 			}
 			
 			if ($page == '') {
@@ -52,7 +52,7 @@ class MonthView extends \TYPO3\CMS\Cal\View\BaseView {
 				}
 			}
 		} else {
-			$page = $this->cObj->fileResource ($this->conf ['view.'] ['month.'] ['monthTemplate']);
+			$page = file_get_contents ($this->conf ['view.'] ['month.'] ['monthTemplate']);
 			if ($page == '') {
 				return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['month.'] ['monthTemplate'] . '<br />Please check your template record and add both cal items at "include static (from extension)"';
 			}

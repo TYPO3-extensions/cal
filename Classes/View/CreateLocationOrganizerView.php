@@ -68,7 +68,7 @@ class CreateLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView 
 		$this->serviceName = 'cal_' . $this->objectString . '_model';
 		$this->table = 'tx_cal_' . $this->objectString;
 		
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['create_location.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['create_location.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no create location template file found:</h3>' . $this->conf ['view.'] ['create_location.'] ['template'];
 		}

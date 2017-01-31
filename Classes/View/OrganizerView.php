@@ -38,7 +38,7 @@ class OrganizerView extends \TYPO3\CMS\Cal\View\BaseView {
 		$lastview = $this->controller->extendLastView ();
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['organizer.'] ['organizerTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['organizer.'] ['organizerTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no organizer template file found:</h3>' . $this->conf ['view.'] ['organizer.'] ['organizerTemplate'];
 		}

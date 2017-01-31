@@ -40,7 +40,7 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	function drawDeleteEvent(&$event, $pidList) {
 		$modelObj = $this->modelObj;
 		unset ($this->controller->piVars ['category']);
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['delete_event.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['delete_event.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no confirm event template file found:</h3>' . $this->conf ['view.'] ['delete_event.'] ['template'];
 		}

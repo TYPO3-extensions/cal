@@ -28,7 +28,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 		
 		$this->checkAction ();
 		
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['admin.'] ['adminTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['admin.'] ['adminTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no adminTemplate file found:</h3>' . $this->conf ['view.'] ['admin.'] ['adminTemplate'];
 		}

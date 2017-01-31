@@ -700,14 +700,14 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 			foreach ($match[1] as $key => $val) {
 				$offset = $match[2][$i].$match[3][$i];
 				if ($match[1][$i] == 'SMALL') {
-					$template_file = $this->cObj->fileResource($this->conf['view.']['month.']['monthSmallTemplate']);
+					$template_file = file_get_contents ($this->conf['view.']['month.']['monthSmallTemplate']);
 					$type = 'small';
 				}
 				elseif ($match[1][$i] == 'MEDIUM') {
-					$template_file = $this->cObj->fileResource($this->conf['view.']['month.']['monthMediumTemplate']);
+					$template_file = file_get_contents ($this->conf['view.']['month.']['monthMediumTemplate']);
 					$type = 'medium';
 				} else {
-					$template_file = $this->cObj->fileResource($this->conf['view.']['month.']['monthLargeTemplate']);
+					$template_file = file_get_contents ($this->conf['view.']['month.']['monthLargeTemplate']);
 					$type = 'large';
 				}
 				
@@ -730,7 +730,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 
 				// This opens up another template and parses it as well.
 				$data = $GLOBALS['TSFE']->tmpl->getFileName($data);
-				$data = (file_exists($data)) ? $this->cObj->fileResource($data) : $data;
+				$data = (file_exists($data)) ? file_get_contents ($data) : $data;
 				// This removes any unfilled tags
 				if (!$data) {
 					$page = preg_replace('!<\!-- ###'.$tag.'### start -->(.*)<\!-- ###'.$tag.'### end -->!is', '', $data);
@@ -1237,7 +1237,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 			}
 		}
 		
-		$page = $this->cObj->fileResource($this->conf['view.']['month.']['new'.ucwords($type).'MonthTemplate']);
+		$page = file_get_contents ($this->conf['view.']['month.']['new'.ucwords($type).'MonthTemplate']);
 		
 		$monthModel = \TYPO3\CMS\Cal\View\NewMonthView::getMonth($monthDate->month, $monthDate->year);
 		
@@ -1664,7 +1664,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 		if($this->conf['view.']['month.']['navigation']==0){
 			$page = str_replace('###CALENDAR_NAV###', '', $page);
 		}else{
-			$template = $this->cObj->fileResource($this->conf['view.']['month.']['horizontalSidebarTemplate']);
+			$template = file_get_contents ($this->conf['view.']['month.']['horizontalSidebarTemplate']);
 			if ($template == '') {
 				$template = '<h3>calendar: no calendar_nav template file found:</h3>'.$this->conf['view.']['month.']['horizontalSidebarTemplate'];
 			}

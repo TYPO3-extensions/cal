@@ -29,7 +29,7 @@ class IcsView extends \TYPO3\CMS\Cal\View\BaseView {
 	
 	public function drawIcsList(&$master_array, $getdate) {
 		$this->_init ($master_array);
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['ics.'] ['icsListTemplate']);
+		$page = file_get_contents ($this->conf ['view.'] ['ics.'] ['icsListTemplate']);
 		if ($page == '') {
 			// return '<h3>calendar: no icsListTemplate file found:</h3>'.$this->conf['view.']['ics.']['icsListTemplate'];
 			// falling back to default:

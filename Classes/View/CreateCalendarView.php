@@ -74,7 +74,7 @@ class CreateCalendarView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$this->serviceName = 'cal_' . $this->objectString . '_model';
 		$this->table = 'tx_cal_' . $this->objectString;
 		
-		$page = $this->cObj->fileResource ($this->conf ['view.'] ['create_calendar.'] ['template']);
+		$page = file_get_contents ($this->conf ['view.'] ['create_calendar.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no create calendar template file found:</h3>' . $this->conf ['view.'] ['create_calendar.'] ['template'];
 		}

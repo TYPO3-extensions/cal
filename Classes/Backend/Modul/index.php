@@ -34,7 +34,7 @@ $GLOBALS ['BE_USER']->modAccess ($MCONF, 1); // This checks permissions and exit
                                // DEFAULT initialization of a module [END]
 
 // Make instance:
-$SOBE = new \TYPO3\CMS\Cal\Backend\Modul\CalIndexer ();
+$SOBE = new \TYPO3\CMS\Cal\Backend\Modul\CalIndexerOld ();
 $SOBE->init ();
 
 $SOBE->main ();

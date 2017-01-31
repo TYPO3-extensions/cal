@@ -335,10 +335,10 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 				}
 				break;
 			default :
-				$content .= $this->getLanguageService()->getLL ('notice_header');
-				$content .= $this->getLanguageService()->getLL ('notice');
-				$content .= $this->getLanguageService()->getLL ('capabilities_header');
-				$content .=  $this->getLanguageService()->getLL ('capabilities');
+				$content .= '<h2>'.$this->getLanguageService()->getLL ( 'notice_header' ).'</h2>';
+				$content .= '<p>'.$this->getLanguageService()->getLL ( 'notice' ).'</p>';
+				$content .= '<h2>'.$this->getLanguageService()->getLL ( 'capabilities_header' ).'</h2>';
+				$content .= '<p>'.$this->getLanguageService()->getLL ( 'capabilities' ).'</p>';
 				break;
 		}
 		return $content;

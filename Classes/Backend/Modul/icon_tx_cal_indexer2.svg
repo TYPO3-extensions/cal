@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="linearGradient1722" y2=".49206" x2=".54694" y1=".40486" x1=".38472">
+      <stop id="stop4729" stop-color="#eefb11" offset="0"/>
+      <stop id="stop4730" stop-color="#fbcd11" offset="1"/>
+    </linearGradient>
+  </defs>
+  <rect x="8.903" y="5.414" width="484.097" height="475.849" style="fill-rule: evenodd; fill: rgb(88, 154, 224);"/>
+  <rect x="51.412" y="59.343" width="411.134" height="377.507" style="fill: rgb(255, 255, 255);" rx="12.055" ry="12.055"/>
+  <rect x="65.371" y="142.885" width="384.486" height="285.29" rx="5.076" ry="5.076" style="fill: rgb(88, 154, 224);"/>
+  <rect x="89.232" y="220.043" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="146.81" y="220.043" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="203.714" y="220.043" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="260.714" y="220.043" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="319.335" y="219.947" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="376.093" y="219.678" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="89.39" y="263.294" width="45.047" height="32.564" style="fill: rgb(86, 86, 86);"/>
+  <rect x="146.968" y="263.294" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="203.872" y="263.294" width="45.047" height="32.564" style="stroke: rgb(218, 89, 85); fill: rgb(218, 89, 85); stroke-width: 0;"/>
+  <rect x="260.872" y="263.294" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="319.493" y="263.198" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="376.251" y="262.929" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="90.024" y="309.996" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="147.602" y="309.996" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="204.506" y="309.996" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="261.506" y="309.996" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="320.127" y="309.9" width="45.047" height="32.564" style="fill: rgb(86, 86, 86);"/>
+  <rect x="376.885" y="309.631" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="90.969" y="355.852" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="148.547" y="355.852" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="205.451" y="355.852" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="260.902" y="176.792" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="319.523" y="176.696" width="45.047" height="32.564" style="fill: rgb(86, 86, 86);"/>
+  <rect x="376.281" y="176.427" width="45.047" height="32.564" style="fill: rgb(255, 255, 255);"/>
+  <rect x="90.749" y="39.04" width="16.496" height="38.702" style="fill: rgb(255, 255, 255);" rx="8.248" ry="8.248"/>
+  <rect x="401.338" y="37.841" width="16.496" height="38.702" style="fill: rgb(255, 255, 255);" rx="8.248" ry="8.248"/>
+  <rect x="247.922" y="38.916" width="16.496" height="38.702" style="fill: rgb(255, 255, 255);" rx="8.248" ry="8.248"/>
+  <g transform="matrix(4.127515, 0, 0, 3.370941, -686.798706, -512.242737)">
+    <path id="path4828" d="M 261.794 208.836 L 229.258 241.986 L 246.796 242.598 L 218.967 270.253 L 230.753 270.473 L 211.224 292.049 L 258.415 265.731 L 240.85 265.918 L 276.407 237.523 L 257.174 237.476 L 288.776 207.952 L 261.795 208.836 Z" stroke="#ff8600" stroke-width=".605" style="fill: rgb(16, 16, 16);"/>
+    <path id="path-1" d="M 257.794 207.836 L 225.258 240.986 L 242.796 241.598 L 214.967 269.253 L 226.753 269.473 L 207.224 291.049 L 254.415 264.73 L 236.85 264.918 L 272.407 236.523 L 253.174 236.476 L 284.776 206.952 L 257.795 207.836 Z" stroke="#ff8600" stroke-width=".605" fill="url(#linearGradient1722)"/>
+  </g>
+</svg>

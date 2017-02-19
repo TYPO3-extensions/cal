@@ -624,7 +624,12 @@ class Functions {
 	}
 	
 	public static function getContent($path) {
-		return file_get_contents ($GLOBALS['TSFE']->tmpl->getFileName($path));
+		if(Functions::beginsWith($path,'/')){
+			$absPath = $path;
+		} else {
+			$absPath = $GLOBALS['TSFE']->tmpl->getFileName($path);
+		}
+		return file_get_contents ($absPath);
 	}
 }
 ?>

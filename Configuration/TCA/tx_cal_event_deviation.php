@@ -97,7 +97,7 @@ $tx_cal_event_deviation = array(
 						'config' => array(
 								'type' => 'input',
 								'size' => '12',
-								'max' => '20',
+								'max' => '25',
 								'eval' => 'required,date'
 						)
 				),
@@ -117,7 +117,7 @@ $tx_cal_event_deviation = array(
 						'config' => array(
 								'type' => 'input',
 								'size' => '12',
-								'max' => '20',
+								'max' => '25',
 								'eval' => 'date'
 						)
 				),
@@ -147,7 +147,7 @@ $tx_cal_event_deviation = array(
 						'config' => array(
 								'type' => 'input',
 								'size' => '12',
-								'max' => '20',
+								'max' => '25',
 								'eval' => 'date'
 						)
 				),

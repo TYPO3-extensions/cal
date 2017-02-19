@@ -2801,9 +2801,3 @@ plugin.tx_cal_controller.lib.list {
 	enableMonthWrapper = 0
 	blub = 1
 }
-
-[compatVersion = 4.3]
-plugin.tx_cal_controller.view.event.event.attachment.20.stdWrap.if.isTrue.field = tx_cal_media
-plugin.tx_cal_controller.view.event.event.attachment.20.field = tx_cal_media
-plugin.tx_cal_controller.view.event.event.attachment.20.filePath.field = nothing
-[GLOBAL]

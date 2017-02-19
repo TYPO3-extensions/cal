@@ -156,7 +156,7 @@ class CustomTca {
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var extUrl = new ExtUrlUI('ext_url-container', 'data[" . $this->table . "][" . $this->uid . "][ext_url]', 'cal-row', '" . $this->getExtUrlRow () . "');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
-			$out [] = "TYPO3.jQuery(function(){ extUrl.load(); });";
+			$out [] = "$(function(){ extUrl.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { extUrl.load(); });";
 		}
@@ -237,7 +237,7 @@ class CustomTca {
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byMonth = new ByMonthUI('bymonth-container', 'data[" . $this->table . "][" . $this->uid . "][bymonth]', 'cal-row');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
-			$out [] = "TYPO3.jQuery(function(){ byMonth.load(); });";
+			$out [] = "$(function(){ byMonth.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { byMonth.load(); });";
 		}
@@ -397,7 +397,7 @@ class CustomTca {
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'cal-row');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
-			$out [] = "TYPO3.jQuery(function(){ byDay.load(); });";
+			$out [] = "$(function(){ byDay.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { byDay.load(); });";
 		}
@@ -420,7 +420,7 @@ class CustomTca {
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'cal-row', '" . $row . "');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
-			$out [] = "TYPO3.jQuery(function(){ byDay.load(); });";
+			$out [] = "$(function(){ byDay.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { byDay.load(); });";
 		}
@@ -437,7 +437,7 @@ class CustomTca {
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byMonthDay = new ByMonthDayUI('bymonthday-container', 'data[" . $this->table . "][" . $this->uid . "][bymonthday]', 'cal-row', '" . $row . "');";
 		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
-			$out [] = "TYPO3.jQuery(function(){ byMonthDay.load(); });";
+			$out [] = "$(function(){ byMonthDay.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { byMonthDay.load(); });";
 		}

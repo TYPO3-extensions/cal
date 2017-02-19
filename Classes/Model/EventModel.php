@@ -14,6 +14,7 @@ namespace TYPO3\CMS\Cal\Model;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Cal\Utility\Functions;
 
 /**
  * A concrete model for the calendar.
@@ -812,7 +813,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 		
 		$templatePath = $this->conf ['view.'] ['event.'] ['eventModelTemplate'];
 		
-		$page = file_get_contents($templatePath);
+		$page = Functions::getContent($templatePath);
 		
 		if ($page == '') {
 			return '<h3>calendar: no event model template file found:</h3>' . $templatePath;
@@ -910,7 +911,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 									
 									$mailer->getHeaders ()->addTextHeader ('Organization: ', $this->conf ['view.'] ['event.'] ['notify.'] ['organisation']);
 									
-									$local_template = file_get_contents ($this->conf ['view.'] ['event.'] ['notify.'] ['confirmTemplate']);
+									$local_template = Functions::getContent ($this->conf ['view.'] ['event.'] ['notify.'] ['confirmTemplate']);
 									
 									$htmlTemplate = $cObj->getSubpart ($local_template, '###HTML###');
 									$plainTemplate = $cObj->getSubpart ($local_template, '###PLAIN###');
@@ -995,7 +996,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 									));
 									$mailer->getHeaders ()->addTextHeader ('Organization: ', $this->conf ['view.'] ['event.'] ['notify.'] ['organisation']);
 									
-									$local_template = file_get_contents ($this->conf ['view.'] ['event.'] ['notify.'] ['unsubscribeConfirmTemplate']);
+									$local_template = Functions::getContent ($this->conf ['view.'] ['event.'] ['notify.'] ['unsubscribeConfirmTemplate']);
 									
 									$htmlTemplate = $cObj->getSubpart ($local_template, '###HTML###');
 									$plainTemplate = $cObj->getSubpart ($local_template, '###PLAIN###');

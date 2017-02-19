@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -38,7 +40,7 @@ class OrganizerView extends \TYPO3\CMS\Cal\View\BaseView {
 		$lastview = $this->controller->extendLastView ();
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
-		$page = file_get_contents ($this->conf ['view.'] ['organizer.'] ['organizerTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['organizer.'] ['organizerTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no organizer template file found:</h3>' . $this->conf ['view.'] ['organizer.'] ['organizerTemplate'];
 		}

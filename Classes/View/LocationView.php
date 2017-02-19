@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -37,7 +39,7 @@ class LocationView extends \TYPO3\CMS\Cal\View\BaseView {
 		$lastview = $this->controller->extendLastView ();
 		$uid = $this->conf ['uid'];
 		$type = $this->conf ['type'];
-		$page = file_get_contents ($this->conf ['view.'] ['location.'] ['locationTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['location.'] ['locationTemplate']);
 		if ($page == '') {
 			return $this->createErrorMessage ('No location template file found at: >' . $this->conf ['view.'] ['location.'] ['locationTemplate'] . '<.', 'Please make sure the path is correct and that you included the static template and double-check the path using the Typoscript Object Browser.');
 		}

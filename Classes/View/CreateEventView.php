@@ -14,6 +14,7 @@ namespace TYPO3\CMS\Cal\View;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Cal\Utility\Functions;
 
 /**
  * A service which renders a form to create / edit a phpicalendar event.
@@ -123,13 +124,13 @@ class CreateEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$page = '';
 		if ($this->conf ['view.'] ['enableAjax'] && $this->controller->piVars ['pid']) {
 			$path = $this->conf ['view.'] ['create_event.'] ['ajaxTemplate'];
-			$page = file_get_contents ($path);
+			$page = Functions::getContent ($path);
 			$this->conf ['noWrapInBaseClass'] = 1;
 			header ("Content-Type: application/xml");
 			header ("Accept-Charset: UTF-8");
 		} else {
 			$path = $this->conf ['view.'] ['create_event.'] ['template'];
-			$page = file_get_contents ($path);
+			$page = Functions::getContent ($path);
 		}
 		
 		if ($page == '') {

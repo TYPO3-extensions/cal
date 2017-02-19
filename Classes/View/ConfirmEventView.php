@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A service which renders a form to confirm the phpicalendar event create/edit.
  *
@@ -42,7 +44,7 @@ class ConfirmEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		
 		/* @fixme		Temporarily reverted to using piVars rather than conf */
 		// unset($this->controller->piVars['category']);
-		$page = file_get_contents ($this->conf ['view.'] ['confirm_event.'] ['template']);
+		$page = Functions::getContent ($this->conf ['view.'] ['confirm_event.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no confirm event template file found:</h3>' . $this->conf ['view.'] ['confirm_event.'] ['template'];
 		}

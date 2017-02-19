@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\Model;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete model for the calendar.
  *
@@ -55,7 +57,7 @@ class TodoRecModel extends \TYPO3\CMS\Cal\Model\EventRecModel {
 		$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 		$modelTemplate = $confArr ['todoSubtype'] == 'event' ? 'todoInlineModelTemplate' : 'todoSeparateModelTemplate';
 		
-		$page = file_get_contents ($this->parentEvent->conf ['view.'] ['todo.'] [$modelTemplate]);
+		$page = Functions::getContent ($this->parentEvent->conf ['view.'] ['todo.'] [$modelTemplate]);
 		if ($page == '') {
 			return '<h3>calendar: no todo model template file found:</h3>' . $this->parentEvent->conf ['view.'] ['todo.'] [$modelTemplate];
 		}

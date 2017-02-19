@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -29,7 +31,7 @@ class IcsView extends \TYPO3\CMS\Cal\View\BaseView {
 	
 	public function drawIcsList(&$master_array, $getdate) {
 		$this->_init ($master_array);
-		$page = file_get_contents ($this->conf ['view.'] ['ics.'] ['icsListTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['ics.'] ['icsListTemplate']);
 		if ($page == '') {
 			// return '<h3>calendar: no icsListTemplate file found:</h3>'.$this->conf['view.']['ics.']['icsListTemplate'];
 			// falling back to default:

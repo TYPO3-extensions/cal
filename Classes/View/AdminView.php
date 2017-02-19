@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -28,7 +30,7 @@ class AdminView extends \TYPO3\CMS\Cal\View\BaseView {
 		
 		$this->checkAction ();
 		
-		$page = file_get_contents ($this->conf ['view.'] ['admin.'] ['adminTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['admin.'] ['adminTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no adminTemplate file found:</h3>' . $this->conf ['view.'] ['admin.'] ['adminTemplate'];
 		}

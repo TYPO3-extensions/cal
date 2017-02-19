@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -42,9 +44,9 @@ class ListView extends \TYPO3\CMS\Cal\View\BaseView {
 		if ($page == '') {
 			$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($confArr ['useTeaser']) {
-				$page = file_get_contents ($this->conf ['view.'] ['list.'] ['listWithTeaserTemplate']);
+				$page = Functions::getContent ($this->conf ['view.'] ['list.'] ['listWithTeaserTemplate']);
 			} else {
-				$page = file_get_contents ($this->conf ['view.'] ['list.'] ['listTemplate']);
+				$page = Functions::getContent ($this->conf ['view.'] ['list.'] ['listTemplate']);
 			}
 			if ($page == '') {
 				$this->error = true;
@@ -63,9 +65,9 @@ class ListView extends \TYPO3\CMS\Cal\View\BaseView {
 		if ($listTemplate == '') {
 			$confArr = unserialize ($GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal']);
 			if ($confArr ['useTeaser']) {
-				$page = file_get_contents ($this->conf ['view.'] ['list.'] ['listWithTeaserTemplate']);
+				$page = Functions::getContent ($this->conf ['view.'] ['list.'] ['listWithTeaserTemplate']);
 			} else {
-				$page = file_get_contents ($this->conf ['view.'] ['list.'] ['listTemplate']);
+				$page = Functions::getContent ($this->conf ['view.'] ['list.'] ['listTemplate']);
 			}
 			if ($page == '') {
 				$this->error = true;

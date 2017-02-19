@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  *
  * @author Mario Matzulla <mario(at)matzullas.de>
@@ -39,7 +41,7 @@ class SubscriptionManagerView extends \TYPO3\CMS\Cal\View\BaseView {
 		$rems ['###SUBSCRIPTION_CONTAINER###'] = '';
 		
 		/* Get the subscription manager template */
-		$page = file_get_contents ($this->conf ['view.'] ['event.'] ['subscriptionManagerTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['event.'] ['subscriptionManagerTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no event template file found:</h3>' . $this->conf ['view.'] ['event.'] ['subscriptionManagerTemplate'];
 		}

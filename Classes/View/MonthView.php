@@ -1,5 +1,6 @@
 <?php
 namespace TYPO3\CMS\Cal\View;
+
 /**
  * This file is part of the TYPO3 extension Calendar Base (cal).
  *
@@ -12,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  *
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
+
+use TYPO3\CMS\Cal\Utility\Functions;
 
 /**
  * A concrete view for the calendar.
@@ -42,7 +45,7 @@ class MonthView extends \TYPO3\CMS\Cal\View\BaseView {
 		if ($this->conf ['view.'] ['month.'] ['monthMakeMiniCal']) {
 			$incFile = $GLOBALS['TSFE']->tmpl->getFileName($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
 			if(file_exists (PATH_site . $incFile )) {
-				$page = file_get_contents ($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
+				$page = Functions::getContent ($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
 			}
 			
 			if ($page == '') {
@@ -52,7 +55,7 @@ class MonthView extends \TYPO3\CMS\Cal\View\BaseView {
 				}
 			}
 		} else {
-			$page = file_get_contents ($this->conf ['view.'] ['month.'] ['monthTemplate']);
+			$page = Functions::getContent ($this->conf ['view.'] ['month.'] ['monthTemplate']);
 			if ($page == '') {
 				return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['month.'] ['monthTemplate'] . '<br />Please check your template record and add both cal items at "include static (from extension)"';
 			}

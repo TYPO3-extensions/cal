@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -35,7 +37,7 @@ class YearView extends \TYPO3\CMS\Cal\View\MonthView {
 	public function drawYear(&$master_array, $getdate) {
 		$this->_init ($master_array);
 		
-		$page = file_get_contents ($this->conf ['view.'] ['year.'] ['yearTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['year.'] ['yearTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['year.'] ['yearTemplate'] . '<br />Please check your template record and add both cal items at "include static (from extension)"';
 		}

@@ -622,5 +622,9 @@ class Functions {
 		$typoScriptService = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Service\\TypoScriptService');
 		return $typoScriptService->convertTypoScriptArrayToPlainArray ($conf);
 	}
+	
+	public static function getContent($path) {
+		return file_get_contents ($GLOBALS['TSFE']->tmpl->getFileName($path));
+	}
 }
 ?>

@@ -13,6 +13,7 @@ namespace TYPO3\CMS\Cal\View\Module;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 use TYPO3\CMS\Cal\Service\AbstractModul;
+use TYPO3\CMS\Cal\Utility\Functions;
 
 /**
  *
@@ -35,7 +36,7 @@ class LocationLoader extends AbstractModul {
 			$useLocationStructure = ($moduleCaller->confArr ['useLocationStructure'] ? $moduleCaller->confArr ['useLocationStructure'] : 'tx_cal_location');
 			$location = $this->modelObj->findLocation ( $moduleCaller->getLocationId (), $useLocationStructure );
 			if (is_object ( $location )) {
-				$page = file_get_contents ( $moduleCaller->conf ['module.'] ['locationloader.'] ['template'] );
+				$page = Functions::getContent ( $moduleCaller->conf ['module.'] ['locationloader.'] ['template'] );
 				if ($page == '') {
 					return '<h3>module locationloader: no template file found:</h3>' . $moduleCaller->conf ['module.'] ['locationloader.'] ['template'];
 				}

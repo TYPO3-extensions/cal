@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -41,27 +43,27 @@ class RssView extends \TYPO3\CMS\Cal\View\BaseView {
 		switch ($this->conf ['view.'] ['rss.'] ['xmlFormat']) {
 			case 'rss091' :
 				$templateName = 'TEMPLATE_RSS091';
-				$this->templateCode = file_get_contents ($this->conf ['view.'] ['rss.'] ['rss091_tmplFile']);
+				$this->templateCode = Functions::getContent ($this->conf ['view.'] ['rss.'] ['rss091_tmplFile']);
 				break;
 			
 			case 'rss2' :
 				$templateName = 'TEMPLATE_RSS2';
-				$this->templateCode = file_get_contents ($this->conf ['view.'] ['rss.'] ['rss2_tmplFile']);
+				$this->templateCode = Functions::getContent ($this->conf ['view.'] ['rss.'] ['rss2_tmplFile']);
 				break;
 			
 			case 'rdf' :
 				$templateName = 'TEMPLATE_RDF';
-				$this->templateCode = file_get_contents ($this->conf ['view.'] ['rss.'] ['rdf_tmplFile']);
+				$this->templateCode = Functions::getContent ($this->conf ['view.'] ['rss.'] ['rdf_tmplFile']);
 				break;
 			
 			case 'atom03' :
 				$templateName = 'TEMPLATE_ATOM03';
-				$this->templateCode = file_get_contents ($this->conf ['view.'] ['rss.'] ['atom03_tmplFile']);
+				$this->templateCode = Functions::getContent ($this->conf ['view.'] ['rss.'] ['atom03_tmplFile']);
 				break;
 			
 			case 'atom1' :
 				$templateName = 'TEMPLATE_ATOM1';
-				$this->templateCode = file_get_contents ($this->conf ['view.'] ['rss.'] ['atom1_tmplFile']);
+				$this->templateCode = Functions::getContent ($this->conf ['view.'] ['rss.'] ['atom1_tmplFile']);
 				break;
 		}
 		

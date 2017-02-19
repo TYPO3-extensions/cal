@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A concrete view for the calendar.
  * It is based on the phpicalendar project
@@ -41,7 +43,7 @@ class EventView extends \TYPO3\CMS\Cal\View\BaseView {
 			return $this->renderWithFluid ($event);
 		}
 		
-		$page = file_get_contents ($this->conf ['view.'] ['event.'] ['eventTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['event.'] ['eventTemplate']);
 		if ($page == '') {
 			return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['event.'] ['eventTemplate'];
 		}

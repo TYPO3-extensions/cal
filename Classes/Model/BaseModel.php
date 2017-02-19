@@ -14,6 +14,7 @@ namespace TYPO3\CMS\Cal\Model;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Cal\Utility\Functions;
 
 /**
  *
@@ -621,7 +622,7 @@ abstract class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 	public function fillTemplate($subpartMarker) {
 		$cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
 		
-		$page = file_get_contents ($this->templatePath);
+		$page = Functions::getContent ($this->templatePath);
 		
 		if ($page == '') {
 			return \TYPO3\CMS\Cal\Utility\Functions::createErrorMessage ('No ' . $this->objectType . ' template file found at: >' . $this->templatePath . '<.', 'Please make sure the path is correct and that you included the static template and double-check the path using the Typoscript Object Browser.');

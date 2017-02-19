@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A service which renders a form to confirm the category edit/create.
  *
@@ -37,7 +39,7 @@ class ConfirmCategoryView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$this->objectString = 'category';
 		$this->isConfirm = true;
 		unset ($this->controller->piVars ['formCheck']);
-		$page = file_get_contents ($this->conf ['view.'] ['confirm_category.'] ['template']);
+		$page = Functions::getContent ($this->conf ['view.'] ['confirm_category.'] ['template']);
 		if ($page == '') {
 			return '<h3>category: no create category template file found:</h3>' . $this->conf ['view.'] ['confirm_category.'] ['template'];
 		}

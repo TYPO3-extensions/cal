@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A service which renders a form to create / edit a phpicalendar event.
  *
@@ -40,7 +42,7 @@ class DeleteCalendarView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 	 * @return string HTML output.
 	 */
 	public function drawDeleteCalendar(&$calendar) {
-		$page = file_get_contents ($this->conf ['view.'] ['delete_calendar.'] ['template']);
+		$page = Functions::getContent ($this->conf ['view.'] ['delete_calendar.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no confirm calendar template file found:</h3>' . $this->conf ['view.'] ['delete_calendar.'] ['template'];
 		}

@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A service which renders a form to create / edit a phpicalendar event.
  *
@@ -74,7 +76,7 @@ class CreateCalendarView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$this->serviceName = 'cal_' . $this->objectString . '_model';
 		$this->table = 'tx_cal_' . $this->objectString;
 		
-		$page = file_get_contents ($this->conf ['view.'] ['create_calendar.'] ['template']);
+		$page = Functions::getContent ($this->conf ['view.'] ['create_calendar.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no create calendar template file found:</h3>' . $this->conf ['view.'] ['create_calendar.'] ['template'];
 		}

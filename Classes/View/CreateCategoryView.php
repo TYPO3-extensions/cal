@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A service which renders a form to create / edit a category.
  *
@@ -65,7 +67,7 @@ class CreateCategoryView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$this->serviceName = 'cal_' . $this->objectString . '_model';
 		$this->table = 'tx_cal_' . $this->objectString;
 		
-		$page = file_get_contents ($this->conf ['view.'] ['create_category.'] ['template']);
+		$page = Functions::getContent ($this->conf ['view.'] ['create_category.'] ['template']);
 		if ($page == '') {
 			return '<h3>category: no create category template file found:</h3>' . $this->conf ['view.'] ['create_category.'] ['template'];
 		}

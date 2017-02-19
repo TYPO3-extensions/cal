@@ -14,6 +14,7 @@ namespace TYPO3\CMS\Cal\View;
  */
 
 use TYPO3\CMS\Cal\Model\Pear\Date\Calc;
+use TYPO3\CMS\Cal\Utility\Functions;
 
 /**
  * A concrete view for the calendar.
@@ -57,8 +58,8 @@ class DayView extends \TYPO3\CMS\Cal\View\BaseView {
 				}
 			}
 		}
-		$subpart = file_get_contents ($this->conf ['view.'] ['day.'] ['newDayTemplate']);
-		$page = file_get_contents ($this->conf ['view.'] ['day.'] ['dayTemplate']);
+		$subpart = Functions::getContent ($this->conf ['view.'] ['day.'] ['newDayTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['day.'] ['dayTemplate']);
 		$page = str_replace ('###DAY###', $dayModel->render ($subpart), $page);
 		$rems = Array ();
 		
@@ -80,7 +81,7 @@ class DayView extends \TYPO3\CMS\Cal\View\BaseView {
 			return $this->newDrawDay ($master_array, $getdate);
 		}
 		
-		$page = file_get_contents ($this->conf ['view.'] ['day.'] ['dayTemplate']);
+		$page = Functions::getContent ($this->conf ['view.'] ['day.'] ['dayTemplate']);
 		if ($page == '') {
 			return "<h3>day: no template file found:</h3>" . $this->conf ['view.'] ['day.'] ['dayTemplate'] . "<br />Please check your template record and add both cal items at 'include static (from extension)'";
 		}
@@ -145,7 +146,7 @@ class DayView extends \TYPO3\CMS\Cal\View\BaseView {
 		
 		$display_date = $this->cObj->cObjGetSingle ($this->conf ['view.'] ['day.'] ['titleWrap'], $this->conf ['view.'] ['day.'] ['titleWrap.'], $TSkey = '__');
 		
-		$dayTemplate = file_get_contents ($this->conf ['view.'] ['day.'] ['dayTemplate']);
+		$dayTemplate = Functions::getContent ($this->conf ['view.'] ['day.'] ['dayTemplate']);
 		if ($dayTemplate == '') {
 			return '<h3>calendar: no template file found:</h3>' . $this->conf ['view.'] ['day.'] ['dayTemplate'] . '<br />Please check your template record and add both cal items at "include static (from extension)"';
 		}

@@ -14,6 +14,7 @@ namespace TYPO3\CMS\Cal\View\Module;
  */
 
 use TYPO3\CMS\Cal\Service\AbstractModul;
+use TYPO3\CMS\Cal\Utility\Functions;
 
 /**
  *
@@ -37,7 +38,7 @@ class OrganizerLoader extends AbstractModul {
 			$organizer = $this->modelObj->findOrganizer ( $moduleCaller->getOrganizerId (), $useOrganizerStructure );
 			
 			if (is_object ( $organizer )) {
-				$page = file_get_contents ( $moduleCaller->conf ['module.'] ['organizerloader.'] ['template'] );
+				$page = Functions::getContent ( $moduleCaller->conf ['module.'] ['organizerloader.'] ['template'] );
 				if ($page == '') {
 					return '<h3>module organizerloader: no template file found:</h3>' . $moduleCaller->conf ['module.'] ['organizerloader.'] ['template'];
 				}

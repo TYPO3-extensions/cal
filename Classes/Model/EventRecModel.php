@@ -1,5 +1,6 @@
 <?php
 namespace TYPO3\CMS\Cal\Model;
+
 /**
  * This file is part of the TYPO3 extension Calendar Base (cal).
  *
@@ -12,6 +13,8 @@ namespace TYPO3\CMS\Cal\Model;
  *
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
+
+use TYPO3\CMS\Cal\Utility\Functions;
 
 /**
  * A concrete model for the calendar.
@@ -169,7 +172,7 @@ class EventRecModel extends \TYPO3\CMS\Cal\Model\Model {
 		
 		$templatePath = $this->parentEvent->conf ['view.'] ['event.'] ['eventModelTemplate'];
 		
-		$page = file_get_contents ($templatePath);
+		$page = Functions::getContent ($templatePath);
 		
 		if ($page == '') {
 			return '<h3>calendar: no event model template file found:</h3>' . $templatePath;

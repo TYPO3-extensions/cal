@@ -13,6 +13,8 @@ namespace TYPO3\CMS\Cal\View;
  * The TYPO3 extension Calendar Base (cal) project - inspiring people to share!
  */
 
+use TYPO3\CMS\Cal\Utility\Functions;
+
 /**
  * A service which renders a form to create / edit an event location / organizer.
  *
@@ -68,7 +70,7 @@ class CreateLocationOrganizerView extends \TYPO3\CMS\Cal\View\FeEditingBaseView 
 		$this->serviceName = 'cal_' . $this->objectString . '_model';
 		$this->table = 'tx_cal_' . $this->objectString;
 		
-		$page = file_get_contents ($this->conf ['view.'] ['create_location.'] ['template']);
+		$page = Functions::getContent ($this->conf ['view.'] ['create_location.'] ['template']);
 		if ($page == '') {
 			return '<h3>calendar: no create location template file found:</h3>' . $this->conf ['view.'] ['create_location.'] ['template'];
 		}

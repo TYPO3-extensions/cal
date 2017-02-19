@@ -8,35 +8,35 @@ function ExtUrlUI (containerID, storageID, rowClass, rowHTML) {
 ExtUrlUI.prototype = {
 						
 	addUrl: function(defaultNote, defaultUrl){
-		var container = TYPO3.jQuery("#"+escapeRegExp(this.containerID));
+		var container = $("#"+escapeRegExp(this.containerID));
 		
 		container.append(this.rowHTML);
 		
 		if(defaultUrl) {
-			TYPO3.jQuery("#"+escapeRegExp(this.containerID) + ' input[type="text"]').last().val(defaultUrl);
+			$("#"+escapeRegExp(this.containerID) + ' input[type="text"]').last().val(defaultUrl);
 		}
 		if(defaultNote) {
-			TYPO3.jQuery("#"+escapeRegExp(this.containerID) + ' input[type="text"]').last().prev().val(defaultNote);
+			$("#"+escapeRegExp(this.containerID) + ' input[type="text"]').last().prev().val(defaultNote);
 		}
 		
 		this.save();
 	},
 	
 	removeUrl: function(icon) {
-		TYPO3.jQuery(icon).parent().remove();
+		$(icon).parent().remove();
 		this.save();
 	},
 	
 	save: function() {
-		storage = TYPO3.jQuery("#"+escapeRegExp(this.storageID));
+		storage = $("#"+escapeRegExp(this.storageID));
 		storage.val('');
 		
-		storageNotes = TYPO3.jQuery("#"+escapeRegExp(this.storageID.substr(0,this.storageID.length-1)+"_notes]"));
+		storageNotes = $("#"+escapeRegExp(this.storageID.substr(0,this.storageID.length-1)+"_notes]"));
 		storageNotes.val('');
 		
-		var container = TYPO3.jQuery("#"+escapeRegExp(this.containerID));
+		var container = $("#"+escapeRegExp(this.containerID));
 		container.find('div.' + this.rowClass).each( function(index, div) {
-			TYPO3.jQuery(div).find('input[type="text"]').each( function(index, input) {
+			$(div).find('input[type="text"]').each( function(index, input) {
 				if(input.className=="exturl") {
 					if(storage.value) {
 						storage.val(storage.val() + '\n');
@@ -54,9 +54,9 @@ ExtUrlUI.prototype = {
 	},
 	
 	load: function() {
-		initialUrlValue = TYPO3.jQuery("#"+escapeRegExp(this.storageID)).val();
+		initialUrlValue = $("#"+escapeRegExp(this.storageID)).val();
 		urlArray = initialUrlValue.split('\n');
-		initialNoteValue = TYPO3.jQuery("#"+escapeRegExp(this.storageID.substr(0,this.storageID.length-1)+"_notes]")).val();
+		initialNoteValue = $("#"+escapeRegExp(this.storageID.substr(0,this.storageID.length-1)+"_notes]")).val();
 		noteArray = initialNoteValue.split('\n');
 		var obj = this;
 		

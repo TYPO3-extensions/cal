@@ -97,13 +97,11 @@ $tx_cal_location = array(
 		),
 		'country_zone' => array(
 			'exclude' => 1,
-			'displayCond' => 'EXT:static_info_tables:LOADED:true',
 			'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.countryzone'
 			// Configuration is done depending on the version @see end of this file
 		),
 		'country' => array(
 			'exclude' => 1,
-			'displayCond' => 'EXT:static_info_tables:LOADED:true',
 			'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.country'
 			// Configuration is done depending on the version @see end of this file
 		),

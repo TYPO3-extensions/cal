@@ -166,7 +166,7 @@
 			<label index="tx_cal_calendar.ext_url_url">URL</label>
 			<label index="tx_cal_calendar.ext_url_note">Note</label>
 			<label index="tx_cal_calendar.ics_file">ICS File</label>
-			<label index="tx_cal_calendar.refresh">Refresh Interval (Minutes)</label>
+			<label index="tx_cal_calendar.refresh">Refresh Interval (Minutes)  (scheduler needed)</label>
 			<label index="tx_cal_calendar.owner">Owner</label>
 			<label index="tx_cal_calendar.activate_fnb">Enable free and busy view</label>
 			<label index="tx_cal_calendar.fb_users_groups">Limit the free and busy view to these users and/or
@@ -174,9 +174,9 @@
 			<label index="tx_cal_calendar.createNew">create a new calendar</label>
 			<label index="tx_cal_calendar.edit">edit selected calendar</label>
 			<label index="tx_cal_calendar.nearby">Show only events within a certain distance of a
-				user</label>
+				user (wec_map needed)</label>
 			<label index="tx_cal_calendar_private">The users private calendar</label>
-			<label index="tx_cal_calendar.schedulerId">Scheduler ID</label>
+			<label index="tx_cal_calendar.schedulerId">Scheduler ID  (scheduler needed)</label>
 			<label index="tx_cal_category">Calendar Category</label>
 			<label index="tx_cal_category.title">Category title</label>
 			<label index="tx_cal_category.headerstyle">Header style</label>
@@ -199,8 +199,8 @@
 			<label index="tx_cal_organizer.street">Street</label>
 			<label index="tx_cal_organizer.zip">Zip</label>
 			<label index="tx_cal_organizer.city">City</label>
-			<label index="tx_cal_organizer.country">Country</label>
-			<label index="tx_cal_organizer.countryzone">State/Province</label>
+			<label index="tx_cal_organizer.country">Country (static_info_tables needed)</label>
+			<label index="tx_cal_organizer.countryzone">State/Province (static_info_tables needed)</label>
 			<label index="tx_cal_organizer.phone">Phone</label>
 			<label index="tx_cal_organizer.fax">Facsimile</label>
 			<label index="tx_cal_organizer.email">E-mail</label>
@@ -218,8 +218,8 @@
 			<label index="tx_cal_location.street">Street</label>
 			<label index="tx_cal_location.zip">Zip</label>
 			<label index="tx_cal_location.city">City</label>
-			<label index="tx_cal_location.country">Country</label>
-			<label index="tx_cal_location.countryzone">State/Province</label>
+			<label index="tx_cal_location.country">Country (static_info_tables needed)</label>
+			<label index="tx_cal_location.countryzone">State/Province (static_info_tables needed)</label>
 			<label index="tx_cal_location.phone">Phone</label>
 			<label index="tx_cal_location.fax">Facsimile</label>
 			<label index="tx_cal_location.email">E-mail</label>
@@ -570,8 +570,8 @@
 			<label index="tx_cal_organizer.street">Straße</label>
 			<label index="tx_cal_organizer.zip">PLZ</label>
 			<label index="tx_cal_organizer.city">Stadt</label>
-			<label index="tx_cal_organizer.country">Staat</label>
-			<label index="tx_cal_organizer.countryzone">Bundesland</label>
+			<label index="tx_cal_organizer.country">Staat (static_info_tables benötigt)</label>
+			<label index="tx_cal_organizer.countryzone">Bundesland (static_info_tables benötigt)</label>
 			<label index="tx_cal_organizer.phone">Tel.</label>
 			<label index="tx_cal_organizer.fax">Fax</label>
 			<label index="tx_cal_organizer.email">EMail</label>
@@ -589,8 +589,8 @@
 			<label index="tx_cal_location.street">Straße</label>
 			<label index="tx_cal_location.zip">PLZ</label>
 			<label index="tx_cal_location.city">Stadt</label>
-			<label index="tx_cal_location.country">Land</label>
-			<label index="tx_cal_location.countryzone">Staat/Bundesland</label>
+			<label index="tx_cal_location.country">Land (static_info_tables benötigt)</label>
+			<label index="tx_cal_location.countryzone">Staat/Bundesland (static_info_tables benötigt)</label>
 			<label index="tx_cal_location.phone">Telefon</label>
 			<label index="tx_cal_location.fax">Fax</label>
 			<label index="tx_cal_location.email">eMail</label>

@@ -52,7 +52,7 @@
 			<label index="cal.pi_flexform.noSubscription">Disabled</label>
 			<label index="cal.pi_flexform.allowSubscribe">Allow anyone to subscribe</label>
 			<label index="cal.pi_flexform.subscribeFeUser">Only allow frontend users to subscribe</label>
-			<label index="cal.pi_flexform.subscribeWithCaptcha">Force captcha to subscribe</label>
+			<label index="cal.pi_flexform.subscribeWithCaptcha">Force captcha to subscribe (captcha needed)</label>
 			<label index="cal.pi_flexform.sheetCategory">Filters</label>
 			<label index="cal.pi_flexform.category_selection">Category selection</label>
 			<label index="cal.pi_flexform.calendar_selection">Calendar selection</label>
@@ -153,7 +153,7 @@
 			<label index="cal.pi_flexform.showTomorrowEvents">Show tomorrows events</label>
 			<label index="cal.pi_flexform.sheetTSView">Typoscript</label>
 			<label index="cal.pi_flexform.tsconfig">plugin.tx_cal_controller:</label>
-			<label index="cal.pi_flexform.calendarDistance">Distance (Km) for events in a nearby calendar</label>
+			<label index="cal.pi_flexform.calendarDistance">Distance (Km) for events in a nearby calendar (wec_map needed)</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="cal.pi_flexform.sheetGeneral">Allgemeine Einstellungen</label>

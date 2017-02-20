@@ -206,7 +206,6 @@
 						<TCEforms>
 							<exclude>1</exclude>
 							<label>LLL:EXT:cal/Resources/Private/Language/locallang_tca.xml:cal.pi_flexform.subscribeWithCaptcha</label>
-							<displayCond>EXT:captcha:LOADED:true</displayCond>
 							<config>
 								<type>check</type>
 							</config>
@@ -240,7 +239,6 @@
 					<calendarDistance>
 						<TCEforms>
 							<label>LLL:EXT:cal/Resources/Private/Language/locallang_tca.xml:cal.pi_flexform.calendarDistance</label>
-							<displayCond>EXT:wec_map:LOADED:true</displayCond>
 							<config>
 								<type>input</type>
 								<default>50</default>

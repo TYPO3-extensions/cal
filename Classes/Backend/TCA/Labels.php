@@ -115,9 +115,24 @@ class Labels {
 		$label = $GLOBALS ['LANG']->sl ('LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.deviation') . ': ';
 		
 		if ($rec ['orig_start_date']) {
-			$origStartDate = new \TYPO3\CMS\Cal\Model\CalDate ($rec ['orig_start_date']);
-			$origStartDate->setTZbyId ('UTC');
-			$label .= $origStartDate->format ('%Y-%m-%d');
+			
+			$dateObj = new \TYPO3\CMS\Cal\Model\CalDate ($rec ['orig_start_date'] . '000000');
+			$dateObj->setTZbyId ('UTC');
+			
+			$format = str_replace (array (
+					'd',
+					'm',
+					'y',
+					'Y'
+			), array (
+					'%d',
+					'%m',
+					'%y',
+					'%Y'
+			), $GLOBALS ['TYPO3_CONF_VARS'] ['SYS'] ['ddmmyy']);
+			
+			$datetime = $dateObj->format ($format);
+			$label .= $datetime;
 		}
 		
 		if ($rec ['orig_start_time']) {

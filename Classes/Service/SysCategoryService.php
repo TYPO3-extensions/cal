@@ -161,7 +161,7 @@ class SysCategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 	
 	public function getCategorySearchString($pidList, $includePublic) {
 		if ($this->conf ['category'] != '') {
-			$categorySearchString .= ' AND sys_category_record_mm.uid_local IN (' . $this->conf ['category'] . ')';
+			$categorySearchString .= ' AND sys_category_record_mm.tablenames = "tx_cal_event" AND sys_category_record_mm.uid_local IN (' . $this->conf ['category'] . ')';
 		}
 		
 		// Filter events by categories

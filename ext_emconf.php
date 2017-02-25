@@ -30,7 +30,9 @@ $EM_CONF [$_EXTKEY] = array (
 						'typo3' => '6.1.0-8.9.99' 
 				),
 				'suggests' => array (
-						'css_styled_content' => '6.1.0-8.9.99'
+						'css_styled_content' => '6.1.0-8.9.99',
+						'wec_map' => '',
+						'tt_address' => ''
 				)
 		)
 );

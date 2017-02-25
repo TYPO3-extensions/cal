@@ -631,5 +631,14 @@ class Functions {
 		}
 		return file_get_contents ($absPath);
 	}
+	
+	/**
+	 * 
+	 * @param array $conf
+	 * @param array $eventArray
+	 */
+	public static function getIcsUid($conf, $eventArray){
+		return $conf ['view.'] ['ics.'] ['eventUidPrefix'] . '_' . $eventArray ['calendar_id'] . '_' . $eventArray ['uid'];
+	}
 }
 ?>

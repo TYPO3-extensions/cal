@@ -1712,7 +1712,8 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 		if ($this->row ['icsUid'] != '') {
 			$sims ['###GUID###'] = $this->row ['icsUid'];
 		} else {
-			$sims ['###GUID###'] = $this->conf ['view.'] ['ics.'] ['eventUidPrefix'] . '_' . $this->getCalendarUid () . '_' . $this->getUid ();
+			$eventArray = array('calendar_id' => $this->getCalendarUid (), 'uid' => $this->getUid ());
+			$sims ['###GUID###'] = \TYPO3\CMS\Cal\Utility\Functions::getIcsUid($this->conf, $eventArray);
 		}
 	}
 	function getDtstampMarker(& $template, & $sims, & $rems, & $wrapped, $view) {

@@ -102,7 +102,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	
 	public function getCategoryIdsMarker(&$page, &$sims, &$rems, $view) {
 		$sims ['###CATEGORY_IDS###'] = '<option value="">' . $this->controller->pi_getLL ('l_all_category') . '</option>';
-		$catArrayArray = $this->modelObj->findAllCategories ('cal_category_model', 'tx_cal_category', $this->conf ['pidList']);
+		$catArrayArray = $this->modelObj->findAllCategories ('cal_category_model', $this->confArr ['categoryService'], $this->conf ['pidList']);
 		
 		$rememberUid = Array ();
 		$ids = Array ();

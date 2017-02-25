@@ -346,7 +346,9 @@
 			<label index="l_false">False</label>
 			<label index="l_more">[more]</label>
 			<label index="l_event_more">[more]</label>
-			<label index="l_all">All</label>
+			<label index="l_all_category">All</label>
+			<label index="l_all_location">All</label>
+			<label index="l_all_organizer">All</label>
 			<label index="l_global">Global</label>
 			<label index="l_edit_event">Edit event</label>
 			<label index="l_create_event">Create event</label>
@@ -978,7 +980,9 @@
 			<label index="l_false">falsch</label>
 			<label index="l_more">[mehr]</label>
 			<label index="l_event_more">[mehr]</label>
-			<label index="l_all">alle</label>
+			<label index="l_all_category">alle</label>
+			<label index="l_all_location">alle</label>
+			<label index="l_all_organizer">alle</label>
 			<label index="l_global">Allgemein</label>
 			<label index="l_edit_event">Event bearbeiten</label>
 			<label index="l_create_event">Event erstellen</label>

@@ -101,7 +101,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	}
 	
 	public function getCategoryIdsMarker(&$page, &$sims, &$rems, $view) {
-		$sims ['###CATEGORY_IDS###'] = '<option value="">' . $this->controller->pi_getLL ('l_all') . '</option>';
+		$sims ['###CATEGORY_IDS###'] = '<option value="">' . $this->controller->pi_getLL ('l_all_category') . '</option>';
 		$catArrayArray = $this->modelObj->findAllCategories ('cal_category_model', 'tx_cal_category', $this->conf ['pidList']);
 		
 		$rememberUid = Array ();
@@ -126,7 +126,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	}
 	
 	public function getLocationIdsMarker(&$page, &$sims, &$rems, $view) {
-		$sims ['###LOCATION_IDS###'] = '<option  value="">' . $this->controller->pi_getLL ('l_all') . '</option>';
+		$sims ['###LOCATION_IDS###'] = '<option  value="">' . $this->controller->pi_getLL ('l_all_location') . '</option>';
 		$locationArray = $this->modelObj->findAllLocations ($this->extConf ['useLocationStructure'] ? $this->extConf ['useLocationStructure'] : 'tx_cal_location', $this->conf ['pidList']);
 		
 		$locationIdArray = Array ();
@@ -146,7 +146,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	}
 	
 	public function getOrganizerIdsMarker(&$page, &$sims, &$rems, $view) {
-		$sims ['###ORGANIZER_IDS###'] = '<option  value="">' . $this->controller->pi_getLL ('l_all') . '</option>';
+		$sims ['###ORGANIZER_IDS###'] = '<option  value="">' . $this->controller->pi_getLL ('l_all_organizer') . '</option>';
 		$organizerArray = $this->modelObj->findAllOrganizer ($this->extConf ['useOrganizerStructure'] ? $this->extConf ['useOrganizerStructure'] : 'tx_cal_organizer', $this->conf ['pidList']);
 		
 		$organizerIdArray = Array ();

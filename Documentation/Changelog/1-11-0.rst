@@ -1,0 +1,42 @@
+
+1.11.0 - TYPO3 LTS 6.2, 7, LTS 8
+--------------------------------
+
+::
+
+    * Bug #73099        - Categorytree lists deleted cal_categories
+    * Bug #73466        - ICS view/file generation (seems) broken -> make function static
+    * Bug #76113        - PHP Warning for Location::getEditLinkMarker should be compatible with LocationModel::getEditLinkMarker
+    * Bug #76087        - Extra Organizer Link
+    * Bug #76115        - Call to undefined method TYPO3\CMS\Core\Page\PageRenderer::setBackPath()
+    * Bug #76116        - ICS imported categories are not sorted
+    * Bug #75522        - t3ver_move_id missing TYPO3 7.6 workspaces
+    * Bug #76131        - Category Icons not displayed in Backend
+    * Bug #76047        - Link rendering of RTE field location description is wrong
+    * Bug #76233        - Calendar style marker function missing "Marker" suffix in event's models
+    * Bug #52587        - Lost sql field definition
+    * Bug #76660        - Missing compatibility with wec_map for TYPO3 CMS 7
+    * Bug #76657        - PHP Warning: Invalid argument supplied for foreach() in /.../typo3conf/ext/cal/Classes/Service/EventService.php line 255
+    * Bug #75453		- cal exception on tx_staticinfotables_pi1
+    * Bug #77434		- ICS view shows HTML instead of ics
+    * Bug #77596		- Cal Frontend create Event Error
+    * Bug #77689		- Fatal error with wec_map for TYPO3 CMS 7
+    * Bug #77368        - No Description and Image displayed
+    * Bug #79081	    - FLUID List misses events if current date is between start-end date
+    * Bug #78956		- Warnings in Log if using SearchViews
+    * Bug #79155		- SearchView shows wrong results
+    * Bug #78954		- SearchViews no sys_category
+    * Bug #76994		- Categories not working using sys_category in TYPO3 7.6.9
+    * Bug #78751		- Categories not loaded
+    * Bug               - Fix for attachment handling in TYPO3 8
+    * Feature #79167    - Language Label l_all
+    * Feature           - ICS support for ATTACH (as image and attachment) and URL (as ext_url). Importing only if the tstamp field has changed
+    * Task #75381       - Remove deprecated tca settings (7LTS)
+    * Task #75383       - Switch backend module to 'routeTarget' (7LTS)
+    * Task			    - ContentObjectRenderer function fileResource is deprecated since TYPO3 v8, will be removed in TYPO3 v9, use Functions::getContent() directly
+    * Suggestion #75727 - translation in locallang.xml missing
+    * Suggestion #79169 - ts setup blub = 1
+    * Core-Task #79221 	- Use $ instead of TYPO3.jQuery
+    * Core-Task #78953	- Custom FormDataProvider breaks with date related changes
+    * Core: Deprecation: #70052 - TCA Display condition EXT LOADED
+    

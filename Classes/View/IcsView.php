@@ -154,9 +154,11 @@ END:VCALENDAR
 									$start = new  \TYPO3\CMS\Cal\Model\CalDate (substr ($deviationRow ['start_datetime'], 0, 8));
 									$start->setHour (substr ($deviationRow ['start_datetime'], 8, 2));
 									$start->setMinute (substr ($deviationRow ['start_datetime'], 10, 2));
+									$start->setTZbyId ('UTC');
 									$end = new  \TYPO3\CMS\Cal\Model\CalDate (substr ($deviationRow ['end_datetime'], 0, 8));
 									$end->setHour (substr ($deviationRow ['end_datetime'], 8, 2));
 									$end->setMinute (substr ($deviationRow ['end_datetime'], 10, 2));
+									$end->setTZbyId ('UTC');
 									unset ($deviationRow ['start_datetime']);
 									unset ($deviationRow ['end_datetime']);
 									$new_event = new \TYPO3\CMS\Cal\Model\EventRecDeviationModel($event, $deviationRow, $start, $end);

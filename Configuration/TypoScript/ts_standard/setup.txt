@@ -3095,5 +3095,4 @@ plugin.tx_cal_controller {
 plugin.tx_cal_controller.lib.list < plugin.tx_cal_controller.view.list
 plugin.tx_cal_controller.lib.list {
 	enableMonthWrapper = 0
-	blub = 1
 }

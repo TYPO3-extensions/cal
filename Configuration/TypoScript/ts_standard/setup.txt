@@ -433,47 +433,34 @@ plugin.tx_cal_controller {
 					}
 					dataWrap = <div>%%%TEASER_LABEL%%%:&nbsp; |</div>
 				}
-	
+				
 				# @description	Content object for event description
-				description =< tt_content.text.20
+				description = TEXT
 				description {
 					field = description
 					required = 1
+					stdWrap.parseFunc < lib.parseFunc_RTE
 					dataWrap = <div>%%%DESCRIPTION_LABEL%%%:&nbsp; |</div>
 				}
 				
 				# @description	Content object for event image
-				image =< tt_content.image.20
+				image = FILES
 				image {
-					preRenderRegisters.allImageCaptions.cObject {
-			            references {
-				        	table = tx_cal_event
-				            uid.data = uid
-				            fieldName = image
-				        }
-				        renderObj.data = title
-				    }
-				    
-				    imgList.cObject.references < plugin.tx_cal_controller.view.event.event.image.preRenderRegisters.allImageCaptions.cObject.references
-						
-					//17 = in text right
-					textPos.override = 17
-					layout.key.override = 17
-					1 {
-						imageLinkWrap {
-							# We just need a value > 0, which could be pid or uid ;)
-							enable.field = uid
-							typolink.ATagParams.dataWrap = class="{$styles.content.imgtext.linkWrap.lightboxCssClass}" rel="{$styles.content.imgtext.linkWrap.lightboxRelAttribute}"
-						}
+					references {
+						table = tx_cal_event
+						uid.data = field:uid
+						fieldName = image
 					}
-					
-					imgMax = 4
+					renderObj = IMAGE
+					renderObj {
+						required = 1
+						file.width = {$plugin.tx_cal_controller.singleMaxW}m
+						file.height = {$plugin.tx_cal_controller.singleMaxH}m
+						file.import.data = file:current:originalUid//file:current:uid
+					}
 
 					stdWrap.required = 1
 					stdWrap.dataWrap = <div>%%%IMAGE_LABEL%%%:&nbsp; |</div>
-					
-					maxW = {$plugin.tx_cal_controller.singleMaxW}
-					
 				}
 	
 				# @description_image	Content object for rendering the description and the images with the regular 'text with image' (TEXTPIC) cObject
@@ -492,6 +479,7 @@ plugin.tx_cal_controller {
 				}
 
 				# @description	Content object for event attachment
+				
 				attachment = COA
 				attachment {
 					10 = < lib.stdheader
@@ -506,16 +494,32 @@ plugin.tx_cal_controller {
 										
 						stdWrap {
 							if.isTrue.field = attachment
-							dataWrap = <div>%%%ATTACHMENT_LABEL%%%:&nbsp;|</div>
+							dataWrap = <div>%%%ATTACHMENT_LABEL%%%:&nbsp;<ul class="attachments">|</ul></div>
 						}
 	
 						# render the files
-						renderObj =< tt_content.uploads.20.renderObj
+						renderObj = TEXT
+						renderObj {
+							typolink.parameter.data = file:current:publicUrl
+							data = file:current:name
+							wrap = <li class="media">|</li>
+						}
 			
 						layout = 1
 						showFileSize = 1
 					}
 				}
+				
+				#for fluid_styled_content use this:
+				#attachment =< tt_content.uploads
+				#attachment {
+				#	dataProcessing.10.references >
+				#	dataProcessing.10.references {
+		        #    	table = tx_cal_event
+				#		uid.data = field:uid
+		        #    	fieldName = attachment
+		        #    }
+				#}
 				
 				freq = CASE
 				freq {
@@ -627,6 +631,7 @@ plugin.tx_cal_controller {
 						# wrapping the parameter with the typenum of the ics page
 						parameter.wrap = |,{$plugin.tx_cal_controller.view.ics.typeNum}
 						title.override.override = %%%ICSLINK_LABEL%%%
+						useCacheHash = 0
 					}
 					wrap = <div>|</div>
 				}
@@ -2505,8 +2510,10 @@ plugin.tx_cal_controller {
 
 				# @description	Content object for the event image
 				image {
-					maxW = {$plugin.tx_cal_controller.listMaxW}
-					stdWrap.dataWrap >
+					renderObj {
+						file.width = {$plugin.tx_cal_controller.listMaxW}m
+						file.height = {$plugin.tx_cal_controller.listMaxH}m
+					}
 				}
 
 				# @description	Content object for the event description
@@ -2555,6 +2562,7 @@ plugin.tx_cal_controller {
 					}
 					dataWrap = |%%%ICS_VIEW%%%
 				}
+				typolink.useCacheHash = 0
 				outerWrap.field = link_wrap
 			}
 

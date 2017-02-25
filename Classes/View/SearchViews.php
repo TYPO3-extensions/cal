@@ -94,7 +94,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 		return $this->finish ($page, $rems);
 	}
 	
-	public function getSearchActionUrlMarker(&$page, &$sims, &$rems, $view) {
+	public function getSearchActionUrlMarker(&$page, &$sims, &$rems, &$wrapped) {
 		$this->initLocalCObject ();
 		$this->controller->getParametersForTyposcriptLink ($this->local_cObj->data, Array (), $this->conf ['cache'], true);
 		$sims ['###SEARCH_ACTION_URL###'] = $this->local_cObj->cObjGetSingle ($this->conf ['view.'] ['search.'] ['searchLinkUrl'], $this->conf ['view.'] ['search.'] ['searchLinkUrl.']);
@@ -265,7 +265,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 		$this->page = $page;
 	}
 	
-	public function getListSubpart(&$page) {
+	public function getListSubpart($page) {
 		$listTemplate = $this->cObj->getSubpart ($page, '###LIST_TEMPLATE###');
 		if ($listTemplate == '') {
 			$this->error = true;
@@ -425,7 +425,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 		return $middle;
 	}
 	
-	public function walkThroughMasterArray(&$master_array, &$reverse, &$firstEventDate) {
+	public function walkThroughMasterArray(&$master_array, $reverse, &$firstEventDate) {
 		if ($this->objectType == 'event') {
 			return parent::walkThroughMasterArray ($master_array, $reverse, $firstEventDate);
 		}
@@ -440,7 +440,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 		}
 	}
 	
-	public function processObject(&$object, $id, &$firstEventDate) {
+	public function processObject(&$object, &$id, &$firstEventDate) {
 		if ($this->objectType == 'event') {
 			return parent::processObject ($object, $id, $firstEventDate);
 		}

@@ -26,16 +26,16 @@ define ('ICALENDAR_PATH', \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::ex
  * @author Mario Matzulla <mario(at)matzullas.de>
  */
 class TceMainProcessdatamap {
-	function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$tce) {
+	
+	public static function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$tce) {
 		/* If we have an existing calendar event */
 		if ($table == 'tx_cal_event' && count ($fieldArray) > 1) {
-			
 			if ($fieldArray ['start_date']) {
-				$fieldArray ['start_date'] = $this->convertBackendDateToYMD ($fieldArray ['start_date']);
+				$fieldArray ['start_date'] = self::convertBackendDateToYMD ($fieldArray ['start_date']);
 			}
 			
 			if ($fieldArray ['end_date']) {
-				$fieldArray ['end_date'] = $this->convertBackendDateToYMD ($fieldArray ['end_date']);
+				$fieldArray ['end_date'] = self::convertBackendDateToYMD ($fieldArray ['end_date']);
 			}
 			
 			/* If the end date is blank or earlier than the start date */
@@ -44,7 +44,7 @@ class TceMainProcessdatamap {
 			}
 			
 			if ($fieldArray ['until']) {
-				$fieldArray ['until'] = $this->convertBackendDateToYMD ($fieldArray ['until']);
+				$fieldArray ['until'] = self::convertBackendDateToYMD ($fieldArray ['until']);
 			}
 			
 			if ($status != 'new') {
@@ -67,21 +67,15 @@ class TceMainProcessdatamap {
 					}
 					
 					/* Check Page TSConfig for a preview page that we should use */
-					$pageTSConf = BackendUtility::getPagesTSconfig ($event ['pid']);
-					if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
-						$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
-					} else {
-						$pageIDForPlugin = $event ['pid'];
-					}
-					
-					// @todo Should we have an else case for notifying when the doktype is 254?
+					$pageIDForPlugin = self::getPageIDForPlugin ( $event ['pid'] );
 					$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
+					
 					if ($page ['doktype'] != 254) {
 						/* Notify of changes to existing event */
 						$tx_cal_api = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
 						$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
 						
-						$fieldArray ['icsUid'] = $tx_cal_api->conf ['view.'] ['ics.'] ['eventUidPrefix'] . '_' . $event ['calendar_id'] . '_' . $event ['uid'];
+						$fieldArray ['icsUid'] = \TYPO3\CMS\Cal\Utility\Functions::getIcsUid($tx_cal_api->conf, $event);
 						
 						$notificationService = & \TYPO3\CMS\Cal\Utility\Functions::getNotificationService ();
 						
@@ -112,11 +106,11 @@ class TceMainProcessdatamap {
 		if ($table == 'tx_cal_exception_event' && count ($fieldArray) > 1) {
 			
 			if ($fieldArray ['start_date']) {
-				$fieldArray ['start_date'] = $this->convertBackendDateToYMD ($fieldArray ['start_date']);
+				$fieldArray ['start_date'] = self::convertBackendDateToYMD ($fieldArray ['start_date']);
 			}
 			
 			if ($fieldArray ['end_date']) {
-				$fieldArray ['end_date'] = $this->convertBackendDateToYMD ($fieldArray ['end_date']);
+				$fieldArray ['end_date'] = self::convertBackendDateToYMD ($fieldArray ['end_date']);
 			}
 			
 			/* If the end date is blank or earlier than the start date */
@@ -125,7 +119,7 @@ class TceMainProcessdatamap {
 			}
 			
 			if ($fieldArray ['until']) {
-				$fieldArray ['until'] = $this->convertBackendDateToYMD ($fieldArray ['until']);
+				$fieldArray ['until'] = self::convertBackendDateToYMD ($fieldArray ['until']);
 			}
 		}
 		
@@ -137,7 +131,7 @@ class TceMainProcessdatamap {
 			$service = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Service\\ICalendarService');
 			
 			if ($calendar ['type'] == 1 or $calendar ['type'] == 2) {
-				$this->processICS ($calendar, $fieldArray, $service);
+				self::processICS ($calendar, $fieldArray, $service);
 			}
 		}
 		
@@ -162,7 +156,8 @@ class TceMainProcessdatamap {
 			$fieldArray ['longitude'] = $latlong ['long'];
 		}
 	}
-	function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, &$tcemain) {
+	
+	public static function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, &$tcemain) {
 		
 		/* If we have a new calendar event */
 		if (($table == 'tx_cal_event' || $table == 'tx_cal_exception_event') && count ($fieldArray) > 1) {
@@ -171,13 +166,8 @@ class TceMainProcessdatamap {
 			/* If we're in a workspace, don't notify anyone about the event */
 			if ($event ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
 				/* Check Page TSConfig for a preview page that we should use */
-				$pageTSConf = BackendUtility::getPagesTSconfig ($event ['pid']);
-				if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
-					$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
-				} else {
-					$pageIDForPlugin = $event ['pid'];
-				}
 				
+				$pageIDForPlugin = self::getPageIDForPlugin ( $event ['pid'] );
 				$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
 				
 				if ($page ['doktype'] != 254) {
@@ -271,13 +261,15 @@ class TceMainProcessdatamap {
 			$GLOBALS ['BE_USER']->setAndSaveSessionData ('cal_itemsProcFunc', array ());
 		}
 	}
-	function processDatamap_preProcessFieldArray(&$incomingFieldArray, $table, $id, &$tce) {
+	
+	public static function processDatamap_preProcessFieldArray(&$incomingFieldArray, $table, $id, &$tce) {
 		
 		/**
 		 * Demo code for using TCE to do custom validation of form elements.
 		 * The record is still
 		 * saved but a bad combination of start date and end date will generate an error message.
 		 */
+		
 		/*
 		 * if($table == 'tx_cal_event') { $startTimestamp = $incomingFieldArray['start_date'] + $incomingFieldArray['start_time']; $endTimestamp = $incomingFieldArray['end_date'] + $incomingFieldArray['end_time']; if ($startTimestamp > $endTimestamp) { $tce->log('tx_cal_event', 2, $id, 0, 1, "Event end (".BackendUtility::datetime($endTimestamp).") is earlier than event start (".BackendUtility::datetime($startTimestamp).").", 1); } }
 		 */
@@ -292,7 +284,6 @@ class TceMainProcessdatamap {
 		}
 		
 		if ($table == 'tx_cal_event' || $table == "tx_cal_exeption_event") {
-			
 			$event = BackendUtility::getRecord ($table, $id);
 			if (intval ($event ['start_date']) == 0) {
 				return;
@@ -303,7 +294,6 @@ class TceMainProcessdatamap {
 			 * If both are 0, then its an all day event.
 			 */
 			if (array_key_exists ('start_time', $incomingFieldArray) && array_key_exists ('end_time', $incomingFieldArray) && $incomingFieldArray ['start_time'] == 0 && $incomingFieldArray ['end_time'] == 0) {
-				
 				$incomingFieldArray ['allday'] = 1;
 			}
 			
@@ -314,9 +304,9 @@ class TceMainProcessdatamap {
 			 * @todo Default date calculations do not take any timezone information into account.
 			 */
 			if ($incomingFieldArray ['freq'] != $event ['freq']) {
-				$date = $this->convertBackendDateToPear ($incomingFieldArray ['start_date']);
+				$date = self::convertBackendDateToPear ($incomingFieldArray ['start_date']);
 				$date->addSeconds ($incomingFieldArray ['start_time']);
-				$dayArray = TceMainProcessdatamap::getWeekdayOccurrence ($date);
+				$dayArray = self::getWeekdayOccurrence ($date);
 				
 				/* If we're on the 4th occurrence or later, let's assume we want the last occurrence */
 				if ($dayArray [0] >= 4) {
@@ -344,6 +334,18 @@ class TceMainProcessdatamap {
 						}
 						break;
 				}
+			}
+			
+			/* Check Page TSConfig for a preview page that we should use */
+			$pageIDForPlugin = self::getPageIDForPlugin ( $event ['pid'] );
+			$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), 'doktype');
+				
+			if ($page ['doktype'] != 254) {
+				/* Notify of changes to existing event */
+				$tx_cal_api = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Controller\\Api');
+				$tx_cal_api = &$tx_cal_api->tx_cal_api_without ($pageIDForPlugin);
+			
+				$incomingFieldArray ['icsUid'] = \TYPO3\CMS\Cal\Utility\Functions::getIcsUid($tx_cal_api->conf, $event);
 			}
 		}
 		
@@ -378,7 +380,7 @@ class TceMainProcessdatamap {
 					break;
 				case 1 : /* External URL or ICS file */
 				case 2: /* ICS File */
-					$this->processICS ($calendar, $incomingFieldArray, $service);
+					self::processICS ($calendar, $incomingFieldArray, $service);
 					break;
 			}
 		}
@@ -388,14 +390,8 @@ class TceMainProcessdatamap {
 			
 			/* If we're in a workspace, don't notify anyone about the event */
 			if ($exceptionEvent ['pid'] > 0 && !$GLOBALS['BE_USER']->workspace) {
-				/* Check Page TSConfig for a preview page that we should use */
-				$pageTSConf = BackendUtility::getPagesTSconfig ($exceptionEvent ['pid']);
-				if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
-					$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
-				} else {
-					$pageIDForPlugin = $exceptionEvent ['pid'];
-				}
 				
+				$pageIDForPlugin = self::getPageIDForPlugin ( $exceptionEvent ['pid'] );
 				$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
 				
 				if ($page ['doktype'] != 254) {
@@ -466,13 +462,26 @@ class TceMainProcessdatamap {
 			unset ($incomingFieldArray ['fe_group_id']);
 		}
 	}
+	/**
+	 * @param pid
+	 */private static function getPageIDForPlugin($pid) {
+		/* Check Page TSConfig for a preview page that we should use */
+		$pageTSConf = BackendUtility::getPagesTSconfig ($pid);
+		if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
+			$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
+		} else {
+			$pageIDForPlugin = $pid;
+		}
+		return $pageIDForPlugin;
+	}
+
 	
 	/**
 	 *  @param array $calendar
 	 *  @param array $fieldArray
 	 *  @param \TYPO3\CMS\Cal\Service\ICalendarService $service
 	 **/
-	public function processICS($calendar, &$fieldArray, &$service) {
+	public static function processICS($calendar, &$fieldArray, &$service) {
 		
 		if ($fieldArray ['ics_file'] or $fieldArray ['ext_url']) {
 			if ($fieldArray ['ics_file']) {
@@ -485,15 +494,11 @@ class TceMainProcessdatamap {
 			$newMD5 = $service->updateEvents ($calendar ['uid'], $calendar ['pid'], $url, $calendar ['md5'], $calendar ['cruser_id']);
 			
 			if ($newMD5) {
-				$fieldArray ['md5'] = $newMD5;
-				$pageTSConf = BackendUtility::getPagesTSconfig ($calendar ['pid']);
-				if ($pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin']) {
-					$pageIDForPlugin = $pageTSConf ['options.'] ['tx_cal_controller.'] ['pageIDForPlugin'];
-				} else {
-					$pageIDForPlugin = $calendar ['pid'];
-				}
 				
+				$fieldArray ['md5'] = $newMD5;
+				$pageIDForPlugin = self::getPageIDForPlugin ( $calendar ['pid'] );
 				$page = BackendUtility::getRecord ('pages', intval ($pageIDForPlugin), "doktype");
+				
 				if ($page ['doktype'] != 254) {
 					/** @var \TYPO3\CMS\Cal\Utility\RecurrenceGenerator $rgc */
 					$rgc = GeneralUtility::makeInstance('TYPO3\\CMS\\Cal\\Utility\\RecurrenceGenerator', $pageIDForPlugin);
@@ -504,7 +509,8 @@ class TceMainProcessdatamap {
 			$service->scheduleUpdates ($fieldArray ['refresh'], $calendar ['uid']);
 		}
 	}
-	function getWeekdayOccurrence($date) {
+	
+	public static function getWeekdayOccurrence($date) {
 		return array (
 				ceil ($date->getDay () / 7),
 				$date->getDayName () 
@@ -518,8 +524,8 @@ class TceMainProcessdatamap {
 	 *        	string		The date to convert.
 	 * @return object date object.
 	 */
-	function convertBackendDateToPear($dateString) {
-		$ymdString = $this->convertBackendDateToYMD ($dateString);
+	public static function convertBackendDateToPear($dateString) {
+		$ymdString = self::convertBackendDateToYMD ($dateString);
 		return new \TYPO3\CMS\Cal\Model\CalDate ($ymdString . '000000');
 	}
 	
@@ -531,7 +537,7 @@ class TceMainProcessdatamap {
 	 *        	string		The date to convert.
 	 * @return string date in Ymd format.
 	 */
-	function convertBackendDateToYMD($dateString) {
+	public static function convertBackendDateToYMD($dateString) {
 		$date = new \TYPO3\CMS\Cal\Model\CalDate ($dateString);
 		return $date->format ('%Y%m%d');
 	}

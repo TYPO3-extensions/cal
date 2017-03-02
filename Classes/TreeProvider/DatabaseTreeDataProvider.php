@@ -66,7 +66,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	protected function loadTreeData() {
 		$configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
 		if($configuration['categoryService'] == 'sys_category') {
-			parent::loadTreeDate();
+			parent::loadTreeData();
 			return;
 		}
 		$this->treeData->setId($this->getRootUid());

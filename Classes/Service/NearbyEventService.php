@@ -24,7 +24,7 @@ class NearbyEventService extends \TYPO3\CMS\Cal\Service\EventService {
 		parent::__construct();
 		
 		// Lets see if the user is logged in
-		if ($this->rightsObj->isLoggedIn () && ! $this->rightsObj->isCalAdmin () && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map') && $this->conf ['view.'] ['calendar.'] ['nearbyDistance'] > 0) {
+		if ($this->rightsObj->isLoggedIn () && ! $this->rightsObj->isCalAdmin () && \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded ('wec_map') && $this->conf ['view.'] ['calendar.'] ['nearbyDistance'] > 0 && class_exists('\JBartels\WecMap\Utility\Cache') ) {
 			$user = $GLOBALS ['TSFE']->fe_user->user;
 			
 			/* Geocode the address */

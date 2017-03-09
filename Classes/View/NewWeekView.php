@@ -23,8 +23,6 @@ namespace TYPO3\CMS\Cal\View;
 class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 	
 	protected $week;
-	protected $year;
-	protected $month;
 	protected $days;
 	protected $alldays;
 	protected $dayNums;
@@ -50,23 +48,23 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 	 */
 	public function __construct($week, $year, $parentMonth = -1) {
 		parent::__construct();
-		$this->mySubpart = 'WEEK_SUBPART';
+		$this->setMySubpart('WEEK_SUBPART');
 		if (DATE_CALC_BEGIN_WEEKDAY == 0) {
-			$this->mySubpart = 'SUNDAY_WEEK_SUBPART';
+			$this->setMySubpart('SUNDAY_WEEK_SUBPART');
 		}
 		$this->week = intval ($week);
-		$this->year = intval ($year);
+		$this->setYear(intval ($year));
 		$this->setParentMonth ($parentMonth);
 		$this->generateDays ();
 	}
 	private function generateDays() {
-		$weekStart = new \TYPO3\CMS\Cal\Model\CalDate (\TYPO3\CMS\Cal\Utility\Functions::getDayByWeek ($this->year, $this->week, DATE_CALC_BEGIN_WEEKDAY));
+		$weekStart = new \TYPO3\CMS\Cal\Model\CalDate (\TYPO3\CMS\Cal\Utility\Functions::getDayByWeek ($this->getYear(), $this->week, DATE_CALC_BEGIN_WEEKDAY));
 		
 		$this->weekStart = $weekStart->format ('%Y%m%d');
-		$this->month = $weekStart->getMonth ();
+		$this->setMonth($weekStart->getMonth ());
 		
 		if ($this->getParentMonth () < 0) {
-			$this->setParentMonth ($this->month);
+			$this->setParentMonth ($this->getMonth());
 		}
 		
 		$this->days = Array ();
@@ -108,7 +106,7 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 				$eventYearEnd ++;
 			}
 			
-			if (! ($eventStartYear == $this->year && $eventStart->getWeekOfYear () == $this->week) && $eventStart->year . sprintf ("%02d", $eventStart->getWeekOfYear ()) < $this->year . sprintf ("%02d", $this->week) && $eventYearEnd . sprintf ("%02d", $event->getEnd ()->getWeekOfYear ()) >= $this->year . sprintf ("%02d", $this->week)) {
+			if (! ($eventStartYear == $this->getYear() && $eventStart->getWeekOfYear () == $this->week) && $eventStart->year . sprintf ("%02d", $eventStart->getWeekOfYear ()) < $this->getYear() . sprintf ("%02d", $this->week) && $eventYearEnd . sprintf ("%02d", $event->getEnd ()->getWeekOfYear ()) >= $this->getYear() . sprintf ("%02d", $this->week)) {
 				do {
 					$eventStart->addSeconds (86400);
 					$eventStartYear = $eventStart->year;
@@ -116,17 +114,17 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 					if ($eventStart->month == 1 && $eventWeek > 50) {
 						$eventStartYear --;
 					}
-				} while ($eventStartYear . sprintf ("%02d", $eventWeek) < $this->year . sprintf ("%02d", $this->week));
+				} while ($eventStartYear . sprintf ("%02d", $eventWeek) < $this->getYear() . sprintf ("%02d", $this->week));
 				$eventStartFormatted = $eventStart->format ('%Y%m%d');
 			}
-			if ($eventStartYear == $this->year && $eventStart->getWeekOfYear () == $this->week) {
+			if ($eventStartYear == $this->getYear() && $eventStart->getWeekOfYear () == $this->week) {
 				$this->alldays [$eventStartFormatted] [] = $event;
 				$this->weekHasEvent = true;
 				$first = true;
 				do {
 					$this->dayHasEvent [$eventStart->getDayOfWeek ()] = true;
 					if (is_object ($this->days [$eventStart->format ('%Y%m%d')])) {
-						$this->days [$eventStart->format ('%Y%m%d')]->hasAlldayEvents = true;
+						$this->days [$eventStart->format ('%Y%m%d')]->setHasAlldayEvents(true);
 						if ($first) {
 							$this->days [$eventStart->format ('%Y%m%d')]->addEvent ($event);
 							$first = false;
@@ -138,11 +136,11 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 					if ($eventStart->month == 1 && $eventWeek > 50) {
 						$eventStartYear --;
 					}
-				} while ($eventStart->format ('%Y%m%d') <= $eventEndFormatted && $eventStartYear . sprintf ("%02d", $eventStart->getWeekOfYear ()) <= $this->year . sprintf ("%02d", $this->week));
+				} while ($eventStart->format ('%Y%m%d') <= $eventEndFormatted && $eventStartYear . sprintf ("%02d", $eventStart->getWeekOfYear ()) <= $this->getYear() . sprintf ("%02d", $this->week));
 			}
 		} else {
 			do {
-				if ($eventStartYear == $this->year && $eventStartWeek == $this->week) {
+				if ($eventStartYear == $this->getYear() && $eventStartWeek == $this->week) {
 					$this->dayHasEvent [$eventStart->getDayOfWeek ()] = true;
 					if (is_object ($this->days [$eventStart->format ('%Y%m%d')])) {
 						$this->days [$eventStart->format ('%Y%m%d')]->addEvent ($event);
@@ -222,13 +220,13 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 			$currentMonth = $controller->getDateTimeObject->getMonth ();
 			
 			for ($i = 0; $i < 7; $i ++) {
-				$timeKeys = array_keys ($this->days [$dayKeys [$i]]->events);
+				$timeKeys = array_keys ($this->days [$dayKeys [$i]]->getEvents());
 				
 				foreach ($timeKeys as $timeKey) {
-					$entryKeys = array_keys ($this->days [$dayKeys [$i]]->events [$timeKey]);
+					$entryKeys = array_keys ($this->days [$dayKeys [$i]]->getEvents() [$timeKey]);
 					foreach ($entryKeys as $entryKey) {
 						
-						$event = &$this->days [$dayKeys [$i]]->events [$timeKey] [$entryKey];
+						$event = &$this->days [$dayKeys [$i]]->getEvents() [$timeKey] [$entryKey];
 						$this->fillLengthArray ($lengthArray, $event);
 					}
 				}
@@ -346,7 +344,7 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 					$this->content .= '<td class="' . $classes . $currentDayClass . '">&nbsp;</td>';
 				} else if (is_object ($theMatrix [$i] [$j])) {
 					$this->content .= '<td class="' . $classes . $currentDayClass . '" colspan="' . ($theMatrix [$i] [$j]->matrixValue) . '">' . $theMatrix [$i] [$j]->renderEventFor ('week') . '</td>';
-					$this->days [$daysKeys [$i]]->hasAlldayEvents = true;
+					$this->days [$daysKeys [$i]]->setHasAlldayEvents(true);
 				}
 			}
 			$this->content .= '</tr>';
@@ -376,7 +374,7 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 					$this->content .= '<td class="empty ' . $classes . $currentDayClass . '">';
 				} else if (is_object ($theMatrix [$i] [$j])) {
 					$this->content .= '<td class="event ' . $classes . $currentDayClass . '" colspan="' . ($theMatrix [$i] [$j]->matrixValue) . '">' . $theMatrix [$i] [$j]->renderEventFor ('month');
-					$this->days [$daysKeys [$i]]->hasAlldayEvents = true;
+					$this->days [$daysKeys [$i]]->setHasAlldayEvents(true);
 				}
 				$this->content .= '</td>';
 			}
@@ -429,7 +427,7 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 	public function getDaysMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
 		$content = '';
 		foreach ($this->days as $day) {
-			$content .= $day->render ($this->template);
+			$content .= $day->render ($this->getTemplate());
 		}
 		$sims ['###DAYS###'] = $content;
 	}
@@ -478,6 +476,10 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 	private function getDayClasses($weekdayIndex) {
 		$conf = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'conf');
 		if ($this->initialized === false) {
+		    $template = '';
+		    $sims = array();
+		    $rems = array();
+		    $wrapped = array();
 			$this->getAlldaysMarker ($template, $sims, $rems, $wrapped, $conf ['view']);
 			$this->initialized = true;
 		}
@@ -517,16 +519,19 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 	private function getDayLink($weekdayIndex) {
 		$conf = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'conf');
 		if ($this->initialized === false) {
-			// initializing!!
+			$template = '';
+		    $sims = array();
+		    $rems = array();
+		    $wrapped = array();
 			$this->getAlldaysMarker ($template, $sims, $rems, $wrapped, $conf ['view']);
 			$this->initialized = true;
 		}
 		
 		$daysKeys = array_keys ($this->days);
-		return $this->days [$daysKeys [$weekdayIndex]]->getDayLink ($conf ['view'], $this->days [$daysKeys [$weekdayIndex]]->time, $this->dayHasEvent [$this->days [$daysKeys [$weekdayIndex]]->weekdayNumber]);
+		return $this->days [$daysKeys [$weekdayIndex]]->getDayLink ($conf ['view'], $this->days [$daysKeys [$weekdayIndex]]->getTime(), $this->dayHasEvent [$this->days [$daysKeys [$weekdayIndex]]->weekdayNumber]);
 	}
 	public function setSelected(&$dateObject) {
-		if ($dateObject->getWeekOfYear () == $this->week && $dateObject->year == $this->year) {
+		if ($dateObject->getWeekOfYear () == $this->week && $dateObject->year == $this->getYear()) {
 			$this->selected = true;
 			
 			$day = $this->days [$dateObject->format ('%Y%m%d')];
@@ -536,7 +541,7 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 		}
 	}
 	public function setCurrent(&$dateObject) {
-		if ($dateObject->getWeekOfYear () == $this->week && $dateObject->year == $this->year) {
+		if ($dateObject->getWeekOfYear () == $this->week && $dateObject->year == $this->getYear()) {
 			$this->current = true;
 			
 			$day = $this->days [$dateObject->format ('%Y%m%d')];
@@ -551,6 +556,10 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 				$day->setCurrent ($dateObject);
 			}
 		}
+	}
+	
+	public function hasEvents() {
+	    return $this->weekHasEvent;
 	}
 }
 

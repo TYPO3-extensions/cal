@@ -21,15 +21,20 @@ namespace TYPO3\CMS\Cal\View;
  * @subpackage cal
  */
 abstract class NewTimeView {
-	var $mySubpart;
-	var $template;
-	var $cs_convert;
-	var $weekDayLength = 100;
-	var $monthNameLength = 100;
-	var $weekDayFormat = '%A';
-	var $current = false;
-	var $selected = false;
-	var $parentMonth;
+    
+    private $day;
+	private $month;
+	private $year;
+	private $weekdayNumber;
+	private $mySubpart;
+	private $template;
+	private $cs_convert;
+	private $weekDayLength = 100;
+	private $monthNameLength = 100;
+	private $weekDayFormat = '%A';
+	protected $current = false;
+	private $selected = false;
+	private $parentMonth;
 	
 	/**
 	 * Constructor.
@@ -43,13 +48,13 @@ abstract class NewTimeView {
 	abstract function addEvent(&$event);
 	
 	public function render(&$template) {
-		$this->template = $template;
+		$this->setTemplate($template);
 		$rems = array ();
 		$sims = array ();
 		$wrapped = array ();
 		$cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
 		
-		$subpart = $cObj->getSubpart ($template, $this->mySubpart);
+		$subpart = $cObj->getSubpart ($template, $this->getMySubpart());
 		$this->getMarker ($subpart, $sims, $rems, $wrapped);
 		return $this->finish (\TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($subpart, $sims, $rems, $wrapped));
 	}
@@ -115,7 +120,7 @@ abstract class NewTimeView {
 							}
 							unset ($tmp);
 						}
-						$cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'local_cobj');
+						$cObj = $this->getLocalCObject(); //&\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'local_cObj');//
 						$cObj->setCurrentVal ($current);
 						$sims ['###' . $marker . '###'] = $cObj->cObjGetSingle ($conf [$base . '.'] [$view . '.'] [strtolower ($marker)], $conf [$base . '.'] [$view . '.'] [strtolower ($marker) . '.']);
 					}
@@ -213,7 +218,14 @@ abstract class NewTimeView {
 		if ($customData && is_array ($customData)) {
 			$local_cObj->data = $customData;
 		} else {
-			$local_cObj->data = $this->cachedValueArray;
+		    $values = Array ();
+		    $values ['day'] = $this->day;
+		    $values ['month'] = $this->month;
+		    $values ['year'] = $this->year;
+		    $values ['weekdayNumber'] = $this->weekdayNumber;
+		    $values ['hasEvents'] = $this->hasEvents();
+		    $values ['parentMonth'] = $this->getParentMonth();
+			$local_cObj->data = $values;
 		}
 		return $local_cObj;
 	}
@@ -243,7 +255,7 @@ abstract class NewTimeView {
 			$this->cs_convert = new \TYPO3\CMS\Core\Charset\CharsetConverter();
 		}
 		$conf = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'conf');
-		return $this->cs_convert->substr (\TYPO3\CMS\Cal\Utility\Functions::getCharset (), strftime ($this->weekDayFormat, $timestamp), 0, $this->weekDayLength);
+		return $this->cs_convert->substr (\TYPO3\CMS\Cal\Utility\Functions::getCharset (), strftime ($this->getWeekDayFormat(), $timestamp), 0, $this->getWeekDayLength());
 	}
 	public function getCreateEventLink($view, $wrap, $date, $createOffset, $isAllowedToCreateEvent, $remember, $class, $time) {
 		$tmp = '';
@@ -353,8 +365,8 @@ abstract class NewTimeView {
 		}
 		
 		if ($conf ['view'] == 'day') {
-			$d_start = new \TYPO3\CMS\Cal\Model\CalDate ($this->Ymd . $dayStart);
-			$d_end = new \TYPO3\CMS\Cal\Model\CalDate ($this->Ymd . $dayEnd);
+			$d_start = new \TYPO3\CMS\Cal\Model\CalDate ($this->getYmd() . $dayStart);
+			$d_end = new \TYPO3\CMS\Cal\Model\CalDate ($this->getYmd() . $dayEnd);
 		}
 		if ($conf ['view'] == 'week') {
 			$d_start = new \TYPO3\CMS\Cal\Model\CalDate ($this->weekStart . $dayStart);
@@ -418,6 +430,7 @@ abstract class NewTimeView {
 		}
 		$rems ['###HOUR_CELLS###'] = $hours;
 	}
+	abstract function hasEvents();
 	abstract function setCurrent(&$dateObject);
 	abstract function setSelected(&$dateObject);
 	public function getCreateEventLinkMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
@@ -471,6 +484,71 @@ abstract class NewTimeView {
 	public function setParentMonth($parentMonth) {
 		$this->parentMonth = $parentMonth;
 	}
+	
+	public function getDay() {
+	    return $this->day;
+	}
+	
+	public function setDay($day) {
+	    $this->day = $day;
+	}
+	
+	public function getMonth() {
+	    return $this->month;
+	}
+	
+	public function setMonth($month) {
+	    $this->month = $month;
+	}
+	
+	public function getYear() {
+	    return $this->year;
+	}
+	
+	public function setYear($year) {
+	    $this->year = $year;
+	}
+	
+	public function getWeekdayNumber() {
+	    return $this->weekdayNumber;
+	}
+	
+	public function setWeekdayNumber($weekdayNumber) {
+	    $this->weekdayNumber = $weekdayNumber;
+	}
+	
+	public function getMySubpart() {
+	    return $this->mySubpart;
+	}
+	
+	public function setMySubpart($mySubpart) {
+	    $this->mySubpart = $mySubpart;
+	}
+	
+	public function getTemplate() {
+	    return $this->template;
+	}
+	
+	public function setTemplate($template) {
+	    $this->template = $template;
+	}
+	
+	public function getWeekDayLength() {
+	    return $this->weekDayLength;
+	}
+	    
+	public function setWeekDayLength($length) {
+	    $this->weekDayLength = $length;
+	}
+	
+	public function getWeekDayFormat() {
+	    return $this->weekDayFormat;
+	}
+	
+	public function setWeekDayFormat($format) {
+	    $this->weekDayFormat = $format;
+	}
+	
 }
 
 ?>

@@ -1240,7 +1240,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 		
 		$page = Functions::getContent ($this->conf['view.']['month.']['new'.ucwords($type).'MonthTemplate']);
 		
-		$monthModel = \TYPO3\CMS\Cal\View\NewMonthView::getMonth($monthDate->month, $monthDate->year);
+		$monthModel = \TYPO3\CMS\Cal\View\NewMonthView::getMonthView($monthDate->month, $monthDate->year);
 		
 		$today = new \TYPO3\CMS\Cal\Model\CalDate();
 		$monthModel->setCurrent($today);
@@ -1248,10 +1248,10 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 		$selected = new \TYPO3\CMS\Cal\Model\CalDate($this->conf['getdate']);
 		$monthModel->setSelected($selected);
 		
-		$monthModel->weekDayFormat = $this->conf['view.'][$this->conf['view'].'.']['weekdayFormat'.ucwords($type).'Month'];
+		$monthModel->setWeekDayFormat($this->conf['view.'][$this->conf['view'].'.']['weekdayFormat'.ucwords($type).'Month']);
 		$weekdayLength = intval($this->conf['view.'][$this->conf['view'].'.']['weekdayLength'.ucwords($type).'Month']);
 		if($weekdayLength > 0){
-			$monthModel->weekDayLength = $weekdayLength;
+			$monthModel->setWeekDayLength($weekdayLength);
 		}
 		
 		$masterArrayKeys = array_keys($this->master_array);

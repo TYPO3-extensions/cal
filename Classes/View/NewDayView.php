@@ -22,35 +22,31 @@ namespace TYPO3\CMS\Cal\View;
  */
 class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 	
-	var $day;
-	var $month;
-	var $year;
-	var $weekdayNumber;
-	var $hasAlldayEvents = false;
-	var $Ymd;
-	var $time;
-	var $events = Array ();
+	private $hasAlldayEvents = false;
+	private $Ymd;
+	private $time;
+	private $events = Array ();
 	
 	/**
 	 * Constructor.
 	 */
 	public function __construct($day, $month, $year, $parentMonth = -1) {
 		parent::__construct();
-		$this->mySubpart = 'DAY_SUBPART';
-		$this->day = intval ($day);
-		$this->month = intval ($month);
-		$this->year = intval ($year);
+		$this->setMySubpart('DAY_SUBPART');
+	    $this->setDay(intval ($day));
+		$this->setMonth(intval ($month));
+		$this->setYear(intval ($year));
 		$date = new \TYPO3\CMS\Cal\Model\CalDate ();
-		$date->setDay ($this->day);
-		$date->setMonth ($this->month);
-		$date->setYear ($this->year);
-		$this->weekdayNumber = $date->format ('%w');
-		$this->Ymd = $date->format ('%Y%m%d');
+		$date->setDay ($this->getDay());
+		$date->setMonth ($this->getMonth());
+		$date->setYear ($this->getYear());
+		$this->setWeekdayNumber($date->format ('%w'));
+		$this->setYmd($date->format ('%Y%m%d'));
 		$this->time = $date->getTime ();
 		if ($parentMonth >= 0) {
 			$this->setParentMonth (intval ($parentMonth));
 		} else {
-			$this->setParentMonth ($this->month);
+			$this->setParentMonth ($this->getMonth());
 		}
 	}
 	public function addEvent(&$event) {
@@ -91,9 +87,9 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 			$gridLength = 15;
 		}
 		
-		$d_start = new \TYPO3\CMS\Cal\Model\CalDate ($this->Ymd . $dayStart);
+		$d_start = new \TYPO3\CMS\Cal\Model\CalDate ($this->getYmd() . $dayStart);
 		$d_start->setTZbyId ('UTC');
-		$d_end = new \TYPO3\CMS\Cal\Model\CalDate ($this->Ymd . $dayEnd);
+		$d_end = new \TYPO3\CMS\Cal\Model\CalDate ($this->getYmd() . $dayEnd);
 		$d_end->setTZbyId ('UTC');
 		
 		// splitting the events into H:M, to find out if events run in parallel
@@ -136,15 +132,15 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 							}
 						}
 					}
-					$rowspan_array [$this->Ymd] [$eventMappingKey] = $entries;
+					$rowspan_array [$this->getYmd()] [$eventMappingKey] = $entries;
 				}
 			}
 		}
 		
-		if (! empty ($viewArray [$this->Ymd])) {
+		if (! empty ($viewArray [$this->getYmd()])) {
 			$max = array ();
-			foreach ($viewArray [$this->Ymd] as $array_time => $time_val) {
-				$c = count ($viewArray [$this->Ymd] [$array_time]);
+			foreach ($viewArray [$this->getYmd()] as $array_time => $time_val) {
+				$c = count ($viewArray [$this->getYmd()] [$array_time]);
 				array_push ($max, $c);
 			}
 			$nbrGridCols = max ($max);
@@ -160,8 +156,8 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 		while ($i->before ($d_end)) {
 			$i_formatted = $i->format ('%H%M');
 			
-			if (is_array ($viewArray [$this->Ymd] [$i_formatted]) && count ($viewArray [$this->Ymd] [$i_formatted]) > 0) {
-				foreach ($viewArray [$this->Ymd] [$i_formatted] as $eventKey) {
+			if (is_array ($viewArray [$this->getYmd()] [$i_formatted]) && count ($viewArray [$this->getYmd()] [$i_formatted]) > 0) {
+				foreach ($viewArray [$this->getYmd()] [$i_formatted] as $eventKey) {
 					$event = &$eventArray [$eventKey];
 					$eventStart = $event->getStart ();
 					$eventMappingKey = $event->getType () . '_' . $event->getUid () . '_' . $eventStart->format ('%Y%m%d%H%M%S');
@@ -202,7 +198,7 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 		$conf = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'conf');
 		$gridLength = $conf ['day.'] ['gridLength'];
 		
-		$cal_time_obj = new \TYPO3\CMS\Cal\Model\CalDate ($this->Ymd . '000000');
+		$cal_time_obj = new \TYPO3\CMS\Cal\Model\CalDate ($this->getYmd() . '000000');
 		$cal_time_obj->setTZbyId ('UTC');
 		$eventCounter = 0;
 		foreach ($t_array as $cal_time => $val) {
@@ -263,7 +259,7 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 		return $daydisplay;
 	}
 	public function getDayClassesMarker(& $template, & $sims, & $rems, & $wrapped, $view) {
-		$classes = 'day weekday' . $this->weekdayNumber;
+		$classes = 'day weekday' . $this->getWeekdayNumber();
 		if ($this->current) {
 			$classes .= ' currentDay';
 		}
@@ -273,7 +269,7 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 		if (! empty ($this->events) || $this->hasAlldayEvents) {
 			$classes .= ' withEventDay';
 		}
-		if (intval ($this->getParentMonth ()) != intval ($this->month)) {
+		if (intval ($this->getParentMonth ()) != intval ($this->getMonth())) {
 			$classes .= ' monthOff';
 		}
 		
@@ -299,7 +295,7 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 		
 		if (($rightsObj->isViewEnabled ($dayLinkViewTarget) || $conf ['view.'] [$dayLinkViewTarget . '.'] [$dayLinkViewTarget . 'ViewPid']) && (! empty ($this->events) || $hasEvent || $this->hasAlldayEvents || $isAllowedToCreateEvent)) {
 			$controller->getParametersForTyposcriptLink ($local_cObj->data, array (
-					'getdate' => $this->Ymd,
+					'getdate' => $this->getYmd(),
 					'view' => $dayLinkViewTarget,
 					$controller->getPointerName () => NULL 
 			), $conf ['cache'], $conf ['clear_anyway'], $conf ['view.'] [$dayLinkViewTarget . '.'] [$dayLinkViewTarget . 'ViewPid']);
@@ -323,14 +319,46 @@ class NewDayView extends \TYPO3\CMS\Cal\View\NewTimeView {
 		$sims ['###ALLDAY###'] = $content;
 	}
 	public function setCurrent(&$dateObject) {
-		if ($this->day == $dateObject->day && $this->month == $dateObject->month && $this->year == $dateObject->year) {
+		if ($this->getDay() == $dateObject->day && $this->getMonth() == $dateObject->month && $this->getYear() == $dateObject->year) {
 			$this->current = true;
 		}
 	}
 	public function setSelected(&$dateObject) {
-		if ($this->day == $dateObject->day && $this->month == $dateObject->month && $this->year == $dateObject->year) {
+		if ($this->getDay() == $dateObject->day && $this->getMonth() == $dateObject->month && $this->getYear() == $dateObject->year) {
 			$this->selected = true;
 		}
+	}
+	
+	public function getTime() {
+	    return $this->time;
+	}
+	
+	public function getYmd() {
+	    return $this->Ymd;
+	}
+	
+	public function setYmd($ymd) {
+	    $this->Ymd = $ymd;
+	}
+	
+	public function getEvents() {
+	    return $this->events;
+	}
+	
+	public function setEvents($events) {
+	    $this->events = $events;
+	}
+	
+	public function getHasAlldayEvents() {
+	    return $this->hasAlldayEvents;
+	}
+	
+	public function setHasAlldayEvents($hasAlldayEvents) {
+	    $this->hasAlldayEvents = $hasAlldayEvents;
+	}
+	
+	public function hasEvents() {
+	    return !empty($this->getEvents()) || $this->getHasAlldayEvents();
 	}
 }
 

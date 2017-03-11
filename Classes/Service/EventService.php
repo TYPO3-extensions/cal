@@ -1197,7 +1197,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$insertFields ['intrval'] = $object->getInterval ();
 		}
 		
-		$eventArray = array('calendar_id' => $this->getCalendarUid (), 'uid' => $this->getUid ());
+		$eventArray = array('calendar_id' => $object->getCalendarUid (), 'uid' => $object->getUid ());
 		$insertFields ['icsUid'] = \TYPO3\CMS\Cal\Utility\Functions::getIcsUid($this->conf, $eventArray);
 		
 		// Hook initialization:

@@ -289,7 +289,9 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			$all_files = Array ();
 			$all_files ['webspace'] ['allow'] = '*';
 			$all_files ['webspace'] ['deny'] = '';
-			$fileFunc->init ( '', $all_files );
+			if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < '8000000') {
+			     $fileFunc->init ( '', $all_files );
+			}
 			$allowedExt = array ();
 			$denyExt = array ();
 			if ($marker == 'image') {
@@ -301,7 +303,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 			$i = 0;
 			
 			// new files
-			if (is_array ( $_FILES [$this->prefixId] ['name'] )) {
+			if (is_array ( $_FILES [$this->prefixId] ['name'] [$marker])) {
 				foreach ( $_FILES [$this->prefixId] ['name'] [$marker] as $id => $filename ) {
 					$theDestFile = '';
 					$iConf = $this->conf ['view.'] [$this->conf ['view'] . '.'] [strtolower ( $marker ) . '_stdWrap.'];

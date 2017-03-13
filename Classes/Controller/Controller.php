@@ -669,7 +669,7 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$uid = intval ($this->piVars ['uid']);
 		$modelObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'modelcontroller');
 		
-		if ($GLOBALS ['TSFE']->fe_user->sesData ['tx_cal_controller_creatingEvent'] == '1') {
+		if ($GLOBALS ['TSFE']->fe_user->getKey ('ses', 'tx_cal_controller_creatingEvent') == '1') {
 			
 			$event = null;
 			if ($eventType == \TYPO3\CMS\Cal\Model\Model::EVENT_TYPE_TODO) {

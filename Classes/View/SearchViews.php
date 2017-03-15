@@ -29,6 +29,7 @@ class SearchViews extends \TYPO3\CMS\Cal\View\ListView {
 	
 	public function __construct() {
 		parent::__construct();
+		$this->confArr = unserialize ( $GLOBALS ['TYPO3_CONF_VARS'] ['EXT'] ['extConf'] ['cal'] );
 	}
 	
 	/**

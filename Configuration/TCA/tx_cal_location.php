@@ -95,16 +95,6 @@ $tx_cal_location = array(
 				'max' => '128'
 			)
 		),
-		'country_zone' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.countryzone'
-			// Configuration is done depending on the version @see end of this file
-		),
-		'country' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.country'
-			// Configuration is done depending on the version @see end of this file
-		),
 		'phone' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.phone',
@@ -316,51 +306,59 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('wec_map')){
 }
 
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_tables')){
-	$tx_cal_location['columns']['country_zone']['config'] = array(
-		'type' => 'select',
-		'items' => array(
-			array(
-				'',
-				0
-			)
-		),
-		'foreign_table' => 'static_country_zones',
-		'foreign_table_where' => 'ORDER BY static_country_zones.zn_name_en',
-		'itemsProcFunc' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\ElementRenderingHelper->translateCountryZonesSelector',
-		'size' => 1,
-		'minitems' => 0,
-		'maxitems' => 1,
-		'wizards' => array(
-			'suggest' => array(
-				'type' => 'suggest',
-				'default' => array(
-					'receiverClass' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\SuggestReceiver'
-				)
-			)
-		)
+    $tx_cal_location['columns']['country_zone'] = array (
+        'exclude' => 1,
+        'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.countryzone',
+    	'config' => array(
+    		'type' => 'select',
+    		'items' => array(
+    			array(
+    				'',
+    				0
+    			)
+    		),
+    		'foreign_table' => 'static_country_zones',
+    		'foreign_table_where' => 'ORDER BY static_country_zones.zn_name_en',
+    		'itemsProcFunc' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\ElementRenderingHelper->translateCountryZonesSelector',
+    		'size' => 1,
+    		'minitems' => 0,
+    		'maxitems' => 1,
+    		'wizards' => array(
+    			'suggest' => array(
+    				'type' => 'suggest',
+    				'default' => array(
+    					'receiverClass' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\SuggestReceiver'
+    				)
+    			)
+    		)
+    	)
 	);
-	$tx_cal_location['columns']['country']['config'] = array(
-		'type' => 'select',
-		'items' => array(
-			array(
-				'',
-				0
-			)
-		),
-		'foreign_table' => 'static_countries',
-		'foreign_table_where' => 'ORDER BY static_countries.cn_short_en',
-		'itemsProcFunc' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\ElementRenderingHelper->translateCountriesSelector',
-		'size' => 1,
-		'minitems' => 0,
-		'maxitems' => 1,
-		'wizards' => array(
-			'suggest' => array(
-				'type' => 'suggest',
-				'default' => array(
-					'receiverClass' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\SuggestReceiver'
-				)
-			)
-		)
+	$tx_cal_location['columns']['country'] = array (
+	    'exclude' => 1,
+	    'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.country',
+	    'config' => array(
+    		'type' => 'select',
+    		'items' => array(
+    			array(
+    				'',
+    				0
+    			)
+    		),
+    		'foreign_table' => 'static_countries',
+    		'foreign_table_where' => 'ORDER BY static_countries.cn_short_en',
+    		'itemsProcFunc' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\ElementRenderingHelper->translateCountriesSelector',
+    		'size' => 1,
+    		'minitems' => 0,
+    		'maxitems' => 1,
+    		'wizards' => array(
+    			'suggest' => array(
+    				'type' => 'suggest',
+    				'default' => array(
+    					'receiverClass' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\SuggestReceiver'
+    				)
+    			)
+    		)
+	     )
 	);
 }
 

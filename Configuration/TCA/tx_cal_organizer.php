@@ -97,16 +97,6 @@ $tx_cal_organizer = array(
 								'max' => '128'
 						)
 				),
-				'country_zone' => array(
-						'exclude' => 1,
-						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.countryzone'
-				// Configuration is done depending on the version @see end of this file
-								),
-				'country' => array(
-						'exclude' => 1,
-						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.country'
-				// Configuration is done depending on the version @see end of this file
-								),
 				'phone' => array(
 						'exclude' => 0,
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.phone',
@@ -264,8 +254,12 @@ $tx_cal_organizer = array(
 		)
 );
 
+
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_tables')){
-	$tx_cal_organizer['columns']['country_zone']['config'] = array(
+	$tx_cal_organizer['columns']['country_zone'] = array(
+	    'exclude' => 1,
+	    'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.countryzone',
+	    'config' => array(
 			'type' => 'select',
 			'items' => array(
 					array(
@@ -287,8 +281,12 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_ta
 							)
 					)
 			)
+        )
 	);
-	$tx_cal_organizer['columns']['country']['config'] = array(
+	$tx_cal_organizer['columns']['country'] = array(
+	    'exclude' => 1,
+        'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.country',
+	    'config' => array(
 			'type' => 'select',
 			'items' => array(
 					array(
@@ -310,6 +308,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_ta
 							)
 					)
 			)
+	    )
 	);
 }
 

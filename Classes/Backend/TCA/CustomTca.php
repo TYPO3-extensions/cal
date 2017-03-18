@@ -61,7 +61,9 @@ class CustomTca {
 		}
 		
 		$this->commonJS = '';
-		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 8000000) {
+			$this->commonJS .= '<script src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'Resources/Public/js/recurui3.js" type="text/javascript"></script>' . chr (10) . '<script src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'Resources/Public/js/url2.js" type="text/javascript"></script>';
+		} else if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
 			$this->commonJS .= '<script src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'Resources/Public/js/recurui2.js" type="text/javascript"></script>' . chr (10) . '<script src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'Resources/Public/js/url2.js" type="text/javascript"></script>';
 		} else {
 			$this->commonJS .= '<script src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'Resources/Public/js/recurui.js" type="text/javascript"></script>' . chr (10) . '<script src="' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath ('cal') . 'Resources/Public/js/url.js" type="text/javascript"></script>';
@@ -155,8 +157,10 @@ class CustomTca {
 		$out [] = $this->commonJS;
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var extUrl = new ExtUrlUI('ext_url-container', 'data[" . $this->table . "][" . $this->uid . "][ext_url]', 'cal-row', '" . $this->getExtUrlRow () . "');";
-		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 8000000) {
 			$out [] = "$(function(){ extUrl.load(); });";
+		} else if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+			$out [] = "TYPO3.jQuery(function(){ extUrl.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { extUrl.load(); });";
 		}
@@ -236,7 +240,9 @@ class CustomTca {
 		$out [] = $this->commonJS;
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byMonth = new ByMonthUI('bymonth-container', 'data[" . $this->table . "][" . $this->uid . "][bymonth]', 'cal-row');";
-		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 8000000) {
+			$out [] = "TYPO3.jQuery(function(){ byMonth.load(); });";
+		} else if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
 			$out [] = "$(function(){ byMonth.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { byMonth.load(); });";
@@ -396,8 +402,10 @@ class CustomTca {
 		$out = array();
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'cal-row');";
-		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 8000000) {
 			$out [] = "$(function(){ byDay.load(); });";
+		} else if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+			$out [] = "TYPO3.jQuery(function(){ byDay.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { byDay.load(); });";
 		}
@@ -419,8 +427,10 @@ class CustomTca {
 		$out = array();
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byDay = new ByDayUI('byday-container', 'data[" . $this->table . "][" . $this->uid . "][byday]', 'cal-row', '" . $row . "');";
-		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 8000000) {
 			$out [] = "$(function(){ byDay.load(); });";
+		} else if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+			$out [] = "TYPO3.jQuery(function(){ byDay.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { byDay.load(); });";
 		}
@@ -436,8 +446,10 @@ class CustomTca {
 		$out = array();
 		$out [] = '<script type="text/javascript">';
 		$out [] = "var byMonthDay = new ByMonthDayUI('bymonthday-container', 'data[" . $this->table . "][" . $this->uid . "][bymonthday]', 'cal-row', '" . $row . "');";
-		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+		if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 8000000) {
 			$out [] = "$(function(){ byMonthDay.load(); });";
+		} else if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7004000) {
+			$out [] = "TYPO3.jQuery(function(){ byMonthDay.load(); });";
 		} else {
 			$out [] = "Event.observe(window, 'load', function() { byMonthDay.load(); });";
 		}

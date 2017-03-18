@@ -8,12 +8,12 @@ function RecurUI(containerID, storageID, rowClass, rowHTML){
 RecurUI.prototype = {
 	
 	addRecurrence: function(defaultValues) {
-		var container = TYPO3.jQuery("#"+escapeRegExp(this.containerID));
+		var container = $("#"+escapeRegExp(this.containerID));
 		
 		container.append(this.rowHTML);
 		
 		if(defaultValues) {
-			TYPO3.jQuery.each (defaultValues, function(index, pair) {
+			$.each (defaultValues, function(index, pair) {
 				var element = container.find('select.' + index).last();
 				element.val(pair);
 			});
@@ -23,10 +23,10 @@ RecurUI.prototype = {
 	},
 	
 	setCheckboxes: function(defaultValues) {
-		var container = TYPO3.jQuery("#"+escapeRegExp(this.containerID));
+		var container = $("#"+escapeRegExp(this.containerID));
 		var rowSelector = '.' + this.rowClass;
 		if(defaultValues) {
-			TYPO3.jQuery.each (defaultValues, function(index, pair) {
+			$.each (defaultValues, function(index, pair) {
 				container.find(rowSelector + ' input[value="' + pair +'"]').each( function(index, input) {
 					input.checked = "true";
 				});
@@ -35,26 +35,26 @@ RecurUI.prototype = {
 	},
 	
 	removeRecurrence: function(icon) {
-		TYPO3.jQuery(icon).parent().remove();
+		$(icon).parent().remove();
 		this.save();
 	},
 	
 	save: function() {
-		var storage = TYPO3.jQuery("#"+escapeRegExp(this.storageID));
+		var storage = $("#"+escapeRegExp(this.storageID));
 		storage.val('');
 		
 		//@todo  Figure out how to differentiate selector based forms from element based forms
-		var container = TYPO3.jQuery("#"+escapeRegExp(this.containerID));
+		var container = $("#"+escapeRegExp(this.containerID));
 		container.find('div.' + this.rowClass).each( function(index, div) {
 			var rowValue = '';
 			
-			TYPO3.jQuery(div).find("select").each( function(index, select) {
-				rowValue += TYPO3.jQuery(select).val();
+			$(div).find("select").each( function(index, select) {
+				rowValue += $(select).val();
 			});
 			
-			TYPO3.jQuery(div).find('input[type="checkbox"]:checked').each( function(index, input) {
-				if(TYPO3.jQuery(input).val()) {
-					rowValue += TYPO3.jQuery(input).val();
+			$(div).find('input[type="checkbox"]:checked').each( function(index, input) {
+				if($(input).val()) {
+					rowValue += $(input).val();
 				}							
 			});
 			
@@ -69,11 +69,11 @@ RecurUI.prototype = {
 	},
 	
 	load: function() {
-		var initialValue = TYPO3.jQuery("#"+escapeRegExp(this.storageID)).val();
+		var initialValue = $("#"+escapeRegExp(this.storageID)).val();
 		var recurArray = initialValue.split(",");
 		var obj = this;
 		
-		TYPO3.jQuery.each (recurArray, function(index, recur) {
+		$.each (recurArray, function(index, recur) {
 			var hash = obj.storageToHash(recur);
 			if(obj.rowHTML) {
 				obj.addRecurrence(hash);

@@ -813,7 +813,10 @@ class ListView extends \TYPO3\CMS\Cal\View\BaseView {
 				$pagesTotal = intval ($this->recordsPerPage) == 0 ? 1 : ceil ($this->count / $this->recordsPerPage);
 				$nextPage = $this->offset + 1;
 				$previousPage = $this->offset - 1;
-				$pagesCount = $this->conf ['view.'] ['list.'] ['pageBrowser.'] ['pagesCount'] - 1;
+				$pagesCount = intval($this->conf ['view.'] ['list.'] ['pageBrowser.'] ['pagesCount']) - 1;
+				if ($pagesCount < 0) {
+				    $pagesCount = 0;
+				}
 				
 				$min = 1;
 				$max = $pagesTotal;

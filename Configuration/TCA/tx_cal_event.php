@@ -1092,7 +1092,7 @@ $tx_cal_event = array(
 				'canNotCollapse' => 1
 		),
 		'5' => array(
-				'showitem' => 'start_date,start_time,allday',
+				'showitem' => 'allday,--linebreak--,start_date,start_time',
 				'canNotCollapse' => 1
 		),
 		'6' => array(

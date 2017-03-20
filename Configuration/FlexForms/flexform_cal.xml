@@ -222,11 +222,11 @@
 										<numIndex index="1"></numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:cal/controller/locallang.xml:l_daysofweek_lang_monday</numIndex>
+										<numIndex index="0">LLL:EXT:cal/Resources/Private/Language/locallang.xml:l_daysofweek_lang_monday</numIndex>
 										<numIndex index="1">Monday</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:cal/controller/locallang.xml:l_daysofweek_lang_sunday</numIndex>
+										<numIndex index="0">LLL:EXT:cal/Resources/Private/Language/locallang.xml:l_daysofweek_lang_sunday</numIndex>
 										<numIndex index="1">Sunday</numIndex>
 									</numIndex>
 								</items>

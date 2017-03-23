@@ -44,7 +44,7 @@ class MonthView extends \TYPO3\CMS\Cal\View\BaseView {
 		$page = '';
 		if ($this->conf ['view.'] ['month.'] ['monthMakeMiniCal']) {
 			$incFile = $GLOBALS['TSFE']->tmpl->getFileName($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
-			if(file_exists (PATH_site . $incFile )) {
+			if($incFile != null && file_exists (PATH_site . $incFile )) {
 				$page = Functions::getContent ($this->conf ['view.'] ['month.'] ['monthMiniTemplate']);
 			}
 			

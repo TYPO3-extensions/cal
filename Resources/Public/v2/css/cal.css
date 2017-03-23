@@ -112,6 +112,7 @@
 	border-bottom:1px solid #AAAAAA;
 }
 
+.tx-cal-controller .month-large td.weekday,
 .tx-cal-controller .month-large .weekday0,
 .tx-cal-controller .month-large .weekday1,
 .tx-cal-controller .month-large .weekday2,

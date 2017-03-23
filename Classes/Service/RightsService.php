@@ -207,7 +207,7 @@ class RightsService extends \TYPO3\CMS\Cal\Service\BaseService {
 		return false;
 	}
 	function isAllowedToEditEventCalendar() {
-		if ($this->checkRights ($this->conf ['rights.'] ['edit.'] ['event.'] ['enableAllFields.']) || $this->checkRights ($this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['calendar.']))
+		if ($this->checkRights ($this->conf ['rights.'] ['edit.'] ['event.'] ['enableAllFields.']) || $this->checkRights ($this->conf ['rights.'] ['edit.'] ['event.'] ['fields.'] ['calendar_id.']))
 			return true;
 		return false;
 	}

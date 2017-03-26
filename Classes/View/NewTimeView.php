@@ -222,6 +222,7 @@ abstract class NewTimeView {
 		    $values ['day'] = $this->day;
 		    $values ['month'] = $this->month;
 		    $values ['year'] = $this->year;
+		    $values ['ymd'] = sprintf('%04d',$this->year).sprintf('%02d',$this->month).sprintf('%02d',$this->day);
 		    $values ['weekdayNumber'] = $this->weekdayNumber;
 		    $values ['hasEvents'] = $this->hasEvents();
 		    $values ['parentMonth'] = $this->getParentMonth();
@@ -303,7 +304,7 @@ abstract class NewTimeView {
 				$local_cObj->data ['link_additionalParams'] = '&tx_cal_controller[gettime]=' . $time . '&tx_cal_controller[getdate]=' . $date->format ('%Y%m%d') . '&tx_cal_controller[lastview]=' . $controller->extendLastView () . '&tx_cal_controller[view]=create_event';
 				$local_cObj->data ['link_section'] = 'default';
 				$local_cObj->data ['link_parameter'] = $conf ['view.'] ['event.'] ['createEventViewPid'] ? $conf ['view.'] ['event.'] ['createEventViewPid'] : $GLOBALS ['TSFE']->id;
-				
+				\TYPO3\CMS\Core\Utility\DebugUtility::debug($local_cObj->data);
 				$tmp .= $local_cObj->cObjGetSingle ($conf ['view.'] [$view . '.'] ['event.'] ['addLink'], $conf ['view.'] [$view . '.'] ['event.'] ['addLink.']);
 				if ($wrap) {
 					$tmp = sprintf ($wrap, $remember, $class, $tmp, $date->format ('%Y %m %d %H %M %s'));

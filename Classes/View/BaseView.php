@@ -196,7 +196,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 		$rems['###CALENDAR_SELECTOR###'] = '';
 		if ($this->conf['view.']['other.']['showCalendarSelection']) {
 			$temp_sims = array();
-			$selectedCalendars = GeneralUtility::trimExplode(',',$this->controller->piVars['calendar'],1);
+			$selectedCalendars = explode (',',\TYPO3\CMS\Cal\Controller\Controller::convertLinkVarArrayToList($this->controller->piVars['calendar']));
 			$calendarService = $this->modelObj->getServiceObjByKey('cal_calendar_model', 'calendar', 'tx_cal_calendar');
 			$calendarArray = $calendarService->getCalendarFromTable($this->conf['pidList'], $calendarService->getCalendarSearchString($this->conf['pidList'], true,false));
 			if(is_array($calendarArray)){
@@ -341,7 +341,6 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 				$this->local_cObj->data['link_additionalParams'] = '&tx_cal_controller[gettime]='.$time.'&tx_cal_controller[getdate]='.$cal_time_obj->format('%Y%m%d').'&tx_cal_controller[lastview]='.$this->controller->extendLastView().'&tx_cal_controller[view]=create_event';
 				$this->local_cObj->data['link_section'] = 'default';
 				$this->local_cObj->data['link_parameter'] = $this->conf['view.']['event.']['createEventViewPid']?$this->conf['view.']['event.']['createEventViewPid']:$GLOBALS['TSFE']->id;
-
 				$tmp .= $this->local_cObj->cObjGetSingle($this->conf['view.'][$view.'.']['event.']['addLink'],$this->conf['view.'][$view.'.']['event.']['addLink.']);
 				if($wrap){
 					$tmp = sprintf($wrap,$remember,$class,$tmp,$cal_time_obj->format('%Y %m %d %H %M %s'));

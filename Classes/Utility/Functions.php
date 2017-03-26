@@ -504,7 +504,7 @@ class Functions {
 		$hookObjectsArr = array ();
 		if (is_array ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName])) {
 			foreach ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName] as $classRef) {
-				$hookObjectsArr [] = GeneralUtility::getUserObj ($classRef);
+				$hookObjectsArr [] = GeneralUtility::makeInstance ($classRef);
 			}
 		}
 		

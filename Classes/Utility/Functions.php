@@ -504,7 +504,11 @@ class Functions {
 		$hookObjectsArr = array ();
 		if (is_array ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName])) {
 			foreach ($GLOBALS ['TYPO3_CONF_VARS'] [TYPO3_MODE] ['EXTCONF'] ['ext/cal/' . $modulePath . '/class.' . $className . '.php'] [$hookName] as $classRef) {
-				$hookObjectsArr [] = GeneralUtility::makeInstance ($classRef);
+			    if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 8000000) {
+				    $hookObjectsArr [] = GeneralUtility::makeInstance ($classRef);
+			    } else {
+			        $hookObjectsArr [] = GeneralUtility::getUserObj ($classRef);
+			    }
 			}
 		}
 		

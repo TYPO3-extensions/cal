@@ -401,7 +401,9 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 		}
 		
 		if ($this->weekHasEvent) {
-			$classes .= ' withEventWeek';
+			$classes .= ' withEventWeek eventCountIs'.$this->rowspan;
+		} else {
+		    $classes .= ' emptyWeek';
 		}
 		return trim ($classes);
 	}

@@ -122,8 +122,23 @@
 .tx-cal-controller .month-large .weekday6,
 .tx-cal-controller .month-large .weekday7,
 .tx-cal-controller .month-large .currentDay {
-  height: 4em;
   font-size: 0.8em;
+}
+
+.tx-cal-controller .month-large .eventCountIs1, .tx-cal-controller .month-large .emptyWeek .empty {
+	height: 4em;
+}
+
+.tx-cal-controller .month-large .eventCountIs2 {
+	height: 2em;
+}
+
+.tx-cal-controller .month-large .eventCountIs3 {
+	height: 1.33em;
+}
+
+.tx-cal-controller .month-large .eventCountIs4 {
+	height: 1em;
 }
 
 .tx-cal-controller .month-small th,

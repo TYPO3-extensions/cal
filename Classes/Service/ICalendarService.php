@@ -1012,7 +1012,7 @@ class ICalendarService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$insertFields ['crdate'] = time ();
 		$insertFields ['pid'] = $pid;
 		$insertFields ['cruser_id'] = $cruserId;
-		$insertFields ['title'] = 'Exception for event ' . $eventUid;
+		$insertFields ['title'] = 'Exception for event ' . $eventUid. ' on '.$exceptionDate->format ( '%Y%m%d' );
 		$insertFields ['start_date'] = $exceptionDate->format ( '%Y%m%d' );
 		
 		$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ( 'tx_cal_exception_event', $insertFields );

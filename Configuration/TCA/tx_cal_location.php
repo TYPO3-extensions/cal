@@ -358,6 +358,12 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_ta
     		)
 	     )
 	);
+	if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7006000) {
+	    $tx_cal_location['columns']['country_zone']['config']['itemsProcFunc'] = 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\FormDataProvider\\TcaSelectItemsProcessor->translateCountryZonesSelector';
+	    $tx_cal_location['columns']['country_zone']['config']['wizards']['suggest']['default']['receiverClass'] = 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\Wizard\\SuggestReceiver';
+	    $tx_cal_location['columns']['country']['config']['itemsProcFunc'] = 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\FormDataProvider\\TcaSelectItemsProcessor->translateCountryZonesSelector';
+	    $tx_cal_location['columns']['country']['config']['wizards']['suggest']['default']['receiverClass'] = 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\Wizard\\SuggestReceiver';
+	}
 }
 
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) < 7000000) {

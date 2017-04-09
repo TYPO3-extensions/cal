@@ -147,7 +147,7 @@ class FeEditingBaseView extends \TYPO3\CMS\Cal\View\BaseView {
 		foreach ( $linkParams as $key => $value ) {
 			$preLinkParams [$this->prefixId . '[' . $key . ']'] = $value;
 		}
-		$this->controller->pi_linkTP ( '', $preLinkParams, $this->conf ['clear_anyway'], $linkParams ['page_id'] );
+		$this->controller->pi_linkTP ( '', $preLinkParams, $this->conf ['cache'], $linkParams ['page_id'] );
 		$temp_sims ['###BACK_LINK###'] = $this->cObj->lastTypoLinkUrl;
 		$temp_sims ['###L_CANCEL###'] = $this->controller->pi_getLL ( 'l_cancel' );
 		$temp_sims ['###L_SUBMIT###'] = $this->controller->pi_getLL ( 'l_submit' );

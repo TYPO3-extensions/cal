@@ -134,7 +134,6 @@ $tx_cal_calendar = array(
 			),
 			
 			'ext_url' => array(
-					'l10n_mode' => 'mergeIfNotBlank',
 					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.ext_url',
 					'config' => array(
 							'type' => 'user',
@@ -143,7 +142,6 @@ $tx_cal_calendar = array(
 			),
 			
 			'ext_url_notes' => array(
-					'l10n_mode' => 'mergeIfNotBlank',
 					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.ext_url_notes',
 					'config' => array(
 							'type' => 'text'
@@ -152,7 +150,6 @@ $tx_cal_calendar = array(
 			
 			'ics_file' => array(
 					'exclude' => 1,
-					'l10n_mode' => 'exclude',
 					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.ics_file',
 					'config' => array(
 							'type' => 'group',
@@ -170,7 +167,6 @@ $tx_cal_calendar = array(
 			
 			'refresh' => array(
 					'exclude' => 1,
-					'l10n_mode' => 'exclude',
 					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.refresh',
 					'config' => array(
 							'type' => 'input',

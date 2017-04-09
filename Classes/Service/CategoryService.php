@@ -561,7 +561,7 @@ class CategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 	public function enhanceEventQuery(&$select, &$table, &$where, &$groupBy, &$orderBy) {
 		$select .= ', tx_cal_event_category_mm.uid_foreign AS category_uid ';
 		$table .= ' LEFT JOIN tx_cal_event_category_mm ON tx_cal_event_category_mm.uid_local = tx_cal_event.uid';
-		$where .= $this->getCategorySearchString ($this->conf ['pidList'], true);;
+		$where .= $this->getCategorySearchString ($this->conf ['pidList'], true);
 		$groupBy = 'tx_cal_event.uid';
 		if ($this->conf ['view.'] ['joinCategoryByAnd']) {
 			$categoryArray = GeneralUtility::trimExplode (',', $this->conf ['category'], 1);

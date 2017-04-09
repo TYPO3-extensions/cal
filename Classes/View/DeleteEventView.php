@@ -81,7 +81,7 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		$page = \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($page, $sims, Array (), Array ());
 		return \TYPO3\CMS\Cal\Utility\Functions::substituteMarkerArrayNotCached ($page, $sims, Array (), Array ());
 	}
-	function getCalendarIdMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getCalendarIdMarker(& $template, & $sims, & $rems) {
 		$sims ['###CALENDAR_ID###'] = '';
 		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('*', 'tx_cal_calendar', 'uid = ' . intval ($this->object->getCalendarUid ()) . '');
 		while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
@@ -89,7 +89,7 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		}
 		$GLOBALS ['TYPO3_DB']->sql_free_result ($result);
 	}
-	function getCategoryMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getCategoryMarker(& $template, & $sims, & $rems) {
 		$sims ['###CATEGORY###'] = '';
 		
 		$categoryArray = $this->object->getCategories ();
@@ -104,70 +104,70 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			$sims ['###CATEGORY###'] = $this->cObj->stdWrap (implode (', ', $names), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['category_stdWrap.']);
 		}
 	}
-	function getAlldayMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getAlldayMarker(& $template, & $sims, & $rems) {
 		$label = $this->controller->pi_getLL ('l_false');
 		if ($this->object->isAllDay () == '1') {
 			$label = $this->controller->pi_getLL ('l_true');
 		}
 		$sims ['###ALLDAY###'] = $this->cObj->stdWrap ($label, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['allday_stdWrap.']);
 	}
-	function getStartdateMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getStartdateMarker(& $template, & $sims, & $rems) {
 		$startDate = $this->object->getStart ();
 		$split = $this->conf ['dateConfig.'] ['splitSymbol'];
 		$startDateFormatted = $startDate->format ('%Y' . $split . '%m' . $split . '%d');
 		$sims ['###STARTDATE###'] = $this->cObj->stdWrap ($startDateFormatted, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['startdate_stdWrap.']);
 	}
-	function getEnddateMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getEnddateMarker(& $template, & $sims, & $rems) {
 		$endDate = $this->object->getEnd ();
 		$split = $this->conf ['dateConfig.'] ['splitSymbol'];
 		$endDateFormatted = $endDate->format ('%Y' . $split . '%m' . $split . '%d');
 		$sims ['###ENDDATE###'] = $this->cObj->stdWrap ($endDateFormatted, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['enddate_stdWrap.']);
 	}
-	function getStarttimeMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getStarttimeMarker(& $template, & $sims, & $rems) {
 		$startDate = $this->object->getStart ();
 		$sims ['###STARTTIME###'] = $this->cObj->stdWrap ($startDate->format ($this->conf ['view.'] ['event.'] ['event.'] ['timeFormat']), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['starttime_stdWrap.']);
 	}
-	function getEndtimeMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getEndtimeMarker(& $template, & $sims, & $rems) {
 		$endDate = $this->object->getEnd ();
 		$sims ['###ENDTIME###'] = $this->cObj->stdWrap ($endDate->format ($this->conf ['view.'] ['event.'] ['event.'] ['timeFormat']), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['endtime_stdWrap.']);
 	}
-	function getTitleMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getTitleMarker(& $template, & $sims, & $rems) {
 		$sims ['###TITLE###'] = $this->cObj->stdWrap ($this->object->getTitle (), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['title_stdWrap.']);
 	}
-	function getOrganizerMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getOrganizerMarker(& $template, & $sims, & $rems) {
 		$sims ['###ORGANIZER###'] = '';
 		if (! $this->extConf ['hideOrganizerTextfield'] && $organizer = $this->object->getOrganizer ()) {
 			$sims ['###ORGANIZER###'] = $this->cObj->stdWrap ($organizer, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['organizer_stdWrap.']);
 		}
 	}
-	function getCalOrganizerMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getCalOrganizerMarker(& $template, & $sims, & $rems) {
 		$sims ['###CAL_ORGANIZER###'] = '';
 		if ($organizer = $this->object->getOrganizerObject ()) {
 			$sims ['###CAL_ORGANIZER###'] = $this->cObj->stdWrap ($organizer->getName (), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['cal_organizer_stdWrap.']);
 		}
 	}
-	function getLocationMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getLocationMarker(& $template, & $sims, & $rems) {
 		$sims ['###LOCATION###'] = '';
 		if (! $this->extConf ['hideLocationTextfield'] && $location = $this->object->getLocation ()) {
 			$sims ['###LOCATION###'] = $this->cObj->stdWrap ($location, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['location_stdWrap.']);
 		}
 	}
-	function getCalLocationMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getCalLocationMarker(& $template, & $sims, & $rems) {
 		$sims ['###CAL_LOCATION###'] = '';
 		if ($location = $this->object->getLocationObject ()) {
 			$sims ['###CAL_LOCATION###'] = $this->cObj->stdWrap ($location->getName (), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['cal_location_stdWrap.']);
 		}
 	}
-	function getDescriptionMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getDescriptionMarker(& $template, & $sims, & $rems) {
 		$this->object->getDescriptionMarker ($template, $sims, $rems, $wrapped, $this->conf ['view']);
 	}
-	function getTeaserMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getTeaserMarker(& $template, & $sims, & $rems) {
 		$this->object->getTeaserMarker ($template, $sims, $rems, $wrapped, $this->conf ['view']);
 	}
-	function getFrequencyMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getFrequencyMarker(& $template, & $sims, & $rems) {
 		$sims ['###FREQUENCY###'] = $this->cObj->stdWrap ($this->controller->pi_getLL ('l_' . $this->object->getFreq ()), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['frequency_stdWrap.']);
 	}
-	function getByDayMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getByDayMarker(& $template, & $sims, & $rems) {
 		$by_day = Array (
 				'MO',
 				'TU',
@@ -189,13 +189,13 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		
 		$sims ['###BY_DAY###'] = $this->cObj->stdWrap (implode (',', $temp_sims), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['byDay_stdWrap.']);
 	}
-	function getByMonthDayMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getByMonthDayMarker(& $template, & $sims, & $rems) {
 		$sims ['###BY_MONTHDAY###'] = $this->cObj->stdWrap (implode (',', $this->object->getByMonthDay ()), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['byMonthday_stdWrap.']);
 	}
-	function getByMonthMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getByMonthMarker(& $template, & $sims, & $rems) {
 		$sims ['###BY_MONTH###'] = $this->cObj->stdWrap (implode (',', $this->object->getByMonth ()), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['byMonth_stdWrap.']);
 	}
-	function getUntilMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getUntilMarker(& $template, & $sims, & $rems) {
 		$sims ['###UNTIL###'] = '';
 		$untilDate = $this->object->getUntil ();
 		if (is_object ($untilDate)) {
@@ -204,19 +204,19 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			$sims ['###UNTIL###'] = $this->cObj->stdWrap ($untilDateFormatted, $this->conf ['view.'] [$this->conf ['view'] . '.'] ['until_stdWrap.']);
 		}
 	}
-	function getCountMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getCountMarker(& $template, & $sims, & $rems) {
 		$sims ['###COUNT###'] = $this->cObj->stdWrap ($this->object->getCount (), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['count_stdWrap.']);
 	}
-	function getIntervalMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getIntervalMarker(& $template, & $sims, & $rems) {
 		$sims ['###INTERVAL###'] = $this->cObj->stdWrap ($this->object->getInterval (), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['interval_stdWrap.']);
 	}
-	function getRdateTypeMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getRdateTypeMarker(& $template, & $sims, & $rems) {
 		$sims ['###RDATE_TYPE###'] = $this->cObj->stdWrap ($this->controller->pi_getLL ('l_' . $this->object->getRdateType ()), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['rdateType_stdWrap.']);
 	}
-	function getRdateMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getRdateMarker(& $template, & $sims, & $rems) {
 		$sims ['###RDATE###'] = $this->cObj->stdWrap ($this->object->getRdate (), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['rdate_stdWrap.']);
 	}
-	function getNotifyMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getNotifyMarker(& $template, & $sims, & $rems) {
 		$sims ['###NOTIFY###'] = '';
 		$cal_notify_user = Array ();
 		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('fe_users.username', 'fe_users, tx_cal_fe_user_event_monitor_mm', 'tx_cal_fe_user_event_monitor_mm.pid in (' . $this->conf ['pidList'] . ') AND fe_users.uid = tx_cal_fe_user_event_monitor_mm.uid_foreign AND tx_cal_fe_user_event_monitor_mm.uid_local = ' . $this->object->getUid ());
@@ -228,7 +228,7 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 			$sims ['###NOTIFY###'] = $this->cObj->stdWrap (implode (',', (array) $cal_notify_user), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['notify_stdWrap.']);
 		}
 	}
-	function getExceptionMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getExceptionMarker(& $template, & $sims, & $rems) {
 		$exception = Array ();
 		$result = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('tx_cal_exception_event.title', 'tx_cal_exception_event,tx_cal_exception_event_mm', 'pid IN (' . $this->conf ['pidList'] . ') AND tx_cal_exception_event_mm.tablenames = "tx_cal_exception_event" AND tx_cal_exception_event_mm.uid_local =' . $this->object->getUid () . $this->cObj->enableFields ('tx_cal_exception_event'));
 		while ($row = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($result)) {
@@ -244,7 +244,7 @@ class DeleteEventView extends \TYPO3\CMS\Cal\View\FeEditingBaseView {
 		
 		$sims ['###EXCEPTION###'] = $this->cObj->stdWrap (implode (',', $exception), $this->conf ['view.'] [$this->conf ['view'] . '.'] ['exception_stdWrap.']);
 	}
-	function getCreateExceptionMarker(& $template, & $sims, & $rems, & $wrapped) {
+	function getCreateExceptionMarker(& $template, & $sims, & $rems) {
 		if ($this->object->isClone () && $this->rightsObj->isAllowedToCreateExceptionEvent ()) {
 			$local_sims ['###ACTION_EXCEPTION_URL###'] = $this->controller->pi_linkTP_keepPIvars_url (array (
 					'view' => 'save_exception_event',

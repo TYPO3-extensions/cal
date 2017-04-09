@@ -1705,10 +1705,10 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 	
 	function renderWithFluid($object = null){
 		$templateFile = GeneralUtility::getFileAbsFileName($this->conf['view.'][$this->conf['view'].'.'][$this->conf['view'].'TemplateFluid']);
-
         /** @var $view \TYPO3\CMS\Fluid\View\StandaloneView */
 		$view = new \TYPO3\CMS\Fluid\View\StandaloneView();
 		$view->setTemplatePathAndFilename($templateFile);
+		$view->setPartialRootPaths([GeneralUtility::getFileAbsFileName($this->conf['fluidPartialsPath'])]);
 		$view->assign($this->conf['view'].'View', $this);
 		if(is_object($object)){
 			$view->assign($this->conf['view'], $object);

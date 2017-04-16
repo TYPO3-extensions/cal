@@ -203,8 +203,8 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 				$postVarArray = GeneralUtility::_POST ();
 				$pageIds = Array ();
 				if(isset($postVarArray['pageIds']) && isset($postVarArray['tsPage'])){
-					$tsPage = intval($postVarArray['tsPage']);
-					foreach(explode(',',$postVarArray['pageIds']) as $pageId){
+					foreach($postVarArray['pageIds'] as $id => $pageId){
+					    $tsPage = intval($postVarArray['tsPage'][$id]);
 						if($tsPage > 0) {
 							$pageIds [intval ($pageId)] = $tsPage;
 						}
@@ -270,14 +270,15 @@ class CalIndexer extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
 									. '<div class="form-control-wrap">'
 											. '<div class="input-group" id="tceforms-pageIds_col'.$pageId.'_row-wrapper">'
 													. $pageTitle.' ['.$pageId.'] '
+													   . '<input name="pageIds[]" value="' . $pageId . '" data-date-offset="0" type="hidden" id="tceforms-pageIds_colId'.$pageId.'_row">'
 															. '</div>'
 																	. '</div>'
 																			. '</div>';
 							$table[] =
-							'<div class="form-group col-sm-6" id="pageIds_colId'.$pageId.'">'
+							'<div class="form-group col-sm-6" id="tsPage_colId'.$pageId.'">'
 									. '<div class="form-control-wrap">'
-											. '<div class="input-group" id="pageIds_colId'.$pageId.'_row-wrapper">'
-													. '<input name="pageIds" value="' . $value . '" class="form-control  t3js-clearable" data-date-type="date" data-date-offset="0" type="text" id="tceforms-pageIds_colId'.$pageId.'_row">'
+											. '<div class="input-group" id="tsPage_colId'.$pageId.'_row-wrapper">'
+													. '<input name="tsPage[]" value="" class="form-control  t3js-clearable" data-date-type="date" data-date-offset="0" type="text" id="tceforms-tsPage_colId'.$pageId.'_row">'
 															. '</div>'
 																	. '</div>'
 																			. '</div>';

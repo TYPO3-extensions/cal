@@ -30,6 +30,14 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	
 	protected $parentRow;
 	
+	protected $table;
+	
+	protected $field;
+	
+	protected $currentValue;
+	
+	protected $conf;
+	
 	const CALENDAR_PREFIX = 'calendar_';
 	const GLOBAL_PREFIX = 'global';
 
@@ -38,8 +46,11 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	 *
 	 * @param array $configuration TCA configuration
 	 */
-	public function __construct (array $configuration) {
-		
+	public function __construct (array $configuration, $table, $field, $currentValue) {
+	    $this->table = $table;
+	    $this->field = $field;
+	    $this->conf = $configuration;
+	    $this->currentValue = $currentValue;
 		$this->backendUserAuthentication = $GLOBALS['BE_USER'];
 	}
 	
@@ -102,11 +113,18 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	}
 	
 	protected function appendCalendarCategories($level, $childNodes){
-		if(isset($this->parentRow['calendar_id'][0])){
-			$calendarId = $this->parentRow['calendar_id'][0];
-		}
+	    $calendarId = 0;
+	    if(\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) > 8000000){
+    		if(isset($this->currentValue['calendar_id'])){
+    			$calendarId = $this->currentValue['calendar_id'];
+    		}
+	    } else {
+	        if(isset($this->parentRow['calendar_id'][0])){
+	            $calendarId = $this->parentRow['calendar_id'][0];
+	        }
+	    }
 		if($calendarId > 0){
-			$calres = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('tx_cal_calendar.uid, tx_cal_calendar.title', 'tx_cal_calendar', $this->getCalendarWhere());
+			$calres = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('tx_cal_calendar.uid, tx_cal_calendar.title', 'tx_cal_calendar', $this->getCalendarWhere($calendarId));
 			if ($calres) {
 				while ($calrow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($calres)) {
 					$node = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNode::class);
@@ -147,8 +165,8 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 		}
 	}
 	
-	protected function getCalendarWhere(){
-		$calWhere = 'l18n_parent = 0  AND tx_cal_calendar.uid = '.$this->parentRow['calendar_id'][0];;
+	protected function getCalendarWhere($calendarId){
+		$calWhere = 'l18n_parent = 0  AND tx_cal_calendar.uid = '.$calendarId;
 	
 		if ((TYPO3_MODE == 'BE') || ($GLOBALS ['TSFE']->beUserLogin && $GLOBALS ['BE_USER']->extAdmEnabled)) {
 			$calWhere .= BackendUtility::BEenableFields ('tx_cal_calendar') . ' AND tx_cal_calendar.deleted = 0';

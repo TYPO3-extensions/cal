@@ -1,0 +1,37 @@
+
+1.11.1 - TYPO3 LTS 6.2, 7, LTS 8
+--------------------------------
+
+::
+
+    * Bug #80041        - Typing error in loadTreeData function
+    * Bug #80237        - undefined method getCalendarUid()
+    * Bug #80250		- Start and End date are always the current day
+    * Bug #80251		- Class 'TYPO3\CMS\Rtehtmlarea\Controller\FrontendRteController' not found
+    * Bug #80252		- Call to undefined method TYPO3\CMS\Core\Utility\File\BasicFileUtility::init()
+    * Bug #80253		- Accessing FeUser session var using getKey
+    * Bug #80290		- Search view shows all categories
+    * Bug #80308		- Missing "renderType" in TCA of field [tx_cal_location][country] - same for tx_cal_organizer
+    * Bug #80339		- Recurring not working in TYPO3 7.6.16
+    * Bug #80340		- Constrain rule not working with equal strings
+    * Bug #80344		- problem with php 7.1 - warning in list view
+    * Bug #79034		- Wrong locallang.xml path in flexform_cal.xml
+    * Bug #77747		- Shifted backend fields in TYPO3 CMS 7
+    * Bug #80382		- error in ext/cal/Classes/Utility/Functions.php line 632
+    * Bug #80410		- handle create and edit calendar_id the same way in RightsService
+    * Bug #80418		- Calendar selector should respect piVars as selected calendar
+    * Bug #80419		- Month table cells should all be equally high
+    * Bug #80458		- GeneralUtility::getUserObj is deprecated with TYPO3 8
+    * Bug #80595		- [] operator not supported for strings
+    * Bug #80773		- DeleteEventView functions are not compatible with super class functions
+    * Bug #80774		- Cancel link in fe-editing does not respect chashes
+    * Bug #80775		- Weeks in month view have no style class if there is no event in the week
+    * Bug #80776		- Can not create calendar records on TYPO3 version 8
+    * Bug #80777		- Automatic created exception events for one event are titled always the same
+    * Bug #80765		- The Fluid template files "" could not be loaded.
+    * Bug #80738		- TCA for wec_map wrong
+    * Bug #80739		- TCA for static_info_tables wrong
+    * Bug #80539		- Creating event - calendar categories not displayed
+    * Bug #80786		- BE Module Cal Indexer
+    * Bug				- Fixed call of not existing class: WecMap\Utility\Cache
+    * Task			    - Refactored variables in new*Views to make them accessable in custom cObject

@@ -30,7 +30,9 @@ class TceFuncSelectTreeView extends \TYPO3\CMS\Backend\Tree\View\AbstractTreeVie
 	var $TCEforms_nonSelectableItemsArray = array ();
 	
 	public function __construct() {
-	    $this->init();
+	    if(\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) > 8000000) {
+	       $this->init();
+	    }
 	}
 	
 	/**

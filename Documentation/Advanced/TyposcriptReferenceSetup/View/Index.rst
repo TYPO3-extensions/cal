@@ -1002,6 +1002,21 @@ plugin.tx\_cal\_controller.view.event.event
 .. container:: table-row
 
    a
+         categoryIconDefault
+   
+   b
+         String
+   
+   c
+         Default category 'icon' used to visualize event category
+   
+   d
+         &bull;
+
+
+.. container:: table-row
+
+   a
          additionalCategoryWhere
    
    b

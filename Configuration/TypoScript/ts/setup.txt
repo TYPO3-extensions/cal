@@ -273,6 +273,9 @@ plugin.tx_cal_controller {
 				
 				# @description Image tag for category icon
 				categoryIcon = <img src="%%%CATICON%%%" border="0" height="24" title="%%%CATTITLE%%%"/>
+				
+				# @description Default category 'icon'
+				categoryIconDefault = &bull;
 					
 				# @description	Configuration for the add event link. Default setting is to act backwards compatible, but it can be altered with TS
 				addLink =< plugin.tx_cal_controller.view.defaultLinkSetup

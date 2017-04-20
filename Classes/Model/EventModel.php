@@ -2002,7 +2002,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 				);
 				$sims ['###CATEGORY_ICON###'] .= str_replace ($search, $replace, $this->conf ['view.'] [$view . '.'] ['event.'] ['categoryIcon']);
 			} else {
-				$sims ['###CATEGORY_ICON###'] .= '&bull;';
+				$sims ['###CATEGORY_ICON###'] .= $this->conf ['view.'] [$view . '.'] ['event.'] ['categoryIconDefault'];
 			}
 		}
 	}

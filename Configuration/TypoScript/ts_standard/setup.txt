@@ -947,12 +947,6 @@ plugin.tx_cal_controller {
 					# @description	Height of the map.
 					mapHeight = 300
 		
-					# @description	Possible control sizes for the map.  Options are large, small, zoomonly, and none.
-					controlSize = small
-		
-					# @description	Boolean defining whether overview map should be shown.
-					showOverviewMap = 0
-		
 					# @description	Boolean defining whether the map type control should be shown.
 					showMapType = 0
 		

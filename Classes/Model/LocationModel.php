@@ -165,8 +165,6 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 			$zoomLevel = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['zoomLevel'];
 			$initialMapType = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['initialMapType'];
 			
-			$controlSize = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['controlSize'];
-			$showOverviewMap = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['showOverviewMap'];
 			$showMapType = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['showMapType'];
 			$showScale = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['showScale'];
 			$showInfoOnLoad = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['showInfoOnLoad'];
@@ -174,23 +172,15 @@ class LocationModel extends \TYPO3\CMS\Cal\Model\BaseModel {
 			$showWrittenDirections = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['showWrittenDirections'];
 			$prefillAddress = $this->conf ['view.'] [$this->conf ['view'] . '.'] [$this->getObjectType () . '.'] ['map.'] ['prefillAddress'];
 			
-			include_once (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath ('wec_map') . 'Classes/MapService/Google/Map.php');
 			$mapName = 'map' . $this->getUid ();
-			$map = new \tx_wecmap_map_google($apiKey, $width, $height, $centerLat, $centerLong, $zoomLevel, $mapName);
+            /** @var \JBartels\WecMap\MapService\Google\Map $map */
+            $map = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\JBartels\WecMap\MapService\Google\Map::class, null, $width, $height, $centerLat, $centerLong, $zoomLevel, $mapName);
 			
 			// evaluate config to see which map controls we need to show
-			if ($controlSize == 'large') {
-				$map->addControl ('largeMap');
-			} else if ($controlSize == 'small') {
-				$map->addControl ('smallMap');
-			} else if ($controlSize == 'zoomonly') {
-				$map->addControl ('smallZoom');
-			}
+			$map->addControl ('zoom');
 			
 			if ($showScale)
 				$map->addControl ('scale');
-			if ($showOverviewMap)
-				$map->addControl ('overviewMap');
 			if ($showMapType)
 				$map->addControl ('mapType');
 			if ($initialMapType)

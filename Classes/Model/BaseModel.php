@@ -588,6 +588,11 @@ abstract class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 		} else {
 			$this->local_cObj->data = $this->getValuesAsArray ();
 		}
+		// Sets the $TSFE->cObjectDepthCounter in BE mode because cObjGetSingle() of ContentObjectRenderer relies on this setting
+		if (TYPO3_MODE === 'BE' && !isset($GLOBALS['TSFE'])) {
+			$GLOBALS['TSFE'] = new \stdClass();
+			$GLOBALS['TSFE']->cObjectDepthCounter = 100;
+		}
 	}
 	
 	public function isSharedUser($userId, $groupIdArray) {

@@ -408,15 +408,16 @@ abstract class BaseService extends \TYPO3\CMS\Core\Service\AbstractService {
 			$wsSelectconf = $selectConf;
 			$wsSelectconf ['selectFields'] = 'uid,pid,tstamp,crdate,deleted,hidden,sys_language_uid,'.$localizationPrefix.'_parent,'.$localizationPrefix.'_diffsource,t3ver_oid,t3ver_id,t3ver_label,t3ver_wsid,t3ver_state,t3ver_stage,t3ver_count,t3ver_tstamp,t3_origuid';
 			$wsRes = $this->cObj->exec_getQuery ($table, $wsSelectconf);
+			$tmpWSRes = $GLOBALS ['TYPO3_DB']->exec_SELECT_queryArray ($wsRes);
 			$removeUids = Array ();
-			while ($wsRow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($wsRes)) {
+			while ($wsRow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($tmpWSRes)) {
 				$orgUid = $wsRow ['uid'];
 				$GLOBALS ['TSFE']->sys_page->versionOL ($table, $wsRow);
 				if (! $wsRow ['uid']) { // if versionOL returns nothing the record is not visible in the selected Workspace
 					$removeUids [] = $orgUid;
 				}
 			}
-			$GLOBALS ['TYPO3_DB']->sql_free_result ($wsRes);
+			$GLOBALS ['TYPO3_DB']->sql_free_result ($tmpWSRes);
 			
 			$removeUidList = implode (',', array_unique ($removeUids));
 			

@@ -98,8 +98,6 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			if (count ($tmpUids)) {
 				$recurringClause = ' OR (tx_cal_event.uid IN (' . implode (',', $tmpUids) . ')) ';
 			}
-		} else if ($includeRecurring) {
-			$recurringClause = ' OR (tx_cal_event.start_date<=' . $formattedEndtime . ' AND (tx_cal_event.freq IN ("day", "week", "month", "year") AND (tx_cal_event.until>=' . $formattedStarttime . ' OR tx_cal_event.until=0))) OR (tx_cal_event.rdate AND tx_cal_event.rdate_type IN ("date_time", "date", "period")) ';
 		}
 		
 		$calendarService = &$this->modelObj->getServiceObjByKey ('cal_calendar_model', 'calendar', 'tx_cal_calendar');

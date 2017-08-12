@@ -240,7 +240,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 			foreach ($basicNode->getChildNodes () as $child) {
 				// Change in custom TreeDataProvider by adding the if clause
 				if ($restriction || $this->isCategoryAllowed ($child)) {
-					$returnedChild = $this->buildRepresentationForNode ($child, $node, $level + 1, TRUE);
+					$returnedChild = $this->buildRepresentationForNode ($child, $node, $level + 1, $restriction);
 
 					if (!is_null ($returnedChild)) {
 						$foundSomeChild = TRUE;
@@ -283,6 +283,9 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	        if ($GLOBALS ['BE_USER']->user ['admin']) {
 	            return TRUE;
 	        }
+	        
+	        $be_userCategories = [];
+	        $be_userCalendars = [];
 	        
 	        if ($GLOBALS ['BE_USER']->user ['tx_cal_enable_accesscontroll']) {
 	            $be_userCategories = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_category'], 1);

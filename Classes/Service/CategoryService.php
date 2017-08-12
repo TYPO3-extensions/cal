@@ -170,7 +170,7 @@ class CategoryService extends \TYPO3\CMS\Cal\Service\BaseService {
 			// Query to select all blacklisted events
 			$sql = 'SELECT uid_local FROM tx_cal_event_category_mm WHERE uid_foreign IN (' . self::$categoryToFilter . ')';
 			// Add search substring with tx_cal_event.uid NOT IN
-			$categorySearchString .= ' AND tx_cal_event.uid NOT IN (' . $sql . ')';
+			$categorySearchString .= ' AND tx_cal_event.uid IN (' . $sql . ')';
 		}
 		
 		// Minimum match

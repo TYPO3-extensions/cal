@@ -150,18 +150,24 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	
 	protected function appendCategories($level, $childNodes, $where){
 		$categoryResult = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ('tx_cal_category.uid, tx_cal_category.title', 'tx_cal_category', $where);
+		$usedCategories = [];
 		if ($categoryResult) {
 			while ($categoryRow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($categoryResult)) {
 				$categoryNode = GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Tree\TreeNode::class);
 				$categoryNode->setId($categoryRow['uid']);
-				
 				if ($level < $this->levelMaximum) {
 					$children = $this->getChildrenOf($categoryNode, $level + 1);
 					if ($children !== NULL) {
+					    foreach ($children as $child) {
+					        $usedCategories[$child->getId()] = TRUE;
+					    }
 						$categoryNode->setChildNodes($children);
 					}
 				}
-				$childNodes->append($categoryNode);
+				if(!$usedCategories[$categoryRow['uid']]) {
+				    $usedCategories[$categoryRow['uid']] = TRUE;
+				    $childNodes->append($categoryNode);
+				}
 			}
 			$GLOBALS ['TYPO3_DB']->sql_free_result ($categoryResult);
 		}
@@ -198,7 +204,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 			$row = BackendUtility::getRecordWSOL ('tx_cal_calendar', $id, '*', '', FALSE);
 			$iconFactory = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
 			$icon = $iconFactory->getIconForRecord('tx_cal_calendar', $row, \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL);
-			$node->setIcon($icon->getMarkup());
+			$node->setIcon($icon);
 			$node->setLabel ($row['title']);
 			$node->setSortValue($id);
 		} else if($basicNode->getId () === GLOBAL_PREFIX) {
@@ -219,7 +225,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 			$node->setLabel ($node->getLabel ());
 			$iconFactory = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Imaging\\IconFactory');
 			$icon = $iconFactory->getIconForRecord($this->tableName, $row, \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL);
-			$node->setIcon($icon->getMarkup());
+			$node->setIcon($icon);
 			$node->setSelectable (!GeneralUtility::inList ($this->getNonSelectableLevelList (), $level) && !in_array ($basicNode->getId (), $this->getItemUnselectableList ()));
 			$node->setSortValue ($this->nodeSortValues[$basicNode->getId ()]);
 		}
@@ -233,7 +239,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 		
 		$node->setParentNode ($parent);
 		if ($basicNode->hasChildNodes ()) {
-			$node->setHasChildren (TRUE);
+			
 			/** @var \TYPO3\CMS\Backend\Tree\SortedTreeNodeCollection $childNodes */
 			$childNodes = GeneralUtility::makeInstance ('TYPO3\\CMS\\Backend\\Tree\\SortedTreeNodeCollection');
 			$foundSomeChild = FALSE;
@@ -254,6 +260,7 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 			}
 
 			if ($foundSomeChild) {
+			    $node->setHasChildren (TRUE);
 				$node->setChildNodes ($childNodes);
 			}
 		}

@@ -290,6 +290,8 @@ class DatabaseTreeDataProvider extends \TYPO3\CMS\Core\Tree\TableConfiguration\D
 	        if ($GLOBALS ['BE_USER']->user ['tx_cal_enable_accesscontroll']) {
 	            $be_userCategories = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_category'], 1);
 	            $be_userCalendars = GeneralUtility::trimExplode (',', $GLOBALS ['BE_USER']->user ['tx_cal_calendar'], 1);
+	        } else {
+	            return TRUE;
 	        }
 	        if (is_array ($GLOBALS ['BE_USER']->userGroups)) {
 	            foreach ($GLOBALS ['BE_USER']->userGroups as $gid => $group) {

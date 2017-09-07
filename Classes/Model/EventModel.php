@@ -1362,7 +1362,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 				$linkConf ['link_ATagParams'] = ' onclick="' . $temp . '"';
 			}
 			$linkConf ['link_no_cache'] = 0;
-			$linkConf ['link_useCacheHash'] = 0;
+			//$linkConf ['link_useCacheHash'] = 0;
 			$linkConf ['link_additionalParams'] = '&tx_cal_controller[view]=edit_event&tx_cal_controller[type]=' . $this->getType () . '&tx_cal_controller[uid]=' . $this->getUid () . '&tx_cal_controller[getdate]=' . $eventStart->format ('%Y%m%d') . '&tx_cal_controller[lastview]=' . $this->controller->extendLastView ();
 			$linkConf ['link_section'] = 'default';
 			$linkConf ['link_parameter'] = $this->conf ['view.'] ['event.'] ['editEventViewPid'] ? $this->conf ['view.'] ['event.'] ['editEventViewPid'] : $GLOBALS ['TSFE']->id;
@@ -1379,7 +1379,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 				$linkConf ['link_ATagParams'] = ' onclick="' . $temp . '"';
 			}
 			$linkConf ['link_no_cache'] = 0;
-			$linkConf ['link_useCacheHash'] = 0;
+			//$linkConf ['link_useCacheHash'] = 0;
 			$linkConf ['link_additionalParams'] = '&tx_cal_controller[view]=delete_event&tx_cal_controller[type]=' . $this->getType () . '&tx_cal_controller[uid]=' . $this->getUid () . '&tx_cal_controller[getdate]=' . $eventStart->format ('%Y%m%d') . '&tx_cal_controller[lastview]=' . $this->controller->extendLastView ();
 			$linkConf ['link_section'] = 'default';
 			$linkConf ['link_parameter'] = $this->conf ['view.'] ['event.'] ['deleteEventViewPid'] ? $this->conf ['view.'] ['event.'] ['deleteEventViewPid'] : $GLOBALS ['TSFE']->id;

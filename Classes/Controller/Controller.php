@@ -66,6 +66,15 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		$this->validateDateRanges();
 		$this->getParamsFromSession ();
 		$this->initCaching ();
+		
+		$hookObjectsArr = $this->getHookObjectsArray ('controllerClass');
+		// Hook: initCal
+		foreach ($hookObjectsArr as $hookObj) {
+		    if (method_exists ($hookObj, 'initCal')) {
+		        $hookObj->initCal ($this);
+		    }
+		}
+		
 		$return = $this->initConfigs ();
 		if (! $this->error) {
 			$return .= $this->getContent ();
@@ -3809,6 +3818,13 @@ class Controller extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 			}
 			if ($this->conf ['view.'] [$action . '_' . $object . '.'] ['redirectAfter' . ucwords ($action) . 'ToView']) {
 				$linkParams [$this->prefixId . '[view]'] = $this->conf ['view.'] [$action . '_' . $object . '.'] ['redirectAfter' . ucwords ($action) . 'ToView'];
+			}
+			$hookObjectsArr = $this->getHookObjectsArray ('beforeRedirect');
+			// Hook: beforeRedirect
+			foreach ($hookObjectsArr as $hookObj) {
+			    if (method_exists ($hookObj, 'beforeRedirect')) {
+			        $hookObj->beforeRedirect ($this, $action, $object, $linkParams);
+			    }
 			}
 			$this->pi_linkTP ('|', $linkParams, $this->conf ['cache'], $this->conf ['view.'] [$action . '_' . $object . '.'] ['redirectAfter' . ucwords ($action) . 'ToPid']);
 			$rURL = $this->cObj->lastTypoLinkUrl;

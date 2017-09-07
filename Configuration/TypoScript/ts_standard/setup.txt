@@ -2562,7 +2562,7 @@ plugin.tx_cal_controller {
 					}
 					dataWrap = |%%%ICS_VIEW%%%
 				}
-				typolink.useCacheHash = 0
+				typolink.useCacheHash = 1
 				outerWrap.field = link_wrap
 			}
 

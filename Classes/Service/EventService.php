@@ -1391,6 +1391,9 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$deviationResult = $GLOBALS ['TYPO3_DB']->exec_SELECTquery ($select, $table, $where);
 		if ($deviationResult) {
 			while ($deviationRow = $GLOBALS ['TYPO3_DB']->sql_fetch_assoc ($deviationResult)) {
+			    if($deviationRow['deleted']){
+			        continue;
+			    }
 				$origStartDate = new \TYPO3\CMS\Cal\Model\CalDate ($deviationRow ['orig_start_date']);
 				$origStartDate->addSeconds ($deviationRow ['orig_start_time']);
 				$deviations [$origStartDate->format ('%Y%m%d%H%M%S')] = $deviationRow;

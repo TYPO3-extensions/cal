@@ -20,7 +20,7 @@ class vnote extends \TYPO3\CMS\Cal\Model\ICalendar {
 	function getType() {
 		return 'vNote';
 	}
-	function parsevCalendar($data) {
+	function parsevCalendar($data, $base = 'VCALENDAR', $charset = 'utf8', $clear = true) {
 		return parent::parsevCalendar ($data, 'VNOTE');
 	}
 	

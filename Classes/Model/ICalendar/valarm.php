@@ -18,7 +18,7 @@ class valarm extends \TYPO3\CMS\Cal\Model\ICalendar {
 	function getType() {
 		return 'vAlarm';
 	}
-	function parsevCalendar($data) {
+	function parsevCalendar($data, $base = 'VCALENDAR', $charset = 'utf8', $clear = true) {
 		parent::parsevCalendar ($data, 'VALARM');
 	}
 	function exportvCalendar() {

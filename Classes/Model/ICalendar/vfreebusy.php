@@ -26,7 +26,7 @@ class vfreebusy extends \TYPO3\CMS\Cal\Model\ICalendar {
 	 * @param string $data
 	 *        	The data to parse.
 	 */
-	function parsevCalendar($data) {
+	function parsevCalendar($data, $base = 'VCALENDAR', $charset = 'utf8', $clear = true) {
 		parent::parsevCalendar ($data, 'VFREEBUSY');
 		
 		// Do something with all the busy periods.

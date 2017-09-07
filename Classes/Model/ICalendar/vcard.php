@@ -41,7 +41,7 @@ class vcard extends \TYPO3\CMS\Cal\Model\ICalendar {
 	function getType() {
 		return 'vcard';
 	}
-	function parsevCalendar($data) {
+	function parsevCalendar($data, $base = 'VCALENDAR', $charset = 'utf8', $clear = true) {
 		return parent::parsevCalendar ($data, 'vcard');
 	}
 	

@@ -18,7 +18,7 @@ class vevent extends \TYPO3\CMS\Cal\Model\ICalendar {
 	function getType() {
 		return 'vEvent';
 	}
-	function parsevCalendar($data) {
+	function parsevCalendar($data, $base = 'VCALENDAR', $charset = 'utf8', $clear = true) {
 		parent::parsevCalendar ($data, 'VEVENT');
 	}
 	function exportvCalendar() {

@@ -299,13 +299,12 @@ abstract class NewTimeView {
 			} else {
 				$local_cObj->setCurrentVal ($conf ['view.'] [$view . '.'] ['event.'] ['addIcon']);
 				// linkConf = Array();
-				$local_cObj->data ['link_useCacheHash'] = 0;
+				//$local_cObj->data ['link_useCacheHash'] = 0;
 				$local_cObj->data ['link_no_cache'] = 1;
 				$local_cObj->data ['link_additionalParams'] = '&tx_cal_controller[gettime]=' . $time . '&tx_cal_controller[getdate]=' . $date->format ('%Y%m%d') . '&tx_cal_controller[lastview]=' . $controller->extendLastView () . '&tx_cal_controller[view]=create_event';
 				$local_cObj->data ['link_section'] = 'default';
 				$local_cObj->data ['link_parameter'] = $conf ['view.'] ['event.'] ['createEventViewPid'] ? $conf ['view.'] ['event.'] ['createEventViewPid'] : $GLOBALS ['TSFE']->id;
-				\TYPO3\CMS\Core\Utility\DebugUtility::debug($local_cObj->data);
-				$tmp .= $local_cObj->cObjGetSingle ($conf ['view.'] [$view . '.'] ['event.'] ['addLink'], $conf ['view.'] [$view . '.'] ['event.'] ['addLink.']);
+    			$tmp .= $local_cObj->cObjGetSingle ($conf ['view.'] [$view . '.'] ['event.'] ['addLink'], $conf ['view.'] [$view . '.'] ['event.'] ['addLink.']);
 				if ($wrap) {
 					$tmp = sprintf ($wrap, $remember, $class, $tmp, $date->format ('%Y %m %d %H %M %s'));
 				}
@@ -470,7 +469,7 @@ abstract class NewTimeView {
 			
 			$local_cObj->setCurrentVal ($conf ['view.'] [$view . '.'] ['event.'] ['addIcon']);
 			// linkConf = Array();
-			$local_cObj->data ['link_useCacheHash'] = 0;
+			//$local_cObj->data ['link_useCacheHash'] = 0;
 			$local_cObj->data ['link_no_cache'] = 1;
 			$local_cObj->data ['link_additionalParams'] = $timeParams . '&tx_cal_controller[startdate]=' . $date->format ('%Y%m%d') . '&tx_cal_controller[lastview]=' . $controller->extendLastView () . '&tx_cal_controller[view]=create_event';
 			$local_cObj->data ['link_section'] = 'default';

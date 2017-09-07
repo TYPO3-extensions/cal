@@ -336,7 +336,7 @@ class BaseView extends \TYPO3\CMS\Cal\Service\BaseService {
 			}else{
 				$this->local_cObj->setCurrentVal($this->conf['view.'][$view.'.']['event.']['addIcon']);
 				#$linkConf = Array();
-				$this->local_cObj->data['link_useCacheHash'] = 0;
+				//$this->local_cObj->data['link_useCacheHash'] = 0;
 				$this->local_cObj->data['link_no_cache'] = 1;
 				$this->local_cObj->data['link_additionalParams'] = '&tx_cal_controller[gettime]='.$time.'&tx_cal_controller[getdate]='.$cal_time_obj->format('%Y%m%d').'&tx_cal_controller[lastview]='.$this->controller->extendLastView().'&tx_cal_controller[view]=create_event';
 				$this->local_cObj->data['link_section'] = 'default';

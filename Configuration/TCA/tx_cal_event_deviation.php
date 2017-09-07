@@ -2,7 +2,6 @@
 defined('TYPO3_MODE') or die();
 
 $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal']);
-$configurationRte = 'richtext:rte_transform[mode=ts_css]';
 
 $sPid = '###CURRENT_PID###'; // storage pid????
 
@@ -72,8 +71,8 @@ $tx_cal_event_deviation = array(
 						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
 						'config' => array(
 								'type' => 'input',
+						        'renderType' => 'inputDateTime',
 								'size' => '12',
-								'max' => '20',
 								'eval' => 'datetime',
 								'default' => '0',
 								'checkbox' => '0'
@@ -84,8 +83,8 @@ $tx_cal_event_deviation = array(
 						'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
 						'config' => array(
 								'type' => 'input',
+						        'renderType' => 'inputDateTime',
 								'size' => '12',
-								'max' => '20',
 								'eval' => 'datetime',
 								'default' => '0',
 								'checkbox' => '0'
@@ -96,8 +95,8 @@ $tx_cal_event_deviation = array(
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.orig_start_date',
 						'config' => array(
 								'type' => 'input',
+						        'renderType' => 'inputDateTime',
 								'size' => '12',
-								'max' => '25',
 								'eval' => 'required,date'
 						)
 				),
@@ -106,8 +105,8 @@ $tx_cal_event_deviation = array(
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.orig_start_time',
 						'config' => array(
 								'type' => 'input',
+						        'renderType' => 'inputDateTime',
 								'size' => '12',
-								'max' => '20',
 								'eval' => 'time'
 						)
 				),
@@ -116,8 +115,8 @@ $tx_cal_event_deviation = array(
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.start_date',
 						'config' => array(
 								'type' => 'input',
+						        'renderType' => 'inputDateTime',
 								'size' => '12',
-								'max' => '25',
 								'eval' => 'date'
 						)
 				),
@@ -135,8 +134,8 @@ $tx_cal_event_deviation = array(
 						'displayCond' => 'FIELD:allday:!=:1',
 						'config' => array(
 								'type' => 'input',
+						        'renderType' => 'inputDateTime',
 								'size' => '12',
-								'max' => '20',
 								'eval' => 'time',
 								'default' => '0'
 						)
@@ -146,8 +145,8 @@ $tx_cal_event_deviation = array(
 						'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.end_date',
 						'config' => array(
 								'type' => 'input',
+						        'renderType' => 'inputDateTime',
 								'size' => '12',
-								'max' => '25',
 								'eval' => 'date'
 						)
 				),
@@ -157,8 +156,8 @@ $tx_cal_event_deviation = array(
 						'displayCond' => 'FIELD:allday:!=:1',
 						'config' => array(
 								'type' => 'input',
+						        'renderType' => 'inputDateTime',
 								'size' => '12',
-								'max' => '20',
 								'eval' => 'time',
 								'default' => '0'
 						)
@@ -182,38 +181,28 @@ $tx_cal_event_deviation = array(
 								'minitems' => 0,
 								'maxitems' => 1,
 								'allowed' => $useOrganizerStructure,
+    						    'fieldControl' => array(
+    						        'addRecord' => array(
+    						            'disabled' => '',
+    						            'options' => array(
+    						                'pid' => $sPid,
+    						                'setValue' => 'set',
+    						                'pid' => $sPid,
+    						                'table' => $useOrganizerStructure,
+    						                'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.createNew',
+    						            )
+    						        ),
+    						        'editPopup' => array(
+    						            'disabled' => '',
+    						            'options' => array(
+    						                'windowOpenParameters' => 'height=600,width=525,status=0,menubar=0,scrollbars=1',
+    						                'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.edit',
+    						            )
+    						        )
+    						    ),
 								'wizards' => array(
 										'_PADDING' => 2,
 										'_VERTICAL' => 1,
-										'add' => array(
-												'type' => 'script',
-												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.createNew',
-												'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
-												'params' => array(
-														'table' => $useOrganizerStructure,
-														'pid' => $sPid,
-														'setValue' => 'set'
-												),
-												'module' => array(
-														'name' => 'wizard_add'
-												)
-										),
-										'edit' => array(
-												'type' => 'popup',
-												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_organizer.edit',
-												'module' => array(
-														'name' => 'wizard_edit'
-												),
-												'popup_onlyOpenIfSelected' => 1,
-												'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
-												'JSopenParams' => 'height=600,width=525,status=0,menubar=0,scrollbars=1',
-												'params' => array(
-														'table' => $useOrganizerStructure 
-												)
-										),
-										'suggest' => array(
-												'type' => 'suggest'
-										)
 								)
 						)
 				),
@@ -227,12 +216,6 @@ $tx_cal_event_deviation = array(
 								'size' => '1',
 								'maxitems' => '1',
 								'minitems' => '0',
-								'show_thumbs' => '1',
-								'wizards' => array(
-										'suggest' => array(
-												'type' => 'suggest'
-										)
-								)
 						)
 				),
 				'organizer_link' => array(
@@ -244,17 +227,9 @@ $tx_cal_event_deviation = array(
 								'max' => '128',
 								'checkbox' => '',
 								'eval' => 'trim',
+						        'renderType' => 'inputLink',
 								'wizards' => array(
 										'_PADDING' => 2,
-										'link' => array(
-												'type' => 'popup',
-												'title' => 'Link',
-												'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
-												'module' => array(
-													'name' => 'wizard_link'
-												),
-												'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-										)
 								)
 						)
 				),
@@ -277,38 +252,28 @@ $tx_cal_event_deviation = array(
 								'minitems' => 0,
 								'maxitems' => 1,
 								'allowed' => $useLocationStructure,
+    						    'fieldControl' => array(
+    						        'addRecord' => array(
+    						            'disabled' => '',
+    						            'options' => array(
+    						                'pid' => $sPid,
+    						                'setValue' => 'set',
+    						                'pid' => $sPid,
+    						                'table' => $useLocationStructure,
+    						                'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.createNew',
+    						            )
+    						        ),
+    						        'editPopup' => array(
+    						            'disabled' => '',
+    						            'options' => array(
+    						                'windowOpenParameters' => 'height=600,width=525,status=0,menubar=0,scrollbars=1',
+    						                'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.edit',
+    						            )
+    						        )
+    						    ),
 								'wizards' => array(
 										'_PADDING' => 2,
 										'_VERTICAL' => 1,
-										'add' => array(
-												'type' => 'script',
-												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.createNew',
-												'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
-												'params' => array(
-														'table' => $useLocationStructure,
-														'pid' => $sPid,
-														'setValue' => 'set'
-												),
-												'module' => array(
-														'name' => 'wizard_add'
-												)
-										),
-										'edit' => array(
-												'type' => 'popup',
-												'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.edit',
-												'module' => array(
-														'name' => 'wizard_edit'
-												),
-												'popup_onlyOpenIfSelected' => 1,
-												'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
-												'JSopenParams' => 'height=600,width=525,status=0,menubar=0,scrollbars=1',
-												'params' => array(
-														'table' => $useLocationStructure 
-												)
-										),
-										'suggest' => array(
-												'type' => 'suggest'
-										)
 								)
 						)
 				),
@@ -322,12 +287,6 @@ $tx_cal_event_deviation = array(
 								'size' => '1',
 								'maxitems' => '1',
 								'minitems' => '0',
-								'show_thumbs' => '1',
-								'wizards' => array(
-										'suggest' => array(
-												'type' => 'suggest'
-										)
-								)
 						)
 				),
 				'location_link' => array(
@@ -339,12 +298,13 @@ $tx_cal_event_deviation = array(
 								'max' => '128',
 								'checkbox' => '',
 								'eval' => 'trim',
+						        'renderType' => 'inputLink',
 								'wizards' => array(
 										'_PADDING' => 2,
 										'link' => array(
 												'type' => 'popup',
 												'title' => 'Link',
-												'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+												'icon' => 'actions-wizard-link',
 												'module' => array(
 													'name' => 'wizard_link'
 												),
@@ -360,18 +320,17 @@ $tx_cal_event_deviation = array(
 								'type' => 'text',
 								'cols' => '40',
 								'rows' => '6',
+						        'enableRichtext' => true,
+    						    'fieldControl' => array(
+    						        'fullScreenRichtext' => array(
+    						            'disabled' => '',
+    						            'options' => array(
+    						                'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+    						            ),
+    						        )
+    						    ),
 								'wizards' => array(
 										'_PADDING' => 4,
-										'RTE' => array(
-												'notNewRecords' => 1,
-												'RTEonly' => 1,
-												'type' => 'script',
-												'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-												'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-												'module' => array(
-														'name' => 'wizard_rte'
-												)
-										)
 								)
 						)
 				),
@@ -382,18 +341,17 @@ $tx_cal_event_deviation = array(
 								'type' => 'text',
 								'cols' => '40',
 								'rows' => '6',
+						        'enableRichtext' => true,
+    						    'fieldControl' => array(
+    						        'fullScreenRichtext' => array(
+    						            'disabled' => '',
+    						            'options' => array(
+    						                'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+    						            ),
+    						        )
+    						    ),
 								'wizards' => array(
 										'_PADDING' => 4,
-										'RTE' => array(
-												'notNewRecords' => 1,
-												'RTEonly' => 1,
-												'type' => 'script',
-												'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-												'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-												'module' => array(
-														'name' => 'wizard_rte'
-												)
-										)
 								)
 						)
 				),
@@ -490,14 +448,6 @@ $tx_cal_event_deviation = array(
 		),
 		'types' => array(
 				'0' => array(
-                    'columnsOverrides' => array(
-                        'description' => array(
-                            'defaultExtras' => $configurationRte
-                        ),
-                        'teaser' => array(
-                            'defaultExtras' => $configuration['useTeaser'] ? $configurationRte : ''
-                        )
-                    ),
                     'showitem' => '--div--;LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.general_sheet,--palette--;LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.orig_start;3, title, --palette--;;1,--palette--;LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.start;5,--palette--;LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.end;6,' . ($configuration['useTeaser'] ? 'teaser,' : ''). 'description, --palette--;;5,--div--;LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.location_sheet,' . ($configuration['hideLocationTextfield'] ? 'location_id,location_pid,location_link' : 'location,location_id,location_pid,location_link'). ',--div--;LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.organizer_sheet,' . ($configuration['hideOrganizerTextfield'] ? 'organizer_id,organizer_pid,organizer_link' : 'organizer,organizer_id,organizer_pid,organizer_link'). ',--div--;LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_event.files_sheet,image, --palette--;;4,imagecaption,attachment,attachmentcaption'
 				)
 		),

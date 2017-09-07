@@ -40,11 +40,6 @@ $tx_cal_attendee = array(
 								'minitems' => 0,
 								'maxitems' => 1,
 								'allowed' => 'fe_users',
-								'wizards' => array(
-										'suggest' => array(
-												'type' => 'suggest'
-										)
-								)
 						)
 				),
 				'fe_group_id' => array(
@@ -57,11 +52,6 @@ $tx_cal_attendee = array(
 								'minitems' => 0,
 								'maxitems' => 1,
 								'allowed' => 'fe_groups',
-								'wizards' => array(
-										'suggest' => array(
-												'type' => 'suggest'
-										)
-								)
 						)
 				),
 				'email' => array(

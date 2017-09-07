@@ -3,7 +3,6 @@ defined('TYPO3_MODE') or die();
 
 $tx_cal_category = array(
 	'ctrl' => array(
-		'requestUpdate' => 'calendar_id',
 		'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
@@ -70,6 +69,7 @@ $tx_cal_category = array(
 		'calendar_id' => array(
 				'exclude' => 1,
 				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.calendar',
+		        'onChange' => 'reload',
 				'config' => array(
                         'renderType' => 'selectSingle',
 						'type' => 'select',
@@ -88,11 +88,6 @@ $tx_cal_category = array(
 						'minitems' => 0,
 						'maxitems' => 1,
 						'allowed' => 'tx_cal_calendar',
-						'wizards' => array(
-								'suggest' => array(
-										'type' => 'suggest'
-								)
-						)
 				)
 		),
 		'parent_category' => array(
@@ -113,7 +108,6 @@ $tx_cal_category = array(
 								'parentField' => 'parent_category',
 								'appearance' => array(
 										'showHeader' => TRUE,
-										'allowRecursiveMode' => TRUE,
 										'expandAll' => TRUE,
 										'maxLevels' => 99
 								)
@@ -121,8 +115,7 @@ $tx_cal_category = array(
 						'form_type' => 'user',
 						'userFunc' => 'TYPO3\CMS\Cal\TreeProvider\TreeView->displayCategoryTree',
 						'treeView' => 1,
-						'size' => 1,
-						'autoSizeMax' => 20,
+						'size' => 20,
 						'itemListStyle' => 'height:300px;',
 						'minitems' => 0,
 						'maxitems' => 2,
@@ -139,18 +132,12 @@ $tx_cal_category = array(
 				'exclude' => 1,
 				'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_category.single_pid',
 				'config' => array(
-						'type' => 'group',
+				        'type' => 'group',
 						'internal_type' => 'db',
 						'allowed' => 'pages',
 						'size' => '1',
 						'maxitems' => '1',
 						'minitems' => '0',
-						'show_thumbs' => '1',
-						'wizards' => array(
-								'suggest' => array(
-										'type' => 'suggest'
-								)
-						)
 				)
 		),
 		'notification_emails' => array(

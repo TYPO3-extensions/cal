@@ -5,7 +5,6 @@ $configuration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['cal'
 
 $tx_cal_calendar = array(
 	'ctrl' => array(
-			'requestUpdate' => 'activate_fnb',
 			'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar',
 			'label' => 'title',
 			'tstamp' => 'tstamp',
@@ -70,15 +69,11 @@ $tx_cal_calendar = array(
 							'autoSizeMax' => 25,
 							'maxitems' => 500,
 							'allowed' => 'fe_users,fe_groups',
-							'wizards' => array(
-									'suggest' => array(
-											'type' => 'suggest'
-									)
-							)
 					)
 			),
 			'activate_fnb' => array(
 					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.activate_fnb',
+			        'onChange' => 'reload',
 					'config' => array(
 							'type' => 'check'
 					)
@@ -95,11 +90,6 @@ $tx_cal_calendar = array(
 							'minitems' => 0,
 							'maxitems' => 100,
 							'allowed' => 'fe_users,fe_groups',
-							'wizards' => array(
-									'suggest' => array(
-											'type' => 'suggest'
-									)
-							)
 					)
 			),
 			'nearby' => array(
@@ -152,13 +142,17 @@ $tx_cal_calendar = array(
 					'exclude' => 1,
 					'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.ics_file',
 					'config' => array(
-							'type' => 'group',
+					        'type' => 'group',
 							'internal_type' => 'file',
 							'allowed' => 'ics', // Must be empty for disallowed to work.
 							'max_size' => '10000',
 							'uploadfolder' => 'uploads/tx_cal/ics',
-							'show_thumbs' => '0',
 							'size' => '1',
+					        'fieldWizard' => array(
+					            'fileThumbnails' => array(
+					                'disabled' => true,
+					            )
+					        ),
 							'autoSizeMax' => '1',
 							'maxitems' => '1',
 							'minitems' => '0'

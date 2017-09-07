@@ -28,11 +28,6 @@ $tx_cal_fe_user_event_monitor_mm = array(
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
-				'wizards' => array(
-					'suggest' => array(
-						'type' => 'suggest'
-					)
-				)
 			)
 		),
 		'uid_local' => array(
@@ -45,11 +40,6 @@ $tx_cal_fe_user_event_monitor_mm = array(
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
-				'wizards' => array(
-					'suggest' => array(
-						'type' => 'suggest'
-					)
-				)
 			)
 		),
 		'tablenames' => array(

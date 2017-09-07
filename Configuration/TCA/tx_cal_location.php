@@ -53,18 +53,17 @@ $tx_cal_location = array(
 				'type' => 'text',
 				'cols' => '30',
 				'rows' => '5',
+			    'enableRichtext' => true,
+			    'fieldControl' => array(
+			        'fullScreenRichtext' => array(
+			            'disabled' => '',
+			            'options' => array(
+			                'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
+			            ),
+			        )
+			    ),
 				'wizards' => array(
 					'_PADDING' => 2,
-					'RTE' => array(
-						'notNewRecords' => 1,
-						'RTEonly' => 1,
-						'type' => 'script',
-						'title' => 'Full screen Rich Text Editing|Formatteret redigering i hele vinduet',
-						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_rte.gif',
-						'module' => array(
-							'name' => 'wizard_rte'
-						)
-					)
 				)
 			)
 		),
@@ -152,17 +151,9 @@ $tx_cal_location = array(
 				'max' => '128',
 				'checkbox' => '',
 				'eval' => 'trim',
+			    'renderType' => 'inputLink',
 				'wizards' => array(
 					'_PADDING' => 2,
-					'link' => array(
-						'type' => 'popup',
-						'title' => 'Link',
-						'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
-						'module' => array(
-							'name' => 'wizard_link'
-						),
-						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-					)
 				)
 			)
 		),
@@ -177,11 +168,6 @@ $tx_cal_location = array(
 				'minitems' => 0,
 				'maxitems' => 100,
 				'MM' => 'tx_cal_location_shared_user_mm',
-				'wizards' => array(
-					'suggest' => array(
-						'type' => 'suggest'
-					)
-				)
 			)
 		),
 		'latitude' => array(
@@ -253,11 +239,6 @@ $tx_cal_location = array(
 	),
 	'types' => array(
 		'0' => array(
-            'columnsOverrides' => array(
-                'description' => array(
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
-                )
-            ),
 			'showitem' => 'name, --palette--;;1, description, street, city, country, country_zone, zip, latitude, longitude, phone, fax, email, image, link, shared_user_cnt'
 		)
 	),
@@ -309,6 +290,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_ta
         'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.countryzone',
     	'config' => array(
     		'type' => 'select',
+    	    'renderType' => 'selectSingle',
     		'items' => array(
     			array(
     				'',
@@ -321,14 +303,6 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_ta
     		'size' => 1,
     		'minitems' => 0,
     		'maxitems' => 1,
-    		'wizards' => array(
-    			'suggest' => array(
-    				'type' => 'suggest',
-    				'default' => array(
-    					'receiverClass' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\SuggestReceiver'
-    				)
-    			)
-    		)
     	)
 	);
 	$tx_cal_location['columns']['country'] = array (
@@ -336,6 +310,7 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_ta
 	    'label' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_location.country',
 	    'config' => array(
     		'type' => 'select',
+	        'renderType' => 'selectSingle',
     		'items' => array(
     			array(
     				'',
@@ -348,14 +323,6 @@ if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('static_info_ta
     		'size' => 1,
     		'minitems' => 0,
     		'maxitems' => 1,
-    		'wizards' => array(
-    			'suggest' => array(
-    				'type' => 'suggest',
-    				'default' => array(
-    					'receiverClass' => 'SJBR\\StaticInfoTables\\Hook\\Backend\\Form\\SuggestReceiver'
-    				)
-    			)
-    		)
 	     )
 	);
 	if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger (TYPO3_version) >= 7006000) {

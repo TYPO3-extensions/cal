@@ -53,11 +53,6 @@ $tx_cal_exception_event_group = array(
 								'minitems' => 0,
 								'maxitems' => 100,
 								'MM' => 'tx_cal_exception_event_group_mm',
-								'wizards' => array(
-										'suggest' => array(
-												'type' => 'suggest'
-										)
-								)
 						)
 				),
 				't3ver_label' => array(

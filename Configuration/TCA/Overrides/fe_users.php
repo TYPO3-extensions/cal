@@ -14,22 +14,20 @@ $tempColumns = array(
 			'allowed' => 'tx_cal_calendar',
 			'minitems' => 0,
 			'maxitems' => 99,
+		    'fieldControl' => array(
+		        'addRecord' => array(
+		            'disabled' => '',
+		            'options' => array(
+		                'pid' => $sPid,
+		                'setValue' => 'set',
+		                'table' => 'tx_cal_calendar',
+		                'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
+		            )
+		        )
+		    ),
 			'wizards' => array(
 				'_PADDING' => 2,
 				'_VERTICAL' => 1,
-				'add' => array(
-					'type' => 'script',
-					'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
-					'icon' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_calendar.gif',
-					'params' => array(
-						'table' => 'tx_cal_calendar',
-						'pid' => $sPid,
-						'setValue' => 'set'
-					),
-					'module' => array(
-						'name' => 'wizard_add'
-					)
-				)
 			)
 		)
 	),
@@ -42,22 +40,20 @@ $tempColumns = array(
 			'allowed' => 'tx_cal_calendar',
 			'minitems' => 0,
 			'maxitems' => 99,
+		    'fieldControl' => array(
+		        'addRecord' => array(
+		            'disabled' => '',
+		            'options' => array(
+		                'pid' => $sPid,
+		                'setValue' => 'set',
+		                'table' => 'tx_cal_calendar',
+		                'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
+		            )
+		        )
+		    ),
 			'wizards' => array(
 				'_PADDING' => 2,
 				'_VERTICAL' => 1,
-				'add' => array(
-					'type' => 'script',
-					'title' => 'LLL:EXT:cal/Resources/Private/Language/locallang_db.xml:tx_cal_calendar.createNew',
-					'icon' => 'EXT:cal/Resources/Public/icons/icon_tx_cal_calendar.gif',
-					'params' => array(
-						'table' => 'tx_cal_calendar',
-						'pid' => $sPid,
-						'setValue' => 'set'
-					),
-					'module' => array(
-						'name' => 'wizard_add'
-					)
-				)
 			)
 		)
 	)

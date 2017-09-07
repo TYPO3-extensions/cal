@@ -37,18 +37,12 @@ $newCalSysCategoryColumns = array (
 				'l10n_mode' => 'mergeIfNotBlank',
 				'label' => $ll . 'tx_cal_category.single_pid',
 				'config' => array (
-						'type' => 'group',
+				        'type' => 'group',
 						'internal_type' => 'db',
 						'allowed' => 'pages',
 						'size' => 1,
 						'maxitems' => 1,
 						'minitems' => 0,
-						'show_thumbs' => 1,
-						'wizards' => array (
-								'suggest' => array (
-										'type' => 'suggest' 
-								) 
-						) 
 				) 
 		),
 		'shortcut' => array (
@@ -56,18 +50,12 @@ $newCalSysCategoryColumns = array (
 				'l10n_mode' => 'mergeIfNotBlank',
 				'label' => $ll . 'tx_cal_category.shortcut',
 				'config' => array (
-						'type' => 'group',
+				        'type' => 'group',
 						'internal_type' => 'db',
 						'allowed' => 'pages',
 						'size' => 1,
 						'maxitems' => 1,
 						'minitems' => 0,
-						'show_thumbs' => 1,
-						'wizards' => array (
-								'suggest' => array (
-										'type' => 'suggest' 
-								) 
-						) 
 				) 
 		),
 		'headerstyle' => Array (
@@ -107,12 +95,6 @@ $newCalSysCategoryColumns = array (
 						'minitems' => 0,
 						'maxitems' => 1,
 						'allowed' => 'tx_cal_calendar',
-						'wizards' => Array (
-								'suggest' => array (
-										'type' => 'suggest',
-										'default' => $wizzardSuggestDefaults 
-								) 
-						) 
 				) 
 		),
 		'shared_user_allowed' => Array (

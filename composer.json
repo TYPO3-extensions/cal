@@ -1,5 +1,5 @@
 {
-  "name": "typo3-ter/cal",
+  "name": "typo3/cal",
   "type": "typo3-cms-extension",
   "description": "Calendar Base (cal)",
   "license": [
@@ -7,13 +7,10 @@
   ],
   "version": "1.11.2-dev",
   "replace": {
-	"cs_seo": "*"
+	"cal": "*"
   },
   "require": {
 	"typo3/cms-core": ">=8.7.0"
-  },
-  "suggest": {
-	"typo3-ter/realurl": "*"
   },
   "autoload": {
 	"psr-4": {

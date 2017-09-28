@@ -484,8 +484,8 @@ CREATE TABLE be_groups (
 );
 
 CREATE TABLE fe_users (
-	tx_cal_calendar tinytext NOT NULL,
-	tx_cal_calendar_subscription tinyblob NOT NULL,
+	tx_cal_calendar tinytext,
+	tx_cal_calendar_subscription tinyblob,
 );
 
 CREATE TABLE tx_cal_attendee (
@@ -603,7 +603,7 @@ CREATE TABLE tx_cal_cache (
     identifier varchar(128) DEFAULT '' NOT NULL,
     content text NOT NULL,
 	crdate int(11) DEFAULT '0' NOT NULL,
-	lifetime int(11) DEFAULT '0' NOT NULL,    
+	lifetime BIGINT DEFAULT '0' NOT NULL,
   	PRIMARY KEY (id),
   	KEY cache_id (identifier)
 ) ENGINE=InnoDB;

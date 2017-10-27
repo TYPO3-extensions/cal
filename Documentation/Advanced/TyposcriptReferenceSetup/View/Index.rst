@@ -1060,7 +1060,7 @@ plugin.tx\_cal\_controller.view.event.event
          
          addLink {
          
-         typolink.useCacheHash = 0
+         typolink.useCacheHash = 1
          
          typolink.title.override.override.dataWrap =
          {LLL:EXT:cal/controller/locallang.xml:l\_create\_event}

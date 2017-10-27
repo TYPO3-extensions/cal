@@ -297,7 +297,7 @@ plugin.tx_cal_controller {
 				# @description	Configuration for the add event link. Default setting is to act backwards compatible, but it can be altered with TS
 				addLink =< plugin.tx_cal_controller.view.defaultLinkSetup
 				addLink {
-					typolink.useCacheHash = 0
+					typolink.useCacheHash = 1
 					typolink.title.override.override.dataWrap = %%%CREATE_EVENT%%%
 				}
 
@@ -637,7 +637,7 @@ plugin.tx_cal_controller {
 						# wrapping the parameter with the typenum of the ics page
 						parameter.wrap = |,{$plugin.tx_cal_controller.view.ics.typeNum}
 						title.override.override = %%%ICSLINK_LABEL%%%
-						useCacheHash = 0
+						useCacheHash = 1
 					}
 					wrap = <div>|</div>
 				}
@@ -2994,7 +2994,7 @@ plugin.tx_cal_controller {
 				value = |
 				required = 1
 				typolink {
-					useCacheHash = 0
+					useCacheHash = 1
 					returnLast = url
 				}
 			}

@@ -351,10 +351,8 @@ class CustomTca {
 						<div class="input-group">
 						    <input type="hidden" value="' . $formatedValue . '" id="data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '" />
 							<div class="form-control-clearable">
-						    	<input data-date-type="datetime" onblur="rdateChanged();" data-formengine-validation-rules="[{&quot;type&quot;:&quot;datetime&quot;,&quot;config&quot;:{&quot;type&quot;:&quot;input&quot;,&quot;size&quot;:&quot;13&quot;,&quot;default&quot;:&quot;0&quot;}}]" data-formengine-input-params="{&quot;field&quot;:&quot;data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]&quot;,&quot;evalList&quot;:&quot;datetime&quot;,&quot;is_in&quot;:&quot;&quot;}" data-formengine-input-name="data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]" id="tceforms-datetimefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" value="'.$formatedValue.'" maxlength="20" class="t3js-datetimepicker form-control t3js-clearable hasDefaultValue" type="text">
-								<button style="display: none;" type="button" class="close" tabindex="-1" aria-hidden="true">
-									<span class="fa fa-times"></span>
-								</button>
+						    	<input data-date-type="datetime" onblur="rdateChanged();" onchange="rdateChanged();" data-formengine-validation-rules="[{&quot;type&quot;:&quot;datetime&quot;,&quot;config&quot;:{&quot;type&quot;:&quot;input&quot;,&quot;size&quot;:&quot;13&quot;,&quot;default&quot;:&quot;0&quot;}}]" data-formengine-input-params="{&quot;field&quot;:&quot;data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]&quot;,&quot;evalList&quot;:&quot;datetime&quot;,&quot;is_in&quot;:&quot;&quot;}" data-formengine-input-name="data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]" id="tceforms-datetimefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" value="'.$formatedValue.'" maxlength="20" class="t3js-datetimepicker form-control t3js-clearable hasDefaultValue" type="text">
+								
 							</div>
 						</div>
 					</div>';
@@ -367,8 +365,8 @@ class CustomTca {
 						<div class="input-group">
 						    <input type="hidden" value="' . $formatedValue . '" id="data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '" />
 							<div class="form-control-clearable">
-						    	<input data-date-type="date" onblur="rdateChanged();" data-formengine-validation-rules="[{&quot;type&quot;:&quot;date&quot;,&quot;config&quot;:{&quot;type&quot;:&quot;input&quot;,&quot;size&quot;:&quot;12&quot;,&quot;max&quot;:&quot;20&quot;}}]" data-formengine-input-params="{&quot;field&quot;:&quot;data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]&quot;,&quot;evalList&quot;:&quot;date&quot;,&quot;is_in&quot;:&quot;&quot;}" data-formengine-input-name="data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]" id="tceforms-datefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" value="'.$formatedValue.'" maxlength="20" class="t3js-datetimepicker form-control t3js-clearable hasDefaultValue" type="text">
-								<button style="display: none;" type="button" class="close" tabindex="-1" aria-hidden="true">
+						    	<input data-date-type="date" onblur="rdateChanged();" onchange="rdateChanged();" data-formengine-validation-rules="[{&quot;type&quot;:&quot;date&quot;,&quot;config&quot;:{&quot;type&quot;:&quot;input&quot;,&quot;size&quot;:&quot;12&quot;,&quot;max&quot;:&quot;20&quot;}}]" data-formengine-input-params="{&quot;field&quot;:&quot;data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]&quot;,&quot;evalList&quot;:&quot;date&quot;,&quot;is_in&quot;:&quot;&quot;}" data-formengine-input-name="data[' . $this->table . '][' . $this->uid . '][rdate' . $key . '_hr]" id="tceforms-datefield-data_' . $this->table . '_' . $this->uid . '_rdate' . $key . '_hr" value="'.$formatedValue.'" maxlength="20" class="t3js-datetimepicker form-control t3js-clearable hasDefaultValue" type="text">
+								<button style="display: none;" type="button" class="close" tabindex="-1" aria-hidden="true" onclick="rdateChanged();">
 									<span class="fa fa-times"></span>
 								</button>
 							</div>

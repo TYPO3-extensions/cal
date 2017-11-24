@@ -1596,6 +1596,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 								'event_uid' => $event->getUid (),
 								'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
 						);
+						$this->updateEventDataWithDeviations($event, $eventData);
 						$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 						if (FALSE === $result){
 							throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458131);
@@ -1661,6 +1662,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 								'event_uid' => $event->getUid (),
 								'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
 						);
+						$this->updateEventDataWithDeviations($event, $eventData);
 						$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 						if (FALSE === $result){
 							throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458132);
@@ -1695,6 +1697,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 								'event_uid' => $event->getUid (),
 								'tablename' => $event->isException ? 'tx_cal_exception_event' : 'tx_cal_event' 
 						);
+						$this->updateEventDataWithDeviations($event, $eventData);
 						$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 						if (FALSE === $result){
 							throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458133);
@@ -2129,32 +2132,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 								'event_uid' => $event->getUid (),
 								'tablename' => $event->getType() == 'tx_cal_phpicalendar' ? ($event->isException ? 'tx_cal_exception_event' : 'tx_cal_event') : $event->getType() 
 						);
-						$deviationDates = $event->getDeviationDates ();
-						if (array_key_exists ($eventData ['start_datetime'], $deviationDates)) {
-							$startDate = null;
-							if ($deviationDates [$eventData ['start_datetime']] ['start_date']) {
-								$startDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationDates [$eventData ['start_datetime']] ['start_date']);
-							} else {
-								$startDate = new \TYPO3\CMS\Cal\Model\CalDate ();
-								$startDate->copy ($nextOccuranceTime);
-							}
-							$endDate = null;
-							if ($deviationDates [$eventData ['start_datetime']] ['end_date']) {
-								$endDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationDates [$eventData ['start_datetime']] ['end_date']);
-							} else {
-								$endDate = new \TYPO3\CMS\Cal\Model\CalDate ();
-								$endDate->copy ($nextOccuranceEndTime);
-							}
-							
-							if (! $deviationDates [$eventData ['start_datetime']] ['allday']) {
-								$startDate->addSeconds ($deviationDates [$eventData ['start_datetime']] ['start_time']);
-								$endDate->addSeconds ($deviationDates [$eventData ['start_datetime']] ['end_time']);
-							}
-							
-							$eventData ['event_deviation_uid'] = $deviationDates [$eventData ['start_datetime']] ['uid'];
-							$eventData ['start_datetime'] = $startDate->format ('%Y%m%d') . $startDate->format ('%H%M%S');
-							$eventData ['end_datetime'] = $endDate->format ('%Y%m%d') . $endDate->format ('%H%M%S');
-						}
+						$this->updateEventDataWithDeviations($event, $eventData);
 						$result = $GLOBALS ['TYPO3_DB']->exec_INSERTquery ($table, $eventData);
 						if (FALSE === $result){
 							throw new \RuntimeException('Could not write event index record to database: '.$GLOBALS ['TYPO3_DB']->sql_error(), 1431458135);
@@ -2168,6 +2146,35 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 			$nextOccuranceTime->addSeconds (86400);
 		}
 	}
+	
+	private function updateEventDataWithDeviations($event, &$eventData) {
+		$deviationDates = $event->getDeviationDates ();
+		if (array_key_exists ($eventData ['start_datetime'], $deviationDates)) {
+			$startDate = null;
+			if ($deviationDates [$eventData ['start_datetime']] ['start_date']) {
+				$startDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationDates [$eventData ['start_datetime']] ['start_date']);
+			} else {
+				$startDate = new \TYPO3\CMS\Cal\Model\CalDate ();
+				$startDate->copy ($nextOccuranceTime);
+			}
+			$endDate = null;
+			if ($deviationDates [$eventData ['start_datetime']] ['end_date']) {
+				$endDate = new  \TYPO3\CMS\Cal\Model\CalDate ($deviationDates [$eventData ['start_datetime']] ['end_date']);
+			} else {
+				$endDate = new \TYPO3\CMS\Cal\Model\CalDate ();
+				$endDate->copy ($nextOccuranceEndTime);
+			}
+			
+			if (! $deviationDates [$eventData ['start_datetime']] ['allday']) {
+				$startDate->addSeconds ($deviationDates [$eventData ['start_datetime']] ['start_time']);
+				$endDate->addSeconds ($deviationDates [$eventData ['start_datetime']] ['end_time']);
+			}
+			
+			$eventData ['event_deviation_uid'] = $deviationDates [$eventData ['start_datetime']] ['uid'];
+			$eventData ['start_datetime'] = $startDate->format ('%Y%m%d') . $startDate->format ('%H%M%S');
+			$eventData ['end_datetime'] = $endDate->format ('%Y%m%d') . $endDate->format ('%H%M%S');
+		}
+    }
 	function getMonthDaysAccordingly(&$event, $month, $year) {
 		$byDayArray = $event->getByDay ();
 		$byMonthDays = $event->getByMonthDay ();

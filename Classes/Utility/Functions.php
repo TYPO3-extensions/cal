@@ -157,20 +157,18 @@ class Functions {
 		$wPkeys = array_keys ($wrappedSubpartContentArray);
 		
 		// Finding subparts and substituting them with the subpart as a marker
-		reset ($sPkeys);
-		while (list (, $sPK) = each ($sPkeys)) {
-			$content = $cObj->substituteSubpart ($content, $sPK, $subpartContentArray [$sPK]);
+		foreach ($sPkeys as $key => $sPK) {
+		    $content = $cObj->substituteSubpart ($content, $sPK, $subpartContentArray [$sPK]);
 		}
 		
 		// Finding subparts and wrapping them with markers
-		reset ($wPkeys);
-		while (list (, $wPK) = each ($wPkeys)) {
-			if (is_array ($wrappedSubpartContentArray [$wPK])) {
-				$parts = &$wrappedSubpartContentArray [$wPK];
-			} else {
-				$parts = explode ('|', $wrappedSubpartContentArray [$wPK]);
-			}
-			$content = $cObj->substituteSubpart ($content, $wPK, $parts);
+		foreach ($wPkeys as $key => $wPK) {
+		    if (is_array ($wrappedSubpartContentArray [$wPK])) {
+		      $parts = &$wrappedSubpartContentArray [$wPK];
+		    } else {
+		      $parts = explode ('|', $wrappedSubpartContentArray [$wPK]);
+		    }
+		    $content = $cObj->substituteSubpart ($content, $wPK, $parts);
 		}
 		
 		return $cObj->substituteMarkerArray ($content, $markContentArray);

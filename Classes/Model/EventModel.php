@@ -495,7 +495,7 @@ class EventModel extends \TYPO3\CMS\Cal\Model\Model {
 		
 		if ($row ['attachment']) {
 			$fileArr = explode (',', $row ['attachment']);
-			while (list (, $val) = each ($fileArr)) {
+			foreach ($fileArr as  $key => $val) {
 				// fills the marker ###FILE_LINK### with the links to the attached files
 				$this->addAttachment ($val);
 			}

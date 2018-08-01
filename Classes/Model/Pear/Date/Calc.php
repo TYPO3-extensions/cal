@@ -825,7 +825,7 @@ class Calc {
 	static function getMonthFromFullName($month) {
 		$month = strtolower ($month);
 		$months = Calc::getMonthNames ();
-		while (list ($id, $name) = each ($months)) {
+		foreach ($months as $id => $name) {
 			if (ereg ($month, strtolower ($name))) {
 				return $id;
 			}

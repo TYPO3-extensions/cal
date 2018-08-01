@@ -114,8 +114,7 @@ class TreeView {
 		// get default items
 		$defItems = array ();
 		if (is_array ($config ['items']) && $table == 'tt_content' && $row ['CType'] == 'list' && $row ['list_type'] == 'cal_controller' && $field == 'pi_flexform') {
-			reset ($config ['items']);
-			while (list ($itemName, $itemValue) = each ($config ['items'])) {
+			foreach ($config ['items'] as $itemName => $itemValue) {
 				if ($itemValue [0]) {
 					$ITitle = $this->pObj->sL ($itemValue [0]);
 					$defItems [] = '<a href="#" onclick="setFormValueFromBrowseWin(\'data[' . $table . '][' . $row ['uid'] . '][' . $field . '][data][sDEF][lDEF][categorySelection][vDEF]\',' . $itemValue [1] . ',\'' . $ITitle . '\'); return false;" style="text-decoration:none;">' . $ITitle . '</a>';
@@ -554,8 +553,7 @@ class TreeView {
 						// get default items
 						$defItems = array ();
 						if (is_array ($config ['items']) && $table == 'tt_content' && $row ['CType'] == 'list' && $row ['list_type'] == 'cal_controller' && $field == 'pi_flexform') {
-							reset ($config ['items']);
-							while (list ($itemName, $itemValue) = each ($config ['items'])) {
+							foreach ($config ['items'] as $itemName => $itemValue) {
 								if ($itemValue [0]) {
 									$ITitle = $this->pObj->sL ($itemValue [0]);
 									$defItems [] = '<a href="#" onclick="setFormValueFromBrowseWin(\'data[' . $table . '][' . $row ['uid'] . '][' . $field . '][data][sDEF][lDEF][categorySelection][vDEF]\',' . $itemValue [1] . ',\'' . $ITitle . '\'); return false;" style="text-decoration:none;">' . $ITitle . '</a>';

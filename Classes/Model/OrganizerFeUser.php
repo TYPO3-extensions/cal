@@ -33,9 +33,9 @@ class OrganizerFeUser extends \TYPO3\CMS\Cal\Model\Organizer {
 	 *        	to search in
 	 */
 	public function __construct($row, $pidList) {
+		parent::__construct($row, $pidList);
 		$this->setType ('tx_feuser');
 		$this->setObjectType ('organizer');
-		parent::__construct($row, $pidList);
 		$this->createOrganizer ($row);
 		$this->templatePath = $this->conf ['view.'] ['organizer.'] ['organizerModelTemplate4FEUser'];
 	}

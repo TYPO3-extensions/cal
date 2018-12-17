@@ -12,6 +12,9 @@ plugin.tx_cal_controller {
 	# @description	List of PIDs where cal records are found.
 	pidList = {$plugin.tx_cal_controller.pidList}
 
+	#@description  Page ID the visitor should get redirected to when the detail view event id is not available (e.g. during change of language)
+	emtyEventPid = {$plugin.tx_cal_controller.emptyEventPid}
+
 	# @description	List of csv of piVars, which should not appear in the url, but should be stored inside the users session. Attention: this works only, if the piVar is the same through a whole single page
 	sessionPiVars = page_id
 

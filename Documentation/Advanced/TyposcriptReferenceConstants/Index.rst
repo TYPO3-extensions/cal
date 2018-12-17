@@ -38,6 +38,19 @@ plugin.tx\_cal\_controller
 
    Default
 
+.. container:: table-row
+
+   Property
+         emtyEventPid
+
+   Data type
+         String
+
+   Description
+         Page ID the visitor should get redirected to when the detail view event id is not available (e.g. during change of language)
+
+   Default
+
 
 .. container:: table-row
 

@@ -504,7 +504,7 @@ class NewWeekView extends \TYPO3\CMS\Cal\View\NewTimeView {
 			$localDayIndex = 6;
 		}
 		$daysKeys = array_keys ($this->days);
-		if (intval ($this->getParentMonth ()) != intval ($this->days [$daysKeys [$localDayIndex]]->month)) {
+		if (intval ($this->getParentMonth ()) != intval ($this->days [$daysKeys [$localDayIndex]]->getMonth())) {
 			$classes .= ' ' . $conf['view.']['month.']['monthOffStyle'];
 		}
 		

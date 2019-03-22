@@ -41,6 +41,7 @@ abstract class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 	var $cachedValueArray = Array ();
 	var $initializingCacheValues = false;
 	var $templatePath;
+	var $classMethodVars = [];
 	
 	/**
 	 * Constructor.
@@ -93,14 +94,14 @@ abstract class BaseModel extends \TYPO3\CMS\Cal\Model\AbstractModel {
 					GeneralUtility::devLog ('CACHE HIT (' . __CLASS__ . '::' . __FUNCTION__ . ')', 'cal', - 1, array ());
 				}
 				$cachedValues = unserialize ($cachedValues);
-				$this->classMethodVars = $cachedValues [0];
+				$this->classMethodVars = $cachedValues [0]?:[];
 				$autoFetchTextFields = $cachedValues [1];
 				$autoFetchTextSplitValue = $cachedValues [2];
 			} else {
 				$noAutoFetchMethods = $this->noAutoFetchMethods;
-				if (is_object (parent) && count (parent::getNoAutoFetchMethods ())) {
-					$noAutoFetchMethods = array_merge (parent::getNoAutoFetchMethods (), $this->getNoAutoFetchMethods ());
-				}
+//				if (is_object (parent) && count (parent::getNoAutoFetchMethods ())) {
+//					$noAutoFetchMethods = array_merge (parent::getNoAutoFetchMethods (), $this->getNoAutoFetchMethods ());
+//				}
 				$cObj = &\TYPO3\CMS\Cal\Utility\Registry::Registry ('basic', 'cobj');
 				$autoFetchTextFields = explode (',', strtolower ($this->conf ['autoFetchTextFields']));
 				$autoFetchTextSplitValue = $cObj->stdWrap ($this->conf ['autoFetchTextSplitValue'], $this->conf ['autoFetchTextSplitValue.']);

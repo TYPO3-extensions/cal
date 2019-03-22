@@ -158,13 +158,13 @@ class Functions {
 		
 		// Finding subparts and substituting them with the subpart as a marker
 		reset ($sPkeys);
-		while (list (, $sPK) = each ($sPkeys)) {
+        foreach ($sPkeys as $key => $sPK) {
 			$content = $cObj->substituteSubpart ($content, $sPK, $subpartContentArray [$sPK]);
 		}
 		
 		// Finding subparts and wrapping them with markers
 		reset ($wPkeys);
-		while (list (, $wPK) = each ($wPkeys)) {
+        foreach ($wPkeys as $key => $wPK) {
 			if (is_array ($wrappedSubpartContentArray [$wPK])) {
 				$parts = &$wrappedSubpartContentArray [$wPK];
 			} else {

@@ -1344,7 +1344,7 @@ class EventService extends \TYPO3\CMS\Cal\Service\BaseService {
 		$timeSearchString = ' AND tx_cal_event.pid IN (' . $pidList . ') ' . $this->cObj->enableFields ('tx_cal_event') . ' AND (((tx_cal_event.start_date>=' . $formattedStarttime . ' AND tx_cal_event.start_date<=' . $formattedEndtime . ') OR (tx_cal_event.end_date<=' . $formattedEndtime . ' AND tx_cal_event.end_date>=' . $formattedStarttime . ') OR (tx_cal_event.end_date>=' . $formattedEndtime . ' AND tx_cal_event.start_date<=' . $formattedStarttime . ') OR (tx_cal_event.start_date<=' . $formattedEndtime . ' AND (tx_cal_event.freq IN ("day","week","month","year") AND (tx_cal_event.until>=' . $formattedStarttime . ' OR tx_cal_event.until=0)))) OR (tx_cal_event.rdate AND tx_cal_event.rdate_type IN ("date_time","date","period"))) ';
 		
 		if ($locationIds != '' && $locationIds != '0') {
-			$locationSearchString = ' AND location_id in (' . $locationIds . ')';
+			$locationSearchString = ' AND tx_cal_event.location_id in (' . $locationIds . ')';
 		}
 		
 		if ($organizerIds != '' && $organizerIds != '0') {

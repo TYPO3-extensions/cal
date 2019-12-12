@@ -1,0 +1,1256 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T10:57:45Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id="l_day" xml:space="preserve">
+				<source>Day</source>
+			</trans-unit>
+			<trans-unit id="l_week" xml:space="preserve">
+				<source>Week</source>
+			</trans-unit>
+			<trans-unit id="l_month" xml:space="preserve">
+				<source>Month</source>
+			</trans-unit>
+			<trans-unit id="l_year" xml:space="preserve">
+				<source>Year</source>
+			</trans-unit>
+			<trans-unit id="l_list" xml:space="preserve">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="l_calendar" xml:space="preserve">
+				<source>Calendar</source>
+			</trans-unit>
+			<trans-unit id="l_create_calendar" xml:space="preserve">
+				<source>Create calendar</source>
+			</trans-unit>
+			<trans-unit id="l_administration_view" xml:space="preserve">
+				<source>Calendar Administration</source>
+			</trans-unit>
+			<trans-unit id="l_edit_calendar" xml:space="preserve">
+				<source>Edit calendar</source>
+			</trans-unit>
+			<trans-unit id="l_confirm_calendar" xml:space="preserve">
+				<source>Confirm calendar</source>
+			</trans-unit>
+			<trans-unit id="l_delete_calendar" xml:space="preserve">
+				<source>Delete calendar</source>
+			</trans-unit>
+			<trans-unit id="l_create_exception" xml:space="preserve">
+				<source>Create exception</source>
+			</trans-unit>
+			<trans-unit id="l_next_day" xml:space="preserve">
+				<source>Next Day</source>
+			</trans-unit>
+			<trans-unit id="l_next_month" xml:space="preserve">
+				<source>Next Month</source>
+			</trans-unit>
+			<trans-unit id="l_next_week" xml:space="preserve">
+				<source>Next Week</source>
+			</trans-unit>
+			<trans-unit id="l_next_year" xml:space="preserve">
+				<source>Next Year</source>
+			</trans-unit>
+			<trans-unit id="l_last_day" xml:space="preserve">
+				<source>Previous Day</source>
+			</trans-unit>
+			<trans-unit id="l_last_month" xml:space="preserve">
+				<source>Previous Month</source>
+			</trans-unit>
+			<trans-unit id="l_last_week" xml:space="preserve">
+				<source>Previous Week</source>
+			</trans-unit>
+			<trans-unit id="l_last_year" xml:space="preserve">
+				<source>Previous Year</source>
+			</trans-unit>
+			<trans-unit id="l_subscribe" xml:space="preserve">
+				<source>Subscribe</source>
+			</trans-unit>
+			<trans-unit id="l_download" xml:space="preserve">
+				<source>Download</source>
+			</trans-unit>
+			<trans-unit id="l_powered_by" xml:space="preserve">
+				<source>Powered by</source>
+			</trans-unit>
+			<trans-unit id="l_event" xml:space="preserve">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="l_events" xml:space="preserve">
+				<source>Events</source>
+			</trans-unit>
+			<trans-unit id="l_no_events" xml:space="preserve">
+				<source>No events found.</source>
+			</trans-unit>
+			<trans-unit id="l_event_start" xml:space="preserve">
+				<source>Start Time</source>
+			</trans-unit>
+			<trans-unit id="l_event_end" xml:space="preserve">
+				<source>End Time</source>
+			</trans-unit>
+			<trans-unit id="l_this_months" xml:space="preserve">
+				<source>This Month's Events</source>
+			</trans-unit>
+			<trans-unit id="l_date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="l_summary" xml:space="preserve">
+				<source>Summary</source>
+			</trans-unit>
+			<trans-unit id="l_all_day" xml:space="preserve">
+				<source>All day event</source>
+			</trans-unit>
+			<trans-unit id="l_notes" xml:space="preserve">
+				<source>Notes</source>
+			</trans-unit>
+			<trans-unit id="l_this_years" xml:space="preserve">
+				<source>This Year's Events</source>
+			</trans-unit>
+			<trans-unit id="l_today" xml:space="preserve">
+				<source>Today</source>
+			</trans-unit>
+			<trans-unit id="l_this_week" xml:space="preserve">
+				<source>This Week</source>
+			</trans-unit>
+			<trans-unit id="l_this_month" xml:space="preserve">
+				<source>This Month</source>
+			</trans-unit>
+			<trans-unit id="l_jump" xml:space="preserve">
+				<source>Jump to</source>
+			</trans-unit>
+			<trans-unit id="l_tomorrows" xml:space="preserve">
+				<source>Tomorrow's Events</source>
+			</trans-unit>
+			<trans-unit id="l_goday" xml:space="preserve">
+				<source>Go to Today</source>
+			</trans-unit>
+			<trans-unit id="l_goweek" xml:space="preserve">
+				<source>Go to This Week</source>
+			</trans-unit>
+			<trans-unit id="l_gomonth" xml:space="preserve">
+				<source>Go to This Month</source>
+			</trans-unit>
+			<trans-unit id="l_goyear" xml:space="preserve">
+				<source>Go to This Year</source>
+			</trans-unit>
+			<trans-unit id="l_search" xml:space="preserve">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="l_search_everything" xml:space="preserve">
+				<source>Search everything</source>
+			</trans-unit>
+			<trans-unit id="l_dosearch" xml:space="preserve">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="l_query_for" xml:space="preserve">
+				<source>Search for</source>
+			</trans-unit>
+			<trans-unit id="l_search_string" xml:space="preserve">
+				<source>Search string</source>
+			</trans-unit>
+			<trans-unit id="l_results" xml:space="preserve">
+				<source>Search Results</source>
+			</trans-unit>
+			<trans-unit id="l_query" xml:space="preserve">
+				<source>Query</source>
+			</trans-unit>
+			<trans-unit id="l_no_results" xml:space="preserve">
+				<source>No events found.</source>
+			</trans-unit>
+			<trans-unit id="l_no_location_results" xml:space="preserve">
+				<source>No locations found.</source>
+			</trans-unit>
+			<trans-unit id="l_no_organizer_results" xml:space="preserve">
+				<source>No organizers found.</source>
+			</trans-unit>
+			<trans-unit id="l_goprint" xml:space="preserve">
+				<source>Printer Friendly</source>
+			</trans-unit>
+			<trans-unit id="l_time" xml:space="preserve">
+				<source>Time</source>
+			</trans-unit>
+			<trans-unit id="l_teaser" xml:space="preserve">
+				<source>Teaser</source>
+			</trans-unit>
+			<trans-unit id="l_description" xml:space="preserve">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="l_no_title" xml:space="preserve">
+				<source>No title</source>
+			</trans-unit>
+			<trans-unit id="l_this_site_is" xml:space="preserve">
+				<source>This site is</source>
+			</trans-unit>
+			<trans-unit id="l_no_events_day" xml:space="preserve">
+				<source>No events today.</source>
+			</trans-unit>
+			<trans-unit id="l_no_events_week" xml:space="preserve">
+				<source>No events this week.</source>
+			</trans-unit>
+			<trans-unit id="l_no_events_month" xml:space="preserve">
+				<source>No events this month.</source>
+			</trans-unit>
+			<trans-unit id="l_rss_day_date" xml:space="preserve">
+				<source>g:i A</source>
+			</trans-unit>
+			<trans-unit id="l_rss_week_date" xml:space="preserve">
+				<source>%b %e</source>
+			</trans-unit>
+			<trans-unit id="l_rss_month_date" xml:space="preserve">
+				<source>%b %e</source>
+			</trans-unit>
+			<trans-unit id="l_rss_language" xml:space="preserve">
+				<source>en-us</source>
+			</trans-unit>
+			<trans-unit id="l_search_took" xml:space="preserve">
+				<source>Search took %s seconds</source>
+			</trans-unit>
+			<trans-unit id="l_recurring_event" xml:space="preserve">
+				<source>Recurring event</source>
+			</trans-unit>
+			<trans-unit id="l_exception" xml:space="preserve">
+				<source>Exception</source>
+			</trans-unit>
+			<trans-unit id="l_no_query" xml:space="preserve">
+				<source>No query given</source>
+			</trans-unit>
+			<trans-unit id="l_preferences" xml:space="preserve">
+				<source>Preferences</source>
+			</trans-unit>
+			<trans-unit id="l_printer" xml:space="preserve">
+				<source>Printer</source>
+			</trans-unit>
+			<trans-unit id="l_select_lang" xml:space="preserve">
+				<source>Select your default language:</source>
+			</trans-unit>
+			<trans-unit id="l_select_cal" xml:space="preserve">
+				<source>Select your default calendar:</source>
+			</trans-unit>
+			<trans-unit id="l_select_view" xml:space="preserve">
+				<source>Select your default view:</source>
+			</trans-unit>
+			<trans-unit id="l_select_time" xml:space="preserve">
+				<source>Select your default start time:</source>
+			</trans-unit>
+			<trans-unit id="l_select_day" xml:space="preserve">
+				<source>Select your default start day of week:</source>
+			</trans-unit>
+			<trans-unit id="l_select_style" xml:space="preserve">
+				<source>Select your default style:</source>
+			</trans-unit>
+			<trans-unit id="l_set_prefs" xml:space="preserve">
+				<source>Set preferences</source>
+			</trans-unit>
+			<trans-unit id="l_completed_date" xml:space="preserve">
+				<source>Completed on</source>
+			</trans-unit>
+			<trans-unit id="l_completed" xml:space="preserve">
+				<source>Completed</source>
+			</trans-unit>
+			<trans-unit id="l_created" xml:space="preserve">
+				<source>Created</source>
+			</trans-unit>
+			<trans-unit id="l_create" xml:space="preserve">
+				<source>Create</source>
+			</trans-unit>
+			<trans-unit id="l_due" xml:space="preserve">
+				<source>Due</source>
+			</trans-unit>
+			<trans-unit id="l_priority" xml:space="preserve">
+				<source>Priority</source>
+			</trans-unit>
+			<trans-unit id="l_priority_high" xml:space="preserve">
+				<source>High</source>
+			</trans-unit>
+			<trans-unit id="l_priority_low" xml:space="preserve">
+				<source>Low</source>
+			</trans-unit>
+			<trans-unit id="l_priority_medium" xml:space="preserve">
+				<source>Medium</source>
+			</trans-unit>
+			<trans-unit id="l_priority_none" xml:space="preserve">
+				<source>None</source>
+			</trans-unit>
+			<trans-unit id="l_status" xml:space="preserve">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="l_todo" xml:space="preserve">
+				<source>To do items</source>
+			</trans-unit>
+			<trans-unit id="l_unfinished" xml:space="preserve">
+				<source>Unfinished</source>
+			</trans-unit>
+			<trans-unit id="l_prefs_set" xml:space="preserve">
+				<source>Your preferences have been set.</source>
+			</trans-unit>
+			<trans-unit id="l_prefs_unset" xml:space="preserve">
+				<source>Preferences unset. Changes will take place next
+				page load.</source>
+			</trans-unit>
+			<trans-unit id="l_unset_prefs" xml:space="preserve">
+				<source>Unset preferences:</source>
+			</trans-unit>
+			<trans-unit id="l_organizer" xml:space="preserve">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="l_edit_organizer" xml:space="preserve">
+				<source>Edit Organizer</source>
+			</trans-unit>
+			<trans-unit id="l_delete_organizer" xml:space="preserve">
+				<source>Delete Organizer</source>
+			</trans-unit>
+			<trans-unit id="l_organizers" xml:space="preserve">
+				<source>Organizers</source>
+			</trans-unit>
+			<trans-unit id="l_attendee" xml:space="preserve">
+				<source>Attendee</source>
+			</trans-unit>
+			<trans-unit id="l_location" xml:space="preserve">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="l_edit_location" xml:space="preserve">
+				<source>Edit Location</source>
+			</trans-unit>
+			<trans-unit id="l_delete_location" xml:space="preserve">
+				<source>Delete Location</source>
+			</trans-unit>
+			<trans-unit id="l_locations" xml:space="preserve">
+				<source>Locations</source>
+			</trans-unit>
+			<trans-unit id="l_admin_header" xml:space="preserve">
+				<source>Calendar Administration</source>
+			</trans-unit>
+			<trans-unit id="l_username" xml:space="preserve">
+				<source>Username</source>
+			</trans-unit>
+			<trans-unit id="l_password" xml:space="preserve">
+				<source>Password</source>
+			</trans-unit>
+			<trans-unit id="l_login" xml:space="preserve">
+				<source>Login</source>
+			</trans-unit>
+			<trans-unit id="l_invalid_login" xml:space="preserve">
+				<source>Wrong username or password.</source>
+			</trans-unit>
+			<trans-unit id="l_addupdate_cal" xml:space="preserve">
+				<source>Add or Update a Calendar</source>
+			</trans-unit>
+			<trans-unit id="l_addupdate_desc" xml:space="preserve">
+				<source>Add a calendar by uploading a new file. Update a
+				calendar by uploading a file of the same name.</source>
+			</trans-unit>
+			<trans-unit id="l_delete_cal" xml:space="preserve">
+				<source>Delete a Calendar</source>
+			</trans-unit>
+			<trans-unit id="l_logout" xml:space="preserve">
+				<source>Logout</source>
+			</trans-unit>
+			<trans-unit id="l_cal_file" xml:space="preserve">
+				<source>Calendar File</source>
+			</trans-unit>
+			<trans-unit id="l_php_error" xml:space="preserve">
+				<source>PHP Error</source>
+			</trans-unit>
+			<trans-unit id="l_upload_error_type" xml:space="preserve">
+				<source>Only .ics files may be uploaded.</source>
+			</trans-unit>
+			<trans-unit id="l_copy_error" xml:space="preserve">
+				<source>Failed to copy file</source>
+			</trans-unit>
+			<trans-unit id="l_delete_confirm" xml:space="preserve">
+				<source>Do you really want to delete?</source>
+			</trans-unit>
+			<trans-unit id="l_delete_error" xml:space="preserve">
+				<source>Failed to delete file</source>
+			</trans-unit>
+			<trans-unit id="l_delete_success" xml:space="preserve">
+				<source>was deleted successfully.</source>
+			</trans-unit>
+			<trans-unit id="l_action_success" xml:space="preserve">
+				<source>Your action was successful.</source>
+			</trans-unit>
+			<trans-unit id="l_submit" xml:space="preserve">
+				<source>Submit</source>
+			</trans-unit>
+			<trans-unit id="l_edit" xml:space="preserve">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="l_delete" xml:space="preserve">
+				<source>Delete</source>
+			</trans-unit>
+			<trans-unit id="l_refresh" xml:space="preserve">
+				<source>Refresh</source>
+			</trans-unit>
+			<trans-unit id="l_all_cal_comb_lang" xml:space="preserve">
+				<source>All Combined</source>
+			</trans-unit>
+			<trans-unit id="l_legend" xml:space="preserve">
+				<source>Legend</source>
+			</trans-unit>
+			<trans-unit id="l_admin_subhead" xml:space="preserve">
+				<source>Manage your calendars from this page</source>
+			</trans-unit>
+			<trans-unit id="l_prefs_subhead" xml:space="preserve">
+				<source>Sets a cookie for visiting this site</source>
+			</trans-unit>
+			<trans-unit id="l_rss_info" xml:space="preserve">
+				<source>RSS Information</source>
+			</trans-unit>
+			<trans-unit id="l_rss_subhead" xml:space="preserve">
+				<source>Basic RSS feeds available for each calendar</source>
+			</trans-unit>
+			<trans-unit id="l_rss_notenabled" xml:space="preserve">
+				<source>RSS is not enabled on this site</source>
+			</trans-unit>
+			<trans-unit id="l_back" xml:space="preserve">
+				<source>Back</source>
+			</trans-unit>
+			<trans-unit id="l_next" xml:space="preserve">
+				<source>Next</source>
+			</trans-unit>
+			<trans-unit id="l_prev" xml:space="preserve">
+				<source>Prev</source>
+			</trans-unit>
+			<trans-unit id="l_day_view" xml:space="preserve">
+				<source>Day View</source>
+			</trans-unit>
+			<trans-unit id="l_week_view" xml:space="preserve">
+				<source>Week View</source>
+			</trans-unit>
+			<trans-unit id="l_month_view" xml:space="preserve">
+				<source>Month View</source>
+			</trans-unit>
+			<trans-unit id="l_year_view" xml:space="preserve">
+				<source>Year View</source>
+			</trans-unit>
+			<trans-unit id="l_event_view" xml:space="preserve">
+				<source>Event View</source>
+			</trans-unit>
+			<trans-unit id="l_search_view" xml:space="preserve">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="l_ics_view" xml:space="preserve">
+				<source>ICS</source>
+			</trans-unit>
+			<trans-unit id="l_icslist_title" xml:space="preserve">
+				<source>List of available ics-files to download</source>
+			</trans-unit>
+			<trans-unit id="l_list_view" xml:space="preserve">
+				<source>List View</source>
+			</trans-unit>
+			<trans-unit id="format_recur_lang_delimiter" xml:space="preserve">
+				<source>, </source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_yearly_single" xml:space="preserve">
+				<source>year</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_yearly_multiple" xml:space="preserve">
+				<source>years</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_monthly_single" xml:space="preserve">
+				<source>month</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_monthly_multiple" xml:space="preserve">
+				<source>months</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_weekly_single" xml:space="preserve">
+				<source>week</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_weekly_multiple" xml:space="preserve">
+				<source>weeks</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_daily_single" xml:space="preserve">
+				<source>day</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_daily_multiple" xml:space="preserve">
+				<source>days</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_hourly_single" xml:space="preserve">
+				<source>hour</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_hourly_multiple" xml:space="preserve">
+				<source>hours</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_minutely_single" xml:space="preserve">
+				<source>minute</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_minutely_multiple" xml:space="preserve">
+				<source>minutes</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_secondly_single" xml:space="preserve">
+				<source>second</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_secondly_multiple" xml:space="preserve">
+				<source>seconds</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_start" xml:space="preserve">
+				<source>Every %int% %freq% %for%</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_until" xml:space="preserve">
+				<source>until %date%</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_count" xml:space="preserve">
+				<source>for a count of %int%</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_bymonth" xml:space="preserve">
+				<source>In months: %list%</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_bymonthday" xml:space="preserve">
+				<source>On dates: %list%</source>
+			</trans-unit>
+			<trans-unit id="l_format_recur_lang_byday" xml:space="preserve">
+				<source>On days: %list%</source>
+			</trans-unit>
+			<trans-unit id="l_daysofweek_all" xml:space="preserve">
+				<source>All Days</source>
+			</trans-unit>
+			<trans-unit id="l_monthsofyear_all" xml:space="preserve">
+				<source>All Months</source>
+			</trans-unit>
+			<trans-unit id="l_daysofweek_lang_sunday" xml:space="preserve">
+				<source>Sunday</source>
+			</trans-unit>
+			<trans-unit id="l_daysofweek_lang_monday" xml:space="preserve">
+				<source>Monday</source>
+			</trans-unit>
+			<trans-unit id="l_daysofweek_lang_tuesday" xml:space="preserve">
+				<source>Tuesday</source>
+			</trans-unit>
+			<trans-unit id="l_daysofweek_lang_wednesday" xml:space="preserve">
+				<source>Wednesday</source>
+			</trans-unit>
+			<trans-unit id="l_daysofweek_lang_thursday" xml:space="preserve">
+				<source>Thursday</source>
+			</trans-unit>
+			<trans-unit id="l_daysofweek_lang_friday" xml:space="preserve">
+				<source>Friday</source>
+			</trans-unit>
+			<trans-unit id="l_daysofweek_lang_saturday" xml:space="preserve">
+				<source>Saturday</source>
+			</trans-unit>
+			<trans-unit id="l_error_title" xml:space="preserve">
+				<source>Error!</source>
+			</trans-unit>
+			<trans-unit id="l_error_window" xml:space="preserve">
+				<source>There was an error!</source>
+			</trans-unit>
+			<trans-unit id="l_error_calendar" xml:space="preserve">
+				<source>The calendar &quot;%s&quot; was being processed
+				when this error occurred.</source>
+			</trans-unit>
+			<trans-unit id="l_error_path" xml:space="preserve">
+				<source>Unable to open the path: &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="l_error_back" xml:space="preserve">
+				<source>Please use the &quot;Back&quot; button to return.</source>
+			</trans-unit>
+			<trans-unit id="l_error_remotecal" xml:space="preserve">
+				<source>This server blocks remote calendars which have not
+				been approved.</source>
+			</trans-unit>
+			<trans-unit id="l_error_restrictedcal" xml:space="preserve">
+				<source>You have tried to access a calendar that is
+				restricted on this server.</source>
+			</trans-unit>
+			<trans-unit id="l_error_invalidcal" xml:space="preserve">
+				<source>Invalid calendar file. Please try a different
+				calendar.</source>
+			</trans-unit>
+			<trans-unit id="l_error_cantopen" xml:space="preserve">
+				<source>Unable to open calendar.</source>
+			</trans-unit>
+			<trans-unit id="l_error_cache" xml:space="preserve">
+				<source>Unable to write to cache directory. Please check
+				your config.</source>
+			</trans-unit>
+			<trans-unit id="l_error_noCategory" xml:space="preserve">
+				<source>You can not create an event without a category.
+				Please create a category first</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_not_logged_in" xml:space="preserve">
+				<source>&lt;br /&gt;&lt;br /&gt;</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_logged_in_nomonitoring" xml:space="preserve">
+				<source>Subscribe to this event?</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_logged_in_monitoring" xml:space="preserve">
+				<source>Unsubscribe?</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_login_in_for_monitoring" xml:space="preserve">
+				<source>Please log in to manage your subscriptions.</source>
+			</trans-unit>
+			<trans-unit id="l_manage_subscription" xml:space="preserve">
+				<source>Manage your subscriptions</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_unsubscribe_successful" xml:space="preserve">
+				<source>You have been unsubscribed from the event
+				&quot;%s&quot;. You will no longer receive notifications about this
+				event.</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_unsubscribe_error" xml:space="preserve">
+				<source>There were problems unsubscribing you from the
+				event &quot;%s&quot;.</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_unsubscribe_noevent" xml:space="preserve">
+				<source>The event you are trying to unsubscribe does not
+				exist anymore.</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_subscribe_successful" xml:space="preserve">
+				<source>You have been subscribed to the event
+				&quot;%s&quot;. You will receive notifications when the event
+				approaches or if any important details are changed.</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_subscribe_error" xml:space="preserve">
+				<source>There were problems subscribing you to the event
+				&quot;%s&quot;.</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_event_subscribe_noevent" xml:space="preserve">
+				<source>The event you are trying to subscribe does not
+				exist anymore.</source>
+			</trans-unit>
+			<trans-unit id="l_fe_user" xml:space="preserve">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_owner" xml:space="preserve">
+				<source>Owner</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_activate_freeandbusy" xml:space="preserve">
+				<source>Enable Free- and Busy view</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_freeandbusyuser" xml:space="preserve">
+				<source>Free- and Busy user</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_type" xml:space="preserve">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_type0" xml:space="preserve">
+				<source>Normal</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_exturl" xml:space="preserve">
+				<source>External URL</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_icsfile" xml:space="preserve">
+				<source>Local ICS file</source>
+			</trans-unit>
+			<trans-unit id="l_ics_file_upload" xml:space="preserve">
+				<source>Upload ICS file</source>
+			</trans-unit>
+			<trans-unit id="l_delete_icsfile" xml:space="preserve">
+				<source>Delete current ICS file</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_refresh" xml:space="preserve">
+				<source>Refresh interval in minutes</source>
+			</trans-unit>
+			<trans-unit id="l_category" xml:space="preserve">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="l_global_category" xml:space="preserve">
+				<source>General Category</source>
+			</trans-unit>
+			<trans-unit id="l_delete_category" xml:space="preserve">
+				<source>Delete Category</source>
+			</trans-unit>
+			<trans-unit id="l_confirm_category" xml:space="preserve">
+				<source>Confirm Category</source>
+			</trans-unit>
+			<trans-unit id="l_category_selector" xml:space="preserve">
+				<source>Select category</source>
+			</trans-unit>
+			<trans-unit id="l_category_title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="l_category_headerstyle" xml:space="preserve">
+				<source>Header Style</source>
+			</trans-unit>
+			<trans-unit id="l_category_bodystyle" xml:space="preserve">
+				<source>Body Style</source>
+			</trans-unit>
+			<trans-unit id="l_category_calendar" xml:space="preserve">
+				<source>Calendar</source>
+			</trans-unit>
+			<trans-unit id="l_category_parent_category" xml:space="preserve">
+				<source>Parent Category</source>
+			</trans-unit>
+			<trans-unit id="l_category_shared_user_allowed" xml:space="preserve">
+				<source>Shared User Allowed</source>
+			</trans-unit>
+			<trans-unit id="l_event_general" xml:space="preserve">
+				<source>General</source>
+			</trans-unit>
+			<trans-unit id="l_event_category" xml:space="preserve">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="l_event_category_selected" xml:space="preserve">
+				<source>Selected Category</source>
+			</trans-unit>
+			<trans-unit id="l_event_user" xml:space="preserve">
+				<source>Creator, creator group</source>
+			</trans-unit>
+			<trans-unit id="l_event_user_selected" xml:space="preserve">
+				<source>Selected creator, creator group</source>
+			</trans-unit>
+			<trans-unit id="l_event_title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="l_event_edit_startdate" xml:space="preserve">
+				<source>Start date</source>
+			</trans-unit>
+			<trans-unit id="l_event_edit_enddate" xml:space="preserve">
+				<source>End date</source>
+			</trans-unit>
+			<trans-unit id="l_event_edit_starttime" xml:space="preserve">
+				<source>Start time</source>
+			</trans-unit>
+			<trans-unit id="l_event_edit_endtime" xml:space="preserve">
+				<source>End time</source>
+			</trans-unit>
+			<trans-unit id="l_event_startdate" xml:space="preserve">
+				<source>Start date</source>
+			</trans-unit>
+			<trans-unit id="l_event_enddate" xml:space="preserve">
+				<source>End date</source>
+			</trans-unit>
+			<trans-unit id="l_event_starttime" xml:space="preserve">
+				<source>Start time</source>
+			</trans-unit>
+			<trans-unit id="l_event_endtime" xml:space="preserve">
+				<source>End time</source>
+			</trans-unit>
+			<trans-unit id="l_event_allday" xml:space="preserve">
+				<source>Allday</source>
+			</trans-unit>
+			<trans-unit id="l_event_organizer" xml:space="preserve">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="l_event_location" xml:space="preserve">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="l_event_teaser" xml:space="preserve">
+				<source>Teaser</source>
+			</trans-unit>
+			<trans-unit id="l_event_description" xml:space="preserve">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="l_event_cal_organizer" xml:space="preserve">
+				<source>Cal Organizer</source>
+			</trans-unit>
+			<trans-unit id="l_event_cal_location" xml:space="preserve">
+				<source>Cal Location</source>
+			</trans-unit>
+			<trans-unit id="l_event_frequency" xml:space="preserve">
+				<source>Frequency</source>
+			</trans-unit>
+			<trans-unit id="l_event_edit_byday" xml:space="preserve">
+				<source>By Day</source>
+			</trans-unit>
+			<trans-unit id="l_event_edit_bymonthday" xml:space="preserve">
+				<source>By Monthday (e.g.: 1,2,30 or all)</source>
+			</trans-unit>
+			<trans-unit id="l_event_edit_bymonth" xml:space="preserve">
+				<source>By Month (e.g.: 1,2,3,4,12 or all)</source>
+			</trans-unit>
+			<trans-unit id="l_event_edit_until" xml:space="preserve">
+				<source>Until Date</source>
+			</trans-unit>
+			<trans-unit id="l_event_byday" xml:space="preserve">
+				<source>By Day</source>
+			</trans-unit>
+			<trans-unit id="l_event_bymonthday" xml:space="preserve">
+				<source>By Monthday</source>
+			</trans-unit>
+			<trans-unit id="l_event_bymonth" xml:space="preserve">
+				<source>By Month</source>
+			</trans-unit>
+			<trans-unit id="l_event_until" xml:space="preserve">
+				<source>Until Date</source>
+			</trans-unit>
+			<trans-unit id="l_event_count" xml:space="preserve">
+				<source>Count</source>
+			</trans-unit>
+			<trans-unit id="l_event_interval" xml:space="preserve">
+				<source>Interval</source>
+			</trans-unit>
+			<trans-unit id="l_event_exception" xml:space="preserve">
+				<source>Exception</source>
+			</trans-unit>
+			<trans-unit id="l_event_exception_selected" xml:space="preserve">
+				<source>Selected exception</source>
+			</trans-unit>
+			<trans-unit id="l_event_fe_cruser" xml:space="preserve">
+				<source>Creator</source>
+			</trans-unit>
+			<trans-unit id="l_event_fe_crgroup" xml:space="preserve">
+				<source>Creator Group</source>
+			</trans-unit>
+			<trans-unit id="l_event_notify" xml:space="preserve">
+				<source>Notify and remind</source>
+			</trans-unit>
+			<trans-unit id="l_event_shared" xml:space="preserve">
+				<source>Share with</source>
+			</trans-unit>
+			<trans-unit id="l_event_icslink" xml:space="preserve">
+				<source>Get this event as *.ics calendar entry</source>
+			</trans-unit>
+			<trans-unit id="l_event_image" xml:space="preserve">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="l_event_image_caption" xml:space="preserve">
+				<source>Caption</source>
+			</trans-unit>
+			<trans-unit id="l_event_image_title" xml:space="preserve">
+				<source>Title text</source>
+			</trans-unit>
+			<trans-unit id="l_event_image_alt" xml:space="preserve">
+				<source>Alt text</source>
+			</trans-unit>
+			<trans-unit id="l_event_attachment" xml:space="preserve">
+				<source>Attachment</source>
+			</trans-unit>
+			<trans-unit id="l_event_type" xml:space="preserve">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="l_event_type_0" xml:space="preserve">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="l_event_type_1" xml:space="preserve">
+				<source>Internal link</source>
+			</trans-unit>
+			<trans-unit id="l_event_type_2" xml:space="preserve">
+				<source>External link</source>
+			</trans-unit>
+			<trans-unit id="l_event_type_3" xml:space="preserve">
+				<source>Meeting</source>
+			</trans-unit>
+			<trans-unit id="l_event_type_4" xml:space="preserve">
+				<source>Todo</source>
+			</trans-unit>
+			<trans-unit id="l_event_attendee_0" xml:space="preserve">
+				<source>Status: Unknown</source>
+			</trans-unit>
+			<trans-unit id="l_event_attendee_CHAIR" xml:space="preserve">
+				<source>Status: Chairman</source>
+			</trans-unit>
+			<trans-unit id="l_event_attendee_OPT-PARTICIPANT" xml:space="preserve">
+				<source>Status: Optional</source>
+			</trans-unit>
+			<trans-unit id="l_event_attendee_REQ-PARTICIPANT" xml:space="preserve">
+				<source>Status: Required</source>
+			</trans-unit>
+			<trans-unit id="l_category_relatedevents" xml:space="preserve">
+				<source>Related event(s)</source>
+			</trans-unit>
+			<trans-unit id="l_todo_enddate" xml:space="preserve">
+				<source>Due date</source>
+			</trans-unit>
+			<trans-unit id="l_todo_endtime" xml:space="preserve">
+				<source>Due time</source>
+			</trans-unit>
+			<trans-unit id="l_todo_status" xml:space="preserve">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="l_todo_priority" xml:space="preserve">
+				<source>Priority</source>
+			</trans-unit>
+			<trans-unit id="l_todo_completed" xml:space="preserve">
+				<source>Completed</source>
+			</trans-unit>
+			<trans-unit id="l_sendout_invitation" xml:space="preserve">
+				<source>Send out invitation</source>
+			</trans-unit>
+			<trans-unit id="l_attendee_external" xml:space="preserve">
+				<source>Guests</source>
+			</trans-unit>
+			<trans-unit id="l_guest_info" xml:space="preserve">
+				<source>Insert comma separated email addresses</source>
+			</trans-unit>
+			<trans-unit id="l_availability" xml:space="preserve">
+				<source>Check availability</source>
+			</trans-unit>
+			<trans-unit id="l_location_name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="l_location_description" xml:space="preserve">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="l_location_street" xml:space="preserve">
+				<source>Street</source>
+			</trans-unit>
+			<trans-unit id="l_location_zip" xml:space="preserve">
+				<source>Zip-code</source>
+			</trans-unit>
+			<trans-unit id="l_location_city" xml:space="preserve">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="l_location_countryzone" xml:space="preserve">
+				<source>State/Province</source>
+			</trans-unit>
+			<trans-unit id="l_location_country" xml:space="preserve">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="l_location_phone" xml:space="preserve">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="l_location_mobilephone" xml:space="preserve">
+				<source>Mobile Phone</source>
+			</trans-unit>
+			<trans-unit id="l_location_fax" xml:space="preserve">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="l_location_email" xml:space="preserve">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="l_location_link" xml:space="preserve">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="l_location_image" xml:space="preserve">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="l_location_relatedevents" xml:space="preserve">
+				<source>Related event(s)</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_description" xml:space="preserve">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_street" xml:space="preserve">
+				<source>Street</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_zip" xml:space="preserve">
+				<source>Zip-code</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_city" xml:space="preserve">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_countryzone" xml:space="preserve">
+				<source>State/Province</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_country" xml:space="preserve">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_phone" xml:space="preserve">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_mobilephone" xml:space="preserve">
+				<source>Mobile Phone</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_fax" xml:space="preserve">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_email" xml:space="preserve">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_link" xml:space="preserve">
+				<source>Link</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_image" xml:space="preserve">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="l_organizer_relatedevents" xml:space="preserve">
+				<source>Related event(s)</source>
+			</trans-unit>
+			<trans-unit id="l_select" xml:space="preserve">
+				<source>Please choose one</source>
+			</trans-unit>
+			<trans-unit id="l_none" xml:space="preserve">
+				<source>None</source>
+			</trans-unit>
+			<trans-unit id="l_hidden" xml:space="preserve">
+				<source>Hide</source>
+			</trans-unit>
+			<trans-unit id="l_cancel" xml:space="preserve">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="l_save" xml:space="preserve">
+				<source>Save</source>
+			</trans-unit>
+			<trans-unit id="l_true" xml:space="preserve">
+				<source>True</source>
+			</trans-unit>
+			<trans-unit id="l_false" xml:space="preserve">
+				<source>False</source>
+			</trans-unit>
+			<trans-unit id="l_more" xml:space="preserve">
+				<source>[more]</source>
+			</trans-unit>
+			<trans-unit id="l_event_more" xml:space="preserve">
+				<source>[more]</source>
+			</trans-unit>
+			<trans-unit id="l_all" xml:space="preserve">
+				<source>All</source>
+			</trans-unit>
+			<trans-unit id="l_global" xml:space="preserve">
+				<source>Global</source>
+			</trans-unit>
+			<trans-unit id="l_edit_event" xml:space="preserve">
+				<source>Edit event</source>
+			</trans-unit>
+			<trans-unit id="l_create_event" xml:space="preserve">
+				<source>Create event</source>
+			</trans-unit>
+			<trans-unit id="l_new_event" xml:space="preserve">
+				<source>New event</source>
+			</trans-unit>
+			<trans-unit id="l_create_location" xml:space="preserve">
+				<source>Create location</source>
+			</trans-unit>
+			<trans-unit id="l_create_organizer" xml:space="preserve">
+				<source>Create organizer</source>
+			</trans-unit>
+			<trans-unit id="l_create_category" xml:space="preserve">
+				<source>Create category</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_icslink" xml:space="preserve">
+				<source>Download *.ics file</source>
+			</trans-unit>
+			<trans-unit id="l_edit_event_atleastone_category" xml:space="preserve">
+				<source>You have to select at least one category</source>
+			</trans-unit>
+			<trans-unit id="l_confirm_event" xml:space="preserve">
+				<source>Confirm event</source>
+			</trans-unit>
+			<trans-unit id="l_confirm_location" xml:space="preserve">
+				<source>Confirm location</source>
+			</trans-unit>
+			<trans-unit id="l_confirm_organizer" xml:space="preserve">
+				<source>Confirm organizer</source>
+			</trans-unit>
+			<trans-unit id="l_enter_email" xml:space="preserve">
+				<source>Enter email-address:</source>
+			</trans-unit>
+			<trans-unit id="l_captcha_text" xml:space="preserve">
+				<source>Please insert the text you see in the picture:</source>
+			</trans-unit>
+			<trans-unit id="l_delete_event" xml:space="preserve">
+				<source>Delete Event</source>
+			</trans-unit>
+			<trans-unit id="l_event_has_been_delete" xml:space="preserve">
+				<source>The event has been deleted</source>
+			</trans-unit>
+			<trans-unit id="l_event_has_been_restored" xml:space="preserve">
+				<source>The event has been restored</source>
+			</trans-unit>
+			<trans-unit id="l_event_has_been_hidden" xml:space="preserve">
+				<source>The event has been hidden and will not be shown in
+				the frontend</source>
+			</trans-unit>
+			<trans-unit id="l_event_has_been_unhidden" xml:space="preserve">
+				<source>The previouisly hidden event has now been unhidden
+				and will be shown in the frontend</source>
+			</trans-unit>
+			<trans-unit id="l_wrong_split_symbol_msg" xml:space="preserve">
+				<source>Date split symbol is: \'###DATE_SPLIT_SYMBOL###\'
+				!\n</source>
+			</trans-unit>
+			<trans-unit id="l_wrong_date" xml:space="preserve">
+				<source>Wrong date!</source>
+			</trans-unit>
+			<trans-unit id="l_wrong_time" xml:space="preserve">
+				<source>Wrong time!</source>
+			</trans-unit>
+			<trans-unit id="l_is_in_past" xml:space="preserve">
+				<source>is a past date!</source>
+			</trans-unit>
+			<trans-unit id="l_page" xml:space="preserve">
+				<source>Page</source>
+			</trans-unit>
+			<trans-unit id="l_page_of" xml:space="preserve">
+				<source>Page %s of %s</source>
+			</trans-unit>
+			<trans-unit id="l_search_found" xml:space="preserve">
+				<source>entries found</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_start_thanks" xml:space="preserve">
+				<source>Thank you. An email has been sent to you. Please
+				confirm the monitoring by clicking on the confirm link inside the
+				email.</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_stop_thanks" xml:space="preserve">
+				<source>Thank you. An email has been sent to you. Please
+				confirm the monitoring stop by clicking on the confirm link inside
+				the email.</source>
+			</trans-unit>
+			<trans-unit id="l_monitor_wrong_captcha" xml:space="preserve">
+				<source>Sorry, but you didn't type in the correct letters.
+				Please try again.</source>
+			</trans-unit>
+			<trans-unit id="l_not_allowed_edit" xml:space="preserve">
+				<source>You are not allowed to edit this </source>
+			</trans-unit>
+			<trans-unit id="l_not_allowed_create" xml:space="preserve">
+				<source>You are not allowed to create a/an </source>
+			</trans-unit>
+			<trans-unit id="l_delete_image" xml:space="preserve">
+				<source>Delete image</source>
+			</trans-unit>
+			<trans-unit id="l_image_upload" xml:space="preserve">
+				<source>Upload image</source>
+			</trans-unit>
+			<trans-unit id="l_delete_attachment" xml:space="preserve">
+				<source>Delete attachment</source>
+			</trans-unit>
+			<trans-unit id="l_attachment_upload" xml:space="preserve">
+				<source>Upload attachment</source>
+			</trans-unit>
+			<trans-unit id="l_meeting_accept" xml:space="preserve">
+				<source>Accept</source>
+			</trans-unit>
+			<trans-unit id="l_meeting_decline" xml:space="preserve">
+				<source>Decline</source>
+			</trans-unit>
+			<trans-unit id="l_meeting_accepted" xml:space="preserve">
+				<source>Your status for &quot;%s&quot; has been
+				successfully changed to &quot;ACCPETED&quot;.</source>
+			</trans-unit>
+			<trans-unit id="l_meeting_declined" xml:space="preserve">
+				<source>Your status for &quot;%s&quot; has been
+				successfully changed to &quot;DECLINED&quot;.</source>
+			</trans-unit>
+			<trans-unit id="l_meeting_update_error" xml:space="preserve">
+				<source>There were problems updating your participation
+				status to &quot;%s&quot;.</source>
+			</trans-unit>
+			<trans-unit id="l_meeting_error" xml:space="preserve">
+				<source>If you see this message, you probably have
+				received an invitation to a meeting and you have clicked on the
+				accept or decline link. But maybe not all of the parameters made it
+				to the url? Please make sure all parameters are there.</source>
+			</trans-unit>
+			<trans-unit id="l_meeting_changestatus" xml:space="preserve">
+				<source> Change meeting status: </source>
+			</trans-unit>
+			<trans-unit id="l_required" xml:space="preserve">
+				<source>(*) Required fields</source>
+			</trans-unit>
+			<trans-unit id="l_constrain_start_before_end" xml:space="preserve">
+				<source>Start has to be before end</source>
+			</trans-unit>
+			<trans-unit id="l_constrain_end_after_start" xml:space="preserve">
+				<source>End has to be after start</source>
+			</trans-unit>
+			<trans-unit id="l_event_date_time" xml:space="preserve">
+				<source>Date/Time</source>
+			</trans-unit>
+			<trans-unit id="l_event_recurrence" xml:space="preserve">
+				<source>Recurrence</source>
+			</trans-unit>
+			<trans-unit id="l_event_files" xml:space="preserve">
+				<source>Files</source>
+			</trans-unit>
+			<trans-unit id="l_event_other" xml:space="preserve">
+				<source>Other</source>
+			</trans-unit>
+			<trans-unit id="l_options" xml:space="preserve">
+				<source>Options</source>
+			</trans-unit>
+			<trans-unit id="l_what" xml:space="preserve">
+				<source>What</source>
+			</trans-unit>
+			<trans-unit id="l_when" xml:space="preserve">
+				<source>When</source>
+			</trans-unit>
+			<trans-unit id="l_to" xml:space="preserve">
+				<source>to</source>
+			</trans-unit>
+			<trans-unit id="l_at" xml:space="preserve">
+				<source>at</source>
+			</trans-unit>
+			<trans-unit id="l_where" xml:space="preserve">
+				<source>Where</source>
+			</trans-unit>
+			<trans-unit id="l_repeats" xml:space="preserve">
+				<source>Repeats</source>
+			</trans-unit>
+			<trans-unit id="l_repeat_by" xml:space="preserve">
+				<source>Repeats</source>
+			</trans-unit>
+			<trans-unit id="l_daily" xml:space="preserve">
+				<source>Daily</source>
+			</trans-unit>
+			<trans-unit id="l_weekly" xml:space="preserve">
+				<source>Weekly</source>
+			</trans-unit>
+			<trans-unit id="l_monthly" xml:space="preserve">
+				<source>Monthly</source>
+			</trans-unit>
+			<trans-unit id="l_yearly" xml:space="preserve">
+				<source>Yearly</source>
+			</trans-unit>
+			<trans-unit id="l_every_weekday" xml:space="preserve">
+				<source>Every weekday (Mon-Fri)</source>
+			</trans-unit>
+			<trans-unit id="l_every_mo_we_fr" xml:space="preserve">
+				<source>Every Mon., Wed., and Fri.</source>
+			</trans-unit>
+			<trans-unit id="l_every_tu_th" xml:space="preserve">
+				<source>Every Tues., and Thurs.</source>
+			</trans-unit>
+			<trans-unit id="l_weekday" xml:space="preserve">
+				<source>Weekday</source>
+			</trans-unit>
+			<trans-unit id="l_until" xml:space="preserve">
+				<source>Until</source>
+			</trans-unit>
+			<trans-unit id="l_interval" xml:space="preserve">
+				<source>Repeat every</source>
+			</trans-unit>
+			<trans-unit id="l_rdate_type" xml:space="preserve">
+				<source>Repeats per</source>
+			</trans-unit>
+			<trans-unit id="l_event_rdate" xml:space="preserve">
+				<source>on</source>
+			</trans-unit>
+			<trans-unit id="l_ends" xml:space="preserve">
+				<source>Ends</source>
+			</trans-unit>
+			<trans-unit id="l_never" xml:space="preserve">
+				<source>Never</source>
+			</trans-unit>
+			<trans-unit id="l_date_time" xml:space="preserve">
+				<source>Date time</source>
+			</trans-unit>
+			<trans-unit id="l_period" xml:space="preserve">
+				<source>Period</source>
+			</trans-unit>
+			<trans-unit id="l_duration" xml:space="preserve">
+				<source>Duration</source>
+			</trans-unit>
+			<trans-unit id="l_no_action" xml:space="preserve">
+				<source>No action</source>
+			</trans-unit>
+			<trans-unit id="l_needs_action" xml:space="preserve">
+				<source>Needs action</source>
+			</trans-unit>
+			<trans-unit id="l_in_progress" xml:space="preserve">
+				<source>In progress</source>
+			</trans-unit>
+			<trans-unit id="l_cancelled" xml:space="preserve">
+				<source>Cancelled</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_week" xml:space="preserve">
+				<source>calendar week</source>
+			</trans-unit>
+			<trans-unit id="l_remind" xml:space="preserve">
+				<source>Here's a reminder...</source>
+			</trans-unit>
+			<trans-unit id="l_remind_minutes_1" xml:space="preserve">
+				<source>&lt;span&gt; -&gt; And remind </source>
+			</trans-unit>
+			<trans-unit id="l_remind_minutes_2" xml:space="preserve">
+				<source> minutes before start&lt;/span&gt;</source>
+			</trans-unit>
+			<trans-unit id="l_calendar_subscription" xml:space="preserve">
+				<source>Manage calendar subscription</source>
+			</trans-unit>
+			<trans-unit id="l_color" xml:space="preserve">
+				<source>Color</source>
+			</trans-unit>
+			<trans-unit id="l_public_calendar" xml:space="preserve">
+				<source>Public calendar</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

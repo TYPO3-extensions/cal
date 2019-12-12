@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T11:00:07Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id=".description" xml:space="preserve">
+				<source>Exception to an event for the Calendar Base
+				extension.</source>
+			</trans-unit>
+			<trans-unit id=".details" xml:space="preserve">
+				<source>Exception events are generally used in conjunction
+				with recurrent events for specific days when you don't want an event
+				to occur.</source>
+			</trans-unit>
+			<trans-unit id="title.description" xml:space="preserve">
+				<source>Title of the exception event.</source>
+			</trans-unit>
+			<trans-unit id="hidden.description" xml:space="preserve">
+				<source>Exclude this exception event from display.</source>
+			</trans-unit>
+			<trans-unit id="starttime.description" xml:space="preserve">
+				<source>The &quot;Start&quot; time determines the date
+				from which the record will be available online.</source>
+			</trans-unit>
+			<trans-unit id="endtime.description" xml:space="preserve">
+				<source>The &quot;End&quot; time determines the date from
+				which the db-record will NOT be available online anymore.</source>
+			</trans-unit>
+			<trans-unit id="start_date.description" xml:space="preserve">
+				<source>The start date determines the day the exception
+				event starts.</source>
+			</trans-unit>
+			<trans-unit id="end_date.description" xml:space="preserve">
+				<source>The end date determines the day the exception
+				event ends.</source>
+			</trans-unit>
+			<trans-unit id="start_time.description" xml:space="preserve">
+				<source>The start time determines the time the exception
+				event starts.</source>
+			</trans-unit>
+			<trans-unit id="end_time.description" xml:space="preserve">
+				<source>The end time determines the time the exception
+				event ends.</source>
+			</trans-unit>
+			<trans-unit id="freq.description" xml:space="preserve">
+				<source>Frequency at which the exception event occurs.</source>
+			</trans-unit>
+			<trans-unit id="until.description" xml:space="preserve">
+				<source>Date the recurrence should end.</source>
+			</trans-unit>
+			<trans-unit id="_until.seeAlso" xml:space="preserve">
+				<source>tx_cal_exception_event:cnt</source>
+			</trans-unit>
+			<trans-unit id="cnt.description" xml:space="preserve">
+				<source>Number of times the exception event should recur
+				before stopping.</source>
+			</trans-unit>
+			<trans-unit id="_cnt.seeAlso" xml:space="preserve">
+				<source>tx_cal_exception_event:until</source>
+			</trans-unit>
+			<trans-unit id="byday.description" xml:space="preserve">
+				<source>Defines the interval by day of the week.</source>
+			</trans-unit>
+			<trans-unit id="bymonthday.description" xml:space="preserve">
+				<source>Defines the interval by day of the month (e.g.
+				20th)</source>
+			</trans-unit>
+			<trans-unit id="bymonth.description" xml:space="preserve">
+				<source>Defines the interval by month.</source>
+			</trans-unit>
+			<trans-unit id="intrval.description" xml:space="preserve">
+				<source>Defines the interval at which the exception event
+				recurs.</source>
+			</trans-unit>
+			<trans-unit id="intrval.details" xml:space="preserve">
+				<source>An interval of 2 with a frequency of weekly would
+				create an exception event that recurs every other week.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

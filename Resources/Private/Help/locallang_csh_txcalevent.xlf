@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-03T10:58:44Z" product-name="cal">
+		<header/>
+		<body>
+			<trans-unit id=".description" xml:space="preserve">
+				<source>Event for the Calendar Base extension.</source>
+			</trans-unit>
+			<trans-unit id=".details" xml:space="preserve">
+				<source>Create events to be displayed on the calendar.
+				Events have a description, location, organizer, and many other
+				fields. Events can occur over a specific time period, last an entire
+				day, or recur at a specified interval.</source>
+			</trans-unit>
+			<trans-unit id="hidden.description" xml:space="preserve">
+				<source>Disables the event so that it is not visible in
+				the frontend.</source>
+			</trans-unit>
+			<trans-unit id="_hidden.seeAlso" xml:space="preserve">
+				<source>tx_cal_event:endtime, tx_cal_event:starttime</source>
+			</trans-unit>
+			<trans-unit id="starttime.description" xml:space="preserve">
+				<source>Sets a date at which the event will be visible in
+				the frontend.</source>
+			</trans-unit>
+			<trans-unit id="starttime.details" xml:space="preserve">
+				<source>This field has nothing to do with the actual start
+				time of the event and is only used to determine at what time the
+				event should be made visible.</source>
+			</trans-unit>
+			<trans-unit id="_starttime.seeAlso" xml:space="preserve">
+				<source>tx_cal_event:endtime, tx_cal_event:hidden</source>
+			</trans-unit>
+			<trans-unit id="endtime.description" xml:space="preserve">
+				<source>Sets a date at which the category will no longer
+				be visible in the frontend.</source>
+			</trans-unit>
+			<trans-unit id="endtime.details" xml:space="preserve">
+				<source>This field has nothing to do with the actual end
+				time of the event and is only used to determine at what time the
+				event should be hidden.</source>
+			</trans-unit>
+			<trans-unit id="_endtime.seeAlso" xml:space="preserve">
+				<source>tx_cal_event:starttime, tx_cal_event:hidden</source>
+			</trans-unit>
+			<trans-unit id="start_date.description" xml:space="preserve">
+				<source>Date the event starts.</source>
+			</trans-unit>
+			<trans-unit id="start_date.details" xml:space="preserve">
+				<source>For recurring events, this field should be the
+				start date for the first instance of the recurring event.</source>
+			</trans-unit>
+			<trans-unit id="end_date.description" xml:space="preserve">
+				<source>Date the event ends.</source>
+			</trans-unit>
+			<trans-unit id="end_date.details" xml:space="preserve">
+				<source>For recurring events, this field should be the end
+				date for the first instance of the recurring event, not the last day
+				that the event recurs on.</source>
+			</trans-unit>
+			<trans-unit id="start_time.description" xml:space="preserve">
+				<source>Time the event starts.</source>
+			</trans-unit>
+			<trans-unit id="start_time.details" xml:space="preserve">
+				<source>For recurring events, this field should be the
+				start time for the first instance of the recurring event.</source>
+			</trans-unit>
+			<trans-unit id="end_time.description" xml:space="preserve">
+				<source>Time the event ends.</source>
+			</trans-unit>
+			<trans-unit id="end_time.details" xml:space="preserve">
+				<source>For recurring events, this field should be the end
+				time for the first instance of the recurring event.</source>
+			</trans-unit>
+			<trans-unit id="title.description" xml:space="preserve">
+				<source>Title of the event.</source>
+			</trans-unit>
+			<trans-unit id="calendar_id.description" xml:space="preserve">
+				<source>Calendar that the event belongs to.</source>
+			</trans-unit>
+			<trans-unit id="calendar_id.details" xml:space="preserve">
+				<source>If you have created multiple Calendar records, you
+				can choose which one you want to associate the event with. The
+				options you've set for the Calendar record will determine which
+				Frontend users will have access to this event.</source>
+			</trans-unit>
+			<trans-unit id="category_id.description" xml:space="preserve">
+				<source>Category that the event belongs to.</source>
+			</trans-unit>
+			<trans-unit id="category_id.details" xml:space="preserve">
+				<source>Choose which Categories, if any, you would like to
+				associate the Event record with. The options you've set for the
+				Category and its associated Calendar record will determine which
+				Frontend users will have access to this event.</source>
+			</trans-unit>
+			<trans-unit id="organizer.description" xml:space="preserve">
+				<source>Organizer of the event.</source>
+			</trans-unit>
+			<trans-unit id="organizer.details" xml:space="preserve">
+				<source>This is the title of the organizer that will be
+				displayed if you do not choose an organizer record.</source>
+			</trans-unit>
+			<trans-unit id="organizer_id.description" xml:space="preserve">
+				<source>Record for the organizer of the event.</source>
+			</trans-unit>
+			<trans-unit id="organizer_pid.description" xml:space="preserve">
+				<source>TYPO3 page with organizer information.</source>
+			</trans-unit>
+			<trans-unit id="organizer_pid.details" xml:space="preserve">
+				<source>If you have a page with more information about the
+				organizer, you can link to it here. This link will override the Cal
+				organizer field and create a link from the organizer field.</source>
+			</trans-unit>
+			<trans-unit id="organizer_link.description" xml:space="preserve">
+				<source>URL with organizer information</source>
+			</trans-unit>
+			<trans-unit id="organizer_link.details" xml:space="preserve">
+				<source>If you have an external URL with more information
+				about the organizer, you can link to it here. This link will
+				override the Cal organizer field and create a link from the
+				organizer field.</source>
+			</trans-unit>
+			<trans-unit id="location.description" xml:space="preserve">
+				<source>Location of the event.</source>
+			</trans-unit>
+			<trans-unit id="location.details" xml:space="preserve">
+				<source>This is the title of the location that will be
+				displayed if you do not choose a location record.</source>
+			</trans-unit>
+			<trans-unit id="location_id.description" xml:space="preserve">
+				<source>Record for the location of the event.</source>
+			</trans-unit>
+			<trans-unit id="location_pid.description" xml:space="preserve">
+				<source>TYPO3 page with location information.</source>
+			</trans-unit>
+			<trans-unit id="location_pid.details" xml:space="preserve">
+				<source>If you have a page that has a map, directions, or
+				other information on it about the location, you can link to it here.
+				This link will override the Cal Location field and create a link
+				from the Location field.</source>
+			</trans-unit>
+			<trans-unit id="location_link.description" xml:space="preserve">
+				<source>URL with location information</source>
+			</trans-unit>
+			<trans-unit id="location_link.details" xml:space="preserve">
+				<source>If you have an external URL that has a map,
+				directions, or other information on it about the location, you can
+				link to it here. This link will override the Cal Location field and
+				create a link from the Location field.</source>
+			</trans-unit>
+			<trans-unit id="teaser.description" xml:space="preserve">
+				<source>A shortened or plain text version of the event's
+				description.</source>
+			</trans-unit>
+			<trans-unit id="description.description" xml:space="preserve">
+				<source>Description of the event.</source>
+			</trans-unit>
+			<trans-unit id="freq.description" xml:space="preserve">
+				<source>Frequency at which the event occurs.</source>
+			</trans-unit>
+			<trans-unit id="until.description" xml:space="preserve">
+				<source>Date the recurrence should end.</source>
+			</trans-unit>
+			<trans-unit id="_until.seeAlso" xml:space="preserve">
+				<source>tx_cal_event:cnt</source>
+			</trans-unit>
+			<trans-unit id="cnt.description" xml:space="preserve">
+				<source>Number of times the event should recur before
+				stopping. Note: the actual event is the first occurence.</source>
+			</trans-unit>
+			<trans-unit id="_cnt.seeAlso" xml:space="preserve">
+				<source>tx_cal_event:until</source>
+			</trans-unit>
+			<trans-unit id="byday.description" xml:space="preserve">
+				<source>Defines the interval by day of the week.</source>
+			</trans-unit>
+			<trans-unit id="bymonthday.description" xml:space="preserve">
+				<source>Defines the interval by day of the month (e.g.
+				20th)</source>
+			</trans-unit>
+			<trans-unit id="bymonth.description" xml:space="preserve">
+				<source>Defines the interval by month.</source>
+			</trans-unit>
+			<trans-unit id="intrval.description" xml:space="preserve">
+				<source>Defines the interval at which the event recurs.</source>
+			</trans-unit>
+			<trans-unit id="intrval.details" xml:space="preserve">
+				<source>An interval of 2 with a frequency of weekly would
+				create an event that recurs every other week.</source>
+			</trans-unit>
+			<trans-unit id="rdate_type.description" xml:space="preserve">
+				<source>List of specific recurrence dates in addition to
+				the regular frequency recurrences.</source>
+			</trans-unit>
+			<trans-unit id="rdate_type.details" xml:space="preserve">
+				<source>Recurrences can be specified by date, date/time,
+				or an overall period that changes both the start time and the
+				duration of the event.</source>
+			</trans-unit>
+			<trans-unit id="monitor_cnt.description" xml:space="preserve">
+				<source>Frontend users and unregisterd users who are
+				monitoring any changes in this event.</source>
+			</trans-unit>
+			<trans-unit id="monitor_cnt.details" xml:space="preserve">
+				<source>Users listed here will receive email notifications
+				about event creation, modification, or delete.</source>
+			</trans-unit>
+			<trans-unit id="exception_cnt.description" xml:space="preserve">
+				<source>Exceptions to describe when this event should not
+				occur.</source>
+			</trans-unit>
+			<trans-unit id="exception_cnt.details" xml:space="preserve">
+				<source>Exception Events are generally used in conjunction
+				with Recurring Events. Exception Events are days on which you don't
+				want a recurring event scheduled. For instance, skipping a weekly
+				meeting Christmas day.</source>
+			</trans-unit>
+			<trans-unit id="fe_cruser_id.description" xml:space="preserve">
+				<source>Frontend user who created the event.</source>
+			</trans-unit>
+			<trans-unit id="fe_crgroup_id.description" xml:space="preserve">
+				<source>Frontend group who created the event.</source>
+			</trans-unit>
+			<trans-unit id="type.description" xml:space="preserve">
+				<source>Type of the event.</source>
+			</trans-unit>
+			<trans-unit id="type.details" xml:space="preserve">
+				<source>The default is Event with Description. You can
+				also select Shortcut to Page or Link to External URL to direct to
+				another page when they click on the Event link in the calendar.</source>
+			</trans-unit>
+			<trans-unit id="page.description" xml:space="preserve">
+				<source>Internal page on your site to link to.</source>
+			</trans-unit>
+			<trans-unit id="ext_url.description" xml:space="preserve">
+				<source>External url to link to.</source>
+			</trans-unit>
+			<trans-unit id="isTemp.description" xml:space="preserve">
+				<source>IsTemp</source>
+			</trans-unit>
+			<trans-unit id="image.description" xml:space="preserve">
+				<source>Upload or select previously uploaded images.</source>
+			</trans-unit>
+			<trans-unit id="imagealttext.description" xml:space="preserve">
+				<source>Alternate text shown if images are not found or
+				not supported.</source>
+			</trans-unit>
+			<trans-unit id="imagealttext.details" xml:space="preserve">
+				<source>If you have multiple images, alt text entries must
+				be listed on separate lines.</source>
+			</trans-unit>
+			<trans-unit id="imagetitletext.description" xml:space="preserve">
+				<source>Tooltip or hover text.</source>
+			</trans-unit>
+			<trans-unit id="imagetitletext.details" xml:space="preserve">
+				<source>If you have multiple images, title text entries
+				must be listed on separate lines.</source>
+			</trans-unit>
+			<trans-unit id="imagecaption.description" xml:space="preserve">
+				<source>Adds a caption beneath each image.</source>
+			</trans-unit>
+			<trans-unit id="imagecaption.details" xml:space="preserve">
+				<source>If you have multiple images, captions must be
+				listed on separate lines.</source>
+			</trans-unit>
+			<trans-unit id="attachment.description" xml:space="preserve">
+				<source>If you want to add a downloadable file, you may
+				upload a file or select a previously uploaded file.</source>
+			</trans-unit>
+			<trans-unit id="attachmentcaption.description" xml:space="preserve">
+				<source>Adds a caption beneath the files.</source>
+			</trans-unit>
+			<trans-unit id="shared_user_cnt.description" xml:space="preserve">
+				<source>Frontend users and groups who are allowed to edit
+				this event (in addition to the owner).</source>
+			</trans-unit>
+			<trans-unit id="shared_user_cnt.details" xml:space="preserve">
+				<source>This option can be viewed and edited in the
+				backend, but the shared user only has access through frontend
+				editing.</source>
+			</trans-unit>
+			<trans-unit id="attendee.description" xml:space="preserve">
+				<source>Current event attendees and their reservation
+				status.</source>
+			</trans-unit>
+			<trans-unit id="send_invitation.description" xml:space="preserve">
+				<source>Check this to send out event invitations to all
+				attendees.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
